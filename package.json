@@ -1,5 +1,5 @@
 {
-  "name": "neutralinojs-react-tailwind-template",
+  "name": "giveaway-o-tron",
   "version": "1.0.0",
   "description": "The simplest template for a Neutralinojs app. It's possible to use your favorite frontend framework using the following steps.",
   "main": "index.js",
@@ -11,7 +11,7 @@
     "watch-css": "postcss src/styles.css -o resources/styles.css -w",
     "dev": "run-p run watch-src watch-css",
     "prebuild": "rimraf dist",
-    "postbuild": "make-dir dist/cmd && cpy cmd/nircmd.exe dist/twitch-plays/cmd && rimraf dist/twitch-plays/twitch-plays-linux* dist/twitch-plays/twitch-plays-mac* dist/cmd && move-file dist/twitch-plays/twitch-plays-win_x64.exe dist/twitch-plays/twitch-plays.exe",
+    "postbuild": "rimraf dist/giveaway-o-tron/giveaway-o-tron-linux* dist/giveaway-o-tron/giveaway-o-tron-mac* dist/cmd && move-file dist/giveaway-o-tron/giveaway-o-tron-win_x64.exe dist/giveaway-o-tron/giveaway-o-tron.exe",
     "build": "npm run build-js && npm run build-css && neu build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

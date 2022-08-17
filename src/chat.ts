@@ -1,37 +1,36 @@
-import {useCallback, useEffect, useState} from 'react'
-import tmi from 'tmi.js';
-import { ControlConfig } from './components/screens/ControlsConfig';
+import { useCallback, useEffect, useState } from 'react'
+import tmi from 'tmi.js'
 
 export interface ChatItem {
-  id: string,
-  color: string,
-  displayName: string,
-  isSubscriber: boolean,
-  turbo: boolean,
-  username: string,
-  type: string,
-  msg: string,
+  id: string
+  color: string
+  displayName: string
+  isSubscriber: boolean
+  turbo: boolean
+  username: string
+  type: string
+  msg: string
   words: string[]
 }
 
 export class ChatEvent extends EventTarget {
-  emit (data: ChatItem) {
-    this.dispatchEvent(new CustomEvent('chat', {detail: data}))
+  emit(data: ChatItem) {
+    this.dispatchEvent(new CustomEvent('chat', { detail: data }))
   }
-};
+}
 
-export const chatEmitter = new ChatEvent();
+export const chatEmitter = new ChatEvent()
 
-export function useChatEvents (onChat: (chat: ChatItem) => void): [ChatItem[], () => void] {
+export function useChatEvents(onChat: (chat: ChatItem) => void): [ChatItem[], () => void] {
   const [chat, setChat] = useState<ChatItem[]>([])
   useEffect(() => {
-    function handleChat (d: CustomEvent<ChatItem>) {
+    function handleChat(d: CustomEvent<ChatItem>) {
       setChat((c) => c.concat(d.detail))
       onChat(d.detail)
     }
     chatEmitter.addEventListener('chat', handleChat)
     return () => {
-      chatEmitter.removeEventListener('chat', handleChat);
+      chatEmitter.removeEventListener('chat', handleChat)
     }
   }, [setChat, onChat])
   const resetChat = useCallback(() => {
@@ -43,27 +42,27 @@ export function useChatEvents (onChat: (chat: ChatItem) => void): [ChatItem[], (
 export default function init(channel: string) {
   // Define configuration options
   const opts = {
-    channels: [
-      channel
-    ]
-  };
+    channels: [channel],
+  }
 
   // Create a client with our options
-  const client = new tmi.client(opts);
+  const client = new tmi.client(opts)
 
   // Register our event handlers (defined below)
-  client.on('message', onMessageHandler);
-  client.on('connected', onConnectedHandler);
+  client.on('message', onMessageHandler)
+  client.on('connected', onConnectedHandler)
 
   // Connect to Twitch:
-  client.connect();
+  client.connect()
 
   // Called every time a message comes in
   function onMessageHandler(target, context, msg, self) {
-    if (self) { return; } // Ignore messages from the bot
+    if (self) {
+      return
+    } // Ignore messages from the bot
 
     // Remove whitespace from chat message
-    const words = msg.trim().toLowerCase().split(' ');
+    const words = msg.trim().toLowerCase().split(' ')
 
     const data: ChatItem = {
       id: context.id,
@@ -74,20 +73,15 @@ export default function init(channel: string) {
       username: context.username,
       type: context['message-type'],
       msg,
-      words
+      words,
     }
 
-    chatEmitter.emit(data);
+    chatEmitter.emit(data)
   }
 
   // Called every time the bot connects to Twitch chat
   function onConnectedHandler(addr, port) {
-    console.log(`* Connected to ${addr}:${port}`);
+    console.log(`* Connected to ${addr}:${port}`)
   }
-  return client;
-};
-
-export function getCommandFromChat (controls: ControlConfig[], chat: ChatItem) {
-  const words = chat.msg.split(' ')
-  return controls.find(({ command }) => words.some((w) => w.toLowerCase() === command.toLowerCase()))
+  return client
 }
