@@ -1,61 +1,73 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, useEffect } from 'react'
 import cls from 'classnames'
 import { GiPartyPopper } from 'react-icons/gi'
 import { ChatItem } from '../../chat'
-import { Settings, getInstantGiveaway, getChatGiveaway } from '../../utils'
-import { FaTimes } from 'react-icons/fa'
+import { Settings, getInstantGiveaway, getChatGiveaway, getTwitchUsersByLogin, removeIdx } from '../../utils'
+import { FaDice, FaTimes } from 'react-icons/fa'
 
 function InstantGiveaway({
   channel,
-  setWinner,
+  setWinners,
+  channelUserId,
 }: {
   channel: string | null
-  setWinner: Dispatch<SetStateAction<string>>
+  setWinners: Dispatch<SetStateAction<string[]>>
+  channelUserId: string | null
 }) {
   return (
-    <div className="bg-gray-600 text-white rounded-md mt-3 overflow-hidden flex flex-row items-center">
-      <button
-        className="bg-purple-600 px-2 py-4"
-        onClick={async () => {
-          if (!channel) return
-          const giveawayWinner = await getInstantGiveaway(channel)
-          setWinner(giveawayWinner)
-        }}
-      >
-        Viewers Instant Giveaway
-      </button>
-    </div>
+    <button
+      className="bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1"
+      onClick={async () => {
+        if (!channel) return
+        const giveawayWinner = await getInstantGiveaway(channel, channelUserId)
+        if (!giveawayWinner) return
+        setWinners((w) => w.concat(giveawayWinner))
+      }}
+    >
+      <FaDice className="text-2xl" /> Viewers Instant Giveaway
+    </button>
   )
 }
 
 function ChatGiveaway({
   chatEvents,
-  setWinner,
+  setWinners,
+  channelUserId,
+  chatCommand,
 }: {
   chatEvents: ChatItem[]
-  setWinner: Dispatch<SetStateAction<string>>
+  setWinners: Dispatch<SetStateAction<string[]>>
+  channelUserId: string | null
+  chatCommand: string
 }) {
   return (
-    <div className="bg-gray-600 text-white rounded-md mt-3 overflow-hidden flex flex-row items-center">
-      <button
-        className="bg-purple-600 px-2 py-4"
-        onClick={async () => {
-          const giveawayWinner = getChatGiveaway(chatEvents)
-          setWinner(giveawayWinner)
-        }}
-      >
-        Active Chatter Giveaway
-      </button>
-    </div>
+    <button
+      className="bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1"
+      onClick={async () => {
+        const giveawayWinner = getChatGiveaway(chatEvents, chatCommand)
+        if (!giveawayWinner) return
+        setWinners((w) => w.concat(giveawayWinner))
+      }}
+    >
+      <FaDice className="text-2xl" /> Active Chatter Giveaway
+    </button>
   )
 }
 
-function Winner({ winner, onClear }: { winner: string; onClear: () => void }) {
-  return winner ? (
-    <div className="bg-gray-600 text-white rounded-md mt-3 overflow-hidden flex flex-row items-center justify-center px-2 py-4 text-center relative">
-      <GiPartyPopper className="text-purple-300 text-xl" /> <div className="px-2">{winner} wins!</div>{' '}
-      <GiPartyPopper className="text-purple-300 text-xl" />
-      <FaTimes className="text-2xl absolute right-5 text-red-500 cursor-pointer" onClick={onClear} />
+function Winner({ winners, onClear }: { winners: string[]; onClear: (idx: number) => void }) {
+  return winners.length ? (
+    <div className="grid gap-1 grid-cols-2 mt-3">
+      {winners.map((winner, i) => (
+        <div
+          key={winner}
+          className="bg-gray-600 text-white rounded-md overflow-hidden flex flex-row items-center justify-center px-2 py-4 text-center relative"
+        >
+          <div className="text-2xl absolute left-5">{i + 1}.</div>
+          <GiPartyPopper className="text-purple-300 text-xl" /> <div className="px-2">{winner} wins!</div>{' '}
+          <GiPartyPopper className="text-purple-300 text-xl" />
+          <FaTimes className="text-2xl absolute right-5 text-red-500 cursor-pointer" onClick={() => onClear(i)} />
+        </div>
+      ))}
     </div>
   ) : null
 }
@@ -73,12 +85,40 @@ export default function MainScreen({
   isConnected: boolean
   channel: string | null
 }) {
-  const [winner, setWinner] = React.useState('')
+  const [winners, setWinners] = React.useState<string[]>([])
+  const [channelUserId, setChannelUserId] = React.useState(null)
+  React.useEffect(() => {
+    if (!channel) return
+    ;(async () => {
+      const channelUser = (await getTwitchUsersByLogin([channel]))[0]
+      console.info({ channelUser })
+      setChannelUserId(channelUser.id)
+    })()
+  }, [channel])
+  const [chatCommand, setChatCommand] = React.useState('')
   return (
     <>
-      <Winner winner={winner} onClear={() => setWinner('')} />
-      <InstantGiveaway channel={channel} setWinner={setWinner} />
-      <ChatGiveaway chatEvents={chatEvents} setWinner={setWinner} />
+      <Winner winners={winners} onClear={(idx) => setWinners((w) => removeIdx(w, idx))} />
+      <div className="flex flex-row gap-2">
+        <InstantGiveaway channelUserId={channelUserId} channel={channel} setWinners={setWinners} />
+        <ChatGiveaway
+          channelUserId={channelUserId}
+          chatEvents={chatEvents}
+          setWinners={setWinners}
+          chatCommand={chatCommand}
+        />
+      </div>
+      <div className="mt-2 flex justify-center items-center">
+        <div>
+          <input
+            className="bg-gray-700 px-2 py-1 rounded-md border-b border-purple-500"
+            placeholder="Chat command..."
+            value={chatCommand}
+            onChange={(e) => setChatCommand(e.target.value.trim())}
+            title="Chat command to enter - leave empty for none"
+          />
+        </div>
+      </div>
       <div className="mt-2 rounded-md bg-gray-700 flex-1 flex flex-col relative overflow-hidden">
         <div className="bg-gray-600 absolute top-0 right-0 left-0 h-8 flex justify-between px-10 items-center text-white">
           <div>
@@ -95,14 +135,20 @@ export default function MainScreen({
               )}
             >
               {chatEvents
-                .filter((c) => (winner ? c.username === winner : true))
+                .filter((c) => (winners.length ? winners.includes(c.username) : true))
                 .map((c) => {
                   return (
                     <div key={c.id}>
-                      <span className="rounded-full bg-purple-700 h-4 w-4 inline-block mr-1">
-                        <span className="flex justify-center items-center text-xs" title={`Team: ${'Default'}`}>
-                          D
-                        </span>
+                      <span
+                        className={cls('rounded-full bg-gray-300 h-4 w-4 inline-block mr-1', {
+                          'bg-yellow-500': c.isSubscriber,
+                        })}
+                      >
+                        {c.isSubscriber ? (
+                          <span className="flex justify-center items-center text-xs" title={'Subscriber'}>
+                            S
+                          </span>
+                        ) : null}
                       </span>
                       <span style={{ color: c.color }}>[{c.displayName}]</span> {highlightAction(c.displayName, c.msg)}
                     </div>
