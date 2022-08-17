@@ -1,5 +1,5 @@
 {
-  "applicationId": "js.twitch.plays",
+  "applicationId": "js.giveaway.otron",
   "defaultMode": "window",
   "port": 0,
   "url": "/resources/",
@@ -15,15 +15,15 @@
   },
   "modes": {
     "window": {
-      "title": "Twitch Plays",
+      "title": "Giveaway-o-tron",
       "width": 800,
       "height": 500,
       "minWidth": 400,
       "minHeight": 200,
       "fullScreen": false,
-      "alwaysOnTop": false,
+      "alwaysOnTop": true,
       "icon": "/resources/icons/appIcon.png",
-      "enableInspector": false,
+      "enableInspector": true,
       "borderless": false,
       "maximize": false,
       "hidden": false,
@@ -34,19 +34,15 @@
       "globalVariables": {
         "TEST": "Test value browser"
       },
-      "nativeBlockList": [
-        "filesystem.*"
-      ]
+      "nativeBlockList": ["filesystem.*"]
     },
     "cloud": {
       "url": "/resources/#cloud",
-      "nativeAllowList": [
-        "app.*"
-      ]
+      "nativeAllowList": ["app.*"]
     }
   },
   "cli": {
-    "binaryName": "twitch-plays",
+    "binaryName": "giveaway-o-tron",
     "resourcesPath": "/resources/",
     "clientLibrary": "/resources/js/neutralino.js",
     "binaryVersion": "3.0.0",

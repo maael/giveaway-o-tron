@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react'
-import { FaTwitch as TwitchIco, FaPlus as PlusIco, FaAngleLeft as LeftIco } from 'react-icons/fa'
+import { FaRobot as LogoIco, FaTwitch as TwitchIco, FaAngleLeft as LeftIco } from 'react-icons/fa'
 import { Link, useLocation } from 'react-router-dom'
 import chat from '../../chat'
 
@@ -23,9 +23,9 @@ export default function Header({
         <div className="inline-block">
           <Link to="/">
             <h1 className="flex flex-row gap-1 items-center text-white bg-purple-600 rounded-md px-3 py-1 transform hover:scale-105 transition-transform shadow-md">
-              <TwitchIco className="text-2xl" />{' '}
+              <LogoIco className="text-2xl" />{' '}
               {location.pathname === '/' ? (
-                <span className="relative -top-0.5 ml-1">Twitch Plays</span>
+                <span className="relative -top-0.5 ml-1">Giveaway-o-tron</span>
               ) : (
                 <LeftIco className="text-xl" />
               )}
@@ -52,6 +52,7 @@ export default function Header({
           value={channel}
           onChange={(e) => setChannel(e.target.value)}
           disabled={!!client}
+          title={!!client ? 'Disconnect to change' : 'Set channel to connect to'}
         />
         <button
           className="bg-purple-600 text-white py-1 px-3 rounded-r-sm transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 w-32 justify-center"
@@ -60,13 +61,6 @@ export default function Header({
           <TwitchIco /> {client ? 'Disconnect' : 'Connect'}
         </button>
       </form>
-      <button
-        className="bg-purple-600 text-white py-1 px-3 rounded-sm transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 justify-center"
-        title="Add another instance of Twitch Plays for another channel"
-        onClick={() => window['myApp'].createNewInstance()}
-      >
-        <PlusIco />
-      </button>
     </div>
   )
 }
