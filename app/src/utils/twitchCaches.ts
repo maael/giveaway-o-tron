@@ -1,13 +1,14 @@
+import { chatEmitter, ChatItem } from '~/chat'
 import { getFollowerInfo, getUsersFromNames, getUsersSubscriptionInfo, getViewers } from './twitch'
 import { ChannelInfo } from './types'
 
-enum CACHE_KEY {
+export enum CACHE_KEY {
   userIds = 'userIds',
   subs = 'subs',
   follows = 'follows',
 }
 
-class Cache {
+export class Cache {
   key: `${string}-${CACHE_KEY}`
 
   constructor(channel: string, key: CACHE_KEY) {
@@ -33,27 +34,34 @@ export default async function watch() {
     console.info('[twitchCache][check]')
     const info = await Neutralino.storage.getData('main-channelInfo')
     if (info) {
-      const parsed = JSON.parse(info) as ChannelInfo
-      if (!parsed.login) return
+      const channelInfo = JSON.parse(info) as ChannelInfo
+      if (!channelInfo.login) return
       clearInterval(interval)
-      void start(parsed)
+      const caches = {
+        userIds: new Cache(channelInfo.login!, CACHE_KEY.userIds),
+        subs: new Cache(channelInfo.login!, CACHE_KEY.subs),
+        follows: new Cache(channelInfo.login!, CACHE_KEY.follows),
+      }
+      void start(caches, channelInfo)
+      const initialUserIds = await caches.userIds.get()
+      chatEmitter.addEventListener('chat', async (data: CustomEvent<ChatItem>) => {
+        const id = await initialUserIds.get(data.detail.username)
+        if (!id) return
+        console.info('[twitchCache][chat][sub]', id, data.detail.isSubscriber)
+        const initialSubs = await caches.subs.get()
+        await initialSubs.set(id, data.detail.isSubscriber)
+      })
     }
   }, 2000)
 }
 
-async function start(channelInfo: ChannelInfo) {
-  const caches = {
-    userIds: new Cache(channelInfo.login!, CACHE_KEY.userIds),
-    subs: new Cache(channelInfo.login!, CACHE_KEY.subs),
-    follows: new Cache(channelInfo.login!, CACHE_KEY.follows),
-  }
+async function start(caches: { [k: string]: Cache }, channelInfo: ChannelInfo) {
   console.info('[twitchCache][start]', caches)
-  let viewers = await getViewers(channelInfo)
+  const viewers = await getViewers(channelInfo)
   const initialUserIds = await caches.userIds.get()
   console.info('[twitchCache][viewers]', viewers.length, initialUserIds.size)
-  viewers = viewers.filter((v) => !initialUserIds.has(v))
   let total = 0
-  const mappedUsers = await getUsersFromNames(channelInfo, viewers, async (data) => {
+  const mappedUsers = await getUsersFromNames(channelInfo, viewers, initialUserIds, async (data) => {
     data.forEach((d) => initialUserIds.set(d.login, d.id))
     await caches.userIds.store(initialUserIds)
     total += data.length
@@ -68,7 +76,7 @@ async function buildFollowers(caches: { [k: string]: Cache }, channelInfo: Chann
   const initialFollowers = await caches.follows.get()
   console.info('[twitchCache][followers][start]', { initial: initialFollowers.size, toGet: mappedUsers.length })
   let total = 0
-  return getFollowerInfo(channelInfo, mappedUsers, 5, async (data) => {
+  await getFollowerInfo(channelInfo, mappedUsers, 5, initialFollowers, async (data) => {
     data.forEach((d) => initialFollowers.set(d.id, d.follows))
     await caches.follows.store(initialFollowers)
     total += data.length
@@ -80,13 +88,15 @@ async function buildFollowers(caches: { [k: string]: Cache }, channelInfo: Chann
       `(${(total / mappedUsers.length) * 100})%`
     )
   })
+  console.info('[twitchCache][followers][done]')
 }
 
 async function buildSubs(caches: { [k: string]: Cache }, channelInfo: ChannelInfo, mappedUsers: any) {
+  return
   const initial = await caches.subs.get()
   console.info('[twitchCache][subs][start]', { initial: initial.size, toGet: mappedUsers.length })
   let total = 0
-  return getUsersSubscriptionInfo(channelInfo, mappedUsers, async (data) => {
+  await getUsersSubscriptionInfo(channelInfo, mappedUsers, initial, async (data) => {
     data.forEach((d) => initial.set(d.id, d.isSubscriber))
     await caches.subs.store(initial)
     total += data.length
@@ -98,4 +108,5 @@ async function buildSubs(caches: { [k: string]: Cache }, channelInfo: ChannelInf
       `(${(total / mappedUsers.length) * 100})%`
     )
   })
+  console.info('[twitchCache][subs][done]')
 }

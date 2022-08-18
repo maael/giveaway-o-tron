@@ -10,18 +10,24 @@ async function callTwitchApi(channelInfo: ChannelInfo, path: string) {
   })
 }
 
+type UserWithSub = UserWithId & { isSubscriber: boolean }
 export async function getUsersSubscriptionInfo(
   channelInfo: ChannelInfo,
   mappedUsers: Awaited<ReturnType<typeof getUsersFromNames>>,
-  onChunk: (data: Awaited<ReturnType<typeof getUsersSubscriptionInfo>>) => Promise<void> = async () => undefined
+  cache: Map<any, any> = new Map(),
+  onChunk: (data: UserWithSub[]) => Promise<void> = async () => undefined
 ) {
-  const chunkedUsers = chunkArray(mappedUsers, 5)
-  let embellishedUsers: {
-    id: string
-    login: string
-    displayName: string
-    isSubscriber: boolean
-  }[] = []
+  const existing = mappedUsers
+    .filter((u) => cache.has(u.id))
+    .map((u) => ({
+      isSubscriber: cache.get(u),
+      login: u.login,
+      id: u.id,
+    }))
+  const toFind = mappedUsers.filter((u) => !cache.has(u))
+  console.info('[subs]', { toFind: toFind.length, existing: existing.length })
+  const chunkedUsers = chunkArray(toFind, 5)
+  let embellishedUsers: UserWithSub[] = []
   for (const chunk of chunkedUsers) {
     const embellishedChunk = await Promise.all(
       chunk.map(async (user) => {
@@ -47,22 +53,28 @@ export async function getUsersSubscriptionInfo(
     embellishedUsers = embellishedUsers.concat(embellishedChunk)
     await wait(200)
   }
-  return embellishedUsers
+  return embellishedUsers.concat(existing)
 }
 
+type UserWithFollower = UserWithId & { follows: boolean }
 export async function getFollowerInfo(
   channelInfo: ChannelInfo,
   mappedUsers: Awaited<ReturnType<typeof getUsersFromNames>>,
   chunkSize: number = 5,
+  cache: Map<any, any> = new Map(),
   onChunk: (data: Awaited<ReturnType<typeof getFollowerInfo>>) => Promise<void> = async () => undefined
 ) {
-  const chunkedUsers = chunkArray(mappedUsers, chunkSize)
-  let embellishedUsers: {
-    id: string
-    login: string
-    displayName: string
-    follows: boolean
-  }[] = []
+  const existing = mappedUsers
+    .filter((u) => cache.has(u.id))
+    .map((u) => ({
+      follows: cache.get(u),
+      login: u.login,
+      id: u.id,
+    }))
+  const toFind = mappedUsers.filter((u) => !cache.has(u))
+  console.info('[follows]', { toFind: toFind.length, existing: existing.length })
+  const chunkedUsers = chunkArray(toFind, chunkSize)
+  let embellishedUsers: UserWithFollower[] = []
   for (const chunk of chunkedUsers) {
     const embellishedChunk = await Promise.all(
       chunk.map(async (user) => {
@@ -79,20 +91,31 @@ export async function getFollowerInfo(
     )
     await onChunk(embellishedChunk)
     embellishedUsers = embellishedUsers.concat(embellishedChunk)
-    await wait(100)
+    await wait(200)
   }
-  return embellishedUsers.filter((u) => u.follows)
+  return embellishedUsers.concat(existing).filter((u) => u.follows)
 }
 
+type UserWithId = {
+  id: string
+  login: string
+}
 export async function getUsersFromNames(
   channelInfo: ChannelInfo,
   usernames: string[],
-  onChunk: (data: Awaited<ReturnType<typeof getUsersFromNames>>) => Promise<void> = async () => undefined
+  cache: Map<any, any> = new Map(),
+  onChunk: (data: UserWithId[]) => Promise<void> = async () => undefined
 ) {
-  const toFind = usernames.slice(0, 1000)
+  const existing = usernames
+    .filter((u) => cache.has(u))
+    .map((u) => ({
+      id: cache.get(u),
+      login: u,
+    }))
+  const toFind = usernames.filter((u) => !cache.has(u))
   const chunks = chunkArray(toFind, 100)
-  console.info('[usernames]', toFind.length)
-  let users: { id: string; login: string; displayName: string }[] = []
+  console.info('[usernames]', { toFind: toFind.length, existing: existing.length })
+  let users: UserWithId[] = []
   for (const chunk of chunks) {
     const info = await callTwitchApi(
       channelInfo,
@@ -101,13 +124,12 @@ export async function getUsersFromNames(
     const mapped = info.data.map((i) => ({
       id: i.id,
       login: i.login,
-      displayName: i.display_name,
     }))
     await onChunk(mapped)
     users = users.concat(mapped)
   }
   console.info('[users]', users.length)
-  return users
+  return users.concat(existing)
 }
 
 export async function getViewers(channelInfo: ChannelInfo) {

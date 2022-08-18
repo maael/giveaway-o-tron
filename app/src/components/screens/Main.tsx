@@ -146,13 +146,11 @@ function ChatGiveaway({
   chatEvents,
   setWinners,
   channelInfo,
-  chatCommand,
   settings,
 }: {
   chatEvents: ChatItem[]
   setWinners: Dispatch<SetStateAction<Winner[]>>
   channelInfo: ChannelInfo
-  chatCommand: string
   settings: Settings
 }) {
   return (
@@ -162,7 +160,7 @@ function ChatGiveaway({
         const giveawayWinner = await getChatGiveaway(
           channelInfo,
           chatEvents,
-          chatCommand,
+          settings.chatCommand,
           settings.subLuck,
           settings.followersOnly,
           settings.numberOfWinners
@@ -216,19 +214,12 @@ export default function MainScreen({
   channelInfo: ChannelInfo
 }) {
   const [winners, setWinners] = React.useState<Winner[]>([])
-  const [chatCommand, setChatCommand] = React.useState('')
   return (
     <>
       <Winner winners={winners} onClear={(idx) => setWinners((w) => removeIdx(w, idx))} />
       <div className="flex flex-row gap-2">
         <InstantGiveaway settings={settings} channelInfo={channelInfo} setWinners={setWinners} />
-        <ChatGiveaway
-          settings={settings}
-          channelInfo={channelInfo}
-          chatEvents={chatEvents}
-          setWinners={setWinners}
-          chatCommand={chatCommand}
-        />
+        <ChatGiveaway settings={settings} channelInfo={channelInfo} chatEvents={chatEvents} setWinners={setWinners} />
       </div>
       <Settings settings={settings} setSettings={setSettings} />
       <div className="mt-2 rounded-md bg-gray-700 flex-1 flex flex-col relative overflow-hidden">

@@ -26670,8 +26670,15 @@ ${JSON.stringify(message, null, 4)}`);
       }
     });
   }
-  async function getUsersSubscriptionInfo(channelInfo, mappedUsers, onChunk = async () => void 0) {
-    const chunkedUsers = chunkArray(mappedUsers, 5);
+  async function getUsersSubscriptionInfo(channelInfo, mappedUsers, cache2 = new Map(), onChunk = async () => void 0) {
+    const existing = mappedUsers.filter((u) => cache2.has(u.id)).map((u) => ({
+      isSubscriber: cache2.get(u),
+      login: u.login,
+      id: u.id
+    }));
+    const toFind = mappedUsers.filter((u) => !cache2.has(u));
+    console.info("[subs]", { toFind: toFind.length, existing: existing.length });
+    const chunkedUsers = chunkArray(toFind, 5);
     let embellishedUsers = [];
     for (const chunk of chunkedUsers) {
       const embellishedChunk = await Promise.all(chunk.map(async (user) => {
@@ -26691,10 +26698,17 @@ ${JSON.stringify(message, null, 4)}`);
       embellishedUsers = embellishedUsers.concat(embellishedChunk);
       await wait(200);
     }
-    return embellishedUsers;
+    return embellishedUsers.concat(existing);
   }
-  async function getFollowerInfo(channelInfo, mappedUsers, chunkSize = 5, onChunk = async () => void 0) {
-    const chunkedUsers = chunkArray(mappedUsers, chunkSize);
+  async function getFollowerInfo(channelInfo, mappedUsers, chunkSize = 5, cache2 = new Map(), onChunk = async () => void 0) {
+    const existing = mappedUsers.filter((u) => cache2.has(u.id)).map((u) => ({
+      follows: cache2.get(u),
+      login: u.login,
+      id: u.id
+    }));
+    const toFind = mappedUsers.filter((u) => !cache2.has(u));
+    console.info("[follows]", { toFind: toFind.length, existing: existing.length });
+    const chunkedUsers = chunkArray(toFind, chunkSize);
     let embellishedUsers = [];
     for (const chunk of chunkedUsers) {
       const embellishedChunk = await Promise.all(chunk.map(async (user) => {
@@ -26706,55 +26720,158 @@ ${JSON.stringify(message, null, 4)}`);
       }));
       await onChunk(embellishedChunk);
       embellishedUsers = embellishedUsers.concat(embellishedChunk);
-      await wait(100);
+      await wait(200);
     }
-    return embellishedUsers.filter((u) => u.follows);
+    return embellishedUsers.concat(existing).filter((u) => u.follows);
   }
-  async function getUsersFromNames(channelInfo, usernames, onChunk = async () => void 0) {
-    const toFind = usernames.slice(0, 1e3);
+  async function getUsersFromNames(channelInfo, usernames, cache2 = new Map(), onChunk = async () => void 0) {
+    const existing = usernames.filter((u) => cache2.has(u)).map((u) => ({
+      id: cache2.get(u),
+      login: u
+    }));
+    const toFind = usernames.filter((u) => !cache2.has(u));
     const chunks = chunkArray(toFind, 100);
-    console.info("[usernames]", toFind.length);
+    console.info("[usernames]", { toFind: toFind.length, existing: existing.length });
     let users = [];
     for (const chunk of chunks) {
       const info = await callTwitchApi(channelInfo, `users?${chunk.map((c) => `login=${encodeURIComponent(c)}`).join("&")}`).then((res) => res.json());
       const mapped = info.data.map((i) => ({
         id: i.id,
-        login: i.login,
-        displayName: i.display_name
+        login: i.login
       }));
       await onChunk(mapped);
       users = users.concat(mapped);
     }
     console.info("[users]", users.length);
-    return users;
+    return users.concat(existing);
   }
   async function getViewers(channelInfo) {
     return fetch(`https://discord-slash-commands.vercel.app/api/twitch-chatters?channel=${channelInfo.login}`).then((res) => res.json()).then((d) => d.chatters.viewers);
   }
 
+  // src/utils/twitchCaches.ts
+  var CACHE_KEY;
+  (function(CACHE_KEY2) {
+    CACHE_KEY2["userIds"] = "userIds";
+    CACHE_KEY2["subs"] = "subs";
+    CACHE_KEY2["follows"] = "follows";
+  })(CACHE_KEY || (CACHE_KEY = {}));
+  var Cache = class {
+    constructor(channel, key) {
+      this.get = async function get() {
+        try {
+          return new Map(JSON.parse(await Neutralino.storage.getData(this.key)));
+        } catch (e) {
+          console.info("[CACHE][ERROR]", this.key, e);
+          return new Map();
+        }
+      };
+      this.store = async function store(data) {
+        await Neutralino.storage.setData(this.key, JSON.stringify([...data]));
+      };
+      this.key = `${channel}-${key}`;
+    }
+  };
+  async function watch() {
+    const interval = setInterval(async () => {
+      console.info("[twitchCache][check]");
+      const info = await Neutralino.storage.getData("main-channelInfo");
+      if (info) {
+        const channelInfo = JSON.parse(info);
+        if (!channelInfo.login)
+          return;
+        clearInterval(interval);
+        const caches = {
+          userIds: new Cache(channelInfo.login, CACHE_KEY.userIds),
+          subs: new Cache(channelInfo.login, CACHE_KEY.subs),
+          follows: new Cache(channelInfo.login, CACHE_KEY.follows)
+        };
+        void start(caches, channelInfo);
+        const initialUserIds = await caches.userIds.get();
+        chatEmitter.addEventListener("chat", async (data) => {
+          const id = await initialUserIds.get(data.detail.username);
+          if (!id)
+            return;
+          console.info("[twitchCache][chat][sub]", id, data.detail.isSubscriber);
+          const initialSubs = await caches.subs.get();
+          await initialSubs.set(id, data.detail.isSubscriber);
+        });
+      }
+    }, 2e3);
+  }
+  async function start(caches, channelInfo) {
+    console.info("[twitchCache][start]", caches);
+    const viewers = await getViewers(channelInfo);
+    const initialUserIds = await caches.userIds.get();
+    console.info("[twitchCache][viewers]", viewers.length, initialUserIds.size);
+    let total = 0;
+    const mappedUsers = await getUsersFromNames(channelInfo, viewers, initialUserIds, async (data) => {
+      data.forEach((d) => initialUserIds.set(d.login, d.id));
+      await caches.userIds.store(initialUserIds);
+      total += data.length;
+      console.info("[twitchCache][userId]", total, "stored of", viewers.length, `(${total / viewers.length * 100})%`);
+    });
+    console.info("[twitchCache][userIds][done]");
+    await Promise.all([buildFollowers(caches, channelInfo, mappedUsers), buildSubs(caches, channelInfo, mappedUsers)]);
+    console.info("[twitchCache][done]");
+  }
+  async function buildFollowers(caches, channelInfo, mappedUsers) {
+    const initialFollowers = await caches.follows.get();
+    console.info("[twitchCache][followers][start]", { initial: initialFollowers.size, toGet: mappedUsers.length });
+    let total = 0;
+    await getFollowerInfo(channelInfo, mappedUsers, 5, initialFollowers, async (data) => {
+      data.forEach((d) => initialFollowers.set(d.id, d.follows));
+      await caches.follows.store(initialFollowers);
+      total += data.length;
+      console.info("[twitchCache][followers]", total, "stored of", mappedUsers.length, `(${total / mappedUsers.length * 100})%`);
+    });
+    console.info("[twitchCache][followers][done]");
+  }
+  async function buildSubs(caches, channelInfo, mappedUsers) {
+    return;
+    const initial = await caches.subs.get();
+    console.info("[twitchCache][subs][start]", { initial: initial.size, toGet: mappedUsers.length });
+    let total = 0;
+    await getUsersSubscriptionInfo(channelInfo, mappedUsers, initial, async (data) => {
+      data.forEach((d) => initial.set(d.id, d.isSubscriber));
+      await caches.subs.store(initial);
+      total += data.length;
+      console.info("[twitchCache][subs]", total, "stored of", mappedUsers.length, `(${total / mappedUsers.length * 100})%`);
+    });
+    console.info("[twitchCache][subs][done]");
+  }
+
   // src/utils/giveaways.ts
   async function getChatGiveaway(channelInfo, chatItems, chatCommand, subLuck = 2, followerOnly = true, numberOfWinners = 1) {
+    console.info("COMMAND", chatCommand);
     let users = chatItems.filter((c) => chatCommand ? c.msg.toLowerCase().includes(chatCommand.toLowerCase()) : true).reduce((acc, c) => acc.some((i) => i.username === c.username) ? acc : acc.concat(c), []).flatMap((c) => c.isSubscriber ? Array.from({ length: subLuck }, () => c) : c);
     if (followerOnly) {
-      const mappedUsers = await getUsersFromNames(channelInfo, users.map((u) => u.username));
-      users = await getFollowerInfo(channelInfo, mappedUsers);
+      const idCache = await new Cache(channelInfo.login, CACHE_KEY.userIds).get();
+      const mappedUsers = await getUsersFromNames(channelInfo, users.map((u) => u.username), idCache);
+      const followerCache = await new Cache(channelInfo.login, CACHE_KEY.follows).get();
+      users = await getFollowerInfo(channelInfo, mappedUsers, 10, followerCache);
     }
     return Array.from({ length: numberOfWinners }, () => {
       const winner = getRandomArrayItem(users);
+      if (!winner)
+        return;
       return {
         username: winner.username,
         isSubscriber: winner.isSubscriber,
         id: winner.id
       };
-    });
+    }).filter(Boolean);
   }
   async function getInstantGiveaway(channelInfo, subLuck = 2, followerOnly = true, numberOfWinners = 1) {
     let viewers = await getViewers(channelInfo);
+    const idCache = await new Cache(channelInfo.login, CACHE_KEY.userIds).get();
+    const mappedUsers = await getUsersFromNames(channelInfo, viewers, idCache);
     if (followerOnly) {
-      const mappedUsers = await getUsersFromNames(channelInfo, viewers);
+      const followerCache = await new Cache(channelInfo.login, CACHE_KEY.follows).get();
+      const subCache = await new Cache(channelInfo.login, CACHE_KEY.subs).get();
       const [withFollowers, withSub] = await Promise.all([
-        getFollowerInfo(channelInfo, mappedUsers, 5),
-        getUsersSubscriptionInfo(channelInfo, mappedUsers)
+        getFollowerInfo(channelInfo, mappedUsers, 5, followerCache),
+        getUsersSubscriptionInfo(channelInfo, mappedUsers, subCache)
       ]);
       const combined = withFollowers.map((i) => {
         var _a;
@@ -26764,7 +26881,12 @@ ${JSON.stringify(message, null, 4)}`);
       });
       viewers = combined.filter((i) => i.follows).flatMap((c) => c.isSubscriber ? Array.from({ length: subLuck }, () => c) : c).map((i) => i.login);
     }
-    return Array.from({ length: numberOfWinners }, () => getRandomArrayItem(viewers));
+    return Array.from({ length: numberOfWinners }, () => {
+      const winner = getRandomArrayItem(viewers);
+      if (!winner)
+        return;
+      return winner;
+    }).filter(Boolean);
   }
 
   // node_modules/react-icons/fa/index.esm.js
@@ -26888,13 +27010,12 @@ ${JSON.stringify(message, null, 4)}`);
     chatEvents,
     setWinners,
     channelInfo,
-    chatCommand,
     settings
   }) {
     return /* @__PURE__ */ import_react8.default.createElement("button", {
       className: "bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none",
       onClick: async () => {
-        const giveawayWinner = await getChatGiveaway(channelInfo, chatEvents, chatCommand, settings.subLuck, settings.followersOnly, settings.numberOfWinners);
+        const giveawayWinner = await getChatGiveaway(channelInfo, chatEvents, settings.chatCommand, settings.subLuck, settings.followersOnly, settings.numberOfWinners);
         if (!giveawayWinner)
           return;
         setWinners((w) => w.concat(giveawayWinner));
@@ -26929,7 +27050,6 @@ ${JSON.stringify(message, null, 4)}`);
     channelInfo
   }) {
     const [winners, setWinners] = import_react8.default.useState([]);
-    const [chatCommand, setChatCommand] = import_react8.default.useState("");
     return /* @__PURE__ */ import_react8.default.createElement(import_react8.default.Fragment, null, /* @__PURE__ */ import_react8.default.createElement(Winner, {
       winners,
       onClear: (idx) => setWinners((w) => removeIdx(w, idx))
@@ -26943,8 +27063,7 @@ ${JSON.stringify(message, null, 4)}`);
       settings,
       channelInfo,
       chatEvents,
-      setWinners,
-      chatCommand
+      setWinners
     })), /* @__PURE__ */ import_react8.default.createElement(Settings, {
       settings,
       setSettings
@@ -27152,87 +27271,6 @@ ${JSON.stringify(message, null, 4)}`);
       channel: channelInfo,
       setChannel: setChannelInfo
     }))));
-  }
-
-  // src/utils/twitchCaches.ts
-  var CACHE_KEY;
-  (function(CACHE_KEY2) {
-    CACHE_KEY2["userIds"] = "userIds";
-    CACHE_KEY2["subs"] = "subs";
-    CACHE_KEY2["follows"] = "follows";
-  })(CACHE_KEY || (CACHE_KEY = {}));
-  var Cache = class {
-    constructor(channel, key) {
-      this.get = async function get() {
-        try {
-          return new Map(JSON.parse(await Neutralino.storage.getData(this.key)));
-        } catch (e) {
-          console.info("[CACHE][ERROR]", this.key, e);
-          return new Map();
-        }
-      };
-      this.store = async function store(data) {
-        await Neutralino.storage.setData(this.key, JSON.stringify([...data]));
-      };
-      this.key = `${channel}-${key}`;
-    }
-  };
-  async function watch() {
-    const interval = setInterval(async () => {
-      console.info("[twitchCache][check]");
-      const info = await Neutralino.storage.getData("main-channelInfo");
-      if (info) {
-        const parsed = JSON.parse(info);
-        if (!parsed.login)
-          return;
-        clearInterval(interval);
-        void start(parsed);
-      }
-    }, 2e3);
-  }
-  async function start(channelInfo) {
-    const caches = {
-      userIds: new Cache(channelInfo.login, CACHE_KEY.userIds),
-      subs: new Cache(channelInfo.login, CACHE_KEY.subs),
-      follows: new Cache(channelInfo.login, CACHE_KEY.follows)
-    };
-    console.info("[twitchCache][start]", caches);
-    let viewers = await getViewers(channelInfo);
-    const initialUserIds = await caches.userIds.get();
-    console.info("[twitchCache][viewers]", viewers.length, initialUserIds.size);
-    viewers = viewers.filter((v) => !initialUserIds.has(v));
-    let total = 0;
-    const mappedUsers = await getUsersFromNames(channelInfo, viewers, async (data) => {
-      data.forEach((d) => initialUserIds.set(d.login, d.id));
-      await caches.userIds.store(initialUserIds);
-      total += data.length;
-      console.info("[twitchCache][userId]", total, "stored of", viewers.length, `(${total / viewers.length * 100})%`);
-    });
-    console.info("[twitchCache][userIds][done]");
-    await Promise.all([buildFollowers(caches, channelInfo, mappedUsers), buildSubs(caches, channelInfo, mappedUsers)]);
-    console.info("[twitchCache][done]");
-  }
-  async function buildFollowers(caches, channelInfo, mappedUsers) {
-    const initialFollowers = await caches.follows.get();
-    console.info("[twitchCache][followers][start]", { initial: initialFollowers.size, toGet: mappedUsers.length });
-    let total = 0;
-    return getFollowerInfo(channelInfo, mappedUsers, 5, async (data) => {
-      data.forEach((d) => initialFollowers.set(d.id, d.follows));
-      await caches.follows.store(initialFollowers);
-      total += data.length;
-      console.info("[twitchCache][followers]", total, "stored of", mappedUsers.length, `(${total / mappedUsers.length * 100})%`);
-    });
-  }
-  async function buildSubs(caches, channelInfo, mappedUsers) {
-    const initial = await caches.subs.get();
-    console.info("[twitchCache][subs][start]", { initial: initial.size, toGet: mappedUsers.length });
-    let total = 0;
-    return getUsersSubscriptionInfo(channelInfo, mappedUsers, async (data) => {
-      data.forEach((d) => initial.set(d.id, d.isSubscriber));
-      await caches.subs.store(initial);
-      total += data.length;
-      console.info("[twitchCache][subs]", total, "stored of", mappedUsers.length, `(${total / mappedUsers.length * 100})%`);
-    });
   }
 
   // src/index.tsx
