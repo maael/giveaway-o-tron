@@ -32,10 +32,10 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
           type: "zip"
-          directory: "./dist"
+          directory: "./app/dist"
           filename: "giveaway-o-tron.zip"
           path: giveaway-o-tron
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: "./dist/giveaway-o-tron.zip"
+          artifacts: "./app/dist/giveaway-o-tron.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
