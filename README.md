@@ -1,3 +1,7 @@
+<p align="center">
+  <img width="802" height="632" src="./screenshot.png">
+</p>
+
 # Giveaway-o-tron
 
 Windows program and a website to allow Twitch giveaways with multiple options.
