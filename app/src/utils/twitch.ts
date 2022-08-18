@@ -20,11 +20,11 @@ export async function getUsersSubscriptionInfo(
   const existing = mappedUsers
     .filter((u) => cache.has(u.id))
     .map((u) => ({
-      isSubscriber: cache.get(u),
+      isSubscriber: cache.get(u.id),
       login: u.login,
       id: u.id,
     }))
-  const toFind = mappedUsers.filter((u) => !cache.has(u))
+  const toFind = mappedUsers.filter((u) => !cache.has(u.id))
   console.info('[subs]', { toFind: toFind.length, existing: existing.length })
   const chunkedUsers = chunkArray(toFind, 5)
   let embellishedUsers: UserWithSub[] = []
@@ -67,11 +67,11 @@ export async function getFollowerInfo(
   const existing = mappedUsers
     .filter((u) => cache.has(u.id))
     .map((u) => ({
-      follows: cache.get(u),
+      follows: cache.get(u.id),
       login: u.login,
       id: u.id,
     }))
-  const toFind = mappedUsers.filter((u) => !cache.has(u))
+  const toFind = mappedUsers.filter((u) => !cache.has(u.id))
   console.info('[follows]', { toFind: toFind.length, existing: existing.length })
   const chunkedUsers = chunkArray(toFind, chunkSize)
   let embellishedUsers: UserWithFollower[] = []

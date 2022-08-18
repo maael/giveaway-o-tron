@@ -10,18 +10,18 @@
   var __hasOwnProp = Object.prototype.hasOwnProperty;
   var __propIsEnum = Object.prototype.propertyIsEnumerable;
   var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-  var __spreadValues = (a, b) => {
-    for (var prop in b || (b = {}))
-      if (__hasOwnProp.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
+  var __spreadValues = (a2, b2) => {
+    for (var prop in b2 || (b2 = {}))
+      if (__hasOwnProp.call(b2, prop))
+        __defNormalProp(a2, prop, b2[prop]);
     if (__getOwnPropSymbols)
-      for (var prop of __getOwnPropSymbols(b)) {
-        if (__propIsEnum.call(b, prop))
-          __defNormalProp(a, prop, b[prop]);
+      for (var prop of __getOwnPropSymbols(b2)) {
+        if (__propIsEnum.call(b2, prop))
+          __defNormalProp(a2, prop, b2[prop]);
       }
-    return a;
+    return a2;
   };
-  var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+  var __spreadProps = (a2, b2) => __defProps(a2, __getOwnPropDescs(b2));
   var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
   var __commonJS = (cb, mod) => function __require() {
     return mod || (0, cb[Object.keys(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
@@ -62,11 +62,11 @@
             return false;
           }
           var test2 = {};
-          for (var i = 0; i < 10; i++) {
-            test2["_" + String.fromCharCode(i)] = i;
+          for (var i2 = 0; i2 < 10; i2++) {
+            test2["_" + String.fromCharCode(i2)] = i2;
           }
-          var order2 = Object.getOwnPropertyNames(test2).map(function(n) {
-            return test2[n];
+          var order2 = Object.getOwnPropertyNames(test2).map(function(n3) {
+            return test2[n3];
           });
           if (order2.join("") !== "0123456789") {
             return false;
@@ -87,8 +87,8 @@
         var from;
         var to = toObject(target);
         var symbols;
-        for (var s = 1; s < arguments.length; s++) {
-          from = Object(arguments[s]);
+        for (var s2 = 1; s2 < arguments.length; s2++) {
+          from = Object(arguments[s2]);
           for (var key in from) {
             if (hasOwnProperty.call(from, key)) {
               to[key] = from[key];
@@ -96,9 +96,9 @@
           }
           if (getOwnPropertySymbols) {
             symbols = getOwnPropertySymbols(from);
-            for (var i = 0; i < symbols.length; i++) {
-              if (propIsEnumerable.call(from, symbols[i])) {
-                to[symbols[i]] = from[symbols[i]];
+            for (var i2 = 0; i2 < symbols.length; i2++) {
+              if (propIsEnumerable.call(from, symbols[i2])) {
+                to[symbols[i2]] = from[symbols[i2]];
               }
             }
           }
@@ -397,7 +397,7 @@
                   var init2 = lazyComponent._init;
                   try {
                     return getComponentName(init2(payload));
-                  } catch (x) {
+                  } catch (x2) {
                     return null;
                   }
                 }
@@ -515,7 +515,7 @@
             }
             return element;
           };
-          function createElement(type, config, children) {
+          function createElement4(type, config, children) {
             var propName;
             var props = {};
             var key = null;
@@ -545,8 +545,8 @@
               props.children = children;
             } else if (childrenLength > 1) {
               var childArray = Array(childrenLength);
-              for (var i = 0; i < childrenLength; i++) {
-                childArray[i] = arguments[i + 2];
+              for (var i2 = 0; i2 < childrenLength; i2++) {
+                childArray[i2] = arguments[i2 + 2];
               }
               {
                 if (Object.freeze) {
@@ -620,8 +620,8 @@
               props.children = children;
             } else if (childrenLength > 1) {
               var childArray = Array(childrenLength);
-              for (var i = 0; i < childrenLength; i++) {
-                childArray[i] = arguments[i + 2];
+              for (var i2 = 0; i2 < childrenLength; i2++) {
+                childArray[i2] = arguments[i2 + 2];
               }
               props.children = childArray;
             }
@@ -685,8 +685,8 @@
                 if (childKey != null) {
                   escapedChildKey = escapeUserProvidedKey(childKey) + "/";
                 }
-                mapIntoArray(mappedChild, array, escapedChildKey, "", function(c) {
-                  return c;
+                mapIntoArray(mappedChild, array, escapedChildKey, "", function(c2) {
+                  return c2;
                 });
               } else if (mappedChild != null) {
                 if (isValidElement(mappedChild)) {
@@ -701,9 +701,9 @@
             var subtreeCount = 0;
             var nextNamePrefix = nameSoFar === "" ? SEPARATOR : nameSoFar + SUBSEPARATOR;
             if (Array.isArray(children)) {
-              for (var i = 0; i < children.length; i++) {
-                child = children[i];
-                nextName = nextNamePrefix + getElementKey(child, i);
+              for (var i2 = 0; i2 < children.length; i2++) {
+                child = children[i2];
+                nextName = nextNamePrefix + getElementKey(child, i2);
                 subtreeCount += mapIntoArray(child, array, escapedPrefix, nextName, callback);
               }
             } else {
@@ -749,11 +749,11 @@
             return result;
           }
           function countChildren(children) {
-            var n = 0;
+            var n3 = 0;
             mapChildren(children, function() {
-              n++;
+              n3++;
             });
-            return n;
+            return n3;
           }
           function forEachChildren(children, forEachFunc, forEachContext) {
             mapChildren(children, function() {
@@ -952,7 +952,7 @@
             }
             return lazyType;
           }
-          function forwardRef2(render) {
+          function forwardRef3(render) {
             {
               if (render != null && render.$$typeof === REACT_MEMO_TYPE) {
                 error("forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...)).");
@@ -1006,7 +1006,7 @@
             }
             return false;
           }
-          function memo(type, compare) {
+          function memo2(type, compare) {
             {
               if (!isValidElementType2(type)) {
                 error("memo: The first argument must be a component. Instead received: %s", type === null ? "null" : typeof type);
@@ -1184,8 +1184,8 @@
               if (prefix2 === void 0) {
                 try {
                   throw Error();
-                } catch (x) {
-                  var match = x.stack.trim().match(/\n( *(at )?)/);
+                } catch (x2) {
+                  var match = x2.stack.trim().match(/\n( *(at )?)/);
                   prefix2 = match && match[1] || "";
                 }
               }
@@ -1231,23 +1231,23 @@
                 if (typeof Reflect === "object" && Reflect.construct) {
                   try {
                     Reflect.construct(Fake, []);
-                  } catch (x) {
-                    control = x;
+                  } catch (x2) {
+                    control = x2;
                   }
                   Reflect.construct(fn, [], Fake);
                 } else {
                   try {
                     Fake.call();
-                  } catch (x) {
-                    control = x;
+                  } catch (x2) {
+                    control = x2;
                   }
                   fn.call(Fake.prototype);
                 }
               } else {
                 try {
                   throw Error();
-                } catch (x) {
-                  control = x;
+                } catch (x2) {
+                  control = x2;
                 }
                 fn();
               }
@@ -1255,19 +1255,19 @@
               if (sample && control && typeof sample.stack === "string") {
                 var sampleLines = sample.stack.split("\n");
                 var controlLines = control.stack.split("\n");
-                var s = sampleLines.length - 1;
-                var c = controlLines.length - 1;
-                while (s >= 1 && c >= 0 && sampleLines[s] !== controlLines[c]) {
-                  c--;
+                var s2 = sampleLines.length - 1;
+                var c2 = controlLines.length - 1;
+                while (s2 >= 1 && c2 >= 0 && sampleLines[s2] !== controlLines[c2]) {
+                  c2--;
                 }
-                for (; s >= 1 && c >= 0; s--, c--) {
-                  if (sampleLines[s] !== controlLines[c]) {
-                    if (s !== 1 || c !== 1) {
+                for (; s2 >= 1 && c2 >= 0; s2--, c2--) {
+                  if (sampleLines[s2] !== controlLines[c2]) {
+                    if (s2 !== 1 || c2 !== 1) {
                       do {
-                        s--;
-                        c--;
-                        if (c < 0 || sampleLines[s] !== controlLines[c]) {
-                          var _frame = "\n" + sampleLines[s].replace(" at new ", " at ");
+                        s2--;
+                        c2--;
+                        if (c2 < 0 || sampleLines[s2] !== controlLines[c2]) {
+                          var _frame = "\n" + sampleLines[s2].replace(" at new ", " at ");
                           {
                             if (typeof fn === "function") {
                               componentFrameCache.set(fn, _frame);
@@ -1275,7 +1275,7 @@
                           }
                           return _frame;
                         }
-                      } while (s >= 1 && c >= 0);
+                      } while (s2 >= 1 && c2 >= 0);
                     }
                     break;
                   }
@@ -1339,7 +1339,7 @@
                   var init2 = lazyComponent._init;
                   try {
                     return describeUnknownElementTypeFrameInDEV(init2(payload), source, ownerFn);
-                  } catch (x) {
+                  } catch (x2) {
                   }
                 }
               }
@@ -1464,8 +1464,8 @@
               return;
             }
             if (Array.isArray(node)) {
-              for (var i = 0; i < node.length; i++) {
-                var child = node[i];
+              for (var i2 = 0; i2 < node.length; i2++) {
+                var child = node[i2];
                 if (isValidElement(child)) {
                   validateExplicitKey(child, parentType);
                 }
@@ -1519,8 +1519,8 @@
           function validateFragmentProps(fragment) {
             {
               var keys = Object.keys(fragment.props);
-              for (var i = 0; i < keys.length; i++) {
-                var key = keys[i];
+              for (var i2 = 0; i2 < keys.length; i2++) {
+                var key = keys[i2];
                 if (key !== "children" && key !== "key") {
                   setCurrentlyValidatingElement$1(fragment);
                   error("Invalid prop `%s` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props.", key);
@@ -1563,13 +1563,13 @@
                 error("React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
               }
             }
-            var element = createElement.apply(this, arguments);
+            var element = createElement4.apply(this, arguments);
             if (element == null) {
               return element;
             }
             if (validType) {
-              for (var i = 2; i < arguments.length; i++) {
-                validateChildKeys(arguments[i], type);
+              for (var i2 = 2; i2 < arguments.length; i2++) {
+                validateChildKeys(arguments[i2], type);
               }
             }
             if (type === exports.Fragment) {
@@ -1603,8 +1603,8 @@
           }
           function cloneElementWithValidation(element, props, children) {
             var newElement = cloneElement.apply(this, arguments);
-            for (var i = 2; i < arguments.length; i++) {
-              validateChildKeys(arguments[i], newElement.type);
+            for (var i2 = 2; i2 < arguments.length; i2++) {
+              validateChildKeys(arguments[i2], newElement.type);
             }
             validatePropTypes(newElement);
             return newElement;
@@ -1614,7 +1614,7 @@
               var frozenObject = Object.freeze({});
               new Map([[frozenObject, null]]);
               new Set([frozenObject]);
-            } catch (e) {
+            } catch (e2) {
             }
           }
           var createElement$1 = createElementWithValidation;
@@ -1636,10 +1636,10 @@
           exports.createElement = createElement$1;
           exports.createFactory = createFactory;
           exports.createRef = createRef;
-          exports.forwardRef = forwardRef2;
+          exports.forwardRef = forwardRef3;
           exports.isValidElement = isValidElement;
           exports.lazy = lazy;
-          exports.memo = memo;
+          exports.memo = memo2;
           exports.useCallback = useCallback3;
           exports.useContext = useContext2;
           exports.useDebugValue = useDebugValue;
@@ -1704,9 +1704,9 @@
                   var hasRemainingTime = true;
                   _callback(hasRemainingTime, currentTime);
                   _callback = null;
-                } catch (e) {
+                } catch (e2) {
                   setTimeout(_flushCallback, 0);
-                  throw e;
+                  throw e2;
                 }
               }
             };
@@ -1828,8 +1828,8 @@
               return null;
             }
           }
-          function siftUp(heap, node, i) {
-            var index2 = i;
+          function siftUp(heap, node, i2) {
+            var index2 = i2;
             while (true) {
               var parentIndex = index2 - 1 >>> 1;
               var parent = heap[parentIndex];
@@ -1842,8 +1842,8 @@
               }
             }
           }
-          function siftDown(heap, node, i) {
-            var index2 = i;
+          function siftDown(heap, node, i2) {
+            var index2 = i2;
             var length = heap.length;
             while (index2 < length) {
               var leftIndex = (index2 + 1) * 2 - 1;
@@ -1869,9 +1869,9 @@
               }
             }
           }
-          function compare(a, b) {
-            var diff = a.sortIndex - b.sortIndex;
-            return diff !== 0 ? diff : a.id - b.id;
+          function compare(a2, b2) {
+            var diff = a2.sortIndex - b2.sortIndex;
+            return diff !== 0 ? diff : a2.id - b2.id;
           }
           var ImmediatePriority = 1;
           var UserBlockingPriority = 2;
@@ -2457,11 +2457,11 @@
       if (true) {
         (function() {
           "use strict";
-          var React11 = require_react();
+          var React15 = require_react();
           var _assign = require_object_assign();
           var Scheduler = require_scheduler();
           var tracing = require_tracing();
-          var ReactSharedInternals = React11.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React15.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function warn(format) {
             {
               for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -2493,7 +2493,7 @@
               Function.prototype.apply.call(console[level], console, argsWithFormat);
             }
           }
-          if (!React11) {
+          if (!React15) {
             {
               throw Error("ReactDOM was loaded before React. Make sure you load the React package before loading ReactDOM.");
             }
@@ -2505,7 +2505,7 @@
           var HostPortal = 4;
           var HostComponent = 5;
           var HostText = 6;
-          var Fragment = 7;
+          var Fragment2 = 7;
           var Mode = 8;
           var ContextConsumer = 9;
           var ContextProvider = 10;
@@ -2548,8 +2548,8 @@
                 possibleRegistrationNames.ondblclick = registrationName;
               }
             }
-            for (var i = 0; i < dependencies.length; i++) {
-              allNativeEvents.add(dependencies[i]);
+            for (var i2 = 0; i2 < dependencies.length; i2++) {
+              allNativeEvents.add(dependencies[i2]);
             }
           }
           var canUseDOM2 = !!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined");
@@ -3106,8 +3106,8 @@
               if (prefix2 === void 0) {
                 try {
                   throw Error();
-                } catch (x) {
-                  var match = x.stack.trim().match(/\n( *(at )?)/);
+                } catch (x2) {
+                  var match = x2.stack.trim().match(/\n( *(at )?)/);
                   prefix2 = match && match[1] || "";
                 }
               }
@@ -3153,23 +3153,23 @@
                 if (typeof Reflect === "object" && Reflect.construct) {
                   try {
                     Reflect.construct(Fake, []);
-                  } catch (x) {
-                    control = x;
+                  } catch (x2) {
+                    control = x2;
                   }
                   Reflect.construct(fn, [], Fake);
                 } else {
                   try {
                     Fake.call();
-                  } catch (x) {
-                    control = x;
+                  } catch (x2) {
+                    control = x2;
                   }
                   fn.call(Fake.prototype);
                 }
               } else {
                 try {
                   throw Error();
-                } catch (x) {
-                  control = x;
+                } catch (x2) {
+                  control = x2;
                 }
                 fn();
               }
@@ -3177,19 +3177,19 @@
               if (sample && control && typeof sample.stack === "string") {
                 var sampleLines = sample.stack.split("\n");
                 var controlLines = control.stack.split("\n");
-                var s = sampleLines.length - 1;
-                var c = controlLines.length - 1;
-                while (s >= 1 && c >= 0 && sampleLines[s] !== controlLines[c]) {
-                  c--;
+                var s2 = sampleLines.length - 1;
+                var c2 = controlLines.length - 1;
+                while (s2 >= 1 && c2 >= 0 && sampleLines[s2] !== controlLines[c2]) {
+                  c2--;
                 }
-                for (; s >= 1 && c >= 0; s--, c--) {
-                  if (sampleLines[s] !== controlLines[c]) {
-                    if (s !== 1 || c !== 1) {
+                for (; s2 >= 1 && c2 >= 0; s2--, c2--) {
+                  if (sampleLines[s2] !== controlLines[c2]) {
+                    if (s2 !== 1 || c2 !== 1) {
                       do {
-                        s--;
-                        c--;
-                        if (c < 0 || sampleLines[s] !== controlLines[c]) {
-                          var _frame = "\n" + sampleLines[s].replace(" at new ", " at ");
+                        s2--;
+                        c2--;
+                        if (c2 < 0 || sampleLines[s2] !== controlLines[c2]) {
+                          var _frame = "\n" + sampleLines[s2].replace(" at new ", " at ");
                           {
                             if (typeof fn === "function") {
                               componentFrameCache.set(fn, _frame);
@@ -3197,7 +3197,7 @@
                           }
                           return _frame;
                         }
-                      } while (s >= 1 && c >= 0);
+                      } while (s2 >= 1 && c2 >= 0);
                     }
                     break;
                   }
@@ -3266,7 +3266,7 @@
                   var init2 = lazyComponent._init;
                   try {
                     return describeUnknownElementTypeFrameInDEV(init2(payload), source, ownerFn);
-                  } catch (x) {
+                  } catch (x2) {
                   }
                 }
               }
@@ -3308,8 +3308,8 @@
                 node = node.return;
               } while (node);
               return info;
-            } catch (x) {
-              return "\nError generating stack: " + x.message + "\n" + x.stack;
+            } catch (x2) {
+              return "\nError generating stack: " + x2.message + "\n" + x2.stack;
             }
           }
           function getWrappedName(outerType, innerType, wrapperName) {
@@ -3368,7 +3368,7 @@
                   var init2 = lazyComponent._init;
                   try {
                     return getComponentName(init2(payload));
-                  } catch (x) {
+                  } catch (x2) {
                     return null;
                   }
                 }
@@ -3544,7 +3544,7 @@
             }
             try {
               return doc.activeElement || doc.body;
-            } catch (e) {
+            } catch (e2) {
               return doc.body;
             }
           }
@@ -3680,8 +3680,8 @@
                 queryRoot = queryRoot.parentNode;
               }
               var group = queryRoot.querySelectorAll("input[name=" + JSON.stringify("" + name) + '][type="radio"]');
-              for (var i = 0; i < group.length; i++) {
-                var otherNode = group[i];
+              for (var i2 = 0; i2 < group.length; i2++) {
+                var otherNode = group[i2];
                 if (otherNode === rootNode || otherNode.form !== rootNode.form) {
                   continue;
                 }
@@ -3709,7 +3709,7 @@
           var didWarnInvalidChild = false;
           function flattenChildren(children) {
             var content = "";
-            React11.Children.forEach(children, function(child) {
+            React15.Children.forEach(children, function(child) {
               if (child == null) {
                 return;
               }
@@ -3720,7 +3720,7 @@
           function validateProps(element, props) {
             {
               if (typeof props.children === "object" && props.children !== null) {
-                React11.Children.forEach(props.children, function(child) {
+                React15.Children.forEach(props.children, function(child) {
                   if (child == null) {
                     return;
                   }
@@ -3772,8 +3772,8 @@
           function checkSelectPropTypes(props) {
             {
               checkControlledValueProps("select", props);
-              for (var i = 0; i < valuePropNames.length; i++) {
-                var propName = valuePropNames[i];
+              for (var i2 = 0; i2 < valuePropNames.length; i2++) {
+                var propName = valuePropNames[i2];
                 if (props[propName] == null) {
                   continue;
                 }
@@ -3791,8 +3791,8 @@
             if (multiple) {
               var selectedValues = propValue;
               var selectedValue = {};
-              for (var i = 0; i < selectedValues.length; i++) {
-                selectedValue["$" + selectedValues[i]] = true;
+              for (var i2 = 0; i2 < selectedValues.length; i2++) {
+                selectedValue["$" + selectedValues[i2]] = true;
               }
               for (var _i = 0; _i < options2.length; _i++) {
                 var selected = selectedValue.hasOwnProperty("$" + options2[_i].value);
@@ -4161,7 +4161,7 @@
             var warnedForNaNValue = false;
             var warnedForInfinityValue = false;
             var camelize = function(string) {
-              return string.replace(hyphenPattern, function(_, character) {
+              return string.replace(hyphenPattern, function(_2, character) {
                 return character.toUpperCase();
               });
             };
@@ -4267,8 +4267,8 @@
             var expanded = {};
             for (var key in styles) {
               var longhands = shorthandToLonghand[key] || [key];
-              for (var i = 0; i < longhands.length; i++) {
-                expanded[longhands[i]] = key;
+              for (var i2 = 0; i2 < longhands.length; i2++) {
+                expanded[longhands[i2]] = key;
               }
             }
             return expanded;
@@ -5169,16 +5169,16 @@
             restoreQueue = null;
             restoreStateOfTarget(target);
             if (queuedTargets) {
-              for (var i = 0; i < queuedTargets.length; i++) {
-                restoreStateOfTarget(queuedTargets[i]);
+              for (var i2 = 0; i2 < queuedTargets.length; i2++) {
+                restoreStateOfTarget(queuedTargets[i2]);
               }
             }
           }
           var batchedUpdatesImpl = function(fn, bookkeeping) {
             return fn(bookkeeping);
           };
-          var discreteUpdatesImpl = function(fn, a, b, c, d) {
-            return fn(a, b, c, d);
+          var discreteUpdatesImpl = function(fn, a2, b2, c2, d3) {
+            return fn(a2, b2, c2, d3);
           };
           var flushDiscreteUpdatesImpl = function() {
           };
@@ -5204,23 +5204,23 @@
               finishEventHandler();
             }
           }
-          function batchedEventUpdates(fn, a, b) {
+          function batchedEventUpdates(fn, a2, b2) {
             if (isBatchingEventUpdates) {
-              return fn(a, b);
+              return fn(a2, b2);
             }
             isBatchingEventUpdates = true;
             try {
-              return batchedEventUpdatesImpl(fn, a, b);
+              return batchedEventUpdatesImpl(fn, a2, b2);
             } finally {
               isBatchingEventUpdates = false;
               finishEventHandler();
             }
           }
-          function discreteUpdates(fn, a, b, c, d) {
+          function discreteUpdates(fn, a2, b2, c2, d3) {
             var prevIsInsideEventHandler = isInsideEventHandler;
             isInsideEventHandler = true;
             try {
-              return discreteUpdatesImpl(fn, a, b, c, d);
+              return discreteUpdatesImpl(fn, a2, b2, c2, d3);
             } finally {
               isInsideEventHandler = prevIsInsideEventHandler;
               if (!isInsideEventHandler) {
@@ -5293,11 +5293,11 @@
               });
               window.addEventListener("test", options, options);
               window.removeEventListener("test", options, options);
-            } catch (e) {
+            } catch (e2) {
               passiveBrowserEventsSupported = false;
             }
           }
-          function invokeGuardedCallbackProd(name, func, context2, a, b, c, d, e, f) {
+          function invokeGuardedCallbackProd(name, func, context2, a2, b2, c2, d3, e2, f3) {
             var funcArgs = Array.prototype.slice.call(arguments, 3);
             try {
               func.apply(context2, funcArgs);
@@ -5309,7 +5309,7 @@
           {
             if (typeof window !== "undefined" && typeof window.dispatchEvent === "function" && typeof document !== "undefined" && typeof document.createEvent === "function") {
               var fakeNode = document.createElement("react");
-              invokeGuardedCallbackImpl = function invokeGuardedCallbackDev(name, func, context2, a, b, c, d, e, f) {
+              invokeGuardedCallbackImpl = function invokeGuardedCallbackDev(name, func, context2, a2, b2, c2, d3, e2, f3) {
                 if (!(typeof document !== "undefined")) {
                   {
                     throw Error("The `document` global was defined when React was initialized, but is not defined anymore. This can happen in a test environment if a component schedules an update from an asynchronous callback, but the test has already finished running. To solve this, you can either unmount the component at the end of your test (and ensure that any asynchronous operations get canceled in `componentWillUnmount`), or you can change the test itself to be asynchronous.");
@@ -5386,12 +5386,12 @@
               caughtError = error2;
             }
           };
-          function invokeGuardedCallback(name, func, context2, a, b, c, d, e, f) {
+          function invokeGuardedCallback(name, func, context2, a2, b2, c2, d3, e2, f3) {
             hasError = false;
             caughtError = null;
             invokeGuardedCallbackImpl$1.apply(reporter, arguments);
           }
-          function invokeGuardedCallbackAndCatchFirstError(name, func, context2, a, b, c, d, e, f) {
+          function invokeGuardedCallbackAndCatchFirstError(name, func, context2, a2, b2, c2, d3, e2, f3) {
             invokeGuardedCallback.apply(this, arguments);
             if (hasError) {
               var error2 = clearCaughtError();
@@ -5538,10 +5538,10 @@
               }
               return fiber;
             }
-            var a = fiber;
-            var b = alternate;
+            var a2 = fiber;
+            var b2 = alternate;
             while (true) {
-              var parentA = a.return;
+              var parentA = a2.return;
               if (parentA === null) {
                 break;
               }
@@ -5549,7 +5549,7 @@
               if (parentB === null) {
                 var nextParent = parentA.return;
                 if (nextParent !== null) {
-                  a = b = nextParent;
+                  a2 = b2 = nextParent;
                   continue;
                 }
                 break;
@@ -5557,11 +5557,11 @@
               if (parentA.child === parentB.child) {
                 var child = parentA.child;
                 while (child) {
-                  if (child === a) {
+                  if (child === a2) {
                     assertIsMounted(parentA);
                     return fiber;
                   }
-                  if (child === b) {
+                  if (child === b2) {
                     assertIsMounted(parentA);
                     return alternate;
                   }
@@ -5573,23 +5573,23 @@
                   }
                 }
               }
-              if (a.return !== b.return) {
-                a = parentA;
-                b = parentB;
+              if (a2.return !== b2.return) {
+                a2 = parentA;
+                b2 = parentB;
               } else {
                 var didFindChild = false;
                 var _child = parentA.child;
                 while (_child) {
-                  if (_child === a) {
+                  if (_child === a2) {
                     didFindChild = true;
-                    a = parentA;
-                    b = parentB;
+                    a2 = parentA;
+                    b2 = parentB;
                     break;
                   }
-                  if (_child === b) {
+                  if (_child === b2) {
                     didFindChild = true;
-                    b = parentA;
-                    a = parentB;
+                    b2 = parentA;
+                    a2 = parentB;
                     break;
                   }
                   _child = _child.sibling;
@@ -5597,16 +5597,16 @@
                 if (!didFindChild) {
                   _child = parentB.child;
                   while (_child) {
-                    if (_child === a) {
+                    if (_child === a2) {
                       didFindChild = true;
-                      a = parentB;
-                      b = parentA;
+                      a2 = parentB;
+                      b2 = parentA;
                       break;
                     }
-                    if (_child === b) {
+                    if (_child === b2) {
                       didFindChild = true;
-                      b = parentB;
-                      a = parentA;
+                      b2 = parentB;
+                      a2 = parentA;
                       break;
                     }
                     _child = _child.sibling;
@@ -5618,18 +5618,18 @@
                   }
                 }
               }
-              if (!(a.alternate === b)) {
+              if (!(a2.alternate === b2)) {
                 {
                   throw Error("Return fibers should always be each others' alternates. This error is likely caused by a bug in React. Please file an issue.");
                 }
               }
             }
-            if (!(a.tag === HostRoot)) {
+            if (!(a2.tag === HostRoot)) {
               {
                 throw Error("Unable to find node on an unmounted component.");
               }
             }
-            if (a.stateNode.current === a) {
+            if (a2.stateNode.current === a2) {
               return fiber;
             }
             return alternate;
@@ -5954,8 +5954,8 @@
           function retryIfBlockedOn(unblocked) {
             if (queuedDiscreteEvents.length > 0) {
               scheduleCallbackIfUnblocked(queuedDiscreteEvents[0], unblocked);
-              for (var i = 1; i < queuedDiscreteEvents.length; i++) {
-                var queuedEvent = queuedDiscreteEvents[i];
+              for (var i2 = 1; i2 < queuedDiscreteEvents.length; i2++) {
+                var queuedEvent = queuedDiscreteEvents[i2];
                 if (queuedEvent.blockedOn === unblocked) {
                   queuedEvent.blockedOn = null;
                 }
@@ -6116,9 +6116,9 @@
           var userBlockingPairsForSimpleEventPlugin = ["drag", "drag", "dragenter", "dragEnter", "dragexit", "dragExit", "dragleave", "dragLeave", "dragover", "dragOver", "mousemove", "mouseMove", "mouseout", "mouseOut", "mouseover", "mouseOver", "pointermove", "pointerMove", "pointerout", "pointerOut", "pointerover", "pointerOver", "scroll", "scroll", "toggle", "toggle", "touchmove", "touchMove", "wheel", "wheel"];
           var continuousPairsForSimpleEventPlugin = ["abort", "abort", ANIMATION_END, "animationEnd", ANIMATION_ITERATION, "animationIteration", ANIMATION_START, "animationStart", "canplay", "canPlay", "canplaythrough", "canPlayThrough", "durationchange", "durationChange", "emptied", "emptied", "encrypted", "encrypted", "ended", "ended", "error", "error", "gotpointercapture", "gotPointerCapture", "load", "load", "loadeddata", "loadedData", "loadedmetadata", "loadedMetadata", "loadstart", "loadStart", "lostpointercapture", "lostPointerCapture", "playing", "playing", "progress", "progress", "seeking", "seeking", "stalled", "stalled", "suspend", "suspend", "timeupdate", "timeUpdate", TRANSITION_END, "transitionEnd", "waiting", "waiting"];
           function registerSimplePluginEventsAndSetTheirPriorities(eventTypes, priority) {
-            for (var i = 0; i < eventTypes.length; i += 2) {
-              var topEvent = eventTypes[i];
-              var event = eventTypes[i + 1];
+            for (var i2 = 0; i2 < eventTypes.length; i2 += 2) {
+              var topEvent = eventTypes[i2];
+              var event = eventTypes[i2 + 1];
               var capitalizedEvent = event[0].toUpperCase() + event.slice(1);
               var reactName = "on" + capitalizedEvent;
               eventPriorities.set(topEvent, priority);
@@ -6127,8 +6127,8 @@
             }
           }
           function setEventPriorities(eventTypes, priority) {
-            for (var i = 0; i < eventTypes.length; i++) {
-              eventPriorities.set(eventTypes[i], priority);
+            for (var i2 = 0; i2 < eventTypes.length; i2++) {
+              eventPriorities.set(eventTypes[i2], priority);
             }
           }
           function getEventPriorityForPluginSystem(domEventName) {
@@ -6532,14 +6532,14 @@
           function laneToIndex(lane) {
             return pickArbitraryLaneIndex(lane);
           }
-          function includesSomeLane(a, b) {
-            return (a & b) !== NoLanes;
+          function includesSomeLane(a2, b2) {
+            return (a2 & b2) !== NoLanes;
           }
           function isSubsetOfLanes(set2, subset) {
             return (set2 & subset) === subset;
           }
-          function mergeLanes(a, b) {
-            return a | b;
+          function mergeLanes(a2, b2) {
+            return a2 | b2;
           }
           function removeLanes(set2, subset) {
             return set2 & ~subset;
@@ -6547,12 +6547,12 @@
           function laneToLanes(lane) {
             return lane;
           }
-          function higherPriorityLane(a, b) {
-            return a !== NoLane && a < b ? a : b;
+          function higherPriorityLane(a2, b2) {
+            return a2 !== NoLane && a2 < b2 ? a2 : b2;
           }
           function createLaneMap(initial) {
             var laneMap = [];
-            for (var i = 0; i < TotalLanes; i++) {
+            for (var i2 = 0; i2 < TotalLanes; i2++) {
               laneMap.push(initial);
             }
             return laneMap;
@@ -7545,8 +7545,8 @@
             }
             accumulateEnterLeaveTwoPhaseListeners(dispatchQueue, leave, enter, from, to);
           }
-          function is(x, y) {
-            return x === y && (x !== 0 || 1 / x === 1 / y) || x !== x && y !== y;
+          function is(x2, y) {
+            return x2 === y && (x2 !== 0 || 1 / x2 === 1 / y) || x2 !== x2 && y !== y;
           }
           var objectIs2 = typeof Object.is === "function" ? Object.is : is;
           var hasOwnProperty$2 = Object.prototype.hasOwnProperty;
@@ -7562,8 +7562,8 @@
             if (keysA.length !== keysB.length) {
               return false;
             }
-            for (var i = 0; i < keysA.length; i++) {
-              if (!hasOwnProperty$2.call(objB, keysA[i]) || !objectIs2(objA[keysA[i]], objB[keysA[i]])) {
+            for (var i2 = 0; i2 < keysA.length; i2++) {
+              if (!hasOwnProperty$2.call(objB, keysA[i2]) || !objectIs2(objA[keysA[i2]], objB[keysA[i2]])) {
                 return false;
               }
             }
@@ -7612,7 +7612,7 @@
             try {
               anchorNode.nodeType;
               focusNode.nodeType;
-            } catch (e) {
+            } catch (e2) {
               return null;
             }
             return getModernOffsetsFromPoints(outerNode, anchorNode, anchorOffset, focusNode, focusOffset);
@@ -7779,8 +7779,8 @@
               if (typeof priorFocusedElem.focus === "function") {
                 priorFocusedElem.focus();
               }
-              for (var i = 0; i < ancestors.length; i++) {
-                var info = ancestors[i];
+              for (var i2 = 0; i2 < ancestors.length; i2++) {
+                var info = ancestors[i2];
                 info.element.scrollLeft = info.left;
                 info.element.scrollTop = info.top;
               }
@@ -8021,8 +8021,8 @@
           function processDispatchQueueItemsInOrder(event, dispatchListeners, inCapturePhase) {
             var previousInstance;
             if (inCapturePhase) {
-              for (var i = dispatchListeners.length - 1; i >= 0; i--) {
-                var _dispatchListeners$i = dispatchListeners[i], instance = _dispatchListeners$i.instance, currentTarget = _dispatchListeners$i.currentTarget, listener = _dispatchListeners$i.listener;
+              for (var i2 = dispatchListeners.length - 1; i2 >= 0; i2--) {
+                var _dispatchListeners$i = dispatchListeners[i2], instance = _dispatchListeners$i.instance, currentTarget = _dispatchListeners$i.currentTarget, listener = _dispatchListeners$i.listener;
                 if (instance !== previousInstance && event.isPropagationStopped()) {
                   return;
                 }
@@ -8042,8 +8042,8 @@
           }
           function processDispatchQueue(dispatchQueue, eventSystemFlags) {
             var inCapturePhase = (eventSystemFlags & IS_CAPTURE_PHASE) !== 0;
-            for (var i = 0; i < dispatchQueue.length; i++) {
-              var _dispatchQueue$i = dispatchQueue[i], event = _dispatchQueue$i.event, listeners = _dispatchQueue$i.listeners;
+            for (var i2 = 0; i2 < dispatchQueue.length; i2++) {
+              var _dispatchQueue$i = dispatchQueue[i2], event = _dispatchQueue$i.event, listeners = _dispatchQueue$i.listeners;
               processDispatchQueueItemsInOrder(event, listeners, inCapturePhase);
             }
             rethrowCaughtError();
@@ -8460,9 +8460,9 @@
             }
           }
           function updateDOMProperties(domElement, updatePayload, wasCustomComponentTag, isCustomComponentTag) {
-            for (var i = 0; i < updatePayload.length; i += 2) {
-              var propKey = updatePayload[i];
-              var propValue = updatePayload[i + 1];
+            for (var i2 = 0; i2 < updatePayload.length; i2 += 2) {
+              var propKey = updatePayload[i2];
+              var propValue = updatePayload[i2 + 1];
               if (propKey === STYLE) {
                 setValueForStyles(domElement, propValue);
               } else if (propKey === DANGEROUSLY_SET_INNER_HTML) {
@@ -8474,7 +8474,7 @@
               }
             }
           }
-          function createElement(type, props, rootContainerElement, parentNamespace) {
+          function createElement4(type, props, rootContainerElement, parentNamespace) {
             var isCustomComponentTag;
             var ownerDocument = getOwnerDocumentFromRootContainer(rootContainerElement);
             var domElement;
@@ -8545,8 +8545,8 @@
                 break;
               case "video":
               case "audio":
-                for (var i = 0; i < mediaEventTypes.length; i++) {
-                  listenToNonDelegatedEvent(mediaEventTypes[i], domElement);
+                for (var i2 = 0; i2 < mediaEventTypes.length; i2++) {
+                  listenToNonDelegatedEvent(mediaEventTypes[i2], domElement);
                 }
                 props = rawProps;
                 break;
@@ -8805,8 +8805,8 @@
                 break;
               case "video":
               case "audio":
-                for (var i = 0; i < mediaEventTypes.length; i++) {
-                  listenToNonDelegatedEvent(mediaEventTypes[i], domElement);
+                for (var i2 = 0; i2 < mediaEventTypes.length; i2++) {
+                  listenToNonDelegatedEvent(mediaEventTypes[i2], domElement);
                 }
                 break;
               case "source":
@@ -9351,7 +9351,7 @@
               }
               parentNamespace = hostContextDev.namespace;
             }
-            var domElement = createElement(type, props, rootContainerInstance, parentNamespace);
+            var domElement = createElement4(type, props, rootContainerInstance, parentNamespace);
             precacheFiberNode(internalInstanceHandle, domElement);
             updateFiberProps(domElement, props);
             return domElement;
@@ -10158,14 +10158,14 @@
           function flushSyncCallbackQueueImpl() {
             if (!isFlushingSyncQueue && syncQueue !== null) {
               isFlushingSyncQueue = true;
-              var i = 0;
+              var i2 = 0;
               {
                 try {
                   var _isSync2 = true;
                   var _queue = syncQueue;
                   runWithPriority$1(ImmediatePriority$1, function() {
-                    for (; i < _queue.length; i++) {
-                      var callback = _queue[i];
+                    for (; i2 < _queue.length; i2++) {
+                      var callback = _queue[i2];
                       do {
                         callback = callback(_isSync2);
                       } while (callback !== null);
@@ -10174,7 +10174,7 @@
                   syncQueue = null;
                 } catch (error2) {
                   if (syncQueue !== null) {
-                    syncQueue = syncQueue.slice(i + 1);
+                    syncQueue = syncQueue.slice(i2 + 1);
                   }
                   Scheduler_scheduleCallback(Scheduler_ImmediatePriority, flushSyncCallbackQueue);
                   throw error2;
@@ -10901,8 +10901,8 @@
             var effects = finishedQueue.effects;
             finishedQueue.effects = null;
             if (effects !== null) {
-              for (var i = 0; i < effects.length; i++) {
-                var effect = effects[i];
+              for (var i2 = 0; i2 < effects.length; i2++) {
+                var effect = effects[i2];
                 var callback = effect.callback;
                 if (callback !== null) {
                   effect.callback = null;
@@ -10913,7 +10913,7 @@
           }
           var fakeInternalInstance = {};
           var isArray = Array.isArray;
-          var emptyRefsObject = new React11.Component().refs;
+          var emptyRefsObject = new React15.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -11689,7 +11689,7 @@
               }
             }
             function updateFragment2(returnFiber, current2, fragment, lanes, key) {
-              if (current2 === null || current2.tag !== Fragment) {
+              if (current2 === null || current2.tag !== Fragment2) {
                 var created = createFiberFromFragment(fragment, returnFiber.mode, lanes, key);
                 created.return = returnFiber;
                 return created;
@@ -11839,8 +11839,8 @@
             function reconcileChildrenArray(returnFiber, currentFirstChild, newChildren, lanes) {
               {
                 var knownKeys = null;
-                for (var i = 0; i < newChildren.length; i++) {
-                  var child = newChildren[i];
+                for (var i2 = 0; i2 < newChildren.length; i2++) {
+                  var child = newChildren[i2];
                   knownKeys = warnOnInvalidKey(child, knownKeys, returnFiber);
                 }
               }
@@ -12057,7 +12057,7 @@
               while (child !== null) {
                 if (child.key === key) {
                   switch (child.tag) {
-                    case Fragment: {
+                    case Fragment2: {
                       if (element.type === REACT_FRAGMENT_TYPE) {
                         deleteRemainingChildren(returnFiber, child.sibling);
                         var existing = useFiber(child, element.props.children);
@@ -12217,13 +12217,13 @@
           var contextStackCursor$1 = createCursor(NO_CONTEXT);
           var contextFiberStackCursor = createCursor(NO_CONTEXT);
           var rootInstanceStackCursor = createCursor(NO_CONTEXT);
-          function requiredContext(c) {
-            if (!(c !== NO_CONTEXT)) {
+          function requiredContext(c2) {
+            if (!(c2 !== NO_CONTEXT)) {
               {
                 throw Error("Expected host context to exist. This error is likely caused by a bug in React. Please file an issue.");
               }
             }
-            return c;
+            return c2;
           }
           function getRootHostContainer() {
             var rootInstance = requiredContext(rootInstanceStackCursor.current);
@@ -12569,8 +12569,8 @@
             workInProgressSources.push(mutableSource);
           }
           function resetWorkInProgressVersions() {
-            for (var i = 0; i < workInProgressSources.length; i++) {
-              var mutableSource = workInProgressSources[i];
+            for (var i2 = 0; i2 < workInProgressSources.length; i2++) {
+              var mutableSource = workInProgressSources[i2];
               {
                 mutableSource._workInProgressVersionPrimary = null;
               }
@@ -12653,10 +12653,10 @@
                 if (hookTypesDev !== null) {
                   var table = "";
                   var secondColumnStart = 30;
-                  for (var i = 0; i <= hookTypesUpdateIndexDev; i++) {
-                    var oldHookName = hookTypesDev[i];
-                    var newHookName = i === hookTypesUpdateIndexDev ? currentHookName : oldHookName;
-                    var row = i + 1 + ". " + oldHookName;
+                  for (var i2 = 0; i2 <= hookTypesUpdateIndexDev; i2++) {
+                    var oldHookName = hookTypesDev[i2];
+                    var newHookName = i2 === hookTypesUpdateIndexDev ? currentHookName : oldHookName;
+                    var row = i2 + 1 + ". " + oldHookName;
                     while (row.length < secondColumnStart) {
                       row += " ";
                     }
@@ -12692,8 +12692,8 @@
                 error("The final argument passed to %s changed size between renders. The order and size of this array must remain constant.\n\nPrevious: %s\nIncoming: %s", currentHookNameInDev, "[" + prevDeps.join(", ") + "]", "[" + nextDeps.join(", ") + "]");
               }
             }
-            for (var i = 0; i < prevDeps.length && i < nextDeps.length; i++) {
-              if (objectIs2(nextDeps[i], prevDeps[i])) {
+            for (var i2 = 0; i2 < prevDeps.length && i2 < nextDeps.length; i2++) {
+              if (objectIs2(nextDeps[i2], prevDeps[i2])) {
                 continue;
               }
               return false;
@@ -14423,7 +14423,7 @@
                   var init2 = lazyComponent._init;
                   try {
                     outerMemoType = init2(payload);
-                  } catch (x) {
+                  } catch (x2) {
                     outerMemoType = null;
                   }
                   var outerPropTypes = outerMemoType && outerMemoType.propTypes;
@@ -14686,9 +14686,9 @@
               {
                 var mutableSourceEagerHydrationData = root2.mutableSourceEagerHydrationData;
                 if (mutableSourceEagerHydrationData != null) {
-                  for (var i = 0; i < mutableSourceEagerHydrationData.length; i += 2) {
-                    var mutableSource = mutableSourceEagerHydrationData[i];
-                    var version = mutableSourceEagerHydrationData[i + 1];
+                  for (var i2 = 0; i2 < mutableSourceEagerHydrationData.length; i2 += 2) {
+                    var mutableSource = mutableSourceEagerHydrationData[i2];
+                    var version = mutableSourceEagerHydrationData[i2 + 1];
                     setWorkInProgressVersion(mutableSource, version);
                   }
                 }
@@ -15262,8 +15262,8 @@
             {
               if ((revealOrder === "forwards" || revealOrder === "backwards") && children !== void 0 && children !== null && children !== false) {
                 if (Array.isArray(children)) {
-                  for (var i = 0; i < children.length; i++) {
-                    if (!validateSuspenseListNestedChild(children[i], i)) {
+                  for (var i2 = 0; i2 < children.length; i2++) {
+                    if (!validateSuspenseListNestedChild(children[i2], i2)) {
                       return;
                     }
                   }
@@ -15661,7 +15661,7 @@
                 var _resolvedProps2 = workInProgress2.elementType === type ? _unresolvedProps2 : resolveDefaultProps(type, _unresolvedProps2);
                 return updateForwardRef(current2, workInProgress2, type, _resolvedProps2, renderLanes2);
               }
-              case Fragment:
+              case Fragment2:
                 return updateFragment(current2, workInProgress2, renderLanes2);
               case Mode:
                 return updateMode(current2, workInProgress2, renderLanes2);
@@ -15828,7 +15828,7 @@
               case SimpleMemoComponent:
               case FunctionComponent:
               case ForwardRef:
-              case Fragment:
+              case Fragment2:
               case Mode:
               case Profiler:
               case ContextConsumer:
@@ -16257,9 +16257,9 @@
               } else {
                 console["error"](error2);
               }
-            } catch (e) {
+            } catch (e2) {
               setTimeout(function() {
-                throw e;
+                throw e2;
               });
             }
           }
@@ -17683,11 +17683,11 @@
             }
             flushSyncCallbackQueue();
           }
-          function batchedUpdates$1(fn, a) {
+          function batchedUpdates$1(fn, a2) {
             var prevExecutionContext = executionContext;
             executionContext |= BatchedContext;
             try {
-              return fn(a);
+              return fn(a2);
             } finally {
               executionContext = prevExecutionContext;
               if (executionContext === NoContext) {
@@ -17696,11 +17696,11 @@
               }
             }
           }
-          function batchedEventUpdates$1(fn, a) {
+          function batchedEventUpdates$1(fn, a2) {
             var prevExecutionContext = executionContext;
             executionContext |= EventContext;
             try {
-              return fn(a);
+              return fn(a2);
             } finally {
               executionContext = prevExecutionContext;
               if (executionContext === NoContext) {
@@ -17709,12 +17709,12 @@
               }
             }
           }
-          function discreteUpdates$1(fn, a, b, c, d) {
+          function discreteUpdates$1(fn, a2, b2, c2, d3) {
             var prevExecutionContext = executionContext;
             executionContext |= DiscreteEventContext;
             {
               try {
-                return runWithPriority$1(UserBlockingPriority$2, fn.bind(null, a, b, c, d));
+                return runWithPriority$1(UserBlockingPriority$2, fn.bind(null, a2, b2, c2, d3));
               } finally {
                 executionContext = prevExecutionContext;
                 if (executionContext === NoContext) {
@@ -17724,12 +17724,12 @@
               }
             }
           }
-          function unbatchedUpdates(fn, a) {
+          function unbatchedUpdates(fn, a2) {
             var prevExecutionContext = executionContext;
             executionContext &= ~BatchedContext;
             executionContext |= LegacyUnbatchedContext;
             try {
-              return fn(a);
+              return fn(a2);
             } finally {
               executionContext = prevExecutionContext;
               if (executionContext === NoContext) {
@@ -17738,19 +17738,19 @@
               }
             }
           }
-          function flushSync(fn, a) {
+          function flushSync(fn, a2) {
             var prevExecutionContext = executionContext;
             if ((prevExecutionContext & (RenderContext | CommitContext)) !== NoContext) {
               {
                 error("flushSync was called from inside a lifecycle method. React cannot flush when React is already rendering. Consider moving this call to a scheduler task or micro task.");
               }
-              return fn(a);
+              return fn(a2);
             }
             executionContext |= BatchedContext;
             {
               try {
                 if (fn) {
-                  return runWithPriority$1(ImmediatePriority$1, fn.bind(null, a));
+                  return runWithPriority$1(ImmediatePriority$1, fn.bind(null, a2));
                 } else {
                   return void 0;
                 }
@@ -18236,8 +18236,8 @@
                 if (spawnedWorkDuringRender !== null) {
                   var expirationTimes = spawnedWorkDuringRender;
                   spawnedWorkDuringRender = null;
-                  for (var i = 0; i < expirationTimes.length; i++) {
-                    scheduleInteractions(root2, expirationTimes[i], root2.memoizedInteractions);
+                  for (var i2 = 0; i2 < expirationTimes.length; i2++) {
+                    scheduleInteractions(root2, expirationTimes[i2], root2.memoizedInteractions);
                   }
                 }
                 schedulePendingInteractions(root2, remainingLanes);
@@ -18439,9 +18439,9 @@
             var prevInteractions = pushInteractions(root2);
             var unmountEffects = pendingPassiveHookEffectsUnmount;
             pendingPassiveHookEffectsUnmount = [];
-            for (var i = 0; i < unmountEffects.length; i += 2) {
-              var _effect = unmountEffects[i];
-              var fiber = unmountEffects[i + 1];
+            for (var i2 = 0; i2 < unmountEffects.length; i2 += 2) {
+              var _effect = unmountEffects[i2];
+              var fiber = unmountEffects[i2 + 1];
               var destroy = _effect.destroy;
               _effect.destroy = void 0;
               {
@@ -19232,7 +19232,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
               var nonExtensibleObject = Object.preventExtensions({});
               new Map([[nonExtensibleObject, null]]);
               new Set([nonExtensibleObject]);
-            } catch (e) {
+            } catch (e2) {
               hasBadMapPolyfill = true;
             }
           }
@@ -19532,7 +19532,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             return fiber;
           }
           function createFiberFromFragment(elements, mode, lanes, key) {
-            var fiber = createFiber(Fragment, elements, key, mode);
+            var fiber = createFiber(Fragment2, elements, key, mode);
             fiber.lanes = lanes;
             return fiber;
           }
@@ -19955,8 +19955,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
                 warn("copyWithRename() expects paths of the same length");
                 return;
               } else {
-                for (var i = 0; i < newPath.length - 1; i++) {
-                  if (oldPath[i] !== newPath[i]) {
+                for (var i2 = 0; i2 < newPath.length - 1; i2++) {
+                  if (oldPath[i2] !== newPath[i2]) {
                     warn("copyWithRename() expects paths to be the same except for the deepest key");
                     return;
                   }
@@ -20129,8 +20129,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
               listenToAllSupportedEvents(rootContainerElement);
             }
             if (mutableSources) {
-              for (var i = 0; i < mutableSources.length; i++) {
-                var mutableSource = mutableSources[i];
+              for (var i2 = 0; i2 < mutableSources.length; i2++) {
+                var mutableSource = mutableSources[i2];
                 registerMutableSourceForHydration(root2, mutableSource);
               }
             }
@@ -20504,7 +20504,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           var ContextProvider = REACT_PROVIDER_TYPE;
           var Element = REACT_ELEMENT_TYPE;
           var ForwardRef = REACT_FORWARD_REF_TYPE;
-          var Fragment = REACT_FRAGMENT_TYPE;
+          var Fragment2 = REACT_FRAGMENT_TYPE;
           var Lazy = REACT_LAZY_TYPE;
           var Memo = REACT_MEMO_TYPE;
           var Portal = REACT_PORTAL_TYPE;
@@ -20563,7 +20563,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           exports.ContextProvider = ContextProvider;
           exports.Element = Element;
           exports.ForwardRef = ForwardRef;
-          exports.Fragment = Fragment;
+          exports.Fragment = Fragment2;
           exports.Lazy = Lazy;
           exports.Memo = Memo;
           exports.Portal = Portal;
@@ -20628,7 +20628,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           }
           try {
             throw new Error(message);
-          } catch (x) {
+          } catch (x2) {
           }
         };
       }
@@ -20690,7 +20690,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           }
           try {
             throw new Error(message);
-          } catch (x) {
+          } catch (x2) {
           }
         };
       }
@@ -20727,11 +20727,11 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           shape: createShapeTypeChecker,
           exact: createStrictShapeTypeChecker
         };
-        function is(x, y) {
-          if (x === y) {
-            return x !== 0 || 1 / x === 1 / y;
+        function is(x2, y) {
+          if (x2 === y) {
+            return x2 !== 0 || 1 / x2 === 1 / y;
           } else {
-            return x !== x && y !== y;
+            return x2 !== x2 && y !== y;
           }
         }
         function PropTypeError(message) {
@@ -20802,8 +20802,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
               var propType = getPropType(propValue);
               return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + propType + "` supplied to `" + componentName + "`, expected an array."));
             }
-            for (var i = 0; i < propValue.length; i++) {
-              var error = typeChecker(propValue, i, componentName, location, propFullName + "[" + i + "]", ReactPropTypesSecret);
+            for (var i2 = 0; i2 < propValue.length; i2++) {
+              var error = typeChecker(propValue, i2, componentName, location, propFullName + "[" + i2 + "]", ReactPropTypesSecret);
               if (error instanceof Error) {
                 return error;
               }
@@ -20858,8 +20858,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           }
           function validate(props, propName, componentName, location, propFullName) {
             var propValue = props[propName];
-            for (var i = 0; i < expectedValues.length; i++) {
-              if (is(propValue, expectedValues[i])) {
+            for (var i2 = 0; i2 < expectedValues.length; i2++) {
+              if (is(propValue, expectedValues[i2])) {
                 return null;
               }
             }
@@ -20901,16 +20901,16 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             true ? printWarning("Invalid argument supplied to oneOfType, expected an instance of array.") : void 0;
             return emptyFunctionThatReturnsNull;
           }
-          for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
-            var checker = arrayOfTypeCheckers[i];
+          for (var i2 = 0; i2 < arrayOfTypeCheckers.length; i2++) {
+            var checker = arrayOfTypeCheckers[i2];
             if (typeof checker !== "function") {
-              printWarning("Invalid argument supplied to oneOfType. Expected an array of check functions, but received " + getPostfixForTypeWarning(checker) + " at index " + i + ".");
+              printWarning("Invalid argument supplied to oneOfType. Expected an array of check functions, but received " + getPostfixForTypeWarning(checker) + " at index " + i2 + ".");
               return emptyFunctionThatReturnsNull;
             }
           }
           function validate(props, propName, componentName, location, propFullName) {
-            for (var i2 = 0; i2 < arrayOfTypeCheckers.length; i2++) {
-              var checker2 = arrayOfTypeCheckers[i2];
+            for (var i3 = 0; i3 < arrayOfTypeCheckers.length; i3++) {
+              var checker2 = arrayOfTypeCheckers[i3];
               if (checker2(props, propName, componentName, location, propFullName, ReactPropTypesSecret) == null) {
                 return null;
               }
@@ -21129,11 +21129,11 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         var defaultDelimiter = options && options.delimiter || "/";
         var res;
         while ((res = PATH_REGEXP.exec(str)) != null) {
-          var m = res[0];
+          var m3 = res[0];
           var escaped = res[1];
           var offset = res.index;
           path += str.slice(index2, offset);
-          index2 = offset + m.length;
+          index2 = offset + m3.length;
           if (escaped) {
             path += escaped[1];
             continue;
@@ -21177,20 +21177,20 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         return tokensToFunction(parse(str, options), options);
       }
       function encodeURIComponentPretty(str) {
-        return encodeURI(str).replace(/[\/?#]/g, function(c) {
-          return "%" + c.charCodeAt(0).toString(16).toUpperCase();
+        return encodeURI(str).replace(/[\/?#]/g, function(c2) {
+          return "%" + c2.charCodeAt(0).toString(16).toUpperCase();
         });
       }
       function encodeAsterisk(str) {
-        return encodeURI(str).replace(/[?#]/g, function(c) {
-          return "%" + c.charCodeAt(0).toString(16).toUpperCase();
+        return encodeURI(str).replace(/[?#]/g, function(c2) {
+          return "%" + c2.charCodeAt(0).toString(16).toUpperCase();
         });
       }
       function tokensToFunction(tokens, options) {
         var matches = new Array(tokens.length);
-        for (var i = 0; i < tokens.length; i++) {
-          if (typeof tokens[i] === "object") {
-            matches[i] = new RegExp("^(?:" + tokens[i].pattern + ")$", flags(options));
+        for (var i2 = 0; i2 < tokens.length; i2++) {
+          if (typeof tokens[i2] === "object") {
+            matches[i2] = new RegExp("^(?:" + tokens[i2].pattern + ")$", flags(options));
           }
         }
         return function(obj, opts) {
@@ -21198,8 +21198,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           var data = obj || {};
           var options2 = opts || {};
           var encode = options2.pretty ? encodeURIComponentPretty : encodeURIComponent;
-          for (var i2 = 0; i2 < tokens.length; i2++) {
-            var token = tokens[i2];
+          for (var i3 = 0; i3 < tokens.length; i3++) {
+            var token = tokens[i3];
             if (typeof token === "string") {
               path += token;
               continue;
@@ -21227,17 +21227,17 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
                   throw new TypeError('Expected "' + token.name + '" to not be empty');
                 }
               }
-              for (var j = 0; j < value.length; j++) {
-                segment = encode(value[j]);
-                if (!matches[i2].test(segment)) {
+              for (var j3 = 0; j3 < value.length; j3++) {
+                segment = encode(value[j3]);
+                if (!matches[i3].test(segment)) {
                   throw new TypeError('Expected all "' + token.name + '" to match "' + token.pattern + '", but received `' + JSON.stringify(segment) + "`");
                 }
-                path += (j === 0 ? token.prefix : token.delimiter) + segment;
+                path += (j3 === 0 ? token.prefix : token.delimiter) + segment;
               }
               continue;
             }
             segment = token.asterisk ? encodeAsterisk(value) : encode(value);
-            if (!matches[i2].test(segment)) {
+            if (!matches[i3].test(segment)) {
               throw new TypeError('Expected "' + token.name + '" to match "' + token.pattern + '", but received "' + segment + '"');
             }
             path += token.prefix + segment;
@@ -21261,9 +21261,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       function regexpToRegexp(path, keys) {
         var groups = path.source.match(/\((?!\?)/g);
         if (groups) {
-          for (var i = 0; i < groups.length; i++) {
+          for (var i2 = 0; i2 < groups.length; i2++) {
             keys.push({
-              name: i,
+              name: i2,
               prefix: null,
               delimiter: null,
               optional: false,
@@ -21278,8 +21278,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       }
       function arrayToRegexp(path, keys, options) {
         var parts = [];
-        for (var i = 0; i < path.length; i++) {
-          parts.push(pathToRegexp2(path[i], keys, options).source);
+        for (var i2 = 0; i2 < path.length; i2++) {
+          parts.push(pathToRegexp2(path[i2], keys, options).source);
         }
         var regexp = new RegExp("(?:" + parts.join("|") + ")", flags(options));
         return attachKeys(regexp, keys);
@@ -21296,8 +21296,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         var strict = options.strict;
         var end = options.end !== false;
         var route = "";
-        for (var i = 0; i < tokens.length; i++) {
-          var token = tokens[i];
+        for (var i2 = 0; i2 < tokens.length; i2++) {
+          var token = tokens[i2];
           if (typeof token === "string") {
             route += escapeString(token);
           } else {
@@ -21419,13 +21419,13 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           }
           var targetStatics = getStatics(targetComponent);
           var sourceStatics = getStatics(sourceComponent);
-          for (var i = 0; i < keys.length; ++i) {
-            var key = keys[i];
+          for (var i2 = 0; i2 < keys.length; ++i2) {
+            var key = keys[i2];
             if (!KNOWN_STATICS[key] && !(blacklist && blacklist[key]) && !(sourceStatics && sourceStatics[key]) && !(targetStatics && targetStatics[key])) {
               var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
               try {
                 defineProperty(targetComponent, key, descriptor);
-              } catch (e) {
+              } catch (e2) {
               }
             }
           }
@@ -21459,8 +21459,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       var ircUnescapedChars = { " ": "s", "\n": "n", ";": ":", "\r": "r" };
       var urlRegex = new RegExp("^(?:(?:https?|ftp)://)(?:\\S+(?::\\S*)?@)?(?:(?!(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))\\.?)(?::\\d{2,5})?(?:[/?#]\\S*)?$", "i");
       var regexEmoteRegex = /[|\\^$*+?:#]/;
-      var _ = module.exports = {
-        get: (a, b) => typeof a === "undefined" ? b : a,
+      var _2 = module.exports = {
+        get: (a2, b2) => typeof a2 === "undefined" ? b2 : a2,
         hasOwn: (obj, key) => ({}).hasOwnProperty.call(obj, key),
         promiseDelay: (time) => new Promise((resolve) => setTimeout(resolve, time)),
         isFinite: (int) => isFinite(int) && !isNaN(parseFloat(int)),
@@ -21468,10 +21468,10 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           if (num === null) {
             return 0;
           }
-          const factor = Math.pow(10, _.isFinite(precision) ? precision : 0);
+          const factor = Math.pow(10, _2.isFinite(precision) ? precision : 0);
           return Math.round(num * factor) / factor;
         },
-        isInteger: (int) => !isNaN(_.toNumber(int, 0)),
+        isInteger: (int) => !isNaN(_2.toNumber(int, 0)),
         isRegex: (str) => regexEmoteRegex.test(str),
         isURL: (str) => urlRegex.test(str),
         justinfan: () => `justinfan${Math.floor(Math.random() * 8e4 + 1e3)}`,
@@ -21486,7 +21486,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         },
         token: (str) => str ? str.toLowerCase().replace("oauth:", "") : "",
         password(str) {
-          const token = _.token(str);
+          const token = _2.token(str);
           return token ? `oauth:${token}` : "";
         },
         actionMessage: (msg) => msg.match(actionMessageRegex),
@@ -21494,8 +21494,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           if (str === null || typeof str === "undefined") {
             return null;
           }
-          for (const x in obj) {
-            str = str.replace(new RegExp(x, "g"), obj[x]);
+          for (const x2 in obj) {
+            str = str.replace(new RegExp(x2, "g"), obj[x2]);
           }
           return str;
         },
@@ -21504,13 +21504,13 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           if (!msg || typeof msg !== "string" || !msg.includes("\\")) {
             return msg;
           }
-          return msg.replace(unescapeIRCRegex, (m, p) => p in ircEscapedChars ? ircEscapedChars[p] : p);
+          return msg.replace(unescapeIRCRegex, (m3, p2) => p2 in ircEscapedChars ? ircEscapedChars[p2] : p2);
         },
         escapeIRC(msg) {
           if (!msg || typeof msg !== "string") {
             return msg;
           }
-          return msg.replace(escapeIRCRegex, (m, p) => p in ircUnescapedChars ? `\\${ircUnescapedChars[p]}` : p);
+          return msg.replace(escapeIRCRegex, (m3, p2) => p2 in ircUnescapedChars ? `\\${ircUnescapedChars[p2]}` : p2);
         },
         addWord: (line, word) => line.length ? line + " " + word : line + word,
         splitLine(input, length) {
@@ -21522,9 +21522,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         },
         extractNumber(str) {
           const parts = str.split(" ");
-          for (let i = 0; i < parts.length; i++) {
-            if (_.isInteger(parts[i])) {
-              return ~~parts[i];
+          for (let i2 = 0; i2 < parts.length; i2++) {
+            if (_2.isInteger(parts[i2])) {
+              return ~~parts[i2];
             }
           }
           return 0;
@@ -21547,7 +21547,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         isNode() {
           try {
             return typeof process === "object" && Object.prototype.toString.call(process) === "[object process]";
-          } catch (e) {
+          } catch (e2) {
           }
           return false;
         }
@@ -21559,13 +21559,13 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
   var require_api = __commonJS({
     "node_modules/tmi.js/lib/api.js"(exports, module) {
       var fetch2 = require_browser();
-      var _ = require_utils();
+      var _2 = require_utils();
       module.exports = function api(options, callback) {
         let url = options.url !== void 0 ? options.url : options.uri;
-        if (!_.isURL(url)) {
+        if (!_2.isURL(url)) {
           url = `https://api.twitch.tv/kraken${url[0] === "/" ? url : `/${url}`}`;
         }
-        if (_.isNode()) {
+        if (_2.isNode()) {
           const opts = Object.assign({ method: "GET", json: true }, options);
           if (opts.qs) {
             const qs = new URLSearchParams(opts.qs);
@@ -21611,10 +21611,10 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
   // node_modules/tmi.js/lib/commands.js
   var require_commands = __commonJS({
     "node_modules/tmi.js/lib/commands.js"(exports, module) {
-      var _ = require_utils();
+      var _2 = require_utils();
       function followersonly(channel, minutes) {
-        channel = _.channel(channel);
-        minutes = _.get(minutes, 30);
+        channel = _2.channel(channel);
+        minutes = _2.get(minutes, 30);
         return this._sendCommand(null, channel, `/followers ${minutes}`, (resolve, reject) => {
           this.once("_promiseFollowers", (err) => {
             if (!err) {
@@ -21626,7 +21626,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         });
       }
       function followersonlyoff(channel) {
-        channel = _.channel(channel);
+        channel = _2.channel(channel);
         return this._sendCommand(null, channel, "/followersoff", (resolve, reject) => {
           this.once("_promiseFollowersoff", (err) => {
             if (!err) {
@@ -21638,7 +21638,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         });
       }
       function part(channel) {
-        channel = _.channel(channel);
+        channel = _2.channel(channel);
         return this._sendCommand(null, null, `PART ${channel}`, (resolve, reject) => {
           this.once("_promisePart", (err) => {
             if (!err) {
@@ -21650,7 +21650,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         });
       }
       function r9kbeta(channel) {
-        channel = _.channel(channel);
+        channel = _2.channel(channel);
         return this._sendCommand(null, channel, "/r9kbeta", (resolve, reject) => {
           this.once("_promiseR9kbeta", (err) => {
             if (!err) {
@@ -21662,7 +21662,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         });
       }
       function r9kbetaoff(channel) {
-        channel = _.channel(channel);
+        channel = _2.channel(channel);
         return this._sendCommand(null, channel, "/r9kbetaoff", (resolve, reject) => {
           this.once("_promiseR9kbetaoff", (err) => {
             if (!err) {
@@ -21674,8 +21674,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         });
       }
       function slow(channel, seconds) {
-        channel = _.channel(channel);
-        seconds = _.get(seconds, 300);
+        channel = _2.channel(channel);
+        seconds = _2.get(seconds, 300);
         return this._sendCommand(null, channel, `/slow ${seconds}`, (resolve, reject) => {
           this.once("_promiseSlow", (err) => {
             if (!err) {
@@ -21687,7 +21687,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         });
       }
       function slowoff(channel) {
-        channel = _.channel(channel);
+        channel = _2.channel(channel);
         return this._sendCommand(null, channel, "/slowoff", (resolve, reject) => {
           this.once("_promiseSlowoff", (err) => {
             if (!err) {
@@ -21700,16 +21700,16 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       }
       module.exports = {
         action(channel, message) {
-          channel = _.channel(channel);
+          channel = _2.channel(channel);
           message = `ACTION ${message}`;
           return this._sendMessage(this._getPromiseDelay(), channel, message, (resolve, _reject) => {
             resolve([channel, message]);
           });
         },
         ban(channel, username, reason) {
-          channel = _.channel(channel);
-          username = _.username(username);
-          reason = _.get(reason, "");
+          channel = _2.channel(channel);
+          username = _2.username(username);
+          reason = _2.get(reason, "");
           return this._sendCommand(null, channel, `/ban ${username} ${reason}`, (resolve, reject) => {
             this.once("_promiseBan", (err) => {
               if (!err) {
@@ -21721,7 +21721,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           });
         },
         clear(channel) {
-          channel = _.channel(channel);
+          channel = _2.channel(channel);
           return this._sendCommand(null, channel, "/clear", (resolve, reject) => {
             this.once("_promiseClear", (err) => {
               if (!err) {
@@ -21733,7 +21733,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           });
         },
         color(channel, newColor) {
-          newColor = _.get(newColor, channel);
+          newColor = _2.get(newColor, channel);
           return this._sendCommand(null, "#tmijs", `/color ${newColor}`, (resolve, reject) => {
             this.once("_promiseColor", (err) => {
               if (!err) {
@@ -21745,8 +21745,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           });
         },
         commercial(channel, seconds) {
-          channel = _.channel(channel);
-          seconds = _.get(seconds, 30);
+          channel = _2.channel(channel);
+          seconds = _2.get(seconds, 30);
           return this._sendCommand(null, channel, `/commercial ${seconds}`, (resolve, reject) => {
             this.once("_promiseCommercial", (err) => {
               if (!err) {
@@ -21758,7 +21758,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           });
         },
         deletemessage(channel, messageUUID) {
-          channel = _.channel(channel);
+          channel = _2.channel(channel);
           return this._sendCommand(null, channel, `/delete ${messageUUID}`, (resolve, reject) => {
             this.once("_promiseDeletemessage", (err) => {
               if (!err) {
@@ -21770,7 +21770,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           });
         },
         emoteonly(channel) {
-          channel = _.channel(channel);
+          channel = _2.channel(channel);
           return this._sendCommand(null, channel, "/emoteonly", (resolve, reject) => {
             this.once("_promiseEmoteonly", (err) => {
               if (!err) {
@@ -21782,7 +21782,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           });
         },
         emoteonlyoff(channel) {
-          channel = _.channel(channel);
+          channel = _2.channel(channel);
           return this._sendCommand(null, channel, "/emoteonlyoff", (resolve, reject) => {
             this.once("_promiseEmoteonlyoff", (err) => {
               if (!err) {
@@ -21798,8 +21798,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         followersonlyoff,
         followersmodeoff: followersonlyoff,
         host(channel, target) {
-          channel = _.channel(channel);
-          target = _.username(target);
+          channel = _2.channel(channel);
+          target = _2.username(target);
           return this._sendCommand(2e3, channel, `/host ${target}`, (resolve, reject) => {
             this.once("_promiseHost", (err, remaining) => {
               if (!err) {
@@ -21811,12 +21811,12 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           });
         },
         join(channel) {
-          channel = _.channel(channel);
+          channel = _2.channel(channel);
           return this._sendCommand(void 0, null, `JOIN ${channel}`, (resolve, reject) => {
             const eventName = "_promiseJoin";
             let hasFulfilled = false;
             const listener = (err, joinedChannel) => {
-              if (channel === _.channel(joinedChannel)) {
+              if (channel === _2.channel(joinedChannel)) {
                 this.removeListener(eventName, listener);
                 hasFulfilled = true;
                 if (!err) {
@@ -21828,7 +21828,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             };
             this.on(eventName, listener);
             const delay = this._getPromiseDelay();
-            _.promiseDelay(delay).then(() => {
+            _2.promiseDelay(delay).then(() => {
               if (!hasFulfilled) {
                 this.emit(eventName, "No response from Twitch.", channel);
               }
@@ -21836,8 +21836,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           });
         },
         mod(channel, username) {
-          channel = _.channel(channel);
-          username = _.username(username);
+          channel = _2.channel(channel);
+          username = _2.username(username);
           return this._sendCommand(null, channel, `/mod ${username}`, (resolve, reject) => {
             this.once("_promiseMod", (err) => {
               if (!err) {
@@ -21849,7 +21849,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           });
         },
         mods(channel) {
-          channel = _.channel(channel);
+          channel = _2.channel(channel);
           return this._sendCommand(null, channel, "/mods", (resolve, reject) => {
             this.once("_promiseMods", (err, mods) => {
               if (!err) {
@@ -21881,7 +21881,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
                 clearInterval(this.pingLoop);
                 clearTimeout(this.pingTimeout);
               }
-            }, _.get(this.opts.connection.timeout, 9999));
+            }, _2.get(this.opts.connection.timeout, 9999));
             this.once("_promisePing", (latency) => resolve([parseFloat(latency)]));
           });
         },
@@ -21895,7 +21895,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           });
         },
         say(channel, message) {
-          channel = _.channel(channel);
+          channel = _2.channel(channel);
           if (message.startsWith(".") && !message.startsWith("..") || message.startsWith("/") || message.startsWith("\\")) {
             if (message.substr(1, 3) === "me ") {
               return this.action(channel, message.substr(4));
@@ -21914,7 +21914,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         slowoff,
         slowmodeoff: slowoff,
         subscribers(channel) {
-          channel = _.channel(channel);
+          channel = _2.channel(channel);
           return this._sendCommand(null, channel, "/subscribers", (resolve, reject) => {
             this.once("_promiseSubscribers", (err) => {
               if (!err) {
@@ -21926,7 +21926,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           });
         },
         subscribersoff(channel) {
-          channel = _.channel(channel);
+          channel = _2.channel(channel);
           return this._sendCommand(null, channel, "/subscribersoff", (resolve, reject) => {
             this.once("_promiseSubscribersoff", (err) => {
               if (!err) {
@@ -21938,14 +21938,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           });
         },
         timeout(channel, username, seconds, reason) {
-          channel = _.channel(channel);
-          username = _.username(username);
-          if (seconds !== null && !_.isInteger(seconds)) {
+          channel = _2.channel(channel);
+          username = _2.username(username);
+          if (seconds !== null && !_2.isInteger(seconds)) {
             reason = seconds;
             seconds = 300;
           }
-          seconds = _.get(seconds, 300);
-          reason = _.get(reason, "");
+          seconds = _2.get(seconds, 300);
+          reason = _2.get(reason, "");
           return this._sendCommand(null, channel, `/timeout ${username} ${seconds} ${reason}`, (resolve, reject) => {
             this.once("_promiseTimeout", (err) => {
               if (!err) {
@@ -21957,8 +21957,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           });
         },
         unban(channel, username) {
-          channel = _.channel(channel);
-          username = _.username(username);
+          channel = _2.channel(channel);
+          username = _2.username(username);
           return this._sendCommand(null, channel, `/unban ${username}`, (resolve, reject) => {
             this.once("_promiseUnban", (err) => {
               if (!err) {
@@ -21970,7 +21970,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           });
         },
         unhost(channel) {
-          channel = _.channel(channel);
+          channel = _2.channel(channel);
           return this._sendCommand(2e3, channel, "/unhost", (resolve, reject) => {
             this.once("_promiseUnhost", (err) => {
               if (!err) {
@@ -21982,8 +21982,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           });
         },
         unmod(channel, username) {
-          channel = _.channel(channel);
-          username = _.username(username);
+          channel = _2.channel(channel);
+          username = _2.username(username);
           return this._sendCommand(null, channel, `/unmod ${username}`, (resolve, reject) => {
             this.once("_promiseUnmod", (err) => {
               if (!err) {
@@ -21995,8 +21995,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           });
         },
         unvip(channel, username) {
-          channel = _.channel(channel);
-          username = _.username(username);
+          channel = _2.channel(channel);
+          username = _2.username(username);
           return this._sendCommand(null, channel, `/unvip ${username}`, (resolve, reject) => {
             this.once("_promiseUnvip", (err) => {
               if (!err) {
@@ -22008,8 +22008,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           });
         },
         vip(channel, username) {
-          channel = _.channel(channel);
-          username = _.username(username);
+          channel = _2.channel(channel);
+          username = _2.username(username);
           return this._sendCommand(null, channel, `/vip ${username}`, (resolve, reject) => {
             this.once("_promiseVip", (err) => {
               if (!err) {
@@ -22021,7 +22021,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           });
         },
         vips(channel) {
-          channel = _.channel(channel);
+          channel = _2.channel(channel);
           return this._sendCommand(null, channel, "/vips", (resolve, reject) => {
             this.once("_promiseVips", (err, vips) => {
               if (!err) {
@@ -22033,7 +22033,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           });
         },
         whisper(username, message) {
-          username = _.username(username);
+          username = _2.username(username);
           if (username === this.getUsername()) {
             return Promise.reject("Cannot send a whisper to the same account.");
           }
@@ -22047,7 +22047,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             if (err && typeof err === "string" && err.indexOf("No response from Twitch.") !== 0) {
               throw err;
             }
-            const from = _.channel(username);
+            const from = _2.channel(username);
             const userstate = Object.assign({
               "message-type": "whisper",
               "message-id": null,
@@ -22077,15 +22077,15 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       EventEmitter.prototype._events = void 0;
       EventEmitter.prototype._maxListeners = void 0;
       EventEmitter.defaultMaxListeners = 10;
-      EventEmitter.prototype.setMaxListeners = function(n) {
-        if (!isNumber(n) || n < 0 || isNaN(n)) {
+      EventEmitter.prototype.setMaxListeners = function(n3) {
+        if (!isNumber(n3) || n3 < 0 || isNaN(n3)) {
           throw TypeError("n must be a positive number");
         }
-        this._maxListeners = n;
+        this._maxListeners = n3;
         return this;
       };
       EventEmitter.prototype.emit = function(type) {
-        var er, handler, len, args, i, listeners;
+        var er, handler, len, args, i2, listeners;
         if (!this._events) {
           this._events = {};
         }
@@ -22121,14 +22121,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           args = Array.prototype.slice.call(arguments, 1);
           listeners = handler.slice();
           len = listeners.length;
-          for (i = 0; i < len; i++) {
-            listeners[i].apply(this, args);
+          for (i2 = 0; i2 < len; i2++) {
+            listeners[i2].apply(this, args);
           }
         }
         return true;
       };
       EventEmitter.prototype.addListener = function(type, listener) {
-        var m;
+        var m3;
         if (!isFunction(listener)) {
           throw TypeError("listener must be a function");
         }
@@ -22147,11 +22147,11 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         }
         if (isObject(this._events[type]) && !this._events[type].warned) {
           if (!isUndefined(this._maxListeners)) {
-            m = this._maxListeners;
+            m3 = this._maxListeners;
           } else {
-            m = EventEmitter.defaultMaxListeners;
+            m3 = EventEmitter.defaultMaxListeners;
           }
-          if (m && m > 0 && this._events[type].length > m) {
+          if (m3 && m3 > 0 && this._events[type].length > m3) {
             this._events[type].warned = true;
             console.error("(node) warning: possible EventEmitter memory leak detected. %d listeners added. Use emitter.setMaxListeners() to increase limit.", this._events[type].length);
             if (typeof console.trace === "function") {
@@ -22170,29 +22170,29 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         if (this._events.hasOwnProperty(type) && type.charAt(0) === "_") {
           var count = 1;
           var searchFor = type;
-          for (var k in this._events) {
-            if (this._events.hasOwnProperty(k) && k.startsWith(searchFor)) {
+          for (var k2 in this._events) {
+            if (this._events.hasOwnProperty(k2) && k2.startsWith(searchFor)) {
               count++;
             }
           }
           type = type + count;
         }
-        function g() {
+        function g3() {
           if (type.charAt(0) === "_" && !isNaN(type.substr(type.length - 1))) {
             type = type.substring(0, type.length - 1);
           }
-          this.removeListener(type, g);
+          this.removeListener(type, g3);
           if (!fired) {
             fired = true;
             listener.apply(this, arguments);
           }
         }
-        g.listener = listener;
-        this.on(type, g);
+        g3.listener = listener;
+        this.on(type, g3);
         return this;
       };
       EventEmitter.prototype.removeListener = function(type, listener) {
-        var list, position, length, i;
+        var list, position, length, i2;
         if (!isFunction(listener)) {
           throw TypeError("listener must be a function");
         }
@@ -22206,11 +22206,11 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           delete this._events[type];
           if (this._events.hasOwnProperty(type + "2") && type.charAt(0) === "_") {
             var searchFor = type;
-            for (var k in this._events) {
-              if (this._events.hasOwnProperty(k) && k.startsWith(searchFor)) {
-                if (!isNaN(parseInt(k.substr(k.length - 1)))) {
-                  this._events[type + parseInt(k.substr(k.length - 1) - 1)] = this._events[k];
-                  delete this._events[k];
+            for (var k2 in this._events) {
+              if (this._events.hasOwnProperty(k2) && k2.startsWith(searchFor)) {
+                if (!isNaN(parseInt(k2.substr(k2.length - 1)))) {
+                  this._events[type + parseInt(k2.substr(k2.length - 1) - 1)] = this._events[k2];
+                  delete this._events[k2];
                 }
               }
             }
@@ -22221,9 +22221,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             this.emit("removeListener", type, listener);
           }
         } else if (isObject(list)) {
-          for (i = length; i-- > 0; ) {
-            if (list[i] === listener || list[i].listener && list[i].listener === listener) {
-              position = i;
+          for (i2 = length; i2-- > 0; ) {
+            if (list[i2] === listener || list[i2].listener && list[i2].listener === listener) {
+              position = i2;
               break;
             }
           }
@@ -22320,13 +22320,13 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
   // node_modules/tmi.js/lib/logger.js
   var require_logger = __commonJS({
     "node_modules/tmi.js/lib/logger.js"(exports, module) {
-      var _ = require_utils();
+      var _2 = require_utils();
       var currentLevel = "info";
       var levels = { "trace": 0, "debug": 1, "info": 2, "warn": 3, "error": 4, "fatal": 5 };
       function log(level) {
         return function(message) {
           if (levels[level] >= levels[currentLevel]) {
-            console.log(`[${_.formatDate(new Date())}] ${level}: ${message}`);
+            console.log(`[${_2.formatDate(new Date())}] ${level}: ${message}`);
           }
         };
       }
@@ -22347,7 +22347,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
   // node_modules/tmi.js/lib/parser.js
   var require_parser = __commonJS({
     "node_modules/tmi.js/lib/parser.js"(exports, module) {
-      var _ = require_utils();
+      var _2 = require_utils();
       var nonspaceRegex = /\S+/g;
       function parseComplexTag(tags, tagKey, splA = ",", splB = "/", splC) {
         const raw = tags[tagKey];
@@ -22363,8 +22363,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         tags[tagKey] = {};
         if (tagIsString) {
           const spl = raw.split(splA);
-          for (let i = 0; i < spl.length; i++) {
-            const parts = spl[i].split(splB);
+          for (let i2 = 0; i2 < spl.length; i2++) {
+            const parts = spl[i2].split(splB);
             let val = parts[1];
             if (splC !== void 0 && val) {
               val = val.split(splC);
@@ -22380,7 +22380,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         emotes: (tags) => parseComplexTag(tags, "emotes", "/", ":", ","),
         emoteRegex(msg, code, id, obj) {
           nonspaceRegex.lastIndex = 0;
-          const regex = new RegExp("(\\b|^|\\s)" + _.unescapeHtml(code) + "(\\b|$|\\s)");
+          const regex = new RegExp("(\\b|^|\\s)" + _2.unescapeHtml(code) + "(\\b|$|\\s)");
           let match;
           while ((match = nonspaceRegex.exec(msg)) !== null) {
             if (regex.test(match[0])) {
@@ -22393,7 +22393,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           nonspaceRegex.lastIndex = 0;
           let match;
           while ((match = nonspaceRegex.exec(msg)) !== null) {
-            if (match[0] === _.unescapeHtml(code)) {
+            if (match[0] === _2.unescapeHtml(code)) {
               obj[id] = obj[id] || [];
               obj[id].push([match.index, nonspaceRegex.lastIndex - 1]);
             }
@@ -22411,7 +22411,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         formTags(tags) {
           const result = [];
           for (const key in tags) {
-            const value = _.escapeIRC(tags[key]);
+            const value = _2.escapeIRC(tags[key]);
             result.push(`${key}=${value}`);
           }
           return `@${result.join(";")}`;
@@ -22432,8 +22432,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
               return null;
             }
             const rawTags = data.slice(1, nextspace).split(";");
-            for (let i = 0; i < rawTags.length; i++) {
-              const tag = rawTags[i];
+            for (let i2 = 0; i2 < rawTags.length; i2++) {
+              const tag = rawTags[i2];
               const pair = tag.split("=");
               message.tags[pair[0]] = tag.substring(tag.indexOf("=") + 1) || true;
             }
@@ -22504,8 +22504,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           this.queue.push({ fn, delay });
         }
         next() {
-          const i = this.index++;
-          const at = this.queue[i];
+          const i2 = this.index++;
+          const at = this.queue[i2];
           if (!at) {
             return;
           }
@@ -22533,32 +22533,32 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       var logger = require_logger();
       var parse = require_parser();
       var Queue = require_timer();
-      var _ = require_utils();
+      var _2 = require_utils();
       var _apiWarned = false;
       var client = function client2(opts) {
         if (this instanceof client2 === false) {
           return new client2(opts);
         }
-        this.opts = _.get(opts, {});
+        this.opts = _2.get(opts, {});
         this.opts.channels = this.opts.channels || [];
         this.opts.connection = this.opts.connection || {};
         this.opts.identity = this.opts.identity || {};
         this.opts.options = this.opts.options || {};
-        this.clientId = _.get(this.opts.options.clientId, null);
-        this._globalDefaultChannel = _.channel(_.get(this.opts.options.globalDefaultChannel, "#tmijs"));
-        this._skipMembership = _.get(this.opts.options.skipMembership, false);
-        this._skipUpdatingEmotesets = _.get(this.opts.options.skipUpdatingEmotesets, false);
+        this.clientId = _2.get(this.opts.options.clientId, null);
+        this._globalDefaultChannel = _2.channel(_2.get(this.opts.options.globalDefaultChannel, "#tmijs"));
+        this._skipMembership = _2.get(this.opts.options.skipMembership, false);
+        this._skipUpdatingEmotesets = _2.get(this.opts.options.skipUpdatingEmotesets, false);
         this._updateEmotesetsTimer = null;
-        this._updateEmotesetsTimerDelay = _.get(this.opts.options.updateEmotesetsTimer, 6e4);
-        this.maxReconnectAttempts = _.get(this.opts.connection.maxReconnectAttempts, Infinity);
-        this.maxReconnectInterval = _.get(this.opts.connection.maxReconnectInterval, 3e4);
-        this.reconnect = _.get(this.opts.connection.reconnect, true);
-        this.reconnectDecay = _.get(this.opts.connection.reconnectDecay, 1.5);
-        this.reconnectInterval = _.get(this.opts.connection.reconnectInterval, 1e3);
+        this._updateEmotesetsTimerDelay = _2.get(this.opts.options.updateEmotesetsTimer, 6e4);
+        this.maxReconnectAttempts = _2.get(this.opts.connection.maxReconnectAttempts, Infinity);
+        this.maxReconnectInterval = _2.get(this.opts.connection.maxReconnectInterval, 3e4);
+        this.reconnect = _2.get(this.opts.connection.reconnect, true);
+        this.reconnectDecay = _2.get(this.opts.connection.reconnectDecay, 1.5);
+        this.reconnectInterval = _2.get(this.opts.connection.reconnectInterval, 1e3);
         this.reconnecting = false;
         this.reconnections = 0;
         this.reconnectTimer = this.reconnectInterval;
-        this.secure = _.get(this.opts.connection.secure, !this.opts.connection.server && !this.opts.connection.port);
+        this.secure = _2.get(this.opts.connection.secure, !this.opts.connection.server && !this.opts.connection.port);
         this.emotes = "";
         this.emotesets = {};
         this.channels = [];
@@ -22583,18 +22583,18 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           logger.setLevel(level);
         } catch (err) {
         }
-        this.opts.channels.forEach((part, index2, theArray) => theArray[index2] = _.channel(part));
+        this.opts.channels.forEach((part, index2, theArray) => theArray[index2] = _2.channel(part));
         EventEmitter.call(this);
         this.setMaxListeners(0);
       };
-      _.inherits(client, EventEmitter);
+      _2.inherits(client, EventEmitter);
       for (const methodName in commands) {
         client.prototype[methodName] = commands[methodName];
       }
       client.prototype.emits = function emits(types, values) {
-        for (let i = 0; i < types.length; i++) {
-          const val = i < values.length ? values[i] : values[values.length - 1];
-          this.emit.apply(this, [types[i]].concat(val));
+        for (let i2 = 0; i2 < types.length; i2++) {
+          const val = i2 < values.length ? values[i2] : values[values.length - 1];
+          this.emit.apply(this, [types[i2]].concat(val));
         }
       };
       client.prototype.api = function(...args) {
@@ -22611,9 +22611,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         if (this.listenerCount("raw_message")) {
           this.emit("raw_message", JSON.parse(JSON.stringify(message)), message);
         }
-        const channel = _.channel(_.get(message.params[0], null));
-        let msg = _.get(message.params[1], null);
-        const msgid = _.get(message.tags["msg-id"], null);
+        const channel = _2.channel(_2.get(message.params[0], null));
+        let msg = _2.get(message.params[1], null);
+        const msgid = _2.get(message.tags["msg-id"], null);
         const tags = message.tags = parse.badges(parse.badgeInfo(parse.emotes(message.tags)));
         for (const key in tags) {
           if (key === "emote-sets" || key === "ban-duration" || key === "bits") {
@@ -22627,7 +22627,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           } else if (value === "0") {
             value = false;
           } else if (typeof value === "string") {
-            value = _.unescapeIRC(value);
+            value = _2.unescapeIRC(value);
           }
           tags[key] = value;
         }
@@ -22683,17 +22683,17 @@ ${JSON.stringify(message, null, 4)}`);
                     clearTimeout(this.pingTimeout);
                     clearTimeout(this._updateEmotesetsTimer);
                   }
-                }, _.get(this.opts.connection.timeout, 9999));
+                }, _2.get(this.opts.connection.timeout, 9999));
               }, 6e4);
-              let joinInterval = _.get(this.opts.options.joinInterval, 2e3);
+              let joinInterval = _2.get(this.opts.options.joinInterval, 2e3);
               if (joinInterval < 300) {
                 joinInterval = 300;
               }
               const joinQueue = new Queue(joinInterval);
               const joinChannels = [...new Set([...this.opts.channels, ...this.channels])];
               this.channels = [];
-              for (let i = 0; i < joinChannels.length; i++) {
-                const channel2 = joinChannels[i];
+              for (let i2 = 0; i2 < joinChannels.length; i2++) {
+                const channel2 = joinChannels[i2];
                 joinQueue.add(() => {
                   if (this._isConnected()) {
                     this.join(channel2).catch((err) => this.log.error(err));
@@ -22746,7 +22746,7 @@ ${JSON.stringify(message, null, 4)}`);
                   break;
                 case "room_mods": {
                   const listSplit = msg.split(": ");
-                  const mods = (listSplit.length > 1 ? listSplit[1] : "").toLowerCase().split(", ").filter((n) => n);
+                  const mods = (listSplit.length > 1 ? listSplit[1] : "").toLowerCase().split(", ").filter((n3) => n3);
                   this.emits(["_promiseMods", "mods"], [[null, mods], [channel, mods]]);
                   break;
                 }
@@ -22758,7 +22758,7 @@ ${JSON.stringify(message, null, 4)}`);
                     msg = msg.slice(0, -1);
                   }
                   const listSplit = msg.split(": ");
-                  const vips = (listSplit.length > 1 ? listSplit[1] : "").toLowerCase().split(", ").filter((n) => n);
+                  const vips = (listSplit.length > 1 ? listSplit[1] : "").toLowerCase().split(", ").filter((n3) => n3);
                   this.emits(["_promiseVips", "vips"], [[null, vips], [channel, vips]]);
                   break;
                 }
@@ -23059,7 +23059,7 @@ ${JSON.stringify(message, null, 4)}`);
             case "USERNOTICE": {
               const username = tags["display-name"] || tags["login"];
               const plan = tags["msg-param-sub-plan"] || "";
-              const planName = _.unescapeIRC(_.get(tags["msg-param-sub-plan-name"], "")) || null;
+              const planName = _2.unescapeIRC(_2.get(tags["msg-param-sub-plan-name"], "")) || null;
               const prime = plan.includes("Prime");
               const methods = { prime, plan, planName };
               const streakMonths = ~~(tags["msg-param-streak-months"] || 0);
@@ -23138,7 +23138,7 @@ ${JSON.stringify(message, null, 4)}`);
             }
             case "CLEARCHAT":
               if (message.params.length > 1) {
-                const duration = _.get(message.tags["ban-duration"], null);
+                const duration = _2.get(message.tags["ban-duration"], null);
                 if (duration === null) {
                   this.log.info(`[${channel}] ${msg} has been banned.`);
                   this.emit("ban", channel, msg, null, message.tags);
@@ -23176,12 +23176,12 @@ ${JSON.stringify(message, null, 4)}`);
                   this.moderators[channel].push(this.username);
                 }
               }
-              if (!_.isJustinfan(this.getUsername()) && !this.userstate[channel]) {
+              if (!_2.isJustinfan(this.getUsername()) && !this.userstate[channel]) {
                 this.userstate[channel] = tags;
                 this.lastJoined = channel;
                 this.channels.push(channel);
                 this.log.info(`Joined ${channel}`);
-                this.emit("join", channel, _.username(this.getUsername()), true);
+                this.emit("join", channel, _2.username(this.getUsername()), true);
               }
               if (message.tags["emote-sets"] !== this.emotes) {
                 this._updateEmoteset(message.tags["emote-sets"]);
@@ -23196,13 +23196,13 @@ ${JSON.stringify(message, null, 4)}`);
               }
               break;
             case "ROOMSTATE":
-              if (_.channel(this.lastJoined) === channel) {
+              if (_2.channel(this.lastJoined) === channel) {
                 this.emit("_promiseJoin", null, channel);
               }
               message.tags.channel = channel;
               this.emit("roomstate", channel, message.tags);
-              if (!_.hasOwn(message.tags, "subs-only")) {
-                if (_.hasOwn(message.tags, "slow")) {
+              if (!_2.hasOwn(message.tags, "subs-only")) {
+                if (_2.hasOwn(message.tags, "slow")) {
                   if (typeof message.tags.slow === "boolean" && !message.tags.slow) {
                     const disabled = [channel, false, 0];
                     this.log.info(`[${channel}] This room is no longer in slow mode.`);
@@ -23214,7 +23214,7 @@ ${JSON.stringify(message, null, 4)}`);
                     this.emits(["slow", "slowmode", "_promiseSlow"], [enabled, enabled, [null]]);
                   }
                 }
-                if (_.hasOwn(message.tags, "followers-only")) {
+                if (_2.hasOwn(message.tags, "followers-only")) {
                   if (message.tags["followers-only"] === "-1") {
                     const disabled = [channel, false, 0];
                     this.log.info(`[${channel}] This room is no longer in followers-only mode.`);
@@ -23268,7 +23268,7 @@ ${JSON.stringify(message, null, 4)}`);
               break;
             case "JOIN": {
               const nick = message.prefix.split("!")[0];
-              if (_.isJustinfan(this.getUsername()) && this.username === nick) {
+              if (_2.isJustinfan(this.getUsername()) && this.username === nick) {
                 this.lastJoined = channel;
                 this.channels.push(channel);
                 this.log.info(`Joined ${channel}`);
@@ -23304,11 +23304,11 @@ ${JSON.stringify(message, null, 4)}`);
             case "WHISPER": {
               const nick = message.prefix.split("!")[0];
               this.log.info(`[WHISPER] <${nick}>: ${msg}`);
-              if (!_.hasOwn(message.tags, "username")) {
+              if (!_2.hasOwn(message.tags, "username")) {
                 message.tags.username = nick;
               }
               message.tags["message-type"] = "whisper";
-              const from = _.channel(message.tags.username);
+              const from = _2.channel(message.tags.username);
               this.emits(["whisper", "message"], [
                 [from, message.tags, msg, false]
               ]);
@@ -23317,23 +23317,23 @@ ${JSON.stringify(message, null, 4)}`);
             case "PRIVMSG":
               message.tags.username = message.prefix.split("!")[0];
               if (message.tags.username === "jtv") {
-                const name = _.username(msg.split(" ")[0]);
+                const name = _2.username(msg.split(" ")[0]);
                 const autohost = msg.includes("auto");
                 if (msg.includes("hosting you for")) {
-                  const count = _.extractNumber(msg);
+                  const count = _2.extractNumber(msg);
                   this.emit("hosted", channel, name, count, autohost);
                 } else if (msg.includes("hosting you")) {
                   this.emit("hosted", channel, name, 0, autohost);
                 }
               } else {
-                const messagesLogLevel = _.get(this.opts.options.messagesLogLevel, "info");
-                const actionMessage = _.actionMessage(msg);
+                const messagesLogLevel = _2.get(this.opts.options.messagesLogLevel, "info");
+                const actionMessage = _2.actionMessage(msg);
                 message.tags["message-type"] = actionMessage ? "action" : "chat";
                 msg = actionMessage ? actionMessage[1] : msg;
-                if (_.hasOwn(message.tags, "bits")) {
+                if (_2.hasOwn(message.tags, "bits")) {
                   this.emit("cheer", channel, message.tags, msg);
                 } else {
-                  if (_.hasOwn(message.tags, "msg-id")) {
+                  if (_2.hasOwn(message.tags, "msg-id")) {
                     if (message.tags["msg-id"] === "highlighted-message") {
                       const rewardtype = message.tags["msg-id"];
                       this.emit("redeem", channel, message.tags.username, rewardtype, message.tags, msg);
@@ -23341,7 +23341,7 @@ ${JSON.stringify(message, null, 4)}`);
                       const rewardtype = message.tags["msg-id"];
                       this.emit("redeem", channel, message.tags.username, rewardtype, message.tags, msg);
                     }
-                  } else if (_.hasOwn(message.tags, "custom-reward-id")) {
+                  } else if (_2.hasOwn(message.tags, "custom-reward-id")) {
                     const rewardtype = message.tags["custom-reward-id"];
                     this.emit("redeem", channel, message.tags.username, rewardtype, message.tags, msg);
                   }
@@ -23368,8 +23368,8 @@ ${JSON.stringify(message, null, 4)}`);
       };
       client.prototype.connect = function connect() {
         return new Promise((resolve, reject) => {
-          this.server = _.get(this.opts.connection.server, "irc-ws.chat.twitch.tv");
-          this.port = _.get(this.opts.connection.port, 80);
+          this.server = _2.get(this.opts.connection.server, "irc-ws.chat.twitch.tv");
+          this.port = _2.get(this.opts.connection.port, 80);
           if (this.secure) {
             this.port = 443;
           }
@@ -23408,9 +23408,9 @@ ${JSON.stringify(message, null, 4)}`);
         }
         this.log.info(`Connecting to ${this.server} on port ${this.port}..`);
         this.emit("connecting", this.server, ~~this.port);
-        this.username = _.get(this.opts.identity.username, _.justinfan());
+        this.username = _2.get(this.opts.identity.username, _2.justinfan());
         this._getToken().then((token) => {
-          const password = _.password(token);
+          const password = _2.password(token);
           this.log.info("Sending authentication to server..");
           this.emit("logon");
           let caps = "twitch.tv/tags twitch.tv/commands";
@@ -23420,7 +23420,7 @@ ${JSON.stringify(message, null, 4)}`);
           this.ws.send("CAP REQ :" + caps);
           if (password) {
             this.ws.send(`PASS ${password}`);
-          } else if (_.isJustinfan(this.username)) {
+          } else if (_2.isJustinfan(this.username)) {
             this.ws.send("PASS SCHMOOPIIE");
           }
           this.ws.send(`NICK ${this.username}`);
@@ -23520,10 +23520,10 @@ ${JSON.stringify(message, null, 4)}`);
             if (delay === null) {
               delay = this._getPromiseDelay();
             }
-            _.promiseDelay(delay).then(() => reject("No response from Twitch."));
+            _2.promiseDelay(delay).then(() => reject("No response from Twitch."));
           }
           if (channel !== null) {
-            const chan = _.channel(channel);
+            const chan = _2.channel(channel);
             this.log.info(`[${chan}] Executing command: ${command}`);
             this.ws.send(`PRIVMSG ${chan} :${command}`);
           } else {
@@ -23541,15 +23541,15 @@ ${JSON.stringify(message, null, 4)}`);
         return new Promise((resolve, reject) => {
           if (!this._isConnected()) {
             return reject("Not connected to server.");
-          } else if (_.isJustinfan(this.getUsername())) {
+          } else if (_2.isJustinfan(this.getUsername())) {
             return reject("Cannot send anonymous messages.");
           }
-          const chan = _.channel(channel);
+          const chan = _2.channel(channel);
           if (!this.userstate[chan]) {
             this.userstate[chan] = {};
           }
           if (message.length >= 500) {
-            const msg = _.splitLine(message, 500);
+            const msg = _2.splitLine(message, 500);
             message = msg[0];
             setTimeout(() => {
               this._sendMessage(delay, channel, msg[1], () => {
@@ -23559,12 +23559,12 @@ ${JSON.stringify(message, null, 4)}`);
           this.ws.send(`PRIVMSG ${chan} :${message}`);
           const emotes = {};
           Object.keys(this.emotesets).forEach((id) => this.emotesets[id].forEach((emote) => {
-            const emoteFunc = _.isRegex(emote.code) ? parse.emoteRegex : parse.emoteString;
+            const emoteFunc = _2.isRegex(emote.code) ? parse.emoteRegex : parse.emoteString;
             return emoteFunc(message, emote.code, emote.id, emotes);
           }));
           const userstate = Object.assign(this.userstate[chan], parse.emotes({ emotes: parse.transformEmotes(emotes) || null }));
-          const messagesLogLevel = _.get(this.opts.options.messagesLogLevel, "info");
-          const actionMessage = _.actionMessage(message);
+          const messagesLogLevel = _2.get(this.opts.options.messagesLogLevel, "info");
+          const actionMessage = _2.actionMessage(message);
           if (actionMessage) {
             userstate["message-type"] = "action";
             this.log[messagesLogLevel](`[${chan}] *<${this.getUsername()}>: ${actionMessage[1]}`);
@@ -23615,7 +23615,7 @@ ${JSON.stringify(message, null, 4)}`);
           return _fetch(url, __spreadProps(__spreadValues({}, fetchOptions), {
             headers: {
               "Accept": "application/vnd.twitchtv.v5+json",
-              "Authorization": `OAuth ${_.token(token)}`,
+              "Authorization": `OAuth ${_2.token(token)}`,
               "Client-ID": this.clientId
             }
           }));
@@ -23635,11 +23635,11 @@ ${JSON.stringify(message, null, 4)}`);
         return this.channels;
       };
       client.prototype.isMod = function isMod(channel, username) {
-        const chan = _.channel(channel);
+        const chan = _2.channel(channel);
         if (!this.moderators[chan]) {
           this.moderators[chan] = [];
         }
-        return this.moderators[chan].includes(_.username(username));
+        return this.moderators[chan].includes(_2.username(username));
       };
       client.prototype.readyState = function readyState() {
         if (this.ws === null) {
@@ -23687,56 +23687,6 @@ ${JSON.stringify(message, null, 4)}`);
     }
   });
 
-  // node_modules/classnames/index.js
-  var require_classnames = __commonJS({
-    "node_modules/classnames/index.js"(exports, module) {
-      (function() {
-        "use strict";
-        var hasOwn = {}.hasOwnProperty;
-        function classNames() {
-          var classes = [];
-          for (var i = 0; i < arguments.length; i++) {
-            var arg = arguments[i];
-            if (!arg)
-              continue;
-            var argType = typeof arg;
-            if (argType === "string" || argType === "number") {
-              classes.push(arg);
-            } else if (Array.isArray(arg)) {
-              if (arg.length) {
-                var inner = classNames.apply(null, arg);
-                if (inner) {
-                  classes.push(inner);
-                }
-              }
-            } else if (argType === "object") {
-              if (arg.toString === Object.prototype.toString) {
-                for (var key in arg) {
-                  if (hasOwn.call(arg, key) && arg[key]) {
-                    classes.push(key);
-                  }
-                }
-              } else {
-                classes.push(arg.toString());
-              }
-            }
-          }
-          return classes.join(" ");
-        }
-        if (typeof module !== "undefined" && module.exports) {
-          classNames.default = classNames;
-          module.exports = classNames;
-        } else if (typeof define === "function" && typeof define.amd === "object" && define.amd) {
-          define("classnames", [], function() {
-            return classNames;
-          });
-        } else {
-          window.classNames = classNames;
-        }
-      })();
-    }
-  });
-
   // node_modules/react-range/lib/types.js
   var require_types = __commonJS({
     "node_modules/react-range/lib/types.js"(exports) {
@@ -23759,11 +23709,11 @@ ${JSON.stringify(message, null, 4)}`);
       "use strict";
       var __spreadArray = exports && exports.__spreadArray || function(to, from, pack) {
         if (pack || arguments.length === 2)
-          for (var i = 0, l = from.length, ar; i < l; i++) {
-            if (ar || !(i in from)) {
+          for (var i2 = 0, l2 = from.length, ar; i2 < l2; i2++) {
+            if (ar || !(i2 in from)) {
               if (!ar)
-                ar = Array.prototype.slice.call(from, 0, i);
-              ar[i] = from[i];
+                ar = Array.prototype.slice.call(from, 0, i2);
+              ar[i2] = from[i2];
             }
           }
         return to.concat(ar || Array.prototype.slice.call(from));
@@ -23845,8 +23795,8 @@ ${JSON.stringify(message, null, 4)}`);
       function checkInitialOverlap(values) {
         if (values.length < 2)
           return;
-        if (!values.slice(1).every(function(item, i) {
-          return values[i] <= item;
+        if (!values.slice(1).every(function(item, i2) {
+          return values[i2] <= item;
         })) {
           throw new RangeError("values={[".concat(values, "]} needs to be sorted when allowOverlap={false}"));
         }
@@ -23882,18 +23832,18 @@ ${JSON.stringify(message, null, 4)}`);
       function getClosestThumbIndex(thumbs, clientX, clientY, direction) {
         var thumbIndex = 0;
         var minThumbDistance = getThumbDistance(thumbs[0], clientX, clientY, direction);
-        for (var i = 1; i < thumbs.length; i++) {
-          var thumbDistance = getThumbDistance(thumbs[i], clientX, clientY, direction);
+        for (var i2 = 1; i2 < thumbs.length; i2++) {
+          var thumbDistance = getThumbDistance(thumbs[i2], clientX, clientY, direction);
           if (thumbDistance < minThumbDistance) {
             minThumbDistance = thumbDistance;
-            thumbIndex = i;
+            thumbIndex = i2;
           }
         }
         return thumbIndex;
       }
       exports.getClosestThumbIndex = getClosestThumbIndex;
-      function translate(element, x, y) {
-        element.style.transform = "translate(".concat(x, "px, ").concat(y, "px)");
+      function translate(element, x2, y) {
+        element.style.transform = "translate(".concat(x2, "px, ").concat(y, "px)");
       }
       exports.translate = translate;
       var schd = function(fn) {
@@ -23929,8 +23879,8 @@ ${JSON.stringify(message, null, 4)}`);
         } else if (rtl && types_1.Direction.Left) {
           direction = types_1.Direction.Right;
         }
-        var progress = values.slice(0).sort(function(a, b) {
-          return a - b;
+        var progress = values.slice(0).sort(function(a2, b2) {
+          return a2 - b2;
         }).map(function(value) {
           return (value - min) / (max - min) * 100;
         });
@@ -23943,7 +23893,7 @@ ${JSON.stringify(message, null, 4)}`);
       function voidFn() {
       }
       exports.voidFn = voidFn;
-      function assertUnreachable(x) {
+      function assertUnreachable(x2) {
         throw new Error("Didn't expect to get here");
       }
       exports.assertUnreachable = assertUnreachable;
@@ -24018,16 +23968,16 @@ ${JSON.stringify(message, null, 4)}`);
             var overlaps = getOverlaps(index2, offsets_1, thumbs, values, separator, decimalPlaces, valueToLabel);
             var labelValue_1 = valueToLabel(values[index2].toFixed(decimalPlaces));
             if (overlaps.length) {
-              var offsetsX = overlaps.reduce(function(a, c, i, s) {
-                return a.length ? __spreadArray(__spreadArray([], a, true), [offsets_1[s[i]].x], false) : [offsets_1[s[i]].x];
+              var offsetsX = overlaps.reduce(function(a2, c2, i2, s2) {
+                return a2.length ? __spreadArray(__spreadArray([], a2, true), [offsets_1[s2[i2]].x], false) : [offsets_1[s2[i2]].x];
               }, []);
               if (Math.min.apply(Math, offsetsX) === offsets_1[index2].x) {
                 var labelValues_1 = [];
                 overlaps.forEach(function(thumb) {
                   labelValues_1.push(values[thumb].toFixed(decimalPlaces));
                 });
-                labelValue_1 = Array.from(new Set(labelValues_1.sort(function(a, b) {
-                  return parseFloat(a) - parseFloat(b);
+                labelValue_1 = Array.from(new Set(labelValues_1.sort(function(a2, b2) {
+                  return parseFloat(a2) - parseFloat(b2);
                 }))).map(valueToLabel).join(separator);
                 var first = Math.min.apply(Math, offsetsX);
                 var last = Math.max.apply(Math, offsetsX);
@@ -24057,71 +24007,71 @@ ${JSON.stringify(message, null, 4)}`);
     "node_modules/react-range/lib/Range.js"(exports) {
       "use strict";
       var __extends = exports && exports.__extends || function() {
-        var extendStatics = function(d, b) {
-          extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d2, b2) {
-            d2.__proto__ = b2;
-          } || function(d2, b2) {
-            for (var p in b2)
-              if (Object.prototype.hasOwnProperty.call(b2, p))
-                d2[p] = b2[p];
+        var extendStatics = function(d3, b2) {
+          extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d4, b3) {
+            d4.__proto__ = b3;
+          } || function(d4, b3) {
+            for (var p2 in b3)
+              if (Object.prototype.hasOwnProperty.call(b3, p2))
+                d4[p2] = b3[p2];
           };
-          return extendStatics(d, b);
+          return extendStatics(d3, b2);
         };
-        return function(d, b) {
-          if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-          extendStatics(d, b);
+        return function(d3, b2) {
+          if (typeof b2 !== "function" && b2 !== null)
+            throw new TypeError("Class extends value " + String(b2) + " is not a constructor or null");
+          extendStatics(d3, b2);
           function __() {
-            this.constructor = d;
+            this.constructor = d3;
           }
-          d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+          d3.prototype = b2 === null ? Object.create(b2) : (__.prototype = b2.prototype, new __());
         };
       }();
-      var __createBinding = exports && exports.__createBinding || (Object.create ? function(o, m, k, k2) {
-        if (k2 === void 0)
-          k2 = k;
-        var desc = Object.getOwnPropertyDescriptor(m, k);
-        if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      var __createBinding = exports && exports.__createBinding || (Object.create ? function(o2, m3, k2, k22) {
+        if (k22 === void 0)
+          k22 = k2;
+        var desc = Object.getOwnPropertyDescriptor(m3, k2);
+        if (!desc || ("get" in desc ? !m3.__esModule : desc.writable || desc.configurable)) {
           desc = { enumerable: true, get: function() {
-            return m[k];
+            return m3[k2];
           } };
         }
-        Object.defineProperty(o, k2, desc);
-      } : function(o, m, k, k2) {
-        if (k2 === void 0)
-          k2 = k;
-        o[k2] = m[k];
+        Object.defineProperty(o2, k22, desc);
+      } : function(o2, m3, k2, k22) {
+        if (k22 === void 0)
+          k22 = k2;
+        o2[k22] = m3[k2];
       });
-      var __setModuleDefault = exports && exports.__setModuleDefault || (Object.create ? function(o, v) {
-        Object.defineProperty(o, "default", { enumerable: true, value: v });
-      } : function(o, v) {
-        o["default"] = v;
+      var __setModuleDefault = exports && exports.__setModuleDefault || (Object.create ? function(o2, v2) {
+        Object.defineProperty(o2, "default", { enumerable: true, value: v2 });
+      } : function(o2, v2) {
+        o2["default"] = v2;
       });
       var __importStar = exports && exports.__importStar || function(mod) {
         if (mod && mod.__esModule)
           return mod;
         var result = {};
         if (mod != null) {
-          for (var k in mod)
-            if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k))
-              __createBinding(result, mod, k);
+          for (var k2 in mod)
+            if (k2 !== "default" && Object.prototype.hasOwnProperty.call(mod, k2))
+              __createBinding(result, mod, k2);
         }
         __setModuleDefault(result, mod);
         return result;
       };
       var __spreadArray = exports && exports.__spreadArray || function(to, from, pack) {
         if (pack || arguments.length === 2)
-          for (var i = 0, l = from.length, ar; i < l; i++) {
-            if (ar || !(i in from)) {
+          for (var i2 = 0, l2 = from.length, ar; i2 < l2; i2++) {
+            if (ar || !(i2 in from)) {
               if (!ar)
-                ar = Array.prototype.slice.call(from, 0, i);
-              ar[i] = from[i];
+                ar = Array.prototype.slice.call(from, 0, i2);
+              ar[i2] = from[i2];
             }
           }
         return to.concat(ar || Array.prototype.slice.call(from));
       };
       Object.defineProperty(exports, "__esModule", { value: true });
-      var React11 = __importStar(require_react());
+      var React15 = __importStar(require_react());
       var utils_1 = require_utils2();
       var types_1 = require_types();
       var INCREASE_KEYS = ["ArrowRight", "ArrowUp", "k", "PageUp"];
@@ -24130,13 +24080,13 @@ ${JSON.stringify(message, null, 4)}`);
         __extends(Range3, _super);
         function Range3(props) {
           var _this = _super.call(this, props) || this;
-          _this.trackRef = React11.createRef();
+          _this.trackRef = React15.createRef();
           _this.thumbRefs = [];
           _this.state = {
             draggedTrackPos: [-1, -1],
             draggedThumbIndex: -1,
-            thumbZIndexes: new Array(_this.props.values.length).fill(0).map(function(t, i) {
-              return i;
+            thumbZIndexes: new Array(_this.props.values.length).fill(0).map(function(t2, i2) {
+              return i2;
             }),
             isChanged: false,
             markOffsets: []
@@ -24185,12 +24135,12 @@ ${JSON.stringify(message, null, 4)}`);
             console.warn("No thumbs found in the track container. Did you forget to pass & spread the `props` param in renderTrack?");
             return [];
           };
-          _this.getTargetIndex = function(e) {
+          _this.getTargetIndex = function(e2) {
             return _this.getThumbs().findIndex(function(child) {
-              return child === e.target || child.contains(e.target);
+              return child === e2.target || child.contains(e2.target);
             });
           };
-          _this.addTouchEvents = function(e) {
+          _this.addTouchEvents = function(e2) {
             document.addEventListener("touchmove", _this.schdOnTouchMove, {
               passive: false
             });
@@ -24201,37 +24151,37 @@ ${JSON.stringify(message, null, 4)}`);
               passive: false
             });
           };
-          _this.addMouseEvents = function(e) {
+          _this.addMouseEvents = function(e2) {
             document.addEventListener("mousemove", _this.schdOnMouseMove);
             document.addEventListener("mouseup", _this.schdOnEnd);
           };
-          _this.onMouseDownTrack = function(e) {
+          _this.onMouseDownTrack = function(e2) {
             var _a;
-            if (e.button !== 0)
+            if (e2.button !== 0)
               return;
-            e.persist();
-            e.preventDefault();
-            _this.addMouseEvents(e.nativeEvent);
+            e2.persist();
+            e2.preventDefault();
+            _this.addMouseEvents(e2.nativeEvent);
             if (_this.props.values.length > 1 && _this.props.draggableTrack) {
               if (_this.thumbRefs.some(function(thumbRef) {
                 var _a2;
-                return (_a2 = thumbRef.current) === null || _a2 === void 0 ? void 0 : _a2.contains(e.target);
+                return (_a2 = thumbRef.current) === null || _a2 === void 0 ? void 0 : _a2.contains(e2.target);
               }))
                 return;
               _this.setState({
-                draggedTrackPos: [e.clientX, e.clientY]
+                draggedTrackPos: [e2.clientX, e2.clientY]
               }, function() {
-                return _this.onMove(e.clientX, e.clientY);
+                return _this.onMove(e2.clientX, e2.clientY);
               });
             } else {
-              var draggedThumbIndex = (0, utils_1.getClosestThumbIndex)(_this.thumbRefs.map(function(t) {
-                return t.current;
-              }), e.clientX, e.clientY, _this.props.direction);
+              var draggedThumbIndex = (0, utils_1.getClosestThumbIndex)(_this.thumbRefs.map(function(t2) {
+                return t2.current;
+              }), e2.clientX, e2.clientY, _this.props.direction);
               (_a = _this.thumbRefs[draggedThumbIndex].current) === null || _a === void 0 ? void 0 : _a.focus();
               _this.setState({
                 draggedThumbIndex
               }, function() {
-                return _this.onMove(e.clientX, e.clientY);
+                return _this.onMove(e2.clientX, e2.clientY);
               });
             }
           };
@@ -24239,87 +24189,87 @@ ${JSON.stringify(message, null, 4)}`);
             (0, utils_1.translateThumbs)(_this.getThumbs(), _this.getOffsets(), _this.props.rtl);
             _this.calculateMarkOffsets();
           };
-          _this.onTouchStartTrack = function(e) {
+          _this.onTouchStartTrack = function(e2) {
             var _a;
-            e.persist();
-            _this.addTouchEvents(e.nativeEvent);
+            e2.persist();
+            _this.addTouchEvents(e2.nativeEvent);
             if (_this.props.values.length > 1 && _this.props.draggableTrack) {
               if (_this.thumbRefs.some(function(thumbRef) {
                 var _a2;
-                return (_a2 = thumbRef.current) === null || _a2 === void 0 ? void 0 : _a2.contains(e.target);
+                return (_a2 = thumbRef.current) === null || _a2 === void 0 ? void 0 : _a2.contains(e2.target);
               }))
                 return;
               _this.setState({
-                draggedTrackPos: [e.touches[0].clientX, e.touches[0].clientY]
+                draggedTrackPos: [e2.touches[0].clientX, e2.touches[0].clientY]
               }, function() {
-                return _this.onMove(e.touches[0].clientX, e.touches[0].clientY);
+                return _this.onMove(e2.touches[0].clientX, e2.touches[0].clientY);
               });
             } else {
-              var draggedThumbIndex = (0, utils_1.getClosestThumbIndex)(_this.thumbRefs.map(function(t) {
-                return t.current;
-              }), e.touches[0].clientX, e.touches[0].clientY, _this.props.direction);
+              var draggedThumbIndex = (0, utils_1.getClosestThumbIndex)(_this.thumbRefs.map(function(t2) {
+                return t2.current;
+              }), e2.touches[0].clientX, e2.touches[0].clientY, _this.props.direction);
               (_a = _this.thumbRefs[draggedThumbIndex].current) === null || _a === void 0 ? void 0 : _a.focus();
               _this.setState({
                 draggedThumbIndex
               }, function() {
-                return _this.onMove(e.touches[0].clientX, e.touches[0].clientY);
+                return _this.onMove(e2.touches[0].clientX, e2.touches[0].clientY);
               });
             }
           };
-          _this.onMouseOrTouchStart = function(e) {
+          _this.onMouseOrTouchStart = function(e2) {
             if (_this.props.disabled)
               return;
-            var isTouch = (0, utils_1.isTouchEvent)(e);
-            if (!isTouch && e.button !== 0)
+            var isTouch = (0, utils_1.isTouchEvent)(e2);
+            if (!isTouch && e2.button !== 0)
               return;
-            var index2 = _this.getTargetIndex(e);
+            var index2 = _this.getTargetIndex(e2);
             if (index2 === -1)
               return;
             if (isTouch) {
-              _this.addTouchEvents(e);
+              _this.addTouchEvents(e2);
             } else {
-              _this.addMouseEvents(e);
+              _this.addMouseEvents(e2);
             }
             _this.setState({
               draggedThumbIndex: index2,
-              thumbZIndexes: _this.state.thumbZIndexes.map(function(t, i) {
-                if (i === index2) {
+              thumbZIndexes: _this.state.thumbZIndexes.map(function(t2, i2) {
+                if (i2 === index2) {
                   return Math.max.apply(Math, _this.state.thumbZIndexes);
                 }
-                return t <= _this.state.thumbZIndexes[index2] ? t : t - 1;
+                return t2 <= _this.state.thumbZIndexes[index2] ? t2 : t2 - 1;
               })
             });
           };
-          _this.onMouseMove = function(e) {
-            e.preventDefault();
-            _this.onMove(e.clientX, e.clientY);
+          _this.onMouseMove = function(e2) {
+            e2.preventDefault();
+            _this.onMove(e2.clientX, e2.clientY);
           };
-          _this.onTouchMove = function(e) {
-            e.preventDefault();
-            _this.onMove(e.touches[0].clientX, e.touches[0].clientY);
+          _this.onTouchMove = function(e2) {
+            e2.preventDefault();
+            _this.onMove(e2.touches[0].clientX, e2.touches[0].clientY);
           };
-          _this.onKeyDown = function(e) {
+          _this.onKeyDown = function(e2) {
             var _a = _this.props, values = _a.values, onChange = _a.onChange, step = _a.step, rtl = _a.rtl, direction = _a.direction;
             var isChanged = _this.state.isChanged;
-            var index2 = _this.getTargetIndex(e.nativeEvent);
+            var index2 = _this.getTargetIndex(e2.nativeEvent);
             var inverter = rtl || direction === types_1.Direction.Left || direction === types_1.Direction.Down ? -1 : 1;
             if (index2 === -1)
               return;
-            if (INCREASE_KEYS.includes(e.key)) {
-              e.preventDefault();
+            if (INCREASE_KEYS.includes(e2.key)) {
+              e2.preventDefault();
               _this.setState({
                 draggedThumbIndex: index2,
                 isChanged: true
               });
-              onChange((0, utils_1.replaceAt)(values, index2, _this.normalizeValue(values[index2] + inverter * (e.key === "PageUp" ? step * 10 : step), index2)));
-            } else if (DECREASE_KEYS.includes(e.key)) {
-              e.preventDefault();
+              onChange((0, utils_1.replaceAt)(values, index2, _this.normalizeValue(values[index2] + inverter * (e2.key === "PageUp" ? step * 10 : step), index2)));
+            } else if (DECREASE_KEYS.includes(e2.key)) {
+              e2.preventDefault();
               _this.setState({
                 draggedThumbIndex: index2,
                 isChanged: true
               });
-              onChange((0, utils_1.replaceAt)(values, index2, _this.normalizeValue(values[index2] - inverter * (e.key === "PageDown" ? step * 10 : step), index2)));
-            } else if (e.key === "Tab") {
+              onChange((0, utils_1.replaceAt)(values, index2, _this.normalizeValue(values[index2] - inverter * (e2.key === "PageDown" ? step * 10 : step), index2)));
+            } else if (e2.key === "Tab") {
               _this.setState({ draggedThumbIndex: -1 }, function() {
                 if (isChanged) {
                   _this.fireOnFinalChange();
@@ -24331,7 +24281,7 @@ ${JSON.stringify(message, null, 4)}`);
               }
             }
           };
-          _this.onKeyUp = function(e) {
+          _this.onKeyUp = function(e2) {
             var isChanged = _this.state.isChanged;
             _this.setState({
               draggedThumbIndex: -1
@@ -24371,18 +24321,18 @@ ${JSON.stringify(message, null, 4)}`);
                 deltaValue *= -1;
               }
               if (Math.abs(deltaValue) >= step / 2) {
-                for (var i = 0; i < _this.thumbRefs.length; i++) {
-                  if (values[i] === max && Math.sign(deltaValue) === 1 || values[i] === min && Math.sign(deltaValue) === -1)
+                for (var i2 = 0; i2 < _this.thumbRefs.length; i2++) {
+                  if (values[i2] === max && Math.sign(deltaValue) === 1 || values[i2] === min && Math.sign(deltaValue) === -1)
                     return;
-                  var thumbValue = values[i] + deltaValue;
+                  var thumbValue = values[i2] + deltaValue;
                   if (thumbValue > max)
-                    deltaValue = max - values[i];
+                    deltaValue = max - values[i2];
                   else if (thumbValue < min)
-                    deltaValue = min - values[i];
+                    deltaValue = min - values[i2];
                 }
                 var newValues = values.slice(0);
-                for (var i = 0; i < _this.thumbRefs.length; i++) {
-                  newValues = (0, utils_1.replaceAt)(newValues, i, _this.normalizeValue(values[i] + deltaValue, i));
+                for (var i2 = 0; i2 < _this.thumbRefs.length; i2++) {
+                  newValues = (0, utils_1.replaceAt)(newValues, i2, _this.normalizeValue(values[i2] + deltaValue, i2));
                 }
                 _this.setState({
                   draggedTrackPos: [clientX, clientY]
@@ -24419,8 +24369,8 @@ ${JSON.stringify(message, null, 4)}`);
             var _a = _this.props, min = _a.min, max = _a.max, step = _a.step, allowOverlap = _a.allowOverlap, values = _a.values;
             return (0, utils_1.normalizeValue)(value, index2, min, max, step, allowOverlap, values);
           };
-          _this.onEnd = function(e) {
-            e.preventDefault();
+          _this.onEnd = function(e2) {
+            e2.preventDefault();
             document.removeEventListener("mousemove", _this.schdOnMouseMove);
             document.removeEventListener("touchmove", _this.schdOnTouchMove);
             document.removeEventListener("mouseup", _this.schdOnEnd);
@@ -24447,8 +24397,8 @@ ${JSON.stringify(message, null, 4)}`);
             }
             _this.numOfMarks = (props2.max - props2.min) / _this.props.step;
             _this.markRefs = [];
-            for (var i = 0; i < _this.numOfMarks + 1; i++) {
-              _this.markRefs[i] = React11.createRef();
+            for (var i2 = 0; i2 < _this.numOfMarks + 1; i2++) {
+              _this.markRefs[i2] = React15.createRef();
             }
           };
           _this.calculateMarkOffsets = function() {
@@ -24460,22 +24410,22 @@ ${JSON.stringify(message, null, 4)}`);
             var paddingLeft = parseInt(elStyles.paddingLeft, 10);
             var paddingTop = parseInt(elStyles.paddingTop, 10);
             var res = [];
-            for (var i = 0; i < _this.numOfMarks + 1; i++) {
+            for (var i2 = 0; i2 < _this.numOfMarks + 1; i2++) {
               var markHeight = 9999;
               var markWidth = 9999;
-              if (_this.markRefs[i].current) {
-                var markRect = _this.markRefs[i].current.getBoundingClientRect();
+              if (_this.markRefs[i2].current) {
+                var markRect = _this.markRefs[i2].current.getBoundingClientRect();
                 markHeight = markRect.height;
                 markWidth = markRect.width;
               }
               if (_this.props.direction === types_1.Direction.Left || _this.props.direction === types_1.Direction.Right) {
                 res.push([
-                  Math.round(trackWidth / _this.numOfMarks * i + paddingLeft - markWidth / 2),
+                  Math.round(trackWidth / _this.numOfMarks * i2 + paddingLeft - markWidth / 2),
                   -Math.round((markHeight - trackHeight) / 2)
                 ]);
               } else {
                 res.push([
-                  Math.round(trackHeight / _this.numOfMarks * i + paddingTop - markHeight / 2),
+                  Math.round(trackHeight / _this.numOfMarks * i2 + paddingTop - markHeight / 2),
                   -Math.round((markWidth - trackWidth) / 2)
                 ]);
               }
@@ -24489,7 +24439,7 @@ ${JSON.stringify(message, null, 4)}`);
           _this.schdOnTouchMove = (0, utils_1.schd)(_this.onTouchMove);
           _this.schdOnEnd = (0, utils_1.schd)(_this.onEnd);
           _this.thumbRefs = props.values.map(function() {
-            return React11.createRef();
+            return React15.createRef();
           });
           _this.updateMarkRefs(props);
           return _this;
@@ -24629,7 +24579,7 @@ ${JSON.stringify(message, null, 4)}`);
           max: 100
         };
         return Range3;
-      }(React11.Component);
+      }(React15.Component);
       exports.default = Range2;
     }
   });
@@ -24665,20 +24615,70 @@ ${JSON.stringify(message, null, 4)}`);
     }
   });
 
+  // node_modules/classnames/index.js
+  var require_classnames = __commonJS({
+    "node_modules/classnames/index.js"(exports, module) {
+      (function() {
+        "use strict";
+        var hasOwn = {}.hasOwnProperty;
+        function classNames() {
+          var classes = [];
+          for (var i2 = 0; i2 < arguments.length; i2++) {
+            var arg = arguments[i2];
+            if (!arg)
+              continue;
+            var argType = typeof arg;
+            if (argType === "string" || argType === "number") {
+              classes.push(arg);
+            } else if (Array.isArray(arg)) {
+              if (arg.length) {
+                var inner = classNames.apply(null, arg);
+                if (inner) {
+                  classes.push(inner);
+                }
+              }
+            } else if (argType === "object") {
+              if (arg.toString === Object.prototype.toString) {
+                for (var key in arg) {
+                  if (hasOwn.call(arg, key) && arg[key]) {
+                    classes.push(key);
+                  }
+                }
+              } else {
+                classes.push(arg.toString());
+              }
+            }
+          }
+          return classes.join(" ");
+        }
+        if (typeof module !== "undefined" && module.exports) {
+          classNames.default = classNames;
+          module.exports = classNames;
+        } else if (typeof define === "function" && typeof define.amd === "object" && define.amd) {
+          define("classnames", [], function() {
+            return classNames;
+          });
+        } else {
+          window.classNames = classNames;
+        }
+      })();
+    }
+  });
+
   // src/index.tsx
-  var import_react12 = __toModule(require_react());
+  var import_react18 = __toModule(require_react());
   var import_react_dom = __toModule(require_react_dom());
 
   // src/App.tsx
-  var import_react11 = __toModule(require_react());
+  var import_react17 = __toModule(require_react());
 
   // node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js
-  function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf2(o2, p2) {
-      o2.__proto__ = p2;
-      return o2;
+  function _setPrototypeOf(o2, p2) {
+    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf2(o3, p3) {
+      o3.__proto__ = p3;
+      return o3;
     };
-    return _setPrototypeOf(o, p);
+    return _setPrototypeOf(o2, p2);
   }
 
   // node_modules/@babel/runtime/helpers/esm/inheritsLoose.js
@@ -24695,8 +24695,8 @@ ${JSON.stringify(message, null, 4)}`);
   // node_modules/@babel/runtime/helpers/esm/extends.js
   function _extends() {
     _extends = Object.assign ? Object.assign.bind() : function(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
+      for (var i2 = 1; i2 < arguments.length; i2++) {
+        var source = arguments[i2];
         for (var key in source) {
           if (Object.prototype.hasOwnProperty.call(source, key)) {
             target[key] = source[key];
@@ -24713,8 +24713,8 @@ ${JSON.stringify(message, null, 4)}`);
     return pathname.charAt(0) === "/";
   }
   function spliceOne(list, index2) {
-    for (var i = index2, k = i + 1, n = list.length; k < n; i += 1, k += 1) {
-      list[i] = list[k];
+    for (var i2 = index2, k2 = i2 + 1, n3 = list.length; k2 < n3; i2 += 1, k2 += 1) {
+      list[i2] = list[k2];
     }
     list.pop();
   }
@@ -24742,15 +24742,15 @@ ${JSON.stringify(message, null, 4)}`);
       hasTrailingSlash = false;
     }
     var up = 0;
-    for (var i = fromParts.length; i >= 0; i--) {
-      var part = fromParts[i];
+    for (var i2 = fromParts.length; i2 >= 0; i2--) {
+      var part = fromParts[i2];
       if (part === ".") {
-        spliceOne(fromParts, i);
+        spliceOne(fromParts, i2);
       } else if (part === "..") {
-        spliceOne(fromParts, i);
+        spliceOne(fromParts, i2);
         up++;
       } else if (up) {
-        spliceOne(fromParts, i);
+        spliceOne(fromParts, i2);
         up--;
       }
     }
@@ -24770,23 +24770,23 @@ ${JSON.stringify(message, null, 4)}`);
   function valueOf(obj) {
     return obj.valueOf ? obj.valueOf() : Object.prototype.valueOf.call(obj);
   }
-  function valueEqual(a, b) {
-    if (a === b)
+  function valueEqual(a2, b2) {
+    if (a2 === b2)
       return true;
-    if (a == null || b == null)
+    if (a2 == null || b2 == null)
       return false;
-    if (Array.isArray(a)) {
-      return Array.isArray(b) && a.length === b.length && a.every(function(item, index2) {
-        return valueEqual(item, b[index2]);
+    if (Array.isArray(a2)) {
+      return Array.isArray(b2) && a2.length === b2.length && a2.every(function(item, index2) {
+        return valueEqual(item, b2[index2]);
       });
     }
-    if (typeof a === "object" || typeof b === "object") {
-      var aValue = valueOf(a);
-      var bValue = valueOf(b);
-      if (aValue !== a || bValue !== b)
+    if (typeof a2 === "object" || typeof b2 === "object") {
+      var aValue = valueOf(a2);
+      var bValue = valueOf(b2);
+      if (aValue !== a2 || bValue !== b2)
         return valueEqual(aValue, bValue);
-      return Object.keys(Object.assign({}, a, b)).every(function(key) {
-        return valueEqual(a[key], b[key]);
+      return Object.keys(Object.assign({}, a2, b2)).every(function(key) {
+        return valueEqual(a2[key], b2[key]);
       });
     }
     return false;
@@ -24806,7 +24806,7 @@ ${JSON.stringify(message, null, 4)}`);
       }
       try {
         throw Error(text);
-      } catch (x) {
+      } catch (x2) {
       }
     }
   }
@@ -24897,11 +24897,11 @@ ${JSON.stringify(message, null, 4)}`);
     }
     try {
       location.pathname = decodeURI(location.pathname);
-    } catch (e) {
-      if (e instanceof URIError) {
+    } catch (e2) {
+      if (e2 instanceof URIError) {
         throw new URIError('Pathname "' + location.pathname + '" could not be decoded. This is likely caused by an invalid percent-encoding.');
       } else {
-        throw e;
+        throw e2;
       }
     }
     if (key)
@@ -24919,8 +24919,8 @@ ${JSON.stringify(message, null, 4)}`);
     }
     return location;
   }
-  function locationsAreEqual(a, b) {
-    return a.pathname === b.pathname && a.search === b.search && a.hash === b.hash && a.key === b.key && value_equal_default(a.state, b.state);
+  function locationsAreEqual(a2, b2) {
+    return a2.pathname === b2.pathname && a2.search === b2.search && a2.hash === b2.hash && a2.key === b2.key && value_equal_default(a2.state, b2.state);
   }
   function createTransitionManager() {
     var prompt = null;
@@ -25003,7 +25003,7 @@ ${JSON.stringify(message, null, 4)}`);
   function getHistoryState() {
     try {
       return window.history.state || {};
-    } catch (e) {
+    } catch (e2) {
       return {};
     }
   }
@@ -25144,8 +25144,8 @@ ${JSON.stringify(message, null, 4)}`);
         }
       });
     }
-    function go(n) {
-      globalHistory.go(n);
+    function go(n3) {
+      globalHistory.go(n3);
     }
     function goBack() {
       go(-1);
@@ -25266,8 +25266,8 @@ ${JSON.stringify(message, null, 4)}`);
     }
     var forceNextPop = false;
     var ignorePath = null;
-    function locationsAreEqual$$1(a, b) {
-      return a.pathname === b.pathname && a.search === b.search && a.hash === b.hash;
+    function locationsAreEqual$$1(a2, b2) {
+      return a2.pathname === b2.pathname && a2.search === b2.search && a2.hash === b2.hash;
     }
     function handleHashChange() {
       var path2 = getHashPath();
@@ -25381,9 +25381,9 @@ ${JSON.stringify(message, null, 4)}`);
         });
       });
     }
-    function go(n) {
+    function go(n3) {
       true ? tiny_warning_esm_default(canGoWithoutReload, "Hash history go(n) causes a full page reload in this browser") : void 0;
-      globalHistory.go(n);
+      globalHistory.go(n3);
     }
     function goBack() {
       go(-1);
@@ -25441,8 +25441,8 @@ ${JSON.stringify(message, null, 4)}`);
     };
     return history;
   }
-  function clamp(n, lowerBound, upperBound) {
-    return Math.min(Math.max(n, lowerBound), upperBound);
+  function clamp(n3, lowerBound, upperBound) {
+    return Math.min(Math.max(n3, lowerBound), upperBound);
   }
   function createMemoryHistory(props) {
     if (props === void 0) {
@@ -25500,8 +25500,8 @@ ${JSON.stringify(message, null, 4)}`);
         });
       });
     }
-    function go(n) {
-      var nextIndex = clamp(history.index + n, 0, history.entries.length - 1);
+    function go(n3) {
+      var nextIndex = clamp(history.index + n3, 0, history.entries.length - 1);
       var action = "POP";
       var location = history.entries[nextIndex];
       transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function(ok) {
@@ -25522,8 +25522,8 @@ ${JSON.stringify(message, null, 4)}`);
     function goForward() {
       go(1);
     }
-    function canGo(n) {
-      var nextIndex = history.index + n;
+    function canGo(n3) {
+      var nextIndex = history.index + n3;
       return nextIndex >= 0 && nextIndex < history.entries.length;
     }
     function block(prompt) {
@@ -25563,11 +25563,11 @@ ${JSON.stringify(message, null, 4)}`);
     var key = "__global_unique_id__";
     return commonjsGlobal[key] = (commonjsGlobal[key] || 0) + 1;
   }
-  function objectIs(x, y) {
-    if (x === y) {
-      return x !== 0 || 1 / x === 1 / y;
+  function objectIs(x2, y) {
+    if (x2 === y) {
+      return x2 !== 0 || 1 / x2 === 1 / y;
     } else {
-      return x !== x && y !== y;
+      return x2 !== x2 && y !== y;
     }
   }
   function createEventEmitter(value) {
@@ -25577,8 +25577,8 @@ ${JSON.stringify(message, null, 4)}`);
         handlers.push(handler);
       },
       off: function off(handler) {
-        handlers = handlers.filter(function(h) {
-          return h !== handler;
+        handlers = handlers.filter(function(h2) {
+          return h2 !== handler;
         });
       },
       get: function get() {
@@ -25702,9 +25702,9 @@ ${JSON.stringify(message, null, 4)}`);
       return {};
     var target = {};
     var sourceKeys = Object.keys(source);
-    var key, i;
-    for (i = 0; i < sourceKeys.length; i++) {
-      key = sourceKeys[i];
+    var key, i2;
+    for (i2 = 0; i2 < sourceKeys.length; i2++) {
+      key = sourceKeys[i2];
       if (excluded.indexOf(key) >= 0)
         continue;
       target[key] = source[key];
@@ -25992,9 +25992,9 @@ ${JSON.stringify(message, null, 4)}`);
         path: path2,
         url: path2 === "/" && url === "" ? "/" : url,
         isExact,
-        params: keys.reduce(function(memo, key, index2) {
-          memo[key.name] = values[index2];
-          return memo;
+        params: keys.reduce(function(memo2, key, index2) {
+          memo2[key.name] = values[index2];
+          return memo2;
         }, {})
       };
     }, null);
@@ -26298,8 +26298,8 @@ ${JSON.stringify(message, null, 4)}`);
   var normalizeToLocation = function normalizeToLocation2(to, currentLocation) {
     return typeof to === "string" ? createLocation(to, null, null, currentLocation) : to;
   };
-  var forwardRefShim = function forwardRefShim2(C) {
-    return C;
+  var forwardRefShim = function forwardRefShim2(C2) {
+    return C2;
   };
   var forwardRef = import_react3.default.forwardRef;
   if (typeof forwardRef === "undefined") {
@@ -26376,8 +26376,8 @@ ${JSON.stringify(message, null, 4)}`);
   }
   var toType;
   var refType;
-  var forwardRefShim$1 = function forwardRefShim3(C) {
-    return C;
+  var forwardRefShim$1 = function forwardRefShim3(C2) {
+    return C2;
   };
   var forwardRef$1 = import_react3.default.forwardRef;
   if (typeof forwardRef$1 === "undefined") {
@@ -26387,8 +26387,8 @@ ${JSON.stringify(message, null, 4)}`);
     for (var _len = arguments.length, classnames = new Array(_len), _key = 0; _key < _len; _key++) {
       classnames[_key] = arguments[_key];
     }
-    return classnames.filter(function(i) {
-      return i;
+    return classnames.filter(function(i2) {
+      return i2;
     }).join(" ");
   }
   var NavLink = forwardRef$1(function(_ref, forwardedRef) {
@@ -26444,8 +26444,447 @@ ${JSON.stringify(message, null, 4)}`);
   }
   var ariaCurrentType;
 
-  // src/chat.ts
+  // node_modules/react-hot-toast/dist/index.mjs
   var import_react4 = __toModule(require_react());
+  var import_react5 = __toModule(require_react());
+  var d2 = __toModule(require_react());
+
+  // node_modules/goober/dist/goober.modern.js
+  var e = { data: "" };
+  var t = (t2) => typeof window == "object" ? ((t2 ? t2.querySelector("#_goober") : window._goober) || Object.assign((t2 || document.head).appendChild(document.createElement("style")), { innerHTML: " ", id: "_goober" })).firstChild : t2 || e;
+  var l = /(?:([\u0080-\uFFFF\w-%@]+) *:? *([^{;]+?);|([^;}{]*?) *{)|(}\s*)/g;
+  var a = /\/\*[^]*?\*\/|  +/g;
+  var n = /\n+/g;
+  var o = (e2, t2) => {
+    let r = "", l2 = "", a2 = "";
+    for (let n3 in e2) {
+      let c2 = e2[n3];
+      n3[0] == "@" ? n3[1] == "i" ? r = n3 + " " + c2 + ";" : l2 += n3[1] == "f" ? o(c2, n3) : n3 + "{" + o(c2, n3[1] == "k" ? "" : t2) + "}" : typeof c2 == "object" ? l2 += o(c2, t2 ? t2.replace(/([^,])+/g, (e3) => n3.replace(/(^:.*)|([^,])+/g, (t3) => /&/.test(t3) ? t3.replace(/&/g, e3) : e3 ? e3 + " " + t3 : t3)) : n3) : c2 != null && (n3 = /^--/.test(n3) ? n3 : n3.replace(/[A-Z]/g, "-$&").toLowerCase(), a2 += o.p ? o.p(n3, c2) : n3 + ":" + c2 + ";");
+    }
+    return r + (t2 && a2 ? t2 + "{" + a2 + "}" : a2) + l2;
+  };
+  var c = {};
+  var s = (e2) => {
+    if (typeof e2 == "object") {
+      let t2 = "";
+      for (let r in e2)
+        t2 += r + s(e2[r]);
+      return t2;
+    }
+    return e2;
+  };
+  var i = (e2, t2, r, i2, p2) => {
+    let u3 = s(e2), d3 = c[u3] || (c[u3] = ((e3) => {
+      let t3 = 0, r2 = 11;
+      for (; t3 < e3.length; )
+        r2 = 101 * r2 + e3.charCodeAt(t3++) >>> 0;
+      return "go" + r2;
+    })(u3));
+    if (!c[d3]) {
+      let t3 = u3 !== e2 ? e2 : ((e3) => {
+        let t4, r2, o2 = [{}];
+        for (; t4 = l.exec(e3.replace(a, "")); )
+          t4[4] ? o2.shift() : t4[3] ? (r2 = t4[3].replace(n, " ").trim(), o2.unshift(o2[0][r2] = o2[0][r2] || {})) : o2[0][t4[1]] = t4[2].replace(n, " ").trim();
+        return o2[0];
+      })(e2);
+      c[d3] = o(p2 ? { ["@keyframes " + d3]: t3 } : t3, r ? "" : "." + d3);
+    }
+    return ((e3, t3, r2) => {
+      t3.data.indexOf(e3) == -1 && (t3.data = r2 ? e3 + t3.data : t3.data + e3);
+    })(c[d3], t2, i2), d3;
+  };
+  var p = (e2, t2, r) => e2.reduce((e3, l2, a2) => {
+    let n3 = t2[a2];
+    if (n3 && n3.call) {
+      let e4 = n3(r), t3 = e4 && e4.props && e4.props.className || /^go/.test(e4) && e4;
+      n3 = t3 ? "." + t3 : e4 && typeof e4 == "object" ? e4.props ? "" : o(e4, "") : e4 === false ? "" : e4;
+    }
+    return e3 + l2 + (n3 == null ? "" : n3);
+  }, "");
+  function u(e2) {
+    let r = this || {}, l2 = e2.call ? e2(r.p) : e2;
+    return i(l2.unshift ? l2.raw ? p(l2, [].slice.call(arguments, 1), r.p) : l2.reduce((e3, t2) => Object.assign(e3, t2 && t2.call ? t2(r.p) : t2), {}) : l2, t(r.target), r.g, r.o, r.k);
+  }
+  var d;
+  var f;
+  var g;
+  var b = u.bind({ g: 1 });
+  var h = u.bind({ k: 1 });
+  function m(e2, t2, r, l2) {
+    o.p = t2, d = e2, f = r, g = l2;
+  }
+  function j(e2, t2) {
+    let r = this || {};
+    return function() {
+      let l2 = arguments;
+      function a2(n3, o2) {
+        let c2 = Object.assign({}, n3), s2 = c2.className || a2.className;
+        r.p = Object.assign({ theme: f && f() }, c2), r.o = / *go\d+/.test(s2), c2.className = u.apply(r, l2) + (s2 ? " " + s2 : ""), t2 && (c2.ref = o2);
+        let i2 = e2;
+        return e2[0] && (i2 = c2.as || e2, delete c2.as), g && i2[0] && g(c2), d(i2, c2);
+      }
+      return t2 ? t2(a2) : a2;
+    };
+  }
+
+  // node_modules/react-hot-toast/dist/index.mjs
+  var f2 = __toModule(require_react());
+  var x = __toModule(require_react());
+  var H = (e2) => typeof e2 == "function";
+  var u2 = (e2, t2) => H(e2) ? e2(t2) : e2;
+  var U = (() => {
+    let e2 = 0;
+    return () => (++e2).toString();
+  })();
+  var $ = (e2) => (t2) => {
+    t2 && setTimeout(() => {
+      let o2 = t2.getBoundingClientRect();
+      e2(o2);
+    });
+  };
+  var S = (() => {
+    let e2;
+    return () => {
+      if (e2 === void 0 && typeof window < "u") {
+        let t2 = matchMedia("(prefers-reduced-motion: reduce)");
+        e2 = !t2 || t2.matches;
+      }
+      return e2;
+    };
+  })();
+  var Q = 20;
+  var A = new Map();
+  var L = (e2) => {
+    if (A.has(e2))
+      return;
+    let t2 = setTimeout(() => {
+      A.delete(e2), m2({ type: 4, toastId: e2 });
+    }, 1e3);
+    A.set(e2, t2);
+  };
+  var J = (e2) => {
+    let t2 = A.get(e2);
+    t2 && clearTimeout(t2);
+  };
+  var E = (e2, t2) => {
+    switch (t2.type) {
+      case 0:
+        return __spreadProps(__spreadValues({}, e2), { toasts: [t2.toast, ...e2.toasts].slice(0, Q) });
+      case 1:
+        return t2.toast.id && J(t2.toast.id), __spreadProps(__spreadValues({}, e2), { toasts: e2.toasts.map((a2) => a2.id === t2.toast.id ? __spreadValues(__spreadValues({}, a2), t2.toast) : a2) });
+      case 2:
+        let { toast: o2 } = t2;
+        return e2.toasts.find((a2) => a2.id === o2.id) ? E(e2, { type: 1, toast: o2 }) : E(e2, { type: 0, toast: o2 });
+      case 3:
+        let { toastId: s2 } = t2;
+        return s2 ? L(s2) : e2.toasts.forEach((a2) => {
+          L(a2.id);
+        }), __spreadProps(__spreadValues({}, e2), { toasts: e2.toasts.map((a2) => a2.id === s2 || s2 === void 0 ? __spreadProps(__spreadValues({}, a2), { visible: false }) : a2) });
+      case 4:
+        return t2.toastId === void 0 ? __spreadProps(__spreadValues({}, e2), { toasts: [] }) : __spreadProps(__spreadValues({}, e2), { toasts: e2.toasts.filter((a2) => a2.id !== t2.toastId) });
+      case 5:
+        return __spreadProps(__spreadValues({}, e2), { pausedAt: t2.time });
+      case 6:
+        let r = t2.time - (e2.pausedAt || 0);
+        return __spreadProps(__spreadValues({}, e2), { pausedAt: void 0, toasts: e2.toasts.map((a2) => __spreadProps(__spreadValues({}, a2), { pauseDuration: a2.pauseDuration + r })) });
+    }
+  };
+  var P = [];
+  var R = { toasts: [], pausedAt: void 0 };
+  var m2 = (e2) => {
+    R = E(R, e2), P.forEach((t2) => {
+      t2(R);
+    });
+  };
+  var X = { blank: 4e3, error: 4e3, success: 2e3, loading: 1 / 0, custom: 4e3 };
+  var v = (e2 = {}) => {
+    let [t2, o2] = (0, import_react4.useState)(R);
+    (0, import_react4.useEffect)(() => (P.push(o2), () => {
+      let r = P.indexOf(o2);
+      r > -1 && P.splice(r, 1);
+    }), [t2]);
+    let s2 = t2.toasts.map((r) => {
+      var a2, i2;
+      return __spreadProps(__spreadValues(__spreadValues(__spreadValues({}, e2), e2[r.type]), r), { duration: r.duration || ((a2 = e2[r.type]) == null ? void 0 : a2.duration) || (e2 == null ? void 0 : e2.duration) || X[r.type], style: __spreadValues(__spreadValues(__spreadValues({}, e2.style), (i2 = e2[r.type]) == null ? void 0 : i2.style), r.style) });
+    });
+    return __spreadProps(__spreadValues({}, t2), { toasts: s2 });
+  };
+  var q = (e2, t2 = "blank", o2) => __spreadProps(__spreadValues({ createdAt: Date.now(), visible: true, type: t2, ariaProps: { role: "status", "aria-live": "polite" }, message: e2, pauseDuration: 0 }, o2), { id: (o2 == null ? void 0 : o2.id) || U() });
+  var g2 = (e2) => (t2, o2) => {
+    let s2 = q(t2, e2, o2);
+    return m2({ type: 2, toast: s2 }), s2.id;
+  };
+  var n2 = (e2, t2) => g2("blank")(e2, t2);
+  n2.error = g2("error");
+  n2.success = g2("success");
+  n2.loading = g2("loading");
+  n2.custom = g2("custom");
+  n2.dismiss = (e2) => {
+    m2({ type: 3, toastId: e2 });
+  };
+  n2.remove = (e2) => m2({ type: 4, toastId: e2 });
+  n2.promise = (e2, t2, o2) => {
+    let s2 = n2.loading(t2.loading, __spreadValues(__spreadValues({}, o2), o2 == null ? void 0 : o2.loading));
+    return e2.then((r) => (n2.success(u2(t2.success, r), __spreadValues(__spreadValues({ id: s2 }, o2), o2 == null ? void 0 : o2.success)), r)).catch((r) => {
+      n2.error(u2(t2.error, r), __spreadValues(__spreadValues({ id: s2 }, o2), o2 == null ? void 0 : o2.error));
+    }), e2;
+  };
+  var D = (e2) => {
+    let { toasts: t2, pausedAt: o2 } = v(e2);
+    (0, import_react5.useEffect)(() => {
+      if (o2)
+        return;
+      let r = Date.now(), a2 = t2.map((i2) => {
+        if (i2.duration === 1 / 0)
+          return;
+        let T = (i2.duration || 0) + i2.pauseDuration - (r - i2.createdAt);
+        if (T < 0) {
+          i2.visible && n2.dismiss(i2.id);
+          return;
+        }
+        return setTimeout(() => n2.dismiss(i2.id), T);
+      });
+      return () => {
+        a2.forEach((i2) => i2 && clearTimeout(i2));
+      };
+    }, [t2, o2]);
+    let s2 = (0, import_react5.useMemo)(() => ({ startPause: () => {
+      m2({ type: 5, time: Date.now() });
+    }, endPause: () => {
+      o2 && m2({ type: 6, time: Date.now() });
+    }, updateHeight: (r, a2) => m2({ type: 1, toast: { id: r, height: a2 } }), calculateOffset: (r, a2) => {
+      let { reverseOrder: i2 = false, gutter: T = 8, defaultPosition: l2 } = a2 || {}, c2 = t2.filter((p2) => (p2.position || l2) === (r.position || l2) && p2.height), h2 = c2.findIndex((p2) => p2.id === r.id), b2 = c2.filter((p2, y) => y < h2 && p2.visible).length;
+      return c2.filter((p2) => p2.visible).slice(...i2 ? [b2 + 1] : [0, b2]).reduce((p2, y) => p2 + (y.height || 0) + T, 0);
+    } }), [t2, o2]);
+    return { toasts: t2, handlers: s2 };
+  };
+  var ee = h`
+from {
+  transform: scale(0) rotate(45deg);
+	opacity: 0;
+}
+to {
+ transform: scale(1) rotate(45deg);
+  opacity: 1;
+}`;
+  var te = h`
+from {
+  transform: scale(0);
+  opacity: 0;
+}
+to {
+  transform: scale(1);
+  opacity: 1;
+}`;
+  var oe = h`
+from {
+  transform: scale(0) rotate(90deg);
+	opacity: 0;
+}
+to {
+  transform: scale(1) rotate(90deg);
+	opacity: 1;
+}`;
+  var k = j("div")`
+  width: 20px;
+  opacity: 0;
+  height: 20px;
+  border-radius: 10px;
+  background: ${(e2) => e2.primary || "#ff4b4b"};
+  position: relative;
+  transform: rotate(45deg);
+
+  animation: ${ee} 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    forwards;
+  animation-delay: 100ms;
+
+  &:after,
+  &:before {
+    content: '';
+    animation: ${te} 0.15s ease-out forwards;
+    animation-delay: 150ms;
+    position: absolute;
+    border-radius: 3px;
+    opacity: 0;
+    background: ${(e2) => e2.secondary || "#fff"};
+    bottom: 9px;
+    left: 4px;
+    height: 2px;
+    width: 12px;
+  }
+
+  &:before {
+    animation: ${oe} 0.15s ease-out forwards;
+    animation-delay: 180ms;
+    transform: rotate(90deg);
+  }
+`;
+  var se = h`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+  var V = j("div")`
+  width: 12px;
+  height: 12px;
+  box-sizing: border-box;
+  border: 2px solid;
+  border-radius: 100%;
+  border-color: ${(e2) => e2.secondary || "#e0e0e0"};
+  border-right-color: ${(e2) => e2.primary || "#616161"};
+  animation: ${se} 1s linear infinite;
+`;
+  var ne = h`
+from {
+  transform: scale(0) rotate(45deg);
+	opacity: 0;
+}
+to {
+  transform: scale(1) rotate(45deg);
+	opacity: 1;
+}`;
+  var ce = h`
+0% {
+	height: 0;
+	width: 0;
+	opacity: 0;
+}
+40% {
+  height: 0;
+	width: 6px;
+	opacity: 1;
+}
+100% {
+  opacity: 1;
+  height: 10px;
+}`;
+  var _ = j("div")`
+  width: 20px;
+  opacity: 0;
+  height: 20px;
+  border-radius: 10px;
+  background: ${(e2) => e2.primary || "#61d345"};
+  position: relative;
+  transform: rotate(45deg);
+
+  animation: ${ne} 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    forwards;
+  animation-delay: 100ms;
+  &:after {
+    content: '';
+    box-sizing: border-box;
+    animation: ${ce} 0.2s ease-out forwards;
+    opacity: 0;
+    animation-delay: 200ms;
+    position: absolute;
+    border-right: 2px solid;
+    border-bottom: 2px solid;
+    border-color: ${(e2) => e2.secondary || "#fff"};
+    bottom: 6px;
+    left: 6px;
+    height: 10px;
+    width: 6px;
+  }
+`;
+  var de = j("div")`
+  position: absolute;
+`;
+  var me = j("div")`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 20px;
+  min-height: 20px;
+`;
+  var ue = h`
+from {
+  transform: scale(0.6);
+  opacity: 0.4;
+}
+to {
+  transform: scale(1);
+  opacity: 1;
+}`;
+  var le = j("div")`
+  position: relative;
+  transform: scale(0.6);
+  opacity: 0.4;
+  min-width: 20px;
+  animation: ${ue} 0.3s 0.12s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    forwards;
+`;
+  var M = ({ toast: e2 }) => {
+    let { icon: t2, type: o2, iconTheme: s2 } = e2;
+    return t2 !== void 0 ? typeof t2 == "string" ? f2.createElement(le, null, t2) : t2 : o2 === "blank" ? null : f2.createElement(me, null, f2.createElement(V, __spreadValues({}, s2)), o2 !== "loading" && f2.createElement(de, null, o2 === "error" ? f2.createElement(k, __spreadValues({}, s2)) : f2.createElement(_, __spreadValues({}, s2))));
+  };
+  var fe = (e2) => `
+0% {transform: translate3d(0,${e2 * -200}%,0) scale(.6); opacity:.5;}
+100% {transform: translate3d(0,0,0) scale(1); opacity:1;}
+`;
+  var Te = (e2) => `
+0% {transform: translate3d(0,0,-1px) scale(1); opacity:1;}
+100% {transform: translate3d(0,${e2 * -150}%,-1px) scale(.6); opacity:0;}
+`;
+  var ye = "0%{opacity:0;} 100%{opacity:1;}";
+  var ge = "0%{opacity:1;} 100%{opacity:0;}";
+  var xe = j("div", d2.forwardRef)`
+  display: flex;
+  align-items: center;
+  background: #fff;
+  color: #363636;
+  line-height: 1.3;
+  will-change: transform;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.05);
+  max-width: 350px;
+  pointer-events: auto;
+  padding: 8px 10px;
+  border-radius: 8px;
+`;
+  var he = j("div")`
+  display: flex;
+  justify-content: center;
+  margin: 4px 10px;
+  color: inherit;
+  flex: 1 1 auto;
+  white-space: pre-line;
+`;
+  var be = (e2, t2) => {
+    let s2 = e2.includes("top") ? 1 : -1, [r, a2] = S() ? [ye, ge] : [fe(s2), Te(s2)];
+    return { animation: t2 ? `${h(r)} 0.35s cubic-bezier(.21,1.02,.73,1) forwards` : `${h(a2)} 0.4s forwards cubic-bezier(.06,.71,.55,1)` };
+  };
+  var C = d2.memo(({ toast: e2, position: t2, style: o2, children: s2 }) => {
+    let r = e2 != null && e2.height ? be(e2.position || t2 || "top-center", e2.visible) : { opacity: 0 }, a2 = d2.createElement(M, { toast: e2 }), i2 = d2.createElement(he, __spreadValues({}, e2.ariaProps), u2(e2.message, e2));
+    return d2.createElement(xe, { className: e2.className, style: __spreadValues(__spreadValues(__spreadValues({}, r), o2), e2.style) }, typeof s2 == "function" ? s2({ icon: a2, message: i2 }) : d2.createElement(d2.Fragment, null, a2, i2));
+  });
+  m(x.createElement);
+  var Pe = (e2, t2) => {
+    let o2 = e2.includes("top"), s2 = o2 ? { top: 0 } : { bottom: 0 }, r = e2.includes("center") ? { justifyContent: "center" } : e2.includes("right") ? { justifyContent: "flex-end" } : {};
+    return __spreadValues(__spreadValues({ left: 0, right: 0, display: "flex", position: "absolute", transition: S() ? void 0 : "all 230ms cubic-bezier(.21,1.02,.73,1)", transform: `translateY(${t2 * (o2 ? 1 : -1)}px)` }, s2), r);
+  };
+  var Re = u`
+  z-index: 9999;
+  > * {
+    pointer-events: auto;
+  }
+`;
+  var O = 16;
+  var Oe = ({ reverseOrder: e2, position: t2 = "top-center", toastOptions: o2, gutter: s2, children: r, containerStyle: a2, containerClassName: i2 }) => {
+    let { toasts: T, handlers: l2 } = D(o2);
+    return x.createElement("div", { style: __spreadValues({ position: "fixed", zIndex: 9999, top: O, left: O, right: O, bottom: O, pointerEvents: "none" }, a2), className: i2, onMouseEnter: l2.startPause, onMouseLeave: l2.endPause }, T.map((c2) => {
+      let h2 = c2.position || t2, b2 = l2.calculateOffset(c2, { reverseOrder: e2, gutter: s2, defaultPosition: t2 }), F = Pe(h2, b2), p2 = c2.height ? void 0 : $((y) => {
+        l2.updateHeight(c2.id, y.height);
+      });
+      return x.createElement("div", { ref: p2, className: c2.visible ? Re : "", key: c2.id, style: F }, c2.type === "custom" ? u2(c2.message, c2) : r ? r(c2) : x.createElement(C, { toast: c2, position: h2 }));
+    }));
+  };
+  var Et = n2;
+
+  // src/chat.ts
+  var import_react6 = __toModule(require_react());
   var import_tmi = __toModule(require_tmi());
   var ChatEvent = class extends EventTarget {
     emit(data) {
@@ -26454,26 +26893,31 @@ ${JSON.stringify(message, null, 4)}`);
   };
   var chatEmitter = new ChatEvent();
   function useChatEvents(onChat) {
-    const [chat, setChat] = (0, import_react4.useState)([]);
-    (0, import_react4.useEffect)(() => {
-      function handleChat(d) {
-        setChat((c) => c.concat(d.detail));
-        onChat(d.detail);
+    const [chat, setChat] = (0, import_react6.useState)([]);
+    (0, import_react6.useEffect)(() => {
+      function handleChat(d3) {
+        setChat((c2) => c2.concat(d3.detail));
+        onChat(d3.detail);
       }
       chatEmitter.addEventListener("chat", handleChat);
       return () => {
         chatEmitter.removeEventListener("chat", handleChat);
       };
     }, [setChat, onChat]);
-    const resetChat = (0, import_react4.useCallback)(() => {
+    const resetChat = (0, import_react6.useCallback)(() => {
       setChat([]);
     }, [setChat]);
     return [chat, resetChat];
   }
-  function init(channel) {
+  function init(channelInfo) {
     const opts = {
-      channels: [channel]
+      channels: [channelInfo.login],
+      identity: {
+        username: channelInfo.login,
+        password: `oauth:${channelInfo.token}`
+      }
     };
+    console.info(opts);
     const client = new import_tmi.default.client(opts);
     client.on("message", onMessageHandler);
     client.on("connected", onConnectedHandler);
@@ -26497,23 +26941,28 @@ ${JSON.stringify(message, null, 4)}`);
       chatEmitter.emit(data);
     }
     function onConnectedHandler(addr, port) {
+      try {
+        Et.success("Connected to chat!", { position: "bottom-center" });
+      } catch (e2) {
+        console.error(e2);
+      }
       console.log(`* Connected to ${addr}:${port}`);
     }
     return client;
   }
 
   // src/components/hooks/useStorage.ts
-  var import_react5 = __toModule(require_react());
+  var import_react7 = __toModule(require_react());
   function useStorage(key, initialValue, onInit) {
     const serialize = JSON.stringify;
     const deserialize = JSON.parse;
-    const [state, setState] = (0, import_react5.useState)(initialValue);
-    const [syncedState, setSyncedState] = (0, import_react5.useState)(state);
-    const [initialised, setInitialised] = (0, import_react5.useState)(false);
-    const getKey = (0, import_react5.useCallback)((key2) => {
+    const [state, setState] = (0, import_react7.useState)(initialValue);
+    const [syncedState, setSyncedState] = (0, import_react7.useState)(state);
+    const [initialised, setInitialised] = (0, import_react7.useState)(false);
+    const getKey = (0, import_react7.useCallback)((key2) => {
       return `main-${key2}`;
     }, []);
-    (0, import_react5.useEffect)(() => {
+    (0, import_react7.useEffect)(() => {
       const value = state;
       (async () => {
         if (syncedState === value)
@@ -26522,27 +26971,27 @@ ${JSON.stringify(message, null, 4)}`);
           console.info("[storage:set]", getKey(key), value);
           await Neutralino.storage.setData(getKey(key), serialize(value));
           setSyncedState(value);
-        } catch (e) {
-          console.warn("[storage:error]", e);
+        } catch (e2) {
+          console.warn("[storage:error]", e2);
         }
       })();
     }, [state, getKey]);
-    (0, import_react5.useEffect)(() => {
+    (0, import_react7.useEffect)(() => {
       ;
       (async () => {
         let value = initialValue;
         try {
           try {
             value = deserialize(await Neutralino.storage.getData(getKey(key)));
-          } catch (e) {
-            console.warn("[storage:warn]", e);
+          } catch (e2) {
+            console.warn("[storage:warn]", e2);
           }
           setState(value);
           console.info("[storage:loaded]", getKey(key), value);
           try {
             await Neutralino.storage.setData(getKey(key), serialize(value));
-          } catch (e) {
-            console.warn("[storage:warn]", e);
+          } catch (e2) {
+            console.warn("[storage:warn]", e2);
           }
         } finally {
           if (onInit)
@@ -26555,94 +27004,7 @@ ${JSON.stringify(message, null, 4)}`);
   }
 
   // src/components/screens/Main.tsx
-  var import_react8 = __toModule(require_react());
-  var import_classnames = __toModule(require_classnames());
-
-  // node_modules/react-icons/lib/esm/iconBase.js
-  var import_react7 = __toModule(require_react());
-
-  // node_modules/react-icons/lib/esm/iconContext.js
-  var import_react6 = __toModule(require_react());
-  var DefaultContext = {
-    color: void 0,
-    size: void 0,
-    className: void 0,
-    style: void 0,
-    attr: void 0
-  };
-  var IconContext = import_react6.default.createContext && import_react6.default.createContext(DefaultContext);
-
-  // node_modules/react-icons/lib/esm/iconBase.js
-  var __assign = function() {
-    __assign = Object.assign || function(t) {
-      for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s)
-          if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-      }
-      return t;
-    };
-    return __assign.apply(this, arguments);
-  };
-  var __rest = function(s, e) {
-    var t = {};
-    for (var p in s)
-      if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-      for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-        if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-          t[p[i]] = s[p[i]];
-      }
-    return t;
-  };
-  function Tree2Element(tree) {
-    return tree && tree.map(function(node, i) {
-      return import_react7.default.createElement(node.tag, __assign({
-        key: i
-      }, node.attr), Tree2Element(node.child));
-    });
-  }
-  function GenIcon(data) {
-    return function(props) {
-      return import_react7.default.createElement(IconBase, __assign({
-        attr: __assign({}, data.attr)
-      }, props), Tree2Element(data.child));
-    };
-  }
-  function IconBase(props) {
-    var elem = function(conf) {
-      var attr = props.attr, size = props.size, title = props.title, svgProps = __rest(props, ["attr", "size", "title"]);
-      var computedSize = size || conf.size || "1em";
-      var className;
-      if (conf.className)
-        className = conf.className;
-      if (props.className)
-        className = (className ? className + " " : "") + props.className;
-      return import_react7.default.createElement("svg", __assign({
-        stroke: "currentColor",
-        fill: "currentColor",
-        strokeWidth: "0"
-      }, conf.attr, attr, svgProps, {
-        className,
-        style: __assign(__assign({
-          color: props.color || conf.color
-        }, conf.style), props.style),
-        height: computedSize,
-        width: computedSize,
-        xmlns: "http://www.w3.org/2000/svg"
-      }), title && import_react7.default.createElement("title", null, title), props.children);
-    };
-    return IconContext !== void 0 ? import_react7.default.createElement(IconContext.Consumer, null, function(conf) {
-      return elem(conf);
-    }) : elem(DefaultContext);
-  }
-
-  // node_modules/react-icons/gi/index.esm.js
-  function GiPartyPopper(props) {
-    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M122.7 23.32l1.7 21.87-16.7 14.25 21.4 5.17 8.4 20.25L149 66.18l21.8-1.75-14.2-16.71 5.1-21.32-20.3 8.35-18.7-11.43zM464 32a16 16 0 0 0-16 16 16 16 0 0 0 16 16 16 16 0 0 0 16-16 16 16 0 0 0-16-16zM239.8 42.5a16 16 0 0 0-16 16 16 16 0 0 0 16 16 16 16 0 0 0 16-16 16 16 0 0 0-16-16zm183.9 6.84c-9.2 1.74-17.7 7.18-25.9 14.28-7.6 6.53-14.7 14.66-20.7 23.45-18.8 3.01-37.6 10.67-50.2 21.13-16.1 13.2-30.4 35.8-38.2 59.1-7.4 3.1-14.4 6.8-20.1 10.8-15.5 10.9-23.5 31.8-29.4 50-5.9 18.3-8.8 34.3-8.8 34.3l17.8 3.2s2.7-15 8.1-31.9c5.5-16.9 14.8-35.3 22.7-40.8 1.3-.9 3-1.9 4.5-2.8-.6 5.7-.6 11.4.3 16.8 1.8 11.4 8 22.3 19 28.2 7.8 4.2 16.6 3.2 24 .2 7.4-3.1 14-8.2 19.7-14.2 5.7-6 10.4-13.1 13.2-20.6 2.8-7.5 3.8-16 .2-23.9h-.1c-3.9-8.4-11.4-13.8-19.4-16.1-8-2.3-16.6-2.2-25.2-.9-1.5.2-2.9.7-4.4 1 7.4-15.8 18-30.7 27.5-38.6 6.2-5.1 16.6-10 27.7-13.6-1.4 3.8-2.5 7.6-3 11.5-1.6 10.5.7 21.9 9.1 29.7 6.1 5.6 14.3 6.5 21.5 5.3 7.1-1.2 14-4.4 20.2-8.5 6.2-4.2 11.7-9.4 15.6-15.5 3.9-6.1 6.5-13.9 4-21.7v-.1c-3.3-10.07-11.5-16.99-20.6-20.27-3.9-1.4-8-2.19-12.2-2.66 2.9-3.26 5.9-6.31 8.9-8.92 6.8-5.84 13.7-9.5 17.6-10.23l-3.4-17.68zM174.8 84.39l-15.2 9.56 34.5 55.25-56.4 2.9 26.5 57.8 16.4-7.6-15.5-33.6 60.6-3.1-50.9-81.21zm216.4 19.31c6.1-.1 11.5.6 15.5 2.1 5.4 1.9 8.1 4.3 9.5 8.8.4 1.1.2 3.3-1.9 6.6-2.2 3.4-6.1 7.2-10.5 10.2-4.5 3-9.5 5.1-13.2 5.7-3.8.7-5.5 0-6.3-.7-3.5-3.2-4.5-7.2-3.5-13.9.8-5.4 3.3-11.9 7-18.6 1.2 0 2.3-.2 3.4-.2zM94.99 123a16 16 0 0 0-16 16 16 16 0 0 0 16 16A16 16 0 0 0 111 139a16 16 0 0 0-16.01-16zm356.11 37.2l-14.4 16.6-21.8-1.8 11.4 18.8-8.5 20.2 21.4-5 16.6 14.3 1.9-21.9 18.7-11.4-20.2-8.5-5.1-21.3zm-123.5 16.5c2.9.1 5.6.5 7.7 1.1 4.3 1.2 6.6 3 8.2 6.4.9 1.9 1 5.4-.7 10-1.7 4.7-5.2 10.1-9.4 14.6s-9.3 8.1-13.5 9.8c-4.2 1.7-6.8 1.6-8.5.7h-.1c-5.8-3.2-8.6-7.8-9.7-15.2-1-6.3-.3-14.3 1.8-22.9 4.9-1.7 9.8-3.1 14.5-3.8 3.5-.5 6.7-.7 9.7-.7zm-202.4 51.9c-7.2-.2-11.7 1.5-14.5 4.3-2.8 2.8-4.5 7.3-4.3 14.5.2 7.3 2.6 16.9 7.2 27.6 9.2 21.5 27.3 47.4 51.6 71.8 24.3 24.3 50.3 42.3 71.8 51.5 10.6 4.6 20.2 7 27.5 7.2 7.3.3 11.7-1.5 14.5-4.3 2.8-2.8 4.6-7.2 4.3-14.5-.2-7.3-2.6-16.9-7.2-27.6-9.2-21.4-27.2-47.4-51.5-71.7-24.3-24.4-50.3-42.4-71.8-51.6-10.7-4.6-20.3-7-27.6-7.2zm232 31.3l-33 54-29.1-27.9-12.4 13 45.1 43.3 33.8-55.2 38.7 32.3 89.3-38.2-7-16.6-79.3 34-46.1-38.7zM93.43 272.6l-17.64 57.9c41.41 49.1 89.71 76.7 142.11 94.7l21.6-6.6c-3.1-1.1-6.4-2.4-9.7-3.8-24.4-10.4-51.7-29.6-77.3-55.3-25.7-25.7-44.9-53-55.34-77.4-1.41-3.2-2.65-6.4-3.73-9.5zm-23.82 78.2l-14.01 46c28.89 27 59 39.2 90.6 50.2l43.4-13.2c-43.2-17.6-84-43.3-119.99-83zM368 352a16 16 0 0 0-16 16 16 16 0 0 0 16 16 16 16 0 0 0 16-16 16 16 0 0 0-16-16zM49.81 415.9l-20.29 66.6 88.28-26.9c-22.77-9.1-45.78-20.7-67.99-39.7z" } }] })(props);
-  }
+  var import_react14 = __toModule(require_react());
 
   // src/utils/misc.ts
   function removeIdx(ar, idx) {
@@ -26654,8 +27016,8 @@ ${JSON.stringify(message, null, 4)}`);
   }
   function chunkArray(arr, chunkSize) {
     const chunks = [];
-    for (let i = 0; i < arr.length; i += chunkSize) {
-      const chunk = arr.slice(i, i + chunkSize);
+    for (let i2 = 0; i2 < arr.length; i2 += chunkSize) {
+      const chunk = arr.slice(i2, i2 + chunkSize);
       chunks.push(chunk);
     }
     return chunks;
@@ -26671,12 +27033,12 @@ ${JSON.stringify(message, null, 4)}`);
     });
   }
   async function getUsersSubscriptionInfo(channelInfo, mappedUsers, cache2 = new Map(), onChunk = async () => void 0) {
-    const existing = mappedUsers.filter((u) => cache2.has(u.id)).map((u) => ({
-      isSubscriber: cache2.get(u),
-      login: u.login,
-      id: u.id
+    const existing = mappedUsers.filter((u3) => cache2.has(u3.id)).map((u3) => ({
+      isSubscriber: cache2.get(u3.id),
+      login: u3.login,
+      id: u3.id
     }));
-    const toFind = mappedUsers.filter((u) => !cache2.has(u));
+    const toFind = mappedUsers.filter((u3) => !cache2.has(u3.id));
     console.info("[subs]", { toFind: toFind.length, existing: existing.length });
     const chunkedUsers = chunkArray(toFind, 5);
     let embellishedUsers = [];
@@ -26688,7 +27050,7 @@ ${JSON.stringify(message, null, 4)}`);
           return __spreadProps(__spreadValues({}, user), {
             isSubscriber
           });
-        } catch (e) {
+        } catch (e2) {
           return __spreadProps(__spreadValues({}, user), {
             isSubscriber: false
           });
@@ -26701,12 +27063,12 @@ ${JSON.stringify(message, null, 4)}`);
     return embellishedUsers.concat(existing);
   }
   async function getFollowerInfo(channelInfo, mappedUsers, chunkSize = 5, cache2 = new Map(), onChunk = async () => void 0) {
-    const existing = mappedUsers.filter((u) => cache2.has(u.id)).map((u) => ({
-      follows: cache2.get(u),
-      login: u.login,
-      id: u.id
+    const existing = mappedUsers.filter((u3) => cache2.has(u3.id)).map((u3) => ({
+      follows: cache2.get(u3.id),
+      login: u3.login,
+      id: u3.id
     }));
-    const toFind = mappedUsers.filter((u) => !cache2.has(u));
+    const toFind = mappedUsers.filter((u3) => !cache2.has(u3.id));
     console.info("[follows]", { toFind: toFind.length, existing: existing.length });
     const chunkedUsers = chunkArray(toFind, chunkSize);
     let embellishedUsers = [];
@@ -26722,22 +27084,22 @@ ${JSON.stringify(message, null, 4)}`);
       embellishedUsers = embellishedUsers.concat(embellishedChunk);
       await wait(200);
     }
-    return embellishedUsers.concat(existing).filter((u) => u.follows);
+    return embellishedUsers.concat(existing).filter((u3) => u3.follows);
   }
   async function getUsersFromNames(channelInfo, usernames, cache2 = new Map(), onChunk = async () => void 0) {
-    const existing = usernames.filter((u) => cache2.has(u)).map((u) => ({
-      id: cache2.get(u),
-      login: u
+    const existing = usernames.filter((u3) => cache2.has(u3)).map((u3) => ({
+      id: cache2.get(u3),
+      login: u3
     }));
-    const toFind = usernames.filter((u) => !cache2.has(u));
+    const toFind = usernames.filter((u3) => !cache2.has(u3));
     const chunks = chunkArray(toFind, 100);
     console.info("[usernames]", { toFind: toFind.length, existing: existing.length });
     let users = [];
     for (const chunk of chunks) {
-      const info = await callTwitchApi(channelInfo, `users?${chunk.map((c) => `login=${encodeURIComponent(c)}`).join("&")}`).then((res) => res.json());
-      const mapped = info.data.map((i) => ({
-        id: i.id,
-        login: i.login
+      const info = await callTwitchApi(channelInfo, `users?${chunk.map((c2) => `login=${encodeURIComponent(c2)}`).join("&")}`).then((res) => res.json());
+      const mapped = info.data.map((i2) => ({
+        id: i2.id,
+        login: i2.login
       }));
       await onChunk(mapped);
       users = users.concat(mapped);
@@ -26746,7 +27108,7 @@ ${JSON.stringify(message, null, 4)}`);
     return users.concat(existing);
   }
   async function getViewers(channelInfo) {
-    return fetch(`https://discord-slash-commands.vercel.app/api/twitch-chatters?channel=${channelInfo.login}`).then((res) => res.json()).then((d) => d.chatters.viewers);
+    return fetch(`https://discord-slash-commands.vercel.app/api/twitch-chatters?channel=${channelInfo.login}`).then((res) => res.json()).then((d3) => d3.chatters.viewers);
   }
 
   // src/utils/twitchCaches.ts
@@ -26761,8 +27123,8 @@ ${JSON.stringify(message, null, 4)}`);
       this.get = async function get() {
         try {
           return new Map(JSON.parse(await Neutralino.storage.getData(this.key)));
-        } catch (e) {
-          console.info("[CACHE][ERROR]", this.key, e);
+        } catch (e2) {
+          console.info("[CACHE][ERROR]", this.key, e2);
           return new Map();
         }
       };
@@ -26806,7 +27168,7 @@ ${JSON.stringify(message, null, 4)}`);
     console.info("[twitchCache][viewers]", viewers.length, initialUserIds.size);
     let total = 0;
     const mappedUsers = await getUsersFromNames(channelInfo, viewers, initialUserIds, async (data) => {
-      data.forEach((d) => initialUserIds.set(d.login, d.id));
+      data.forEach((d3) => initialUserIds.set(d3.login, d3.id));
       await caches.userIds.store(initialUserIds);
       total += data.length;
       console.info("[twitchCache][userId]", total, "stored of", viewers.length, `(${total / viewers.length * 100})%`);
@@ -26814,13 +27176,18 @@ ${JSON.stringify(message, null, 4)}`);
     console.info("[twitchCache][userIds][done]");
     await Promise.all([buildFollowers(caches, channelInfo, mappedUsers), buildSubs(caches, channelInfo, mappedUsers)]);
     console.info("[twitchCache][done]");
+    try {
+      Et.success("Done building Twitch cache!", { position: "bottom-center" });
+    } catch (e2) {
+      console.error(e2);
+    }
   }
   async function buildFollowers(caches, channelInfo, mappedUsers) {
     const initialFollowers = await caches.follows.get();
     console.info("[twitchCache][followers][start]", { initial: initialFollowers.size, toGet: mappedUsers.length });
     let total = 0;
     await getFollowerInfo(channelInfo, mappedUsers, 5, initialFollowers, async (data) => {
-      data.forEach((d) => initialFollowers.set(d.id, d.follows));
+      data.forEach((d3) => initialFollowers.set(d3.id, d3.follows));
       await caches.follows.store(initialFollowers);
       total += data.length;
       console.info("[twitchCache][followers]", total, "stored of", mappedUsers.length, `(${total / mappedUsers.length * 100})%`);
@@ -26833,7 +27200,7 @@ ${JSON.stringify(message, null, 4)}`);
     console.info("[twitchCache][subs][start]", { initial: initial.size, toGet: mappedUsers.length });
     let total = 0;
     await getUsersSubscriptionInfo(channelInfo, mappedUsers, initial, async (data) => {
-      data.forEach((d) => initial.set(d.id, d.isSubscriber));
+      data.forEach((d3) => initial.set(d3.id, d3.isSubscriber));
       await caches.subs.store(initial);
       total += data.length;
       console.info("[twitchCache][subs]", total, "stored of", mappedUsers.length, `(${total / mappedUsers.length * 100})%`);
@@ -26843,14 +27210,15 @@ ${JSON.stringify(message, null, 4)}`);
 
   // src/utils/giveaways.ts
   async function getChatGiveaway(channelInfo, chatItems, chatCommand, subLuck = 2, followerOnly = true, numberOfWinners = 1) {
-    console.info("COMMAND", chatCommand);
-    let users = chatItems.filter((c) => chatCommand ? c.msg.toLowerCase().includes(chatCommand.toLowerCase()) : true).reduce((acc, c) => acc.some((i) => i.username === c.username) ? acc : acc.concat(c), []).flatMap((c) => c.isSubscriber ? Array.from({ length: subLuck }, () => c) : c);
+    console.info("[giveaway][chat][start]");
+    let users = chatItems.filter((c2) => chatCommand ? c2.msg.toLowerCase().includes(chatCommand.toLowerCase()) : true).reduce((acc, c2) => acc.some((i2) => i2.username === c2.username) ? acc : acc.concat(c2), []).flatMap((c2) => c2.isSubscriber ? Array.from({ length: subLuck }, () => c2) : c2);
     if (followerOnly) {
       const idCache = await new Cache(channelInfo.login, CACHE_KEY.userIds).get();
-      const mappedUsers = await getUsersFromNames(channelInfo, users.map((u) => u.username), idCache);
+      const mappedUsers = await getUsersFromNames(channelInfo, users.map((u3) => u3.username), idCache);
       const followerCache = await new Cache(channelInfo.login, CACHE_KEY.follows).get();
       users = await getFollowerInfo(channelInfo, mappedUsers, 10, followerCache);
     }
+    console.info("[giveaway][chat][end]");
     return Array.from({ length: numberOfWinners }, () => {
       const winner = getRandomArrayItem(users);
       if (!winner)
@@ -26863,6 +27231,7 @@ ${JSON.stringify(message, null, 4)}`);
     }).filter(Boolean);
   }
   async function getInstantGiveaway(channelInfo, subLuck = 2, followerOnly = true, numberOfWinners = 1) {
+    console.info("[giveaway][instant][start]");
     let viewers = await getViewers(channelInfo);
     const idCache = await new Cache(channelInfo.login, CACHE_KEY.userIds).get();
     const mappedUsers = await getUsersFromNames(channelInfo, viewers, idCache);
@@ -26873,20 +27242,107 @@ ${JSON.stringify(message, null, 4)}`);
         getFollowerInfo(channelInfo, mappedUsers, 5, followerCache),
         getUsersSubscriptionInfo(channelInfo, mappedUsers, subCache)
       ]);
-      const combined = withFollowers.map((i) => {
+      const combined = withFollowers.map((i2) => {
         var _a;
         ;
-        i.isSubscriber = ((_a = withSub.find((s) => s.id === i.id)) == null ? void 0 : _a.isSubscriber) || false;
-        return i;
+        i2.isSubscriber = ((_a = withSub.find((s2) => s2.id === i2.id)) == null ? void 0 : _a.isSubscriber) || false;
+        return i2;
       });
-      viewers = combined.filter((i) => i.follows).flatMap((c) => c.isSubscriber ? Array.from({ length: subLuck }, () => c) : c).map((i) => i.login);
+      const followers = combined.filter((i2) => i2.follows);
+      console.info("[giveaway][instant]", { followers: followers.length });
+      viewers = followers.flatMap((c2) => c2.isSubscriber ? Array.from({ length: subLuck }, () => c2) : c2).map((i2) => i2.login);
     }
+    console.info("[giveaway][instant][end]");
     return Array.from({ length: numberOfWinners }, () => {
       const winner = getRandomArrayItem(viewers);
       if (!winner)
         return;
       return winner;
     }).filter(Boolean);
+  }
+
+  // src/components/primitives/Settings.tsx
+  var import_react11 = __toModule(require_react());
+
+  // node_modules/react-icons/lib/esm/iconBase.js
+  var import_react9 = __toModule(require_react());
+
+  // node_modules/react-icons/lib/esm/iconContext.js
+  var import_react8 = __toModule(require_react());
+  var DefaultContext = {
+    color: void 0,
+    size: void 0,
+    className: void 0,
+    style: void 0,
+    attr: void 0
+  };
+  var IconContext = import_react8.default.createContext && import_react8.default.createContext(DefaultContext);
+
+  // node_modules/react-icons/lib/esm/iconBase.js
+  var __assign = function() {
+    __assign = Object.assign || function(t2) {
+      for (var s2, i2 = 1, n3 = arguments.length; i2 < n3; i2++) {
+        s2 = arguments[i2];
+        for (var p2 in s2)
+          if (Object.prototype.hasOwnProperty.call(s2, p2))
+            t2[p2] = s2[p2];
+      }
+      return t2;
+    };
+    return __assign.apply(this, arguments);
+  };
+  var __rest = function(s2, e2) {
+    var t2 = {};
+    for (var p2 in s2)
+      if (Object.prototype.hasOwnProperty.call(s2, p2) && e2.indexOf(p2) < 0)
+        t2[p2] = s2[p2];
+    if (s2 != null && typeof Object.getOwnPropertySymbols === "function")
+      for (var i2 = 0, p2 = Object.getOwnPropertySymbols(s2); i2 < p2.length; i2++) {
+        if (e2.indexOf(p2[i2]) < 0 && Object.prototype.propertyIsEnumerable.call(s2, p2[i2]))
+          t2[p2[i2]] = s2[p2[i2]];
+      }
+    return t2;
+  };
+  function Tree2Element(tree) {
+    return tree && tree.map(function(node, i2) {
+      return import_react9.default.createElement(node.tag, __assign({
+        key: i2
+      }, node.attr), Tree2Element(node.child));
+    });
+  }
+  function GenIcon(data) {
+    return function(props) {
+      return import_react9.default.createElement(IconBase, __assign({
+        attr: __assign({}, data.attr)
+      }, props), Tree2Element(data.child));
+    };
+  }
+  function IconBase(props) {
+    var elem = function(conf) {
+      var attr = props.attr, size = props.size, title = props.title, svgProps = __rest(props, ["attr", "size", "title"]);
+      var computedSize = size || conf.size || "1em";
+      var className;
+      if (conf.className)
+        className = conf.className;
+      if (props.className)
+        className = (className ? className + " " : "") + props.className;
+      return import_react9.default.createElement("svg", __assign({
+        stroke: "currentColor",
+        fill: "currentColor",
+        strokeWidth: "0"
+      }, conf.attr, attr, svgProps, {
+        className,
+        style: __assign(__assign({
+          color: props.color || conf.color
+        }, conf.style), props.style),
+        height: computedSize,
+        width: computedSize,
+        xmlns: "http://www.w3.org/2000/svg"
+      }), title && import_react9.default.createElement("title", null, title), props.children);
+    };
+    return IconContext !== void 0 ? import_react9.default.createElement(IconContext.Consumer, null, function(conf) {
+      return elem(conf);
+    }) : elem(DefaultContext);
   }
 
   // node_modules/react-icons/fa/index.esm.js
@@ -26909,7 +27365,8 @@ ${JSON.stringify(message, null, 4)}`);
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 352 512" }, "child": [{ "tag": "path", "attr": { "d": "M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z" } }] })(props);
   }
 
-  // src/components/screens/Main.tsx
+  // src/components/primitives/Slider.tsx
+  var import_react10 = __toModule(require_react());
   var import_react_range = __toModule(require_lib());
   function Slider({
     value,
@@ -26919,17 +27376,17 @@ ${JSON.stringify(message, null, 4)}`);
     onChange
   }) {
     const values = [value];
-    return /* @__PURE__ */ import_react8.default.createElement("div", {
+    return /* @__PURE__ */ import_react10.default.createElement("div", {
       className: "flex-1 px-3"
-    }, /* @__PURE__ */ import_react8.default.createElement("div", null, label, ": ", values[0]), /* @__PURE__ */ import_react8.default.createElement("div", {
+    }, /* @__PURE__ */ import_react10.default.createElement("div", null, label, ": ", values[0]), /* @__PURE__ */ import_react10.default.createElement("div", {
       className: "mt-3 mb-4"
-    }, /* @__PURE__ */ import_react8.default.createElement(import_react_range.Range, {
+    }, /* @__PURE__ */ import_react10.default.createElement(import_react_range.Range, {
       min,
       max,
       step: 1,
       values,
       onChange: (values2) => onChange(values2[0]),
-      renderTrack: ({ props, children }) => /* @__PURE__ */ import_react8.default.createElement("div", __spreadProps(__spreadValues({}, props), {
+      renderTrack: ({ props, children }) => /* @__PURE__ */ import_react10.default.createElement("div", __spreadProps(__spreadValues({}, props), {
         style: __spreadProps(__spreadValues({}, props.style), {
           height: "6px",
           width: "100%",
@@ -26943,7 +27400,7 @@ ${JSON.stringify(message, null, 4)}`);
           })
         })
       }), children),
-      renderThumb: ({ props }) => /* @__PURE__ */ import_react8.default.createElement("div", __spreadProps(__spreadValues({}, props), {
+      renderThumb: ({ props }) => /* @__PURE__ */ import_react10.default.createElement("div", __spreadProps(__spreadValues({}, props), {
         style: __spreadProps(__spreadValues({}, props.style), {
           height: "20px",
           width: "20px",
@@ -26957,52 +27414,88 @@ ${JSON.stringify(message, null, 4)}`);
       }))
     })));
   }
-  function Settings({ settings, setSettings }) {
-    return /* @__PURE__ */ import_react8.default.createElement("div", {
+
+  // src/components/primitives/Settings.tsx
+  function SettingsComponent({
+    settings,
+    setSettings
+  }) {
+    return /* @__PURE__ */ import_react11.default.createElement(import_react11.default.Fragment, null, /* @__PURE__ */ import_react11.default.createElement("div", {
       className: "flex flex-row gap-2 mt-2"
-    }, /* @__PURE__ */ import_react8.default.createElement(Slider, {
+    }, /* @__PURE__ */ import_react11.default.createElement("div", {
+      className: "flex flex-row justify-center items-center flex-1"
+    }, /* @__PURE__ */ import_react11.default.createElement("div", {
+      className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md"
+    }, "Winner Message"), /* @__PURE__ */ import_react11.default.createElement("input", {
+      className: "bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1",
+      placeholder: "Winner Message...",
+      value: settings.winnerMessage,
+      onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { winnerMessage: e2.target.value })),
+      title: "Chat command to enter - leave empty for none"
+    })), /* @__PURE__ */ import_react11.default.createElement("div", {
+      className: "flex flex-row justify-center items-center flex-1"
+    }, /* @__PURE__ */ import_react11.default.createElement("div", {
+      className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md"
+    }, "Chat Command"), /* @__PURE__ */ import_react11.default.createElement("input", {
+      className: "bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1",
+      placeholder: "Empty means any message...",
+      value: settings.chatCommand,
+      onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { chatCommand: e2.target.value.trim() })),
+      title: "Chat command to enter - leave empty for none"
+    }))), /* @__PURE__ */ import_react11.default.createElement("div", {
+      className: "flex flex-row gap-2 mt-2"
+    }, /* @__PURE__ */ import_react11.default.createElement(Slider, {
       label: "Sub Luck",
       value: settings.subLuck,
       min: 1,
       max: 10,
-      onChange: (val) => setSettings((s) => __spreadProps(__spreadValues({}, s), { subLuck: val }))
-    }), /* @__PURE__ */ import_react8.default.createElement(Slider, {
+      onChange: (val) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { subLuck: val }))
+    }), /* @__PURE__ */ import_react11.default.createElement(Slider, {
       label: "Number of Winners",
       value: settings.numberOfWinners,
       min: 1,
       max: 10,
-      onChange: (val) => setSettings((s) => __spreadProps(__spreadValues({}, s), { numberOfWinners: val }))
-    }), /* @__PURE__ */ import_react8.default.createElement("div", {
+      onChange: (val) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { numberOfWinners: val }))
+    }), /* @__PURE__ */ import_react11.default.createElement("div", {
       className: "flex-1 flex flex-row justify-center items-center gap-2"
-    }, "Followers Only:", /* @__PURE__ */ import_react8.default.createElement("button", {
+    }, "Followers Only:", /* @__PURE__ */ import_react11.default.createElement("button", {
       className: "rounded-md p-1 border border-white text-2xl",
-      onClick: () => setSettings((s) => __spreadProps(__spreadValues({}, s), { followersOnly: !s.followersOnly }))
-    }, settings.followersOnly ? /* @__PURE__ */ import_react8.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react8.default.createElement(FaTimes, null))), /* @__PURE__ */ import_react8.default.createElement("div", {
-      className: "flex flex-col justify-center items-center"
-    }, /* @__PURE__ */ import_react8.default.createElement("input", {
-      className: "bg-gray-700 px-2 py-1 rounded-md border-b border-purple-500",
-      placeholder: "Chat command...",
-      value: settings.chatCommand,
-      onChange: (e) => setSettings((s) => __spreadProps(__spreadValues({}, s), { chatCommand: e.target.value.trim() })),
-      title: "Chat command to enter - leave empty for none"
-    })));
+      onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { followersOnly: !s2.followersOnly }))
+    }, settings.followersOnly ? /* @__PURE__ */ import_react11.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react11.default.createElement(FaTimes, null)))));
   }
+
+  // src/components/primitives/giveaways.tsx
+  var import_react12 = __toModule(require_react());
+
+  // node_modules/react-icons/gi/index.esm.js
+  function GiPartyPopper(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M122.7 23.32l1.7 21.87-16.7 14.25 21.4 5.17 8.4 20.25L149 66.18l21.8-1.75-14.2-16.71 5.1-21.32-20.3 8.35-18.7-11.43zM464 32a16 16 0 0 0-16 16 16 16 0 0 0 16 16 16 16 0 0 0 16-16 16 16 0 0 0-16-16zM239.8 42.5a16 16 0 0 0-16 16 16 16 0 0 0 16 16 16 16 0 0 0 16-16 16 16 0 0 0-16-16zm183.9 6.84c-9.2 1.74-17.7 7.18-25.9 14.28-7.6 6.53-14.7 14.66-20.7 23.45-18.8 3.01-37.6 10.67-50.2 21.13-16.1 13.2-30.4 35.8-38.2 59.1-7.4 3.1-14.4 6.8-20.1 10.8-15.5 10.9-23.5 31.8-29.4 50-5.9 18.3-8.8 34.3-8.8 34.3l17.8 3.2s2.7-15 8.1-31.9c5.5-16.9 14.8-35.3 22.7-40.8 1.3-.9 3-1.9 4.5-2.8-.6 5.7-.6 11.4.3 16.8 1.8 11.4 8 22.3 19 28.2 7.8 4.2 16.6 3.2 24 .2 7.4-3.1 14-8.2 19.7-14.2 5.7-6 10.4-13.1 13.2-20.6 2.8-7.5 3.8-16 .2-23.9h-.1c-3.9-8.4-11.4-13.8-19.4-16.1-8-2.3-16.6-2.2-25.2-.9-1.5.2-2.9.7-4.4 1 7.4-15.8 18-30.7 27.5-38.6 6.2-5.1 16.6-10 27.7-13.6-1.4 3.8-2.5 7.6-3 11.5-1.6 10.5.7 21.9 9.1 29.7 6.1 5.6 14.3 6.5 21.5 5.3 7.1-1.2 14-4.4 20.2-8.5 6.2-4.2 11.7-9.4 15.6-15.5 3.9-6.1 6.5-13.9 4-21.7v-.1c-3.3-10.07-11.5-16.99-20.6-20.27-3.9-1.4-8-2.19-12.2-2.66 2.9-3.26 5.9-6.31 8.9-8.92 6.8-5.84 13.7-9.5 17.6-10.23l-3.4-17.68zM174.8 84.39l-15.2 9.56 34.5 55.25-56.4 2.9 26.5 57.8 16.4-7.6-15.5-33.6 60.6-3.1-50.9-81.21zm216.4 19.31c6.1-.1 11.5.6 15.5 2.1 5.4 1.9 8.1 4.3 9.5 8.8.4 1.1.2 3.3-1.9 6.6-2.2 3.4-6.1 7.2-10.5 10.2-4.5 3-9.5 5.1-13.2 5.7-3.8.7-5.5 0-6.3-.7-3.5-3.2-4.5-7.2-3.5-13.9.8-5.4 3.3-11.9 7-18.6 1.2 0 2.3-.2 3.4-.2zM94.99 123a16 16 0 0 0-16 16 16 16 0 0 0 16 16A16 16 0 0 0 111 139a16 16 0 0 0-16.01-16zm356.11 37.2l-14.4 16.6-21.8-1.8 11.4 18.8-8.5 20.2 21.4-5 16.6 14.3 1.9-21.9 18.7-11.4-20.2-8.5-5.1-21.3zm-123.5 16.5c2.9.1 5.6.5 7.7 1.1 4.3 1.2 6.6 3 8.2 6.4.9 1.9 1 5.4-.7 10-1.7 4.7-5.2 10.1-9.4 14.6s-9.3 8.1-13.5 9.8c-4.2 1.7-6.8 1.6-8.5.7h-.1c-5.8-3.2-8.6-7.8-9.7-15.2-1-6.3-.3-14.3 1.8-22.9 4.9-1.7 9.8-3.1 14.5-3.8 3.5-.5 6.7-.7 9.7-.7zm-202.4 51.9c-7.2-.2-11.7 1.5-14.5 4.3-2.8 2.8-4.5 7.3-4.3 14.5.2 7.3 2.6 16.9 7.2 27.6 9.2 21.5 27.3 47.4 51.6 71.8 24.3 24.3 50.3 42.3 71.8 51.5 10.6 4.6 20.2 7 27.5 7.2 7.3.3 11.7-1.5 14.5-4.3 2.8-2.8 4.6-7.2 4.3-14.5-.2-7.3-2.6-16.9-7.2-27.6-9.2-21.4-27.2-47.4-51.5-71.7-24.3-24.4-50.3-42.4-71.8-51.6-10.7-4.6-20.3-7-27.6-7.2zm232 31.3l-33 54-29.1-27.9-12.4 13 45.1 43.3 33.8-55.2 38.7 32.3 89.3-38.2-7-16.6-79.3 34-46.1-38.7zM93.43 272.6l-17.64 57.9c41.41 49.1 89.71 76.7 142.11 94.7l21.6-6.6c-3.1-1.1-6.4-2.4-9.7-3.8-24.4-10.4-51.7-29.6-77.3-55.3-25.7-25.7-44.9-53-55.34-77.4-1.41-3.2-2.65-6.4-3.73-9.5zm-23.82 78.2l-14.01 46c28.89 27 59 39.2 90.6 50.2l43.4-13.2c-43.2-17.6-84-43.3-119.99-83zM368 352a16 16 0 0 0-16 16 16 16 0 0 0 16 16 16 16 0 0 0 16-16 16 16 0 0 0-16-16zM49.81 415.9l-20.29 66.6 88.28-26.9c-22.77-9.1-45.78-20.7-67.99-39.7z" } }] })(props);
+  }
+
+  // src/components/primitives/giveaways.tsx
   function InstantGiveaway({
     setWinners,
     channelInfo,
-    settings
+    settings,
+    client
   }) {
-    return /* @__PURE__ */ import_react8.default.createElement("button", {
+    return /* @__PURE__ */ import_react12.default.createElement("button", {
       className: "bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none",
       onClick: async () => {
         if (!channelInfo.login)
           return;
         const giveawayWinner = await getInstantGiveaway(channelInfo, settings.subLuck, settings.followersOnly, settings.numberOfWinners);
-        if (!giveawayWinner.length)
+        if (!giveawayWinner.length) {
+          Et.error("No winners found that match conditions!", { position: "bottom-center" });
           return;
-        setWinners((w) => w.concat(giveawayWinner.map((u) => ({ username: u }))));
+        }
+        giveawayWinner.forEach((w) => {
+          console.info({ client });
+          client == null ? void 0 : client.say("odialo", settings.winnerMessage.replace("@name", `@${"odialo"}`));
+        });
+        setWinners((w) => w.concat(giveawayWinner.map((u3) => ({ username: u3 }))));
       }
-    }, /* @__PURE__ */ import_react8.default.createElement(FaDice, {
+    }, /* @__PURE__ */ import_react12.default.createElement(FaDice, {
       className: "text-2xl"
     }), " Viewers Instant Giveaway");
   }
@@ -27010,86 +27503,73 @@ ${JSON.stringify(message, null, 4)}`);
     chatEvents,
     setWinners,
     channelInfo,
-    settings
+    settings,
+    client
   }) {
-    return /* @__PURE__ */ import_react8.default.createElement("button", {
+    return /* @__PURE__ */ import_react12.default.createElement("button", {
       className: "bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none",
       onClick: async () => {
         const giveawayWinner = await getChatGiveaway(channelInfo, chatEvents, settings.chatCommand, settings.subLuck, settings.followersOnly, settings.numberOfWinners);
-        if (!giveawayWinner)
+        if (!giveawayWinner.length) {
+          Et.error("No winners found that match conditions!", { position: "bottom-center" });
           return;
+        }
+        giveawayWinner.forEach((w) => {
+          client == null ? void 0 : client.say("odialo", settings.winnerMessage.replace("@name", `@${"odialo"}`));
+        });
         setWinners((w) => w.concat(giveawayWinner));
       }
-    }, /* @__PURE__ */ import_react8.default.createElement(FaDice, {
+    }, /* @__PURE__ */ import_react12.default.createElement(FaDice, {
       className: "text-2xl"
     }), " Active Chatter Giveaway");
   }
   function Winner({ winners, onClear }) {
-    return winners.length ? /* @__PURE__ */ import_react8.default.createElement("div", {
+    return winners.length ? /* @__PURE__ */ import_react12.default.createElement("div", {
       className: "grid gap-1 grid-cols-2 mt-3"
-    }, winners.map((winner, i) => /* @__PURE__ */ import_react8.default.createElement("div", {
+    }, winners.map((winner, i2) => /* @__PURE__ */ import_react12.default.createElement("div", {
       key: winner.username,
       className: "bg-gray-600 text-white rounded-md overflow-hidden flex flex-row items-center justify-center px-2 py-4 text-center relative"
-    }, /* @__PURE__ */ import_react8.default.createElement("div", {
+    }, /* @__PURE__ */ import_react12.default.createElement("div", {
       className: "text-2xl absolute left-5"
-    }, i + 1, "."), /* @__PURE__ */ import_react8.default.createElement(GiPartyPopper, {
+    }, i2 + 1, "."), /* @__PURE__ */ import_react12.default.createElement(GiPartyPopper, {
       className: "text-purple-300 text-xl"
-    }), " ", /* @__PURE__ */ import_react8.default.createElement("div", {
+    }), " ", /* @__PURE__ */ import_react12.default.createElement("div", {
       className: "px-2"
-    }, winner.username, " wins!"), " ", /* @__PURE__ */ import_react8.default.createElement(GiPartyPopper, {
+    }, winner.username, " wins!"), " ", /* @__PURE__ */ import_react12.default.createElement(GiPartyPopper, {
       className: "text-purple-300 text-xl"
-    }), /* @__PURE__ */ import_react8.default.createElement(FaTimes, {
+    }), /* @__PURE__ */ import_react12.default.createElement(FaTimes, {
       className: "text-2xl absolute right-5 text-red-500 cursor-pointer select-none",
-      onClick: () => onClear(i)
+      onClick: () => onClear(i2)
     })))) : null;
   }
-  function MainScreen({
-    chatEvents,
-    settings,
-    setSettings,
-    channelInfo
-  }) {
-    const [winners, setWinners] = import_react8.default.useState([]);
-    return /* @__PURE__ */ import_react8.default.createElement(import_react8.default.Fragment, null, /* @__PURE__ */ import_react8.default.createElement(Winner, {
-      winners,
-      onClear: (idx) => setWinners((w) => removeIdx(w, idx))
-    }), /* @__PURE__ */ import_react8.default.createElement("div", {
-      className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react8.default.createElement(InstantGiveaway, {
-      settings,
-      channelInfo,
-      setWinners
-    }), /* @__PURE__ */ import_react8.default.createElement(ChatGiveaway, {
-      settings,
-      channelInfo,
-      chatEvents,
-      setWinners
-    })), /* @__PURE__ */ import_react8.default.createElement(Settings, {
-      settings,
-      setSettings
-    }), /* @__PURE__ */ import_react8.default.createElement("div", {
+
+  // src/components/primitives/ChatBox.tsx
+  var import_react13 = __toModule(require_react());
+  var import_classnames = __toModule(require_classnames());
+  function ChatBox({ chatEvents, winners }) {
+    return /* @__PURE__ */ import_react13.default.createElement(import_react13.default.Fragment, null, /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "mt-2 rounded-md bg-gray-700 flex-1 flex flex-col relative overflow-hidden"
-    }, /* @__PURE__ */ import_react8.default.createElement("div", {
+    }, /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "bg-gray-600 absolute top-0 right-0 left-0 h-8 flex justify-between px-10 items-center text-white"
-    }, /* @__PURE__ */ import_react8.default.createElement("div", null, chatEvents.length, " message", chatEvents.length === 1 ? "" : "s")), /* @__PURE__ */ import_react8.default.createElement("div", {
+    }, /* @__PURE__ */ import_react13.default.createElement("div", null, chatEvents.length, " message", chatEvents.length === 1 ? "" : "s")), /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "relative flex-1"
-    }, chatEvents.length === 0 ? /* @__PURE__ */ import_react8.default.createElement("span", {
+    }, chatEvents.length === 0 ? /* @__PURE__ */ import_react13.default.createElement("span", {
       className: (0, import_classnames.default)("relative left-2 top-9")
-    }, "Logs will appear here...") : /* @__PURE__ */ import_react8.default.createElement("div", {
+    }, "Logs will appear here...") : /* @__PURE__ */ import_react13.default.createElement("div", {
       className: (0, import_classnames.default)("absolute right-0 left-0 bottom-0 overflow-y-scroll px-2 pt-1 pb-3 flex flex-col gap-1 top-8")
-    }, chatEvents.filter((c) => winners.length ? winners.map((c2) => c2.username).includes(c.username) : true).map((c) => {
-      return /* @__PURE__ */ import_react8.default.createElement("div", {
-        key: c.id
-      }, /* @__PURE__ */ import_react8.default.createElement("span", {
+    }, chatEvents.filter((c2) => winners.length ? winners.map((c3) => c3.username).includes(c2.username) : true).map((c2) => {
+      return /* @__PURE__ */ import_react13.default.createElement("div", {
+        key: c2.id
+      }, /* @__PURE__ */ import_react13.default.createElement("span", {
         className: (0, import_classnames.default)("rounded-full bg-gray-300 h-4 w-4 inline-block mr-1", {
-          "bg-yellow-500": c.isSubscriber
+          "bg-yellow-500": c2.isSubscriber
         })
-      }, c.isSubscriber ? /* @__PURE__ */ import_react8.default.createElement("span", {
+      }, c2.isSubscriber ? /* @__PURE__ */ import_react13.default.createElement("span", {
         className: "flex justify-center items-center text-xs",
         title: "Subscriber"
-      }, "S") : null), /* @__PURE__ */ import_react8.default.createElement("span", {
-        style: { color: c.color }
-      }, "[", c.displayName, "]"), " ", highlightAction(c.displayName, c.msg));
+      }, "S") : null), /* @__PURE__ */ import_react13.default.createElement("span", {
+        style: { color: c2.color }
+      }, "[", c2.displayName, "]"), " ", highlightAction(c2.displayName, c2.msg));
     })))));
   }
   function highlightAction(displayName, msg) {
@@ -27097,7 +27577,7 @@ ${JSON.stringify(message, null, 4)}`);
     const matchIdx = -1;
     return matchIdx > -1 ? [
       words.slice(0, matchIdx).join(" "),
-      /* @__PURE__ */ import_react8.default.createElement("span", {
+      /* @__PURE__ */ import_react13.default.createElement("span", {
         key: "highlight",
         className: "bg-purple-500 text-white rounded-sm font-bold text-center",
         style: { padding: "1px 2px", margin: "0px 4px" }
@@ -27106,8 +27586,42 @@ ${JSON.stringify(message, null, 4)}`);
     ] : [msg];
   }
 
+  // src/components/screens/Main.tsx
+  function MainScreen({
+    chatEvents,
+    settings,
+    setSettings,
+    channelInfo,
+    client
+  }) {
+    const [winners, setWinners] = import_react14.default.useState([]);
+    return /* @__PURE__ */ import_react14.default.createElement(import_react14.default.Fragment, null, /* @__PURE__ */ import_react14.default.createElement(Winner, {
+      winners,
+      onClear: (idx) => setWinners((w) => removeIdx(w, idx))
+    }), /* @__PURE__ */ import_react14.default.createElement("div", {
+      className: "flex flex-row gap-2"
+    }, /* @__PURE__ */ import_react14.default.createElement(InstantGiveaway, {
+      settings,
+      channelInfo,
+      setWinners,
+      client
+    }), /* @__PURE__ */ import_react14.default.createElement(ChatGiveaway, {
+      settings,
+      channelInfo,
+      chatEvents,
+      setWinners,
+      client
+    })), /* @__PURE__ */ import_react14.default.createElement(SettingsComponent, {
+      settings,
+      setSettings
+    }), /* @__PURE__ */ import_react14.default.createElement(ChatBox, {
+      chatEvents,
+      winners
+    }));
+  }
+
   // src/components/screens/Setup.tsx
-  var import_react9 = __toModule(require_react());
+  var import_react15 = __toModule(require_react());
   async function validateToken(token) {
     try {
       const data = await fetch(`https://id.twitch.tv/oauth2/validate`, {
@@ -27118,10 +27632,10 @@ ${JSON.stringify(message, null, 4)}`);
       return {
         token,
         clientId: data.client_id,
-        login: data.login === "odialo" ? "fextralife" : data.login,
+        login: data.login === "odialo" ? "roms_hut" : data.login,
         userId: data.user_id
       };
-    } catch (e) {
+    } catch (e2) {
       return null;
     }
   }
@@ -27133,20 +27647,20 @@ ${JSON.stringify(message, null, 4)}`);
     setChannel
   }) {
     const history = useHistory();
-    import_react9.default.useEffect(() => {
+    import_react15.default.useEffect(() => {
       if (channel.login) {
         history.push("/");
       }
     }, [channel.login]);
-    return /* @__PURE__ */ import_react9.default.createElement("div", {
+    return /* @__PURE__ */ import_react15.default.createElement("div", {
       className: "flex flex-col justify-center items-center h-full gap-2 -mt-10"
-    }, /* @__PURE__ */ import_react9.default.createElement("div", null, "Setup"), /* @__PURE__ */ import_react9.default.createElement("button", {
+    }, /* @__PURE__ */ import_react15.default.createElement("div", null, "Setup"), /* @__PURE__ */ import_react15.default.createElement("button", {
       onClick: () => Neutralino.os.open("https://giveaway-o-tron.vercel.app")
-    }, "Click here to authenticate with Twitch and get the required tokens"), /* @__PURE__ */ import_react9.default.createElement("form", {
+    }, "Click here to authenticate with Twitch and get the required tokens"), /* @__PURE__ */ import_react15.default.createElement("form", {
       className: "flex flex-row",
-      onSubmit: async (e) => {
-        e.preventDefault();
-        const accessToken = e.currentTarget.elements.accessToken.value.trim();
+      onSubmit: async (e2) => {
+        e2.preventDefault();
+        const accessToken = e2.currentTarget.elements.accessToken.value.trim();
         const data = await validateToken(accessToken);
         if (!data)
           return;
@@ -27160,71 +27674,71 @@ ${JSON.stringify(message, null, 4)}`);
         history.push("/");
         setChannel(data);
       }
-    }, /* @__PURE__ */ import_react9.default.createElement("input", {
+    }, /* @__PURE__ */ import_react15.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-l-md border-b border-l border-purple-500 overflow-ellipsis",
       placeholder: "Access Token",
       name: "accessToken"
-    }), /* @__PURE__ */ import_react9.default.createElement("button", {
+    }), /* @__PURE__ */ import_react15.default.createElement("button", {
       className: "bg-purple-600 text-white py-1 px-3 rounded-r-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 w-32 justify-center",
       title: "Setup connection"
-    }, /* @__PURE__ */ import_react9.default.createElement(FaTwitch, null), " Setup")));
+    }, /* @__PURE__ */ import_react15.default.createElement(FaTwitch, null), " Setup")));
   }
 
   // src/components/primitives/Header.tsx
-  var import_react10 = __toModule(require_react());
+  var import_react16 = __toModule(require_react());
   function Header({
     client,
     resetChat,
     setClient,
-    channel
+    channelInfo
   }) {
     const location = useLocation();
-    const homeRoute = channel ? "/" : "/setup";
-    return /* @__PURE__ */ import_react10.default.createElement("div", {
+    const homeRoute = channelInfo.login ? "/" : "/setup";
+    return /* @__PURE__ */ import_react16.default.createElement("div", {
       className: "flex flex-row justify-start gap-2"
-    }, /* @__PURE__ */ import_react10.default.createElement("div", {
+    }, /* @__PURE__ */ import_react16.default.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ import_react10.default.createElement("div", {
+    }, /* @__PURE__ */ import_react16.default.createElement("div", {
       className: "inline-block"
-    }, /* @__PURE__ */ import_react10.default.createElement(Link, {
+    }, /* @__PURE__ */ import_react16.default.createElement(Link, {
       to: homeRoute
-    }, /* @__PURE__ */ import_react10.default.createElement("h1", {
+    }, /* @__PURE__ */ import_react16.default.createElement("h1", {
       className: "flex flex-row gap-1 items-center text-white bg-purple-600 rounded-md px-3 py-1 transform hover:scale-105 transition-transform shadow-md"
-    }, /* @__PURE__ */ import_react10.default.createElement(FaRobot, {
+    }, /* @__PURE__ */ import_react16.default.createElement(FaRobot, {
       className: "text-2xl"
-    }), " ", location.pathname === homeRoute ? /* @__PURE__ */ import_react10.default.createElement("span", {
+    }), " ", location.pathname === homeRoute ? /* @__PURE__ */ import_react16.default.createElement("span", {
       className: "relative -top-0.5 ml-1"
-    }, "Giveaway-o-tron") : /* @__PURE__ */ import_react10.default.createElement(FaAngleLeft, {
+    }, "Giveaway-o-tron") : /* @__PURE__ */ import_react16.default.createElement(FaAngleLeft, {
       className: "text-xl"
-    }))))), /* @__PURE__ */ import_react10.default.createElement("form", {
+    }))))), /* @__PURE__ */ import_react16.default.createElement("form", {
       className: "flex flex-row",
-      onSubmit: (e) => {
-        e.preventDefault();
+      onSubmit: (e2) => {
+        e2.preventDefault();
         if (client) {
           client.disconnect();
           resetChat();
           setClient(null);
         } else {
-          setClient(init(channel));
+          setClient(init(channelInfo));
         }
       }
-    }, /* @__PURE__ */ import_react10.default.createElement("input", {
+    }, /* @__PURE__ */ import_react16.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-l-md border-b border-l border-purple-500",
       placeholder: "Channel Name",
-      value: channel,
+      value: channelInfo.login,
       disabled: true,
       title: !!client ? "Disconnect to change" : "Set channel to connect to"
-    }), /* @__PURE__ */ import_react10.default.createElement("button", {
+    }), /* @__PURE__ */ import_react16.default.createElement("button", {
       className: "bg-purple-600 text-white py-1 px-3 rounded-r-sm transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 w-32 justify-center",
       title: "Connect to chat"
-    }, /* @__PURE__ */ import_react10.default.createElement(FaTwitch, null), " ", client ? "Disconnect" : "Connect")));
+    }, /* @__PURE__ */ import_react16.default.createElement(FaTwitch, null), " ", client ? "Disconnect" : "Connect")));
   }
 
   // src/App.tsx
   function App() {
-    return /* @__PURE__ */ import_react11.default.createElement(MemoryRouter, {
+    return /* @__PURE__ */ import_react17.default.createElement(MemoryRouter, {
       initialEntries: ["/setup"]
-    }, /* @__PURE__ */ import_react11.default.createElement(InnerApp, null));
+    }, /* @__PURE__ */ import_react17.default.createElement(InnerApp, null));
   }
   function InnerApp() {
     const [settings, setSettings] = useStorage("settings", {
@@ -27232,45 +27746,47 @@ ${JSON.stringify(message, null, 4)}`);
       subLuck: 2,
       numberOfWinners: 1,
       followersOnly: true,
-      chatCommand: ""
+      chatCommand: "",
+      winnerMessage: "PartyHat @name won!"
     });
-    const [client, setClient] = import_react11.default.useState(null);
-    const [channelInfo, setChannelInfo] = useStorage("channelInfo", {}, (c) => c.login ? setClient(init(c.login)) : null);
-    const onNewChat = import_react11.default.useCallback((chat) => {
+    const [client, setClient] = import_react17.default.useState(null);
+    const [channelInfo, setChannelInfo] = useStorage("channelInfo", {}, (c2) => c2.login ? setClient(init(c2)) : null);
+    const onNewChat = import_react17.default.useCallback((chat) => {
       console.info("[chat]", chat);
     }, []);
     const [chatEvents, resetChat] = useChatEvents(onNewChat);
-    const chatEventsRef = import_react11.default.useRef(chatEvents);
-    import_react11.default.useEffect(() => {
+    const chatEventsRef = import_react17.default.useRef(chatEvents);
+    import_react17.default.useEffect(() => {
       chatEventsRef.current = chatEvents;
     }, [chatEvents]);
-    import_react11.default.useEffect(() => {
+    import_react17.default.useEffect(() => {
       window["myApp"].setTitle(channelInfo.login, !!client);
     }, [channelInfo.login, client]);
-    return /* @__PURE__ */ import_react11.default.createElement(import_react11.default.Fragment, null, /* @__PURE__ */ import_react11.default.createElement(Header, {
+    return /* @__PURE__ */ import_react17.default.createElement(import_react17.default.Fragment, null, /* @__PURE__ */ import_react17.default.createElement(Header, {
       client,
       resetChat,
       setClient,
-      channel: channelInfo.login || ""
-    }), /* @__PURE__ */ import_react11.default.createElement(Switch, null, /* @__PURE__ */ import_react11.default.createElement(Route, {
+      channelInfo
+    }), /* @__PURE__ */ import_react17.default.createElement(Switch, null, /* @__PURE__ */ import_react17.default.createElement(Route, {
       path: "/",
       exact: true
-    }, /* @__PURE__ */ import_react11.default.createElement(MainScreen, {
+    }, /* @__PURE__ */ import_react17.default.createElement(MainScreen, {
+      client,
       chatEvents,
       settings,
       setSettings,
       isConnected: !!client,
       channelInfo
-    })), /* @__PURE__ */ import_react11.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react17.default.createElement(Route, {
       path: "/setup",
       exact: true
-    }, /* @__PURE__ */ import_react11.default.createElement(Setup, {
+    }, /* @__PURE__ */ import_react17.default.createElement(Setup, {
       client,
       resetChat,
       setClient,
       channel: channelInfo,
       setChannel: setChannelInfo
-    }))));
+    }))), /* @__PURE__ */ import_react17.default.createElement(Oe, null));
   }
 
   // src/index.tsx
@@ -27286,7 +27802,7 @@ ${JSON.stringify(message, null, 4)}`);
   Neutralino.events.on("windowClose", window["myApp"].onWindowClose);
   Neutralino.events.on("ready", () => {
     void watch();
-    import_react_dom.default.render(/* @__PURE__ */ import_react12.default.createElement(App, null), document.querySelector("#app"));
+    import_react_dom.default.render(/* @__PURE__ */ import_react18.default.createElement(App, null), document.querySelector("#app"));
   });
 })();
 /*

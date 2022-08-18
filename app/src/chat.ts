@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import tmi from 'tmi.js'
+import toast from 'react-hot-toast'
+import { ChannelInfo } from './utils'
 
 export interface ChatItem {
   id: string
@@ -39,11 +41,17 @@ export function useChatEvents(onChat: (chat: ChatItem) => void): [ChatItem[], ()
   return [chat, resetChat]
 }
 
-export default function init(channel: string) {
+export default function init(channelInfo: ChannelInfo) {
   // Define configuration options
   const opts = {
-    channels: [channel],
+    channels: [channelInfo.login!],
+    identity: {
+      username: channelInfo.login,
+      password: `oauth:${channelInfo.token}`,
+    },
   }
+
+  console.info(opts)
 
   // Create a client with our options
   const client = new tmi.client(opts)
@@ -81,6 +89,11 @@ export default function init(channel: string) {
 
   // Called every time the bot connects to Twitch chat
   function onConnectedHandler(addr, port) {
+    try {
+      toast.success('Connected to chat!', { position: 'bottom-center' })
+    } catch (e) {
+      console.error(e)
+    }
     console.log(`* Connected to ${addr}:${port}`)
   }
   return client

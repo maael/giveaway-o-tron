@@ -14,7 +14,7 @@ async function validateToken(token: string) {
     return {
       token,
       clientId: data.client_id,
-      login: data.login === 'odialo' ? 'fextralife' : data.login,
+      login: data.login === 'odialo' ? 'roms_hut' : data.login,
       userId: data.user_id,
     }
   } catch {

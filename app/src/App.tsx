@@ -1,5 +1,6 @@
 import React from 'react'
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
 import chat, { ChatItem, useChatEvents } from './chat'
 import useStorage from './components/hooks/useStorage'
 import MainScreen from './components/screens/Main'
@@ -22,10 +23,11 @@ function InnerApp() {
     numberOfWinners: 1,
     followersOnly: true,
     chatCommand: '',
+    winnerMessage: 'PartyHat @name won!',
   })
   const [client, setClient] = React.useState<ReturnType<typeof chat> | null>(null)
   const [channelInfo, setChannelInfo] = useStorage<ChannelInfo>('channelInfo', {}, (c) =>
-    c.login ? setClient(chat(c.login)) : null
+    c.login ? setClient(chat(c)) : null
   )
   const onNewChat = React.useCallback((chat: ChatItem) => {
     console.info('[chat]', chat)
@@ -40,10 +42,11 @@ function InnerApp() {
   }, [channelInfo.login, client])
   return (
     <>
-      <Header client={client} resetChat={resetChat} setClient={setClient} channel={channelInfo.login || ''} />
+      <Header client={client} resetChat={resetChat} setClient={setClient} channelInfo={channelInfo} />
       <Switch>
         <Route path="/" exact>
           <MainScreen
+            client={client}
             chatEvents={chatEvents}
             settings={settings}
             setSettings={setSettings}
@@ -61,6 +64,7 @@ function InnerApp() {
           />
         </Route>
       </Switch>
+      <Toaster />
     </>
   )
 }

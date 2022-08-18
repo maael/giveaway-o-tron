@@ -12,7 +12,7 @@ export async function getChatGiveaway(
   followerOnly: boolean = true,
   numberOfWinners: number = 1
 ) {
-  console.info('COMMAND', chatCommand)
+  console.info('[giveaway][chat][start]')
   let users = chatItems
     .filter((c) => (chatCommand ? c.msg.toLowerCase().includes(chatCommand.toLowerCase()) : true))
     .reduce<ChatItem[]>((acc, c) => (acc.some((i) => i.username === c.username) ? acc : acc.concat(c)), [])
@@ -28,6 +28,7 @@ export async function getChatGiveaway(
     users = (await getFollowerInfo(channelInfo, mappedUsers, 10, followerCache)) as any
   }
 
+  console.info('[giveaway][chat][end]')
   return Array.from({ length: numberOfWinners }, () => {
     const winner = getRandomArrayItem(users)
     if (!winner) return
@@ -45,6 +46,7 @@ export async function getInstantGiveaway(
   followerOnly: boolean = true,
   numberOfWinners: number = 1
 ) {
+  console.info('[giveaway][instant][start]')
   let viewers = await getViewers(channelInfo)
   const idCache = await new Cache(channelInfo.login!, CACHE_KEY.userIds).get()
   const mappedUsers = await getUsersFromNames(channelInfo, viewers, idCache)
@@ -59,11 +61,13 @@ export async function getInstantGiveaway(
       ;(i as any).isSubscriber = withSub.find((s) => s.id === i.id)?.isSubscriber || false
       return i
     })
-    viewers = combined
-      .filter((i) => i.follows)
+    const followers = combined.filter((i) => i.follows)
+    console.info('[giveaway][instant]', { followers: followers.length })
+    viewers = followers
       .flatMap((c) => (c.isSubscriber ? Array.from({ length: subLuck }, () => c) : c))
       .map((i) => i.login)
   }
+  console.info('[giveaway][instant][end]')
   return Array.from({ length: numberOfWinners }, () => {
     const winner = getRandomArrayItem(viewers)
     if (!winner) return

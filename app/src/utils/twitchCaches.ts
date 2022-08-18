@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast'
 import { chatEmitter, ChatItem } from '~/chat'
 import { getFollowerInfo, getUsersFromNames, getUsersSubscriptionInfo, getViewers } from './twitch'
 import { ChannelInfo } from './types'
@@ -70,6 +71,11 @@ async function start(caches: { [k: string]: Cache }, channelInfo: ChannelInfo) {
   console.info('[twitchCache][userIds][done]')
   await Promise.all([buildFollowers(caches, channelInfo, mappedUsers), buildSubs(caches, channelInfo, mappedUsers)])
   console.info('[twitchCache][done]')
+  try {
+    toast.success('Done building Twitch cache!', { position: 'bottom-center' })
+  } catch (e) {
+    console.error(e)
+  }
 }
 
 async function buildFollowers(caches: { [k: string]: Cache }, channelInfo: ChannelInfo, mappedUsers: any) {

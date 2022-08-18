@@ -1,21 +1,22 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import { FaRobot as LogoIco, FaTwitch as TwitchIco, FaAngleLeft as LeftIco } from 'react-icons/fa'
 import { Link, useLocation } from 'react-router-dom'
+import { ChannelInfo } from '~/utils'
 import chat from '../../chat'
 
 export default function Header({
   client,
   resetChat,
   setClient,
-  channel,
+  channelInfo,
 }: {
   client: ReturnType<typeof chat> | null
   resetChat: () => void
   setClient: Dispatch<SetStateAction<ReturnType<typeof chat> | null>>
-  channel: string
+  channelInfo: ChannelInfo
 }) {
   const location = useLocation()
-  const homeRoute = channel ? '/' : '/setup'
+  const homeRoute = channelInfo.login ? '/' : '/setup'
   return (
     <div className="flex flex-row justify-start gap-2">
       <div className="flex-1">
@@ -41,14 +42,14 @@ export default function Header({
             resetChat()
             setClient(null)
           } else {
-            setClient(chat(channel))
+            setClient(chat(channelInfo))
           }
         }}
       >
         <input
           className="bg-gray-700 px-2 py-1 rounded-l-md border-b border-l border-purple-500"
           placeholder="Channel Name"
-          value={channel}
+          value={channelInfo.login}
           disabled
           title={!!client ? 'Disconnect to change' : 'Set channel to connect to'}
         />
