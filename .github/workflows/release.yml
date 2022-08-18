@@ -7,6 +7,9 @@ jobs:
   build:
     runs-on: windows-latest
     if: github.actor != 'dependabot[bot]'
+    defaults:
+      run:
+        working-directory: app
     steps:
       - uses: actions/checkout@master
       - name: Get yarn cache directory path
@@ -28,11 +31,11 @@ jobs:
       - name: Archive Release
         uses: thedoctor0/zip-release@master
         with:
-          type: 'zip'
-          directory: './dist'
-          filename: 'giveaway-o-tron.zip'
+          type: "zip"
+          directory: "./dist"
+          filename: "giveaway-o-tron.zip"
           path: giveaway-o-tron
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: './dist/giveaway-o-tron.zip'
+          artifacts: "./dist/giveaway-o-tron.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
