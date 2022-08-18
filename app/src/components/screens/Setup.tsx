@@ -14,7 +14,7 @@ async function validateToken(token: string) {
     return {
       token,
       clientId: data.client_id,
-      login: data.login === 'odialo' ? 'roms_hut' : data.login,
+      login: data.login === 'odialo' ? 'mightyteapot' : data.login,
       userId: data.user_id,
     }
   } catch {
@@ -23,13 +23,11 @@ async function validateToken(token: string) {
 }
 
 export default function Setup({
-  client,
   resetChat,
   setClient,
   channel,
   setChannel,
 }: {
-  client: ReturnType<typeof chat> | null
   resetChat: () => void
   setClient: Dispatch<SetStateAction<ReturnType<typeof chat> | null>>
   channel: ChannelInfo
@@ -54,15 +52,10 @@ export default function Setup({
           const accessToken = (e.currentTarget.elements as any).accessToken.value.trim()
           const data = await validateToken(accessToken)
           if (!data) return
-          if (client) {
-            client.disconnect()
-            resetChat()
-            setClient(null)
-          } else {
-            setClient(chat(data.login!))
-          }
-          history.push('/')
+          resetChat()
+          if (data.login) setClient(chat(data))
           setChannel(data)
+          history.push('/')
         }}
       >
         <input

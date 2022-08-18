@@ -26917,12 +26917,14 @@ to {
       identity: {
         username: channelInfo.login,
         password: `oauth:${channelInfo.token}`
+      },
+      options: {
+        debug: true
       }
     };
     const client = new import_tmi.default.client(opts);
-    client.on("message", onMessageHandler);
-    client.on("connected", onConnectedHandler);
-    client.connect();
+    client.disconnect();
+    console.info(opts);
     function onMessageHandler(target, context2, msg, self) {
       if (self) {
         return;
@@ -26945,10 +26947,16 @@ to {
       try {
         Et.success("Connected to chat!", { position: "bottom-center" });
       } catch (e2) {
-        console.error(e2);
+        console.error("[error]", e2);
       }
       console.log(`* Connected to ${addr}:${port}`);
     }
+    client.on("message", onMessageHandler);
+    client.on("connected", onConnectedHandler);
+    client.on("timeout", () => {
+      console.info("[timeout]");
+    });
+    client.connect();
     return client;
   }
 
@@ -27242,7 +27250,7 @@ to {
       const subCache = await new Cache(channelInfo.login, CACHE_KEY.subs).get();
       const [withFollowers, withSub] = await Promise.all([
         getFollowerInfo(channelInfo, mappedUsers, 5, followerCache),
-        getUsersSubscriptionInfo(channelInfo, mappedUsers, subCache)
+        channelInfo.userId === "69496551" ? [] : getUsersSubscriptionInfo(channelInfo, mappedUsers, subCache)
       ]);
       const combined = withFollowers.map((i2) => {
         var _a;
@@ -28721,7 +28729,7 @@ to {
           return;
         }
         giveawayWinner.forEach((w) => {
-          client == null ? void 0 : client.say("odialo", settings.winnerMessage.replace("@name", `@${w}`));
+          client == null ? void 0 : client.say("odialo", settings.winnerMessage.replace("@name", `@${w.username}`));
         });
         setWinners((w) => w.concat(giveawayWinner));
       }
@@ -28864,7 +28872,7 @@ to {
       return {
         token,
         clientId: data.client_id,
-        login: data.login === "odialo" ? "roms_hut" : data.login,
+        login: data.login === "odialo" ? "mightyteapot" : data.login,
         userId: data.user_id
       };
     } catch (e2) {
@@ -28872,7 +28880,6 @@ to {
     }
   }
   function Setup({
-    client,
     resetChat,
     setClient,
     channel,
@@ -28896,15 +28903,11 @@ to {
         const data = await validateToken(accessToken);
         if (!data)
           return;
-        if (client) {
-          client.disconnect();
-          resetChat();
-          setClient(null);
-        } else {
-          setClient(init(data.login));
-        }
-        history.push("/");
+        resetChat();
+        if (data.login)
+          setClient(init(data));
         setChannel(data);
+        history.push("/");
       }
     }, /* @__PURE__ */ import_react16.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-l-md border-b border-l border-purple-500 overflow-ellipsis",
@@ -28982,7 +28985,13 @@ to {
       winnerMessage: "PartyHat @name won!"
     });
     const [client, setClient] = import_react18.default.useState(null);
-    const [channelInfo, setChannelInfo] = useStorage("channelInfo", {}, (c2) => c2.login ? setClient(init(c2)) : null);
+    const [channelInfo, setChannelInfo] = useStorage("channelInfo", {}, (c2) => {
+      console.info("[client][app]", c2);
+      if (c2.login)
+        return null;
+      console.info("[client][app][startClient]");
+      setClient(init(c2));
+    });
     const onNewChat = import_react18.default.useCallback((chat) => {
       console.info("[chat]", chat);
     }, []);
@@ -29017,7 +29026,6 @@ to {
       path: "/setup",
       exact: true
     }, /* @__PURE__ */ import_react18.default.createElement(Setup, {
-      client,
       resetChat,
       setClient,
       channel: channelInfo,

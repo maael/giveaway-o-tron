@@ -55,7 +55,7 @@ export async function getInstantGiveaway(
     const subCache = await new Cache(channelInfo.login!, CACHE_KEY.subs).get()
     const [withFollowers, withSub] = await Promise.all([
       getFollowerInfo(channelInfo, mappedUsers, 5, followerCache),
-      getUsersSubscriptionInfo(channelInfo, mappedUsers, subCache),
+      channelInfo.userId === '69496551' ? ([] as any) : getUsersSubscriptionInfo(channelInfo, mappedUsers, subCache),
     ])
     const combined: any[] = withFollowers.map((i) => {
       ;(i as any).isSubscriber = withSub.find((s) => s.id === i.id)?.isSubscriber || false

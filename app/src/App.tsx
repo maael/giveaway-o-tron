@@ -26,9 +26,12 @@ function InnerApp() {
     winnerMessage: 'PartyHat @name won!',
   })
   const [client, setClient] = React.useState<ReturnType<typeof chat> | null>(null)
-  const [channelInfo, setChannelInfo] = useStorage<ChannelInfo>('channelInfo', {}, (c) =>
-    c.login ? setClient(chat(c)) : null
-  )
+  const [channelInfo, setChannelInfo] = useStorage<ChannelInfo>('channelInfo', {}, (c) => {
+    console.info('[client][app]', c)
+    if (c.login) return null
+    console.info('[client][app][startClient]')
+    setClient(chat(c))
+  })
   const onNewChat = React.useCallback((chat: ChatItem) => {
     console.info('[chat]', chat)
   }, [])
@@ -59,13 +62,7 @@ function InnerApp() {
           />
         </Route>
         <Route path="/setup" exact>
-          <SetupScreen
-            client={client}
-            resetChat={resetChat}
-            setClient={setClient}
-            channel={channelInfo}
-            setChannel={setChannelInfo}
-          />
+          <SetupScreen resetChat={resetChat} setClient={setClient} channel={channelInfo} setChannel={setChannelInfo} />
         </Route>
       </Switch>
       <Toaster />

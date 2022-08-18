@@ -74,7 +74,7 @@ export function ChatGiveaway({
           return
         }
         giveawayWinner.forEach((w) => {
-          client?.say('odialo', settings.winnerMessage.replace('@name', `@${w}`))
+          client?.say('odialo', settings.winnerMessage.replace('@name', `@${w.username}`))
         })
         setWinners((w) => w.concat(giveawayWinner))
       }}
