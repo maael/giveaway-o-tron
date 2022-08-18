@@ -28529,7 +28529,8 @@ to {
     return /* @__PURE__ */ import_react11.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
     }, /* @__PURE__ */ import_react11.default.createElement("div", {
-      className: "bg-purple-600 px-2 py-1 flex-0"
+      className: "bg-purple-600 px-2 py-1 flex-0",
+      title: props.title
     }, props.label), /* @__PURE__ */ import_react11.default.createElement("div", {
       className: "px-2 flex-1 flex justify-center items-center"
     }, /* @__PURE__ */ import_react11.default.createElement(SliderInner, __spreadValues({}, props))), /* @__PURE__ */ import_react11.default.createElement("div", {
@@ -28607,7 +28608,8 @@ to {
     })) : /* @__PURE__ */ import_react12.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
     }, /* @__PURE__ */ import_react12.default.createElement("div", {
-      className: "bg-purple-600 px-2 py-1 flex-0"
+      className: "bg-purple-600 px-2 py-1 flex-0",
+      title: "Will clear chat, and then pause it after the time, to enable a giveaway with cut off"
     }, "Timer"), /* @__PURE__ */ import_react12.default.createElement("div", {
       className: "px-2 flex-1 flex justify-center items-center"
     }, /* @__PURE__ */ import_react12.default.createElement(SliderInner, {
@@ -28619,11 +28621,12 @@ to {
     })), /* @__PURE__ */ import_react12.default.createElement("div", {
       className: "flex-1 justify-center items-center text-center flex"
     }, formatDistanceStrict(Date.now() + value, new Date())), /* @__PURE__ */ import_react12.default.createElement("button", {
-      className: "bg-purple-600 px-2 py-1 flex-0 select-none cursor-pointer flex flex-row justify-center items-center gap-1",
+      className: "bg-purple-600 px-2 py-1 flex-0 select-none cursor-pointer flex flex-row justify-center items-center gap-1 transition-colors hover:bg-purple-700",
       onClick: () => {
         resetChat();
         setActive(true);
-      }
+      },
+      title: "Will clear chat"
     }, /* @__PURE__ */ import_react12.default.createElement(FaClock, null), " Start"));
   });
   function SettingsComponent({ settings, setSettings, setChatPaused, resetChat }) {
@@ -28632,7 +28635,8 @@ to {
     }, /* @__PURE__ */ import_react12.default.createElement("div", {
       className: "flex flex-row justify-center items-center flex-1"
     }, /* @__PURE__ */ import_react12.default.createElement("div", {
-      className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md"
+      className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md",
+      title: "This will be sent to chat by your account to tell winners, if Send Message is enabled below"
     }, "Winner Message"), /* @__PURE__ */ import_react12.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1",
       placeholder: "Winner Message...",
@@ -28642,7 +28646,8 @@ to {
     })), /* @__PURE__ */ import_react12.default.createElement("div", {
       className: "flex flex-row justify-center items-center flex-1"
     }, /* @__PURE__ */ import_react12.default.createElement("div", {
-      className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md"
+      className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md",
+      title: "Filters messages to include this"
     }, "Chat Command"), /* @__PURE__ */ import_react12.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1",
       placeholder: "Empty means any message...",
@@ -28656,16 +28661,18 @@ to {
     }, /* @__PURE__ */ import_react12.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
     }, /* @__PURE__ */ import_react12.default.createElement("div", {
-      className: "bg-purple-600 px-2 py-1 flex-0"
+      className: "bg-purple-600 px-2 py-1 flex-0",
+      title: "Will limit winners to those who follow you, will slow down giveaways"
     }, "Followers Only"), /* @__PURE__ */ import_react12.default.createElement("button", {
-      className: "flex-1 text-2xl text-center justify-center items-center flex",
+      className: "flex-1 text-2xl text-center justify-center items-center flex transition-opacity hover:opacity-60",
       onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { followersOnly: !s2.followersOnly }))
     }, settings.followersOnly ? /* @__PURE__ */ import_react12.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react12.default.createElement(FaTimes, null))), /* @__PURE__ */ import_react12.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
     }, /* @__PURE__ */ import_react12.default.createElement("div", {
-      className: "bg-purple-600 px-2 py-1 flex-0"
+      className: "bg-purple-600 px-2 py-1 flex-0",
+      title: "If enabled, will send messages tagging winners in Twitch chat"
     }, "Send Message"), /* @__PURE__ */ import_react12.default.createElement("button", {
-      className: "flex-1 text-2xl text-center justify-center items-center flex",
+      className: "flex-1 text-2xl text-center justify-center items-center flex transition-opacity hover:opacity-60",
       onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { sendMessages: !s2.sendMessages }))
     }, settings.sendMessages ? /* @__PURE__ */ import_react12.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react12.default.createElement(FaTimes, null)))), /* @__PURE__ */ import_react12.default.createElement(Time, {
       setChatPaused,
@@ -28674,12 +28681,14 @@ to {
       className: "flex flex-row gap-2 mt-2"
     }, /* @__PURE__ */ import_react12.default.createElement(SliderOuter, {
       label: "Sub Luck",
+      title: "Will enter subscribers this amount of times into the giveaways",
       value: settings.subLuck,
       min: 1,
       max: 10,
       onChange: (val) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { subLuck: val }))
     }), /* @__PURE__ */ import_react12.default.createElement(SliderOuter, {
       label: "Number of Winners",
+      title: "How many winners to draw per giveaway",
       value: settings.numberOfWinners,
       min: 1,
       max: 10,
@@ -28703,7 +28712,7 @@ to {
     client
   }) {
     return /* @__PURE__ */ import_react13.default.createElement("button", {
-      className: "bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none",
+      className: "bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-all hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700",
       onClick: async () => {
         if (!channelInfo.login)
           return;
@@ -28733,7 +28742,7 @@ to {
     client
   }) {
     return /* @__PURE__ */ import_react13.default.createElement("button", {
-      className: "bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none",
+      className: "bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-transform hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700",
       onClick: async () => {
         const giveawayWinner = await getChatGiveaway(channelInfo, chatEvents, settings.chatCommand, settings.subLuck, settings.followersOnly, settings.numberOfWinners);
         if (!giveawayWinner.length) {
@@ -28789,14 +28798,17 @@ to {
     }, /* @__PURE__ */ import_react14.default.createElement("div", null, chatEvents.length, " message", chatEvents.length === 1 ? "" : "s"), winners.length ? /* @__PURE__ */ import_react14.default.createElement("div", null, limitedMessages.length, " winner message", limitedMessages.length === 1 ? "" : "s") : null, /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "flex flex-row justify-center items-center gap-2 text-xl"
     }, paused ? /* @__PURE__ */ import_react14.default.createElement(FaPlayCircle, {
-      className: "select-none cursor-pointer",
-      onClick: () => setPaused((p2) => !p2)
+      className: "select-none cursor-pointer transition-opacity hover:opacity-70",
+      onClick: () => setPaused((p2) => !p2),
+      title: "Resume chat"
     }) : /* @__PURE__ */ import_react14.default.createElement(FaPauseCircle, {
-      className: "select-none cursor-pointer",
-      onClick: () => setPaused((p2) => !p2)
+      className: "select-none cursor-pointer  transition-opacity hover:opacity-70",
+      onClick: () => setPaused((p2) => !p2),
+      title: "Pause chat, misses messages while paused"
     }), /* @__PURE__ */ import_react14.default.createElement(FaTimesCircle, {
-      className: "text-red-500 select-none cursor-pointer",
-      onClick: () => clear()
+      className: "text-red-500 select-none cursor-pointer  transition-opacity hover:opacity-70",
+      onClick: () => clear(),
+      title: "Clear chat"
     }))), /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "relative flex-1"
     }, chatEvents.length === 0 ? /* @__PURE__ */ import_react14.default.createElement("span", {

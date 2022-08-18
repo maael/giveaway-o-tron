@@ -8,12 +8,15 @@ interface Props {
   max: number
   step?: number
   onChange: (val: number) => void
+  title?: string
 }
 
 export default function SliderOuter(props: Props) {
   return (
     <div className="flex-1 border border-purple-600 rounded-md flex relative">
-      <div className="bg-purple-600 px-2 py-1 flex-0">{props.label}</div>
+      <div className="bg-purple-600 px-2 py-1 flex-0" title={props.title}>
+        {props.label}
+      </div>
       <div className="px-2 flex-1 flex justify-center items-center">
         <SliderInner {...props} />
       </div>

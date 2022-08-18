@@ -34,11 +34,23 @@ export default function ChatBox({
           ) : null}
           <div className="flex flex-row justify-center items-center gap-2 text-xl">
             {paused ? (
-              <FaPlayCircle className="select-none cursor-pointer" onClick={() => setPaused((p) => !p)} />
+              <FaPlayCircle
+                className="select-none cursor-pointer transition-opacity hover:opacity-70"
+                onClick={() => setPaused((p) => !p)}
+                title="Resume chat"
+              />
             ) : (
-              <FaPauseCircle className="select-none cursor-pointer" onClick={() => setPaused((p) => !p)} />
+              <FaPauseCircle
+                className="select-none cursor-pointer  transition-opacity hover:opacity-70"
+                onClick={() => setPaused((p) => !p)}
+                title="Pause chat, misses messages while paused"
+              />
             )}
-            <FaTimesCircle className="text-red-500 select-none cursor-pointer" onClick={() => clear()} />
+            <FaTimesCircle
+              className="text-red-500 select-none cursor-pointer  transition-opacity hover:opacity-70"
+              onClick={() => clear()}
+              title="Clear chat"
+            />
           </div>
         </div>
         <div className="relative flex-1">

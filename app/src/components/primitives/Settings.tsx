@@ -50,7 +50,12 @@ const Time = React.memo(function Time({ setChatPaused, resetChat }: Pick<Props, 
     </div>
   ) : (
     <div className="flex-1 border border-purple-600 rounded-md flex relative">
-      <div className="bg-purple-600 px-2 py-1 flex-0">Timer</div>
+      <div
+        className="bg-purple-600 px-2 py-1 flex-0"
+        title="Will clear chat, and then pause it after the time, to enable a giveaway with cut off"
+      >
+        Timer
+      </div>
       <div className="px-2 flex-1 flex justify-center items-center">
         <SliderInner min={ONE_MIN} max={ONE_MIN * 30} value={value} step={ONE_MIN} onChange={setValue} />
       </div>
@@ -58,11 +63,12 @@ const Time = React.memo(function Time({ setChatPaused, resetChat }: Pick<Props, 
         {format(Date.now() + value, new Date())}
       </div>
       <button
-        className="bg-purple-600 px-2 py-1 flex-0 select-none cursor-pointer flex flex-row justify-center items-center gap-1"
+        className="bg-purple-600 px-2 py-1 flex-0 select-none cursor-pointer flex flex-row justify-center items-center gap-1 transition-colors hover:bg-purple-700"
         onClick={() => {
           resetChat()
           setActive(true)
         }}
+        title="Will clear chat"
       >
         <FaClock /> Start
       </button>
@@ -75,7 +81,12 @@ export default function SettingsComponent({ settings, setSettings, setChatPaused
     <>
       <div className="flex flex-row gap-2 mt-2">
         <div className="flex flex-row justify-center items-center flex-1">
-          <div className="flex-0 bg-purple-600 px-2 py-1 rounded-l-md">Winner Message</div>
+          <div
+            className="flex-0 bg-purple-600 px-2 py-1 rounded-l-md"
+            title="This will be sent to chat by your account to tell winners, if Send Message is enabled below"
+          >
+            Winner Message
+          </div>
           <input
             className="bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1"
             placeholder="Winner Message..."
@@ -85,7 +96,9 @@ export default function SettingsComponent({ settings, setSettings, setChatPaused
           />
         </div>
         <div className="flex flex-row justify-center items-center flex-1">
-          <div className="flex-0 bg-purple-600 px-2 py-1 rounded-l-md">Chat Command</div>
+          <div className="flex-0 bg-purple-600 px-2 py-1 rounded-l-md" title="Filters messages to include this">
+            Chat Command
+          </div>
           <input
             className="bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1"
             placeholder="Empty means any message..."
@@ -98,20 +111,30 @@ export default function SettingsComponent({ settings, setSettings, setChatPaused
       <div className="flex flex-row gap-2 mt-2">
         <div className="flex flex-1 flex-row gap-2">
           <div className="flex-1 border border-purple-600 rounded-md flex relative">
-            <div className="bg-purple-600 px-2 py-1 flex-0">Followers Only</div>
+            <div
+              className="bg-purple-600 px-2 py-1 flex-0"
+              title="Will limit winners to those who follow you, will slow down giveaways"
+            >
+              Followers Only
+            </div>
 
             <button
-              className="flex-1 text-2xl text-center justify-center items-center flex"
+              className="flex-1 text-2xl text-center justify-center items-center flex transition-opacity hover:opacity-60"
               onClick={() => setSettings((s) => ({ ...s, followersOnly: !s.followersOnly }))}
             >
               {settings.followersOnly ? <FaCheck /> : <FaTimes />}
             </button>
           </div>
           <div className="flex-1 border border-purple-600 rounded-md flex relative">
-            <div className="bg-purple-600 px-2 py-1 flex-0">Send Message</div>
+            <div
+              className="bg-purple-600 px-2 py-1 flex-0"
+              title="If enabled, will send messages tagging winners in Twitch chat"
+            >
+              Send Message
+            </div>
 
             <button
-              className="flex-1 text-2xl text-center justify-center items-center flex"
+              className="flex-1 text-2xl text-center justify-center items-center flex transition-opacity hover:opacity-60"
               onClick={() => setSettings((s) => ({ ...s, sendMessages: !s.sendMessages }))}
             >
               {settings.sendMessages ? <FaCheck /> : <FaTimes />}
@@ -123,6 +146,7 @@ export default function SettingsComponent({ settings, setSettings, setChatPaused
       <div className="flex flex-row gap-2 mt-2">
         <Slider
           label="Sub Luck"
+          title="Will enter subscribers this amount of times into the giveaways"
           value={settings.subLuck}
           min={1}
           max={10}
@@ -130,6 +154,7 @@ export default function SettingsComponent({ settings, setSettings, setChatPaused
         />
         <Slider
           label="Number of Winners"
+          title="How many winners to draw per giveaway"
           value={settings.numberOfWinners}
           min={1}
           max={10}
