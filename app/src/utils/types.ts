@@ -5,6 +5,7 @@ export interface Settings {
   followersOnly: boolean
   chatCommand: string
   winnerMessage: string
+  sendMessages: boolean
 }
 
 export type ChannelInfo = Partial<{

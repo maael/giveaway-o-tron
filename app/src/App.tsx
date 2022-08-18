@@ -24,6 +24,7 @@ function InnerApp() {
     followersOnly: true,
     chatCommand: '',
     winnerMessage: 'PartyHat @name won!',
+    sendMessages: false,
   })
   const [client, setClient] = React.useState<ReturnType<typeof chat> | null>(null)
   const [channelInfo, setChannelInfo] = useStorage<ChannelInfo>('channelInfo', {}, (c) => {

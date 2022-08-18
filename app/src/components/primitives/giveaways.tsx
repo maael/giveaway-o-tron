@@ -33,8 +33,11 @@ export function InstantGiveaway({
           return
         }
         giveawayWinner.forEach((w) => {
-          console.info({ client })
-          client?.say('odialo', settings.winnerMessage.replace('@name', `@${w}`))
+          if (settings.sendMessages) {
+            giveawayWinner.forEach((w) => {
+              client?.say(channelInfo.login!, settings.winnerMessage.replace('@name', `@${w}`))
+            })
+          }
         })
         setWinners((w) => w.concat(giveawayWinner.map((u) => ({ username: u }))))
       }}
@@ -73,9 +76,11 @@ export function ChatGiveaway({
           toast.error('No winners found that match conditions!', { position: 'bottom-center' })
           return
         }
-        giveawayWinner.forEach((w) => {
-          client?.say('odialo', settings.winnerMessage.replace('@name', `@${w.username}`))
-        })
+        if (settings.sendMessages) {
+          giveawayWinner.forEach((w) => {
+            client?.say(channelInfo.login!, settings.winnerMessage.replace('@name', `@${w.username}`))
+          })
+        }
         setWinners((w) => w.concat(giveawayWinner))
       }}
     >

@@ -96,15 +96,27 @@ export default function SettingsComponent({ settings, setSettings, setChatPaused
         </div>
       </div>
       <div className="flex flex-row gap-2 mt-2">
-        <div className="flex-1 border border-purple-600 rounded-md flex relative">
-          <div className="bg-purple-600 px-2 py-1 flex-0">Followers Only</div>
+        <div className="flex flex-1 flex-row gap-2">
+          <div className="flex-1 border border-purple-600 rounded-md flex relative">
+            <div className="bg-purple-600 px-2 py-1 flex-0">Followers Only</div>
 
-          <button
-            className="flex-1 text-2xl text-center justify-center items-center flex"
-            onClick={() => setSettings((s) => ({ ...s, followersOnly: !s.followersOnly }))}
-          >
-            {settings.followersOnly ? <FaCheck /> : <FaTimes />}
-          </button>
+            <button
+              className="flex-1 text-2xl text-center justify-center items-center flex"
+              onClick={() => setSettings((s) => ({ ...s, followersOnly: !s.followersOnly }))}
+            >
+              {settings.followersOnly ? <FaCheck /> : <FaTimes />}
+            </button>
+          </div>
+          <div className="flex-1 border border-purple-600 rounded-md flex relative">
+            <div className="bg-purple-600 px-2 py-1 flex-0">Send Message</div>
+
+            <button
+              className="flex-1 text-2xl text-center justify-center items-center flex"
+              onClick={() => setSettings((s) => ({ ...s, sendMessages: !s.sendMessages }))}
+            >
+              {settings.sendMessages ? <FaCheck /> : <FaTimes />}
+            </button>
+          </div>
         </div>
         <Time setChatPaused={setChatPaused} resetChat={() => resetChat()} />
       </div>

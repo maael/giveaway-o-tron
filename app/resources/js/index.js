@@ -28652,13 +28652,22 @@ to {
     }))), /* @__PURE__ */ import_react12.default.createElement("div", {
       className: "flex flex-row gap-2 mt-2"
     }, /* @__PURE__ */ import_react12.default.createElement("div", {
+      className: "flex flex-1 flex-row gap-2"
+    }, /* @__PURE__ */ import_react12.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
     }, /* @__PURE__ */ import_react12.default.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0"
     }, "Followers Only"), /* @__PURE__ */ import_react12.default.createElement("button", {
       className: "flex-1 text-2xl text-center justify-center items-center flex",
       onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { followersOnly: !s2.followersOnly }))
-    }, settings.followersOnly ? /* @__PURE__ */ import_react12.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react12.default.createElement(FaTimes, null))), /* @__PURE__ */ import_react12.default.createElement(Time, {
+    }, settings.followersOnly ? /* @__PURE__ */ import_react12.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react12.default.createElement(FaTimes, null))), /* @__PURE__ */ import_react12.default.createElement("div", {
+      className: "flex-1 border border-purple-600 rounded-md flex relative"
+    }, /* @__PURE__ */ import_react12.default.createElement("div", {
+      className: "bg-purple-600 px-2 py-1 flex-0"
+    }, "Send Message"), /* @__PURE__ */ import_react12.default.createElement("button", {
+      className: "flex-1 text-2xl text-center justify-center items-center flex",
+      onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { sendMessages: !s2.sendMessages }))
+    }, settings.sendMessages ? /* @__PURE__ */ import_react12.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react12.default.createElement(FaTimes, null)))), /* @__PURE__ */ import_react12.default.createElement(Time, {
       setChatPaused,
       resetChat: () => resetChat()
     })), /* @__PURE__ */ import_react12.default.createElement("div", {
@@ -28704,8 +28713,11 @@ to {
           return;
         }
         giveawayWinner.forEach((w) => {
-          console.info({ client });
-          client == null ? void 0 : client.say("odialo", settings.winnerMessage.replace("@name", `@${w}`));
+          if (settings.sendMessages) {
+            giveawayWinner.forEach((w2) => {
+              client == null ? void 0 : client.say(channelInfo.login, settings.winnerMessage.replace("@name", `@${w2}`));
+            });
+          }
         });
         setWinners((w) => w.concat(giveawayWinner.map((u3) => ({ username: u3 }))));
       }
@@ -28728,9 +28740,11 @@ to {
           Et.error("No winners found that match conditions!", { position: "bottom-center" });
           return;
         }
-        giveawayWinner.forEach((w) => {
-          client == null ? void 0 : client.say("odialo", settings.winnerMessage.replace("@name", `@${w.username}`));
-        });
+        if (settings.sendMessages) {
+          giveawayWinner.forEach((w) => {
+            client == null ? void 0 : client.say(channelInfo.login, settings.winnerMessage.replace("@name", `@${w.username}`));
+          });
+        }
         setWinners((w) => w.concat(giveawayWinner));
       }
     }, /* @__PURE__ */ import_react13.default.createElement(FaDice, {
@@ -28982,7 +28996,8 @@ to {
       numberOfWinners: 1,
       followersOnly: true,
       chatCommand: "",
-      winnerMessage: "PartyHat @name won!"
+      winnerMessage: "PartyHat @name won!",
+      sendMessages: false
     });
     const [client, setClient] = import_react18.default.useState(null);
     const [channelInfo, setChannelInfo] = useStorage("channelInfo", {}, (c2) => {
