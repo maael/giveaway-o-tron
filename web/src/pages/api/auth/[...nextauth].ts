@@ -14,6 +14,18 @@ export default NextAuth({
           image: profile.picture,
         }
       },
+      authorization: {
+        params: {
+          scope: 'openid user:read:email user:read:subscriptions',
+          claims: {
+            id_token: {
+              email: null,
+              picture: null,
+              preferred_username: null,
+            },
+          },
+        },
+      },
     }),
     // ...add more providers here
   ],

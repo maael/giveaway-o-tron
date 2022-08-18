@@ -29,65 +29,172 @@ interface ChattersApiData {
   }
 }
 
-export async function getInstantGiveaway(channel: string, channelUserId: string | null) {
-  const [viewers] = await Promise.all([
-    fetch(`https://discord-slash-commands.vercel.app/api/twitch-chatters?channel=${channel}`)
-      .then<ChattersApiData>((res) => res.json())
-      .then((d) => d.chatters.viewers),
-  ])
+async function getUsersSubscriptionInfo(
+  channelInfo: ChannelInfo,
+  mappedUsers: Awaited<ReturnType<typeof getUsersFromNames>>
+) {
+  const chunkedUsers = chunkArray(mappedUsers, 5)
+  let embellishedUsers: {
+    id: string
+    login: string
+    displayName: string
+    isSubscriber: boolean
+  }[] = []
+  for (const chunk of chunkedUsers) {
+    const embellishedChunk = await Promise.all(
+      chunk.map(async (user) => {
+        try {
+          const info = await fetch(
+            `https://api.twitch.tv/helix/subscriptions/user?broadcaster_id=${channelInfo.userId}&user_id=${user.id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${channelInfo.token}`,
+                'Client-ID': `${channelInfo.clientId}`,
+              },
+            }
+          )
+          const isSubscriber = info.status === 200
+          return {
+            ...user,
+            isSubscriber,
+          }
+        } catch {
+          return {
+            ...user,
+            isSubscriber: false,
+          }
+        }
+      })
+    )
+    embellishedUsers = embellishedUsers.concat(embellishedChunk)
+    await wait(200)
+  }
+  return embellishedUsers
+}
+
+export async function getInstantGiveaway(channelInfo: ChannelInfo, subLuck = 2, followerOnly: boolean = true) {
+  let viewers = await fetch(
+    `https://discord-slash-commands.vercel.app/api/twitch-chatters?channel=${channelInfo.login}`
+  )
+    .then<ChattersApiData>((res) => res.json())
+    .then((d) => d.chatters.viewers)
+  if (followerOnly) {
+    const mappedUsers = await getUsersFromNames(channelInfo, viewers)
+    const [withFollowers, withSub] = await Promise.all([
+      getFollowerInfo(channelInfo, mappedUsers, 5),
+      getUsersSubscriptionInfo(channelInfo, mappedUsers),
+    ])
+    const combined: any[] = withFollowers.map((i) => {
+      ;(i as any).isSubscriber = withSub.find((s) => s.id === i.id)?.isSubscriber || false
+      return i
+    })
+    viewers = combined
+      .filter((i) => i.follows)
+      .flatMap((c) => (c.isSubscriber ? Array.from({ length: subLuck }, () => c) : c))
+      .map((i) => i.login)
+  }
   const winner = getRandomArrayItem(viewers)
   return winner
 }
 
-export function getChatGiveaway(chatItems: ChatItem[], chatCommand: string) {
-  const users = [
-    ...new Set(
-      chatItems
-        .filter((c) => (chatCommand ? c.msg.toLowerCase().includes(chatCommand.toLowerCase()) : true))
-        .map((c) => c.username)
-    ),
-  ]
-  return getRandomArrayItem(users)
-}
+const wait = async (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
-export async function getTwitchUsersByLogin(logins: string[]) {
-  const info = await fetch(
-    `https://api.twitch.tv/helix/users?${logins.map((l) => `login=${encodeURIComponent(l)}`).join('&')}`,
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        'Client-ID': CLIENT_ID,
-      },
-    }
-  ).then((res) => res.json())
-  return info.data.map((i) => ({ id: i.id, username: i.login, displayName: i.display_name }))
-}
-
-export async function getUserFollowers(toId: number) {
-  const followers = []
-  let after = ''
-  do {
-    const page = await fetch(`https://api.twitch.tv/helix/users/follows?to_id=${toId}&first=100&after=${after}`, {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        'Client-ID': CLIENT_ID,
-      },
-    }).then((res) => res.json())
-    followers.concat(
-      page.data.map((i) => ({ id: i.from_id, login: i.from_login, name: i.from_name, since: i.followed_at }))
+async function getFollowerInfo(
+  channelInfo: ChannelInfo,
+  mappedUsers: Awaited<ReturnType<typeof getUsersFromNames>>,
+  chunkSize: number = 5
+) {
+  const chunkedUsers = chunkArray(mappedUsers, chunkSize)
+  let embellishedUsers: {
+    id: string
+    login: string
+    displayName: string
+    follows: boolean
+  }[] = []
+  for (const chunk of chunkedUsers) {
+    const embellishedChunk = await Promise.all(
+      chunk.map(async (user) => {
+        const userId = user.id
+        const info = await fetch(
+          `https://api.twitch.tv/helix/users/follows?from_id=${userId}&to_id=${channelInfo.userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${channelInfo.token}`,
+              'Client-ID': `${channelInfo.clientId}`,
+            },
+          }
+        ).then((res) => res.json())
+        return {
+          ...user,
+          follows: info.data.total === 1,
+        }
+      })
     )
-    after = page.pagination.cursor
-  } while (after)
-  return followers
+    embellishedUsers = embellishedUsers.concat(embellishedChunk)
+    await wait(100)
+  }
+  return embellishedUsers.filter((u) => u.follows)
 }
 
-export async function isUserFollower(user: string, userId: string | null) {
-  const info = await fetch(`https://api.twitch.tv/helix/users/follows?from_id=${userId}`, {
-    headers: {
-      Authorization: `Bearer ${TOKEN}`,
-      'Client-ID': CLIENT_ID,
-    },
-  })
+function chunkArray<T>(arr: T[], chunkSize: number): T[][] {
+  const chunks: T[][] = []
+  for (let i = 0; i < arr.length; i += chunkSize) {
+    const chunk = arr.slice(i, i + chunkSize)
+    chunks.push(chunk)
+  }
+  return chunks
+}
+
+async function getUsersFromNames(channelInfo: ChannelInfo, usernames: string[]) {
+  const toFind = usernames.slice(0, 1000)
+  const chunks = chunkArray(toFind, 100)
+  console.info('[usernames]', toFind.length)
+  let users: { id: string; login: string; displayName: string }[] = []
+  for (const chunk of chunks) {
+    const info = await fetch(
+      `https://api.twitch.tv/helix/users?${chunk.map((c) => `login=${encodeURIComponent(c)}`).join('&')}`,
+      {
+        headers: {
+          Authorization: `Bearer ${channelInfo.token}`,
+          'Client-ID': `${channelInfo.clientId}`,
+        },
+      }
+    ).then((res) => res.json())
+    const mapped = info.data.map((i) => ({
+      id: i.id,
+      login: i.login,
+      displayName: i.display_name,
+    }))
+    users = users.concat(mapped)
+  }
+  console.info('[users]', users.length)
+  return users
+}
+
+export async function getChatGiveaway(
+  channelInfo: ChannelInfo,
+  chatItems: ChatItem[],
+  chatCommand: string,
+  subLuck: number = 2,
+  followerOnly: boolean = true
+) {
+  let users = chatItems
+    .filter((c) => (chatCommand ? c.msg.toLowerCase().includes(chatCommand.toLowerCase()) : true))
+    .reduce<ChatItem[]>((acc, c) => (acc.some((i) => i.username === c.username) ? acc : acc.concat(c)), [])
+    .flatMap((c) => (c.isSubscriber ? Array.from({ length: subLuck }, () => c) : c))
+  if (followerOnly) {
+    const mappedUsers = await getUsersFromNames(
+      channelInfo,
+      users.map((u) => u.username)
+    )
+    users = (await getFollowerInfo(channelInfo, mappedUsers)) as any
+  }
+  const winner = getRandomArrayItem(users)
+  return {
+    username: winner.username,
+    isSubscriber: winner.isSubscriber,
+    id: winner.id,
+  }
 }
 
 export function removeIdx<T>(ar: T[], idx: number): T[] {

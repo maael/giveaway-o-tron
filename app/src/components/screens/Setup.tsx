@@ -14,7 +14,7 @@ async function validateToken(token: string) {
     return {
       token,
       clientId: data.client_id,
-      login: data.login === 'odialo' ? 'finalfantasyxiv' : data.login,
+      login: data.login === 'odialo' ? 'fextralife' : data.login,
       userId: data.user_id,
     }
   } catch {
@@ -59,7 +59,7 @@ export default function Setup({
             resetChat()
             setClient(null)
           } else {
-            setClient(chat(channel.login!))
+            setClient(chat(data.login!))
           }
           history.push('/')
           setChannel(data)

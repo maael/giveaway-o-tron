@@ -2,21 +2,14 @@ import React, { Dispatch, SetStateAction, useEffect } from 'react'
 import cls from 'classnames'
 import { GiPartyPopper } from 'react-icons/gi'
 import { ChatItem } from '../../chat'
-import {
-  Settings,
-  getInstantGiveaway,
-  getChatGiveaway,
-  getTwitchUsersByLogin,
-  removeIdx,
-  ChannelInfo,
-} from '../../utils'
+import { Settings, getInstantGiveaway, getChatGiveaway, removeIdx, ChannelInfo } from '../../utils'
 import { FaDice, FaTimes } from 'react-icons/fa'
 
 function InstantGiveaway({
   setWinners,
   channelInfo,
 }: {
-  setWinners: Dispatch<SetStateAction<string[]>>
+  setWinners: Dispatch<SetStateAction<Winner[]>>
   channelInfo: ChannelInfo
 }) {
   return (
@@ -24,9 +17,9 @@ function InstantGiveaway({
       className="bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1"
       onClick={async () => {
         if (!channelInfo.login) return
-        const giveawayWinner = await getInstantGiveaway(channelInfo.login, channelInfo.userId!)
+        const giveawayWinner = await getInstantGiveaway(channelInfo)
         if (!giveawayWinner) return
-        setWinners((w) => w.concat(giveawayWinner))
+        setWinners((w) => w.concat({ username: giveawayWinner }))
       }}
     >
       <FaDice className="text-2xl" /> Viewers Instant Giveaway
@@ -41,7 +34,7 @@ function ChatGiveaway({
   chatCommand,
 }: {
   chatEvents: ChatItem[]
-  setWinners: Dispatch<SetStateAction<string[]>>
+  setWinners: Dispatch<SetStateAction<Winner[]>>
   channelInfo: ChannelInfo
   chatCommand: string
 }) {
@@ -49,7 +42,7 @@ function ChatGiveaway({
     <button
       className="bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1"
       onClick={async () => {
-        const giveawayWinner = getChatGiveaway(chatEvents, chatCommand)
+        const giveawayWinner = await getChatGiveaway(channelInfo, chatEvents, chatCommand)
         if (!giveawayWinner) return
         setWinners((w) => w.concat(giveawayWinner))
       }}
@@ -59,16 +52,22 @@ function ChatGiveaway({
   )
 }
 
-function Winner({ winners, onClear }: { winners: string[]; onClear: (idx: number) => void }) {
+type Winner = Partial<{
+  username: string
+  id: string
+  isSubscriber: boolean
+  isFollower: boolean
+}>
+function Winner({ winners, onClear }: { winners: Winner[]; onClear: (idx: number) => void }) {
   return winners.length ? (
     <div className="grid gap-1 grid-cols-2 mt-3">
       {winners.map((winner, i) => (
         <div
-          key={winner}
+          key={winner.username}
           className="bg-gray-600 text-white rounded-md overflow-hidden flex flex-row items-center justify-center px-2 py-4 text-center relative"
         >
           <div className="text-2xl absolute left-5">{i + 1}.</div>
-          <GiPartyPopper className="text-purple-300 text-xl" /> <div className="px-2">{winner} wins!</div>{' '}
+          <GiPartyPopper className="text-purple-300 text-xl" /> <div className="px-2">{winner.username} wins!</div>{' '}
           <GiPartyPopper className="text-purple-300 text-xl" />
           <FaTimes className="text-2xl absolute right-5 text-red-500 cursor-pointer" onClick={() => onClear(i)} />
         </div>
@@ -90,7 +89,7 @@ export default function MainScreen({
   isConnected: boolean
   channelInfo: ChannelInfo
 }) {
-  const [winners, setWinners] = React.useState<string[]>([])
+  const [winners, setWinners] = React.useState<Winner[]>([])
   const [chatCommand, setChatCommand] = React.useState('')
   return (
     <>
@@ -131,7 +130,7 @@ export default function MainScreen({
               )}
             >
               {chatEvents
-                .filter((c) => (winners.length ? winners.includes(c.username) : true))
+                .filter((c) => (winners.length ? winners.map((c) => c.username).includes(c.username) : true))
                 .map((c) => {
                   return (
                     <div key={c.id}>

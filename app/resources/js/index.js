@@ -25720,18 +25720,116 @@ ${JSON.stringify(message, null, 4)}`);
   function getRandomArrayItem(items) {
     return items[Math.floor(Math.random() * items.length)];
   }
-  async function getInstantGiveaway(channel, channelUserId) {
-    const [viewers] = await Promise.all([
-      fetch(`https://discord-slash-commands.vercel.app/api/twitch-chatters?channel=${channel}`).then((res) => res.json()).then((d) => d.chatters.viewers)
-    ]);
+  async function getUsersSubscriptionInfo(channelInfo, mappedUsers) {
+    const chunkedUsers = chunkArray(mappedUsers, 5);
+    let embellishedUsers = [];
+    for (const chunk of chunkedUsers) {
+      const embellishedChunk = await Promise.all(chunk.map(async (user) => {
+        try {
+          const info = await fetch(`https://api.twitch.tv/helix/subscriptions/user?broadcaster_id=${channelInfo.userId}&user_id=${user.id}`, {
+            headers: {
+              Authorization: `Bearer ${channelInfo.token}`,
+              "Client-ID": `${channelInfo.clientId}`
+            }
+          });
+          const isSubscriber = info.status === 200;
+          return __spreadProps(__spreadValues({}, user), {
+            isSubscriber
+          });
+        } catch (e) {
+          return __spreadProps(__spreadValues({}, user), {
+            isSubscriber: false
+          });
+        }
+      }));
+      embellishedUsers = embellishedUsers.concat(embellishedChunk);
+      await wait(200);
+    }
+    return embellishedUsers;
+  }
+  async function getInstantGiveaway(channelInfo, subLuck = 2, followerOnly = true) {
+    let viewers = await fetch(`https://discord-slash-commands.vercel.app/api/twitch-chatters?channel=${channelInfo.login}`).then((res) => res.json()).then((d) => d.chatters.viewers);
+    if (followerOnly) {
+      const mappedUsers = await getUsersFromNames(channelInfo, viewers);
+      const [withFollowers, withSub] = await Promise.all([
+        getFollowerInfo(channelInfo, mappedUsers, 5),
+        getUsersSubscriptionInfo(channelInfo, mappedUsers)
+      ]);
+      const combined = withFollowers.map((i) => {
+        var _a;
+        ;
+        i.isSubscriber = ((_a = withSub.find((s) => s.id === i.id)) == null ? void 0 : _a.isSubscriber) || false;
+        return i;
+      });
+      viewers = combined.filter((i) => i.follows).flatMap((c) => c.isSubscriber ? Array.from({ length: subLuck }, () => c) : c).map((i) => i.login);
+    }
     const winner = getRandomArrayItem(viewers);
     return winner;
   }
-  function getChatGiveaway(chatItems, chatCommand) {
-    const users = [
-      ...new Set(chatItems.filter((c) => chatCommand ? c.msg.toLowerCase().includes(chatCommand.toLowerCase()) : true).map((c) => c.username))
-    ];
-    return getRandomArrayItem(users);
+  var wait = async (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  async function getFollowerInfo(channelInfo, mappedUsers, chunkSize = 5) {
+    const chunkedUsers = chunkArray(mappedUsers, chunkSize);
+    let embellishedUsers = [];
+    for (const chunk of chunkedUsers) {
+      const embellishedChunk = await Promise.all(chunk.map(async (user) => {
+        const userId = user.id;
+        const info = await fetch(`https://api.twitch.tv/helix/users/follows?from_id=${userId}&to_id=${channelInfo.userId}`, {
+          headers: {
+            Authorization: `Bearer ${channelInfo.token}`,
+            "Client-ID": `${channelInfo.clientId}`
+          }
+        }).then((res) => res.json());
+        return __spreadProps(__spreadValues({}, user), {
+          follows: info.data.total === 1
+        });
+      }));
+      embellishedUsers = embellishedUsers.concat(embellishedChunk);
+      await wait(100);
+    }
+    return embellishedUsers.filter((u) => u.follows);
+  }
+  function chunkArray(arr, chunkSize) {
+    const chunks = [];
+    for (let i = 0; i < arr.length; i += chunkSize) {
+      const chunk = arr.slice(i, i + chunkSize);
+      chunks.push(chunk);
+    }
+    return chunks;
+  }
+  async function getUsersFromNames(channelInfo, usernames) {
+    const toFind = usernames.slice(0, 1e3);
+    const chunks = chunkArray(toFind, 100);
+    console.info("[usernames]", toFind.length);
+    let users = [];
+    for (const chunk of chunks) {
+      const info = await fetch(`https://api.twitch.tv/helix/users?${chunk.map((c) => `login=${encodeURIComponent(c)}`).join("&")}`, {
+        headers: {
+          Authorization: `Bearer ${channelInfo.token}`,
+          "Client-ID": `${channelInfo.clientId}`
+        }
+      }).then((res) => res.json());
+      const mapped = info.data.map((i) => ({
+        id: i.id,
+        login: i.login,
+        displayName: i.display_name
+      }));
+      users = users.concat(mapped);
+    }
+    console.info("[users]", users.length);
+    return users;
+  }
+  async function getChatGiveaway(channelInfo, chatItems, chatCommand, subLuck = 2, followerOnly = true) {
+    let users = chatItems.filter((c) => chatCommand ? c.msg.toLowerCase().includes(chatCommand.toLowerCase()) : true).reduce((acc, c) => acc.some((i) => i.username === c.username) ? acc : acc.concat(c), []).flatMap((c) => c.isSubscriber ? Array.from({ length: subLuck }, () => c) : c);
+    if (followerOnly) {
+      const mappedUsers = await getUsersFromNames(channelInfo, users.map((u) => u.username));
+      users = await getFollowerInfo(channelInfo, mappedUsers);
+    }
+    const winner = getRandomArrayItem(users);
+    return {
+      username: winner.username,
+      isSubscriber: winner.isSubscriber,
+      id: winner.id
+    };
   }
   function removeIdx(ar, idx) {
     return ar.slice(0, idx).concat(ar.slice(idx + 1));
@@ -25764,10 +25862,10 @@ ${JSON.stringify(message, null, 4)}`);
       onClick: async () => {
         if (!channelInfo.login)
           return;
-        const giveawayWinner = await getInstantGiveaway(channelInfo.login, channelInfo.userId);
+        const giveawayWinner = await getInstantGiveaway(channelInfo);
         if (!giveawayWinner)
           return;
-        setWinners((w) => w.concat(giveawayWinner));
+        setWinners((w) => w.concat({ username: giveawayWinner }));
       }
     }, /* @__PURE__ */ import_react8.default.createElement(FaDice, {
       className: "text-2xl"
@@ -25782,7 +25880,7 @@ ${JSON.stringify(message, null, 4)}`);
     return /* @__PURE__ */ import_react8.default.createElement("button", {
       className: "bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1",
       onClick: async () => {
-        const giveawayWinner = getChatGiveaway(chatEvents, chatCommand);
+        const giveawayWinner = await getChatGiveaway(channelInfo, chatEvents, chatCommand);
         if (!giveawayWinner)
           return;
         setWinners((w) => w.concat(giveawayWinner));
@@ -25795,7 +25893,7 @@ ${JSON.stringify(message, null, 4)}`);
     return winners.length ? /* @__PURE__ */ import_react8.default.createElement("div", {
       className: "grid gap-1 grid-cols-2 mt-3"
     }, winners.map((winner, i) => /* @__PURE__ */ import_react8.default.createElement("div", {
-      key: winner,
+      key: winner.username,
       className: "bg-gray-600 text-white rounded-md overflow-hidden flex flex-row items-center justify-center px-2 py-4 text-center relative"
     }, /* @__PURE__ */ import_react8.default.createElement("div", {
       className: "text-2xl absolute left-5"
@@ -25803,7 +25901,7 @@ ${JSON.stringify(message, null, 4)}`);
       className: "text-purple-300 text-xl"
     }), " ", /* @__PURE__ */ import_react8.default.createElement("div", {
       className: "px-2"
-    }, winner, " wins!"), " ", /* @__PURE__ */ import_react8.default.createElement(GiPartyPopper, {
+    }, winner.username, " wins!"), " ", /* @__PURE__ */ import_react8.default.createElement(GiPartyPopper, {
       className: "text-purple-300 text-xl"
     }), /* @__PURE__ */ import_react8.default.createElement(FaTimes, {
       className: "text-2xl absolute right-5 text-red-500 cursor-pointer",
@@ -25850,7 +25948,7 @@ ${JSON.stringify(message, null, 4)}`);
       className: (0, import_classnames.default)("relative left-2 top-9")
     }, "Logs will appear here...") : /* @__PURE__ */ import_react8.default.createElement("div", {
       className: (0, import_classnames.default)("absolute right-0 left-0 bottom-0 overflow-y-scroll px-2 pt-1 pb-3 flex flex-col gap-1 top-8")
-    }, chatEvents.filter((c) => winners.length ? winners.includes(c.username) : true).map((c) => {
+    }, chatEvents.filter((c) => winners.length ? winners.map((c2) => c2.username).includes(c.username) : true).map((c) => {
       return /* @__PURE__ */ import_react8.default.createElement("div", {
         key: c.id
       }, /* @__PURE__ */ import_react8.default.createElement("span", {
@@ -25891,7 +25989,7 @@ ${JSON.stringify(message, null, 4)}`);
       return {
         token,
         clientId: data.client_id,
-        login: data.login === "odialo" ? "finalfantasyxiv" : data.login,
+        login: data.login === "odialo" ? "fextralife" : data.login,
         userId: data.user_id
       };
     } catch (e) {
@@ -25928,7 +26026,7 @@ ${JSON.stringify(message, null, 4)}`);
           resetChat();
           setClient(null);
         } else {
-          setClient(init(channel.login));
+          setClient(init(data.login));
         }
         history.push("/");
         setChannel(data);
