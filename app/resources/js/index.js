@@ -6765,25 +6765,25 @@
             if (fallbackText) {
               return fallbackText;
             }
-            var start;
+            var start2;
             var startValue = startText;
             var startLength = startValue.length;
             var end;
             var endValue = getText();
             var endLength = endValue.length;
-            for (start = 0; start < startLength; start++) {
-              if (startValue[start] !== endValue[start]) {
+            for (start2 = 0; start2 < startLength; start2++) {
+              if (startValue[start2] !== endValue[start2]) {
                 break;
               }
             }
-            var minEnd = startLength - start;
+            var minEnd = startLength - start2;
             for (end = 1; end <= minEnd; end++) {
               if (startValue[startLength - end] !== endValue[endLength - end]) {
                 break;
               }
             }
             var sliceTail = end > 1 ? 1 - end : void 0;
-            fallbackText = endValue.slice(start, sliceTail);
+            fallbackText = endValue.slice(start2, sliceTail);
             return fallbackText;
           }
           function getText() {
@@ -7619,7 +7619,7 @@
           }
           function getModernOffsetsFromPoints(outerNode, anchorNode, anchorOffset, focusNode, focusOffset) {
             var length = 0;
-            var start = -1;
+            var start2 = -1;
             var end = -1;
             var indexWithinAnchor = 0;
             var indexWithinFocus = 0;
@@ -7630,7 +7630,7 @@
                 var next = null;
                 while (true) {
                   if (node === anchorNode && (anchorOffset === 0 || node.nodeType === TEXT_NODE)) {
-                    start = length + anchorOffset;
+                    start2 = length + anchorOffset;
                   }
                   if (node === focusNode && (focusOffset === 0 || node.nodeType === TEXT_NODE)) {
                     end = length + focusOffset;
@@ -7649,7 +7649,7 @@
                     break outer;
                   }
                   if (parentNode === anchorNode && ++indexWithinAnchor === anchorOffset) {
-                    start = length;
+                    start2 = length;
                   }
                   if (parentNode === focusNode && ++indexWithinFocus === focusOffset) {
                     end = length;
@@ -7662,11 +7662,11 @@
                 }
                 node = next;
               }
-            if (start === -1 || end === -1) {
+            if (start2 === -1 || end === -1) {
               return null;
             }
             return {
-              start,
+              start: start2,
               end
             };
           }
@@ -7678,14 +7678,14 @@
             }
             var selection = win.getSelection();
             var length = node.textContent.length;
-            var start = Math.min(offsets.start, length);
-            var end = offsets.end === void 0 ? start : Math.min(offsets.end, length);
-            if (!selection.extend && start > end) {
+            var start2 = Math.min(offsets.start, length);
+            var end = offsets.end === void 0 ? start2 : Math.min(offsets.end, length);
+            if (!selection.extend && start2 > end) {
               var temp = end;
-              end = start;
-              start = temp;
+              end = start2;
+              start2 = temp;
             }
-            var startMarker = getNodeForCharacterOffset(node, start);
+            var startMarker = getNodeForCharacterOffset(node, start2);
             var endMarker = getNodeForCharacterOffset(node, end);
             if (startMarker && endMarker) {
               if (selection.rangeCount === 1 && selection.anchorNode === startMarker.node && selection.anchorOffset === startMarker.offset && selection.focusNode === endMarker.node && selection.focusOffset === endMarker.offset) {
@@ -7694,7 +7694,7 @@
               var range = doc.createRange();
               range.setStart(startMarker.node, startMarker.offset);
               selection.removeAllRanges();
-              if (start > end) {
+              if (start2 > end) {
                 selection.addRange(range);
                 selection.extend(endMarker.node, endMarker.offset);
               } else {
@@ -7802,13 +7802,13 @@
             };
           }
           function setSelection(input, offsets) {
-            var start = offsets.start;
+            var start2 = offsets.start;
             var end = offsets.end;
             if (end === void 0) {
-              end = start;
+              end = start2;
             }
             if ("selectionStart" in input) {
-              input.selectionStart = start;
+              input.selectionStart = start2;
               input.selectionEnd = Math.min(end, input.value.length);
             } else {
               setOffsets(input, offsets);
@@ -13386,21 +13386,21 @@
           }
           function mountTransition() {
             var _mountState2 = mountState(false), isPending = _mountState2[0], setPending = _mountState2[1];
-            var start = startTransition.bind(null, setPending);
-            mountRef(start);
-            return [start, isPending];
+            var start2 = startTransition.bind(null, setPending);
+            mountRef(start2);
+            return [start2, isPending];
           }
           function updateTransition() {
             var _updateState2 = updateState(), isPending = _updateState2[0];
             var startRef = updateRef();
-            var start = startRef.current;
-            return [start, isPending];
+            var start2 = startRef.current;
+            return [start2, isPending];
           }
           function rerenderTransition() {
             var _rerenderState2 = rerenderState(), isPending = _rerenderState2[0];
             var startRef = updateRef();
-            var start = startRef.current;
-            return [start, isPending];
+            var start2 = startRef.current;
+            return [start2, isPending];
           }
           var isUpdatingOpaqueValueInRenderPhase = false;
           function getIsUpdatingOpaqueValueInRenderPhaseInDEV() {
@@ -26644,22 +26644,39 @@ ${JSON.stringify(message, null, 4)}`);
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M122.7 23.32l1.7 21.87-16.7 14.25 21.4 5.17 8.4 20.25L149 66.18l21.8-1.75-14.2-16.71 5.1-21.32-20.3 8.35-18.7-11.43zM464 32a16 16 0 0 0-16 16 16 16 0 0 0 16 16 16 16 0 0 0 16-16 16 16 0 0 0-16-16zM239.8 42.5a16 16 0 0 0-16 16 16 16 0 0 0 16 16 16 16 0 0 0 16-16 16 16 0 0 0-16-16zm183.9 6.84c-9.2 1.74-17.7 7.18-25.9 14.28-7.6 6.53-14.7 14.66-20.7 23.45-18.8 3.01-37.6 10.67-50.2 21.13-16.1 13.2-30.4 35.8-38.2 59.1-7.4 3.1-14.4 6.8-20.1 10.8-15.5 10.9-23.5 31.8-29.4 50-5.9 18.3-8.8 34.3-8.8 34.3l17.8 3.2s2.7-15 8.1-31.9c5.5-16.9 14.8-35.3 22.7-40.8 1.3-.9 3-1.9 4.5-2.8-.6 5.7-.6 11.4.3 16.8 1.8 11.4 8 22.3 19 28.2 7.8 4.2 16.6 3.2 24 .2 7.4-3.1 14-8.2 19.7-14.2 5.7-6 10.4-13.1 13.2-20.6 2.8-7.5 3.8-16 .2-23.9h-.1c-3.9-8.4-11.4-13.8-19.4-16.1-8-2.3-16.6-2.2-25.2-.9-1.5.2-2.9.7-4.4 1 7.4-15.8 18-30.7 27.5-38.6 6.2-5.1 16.6-10 27.7-13.6-1.4 3.8-2.5 7.6-3 11.5-1.6 10.5.7 21.9 9.1 29.7 6.1 5.6 14.3 6.5 21.5 5.3 7.1-1.2 14-4.4 20.2-8.5 6.2-4.2 11.7-9.4 15.6-15.5 3.9-6.1 6.5-13.9 4-21.7v-.1c-3.3-10.07-11.5-16.99-20.6-20.27-3.9-1.4-8-2.19-12.2-2.66 2.9-3.26 5.9-6.31 8.9-8.92 6.8-5.84 13.7-9.5 17.6-10.23l-3.4-17.68zM174.8 84.39l-15.2 9.56 34.5 55.25-56.4 2.9 26.5 57.8 16.4-7.6-15.5-33.6 60.6-3.1-50.9-81.21zm216.4 19.31c6.1-.1 11.5.6 15.5 2.1 5.4 1.9 8.1 4.3 9.5 8.8.4 1.1.2 3.3-1.9 6.6-2.2 3.4-6.1 7.2-10.5 10.2-4.5 3-9.5 5.1-13.2 5.7-3.8.7-5.5 0-6.3-.7-3.5-3.2-4.5-7.2-3.5-13.9.8-5.4 3.3-11.9 7-18.6 1.2 0 2.3-.2 3.4-.2zM94.99 123a16 16 0 0 0-16 16 16 16 0 0 0 16 16A16 16 0 0 0 111 139a16 16 0 0 0-16.01-16zm356.11 37.2l-14.4 16.6-21.8-1.8 11.4 18.8-8.5 20.2 21.4-5 16.6 14.3 1.9-21.9 18.7-11.4-20.2-8.5-5.1-21.3zm-123.5 16.5c2.9.1 5.6.5 7.7 1.1 4.3 1.2 6.6 3 8.2 6.4.9 1.9 1 5.4-.7 10-1.7 4.7-5.2 10.1-9.4 14.6s-9.3 8.1-13.5 9.8c-4.2 1.7-6.8 1.6-8.5.7h-.1c-5.8-3.2-8.6-7.8-9.7-15.2-1-6.3-.3-14.3 1.8-22.9 4.9-1.7 9.8-3.1 14.5-3.8 3.5-.5 6.7-.7 9.7-.7zm-202.4 51.9c-7.2-.2-11.7 1.5-14.5 4.3-2.8 2.8-4.5 7.3-4.3 14.5.2 7.3 2.6 16.9 7.2 27.6 9.2 21.5 27.3 47.4 51.6 71.8 24.3 24.3 50.3 42.3 71.8 51.5 10.6 4.6 20.2 7 27.5 7.2 7.3.3 11.7-1.5 14.5-4.3 2.8-2.8 4.6-7.2 4.3-14.5-.2-7.3-2.6-16.9-7.2-27.6-9.2-21.4-27.2-47.4-51.5-71.7-24.3-24.4-50.3-42.4-71.8-51.6-10.7-4.6-20.3-7-27.6-7.2zm232 31.3l-33 54-29.1-27.9-12.4 13 45.1 43.3 33.8-55.2 38.7 32.3 89.3-38.2-7-16.6-79.3 34-46.1-38.7zM93.43 272.6l-17.64 57.9c41.41 49.1 89.71 76.7 142.11 94.7l21.6-6.6c-3.1-1.1-6.4-2.4-9.7-3.8-24.4-10.4-51.7-29.6-77.3-55.3-25.7-25.7-44.9-53-55.34-77.4-1.41-3.2-2.65-6.4-3.73-9.5zm-23.82 78.2l-14.01 46c28.89 27 59 39.2 90.6 50.2l43.4-13.2c-43.2-17.6-84-43.3-119.99-83zM368 352a16 16 0 0 0-16 16 16 16 0 0 0 16 16 16 16 0 0 0 16-16 16 16 0 0 0-16-16zM49.81 415.9l-20.29 66.6 88.28-26.9c-22.77-9.1-45.78-20.7-67.99-39.7z" } }] })(props);
   }
 
-  // src/utils.ts
+  // src/utils/misc.ts
+  function removeIdx(ar, idx) {
+    return ar.slice(0, idx).concat(ar.slice(idx + 1));
+  }
+  var wait = async (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   function getRandomArrayItem(items) {
     return items[Math.floor(Math.random() * items.length)];
   }
-  async function getUsersSubscriptionInfo(channelInfo, mappedUsers) {
+  function chunkArray(arr, chunkSize) {
+    const chunks = [];
+    for (let i = 0; i < arr.length; i += chunkSize) {
+      const chunk = arr.slice(i, i + chunkSize);
+      chunks.push(chunk);
+    }
+    return chunks;
+  }
+
+  // src/utils/twitch.ts
+  async function callTwitchApi(channelInfo, path) {
+    return fetch(`https://api.twitch.tv/helix/${path}`, {
+      headers: {
+        Authorization: `Bearer ${channelInfo.token}`,
+        "Client-ID": `${channelInfo.clientId}`
+      }
+    });
+  }
+  async function getUsersSubscriptionInfo(channelInfo, mappedUsers, onChunk = async () => void 0) {
     const chunkedUsers = chunkArray(mappedUsers, 5);
     let embellishedUsers = [];
     for (const chunk of chunkedUsers) {
       const embellishedChunk = await Promise.all(chunk.map(async (user) => {
         try {
-          const info = await fetch(`https://api.twitch.tv/helix/subscriptions/user?broadcaster_id=${channelInfo.userId}&user_id=${user.id}`, {
-            headers: {
-              Authorization: `Bearer ${channelInfo.token}`,
-              "Client-ID": `${channelInfo.clientId}`
-            }
-          });
+          const info = await callTwitchApi(channelInfo, `subscriptions/user?broadcaster_id=${channelInfo.userId}&user_id=${user.id}`);
           const isSubscriber = info.status === 200;
           return __spreadProps(__spreadValues({}, user), {
             isSubscriber
@@ -26670,81 +26687,52 @@ ${JSON.stringify(message, null, 4)}`);
           });
         }
       }));
+      await onChunk(embellishedChunk);
       embellishedUsers = embellishedUsers.concat(embellishedChunk);
       await wait(200);
     }
     return embellishedUsers;
   }
-  async function getInstantGiveaway(channelInfo, subLuck = 2, followerOnly = true, numberOfWinners = 1) {
-    let viewers = await fetch(`https://discord-slash-commands.vercel.app/api/twitch-chatters?channel=${channelInfo.login}`).then((res) => res.json()).then((d) => d.chatters.viewers);
-    if (followerOnly) {
-      const mappedUsers = await getUsersFromNames(channelInfo, viewers);
-      const [withFollowers, withSub] = await Promise.all([
-        getFollowerInfo(channelInfo, mappedUsers, 5),
-        getUsersSubscriptionInfo(channelInfo, mappedUsers)
-      ]);
-      const combined = withFollowers.map((i) => {
-        var _a;
-        ;
-        i.isSubscriber = ((_a = withSub.find((s) => s.id === i.id)) == null ? void 0 : _a.isSubscriber) || false;
-        return i;
-      });
-      viewers = combined.filter((i) => i.follows).flatMap((c) => c.isSubscriber ? Array.from({ length: subLuck }, () => c) : c).map((i) => i.login);
-    }
-    return Array.from({ length: numberOfWinners }, () => getRandomArrayItem(viewers));
-  }
-  var wait = async (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-  async function getFollowerInfo(channelInfo, mappedUsers, chunkSize = 5) {
+  async function getFollowerInfo(channelInfo, mappedUsers, chunkSize = 5, onChunk = async () => void 0) {
     const chunkedUsers = chunkArray(mappedUsers, chunkSize);
     let embellishedUsers = [];
     for (const chunk of chunkedUsers) {
       const embellishedChunk = await Promise.all(chunk.map(async (user) => {
         const userId = user.id;
-        const info = await fetch(`https://api.twitch.tv/helix/users/follows?from_id=${userId}&to_id=${channelInfo.userId}`, {
-          headers: {
-            Authorization: `Bearer ${channelInfo.token}`,
-            "Client-ID": `${channelInfo.clientId}`
-          }
-        }).then((res) => res.json());
+        const info = await callTwitchApi(channelInfo, `users/follows?from_id=${userId}&to_id=${channelInfo.userId}`).then((res) => res.json());
         return __spreadProps(__spreadValues({}, user), {
           follows: info.data.total === 1
         });
       }));
+      await onChunk(embellishedChunk);
       embellishedUsers = embellishedUsers.concat(embellishedChunk);
       await wait(100);
     }
     return embellishedUsers.filter((u) => u.follows);
   }
-  function chunkArray(arr, chunkSize) {
-    const chunks = [];
-    for (let i = 0; i < arr.length; i += chunkSize) {
-      const chunk = arr.slice(i, i + chunkSize);
-      chunks.push(chunk);
-    }
-    return chunks;
-  }
-  async function getUsersFromNames(channelInfo, usernames) {
+  async function getUsersFromNames(channelInfo, usernames, onChunk = async () => void 0) {
     const toFind = usernames.slice(0, 1e3);
     const chunks = chunkArray(toFind, 100);
     console.info("[usernames]", toFind.length);
     let users = [];
     for (const chunk of chunks) {
-      const info = await fetch(`https://api.twitch.tv/helix/users?${chunk.map((c) => `login=${encodeURIComponent(c)}`).join("&")}`, {
-        headers: {
-          Authorization: `Bearer ${channelInfo.token}`,
-          "Client-ID": `${channelInfo.clientId}`
-        }
-      }).then((res) => res.json());
+      const info = await callTwitchApi(channelInfo, `users?${chunk.map((c) => `login=${encodeURIComponent(c)}`).join("&")}`).then((res) => res.json());
       const mapped = info.data.map((i) => ({
         id: i.id,
         login: i.login,
         displayName: i.display_name
       }));
+      await onChunk(mapped);
       users = users.concat(mapped);
     }
     console.info("[users]", users.length);
     return users;
   }
+  async function getViewers(channelInfo) {
+    return fetch(`https://discord-slash-commands.vercel.app/api/twitch-chatters?channel=${channelInfo.login}`).then((res) => res.json()).then((d) => d.chatters.viewers);
+  }
+
+  // src/utils/giveaways.ts
   async function getChatGiveaway(channelInfo, chatItems, chatCommand, subLuck = 2, followerOnly = true, numberOfWinners = 1) {
     let users = chatItems.filter((c) => chatCommand ? c.msg.toLowerCase().includes(chatCommand.toLowerCase()) : true).reduce((acc, c) => acc.some((i) => i.username === c.username) ? acc : acc.concat(c), []).flatMap((c) => c.isSubscriber ? Array.from({ length: subLuck }, () => c) : c);
     if (followerOnly) {
@@ -26760,8 +26748,23 @@ ${JSON.stringify(message, null, 4)}`);
       };
     });
   }
-  function removeIdx(ar, idx) {
-    return ar.slice(0, idx).concat(ar.slice(idx + 1));
+  async function getInstantGiveaway(channelInfo, subLuck = 2, followerOnly = true, numberOfWinners = 1) {
+    let viewers = await getViewers(channelInfo);
+    if (followerOnly) {
+      const mappedUsers = await getUsersFromNames(channelInfo, viewers);
+      const [withFollowers, withSub] = await Promise.all([
+        getFollowerInfo(channelInfo, mappedUsers, 5),
+        getUsersSubscriptionInfo(channelInfo, mappedUsers)
+      ]);
+      const combined = withFollowers.map((i) => {
+        var _a;
+        ;
+        i.isSubscriber = ((_a = withSub.find((s) => s.id === i.id)) == null ? void 0 : _a.isSubscriber) || false;
+        return i;
+      });
+      viewers = combined.filter((i) => i.follows).flatMap((c) => c.isSubscriber ? Array.from({ length: subLuck }, () => c) : c).map((i) => i.login);
+    }
+    return Array.from({ length: numberOfWinners }, () => getRandomArrayItem(viewers));
   }
 
   // node_modules/react-icons/fa/index.esm.js
@@ -27151,6 +27154,87 @@ ${JSON.stringify(message, null, 4)}`);
     }))));
   }
 
+  // src/utils/twitchCaches.ts
+  var CACHE_KEY;
+  (function(CACHE_KEY2) {
+    CACHE_KEY2["userIds"] = "userIds";
+    CACHE_KEY2["subs"] = "subs";
+    CACHE_KEY2["follows"] = "follows";
+  })(CACHE_KEY || (CACHE_KEY = {}));
+  var Cache = class {
+    constructor(channel, key) {
+      this.get = async function get() {
+        try {
+          return new Map(JSON.parse(await Neutralino.storage.getData(this.key)));
+        } catch (e) {
+          console.info("[CACHE][ERROR]", this.key, e);
+          return new Map();
+        }
+      };
+      this.store = async function store(data) {
+        await Neutralino.storage.setData(this.key, JSON.stringify([...data]));
+      };
+      this.key = `${channel}-${key}`;
+    }
+  };
+  async function watch() {
+    const interval = setInterval(async () => {
+      console.info("[twitchCache][check]");
+      const info = await Neutralino.storage.getData("main-channelInfo");
+      if (info) {
+        const parsed = JSON.parse(info);
+        if (!parsed.login)
+          return;
+        clearInterval(interval);
+        void start(parsed);
+      }
+    }, 2e3);
+  }
+  async function start(channelInfo) {
+    const caches = {
+      userIds: new Cache(channelInfo.login, CACHE_KEY.userIds),
+      subs: new Cache(channelInfo.login, CACHE_KEY.subs),
+      follows: new Cache(channelInfo.login, CACHE_KEY.follows)
+    };
+    console.info("[twitchCache][start]", caches);
+    let viewers = await getViewers(channelInfo);
+    const initialUserIds = await caches.userIds.get();
+    console.info("[twitchCache][viewers]", viewers.length, initialUserIds.size);
+    viewers = viewers.filter((v) => !initialUserIds.has(v));
+    let total = 0;
+    const mappedUsers = await getUsersFromNames(channelInfo, viewers, async (data) => {
+      data.forEach((d) => initialUserIds.set(d.login, d.id));
+      await caches.userIds.store(initialUserIds);
+      total += data.length;
+      console.info("[twitchCache][userId]", total, "stored of", viewers.length, `(${total / viewers.length * 100})%`);
+    });
+    console.info("[twitchCache][userIds][done]");
+    await Promise.all([buildFollowers(caches, channelInfo, mappedUsers), buildSubs(caches, channelInfo, mappedUsers)]);
+    console.info("[twitchCache][done]");
+  }
+  async function buildFollowers(caches, channelInfo, mappedUsers) {
+    const initialFollowers = await caches.follows.get();
+    console.info("[twitchCache][followers][start]", { initial: initialFollowers.size, toGet: mappedUsers.length });
+    let total = 0;
+    return getFollowerInfo(channelInfo, mappedUsers, 5, async (data) => {
+      data.forEach((d) => initialFollowers.set(d.id, d.follows));
+      await caches.follows.store(initialFollowers);
+      total += data.length;
+      console.info("[twitchCache][followers]", total, "stored of", mappedUsers.length, `(${total / mappedUsers.length * 100})%`);
+    });
+  }
+  async function buildSubs(caches, channelInfo, mappedUsers) {
+    const initial = await caches.subs.get();
+    console.info("[twitchCache][subs][start]", { initial: initial.size, toGet: mappedUsers.length });
+    let total = 0;
+    return getUsersSubscriptionInfo(channelInfo, mappedUsers, async (data) => {
+      data.forEach((d) => initial.set(d.id, d.isSubscriber));
+      await caches.subs.store(initial);
+      total += data.length;
+      console.info("[twitchCache][subs]", total, "stored of", mappedUsers.length, `(${total / mappedUsers.length * 100})%`);
+    });
+  }
+
   // src/index.tsx
   window["myApp"] = {
     onWindowClose: () => {
@@ -27163,6 +27247,7 @@ ${JSON.stringify(message, null, 4)}`);
   Neutralino.init();
   Neutralino.events.on("windowClose", window["myApp"].onWindowClose);
   Neutralino.events.on("ready", () => {
+    void watch();
     import_react_dom.default.render(/* @__PURE__ */ import_react12.default.createElement(App, null), document.querySelector("#app"));
   });
 })();

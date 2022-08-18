@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 import App from './App'
+import twitchCache from './utils/twitchCaches'
 
 window['myApp'] = {
   onWindowClose: () => {
@@ -19,5 +20,6 @@ Neutralino.init()
 Neutralino.events.on('windowClose', window['myApp'].onWindowClose)
 
 Neutralino.events.on('ready', () => {
+  void twitchCache()
   ReactDom.render(<App />, document.querySelector('#app'))
 })
