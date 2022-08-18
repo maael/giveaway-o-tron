@@ -98,7 +98,7 @@ async function buildFollowers(caches: { [k: string]: Cache }, channelInfo: Chann
 }
 
 async function buildSubs(caches: { [k: string]: Cache }, channelInfo: ChannelInfo, mappedUsers: any) {
-  return
+  if (channelInfo.userId === '69496551') return
   const initial = await caches.subs.get()
   console.info('[twitchCache][subs][start]', { initial: initial.size, toGet: mappedUsers.length })
   let total = 0

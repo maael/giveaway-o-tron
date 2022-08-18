@@ -23,10 +23,11 @@ export class ChatEvent extends EventTarget {
 
 export const chatEmitter = new ChatEvent()
 
-export function useChatEvents(onChat: (chat: ChatItem) => void): [ChatItem[], () => void] {
+export function useChatEvents(paused: boolean, onChat: (chat: ChatItem) => void): [ChatItem[], () => void] {
   const [chat, setChat] = useState<ChatItem[]>([])
   useEffect(() => {
     function handleChat(d: CustomEvent<ChatItem>) {
+      if (paused) return
       setChat((c) => c.concat(d.detail))
       onChat(d.detail)
     }
@@ -34,7 +35,7 @@ export function useChatEvents(onChat: (chat: ChatItem) => void): [ChatItem[], ()
     return () => {
       chatEmitter.removeEventListener('chat', handleChat)
     }
-  }, [setChat, onChat])
+  }, [setChat, onChat, paused])
   const resetChat = useCallback(() => {
     setChat([])
   }, [setChat])
@@ -50,8 +51,6 @@ export default function init(channelInfo: ChannelInfo) {
       password: `oauth:${channelInfo.token}`,
     },
   }
-
-  console.info(opts)
 
   // Create a client with our options
   const client = new tmi.client(opts)

@@ -1,30 +1,36 @@
 import React from 'react'
 import { Range, getTrackBackground } from 'react-range'
 
-export default function Slider({
-  value,
-  label,
-  min,
-  max,
-  onChange,
-}: {
-  label: string
+interface Props {
+  label?: string
   value: number
   min: number
   max: number
+  step?: number
   onChange: (val: number) => void
-}) {
+}
+
+export default function SliderOuter(props: Props) {
+  return (
+    <div className="flex-1 border border-purple-600 rounded-md flex relative">
+      <div className="bg-purple-600 px-2 py-1 flex-0">{props.label}</div>
+      <div className="px-2 flex-1 flex justify-center items-center">
+        <SliderInner {...props} />
+      </div>
+      <div className="justify-center items-center text-center flex pr-4">{props.value}</div>
+    </div>
+  )
+}
+
+export function SliderInner({ value, label, min, max, step = 1, onChange }: Props) {
   const values = [value]
   return (
     <div className="flex-1 px-3">
-      <div>
-        {label}: {values[0]}
-      </div>
-      <div className="mt-3 mb-4">
+      <div className="my-3">
         <Range
           min={min}
           max={max}
-          step={1}
+          step={step}
           values={values}
           onChange={(values) => onChange(values[0])}
           renderTrack={({ props, children }) => (

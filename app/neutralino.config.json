@@ -17,9 +17,9 @@
     "window": {
       "title": "Giveaway-o-tron",
       "width": 800,
-      "height": 500,
+      "height": 600,
       "minWidth": 400,
-      "minHeight": 200,
+      "minHeight": 400,
       "fullScreen": false,
       "alwaysOnTop": false,
       "enableInspector": false,

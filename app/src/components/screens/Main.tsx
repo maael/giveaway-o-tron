@@ -12,6 +12,9 @@ export default function MainScreen({
   setSettings,
   channelInfo,
   client,
+  chatPaused,
+  setChatPaused,
+  resetChat,
 }: {
   client: ReturnType<typeof chat> | null
   chatEvents: ChatItem[]
@@ -19,6 +22,9 @@ export default function MainScreen({
   setSettings: Dispatch<SetStateAction<TSettings>>
   isConnected: boolean
   channelInfo: ChannelInfo
+  chatPaused: boolean
+  setChatPaused: Dispatch<SetStateAction<Boolean>>
+  resetChat: () => void
 }) {
   const [winners, setWinners] = React.useState<WinnerUser[]>([])
   return (
@@ -34,8 +40,14 @@ export default function MainScreen({
           client={client}
         />
       </div>
-      <Settings settings={settings} setSettings={setSettings} />
-      <ChatBox chatEvents={chatEvents} winners={winners} />
+      <Settings settings={settings} setSettings={setSettings} setChatPaused={setChatPaused} resetChat={resetChat} />
+      <ChatBox
+        chatEvents={chatEvents}
+        winners={winners}
+        paused={chatPaused}
+        setPaused={setChatPaused}
+        clear={resetChat}
+      />
     </>
   )
 }

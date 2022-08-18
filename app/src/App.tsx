@@ -32,7 +32,8 @@ function InnerApp() {
   const onNewChat = React.useCallback((chat: ChatItem) => {
     console.info('[chat]', chat)
   }, [])
-  const [chatEvents, resetChat] = useChatEvents(onNewChat)
+  const [chatPaused, setChatPaused] = React.useState(false)
+  const [chatEvents, resetChat] = useChatEvents(chatPaused, onNewChat)
   const chatEventsRef = React.useRef(chatEvents)
   React.useEffect(() => {
     chatEventsRef.current = chatEvents
@@ -52,6 +53,9 @@ function InnerApp() {
             setSettings={setSettings}
             isConnected={!!client}
             channelInfo={channelInfo}
+            chatPaused={chatPaused}
+            setChatPaused={setChatPaused}
+            resetChat={resetChat}
           />
         </Route>
         <Route path="/setup" exact>
