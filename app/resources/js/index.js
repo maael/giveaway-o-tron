@@ -28697,7 +28697,7 @@ to {
         }
         giveawayWinner.forEach((w) => {
           console.info({ client });
-          client == null ? void 0 : client.say("odialo", settings.winnerMessage.replace("@name", `@${"odialo"}`));
+          client == null ? void 0 : client.say("odialo", settings.winnerMessage.replace("@name", `@${w}`));
         });
         setWinners((w) => w.concat(giveawayWinner.map((u3) => ({ username: u3 }))));
       }
@@ -28721,7 +28721,7 @@ to {
           return;
         }
         giveawayWinner.forEach((w) => {
-          client == null ? void 0 : client.say("odialo", settings.winnerMessage.replace("@name", `@${"odialo"}`));
+          client == null ? void 0 : client.say("odialo", settings.winnerMessage.replace("@name", `@${w}`));
         });
         setWinners((w) => w.concat(giveawayWinner));
       }

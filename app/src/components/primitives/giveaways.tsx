@@ -34,7 +34,7 @@ export function InstantGiveaway({
         }
         giveawayWinner.forEach((w) => {
           console.info({ client })
-          client?.say('odialo', settings.winnerMessage.replace('@name', `@${'odialo'}`))
+          client?.say('odialo', settings.winnerMessage.replace('@name', `@${w}`))
         })
         setWinners((w) => w.concat(giveawayWinner.map((u) => ({ username: u }))))
       }}
@@ -74,7 +74,7 @@ export function ChatGiveaway({
           return
         }
         giveawayWinner.forEach((w) => {
-          client?.say('odialo', settings.winnerMessage.replace('@name', `@${'odialo'}`))
+          client?.say('odialo', settings.winnerMessage.replace('@name', `@${w}`))
         })
         setWinners((w) => w.concat(giveawayWinner))
       }}
