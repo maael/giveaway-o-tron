@@ -3,15 +3,26 @@ import { MemoryRouter as Router, Switch, Route } from 'react-router-dom'
 import chat, { ChatItem, useChatEvents } from './chat'
 import useStorage from './components/hooks/useStorage'
 import MainScreen from './components/screens/Main'
+import SetupScreen from './components/screens/Setup'
 import Header from './components/primitives/Header'
-import { Settings } from './utils'
+import { ChannelInfo, Settings } from './utils'
 
 export default function App() {
+  return (
+    <Router initialEntries={['/setup']}>
+      <InnerApp />
+    </Router>
+  )
+}
+
+function InnerApp() {
   const [settings, setSettings] = useStorage<Settings>('settings', {
     autoConnect: true,
   })
   const [client, setClient] = React.useState<ReturnType<typeof chat> | null>(null)
-  const [channel, setChannel] = useStorage('channel', '', (c) => (c ? setClient(chat(c)) : null))
+  const [channelInfo, setChannelInfo] = useStorage<ChannelInfo>('channelInfo', {}, (c) =>
+    c.login ? setClient(chat(c.login)) : null
+  )
   const onNewChat = React.useCallback((chat: ChatItem) => {
     console.info('[chat]', chat)
   }, [])
@@ -21,22 +32,31 @@ export default function App() {
     chatEventsRef.current = chatEvents
   }, [chatEvents])
   React.useEffect(() => {
-    window['myApp'].setTitle(channel, !!client)
-  }, [channel, client])
+    window['myApp'].setTitle(channelInfo.login, !!client)
+  }, [channelInfo.login, client])
   return (
-    <Router initialEntries={['/']}>
-      <Header client={client} resetChat={resetChat} setClient={setClient} channel={channel} setChannel={setChannel} />
+    <>
+      <Header client={client} resetChat={resetChat} setClient={setClient} channel={channelInfo.login || ''} />
       <Switch>
-        <Route path="/">
+        <Route path="/" exact>
           <MainScreen
             chatEvents={chatEvents}
             settings={settings}
             setSettings={setSettings}
             isConnected={!!client}
-            channel={channel}
+            channelInfo={channelInfo}
+          />
+        </Route>
+        <Route path="/setup" exact>
+          <SetupScreen
+            client={client}
+            resetChat={resetChat}
+            setClient={setClient}
+            channel={channelInfo}
+            setChannel={setChannelInfo}
           />
         </Route>
       </Switch>
-    </Router>
+    </>
   )
 }

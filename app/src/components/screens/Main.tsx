@@ -2,24 +2,29 @@ import React, { Dispatch, SetStateAction, useEffect } from 'react'
 import cls from 'classnames'
 import { GiPartyPopper } from 'react-icons/gi'
 import { ChatItem } from '../../chat'
-import { Settings, getInstantGiveaway, getChatGiveaway, getTwitchUsersByLogin, removeIdx } from '../../utils'
+import {
+  Settings,
+  getInstantGiveaway,
+  getChatGiveaway,
+  getTwitchUsersByLogin,
+  removeIdx,
+  ChannelInfo,
+} from '../../utils'
 import { FaDice, FaTimes } from 'react-icons/fa'
 
 function InstantGiveaway({
-  channel,
   setWinners,
-  channelUserId,
+  channelInfo,
 }: {
-  channel: string | null
   setWinners: Dispatch<SetStateAction<string[]>>
-  channelUserId: string | null
+  channelInfo: ChannelInfo
 }) {
   return (
     <button
       className="bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1"
       onClick={async () => {
-        if (!channel) return
-        const giveawayWinner = await getInstantGiveaway(channel, channelUserId)
+        if (!channelInfo.login) return
+        const giveawayWinner = await getInstantGiveaway(channelInfo.login, channelInfo.userId!)
         if (!giveawayWinner) return
         setWinners((w) => w.concat(giveawayWinner))
       }}
@@ -32,12 +37,12 @@ function InstantGiveaway({
 function ChatGiveaway({
   chatEvents,
   setWinners,
-  channelUserId,
+  channelInfo,
   chatCommand,
 }: {
   chatEvents: ChatItem[]
   setWinners: Dispatch<SetStateAction<string[]>>
-  channelUserId: string | null
+  channelInfo: ChannelInfo
   chatCommand: string
 }) {
   return (
@@ -77,32 +82,23 @@ export default function MainScreen({
   settings,
   setSettings,
   isConnected,
-  channel,
+  channelInfo,
 }: {
   chatEvents: ChatItem[]
   settings: Settings
   setSettings: Dispatch<SetStateAction<Settings>>
   isConnected: boolean
-  channel: string | null
+  channelInfo: ChannelInfo
 }) {
   const [winners, setWinners] = React.useState<string[]>([])
-  const [channelUserId, setChannelUserId] = React.useState(null)
-  React.useEffect(() => {
-    if (!channel) return
-    ;(async () => {
-      const channelUser = (await getTwitchUsersByLogin([channel]))[0]
-      console.info({ channelUser })
-      setChannelUserId(channelUser.id)
-    })()
-  }, [channel])
   const [chatCommand, setChatCommand] = React.useState('')
   return (
     <>
       <Winner winners={winners} onClear={(idx) => setWinners((w) => removeIdx(w, idx))} />
       <div className="flex flex-row gap-2">
-        <InstantGiveaway channelUserId={channelUserId} channel={channel} setWinners={setWinners} />
+        <InstantGiveaway channelInfo={channelInfo} setWinners={setWinners} />
         <ChatGiveaway
-          channelUserId={channelUserId}
+          channelInfo={channelInfo}
           chatEvents={chatEvents}
           setWinners={setWinners}
           chatCommand={chatCommand}

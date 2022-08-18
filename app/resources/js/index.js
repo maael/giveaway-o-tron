@@ -2457,11 +2457,11 @@
       if (true) {
         (function() {
           "use strict";
-          var React10 = require_react();
+          var React11 = require_react();
           var _assign = require_object_assign();
           var Scheduler = require_scheduler();
           var tracing = require_tracing();
-          var ReactSharedInternals = React10.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React11.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function warn(format) {
             {
               for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -2493,7 +2493,7 @@
               Function.prototype.apply.call(console[level], console, argsWithFormat);
             }
           }
-          if (!React10) {
+          if (!React11) {
             {
               throw Error("ReactDOM was loaded before React. Make sure you load the React package before loading ReactDOM.");
             }
@@ -3709,7 +3709,7 @@
           var didWarnInvalidChild = false;
           function flattenChildren(children) {
             var content = "";
-            React10.Children.forEach(children, function(child) {
+            React11.Children.forEach(children, function(child) {
               if (child == null) {
                 return;
               }
@@ -3720,7 +3720,7 @@
           function validateProps(element, props) {
             {
               if (typeof props.children === "object" && props.children !== null) {
-                React10.Children.forEach(props.children, function(child) {
+                React11.Children.forEach(props.children, function(child) {
                   if (child == null) {
                     return;
                   }
@@ -10913,7 +10913,7 @@
           }
           var fakeInternalInstance = {};
           var isArray = Array.isArray;
-          var emptyRefsObject = new React10.Component().refs;
+          var emptyRefsObject = new React11.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -23738,11 +23738,11 @@ ${JSON.stringify(message, null, 4)}`);
   });
 
   // src/index.tsx
-  var import_react11 = __toModule(require_react());
+  var import_react12 = __toModule(require_react());
   var import_react_dom = __toModule(require_react_dom());
 
   // src/App.tsx
-  var import_react10 = __toModule(require_react());
+  var import_react11 = __toModule(require_react());
 
   // node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js
   function _setPrototypeOf(o, p) {
@@ -25263,6 +25263,12 @@ ${JSON.stringify(message, null, 4)}`);
     };
   }
   var useContext = import_react2.default.useContext;
+  function useHistory() {
+    if (true) {
+      !(typeof useContext === "function") ? true ? tiny_invariant_esm_default(false, "You must use React >= 16.8 in order to use useHistory()") : tiny_invariant_esm_default(false) : void 0;
+    }
+    return useContext(historyContext);
+  }
   function useLocation() {
     if (true) {
       !(typeof useContext === "function") ? true ? tiny_invariant_esm_default(false, "You must use React >= 16.8 in order to use useLocation()") : tiny_invariant_esm_default(false) : void 0;
@@ -25711,8 +25717,6 @@ ${JSON.stringify(message, null, 4)}`);
   }
 
   // src/utils.ts
-  var TOKEN = "";
-  var CLIENT_ID = "";
   function getRandomArrayItem(items) {
     return items[Math.floor(Math.random() * items.length)];
   }
@@ -25728,15 +25732,6 @@ ${JSON.stringify(message, null, 4)}`);
       ...new Set(chatItems.filter((c) => chatCommand ? c.msg.toLowerCase().includes(chatCommand.toLowerCase()) : true).map((c) => c.username))
     ];
     return getRandomArrayItem(users);
-  }
-  async function getTwitchUsersByLogin(logins) {
-    const info = await fetch(`https://api.twitch.tv/helix/users?${logins.map((l) => `login=${encodeURIComponent(l)}`).join("&")}`, {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        "Client-ID": CLIENT_ID
-      }
-    }).then((res) => res.json());
-    return info.data.map((i) => ({ id: i.id, username: i.login, displayName: i.display_name }));
   }
   function removeIdx(ar, idx) {
     return ar.slice(0, idx).concat(ar.slice(idx + 1));
@@ -25761,16 +25756,15 @@ ${JSON.stringify(message, null, 4)}`);
 
   // src/components/screens/Main.tsx
   function InstantGiveaway({
-    channel,
     setWinners,
-    channelUserId
+    channelInfo
   }) {
     return /* @__PURE__ */ import_react8.default.createElement("button", {
       className: "bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1",
       onClick: async () => {
-        if (!channel)
+        if (!channelInfo.login)
           return;
-        const giveawayWinner = await getInstantGiveaway(channel, channelUserId);
+        const giveawayWinner = await getInstantGiveaway(channelInfo.login, channelInfo.userId);
         if (!giveawayWinner)
           return;
         setWinners((w) => w.concat(giveawayWinner));
@@ -25782,7 +25776,7 @@ ${JSON.stringify(message, null, 4)}`);
   function ChatGiveaway({
     chatEvents,
     setWinners,
-    channelUserId,
+    channelInfo,
     chatCommand
   }) {
     return /* @__PURE__ */ import_react8.default.createElement("button", {
@@ -25821,19 +25815,9 @@ ${JSON.stringify(message, null, 4)}`);
     settings,
     setSettings,
     isConnected,
-    channel
+    channelInfo
   }) {
     const [winners, setWinners] = import_react8.default.useState([]);
-    const [channelUserId, setChannelUserId] = import_react8.default.useState(null);
-    import_react8.default.useEffect(() => {
-      if (!channel)
-        return;
-      (async () => {
-        const channelUser = (await getTwitchUsersByLogin([channel]))[0];
-        console.info({ channelUser });
-        setChannelUserId(channelUser.id);
-      })();
-    }, [channel]);
     const [chatCommand, setChatCommand] = import_react8.default.useState("");
     return /* @__PURE__ */ import_react8.default.createElement(import_react8.default.Fragment, null, /* @__PURE__ */ import_react8.default.createElement(Winner, {
       winners,
@@ -25841,11 +25825,10 @@ ${JSON.stringify(message, null, 4)}`);
     }), /* @__PURE__ */ import_react8.default.createElement("div", {
       className: "flex flex-row gap-2"
     }, /* @__PURE__ */ import_react8.default.createElement(InstantGiveaway, {
-      channelUserId,
-      channel,
+      channelInfo,
       setWinners
     }), /* @__PURE__ */ import_react8.default.createElement(ChatGiveaway, {
-      channelUserId,
+      channelInfo,
       chatEvents,
       setWinners,
       chatCommand
@@ -25896,33 +25879,97 @@ ${JSON.stringify(message, null, 4)}`);
     ] : [msg];
   }
 
-  // src/components/primitives/Header.tsx
+  // src/components/screens/Setup.tsx
   var import_react9 = __toModule(require_react());
-  function Header({
+  async function validateToken(token) {
+    try {
+      const data = await fetch(`https://id.twitch.tv/oauth2/validate`, {
+        headers: {
+          Authorization: `OAuth ${token}`
+        }
+      }).then((res) => res.json());
+      return {
+        token,
+        clientId: data.client_id,
+        login: data.login === "odialo" ? "finalfantasyxiv" : data.login,
+        userId: data.user_id
+      };
+    } catch (e) {
+      return null;
+    }
+  }
+  function Setup({
     client,
     resetChat,
     setClient,
     channel,
     setChannel
   }) {
-    const location = useLocation();
+    const history = useHistory();
+    import_react9.default.useEffect(() => {
+      if (channel.login) {
+        history.push("/");
+      }
+    }, [channel.login]);
     return /* @__PURE__ */ import_react9.default.createElement("div", {
+      className: "flex flex-col justify-center items-center h-full gap-2 -mt-10"
+    }, /* @__PURE__ */ import_react9.default.createElement("div", null, "Setup"), /* @__PURE__ */ import_react9.default.createElement("button", {
+      onClick: () => Neutralino.os.open("https://giveaway-o-tron.vercel.app")
+    }, "Click here to authenticate with Twitch and get the required tokens"), /* @__PURE__ */ import_react9.default.createElement("form", {
+      className: "flex flex-row",
+      onSubmit: async (e) => {
+        e.preventDefault();
+        const accessToken = e.currentTarget.elements.accessToken.value.trim();
+        const data = await validateToken(accessToken);
+        if (!data)
+          return;
+        if (client) {
+          client.disconnect();
+          resetChat();
+          setClient(null);
+        } else {
+          setClient(init(channel.login));
+        }
+        history.push("/");
+        setChannel(data);
+      }
+    }, /* @__PURE__ */ import_react9.default.createElement("input", {
+      className: "bg-gray-700 px-2 py-1 rounded-l-md border-b border-l border-purple-500 overflow-ellipsis",
+      placeholder: "Access Token",
+      name: "accessToken"
+    }), /* @__PURE__ */ import_react9.default.createElement("button", {
+      className: "bg-purple-600 text-white py-1 px-3 rounded-r-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 w-32 justify-center",
+      title: "Setup connection"
+    }, /* @__PURE__ */ import_react9.default.createElement(FaTwitch, null), " Setup")));
+  }
+
+  // src/components/primitives/Header.tsx
+  var import_react10 = __toModule(require_react());
+  function Header({
+    client,
+    resetChat,
+    setClient,
+    channel
+  }) {
+    const location = useLocation();
+    const homeRoute = channel ? "/" : "/setup";
+    return /* @__PURE__ */ import_react10.default.createElement("div", {
       className: "flex flex-row justify-start gap-2"
-    }, /* @__PURE__ */ import_react9.default.createElement("div", {
+    }, /* @__PURE__ */ import_react10.default.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ import_react9.default.createElement("div", {
+    }, /* @__PURE__ */ import_react10.default.createElement("div", {
       className: "inline-block"
-    }, /* @__PURE__ */ import_react9.default.createElement(Link, {
-      to: "/"
-    }, /* @__PURE__ */ import_react9.default.createElement("h1", {
+    }, /* @__PURE__ */ import_react10.default.createElement(Link, {
+      to: homeRoute
+    }, /* @__PURE__ */ import_react10.default.createElement("h1", {
       className: "flex flex-row gap-1 items-center text-white bg-purple-600 rounded-md px-3 py-1 transform hover:scale-105 transition-transform shadow-md"
-    }, /* @__PURE__ */ import_react9.default.createElement(FaRobot, {
+    }, /* @__PURE__ */ import_react10.default.createElement(FaRobot, {
       className: "text-2xl"
-    }), " ", location.pathname === "/" ? /* @__PURE__ */ import_react9.default.createElement("span", {
+    }), " ", location.pathname === homeRoute ? /* @__PURE__ */ import_react10.default.createElement("span", {
       className: "relative -top-0.5 ml-1"
-    }, "Giveaway-o-tron") : /* @__PURE__ */ import_react9.default.createElement(FaAngleLeft, {
+    }, "Giveaway-o-tron") : /* @__PURE__ */ import_react10.default.createElement(FaAngleLeft, {
       className: "text-xl"
-    }))))), /* @__PURE__ */ import_react9.default.createElement("form", {
+    }))))), /* @__PURE__ */ import_react10.default.createElement("form", {
       className: "flex flex-row",
       onSubmit: (e) => {
         e.preventDefault();
@@ -25934,53 +25981,64 @@ ${JSON.stringify(message, null, 4)}`);
           setClient(init(channel));
         }
       }
-    }, /* @__PURE__ */ import_react9.default.createElement("input", {
+    }, /* @__PURE__ */ import_react10.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-l-md border-b border-l border-purple-500",
       placeholder: "Channel Name",
       value: channel,
-      onChange: (e) => setChannel(e.target.value),
-      disabled: !!client,
+      disabled: true,
       title: !!client ? "Disconnect to change" : "Set channel to connect to"
-    }), /* @__PURE__ */ import_react9.default.createElement("button", {
+    }), /* @__PURE__ */ import_react10.default.createElement("button", {
       className: "bg-purple-600 text-white py-1 px-3 rounded-r-sm transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 w-32 justify-center",
       title: "Connect to chat"
-    }, /* @__PURE__ */ import_react9.default.createElement(FaTwitch, null), " ", client ? "Disconnect" : "Connect")));
+    }, /* @__PURE__ */ import_react10.default.createElement(FaTwitch, null), " ", client ? "Disconnect" : "Connect")));
   }
 
   // src/App.tsx
   function App() {
+    return /* @__PURE__ */ import_react11.default.createElement(MemoryRouter, {
+      initialEntries: ["/setup"]
+    }, /* @__PURE__ */ import_react11.default.createElement(InnerApp, null));
+  }
+  function InnerApp() {
     const [settings, setSettings] = useStorage("settings", {
       autoConnect: true
     });
-    const [client, setClient] = import_react10.default.useState(null);
-    const [channel, setChannel] = useStorage("channel", "", (c) => c ? setClient(init(c)) : null);
-    const onNewChat = import_react10.default.useCallback((chat) => {
+    const [client, setClient] = import_react11.default.useState(null);
+    const [channelInfo, setChannelInfo] = useStorage("channelInfo", {}, (c) => c.login ? setClient(init(c.login)) : null);
+    const onNewChat = import_react11.default.useCallback((chat) => {
       console.info("[chat]", chat);
     }, []);
     const [chatEvents, resetChat] = useChatEvents(onNewChat);
-    const chatEventsRef = import_react10.default.useRef(chatEvents);
-    import_react10.default.useEffect(() => {
+    const chatEventsRef = import_react11.default.useRef(chatEvents);
+    import_react11.default.useEffect(() => {
       chatEventsRef.current = chatEvents;
     }, [chatEvents]);
-    import_react10.default.useEffect(() => {
-      window["myApp"].setTitle(channel, !!client);
-    }, [channel, client]);
-    return /* @__PURE__ */ import_react10.default.createElement(MemoryRouter, {
-      initialEntries: ["/"]
-    }, /* @__PURE__ */ import_react10.default.createElement(Header, {
+    import_react11.default.useEffect(() => {
+      window["myApp"].setTitle(channelInfo.login, !!client);
+    }, [channelInfo.login, client]);
+    return /* @__PURE__ */ import_react11.default.createElement(import_react11.default.Fragment, null, /* @__PURE__ */ import_react11.default.createElement(Header, {
       client,
       resetChat,
       setClient,
-      channel,
-      setChannel
-    }), /* @__PURE__ */ import_react10.default.createElement(Switch, null, /* @__PURE__ */ import_react10.default.createElement(Route, {
-      path: "/"
-    }, /* @__PURE__ */ import_react10.default.createElement(MainScreen, {
+      channel: channelInfo.login || ""
+    }), /* @__PURE__ */ import_react11.default.createElement(Switch, null, /* @__PURE__ */ import_react11.default.createElement(Route, {
+      path: "/",
+      exact: true
+    }, /* @__PURE__ */ import_react11.default.createElement(MainScreen, {
       chatEvents,
       settings,
       setSettings,
       isConnected: !!client,
-      channel
+      channelInfo
+    })), /* @__PURE__ */ import_react11.default.createElement(Route, {
+      path: "/setup",
+      exact: true
+    }, /* @__PURE__ */ import_react11.default.createElement(Setup, {
+      client,
+      resetChat,
+      setClient,
+      channel: channelInfo,
+      setChannel: setChannelInfo
     }))));
   }
 
@@ -25996,7 +26054,7 @@ ${JSON.stringify(message, null, 4)}`);
   Neutralino.init();
   Neutralino.events.on("windowClose", window["myApp"].onWindowClose);
   Neutralino.events.on("ready", () => {
-    import_react_dom.default.render(/* @__PURE__ */ import_react11.default.createElement(App, null), document.querySelector("#app"));
+    import_react_dom.default.render(/* @__PURE__ */ import_react12.default.createElement(App, null), document.querySelector("#app"));
   });
 })();
 /*

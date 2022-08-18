@@ -8,23 +8,22 @@ export default function Header({
   resetChat,
   setClient,
   channel,
-  setChannel,
 }: {
   client: ReturnType<typeof chat> | null
   resetChat: () => void
   setClient: Dispatch<SetStateAction<ReturnType<typeof chat> | null>>
   channel: string
-  setChannel: Dispatch<SetStateAction<string>>
 }) {
   const location = useLocation()
+  const homeRoute = channel ? '/' : '/setup'
   return (
     <div className="flex flex-row justify-start gap-2">
       <div className="flex-1">
         <div className="inline-block">
-          <Link to="/">
+          <Link to={homeRoute}>
             <h1 className="flex flex-row gap-1 items-center text-white bg-purple-600 rounded-md px-3 py-1 transform hover:scale-105 transition-transform shadow-md">
               <LogoIco className="text-2xl" />{' '}
-              {location.pathname === '/' ? (
+              {location.pathname === homeRoute ? (
                 <span className="relative -top-0.5 ml-1">Giveaway-o-tron</span>
               ) : (
                 <LeftIco className="text-xl" />
@@ -50,8 +49,7 @@ export default function Header({
           className="bg-gray-700 px-2 py-1 rounded-l-md border-b border-l border-purple-500"
           placeholder="Channel Name"
           value={channel}
-          onChange={(e) => setChannel(e.target.value)}
-          disabled={!!client}
+          disabled
           title={!!client ? 'Disconnect to change' : 'Set channel to connect to'}
         />
         <button
