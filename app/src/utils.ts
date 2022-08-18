@@ -10,6 +10,13 @@ export interface Settings {
   autoConnect: boolean
 }
 
+export type ChannelInfo = Partial<{
+  token: string
+  login: string
+  userId: string
+  clientId: string
+}>
+
 export function getRandomArrayItem<T>(items: T[]) {
   return items[Math.floor(Math.random() * items.length)]
 }
