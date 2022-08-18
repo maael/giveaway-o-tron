@@ -18,6 +18,10 @@ export default function App() {
 function InnerApp() {
   const [settings, setSettings] = useStorage<Settings>('settings', {
     autoConnect: true,
+    subLuck: 2,
+    numberOfWinners: 1,
+    followersOnly: true,
+    chatCommand: '',
   })
   const [client, setClient] = React.useState<ReturnType<typeof chat> | null>(null)
   const [channelInfo, setChannelInfo] = useStorage<ChannelInfo>('channelInfo', {}, (c) =>

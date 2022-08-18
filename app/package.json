@@ -22,6 +22,7 @@
     "classnames": "^2.3.1",
     "react": "^17.0.2",
     "react-icons": "^4.3.1",
+    "react-range": "^1.8.14",
     "react-router-dom": "^5.3.0",
     "tmi.js": "^1.8.5",
     "uuid": "^8.3.2"

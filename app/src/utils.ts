@@ -3,11 +3,12 @@
 
 import { ChatItem } from './chat'
 
-const TOKEN = ''
-const CLIENT_ID = ''
-
 export interface Settings {
   autoConnect: boolean
+  subLuck: number
+  numberOfWinners: number
+  followersOnly: boolean
+  chatCommand: string
 }
 
 export type ChannelInfo = Partial<{
@@ -72,7 +73,12 @@ async function getUsersSubscriptionInfo(
   return embellishedUsers
 }
 
-export async function getInstantGiveaway(channelInfo: ChannelInfo, subLuck = 2, followerOnly: boolean = true) {
+export async function getInstantGiveaway(
+  channelInfo: ChannelInfo,
+  subLuck = 2,
+  followerOnly: boolean = true,
+  numberOfWinners: number = 1
+) {
   let viewers = await fetch(
     `https://discord-slash-commands.vercel.app/api/twitch-chatters?channel=${channelInfo.login}`
   )
@@ -93,8 +99,7 @@ export async function getInstantGiveaway(channelInfo: ChannelInfo, subLuck = 2, 
       .flatMap((c) => (c.isSubscriber ? Array.from({ length: subLuck }, () => c) : c))
       .map((i) => i.login)
   }
-  const winner = getRandomArrayItem(viewers)
-  return winner
+  return Array.from({ length: numberOfWinners }, () => getRandomArrayItem(viewers))
 }
 
 const wait = async (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
@@ -176,7 +181,8 @@ export async function getChatGiveaway(
   chatItems: ChatItem[],
   chatCommand: string,
   subLuck: number = 2,
-  followerOnly: boolean = true
+  followerOnly: boolean = true,
+  numberOfWinners: number = 1
 ) {
   let users = chatItems
     .filter((c) => (chatCommand ? c.msg.toLowerCase().includes(chatCommand.toLowerCase()) : true))
@@ -189,12 +195,15 @@ export async function getChatGiveaway(
     )
     users = (await getFollowerInfo(channelInfo, mappedUsers)) as any
   }
-  const winner = getRandomArrayItem(users)
-  return {
-    username: winner.username,
-    isSubscriber: winner.isSubscriber,
-    id: winner.id,
-  }
+
+  return Array.from({ length: numberOfWinners }, () => {
+    const winner = getRandomArrayItem(users)
+    return {
+      username: winner.username,
+      isSubscriber: winner.isSubscriber,
+      id: winner.id,
+    }
+  })
 }
 
 export function removeIdx<T>(ar: T[], idx: number): T[] {

@@ -1,25 +1,140 @@
-import React, { Dispatch, SetStateAction, useEffect } from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import cls from 'classnames'
 import { GiPartyPopper } from 'react-icons/gi'
 import { ChatItem } from '../../chat'
 import { Settings, getInstantGiveaway, getChatGiveaway, removeIdx, ChannelInfo } from '../../utils'
-import { FaDice, FaTimes } from 'react-icons/fa'
+import { FaCheck, FaDice, FaTimes } from 'react-icons/fa'
+import { Range, getTrackBackground } from 'react-range'
+
+function Slider({
+  value,
+  label,
+  min,
+  max,
+  onChange,
+}: {
+  label: string
+  value: number
+  min: number
+  max: number
+  onChange: (val: number) => void
+}) {
+  const values = [value]
+  return (
+    <div className="flex-1 px-3">
+      <div>
+        {label}: {values[0]}
+      </div>
+      <div className="mt-3 mb-4">
+        <Range
+          min={min}
+          max={max}
+          step={1}
+          values={values}
+          onChange={(values) => onChange(values[0])}
+          renderTrack={({ props, children }) => (
+            <div
+              {...props}
+              style={{
+                ...props.style,
+                height: '6px',
+                width: '100%',
+                borderRadius: '4px',
+                background: getTrackBackground({
+                  values,
+                  colors: ['#7c3aed', '#9ca3af'],
+                  min,
+                  max,
+                  rtl: false,
+                }),
+              }}
+            >
+              {children}
+            </div>
+          )}
+          renderThumb={({ props }) => (
+            <div
+              {...props}
+              style={{
+                ...props.style,
+                height: '20px',
+                width: '20px',
+                borderRadius: '4px',
+                backgroundColor: '#FFF',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                boxShadow: '0px 2px 6px #AAA',
+              }}
+            />
+          )}
+        />
+      </div>
+    </div>
+  )
+}
+
+function Settings({ settings, setSettings }: { settings: Settings; setSettings: Dispatch<SetStateAction<Settings>> }) {
+  return (
+    <div className="flex flex-row gap-2 mt-2">
+      <Slider
+        label="Sub Luck"
+        value={settings.subLuck}
+        min={1}
+        max={10}
+        onChange={(val) => setSettings((s) => ({ ...s, subLuck: val }))}
+      />
+      <Slider
+        label="Number of Winners"
+        value={settings.numberOfWinners}
+        min={1}
+        max={10}
+        onChange={(val) => setSettings((s) => ({ ...s, numberOfWinners: val }))}
+      />
+      <div className="flex-1 flex flex-row justify-center items-center gap-2">
+        Followers Only:
+        <button
+          className="rounded-md p-1 border border-white text-2xl"
+          onClick={() => setSettings((s) => ({ ...s, followersOnly: !s.followersOnly }))}
+        >
+          {settings.followersOnly ? <FaCheck /> : <FaTimes />}
+        </button>
+      </div>
+      <div className="flex flex-col justify-center items-center">
+        <input
+          className="bg-gray-700 px-2 py-1 rounded-md border-b border-purple-500"
+          placeholder="Chat command..."
+          value={settings.chatCommand}
+          onChange={(e) => setSettings((s) => ({ ...s, chatCommand: e.target.value.trim() }))}
+          title="Chat command to enter - leave empty for none"
+        />
+      </div>
+    </div>
+  )
+}
 
 function InstantGiveaway({
   setWinners,
   channelInfo,
+  settings,
 }: {
   setWinners: Dispatch<SetStateAction<Winner[]>>
   channelInfo: ChannelInfo
+  settings: Settings
 }) {
   return (
     <button
-      className="bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1"
+      className="bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none"
       onClick={async () => {
         if (!channelInfo.login) return
-        const giveawayWinner = await getInstantGiveaway(channelInfo)
-        if (!giveawayWinner) return
-        setWinners((w) => w.concat({ username: giveawayWinner }))
+        const giveawayWinner = await getInstantGiveaway(
+          channelInfo,
+          settings.subLuck,
+          settings.followersOnly,
+          settings.numberOfWinners
+        )
+        if (!giveawayWinner.length) return
+        setWinners((w) => w.concat(giveawayWinner.map((u) => ({ username: u }))))
       }}
     >
       <FaDice className="text-2xl" /> Viewers Instant Giveaway
@@ -32,17 +147,26 @@ function ChatGiveaway({
   setWinners,
   channelInfo,
   chatCommand,
+  settings,
 }: {
   chatEvents: ChatItem[]
   setWinners: Dispatch<SetStateAction<Winner[]>>
   channelInfo: ChannelInfo
   chatCommand: string
+  settings: Settings
 }) {
   return (
     <button
-      className="bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1"
+      className="bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none"
       onClick={async () => {
-        const giveawayWinner = await getChatGiveaway(channelInfo, chatEvents, chatCommand)
+        const giveawayWinner = await getChatGiveaway(
+          channelInfo,
+          chatEvents,
+          chatCommand,
+          settings.subLuck,
+          settings.followersOnly,
+          settings.numberOfWinners
+        )
         if (!giveawayWinner) return
         setWinners((w) => w.concat(giveawayWinner))
       }}
@@ -69,7 +193,10 @@ function Winner({ winners, onClear }: { winners: Winner[]; onClear: (idx: number
           <div className="text-2xl absolute left-5">{i + 1}.</div>
           <GiPartyPopper className="text-purple-300 text-xl" /> <div className="px-2">{winner.username} wins!</div>{' '}
           <GiPartyPopper className="text-purple-300 text-xl" />
-          <FaTimes className="text-2xl absolute right-5 text-red-500 cursor-pointer" onClick={() => onClear(i)} />
+          <FaTimes
+            className="text-2xl absolute right-5 text-red-500 cursor-pointer select-none"
+            onClick={() => onClear(i)}
+          />
         </div>
       ))}
     </div>
@@ -80,7 +207,6 @@ export default function MainScreen({
   chatEvents,
   settings,
   setSettings,
-  isConnected,
   channelInfo,
 }: {
   chatEvents: ChatItem[]
@@ -95,25 +221,16 @@ export default function MainScreen({
     <>
       <Winner winners={winners} onClear={(idx) => setWinners((w) => removeIdx(w, idx))} />
       <div className="flex flex-row gap-2">
-        <InstantGiveaway channelInfo={channelInfo} setWinners={setWinners} />
+        <InstantGiveaway settings={settings} channelInfo={channelInfo} setWinners={setWinners} />
         <ChatGiveaway
+          settings={settings}
           channelInfo={channelInfo}
           chatEvents={chatEvents}
           setWinners={setWinners}
           chatCommand={chatCommand}
         />
       </div>
-      <div className="mt-2 flex justify-center items-center">
-        <div>
-          <input
-            className="bg-gray-700 px-2 py-1 rounded-md border-b border-purple-500"
-            placeholder="Chat command..."
-            value={chatCommand}
-            onChange={(e) => setChatCommand(e.target.value.trim())}
-            title="Chat command to enter - leave empty for none"
-          />
-        </div>
-      </div>
+      <Settings settings={settings} setSettings={setSettings} />
       <div className="mt-2 rounded-md bg-gray-700 flex-1 flex flex-col relative overflow-hidden">
         <div className="bg-gray-600 absolute top-0 right-0 left-0 h-8 flex justify-between px-10 items-center text-white">
           <div>
