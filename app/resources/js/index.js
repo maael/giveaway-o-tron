@@ -27151,6 +27151,7 @@ to {
   }
 
   // src/utils/twitch.ts
+  var BOTS = ["streamelements", "streamlabs", "nightbot"];
   async function callTwitchApi(channelInfo, path) {
     const res = await fetch(`https://api.twitch.tv/helix/${path}`, {
       headers: {
@@ -27171,7 +27172,7 @@ to {
     return res;
   }
   async function getViewers(channelInfo) {
-    return fetch(`https://discord-slash-commands.vercel.app/api/twitch-chatters?channel=${channelInfo.login}`).then((res) => res.json()).then((d3) => d3.chatters.viewers);
+    return fetch(`https://discord-slash-commands.vercel.app/api/twitch-chatters?channel=${channelInfo.login}`).then((res) => res.json()).then((d3) => d3.chatters.viewers.concat(d3.chatters.moderators).concat(d3.chatters.vips).concat(d3.chatters.admins).concat(d3.chatters.staff).concat(d3.chatters.global_mods).filter((n3) => !BOTS.includes(n3)));
   }
   var dumbFollowersCache = new Map();
   async function getFollowers(channelInfo) {

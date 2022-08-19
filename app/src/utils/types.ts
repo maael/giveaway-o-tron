@@ -21,5 +21,9 @@ export interface ChattersApiData {
   chatters: {
     viewers: string[]
     vips: string[]
+    moderators: string[]
+    staff: string[]
+    admins: string[]
+    global_mods: string[]
   }
 }

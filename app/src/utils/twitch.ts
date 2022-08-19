@@ -4,6 +4,8 @@ import toast from 'react-hot-toast'
 import { Cache, CACHE_KEY } from './twitchCaches'
 import { refreshTokenFlow } from './auth'
 
+const BOTS = ['streamelements', 'streamlabs', 'nightbot']
+
 async function callTwitchApi(channelInfo: ChannelInfo, path: string) {
   const res = await fetch(`https://api.twitch.tv/helix/${path}`, {
     headers: {
@@ -27,7 +29,15 @@ async function callTwitchApi(channelInfo: ChannelInfo, path: string) {
 export async function getViewers(channelInfo: ChannelInfo) {
   return fetch(`https://discord-slash-commands.vercel.app/api/twitch-chatters?channel=${channelInfo.login}`)
     .then<ChattersApiData>((res) => res.json())
-    .then((d) => d.chatters.viewers)
+    .then((d) =>
+      d.chatters.viewers
+        .concat(d.chatters.moderators)
+        .concat(d.chatters.vips)
+        .concat(d.chatters.admins)
+        .concat(d.chatters.staff)
+        .concat(d.chatters.global_mods)
+        .filter((n) => !BOTS.includes(n))
+    )
 }
 
 interface DumbItem {
