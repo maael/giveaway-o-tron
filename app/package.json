@@ -7,7 +7,7 @@
     "build-js": "esbuild src/index.jsx --bundle --target=chrome60,firefox60,safari11,edge18 --outfile=resources/js/index.js",
     "build-css": "postcss src/styles.css -o resources/styles.css",
     "watch-src": "esbuild src/index.jsx --bundle --target=chrome60,firefox60,safari11,edge18 --outfile=resources/js/index.js --watch",
-    "run": "neu run --window-enable-inspector=true --window-always-on-top=true",
+    "run": "neu run",
     "watch-css": "postcss src/styles.css -o resources/styles.css -w",
     "dev": "run-p run watch-src watch-css",
     "prebuild": "rimraf dist",
