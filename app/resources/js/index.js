@@ -28645,7 +28645,7 @@ to {
       renderer: countDownRenderer,
       date: Date.now() + value,
       onComplete: () => {
-        Et.success("Timer finished! Choosing winners...", { position: "bottom-center" });
+        Et.success("Timer finished! Chat paused, do a giveaway...", { position: "bottom-center" });
         setChatPaused(true);
       }
     }), /* @__PURE__ */ import_react13.default.createElement(FaTimes, {

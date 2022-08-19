@@ -38,7 +38,7 @@ const Time = React.memo(function Time({ setChatPaused, resetChat }: Pick<Props, 
         renderer={countDownRenderer}
         date={Date.now() + value}
         onComplete={() => {
-          toast.success('Timer finished! Choosing winners...', { position: 'bottom-center' })
+          toast.success('Timer finished! Chat paused, do a giveaway...', { position: 'bottom-center' })
           setChatPaused(true)
         }}
       />
