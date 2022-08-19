@@ -6765,25 +6765,25 @@
             if (fallbackText) {
               return fallbackText;
             }
-            var start2;
+            var start;
             var startValue = startText;
             var startLength = startValue.length;
             var end;
             var endValue = getText();
             var endLength = endValue.length;
-            for (start2 = 0; start2 < startLength; start2++) {
-              if (startValue[start2] !== endValue[start2]) {
+            for (start = 0; start < startLength; start++) {
+              if (startValue[start] !== endValue[start]) {
                 break;
               }
             }
-            var minEnd = startLength - start2;
+            var minEnd = startLength - start;
             for (end = 1; end <= minEnd; end++) {
               if (startValue[startLength - end] !== endValue[endLength - end]) {
                 break;
               }
             }
             var sliceTail = end > 1 ? 1 - end : void 0;
-            fallbackText = endValue.slice(start2, sliceTail);
+            fallbackText = endValue.slice(start, sliceTail);
             return fallbackText;
           }
           function getText() {
@@ -7619,7 +7619,7 @@
           }
           function getModernOffsetsFromPoints(outerNode, anchorNode, anchorOffset, focusNode, focusOffset) {
             var length = 0;
-            var start2 = -1;
+            var start = -1;
             var end = -1;
             var indexWithinAnchor = 0;
             var indexWithinFocus = 0;
@@ -7630,7 +7630,7 @@
                 var next = null;
                 while (true) {
                   if (node === anchorNode && (anchorOffset === 0 || node.nodeType === TEXT_NODE)) {
-                    start2 = length + anchorOffset;
+                    start = length + anchorOffset;
                   }
                   if (node === focusNode && (focusOffset === 0 || node.nodeType === TEXT_NODE)) {
                     end = length + focusOffset;
@@ -7649,7 +7649,7 @@
                     break outer;
                   }
                   if (parentNode === anchorNode && ++indexWithinAnchor === anchorOffset) {
-                    start2 = length;
+                    start = length;
                   }
                   if (parentNode === focusNode && ++indexWithinFocus === focusOffset) {
                     end = length;
@@ -7662,11 +7662,11 @@
                 }
                 node = next;
               }
-            if (start2 === -1 || end === -1) {
+            if (start === -1 || end === -1) {
               return null;
             }
             return {
-              start: start2,
+              start,
               end
             };
           }
@@ -7678,14 +7678,14 @@
             }
             var selection = win.getSelection();
             var length = node.textContent.length;
-            var start2 = Math.min(offsets.start, length);
-            var end = offsets.end === void 0 ? start2 : Math.min(offsets.end, length);
-            if (!selection.extend && start2 > end) {
+            var start = Math.min(offsets.start, length);
+            var end = offsets.end === void 0 ? start : Math.min(offsets.end, length);
+            if (!selection.extend && start > end) {
               var temp = end;
-              end = start2;
-              start2 = temp;
+              end = start;
+              start = temp;
             }
-            var startMarker = getNodeForCharacterOffset(node, start2);
+            var startMarker = getNodeForCharacterOffset(node, start);
             var endMarker = getNodeForCharacterOffset(node, end);
             if (startMarker && endMarker) {
               if (selection.rangeCount === 1 && selection.anchorNode === startMarker.node && selection.anchorOffset === startMarker.offset && selection.focusNode === endMarker.node && selection.focusOffset === endMarker.offset) {
@@ -7694,7 +7694,7 @@
               var range = doc.createRange();
               range.setStart(startMarker.node, startMarker.offset);
               selection.removeAllRanges();
-              if (start2 > end) {
+              if (start > end) {
                 selection.addRange(range);
                 selection.extend(endMarker.node, endMarker.offset);
               } else {
@@ -7802,13 +7802,13 @@
             };
           }
           function setSelection(input, offsets) {
-            var start2 = offsets.start;
+            var start = offsets.start;
             var end = offsets.end;
             if (end === void 0) {
-              end = start2;
+              end = start;
             }
             if ("selectionStart" in input) {
-              input.selectionStart = start2;
+              input.selectionStart = start;
               input.selectionEnd = Math.min(end, input.value.length);
             } else {
               setOffsets(input, offsets);
@@ -13386,21 +13386,21 @@
           }
           function mountTransition() {
             var _mountState2 = mountState(false), isPending = _mountState2[0], setPending = _mountState2[1];
-            var start2 = startTransition.bind(null, setPending);
-            mountRef(start2);
-            return [start2, isPending];
+            var start = startTransition.bind(null, setPending);
+            mountRef(start);
+            return [start, isPending];
           }
           function updateTransition() {
             var _updateState2 = updateState(), isPending = _updateState2[0];
             var startRef = updateRef();
-            var start2 = startRef.current;
-            return [start2, isPending];
+            var start = startRef.current;
+            return [start, isPending];
           }
           function rerenderTransition() {
             var _rerenderState2 = rerenderState(), isPending = _rerenderState2[0];
             var startRef = updateRef();
-            var start2 = startRef.current;
-            return [start2, isPending];
+            var start = startRef.current;
+            return [start, isPending];
           }
           var isUpdatingOpaqueValueInRenderPhase = false;
           function getIsUpdatingOpaqueValueInRenderPhaseInDEV() {
@@ -27013,7 +27013,7 @@ to {
   }
 
   // src/components/screens/Main.tsx
-  var import_react15 = __toModule(require_react());
+  var import_react16 = __toModule(require_react());
 
   // src/utils/misc.ts
   function removeIdx(ar, idx) {
@@ -27023,109 +27023,12 @@ to {
   function getRandomArrayItem(items) {
     return items[Math.floor(Math.random() * items.length)];
   }
-  function chunkArray(arr, chunkSize) {
-    const chunks = [];
-    for (let i2 = 0; i2 < arr.length; i2 += chunkSize) {
-      const chunk = arr.slice(i2, i2 + chunkSize);
-      chunks.push(chunk);
-    }
-    return chunks;
-  }
-
-  // src/utils/twitch.ts
-  async function callTwitchApi(channelInfo, path) {
-    return fetch(`https://api.twitch.tv/helix/${path}`, {
-      headers: {
-        Authorization: `Bearer ${channelInfo.token}`,
-        "Client-ID": `${channelInfo.clientId}`
-      }
-    });
-  }
-  async function getUsersSubscriptionInfo(channelInfo, mappedUsers, cache2 = new Map(), onChunk = async () => void 0) {
-    const existing = mappedUsers.filter((u3) => cache2.has(u3.id)).map((u3) => ({
-      isSubscriber: cache2.get(u3.id),
-      login: u3.login,
-      id: u3.id
-    }));
-    const toFind = mappedUsers.filter((u3) => !cache2.has(u3.id));
-    console.info("[subs]", { toFind: toFind.length, existing: existing.length });
-    const chunkedUsers = chunkArray(toFind, 5);
-    let embellishedUsers = [];
-    for (const chunk of chunkedUsers) {
-      const embellishedChunk = await Promise.all(chunk.map(async (user) => {
-        try {
-          const info = await callTwitchApi(channelInfo, `subscriptions/user?broadcaster_id=${channelInfo.userId}&user_id=${user.id}`);
-          const isSubscriber = info.status === 200;
-          return __spreadProps(__spreadValues({}, user), {
-            isSubscriber
-          });
-        } catch (e2) {
-          return __spreadProps(__spreadValues({}, user), {
-            isSubscriber: false
-          });
-        }
-      }));
-      await onChunk(embellishedChunk);
-      embellishedUsers = embellishedUsers.concat(embellishedChunk);
-      await wait(200);
-    }
-    return embellishedUsers.concat(existing);
-  }
-  async function getFollowerInfo(channelInfo, mappedUsers, chunkSize = 5, cache2 = new Map(), onChunk = async () => void 0) {
-    const existing = mappedUsers.filter((u3) => cache2.has(u3.id)).map((u3) => ({
-      follows: cache2.get(u3.id),
-      login: u3.login,
-      id: u3.id
-    }));
-    const toFind = mappedUsers.filter((u3) => !cache2.has(u3.id));
-    console.info("[follows]", { toFind: toFind.length, existing: existing.length });
-    const chunkedUsers = chunkArray(toFind, chunkSize);
-    let embellishedUsers = [];
-    for (const chunk of chunkedUsers) {
-      const embellishedChunk = await Promise.all(chunk.map(async (user) => {
-        const userId = user.id;
-        const info = await callTwitchApi(channelInfo, `users/follows?from_id=${userId}&to_id=${channelInfo.userId}`).then((res) => res.json());
-        return __spreadProps(__spreadValues({}, user), {
-          follows: info.data.total === 1
-        });
-      }));
-      await onChunk(embellishedChunk);
-      embellishedUsers = embellishedUsers.concat(embellishedChunk);
-      await wait(200);
-    }
-    return embellishedUsers.concat(existing).filter((u3) => u3.follows);
-  }
-  async function getUsersFromNames(channelInfo, usernames, cache2 = new Map(), onChunk = async () => void 0) {
-    const existing = usernames.filter((u3) => cache2.has(u3)).map((u3) => ({
-      id: cache2.get(u3),
-      login: u3
-    }));
-    const toFind = usernames.filter((u3) => !cache2.has(u3));
-    const chunks = chunkArray(toFind, 100);
-    console.info("[usernames]", { toFind: toFind.length, existing: existing.length });
-    let users = [];
-    for (const chunk of chunks) {
-      const info = await callTwitchApi(channelInfo, `users?${chunk.map((c2) => `login=${encodeURIComponent(c2)}`).join("&")}`).then((res) => res.json());
-      const mapped = info.data.map((i2) => ({
-        id: i2.id,
-        login: i2.login
-      }));
-      await onChunk(mapped);
-      users = users.concat(mapped);
-    }
-    console.info("[users]", users.length);
-    return users.concat(existing);
-  }
-  async function getViewers(channelInfo) {
-    return fetch(`https://discord-slash-commands.vercel.app/api/twitch-chatters?channel=${channelInfo.login}`).then((res) => res.json()).then((d3) => d3.chatters.viewers);
-  }
 
   // src/utils/twitchCaches.ts
   var CACHE_KEY;
   (function(CACHE_KEY2) {
-    CACHE_KEY2["userIds"] = "userIds";
-    CACHE_KEY2["subs"] = "subs";
-    CACHE_KEY2["follows"] = "follows";
+    CACHE_KEY2["dumbfollows"] = "dumbfollows";
+    CACHE_KEY2["dumbsubs"] = "dumbsubs";
   })(CACHE_KEY || (CACHE_KEY = {}));
   var Cache = class {
     constructor(channel, key) {
@@ -27152,127 +27055,14 @@ to {
         if (!channelInfo.login)
           return;
         clearInterval(interval);
-        const caches = {
-          userIds: new Cache(channelInfo.login, CACHE_KEY.userIds),
-          subs: new Cache(channelInfo.login, CACHE_KEY.subs),
-          follows: new Cache(channelInfo.login, CACHE_KEY.follows)
-        };
-        void start(caches, channelInfo);
-        const initialUserIds = await caches.userIds.get();
-        chatEmitter.addEventListener("chat", async (data) => {
-          const id = await initialUserIds.get(data.detail.username);
-          if (!id)
-            return;
-          console.info("[twitchCache][chat][sub]", id, data.detail.isSubscriber);
-          const initialSubs = await caches.subs.get();
-          await initialSubs.set(id, data.detail.isSubscriber);
-        });
+        await Promise.all([getFollowers(channelInfo), getSubs(channelInfo)]);
+        Et.success("Finished Twitch caches, ready!", { position: "bottom-right" });
       }
     }, 2e3);
   }
-  async function start(caches, channelInfo) {
-    console.info("[twitchCache][start]", caches);
-    const viewers = await getViewers(channelInfo);
-    const initialUserIds = await caches.userIds.get();
-    console.info("[twitchCache][viewers]", viewers.length, initialUserIds.size);
-    let total = 0;
-    const mappedUsers = await getUsersFromNames(channelInfo, viewers, initialUserIds, async (data) => {
-      data.forEach((d3) => initialUserIds.set(d3.login, d3.id));
-      await caches.userIds.store(initialUserIds);
-      total += data.length;
-      console.info("[twitchCache][userId]", total, "stored of", viewers.length, `(${total / viewers.length * 100})%`);
-    });
-    console.info("[twitchCache][userIds][done]");
-    await Promise.all([buildFollowers(caches, channelInfo, mappedUsers), buildSubs(caches, channelInfo, mappedUsers)]);
-    console.info("[twitchCache][done]");
-    try {
-      Et.success("Done building Twitch cache!", { position: "bottom-center" });
-    } catch (e2) {
-      console.error(e2);
-    }
-  }
-  async function buildFollowers(caches, channelInfo, mappedUsers) {
-    const initialFollowers = await caches.follows.get();
-    console.info("[twitchCache][followers][start]", { initial: initialFollowers.size, toGet: mappedUsers.length });
-    let total = 0;
-    await getFollowerInfo(channelInfo, mappedUsers, 5, initialFollowers, async (data) => {
-      data.forEach((d3) => initialFollowers.set(d3.id, d3.follows));
-      await caches.follows.store(initialFollowers);
-      total += data.length;
-      console.info("[twitchCache][followers]", total, "stored of", mappedUsers.length, `(${total / mappedUsers.length * 100})%`);
-    });
-    console.info("[twitchCache][followers][done]");
-  }
-  async function buildSubs(caches, channelInfo, mappedUsers) {
-    if (channelInfo.userId === "69496551")
-      return;
-    const initial = await caches.subs.get();
-    console.info("[twitchCache][subs][start]", { initial: initial.size, toGet: mappedUsers.length });
-    let total = 0;
-    await getUsersSubscriptionInfo(channelInfo, mappedUsers, initial, async (data) => {
-      data.forEach((d3) => initial.set(d3.id, d3.isSubscriber));
-      await caches.subs.store(initial);
-      total += data.length;
-      console.info("[twitchCache][subs]", total, "stored of", mappedUsers.length, `(${total / mappedUsers.length * 100})%`);
-    });
-    console.info("[twitchCache][subs][done]");
-  }
 
-  // src/utils/giveaways.ts
-  async function getChatGiveaway(channelInfo, chatItems, chatCommand, subLuck = 2, followerOnly = true, numberOfWinners = 1) {
-    console.info("[giveaway][chat][start]");
-    let users = chatItems.filter((c2) => chatCommand ? c2.msg.toLowerCase().includes(chatCommand.toLowerCase()) : true).reduce((acc, c2) => acc.some((i2) => i2.username === c2.username) ? acc : acc.concat(c2), []).flatMap((c2) => c2.isSubscriber ? Array.from({ length: subLuck }, () => c2) : c2);
-    if (followerOnly) {
-      const idCache = await new Cache(channelInfo.login, CACHE_KEY.userIds).get();
-      const mappedUsers = await getUsersFromNames(channelInfo, users.map((u3) => u3.username), idCache);
-      const followerCache = await new Cache(channelInfo.login, CACHE_KEY.follows).get();
-      users = await getFollowerInfo(channelInfo, mappedUsers, 10, followerCache);
-    }
-    console.info("[giveaway][chat][end]");
-    return Array.from({ length: numberOfWinners }, () => {
-      const winner = getRandomArrayItem(users);
-      if (!winner)
-        return;
-      return {
-        username: winner.username,
-        isSubscriber: winner.isSubscriber,
-        id: winner.id
-      };
-    }).filter(Boolean);
-  }
-  async function getInstantGiveaway(channelInfo, subLuck = 2, followerOnly = true, numberOfWinners = 1) {
-    console.info("[giveaway][instant][start]");
-    let viewers = await getViewers(channelInfo);
-    const idCache = await new Cache(channelInfo.login, CACHE_KEY.userIds).get();
-    const mappedUsers = await getUsersFromNames(channelInfo, viewers, idCache);
-    if (followerOnly) {
-      const followerCache = await new Cache(channelInfo.login, CACHE_KEY.follows).get();
-      const subCache = await new Cache(channelInfo.login, CACHE_KEY.subs).get();
-      const [withFollowers, withSub] = await Promise.all([
-        getFollowerInfo(channelInfo, mappedUsers, 5, followerCache),
-        channelInfo.userId === "69496551" ? [] : getUsersSubscriptionInfo(channelInfo, mappedUsers, subCache)
-      ]);
-      const combined = withFollowers.map((i2) => {
-        var _a;
-        ;
-        i2.isSubscriber = ((_a = withSub.find((s2) => s2.id === i2.id)) == null ? void 0 : _a.isSubscriber) || false;
-        return i2;
-      });
-      const followers = combined.filter((i2) => i2.follows);
-      console.info("[giveaway][instant]", { followers: followers.length });
-      viewers = followers.flatMap((c2) => c2.isSubscriber ? Array.from({ length: subLuck }, () => c2) : c2).map((i2) => i2.login);
-    }
-    console.info("[giveaway][instant][end]");
-    return Array.from({ length: numberOfWinners }, () => {
-      const winner = getRandomArrayItem(viewers);
-      if (!winner)
-        return;
-      return winner;
-    }).filter(Boolean);
-  }
-
-  // src/components/primitives/Settings.tsx
-  var import_react12 = __toModule(require_react());
+  // src/components/screens/Setup.tsx
+  var import_react10 = __toModule(require_react());
 
   // node_modules/react-icons/lib/esm/iconBase.js
   var import_react9 = __toModule(require_react());
@@ -27387,8 +27177,267 @@ to {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 352 512" }, "child": [{ "tag": "path", "attr": { "d": "M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z" } }] })(props);
   }
 
+  // src/components/screens/Setup.tsx
+  async function validateToken(token, refreshToken) {
+    try {
+      const res = await fetch(`https://id.twitch.tv/oauth2/validate`, {
+        headers: {
+          Authorization: `OAuth ${token}`
+        }
+      });
+      if (res.status === 401) {
+        return refreshTokenFlow(refreshToken);
+      }
+      const data = await res.json();
+      console.info("[validate]", data);
+      return {
+        token,
+        refreshToken,
+        clientId: data.client_id,
+        login: data.login === "odialo" ? "mukluk" : data.login,
+        userId: data.user_id
+      };
+    } catch (e2) {
+      return null;
+    }
+  }
+  async function refreshTokenFlow(refreshToken) {
+    const channelInfo = await JSON.parse(await Neutralino.storage.getData("main-channelinfo"));
+    const details = {
+      client_id: channelInfo.clientId,
+      client_secret: "Password!",
+      grant_type: "refresh_token",
+      refresh_token: refreshToken
+    };
+    const formBody = [];
+    for (let property in details) {
+      const encodedKey = encodeURIComponent(property);
+      const encodedValue = encodeURIComponent(details[property]);
+      formBody.push(`${encodedKey}=${encodedValue}`);
+    }
+    const body = formBody.join("&");
+    const res = await fetch(`https://id.twitch.tv/oauth2/token`, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: "POST",
+      body
+    });
+    if (res.status === 403) {
+      console.error("[refresh][error]");
+      throw Error("Refresh token failed");
+    }
+    const data = await res.json();
+    await Neutralino.storage.setData("main-channelinfo", JSON.stringify(__spreadProps(__spreadValues({}, channelInfo), { accessToken: data.access_token, refreshToken: data.refresh_token })));
+    return {
+      token: data.access_token,
+      clientId: channelInfo.clientId,
+      login: channelInfo.login,
+      userId: channelInfo.userId
+    };
+  }
+  function Setup({
+    resetChat,
+    setClient,
+    channel,
+    setChannel
+  }) {
+    const history = useHistory();
+    import_react10.default.useEffect(() => {
+      if (channel.login) {
+        history.push("/");
+      }
+    }, [channel.login]);
+    return /* @__PURE__ */ import_react10.default.createElement("div", {
+      className: "flex flex-col justify-center items-center h-full gap-3 -mt-10"
+    }, /* @__PURE__ */ import_react10.default.createElement("div", {
+      className: "text-2xl"
+    }, "Setup"), /* @__PURE__ */ import_react10.default.createElement("button", {
+      onClick: () => Neutralino.os.open("https://giveaway-o-tron.vercel.app")
+    }, "Click here to authenticate with Twitch and get the required tokens \u2192"), /* @__PURE__ */ import_react10.default.createElement("form", {
+      className: "flex flex-col gap-2 justify-center items-center",
+      onSubmit: async (e2) => {
+        e2.preventDefault();
+        const accessToken = e2.currentTarget.elements.accessToken.value.trim();
+        const refreshToken = e2.currentTarget.elements.refreshToken.value.trim();
+        const data = await validateToken(accessToken, refreshToken);
+        if (!data)
+          return;
+        resetChat();
+        if (data.login)
+          setClient(init(data));
+        setChannel(data);
+        history.push("/");
+      }
+    }, /* @__PURE__ */ import_react10.default.createElement("input", {
+      className: "bg-gray-700 px-2 py-1 rounded-md border-b border-purple-500 overflow-ellipsis",
+      placeholder: "Access Token...",
+      name: "accessToken",
+      type: "password"
+    }), /* @__PURE__ */ import_react10.default.createElement("input", {
+      className: "bg-gray-700 px-2 py-1 rounded-md border-b border-purple-500 overflow-ellipsis",
+      placeholder: "Refresh Token...",
+      name: "refreshToken",
+      type: "password"
+    }), /* @__PURE__ */ import_react10.default.createElement("button", {
+      className: "bg-purple-600 text-white py-1 px-3 rounded-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 w-32 justify-center",
+      title: "Setup connection"
+    }, /* @__PURE__ */ import_react10.default.createElement(FaTwitch, null), " Setup")));
+  }
+
+  // src/utils/twitch.ts
+  async function callTwitchApi(channelInfo, path) {
+    const res = await fetch(`https://api.twitch.tv/helix/${path}`, {
+      headers: {
+        Authorization: `Bearer ${channelInfo.token}`,
+        "Client-ID": `${channelInfo.clientId}`
+      }
+    });
+    if (res.status === 401) {
+      await refreshTokenFlow("");
+      return callTwitchApi(channelInfo, path);
+    }
+    return res;
+  }
+  async function getViewers(channelInfo) {
+    return fetch(`https://discord-slash-commands.vercel.app/api/twitch-chatters?channel=${channelInfo.login}`).then((res) => res.json()).then((d3) => d3.chatters.viewers);
+  }
+  var dumbFollowersCache = new Map();
+  async function getFollowers(channelInfo) {
+    return genericCacher("followers", CACHE_KEY.dumbfollows, channelInfo, "users/follows?to_id=", dumbFollowersCache, (i2) => ({ id: i2.from_id, login: i2.from_login }));
+  }
+  var dumbSubscriberCache = new Map();
+  async function getSubs(channelInfo) {
+    return genericCacher("subs", CACHE_KEY.dumbsubs, channelInfo, "subscriptions?broadcaster_id=", dumbSubscriberCache, (i2) => ({ id: i2.user_id, login: i2.user_login }));
+  }
+  var initialized = {
+    followers: false,
+    subs: false
+  };
+  async function genericCacher(type, cacheKey, channelInfo, path, dumbCache, mapResult) {
+    const wasInitialized = !!initialized[type];
+    const shouldToast = dumbCache.size === 0 && !initialized[type];
+    initialized[type] = true;
+    try {
+      let cursor = "";
+      let cache2 = new Cache(channelInfo.login, cacheKey);
+      const existingCache = await cache2.get();
+      if (dumbCache.size === 0) {
+        console.info(`[${type}[existing]`, existingCache.size);
+        dumbCache = new Map([...existingCache]);
+      }
+      let percentThresholdTotal = 0;
+      if (shouldToast) {
+        Et.success(`Loading basic ${type} cache...`, { position: "bottom-right" });
+      }
+      do {
+        const data = await callTwitchApi(channelInfo, `${path}${channelInfo.userId}&first=100&after=${cursor}`).then((r) => r.json());
+        if (!Array.isArray(data.data)) {
+          console.info(`[${type}][expected-data]`, data);
+          throw new Error("Unexpected API data");
+        }
+        const chunk = data.data.map(mapResult);
+        const chunkInCachePercent = chunk.filter((i2) => dumbCache.has(i2.id) || dumbCache.has(i2.login)).length / chunk.length;
+        const originalActualSize = dumbCache.size / 2;
+        chunk.forEach((c2) => {
+          dumbCache.set(c2.id, c2.login);
+          dumbCache.set(c2.login, c2.id);
+        });
+        await cache2.store(dumbCache);
+        const actualSize = dumbCache.size / 2;
+        const foundSeenPages = chunkInCachePercent > 0.5;
+        const rightTotalish = actualSize >= data.total;
+        const isCatchingUp = foundSeenPages && !rightTotalish;
+        if (foundSeenPages && !wasInitialized && rightTotalish || foundSeenPages && wasInitialized) {
+          console.info(`[${type}]`, "[caught-up]", { chunkInCachePercent, newItems: data.total - originalActualSize });
+          break;
+        }
+        if (cursor === data.pagination.cursor) {
+          throw Error("This is nonsense");
+        }
+        cursor = data.pagination.cursor;
+        const percentThreshold = Math.floor(actualSize / data.total * 100 / 10);
+        const percent = (actualSize / data.total * 100).toFixed(0);
+        const timeEstimate = `~${(data.total - actualSize) / 100 * 400 / 1e3}s remaining`;
+        if (percentThreshold !== percentThresholdTotal) {
+          percentThresholdTotal = percentThreshold;
+          if (shouldToast) {
+            if (isCatchingUp) {
+              Et.success(`Basic ${type} cache catching up, was at ${percent}% done`, {
+                position: "bottom-right"
+              });
+            } else {
+              Et.success(`Basic ${type} cache ${percent}% done, ${timeEstimate}`, {
+                position: "bottom-right"
+              });
+            }
+          }
+        }
+        console.info(`[${type}]`, `${percent}%`, timeEstimate);
+        if (cursor)
+          await wait(100);
+      } while (cursor);
+      if (shouldToast)
+        Et.success(`Basic ${type} cache done!`, { position: "bottom-right" });
+      return dumbCache;
+    } catch (e2) {
+      console.error(`[${type}]`, e2);
+      if (shouldToast)
+        Et.error(`Failed to load basic ${type} cache!`, { position: "bottom-right" });
+      return dumbCache;
+    }
+  }
+
+  // src/utils/giveaways.ts
+  async function getChatGiveaway(channelInfo, chatItems, chatCommand, subLuck = 2, followerOnly = true, numberOfWinners = 1) {
+    console.info("[giveaway][chat][start]");
+    let users = chatItems.filter((c2) => chatCommand ? c2.msg.toLowerCase().includes(chatCommand.toLowerCase()) : true).reduce((acc, c2) => acc.some((i2) => i2.username === c2.username) ? acc : acc.concat(c2), []).flatMap((c2) => c2.isSubscriber ? Array.from({ length: subLuck }, () => c2) : c2);
+    if (followerOnly) {
+      const followers = await getFollowers(channelInfo);
+      users = users.filter((u3) => followers.has(u3.username));
+    }
+    console.info("[giveaway][chat][end]");
+    return Array.from({ length: numberOfWinners }, () => {
+      const winner = getRandomArrayItem(users);
+      if (!winner)
+        return;
+      return {
+        username: winner.username,
+        isSubscriber: winner.isSubscriber,
+        id: winner.id
+      };
+    }).filter(Boolean);
+  }
+  async function getInstantGiveaway(channelInfo, subLuck = 2, followerOnly = true, numberOfWinners = 1) {
+    console.info("[giveaway][instant][start]");
+    let viewers = await getViewers(channelInfo);
+    console.info({ viewers: viewers.length });
+    if (followerOnly) {
+      const [followersList, subsList] = await Promise.all([getFollowers(channelInfo), getSubs(channelInfo)]);
+      const combined = viewers.filter((v2) => followersList.has(v2)).map((u3) => {
+        return {
+          login: u3,
+          follows: true,
+          isSubscriber: subsList.has(u3)
+        };
+      });
+      console.info("[giveaway][instant]", { followers: combined.length });
+      viewers = combined.flatMap((c2) => c2.isSubscriber ? Array.from({ length: subLuck }, () => c2) : c2).map((i2) => i2.login);
+    }
+    console.info("[giveaway][instant][end]");
+    return Array.from({ length: numberOfWinners }, () => {
+      const winner = getRandomArrayItem(viewers);
+      if (!winner)
+        return;
+      return winner;
+    }).filter(Boolean);
+  }
+
+  // src/components/primitives/Settings.tsx
+  var import_react13 = __toModule(require_react());
+
   // node_modules/react-countdown/dist/index.es.js
-  var import_react10 = __toModule(require_react());
+  var import_react11 = __toModule(require_react());
   var import_prop_types4 = __toModule(require_prop_types());
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -27622,13 +27671,13 @@ to {
     }, {
       key: "render",
       value: function render() {
-        return this.props.children ? (0, import_react10.cloneElement)(this.props.children, {
+        return this.props.children ? (0, import_react11.cloneElement)(this.props.children, {
           count: this.state.count
         }) : null;
       }
     }]);
     return Countdown2;
-  }(import_react10.Component);
+  }(import_react11.Component);
   Countdown.propTypes = {
     count: import_prop_types4.number,
     children: import_prop_types4.element,
@@ -27646,7 +27695,7 @@ to {
       _this.offsetStartTimestamp = _this.props.autoStart ? 0 : _this.initialTimestamp;
       _this.offsetTime = 0;
       _this.legacyMode = false;
-      _this.legacyCountdownRef = (0, import_react10.createRef)();
+      _this.legacyCountdownRef = (0, import_react11.createRef)();
       _this.tick = function() {
         var timeDelta2 = _this.calcTimeDelta();
         var callback = timeDelta2.completed && !_this.props.overtime ? void 0 : _this.props.onTick;
@@ -27837,7 +27886,7 @@ to {
       value: function render() {
         if (this.legacyMode) {
           var _this$props3 = this.props, count = _this$props3.count, _children = _this$props3.children, onComplete = _this$props3.onComplete;
-          return (0, import_react10.createElement)(Countdown, {
+          return (0, import_react11.createElement)(Countdown, {
             ref: this.legacyCountdownRef,
             count,
             onComplete
@@ -27849,18 +27898,18 @@ to {
           return renderer(renderProps);
         }
         if (children && this.state.timeDelta.completed && !overtime) {
-          return (0, import_react10.cloneElement)(children, {
+          return (0, import_react11.cloneElement)(children, {
             countdown: renderProps
           });
         }
         var _renderProps$formatte = renderProps.formatted, days = _renderProps$formatte.days, hours = _renderProps$formatte.hours, minutes = _renderProps$formatte.minutes, seconds = _renderProps$formatte.seconds;
-        return (0, import_react10.createElement)("span", {
+        return (0, import_react11.createElement)("span", {
           className
         }, renderProps.total < 0 ? "-" : "", days, days ? ":" : "", hours, ":", minutes, ":", seconds);
       }
     }]);
     return Countdown$12;
-  }(import_react10.Component);
+  }(import_react11.Component);
   Countdown$1.defaultProps = Object.assign(Object.assign({}, timeDeltaFormatOptionsDefaults), {
     controlled: false,
     intervalDelay: 1e3,
@@ -28523,33 +28572,33 @@ to {
   }
 
   // src/components/primitives/Slider.tsx
-  var import_react11 = __toModule(require_react());
+  var import_react12 = __toModule(require_react());
   var import_react_range = __toModule(require_lib());
   function SliderOuter(props) {
-    return /* @__PURE__ */ import_react11.default.createElement("div", {
+    return /* @__PURE__ */ import_react12.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
-    }, /* @__PURE__ */ import_react11.default.createElement("div", {
+    }, /* @__PURE__ */ import_react12.default.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",
       title: props.title
-    }, props.label), /* @__PURE__ */ import_react11.default.createElement("div", {
+    }, props.label), /* @__PURE__ */ import_react12.default.createElement("div", {
       className: "px-2 flex-1 flex justify-center items-center"
-    }, /* @__PURE__ */ import_react11.default.createElement(SliderInner, __spreadValues({}, props))), /* @__PURE__ */ import_react11.default.createElement("div", {
+    }, /* @__PURE__ */ import_react12.default.createElement(SliderInner, __spreadValues({}, props))), /* @__PURE__ */ import_react12.default.createElement("div", {
       className: "justify-center items-center text-center flex pr-4"
     }, props.value));
   }
   function SliderInner({ value, label, min, max, step = 1, onChange }) {
     const values = [value];
-    return /* @__PURE__ */ import_react11.default.createElement("div", {
+    return /* @__PURE__ */ import_react12.default.createElement("div", {
       className: "flex-1 px-3"
-    }, /* @__PURE__ */ import_react11.default.createElement("div", {
+    }, /* @__PURE__ */ import_react12.default.createElement("div", {
       className: "my-3"
-    }, /* @__PURE__ */ import_react11.default.createElement(import_react_range.Range, {
+    }, /* @__PURE__ */ import_react12.default.createElement(import_react_range.Range, {
       min,
       max,
       step,
       values,
       onChange: (values2) => onChange(values2[0]),
-      renderTrack: ({ props, children }) => /* @__PURE__ */ import_react11.default.createElement("div", __spreadProps(__spreadValues({}, props), {
+      renderTrack: ({ props, children }) => /* @__PURE__ */ import_react12.default.createElement("div", __spreadProps(__spreadValues({}, props), {
         style: __spreadProps(__spreadValues({}, props.style), {
           height: "6px",
           width: "100%",
@@ -28563,7 +28612,7 @@ to {
           })
         })
       }), children),
-      renderThumb: ({ props }) => /* @__PURE__ */ import_react11.default.createElement("div", __spreadProps(__spreadValues({}, props), {
+      renderThumb: ({ props }) => /* @__PURE__ */ import_react12.default.createElement("div", __spreadProps(__spreadValues({}, props), {
         style: __spreadProps(__spreadValues({}, props.style), {
           height: "20px",
           width: "20px",
@@ -28581,112 +28630,112 @@ to {
   // src/components/primitives/Settings.tsx
   var countDownRenderer = ({ hours, minutes, seconds, completed }) => {
     if (completed) {
-      return /* @__PURE__ */ import_react12.default.createElement("div", {
+      return /* @__PURE__ */ import_react13.default.createElement("div", {
         className: "animate-pulse"
       }, "Finished! Chat is paused, just do the giveaway!");
     } else {
-      return /* @__PURE__ */ import_react12.default.createElement("span", null, zeroPad(hours, 2), " : ", zeroPad(minutes, 2), " : ", zeroPad(seconds, 2));
+      return /* @__PURE__ */ import_react13.default.createElement("span", null, zeroPad(hours, 2), " : ", zeroPad(minutes, 2), " : ", zeroPad(seconds, 2));
     }
   };
   var ONE_MIN = 1e3 * 60;
-  var Time = import_react12.default.memo(function Time2({ setChatPaused, resetChat }) {
-    const [active, setActive] = import_react12.default.useState(false);
-    const [value, setValue] = import_react12.default.useState(ONE_MIN);
-    return active ? /* @__PURE__ */ import_react12.default.createElement("div", {
+  var Time = import_react13.default.memo(function Time2({ setChatPaused, resetChat }) {
+    const [active, setActive] = import_react13.default.useState(false);
+    const [value, setValue] = import_react13.default.useState(ONE_MIN);
+    return active ? /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex justify-center items-center text-center relative"
-    }, /* @__PURE__ */ import_react12.default.createElement(index_es_default, {
+    }, /* @__PURE__ */ import_react13.default.createElement(index_es_default, {
       renderer: countDownRenderer,
       date: Date.now() + value,
       onComplete: () => {
         Et.success("Timer finished! Choosing winners...", { position: "bottom-center" });
         setChatPaused(true);
       }
-    }), /* @__PURE__ */ import_react12.default.createElement(FaTimes, {
+    }), /* @__PURE__ */ import_react13.default.createElement(FaTimes, {
       className: "absolute right-3 top-2 text-red-500 select-none cursor-pointer",
       onClick: () => setActive(false),
       title: "Cancel the timer"
-    })) : /* @__PURE__ */ import_react12.default.createElement("div", {
+    })) : /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
-    }, /* @__PURE__ */ import_react12.default.createElement("div", {
+    }, /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",
       title: "Will clear chat, and then pause it after the time, to enable a giveaway with cut off"
-    }, "Timer"), /* @__PURE__ */ import_react12.default.createElement("div", {
+    }, "Timer"), /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "px-2 flex-1 flex justify-center items-center"
-    }, /* @__PURE__ */ import_react12.default.createElement(SliderInner, {
+    }, /* @__PURE__ */ import_react13.default.createElement(SliderInner, {
       min: ONE_MIN,
       max: ONE_MIN * 30,
       value,
       step: ONE_MIN,
       onChange: setValue
-    })), /* @__PURE__ */ import_react12.default.createElement("div", {
+    })), /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex-1 justify-center items-center text-center flex"
-    }, formatDistanceStrict(Date.now() + value, new Date())), /* @__PURE__ */ import_react12.default.createElement("button", {
+    }, formatDistanceStrict(Date.now() + value, new Date())), /* @__PURE__ */ import_react13.default.createElement("button", {
       className: "bg-purple-600 px-2 py-1 flex-0 select-none cursor-pointer flex flex-row justify-center items-center gap-1 transition-colors hover:bg-purple-700",
       onClick: () => {
         resetChat();
         setActive(true);
       },
       title: "Will clear chat"
-    }, /* @__PURE__ */ import_react12.default.createElement(FaClock, null), " Start"));
+    }, /* @__PURE__ */ import_react13.default.createElement(FaClock, null), " Start"));
   });
   function SettingsComponent({ settings, setSettings, setChatPaused, resetChat }) {
-    return /* @__PURE__ */ import_react12.default.createElement(import_react12.default.Fragment, null, /* @__PURE__ */ import_react12.default.createElement("div", {
+    return /* @__PURE__ */ import_react13.default.createElement(import_react13.default.Fragment, null, /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex flex-row gap-2 mt-2"
-    }, /* @__PURE__ */ import_react12.default.createElement("div", {
+    }, /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex flex-row justify-center items-center flex-1"
-    }, /* @__PURE__ */ import_react12.default.createElement("div", {
+    }, /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md",
       title: "This will be sent to chat by your account to tell winners, if Send Message is enabled below"
-    }, "Winner Message"), /* @__PURE__ */ import_react12.default.createElement("input", {
+    }, "Winner Message"), /* @__PURE__ */ import_react13.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1",
       placeholder: "Winner Message...",
       value: settings.winnerMessage,
       onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { winnerMessage: e2.target.value })),
       title: "Chat command to enter - leave empty for none"
-    })), /* @__PURE__ */ import_react12.default.createElement("div", {
+    })), /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex flex-row justify-center items-center flex-1"
-    }, /* @__PURE__ */ import_react12.default.createElement("div", {
+    }, /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md",
       title: "Filters messages to include this"
-    }, "Chat Command"), /* @__PURE__ */ import_react12.default.createElement("input", {
+    }, "Chat Command"), /* @__PURE__ */ import_react13.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1",
       placeholder: "Empty means any message...",
       value: settings.chatCommand,
       onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { chatCommand: e2.target.value.trim() })),
       title: "Chat command to enter - leave empty for none"
-    }))), /* @__PURE__ */ import_react12.default.createElement("div", {
+    }))), /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex flex-row gap-2 mt-2"
-    }, /* @__PURE__ */ import_react12.default.createElement("div", {
+    }, /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex flex-1 flex-row gap-2"
-    }, /* @__PURE__ */ import_react12.default.createElement("div", {
+    }, /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
-    }, /* @__PURE__ */ import_react12.default.createElement("div", {
+    }, /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",
       title: "Will limit winners to those who follow you, will slow down giveaways"
-    }, "Followers Only"), /* @__PURE__ */ import_react12.default.createElement("button", {
+    }, "Followers Only"), /* @__PURE__ */ import_react13.default.createElement("button", {
       className: "flex-1 text-2xl text-center justify-center items-center flex transition-opacity hover:opacity-60",
       onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { followersOnly: !s2.followersOnly }))
-    }, settings.followersOnly ? /* @__PURE__ */ import_react12.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react12.default.createElement(FaTimes, null))), /* @__PURE__ */ import_react12.default.createElement("div", {
+    }, settings.followersOnly ? /* @__PURE__ */ import_react13.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react13.default.createElement(FaTimes, null))), /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
-    }, /* @__PURE__ */ import_react12.default.createElement("div", {
+    }, /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",
       title: "If enabled, will send messages tagging winners in Twitch chat"
-    }, "Send Message"), /* @__PURE__ */ import_react12.default.createElement("button", {
+    }, "Send Message"), /* @__PURE__ */ import_react13.default.createElement("button", {
       className: "flex-1 text-2xl text-center justify-center items-center flex transition-opacity hover:opacity-60",
       onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { sendMessages: !s2.sendMessages }))
-    }, settings.sendMessages ? /* @__PURE__ */ import_react12.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react12.default.createElement(FaTimes, null)))), /* @__PURE__ */ import_react12.default.createElement(Time, {
+    }, settings.sendMessages ? /* @__PURE__ */ import_react13.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react13.default.createElement(FaTimes, null)))), /* @__PURE__ */ import_react13.default.createElement(Time, {
       setChatPaused,
       resetChat: () => resetChat()
-    })), /* @__PURE__ */ import_react12.default.createElement("div", {
+    })), /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex flex-row gap-2 mt-2"
-    }, /* @__PURE__ */ import_react12.default.createElement(SliderOuter, {
+    }, /* @__PURE__ */ import_react13.default.createElement(SliderOuter, {
       label: "Sub Luck",
       title: "Will enter subscribers this amount of times into the giveaways",
       value: settings.subLuck,
       min: 1,
       max: 10,
       onChange: (val) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { subLuck: val }))
-    }), /* @__PURE__ */ import_react12.default.createElement(SliderOuter, {
+    }), /* @__PURE__ */ import_react13.default.createElement(SliderOuter, {
       label: "Number of Winners",
       title: "How many winners to draw per giveaway",
       value: settings.numberOfWinners,
@@ -28697,7 +28746,7 @@ to {
   }
 
   // src/components/primitives/giveaways.tsx
-  var import_react13 = __toModule(require_react());
+  var import_react14 = __toModule(require_react());
 
   // node_modules/react-icons/gi/index.esm.js
   function GiPartyPopper(props) {
@@ -28711,7 +28760,7 @@ to {
     settings,
     client
   }) {
-    return /* @__PURE__ */ import_react13.default.createElement("button", {
+    return /* @__PURE__ */ import_react14.default.createElement("button", {
       className: "bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-all hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700",
       onClick: async () => {
         if (!channelInfo.login)
@@ -28730,7 +28779,7 @@ to {
         });
         setWinners((w) => w.concat(giveawayWinner.map((u3) => ({ username: u3 }))));
       }
-    }, /* @__PURE__ */ import_react13.default.createElement(FaDice, {
+    }, /* @__PURE__ */ import_react14.default.createElement(FaDice, {
       className: "text-2xl"
     }), " Viewers Instant Giveaway");
   }
@@ -28741,7 +28790,7 @@ to {
     settings,
     client
   }) {
-    return /* @__PURE__ */ import_react13.default.createElement("button", {
+    return /* @__PURE__ */ import_react14.default.createElement("button", {
       className: "bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-transform hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700",
       onClick: async () => {
         const giveawayWinner = await getChatGiveaway(channelInfo, chatEvents, settings.chatCommand, settings.subLuck, settings.followersOnly, settings.numberOfWinners);
@@ -28756,32 +28805,32 @@ to {
         }
         setWinners((w) => w.concat(giveawayWinner));
       }
-    }, /* @__PURE__ */ import_react13.default.createElement(FaDice, {
+    }, /* @__PURE__ */ import_react14.default.createElement(FaDice, {
       className: "text-2xl"
     }), " Active Chatter Giveaway");
   }
   function Winner({ winners, onClear }) {
-    return winners.length ? /* @__PURE__ */ import_react13.default.createElement("div", {
+    return winners.length ? /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "grid gap-1 grid-cols-2 mt-3"
-    }, winners.map((winner, i2) => /* @__PURE__ */ import_react13.default.createElement("div", {
+    }, winners.map((winner, i2) => /* @__PURE__ */ import_react14.default.createElement("div", {
       key: winner.username,
       className: "bg-gray-600 text-white rounded-md overflow-hidden flex flex-row items-center justify-center px-2 py-4 text-center relative"
-    }, /* @__PURE__ */ import_react13.default.createElement("div", {
+    }, /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "text-2xl absolute left-5"
-    }, i2 + 1, "."), /* @__PURE__ */ import_react13.default.createElement(GiPartyPopper, {
+    }, i2 + 1, "."), /* @__PURE__ */ import_react14.default.createElement(GiPartyPopper, {
       className: "text-purple-300 text-xl"
-    }), " ", /* @__PURE__ */ import_react13.default.createElement("div", {
+    }), " ", /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "px-2"
-    }, winner.username, " wins!"), " ", /* @__PURE__ */ import_react13.default.createElement(GiPartyPopper, {
+    }, winner.username, " wins!"), " ", /* @__PURE__ */ import_react14.default.createElement(GiPartyPopper, {
       className: "text-purple-300 text-xl"
-    }), /* @__PURE__ */ import_react13.default.createElement(FaTimes, {
+    }), /* @__PURE__ */ import_react14.default.createElement(FaTimes, {
       className: "text-2xl absolute right-5 text-red-500 cursor-pointer select-none",
       onClick: () => onClear(i2)
     })))) : null;
   }
 
   // src/components/primitives/ChatBox.tsx
-  var import_react14 = __toModule(require_react());
+  var import_react15 = __toModule(require_react());
   var import_classnames = __toModule(require_classnames());
   function ChatBox({
     chatEvents,
@@ -28791,41 +28840,41 @@ to {
     clear
   }) {
     const limitedMessages = chatEvents.filter((c2) => winners.length ? winners.map((c3) => c3.username).includes(c2.username) : true);
-    return /* @__PURE__ */ import_react14.default.createElement(import_react14.default.Fragment, null, /* @__PURE__ */ import_react14.default.createElement("div", {
+    return /* @__PURE__ */ import_react15.default.createElement(import_react15.default.Fragment, null, /* @__PURE__ */ import_react15.default.createElement("div", {
       className: "mt-2 rounded-md bg-gray-700 flex-1 flex flex-col relative overflow-hidden"
-    }, /* @__PURE__ */ import_react14.default.createElement("div", {
+    }, /* @__PURE__ */ import_react15.default.createElement("div", {
       className: "bg-gray-600 absolute top-0 right-0 left-0 h-8 flex justify-between px-5 items-center text-white z-50"
-    }, /* @__PURE__ */ import_react14.default.createElement("div", null, chatEvents.length, " message", chatEvents.length === 1 ? "" : "s"), winners.length ? /* @__PURE__ */ import_react14.default.createElement("div", null, limitedMessages.length, " winner message", limitedMessages.length === 1 ? "" : "s") : null, /* @__PURE__ */ import_react14.default.createElement("div", {
+    }, /* @__PURE__ */ import_react15.default.createElement("div", null, chatEvents.length, " message", chatEvents.length === 1 ? "" : "s"), winners.length ? /* @__PURE__ */ import_react15.default.createElement("div", null, limitedMessages.length, " winner message", limitedMessages.length === 1 ? "" : "s") : null, /* @__PURE__ */ import_react15.default.createElement("div", {
       className: "flex flex-row justify-center items-center gap-2 text-xl"
-    }, paused ? /* @__PURE__ */ import_react14.default.createElement(FaPlayCircle, {
+    }, paused ? /* @__PURE__ */ import_react15.default.createElement(FaPlayCircle, {
       className: "select-none cursor-pointer transition-opacity hover:opacity-70",
       onClick: () => setPaused((p2) => !p2),
       title: "Resume chat"
-    }) : /* @__PURE__ */ import_react14.default.createElement(FaPauseCircle, {
+    }) : /* @__PURE__ */ import_react15.default.createElement(FaPauseCircle, {
       className: "select-none cursor-pointer  transition-opacity hover:opacity-70",
       onClick: () => setPaused((p2) => !p2),
       title: "Pause chat, misses messages while paused"
-    }), /* @__PURE__ */ import_react14.default.createElement(FaTimesCircle, {
+    }), /* @__PURE__ */ import_react15.default.createElement(FaTimesCircle, {
       className: "text-red-500 select-none cursor-pointer  transition-opacity hover:opacity-70",
       onClick: () => clear(),
       title: "Clear chat"
-    }))), /* @__PURE__ */ import_react14.default.createElement("div", {
+    }))), /* @__PURE__ */ import_react15.default.createElement("div", {
       className: "relative flex-1"
-    }, chatEvents.length === 0 ? /* @__PURE__ */ import_react14.default.createElement("span", {
+    }, chatEvents.length === 0 ? /* @__PURE__ */ import_react15.default.createElement("span", {
       className: (0, import_classnames.default)("relative left-2 top-9")
-    }, "Logs will appear here...") : /* @__PURE__ */ import_react14.default.createElement("div", {
+    }, "Logs will appear here...") : /* @__PURE__ */ import_react15.default.createElement("div", {
       className: (0, import_classnames.default)("absolute right-0 left-0 bottom-0 overflow-y-scroll px-2 pt-1 pb-3 flex flex-col gap-1 top-8")
     }, limitedMessages.map((c2) => {
-      return /* @__PURE__ */ import_react14.default.createElement("div", {
+      return /* @__PURE__ */ import_react15.default.createElement("div", {
         key: c2.id
-      }, /* @__PURE__ */ import_react14.default.createElement("span", {
+      }, /* @__PURE__ */ import_react15.default.createElement("span", {
         className: (0, import_classnames.default)("rounded-full bg-gray-300 h-4 w-4 inline-block mr-1", {
           "bg-yellow-500": c2.isSubscriber
         })
-      }, c2.isSubscriber ? /* @__PURE__ */ import_react14.default.createElement("span", {
+      }, c2.isSubscriber ? /* @__PURE__ */ import_react15.default.createElement("span", {
         className: "flex justify-center items-center text-xs cursor-default select-none",
         title: "Subscriber"
-      }, "S") : null), /* @__PURE__ */ import_react14.default.createElement("span", {
+      }, "S") : null), /* @__PURE__ */ import_react15.default.createElement("span", {
         style: { color: c2.color }
       }, "[", c2.displayName, "]"), " ", highlightAction(c2.displayName, c2.msg));
     })))));
@@ -28835,7 +28884,7 @@ to {
     const matchIdx = -1;
     return matchIdx > -1 ? [
       words.slice(0, matchIdx).join(" "),
-      /* @__PURE__ */ import_react14.default.createElement("span", {
+      /* @__PURE__ */ import_react15.default.createElement("span", {
         key: "highlight",
         className: "bg-purple-500 text-white rounded-sm font-bold text-center",
         style: { padding: "1px 2px", margin: "0px 4px" }
@@ -28855,94 +28904,35 @@ to {
     setChatPaused,
     resetChat
   }) {
-    const [winners, setWinners] = import_react15.default.useState([]);
-    return /* @__PURE__ */ import_react15.default.createElement(import_react15.default.Fragment, null, /* @__PURE__ */ import_react15.default.createElement(Winner, {
+    const [winners, setWinners] = import_react16.default.useState([]);
+    return /* @__PURE__ */ import_react16.default.createElement(import_react16.default.Fragment, null, /* @__PURE__ */ import_react16.default.createElement(Winner, {
       winners,
       onClear: (idx) => setWinners((w) => removeIdx(w, idx))
-    }), /* @__PURE__ */ import_react15.default.createElement("div", {
+    }), /* @__PURE__ */ import_react16.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react15.default.createElement(InstantGiveaway, {
+    }, /* @__PURE__ */ import_react16.default.createElement(InstantGiveaway, {
       settings,
       channelInfo,
       setWinners,
       client
-    }), /* @__PURE__ */ import_react15.default.createElement(ChatGiveaway, {
+    }), /* @__PURE__ */ import_react16.default.createElement(ChatGiveaway, {
       settings,
       channelInfo,
       chatEvents,
       setWinners,
       client
-    })), /* @__PURE__ */ import_react15.default.createElement(SettingsComponent, {
+    })), /* @__PURE__ */ import_react16.default.createElement(SettingsComponent, {
       settings,
       setSettings,
       setChatPaused,
       resetChat
-    }), /* @__PURE__ */ import_react15.default.createElement(ChatBox, {
+    }), /* @__PURE__ */ import_react16.default.createElement(ChatBox, {
       chatEvents,
       winners,
       paused: chatPaused,
       setPaused: setChatPaused,
       clear: resetChat
     }));
-  }
-
-  // src/components/screens/Setup.tsx
-  var import_react16 = __toModule(require_react());
-  async function validateToken(token) {
-    try {
-      const data = await fetch(`https://id.twitch.tv/oauth2/validate`, {
-        headers: {
-          Authorization: `OAuth ${token}`
-        }
-      }).then((res) => res.json());
-      return {
-        token,
-        clientId: data.client_id,
-        login: data.login === "odialo" ? "mightyteapot" : data.login,
-        userId: data.user_id
-      };
-    } catch (e2) {
-      return null;
-    }
-  }
-  function Setup({
-    resetChat,
-    setClient,
-    channel,
-    setChannel
-  }) {
-    const history = useHistory();
-    import_react16.default.useEffect(() => {
-      if (channel.login) {
-        history.push("/");
-      }
-    }, [channel.login]);
-    return /* @__PURE__ */ import_react16.default.createElement("div", {
-      className: "flex flex-col justify-center items-center h-full gap-2 -mt-10"
-    }, /* @__PURE__ */ import_react16.default.createElement("div", null, "Setup"), /* @__PURE__ */ import_react16.default.createElement("button", {
-      onClick: () => Neutralino.os.open("https://giveaway-o-tron.vercel.app")
-    }, "Click here to authenticate with Twitch and get the required tokens"), /* @__PURE__ */ import_react16.default.createElement("form", {
-      className: "flex flex-row",
-      onSubmit: async (e2) => {
-        e2.preventDefault();
-        const accessToken = e2.currentTarget.elements.accessToken.value.trim();
-        const data = await validateToken(accessToken);
-        if (!data)
-          return;
-        resetChat();
-        if (data.login)
-          setClient(init(data));
-        setChannel(data);
-        history.push("/");
-      }
-    }, /* @__PURE__ */ import_react16.default.createElement("input", {
-      className: "bg-gray-700 px-2 py-1 rounded-l-md border-b border-l border-purple-500 overflow-ellipsis",
-      placeholder: "Access Token",
-      name: "accessToken"
-    }), /* @__PURE__ */ import_react16.default.createElement("button", {
-      className: "bg-purple-600 text-white py-1 px-3 rounded-r-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 w-32 justify-center",
-      title: "Setup connection"
-    }, /* @__PURE__ */ import_react16.default.createElement(FaTwitch, null), " Setup")));
   }
 
   // src/components/primitives/Header.tsx
@@ -29017,8 +29007,15 @@ to {
       if (c2.login)
         return null;
       console.info("[client][app][startClient]");
-      setClient(init(c2));
+      if (settings.autoConnect)
+        setClient(init(c2));
     });
+    import_react18.default.useEffect(() => {
+      if (channelInfo.login) {
+        if (settings.autoConnect)
+          setClient(init(channelInfo));
+      }
+    }, [channelInfo.login]);
     const onNewChat = import_react18.default.useCallback((chat) => {
       console.info("[chat]", chat);
     }, []);

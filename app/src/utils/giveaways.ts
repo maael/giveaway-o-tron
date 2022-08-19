@@ -1,8 +1,7 @@
 import { ChatItem } from '../chat'
 import { ChannelInfo } from './types'
 import { getRandomArrayItem } from './misc'
-import { getFollowerInfo, getUsersFromNames, getUsersSubscriptionInfo, getViewers } from './twitch'
-import { Cache, CACHE_KEY } from './twitchCaches'
+import { getFollowers, getSubs, getViewers } from './twitch'
 
 export async function getChatGiveaway(
   channelInfo: ChannelInfo,
@@ -18,14 +17,8 @@ export async function getChatGiveaway(
     .reduce<ChatItem[]>((acc, c) => (acc.some((i) => i.username === c.username) ? acc : acc.concat(c)), [])
     .flatMap((c) => (c.isSubscriber ? Array.from({ length: subLuck }, () => c) : c))
   if (followerOnly) {
-    const idCache = await new Cache(channelInfo.login!, CACHE_KEY.userIds).get()
-    const mappedUsers = await getUsersFromNames(
-      channelInfo,
-      users.map((u) => u.username),
-      idCache
-    )
-    const followerCache = await new Cache(channelInfo.login!, CACHE_KEY.follows).get()
-    users = (await getFollowerInfo(channelInfo, mappedUsers, 10, followerCache)) as any
+    const followers = await getFollowers(channelInfo)
+    users = users.filter((u) => followers.has(u.username))
   }
 
   console.info('[giveaway][chat][end]')
@@ -48,22 +41,20 @@ export async function getInstantGiveaway(
 ) {
   console.info('[giveaway][instant][start]')
   let viewers = await getViewers(channelInfo)
-  const idCache = await new Cache(channelInfo.login!, CACHE_KEY.userIds).get()
-  const mappedUsers = await getUsersFromNames(channelInfo, viewers, idCache)
+  console.info({ viewers: viewers.length })
   if (followerOnly) {
-    const followerCache = await new Cache(channelInfo.login!, CACHE_KEY.follows).get()
-    const subCache = await new Cache(channelInfo.login!, CACHE_KEY.subs).get()
-    const [withFollowers, withSub] = await Promise.all([
-      getFollowerInfo(channelInfo, mappedUsers, 5, followerCache),
-      channelInfo.userId === '69496551' ? ([] as any) : getUsersSubscriptionInfo(channelInfo, mappedUsers, subCache),
-    ])
-    const combined: any[] = withFollowers.map((i) => {
-      ;(i as any).isSubscriber = withSub.find((s) => s.id === i.id)?.isSubscriber || false
-      return i
-    })
-    const followers = combined.filter((i) => i.follows)
-    console.info('[giveaway][instant]', { followers: followers.length })
-    viewers = followers
+    const [followersList, subsList] = await Promise.all([getFollowers(channelInfo), getSubs(channelInfo)])
+    const combined: any[] = viewers
+      .filter((v) => followersList.has(v))
+      .map((u) => {
+        return {
+          login: u,
+          follows: true,
+          isSubscriber: subsList.has(u),
+        }
+      })
+    console.info('[giveaway][instant]', { followers: combined.length })
+    viewers = combined
       .flatMap((c) => (c.isSubscriber ? Array.from({ length: subLuck }, () => c) : c))
       .map((i) => i.login)
   }

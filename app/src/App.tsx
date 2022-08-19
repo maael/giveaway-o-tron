@@ -31,8 +31,13 @@ function InnerApp() {
     console.info('[client][app]', c)
     if (c.login) return null
     console.info('[client][app][startClient]')
-    setClient(chat(c))
+    if (settings.autoConnect) setClient(chat(c))
   })
+  React.useEffect(() => {
+    if (channelInfo.login) {
+      if (settings.autoConnect) setClient(chat(channelInfo))
+    }
+  }, [channelInfo.login])
   const onNewChat = React.useCallback((chat: ChatItem) => {
     console.info('[chat]', chat)
   }, [])

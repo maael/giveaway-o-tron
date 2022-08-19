@@ -48,5 +48,9 @@ export default function useStorage<T>(
       }
     })()
   }, [key, getKey])
+  // if (key === 'channelInfo' && state && (state as any).userId === '69496551') {
+  //   ;(state as any).userId = '132739183' // Mock as Muk
+  //   ;(state as any).login = 'mukluk'
+  // }
   return [state, setState, initialised]
 }

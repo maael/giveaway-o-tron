@@ -10,6 +10,7 @@ export interface Settings {
 
 export type ChannelInfo = Partial<{
   token: string
+  refreshToken: string
   login: string
   userId: string
   clientId: string
