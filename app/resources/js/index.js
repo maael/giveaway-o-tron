@@ -27269,10 +27269,12 @@ to {
       users = users.filter((u3) => followers.has(u3.username));
     }
     console.info("[giveaway][chat][end]");
+    let winnersList = [];
     return Array.from({ length: numberOfWinners }, () => {
-      const winner = getRandomArrayItem(users);
+      const winner = getRandomArrayItem(users.filter((u3) => !winnersList.includes(u3.username)));
       if (!winner)
         return;
+      winnersList.push(winner.username);
       return {
         username: winner.username,
         isSubscriber: winner.isSubscriber,
@@ -27297,10 +27299,12 @@ to {
       viewers = combined.flatMap((c2) => c2.isSubscriber ? Array.from({ length: subLuck }, () => c2) : c2).map((i2) => i2.login);
     }
     console.info("[giveaway][instant][end]");
+    let winnersList = [];
     return Array.from({ length: numberOfWinners }, () => {
-      const winner = getRandomArrayItem(viewers);
+      const winner = getRandomArrayItem(viewers.filter((u3) => !winnersList.includes(u3)));
       if (!winner)
         return;
+      winnersList.push(winner);
       return winner;
     }).filter(Boolean);
   }

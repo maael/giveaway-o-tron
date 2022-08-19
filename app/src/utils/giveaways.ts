@@ -22,9 +22,11 @@ export async function getChatGiveaway(
   }
 
   console.info('[giveaway][chat][end]')
+  let winnersList: string[] = []
   return Array.from({ length: numberOfWinners }, () => {
-    const winner = getRandomArrayItem(users)
+    const winner = getRandomArrayItem(users.filter((u) => !winnersList.includes(u.username)))
     if (!winner) return
+    winnersList.push(winner.username)
     return {
       username: winner.username,
       isSubscriber: winner.isSubscriber,
@@ -59,9 +61,11 @@ export async function getInstantGiveaway(
       .map((i) => i.login)
   }
   console.info('[giveaway][instant][end]')
+  let winnersList: string[] = []
   return Array.from({ length: numberOfWinners }, () => {
-    const winner = getRandomArrayItem(viewers)
+    const winner = getRandomArrayItem(viewers.filter((u) => !winnersList.includes(u)))
     if (!winner) return
+    winnersList.push(winner)
     return winner
   }).filter(Boolean) as string[]
 }
