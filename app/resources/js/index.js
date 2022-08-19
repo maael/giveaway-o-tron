@@ -27264,8 +27264,9 @@ to {
         if (!data)
           return;
         resetChat();
+        console.info("[setup][client]", data);
         if (data.login)
-          setClient(init(data));
+          setClient((cl) => cl ? cl : init(data));
         setChannel(data);
         history.push("/");
       }
@@ -29004,16 +29005,16 @@ to {
     const [client, setClient] = import_react18.default.useState(null);
     const [channelInfo, setChannelInfo] = useStorage("channelInfo", {}, (c2) => {
       console.info("[client][app]", c2);
-      if (c2.login)
+      if (!c2.login)
         return null;
       console.info("[client][app][startClient]");
       if (settings.autoConnect)
-        setClient(init(c2));
+        setClient((cl) => cl ? cl : init(c2));
     });
     import_react18.default.useEffect(() => {
       if (channelInfo.login) {
         if (settings.autoConnect)
-          setClient(init(channelInfo));
+          setClient((cl) => cl ? cl : init(channelInfo));
       }
     }, [channelInfo.login]);
     const onNewChat = import_react18.default.useCallback((chat) => {

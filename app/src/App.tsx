@@ -29,7 +29,7 @@ function InnerApp() {
   const [client, setClient] = React.useState<ReturnType<typeof chat> | null>(null)
   const [channelInfo, setChannelInfo] = useStorage<ChannelInfo>('channelInfo', {}, (c) => {
     console.info('[client][app]', c)
-    if (c.login) return null
+    if (!c.login) return null
     console.info('[client][app][startClient]')
     if (settings.autoConnect) setClient((cl) => (cl ? cl : chat(c)))
   })

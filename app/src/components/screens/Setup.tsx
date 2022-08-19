@@ -103,6 +103,7 @@ export default function Setup({
           const data = await validateToken(accessToken, refreshToken)
           if (!data) return
           resetChat()
+          console.info('[setup][client]', data)
           if (data.login) setClient((cl) => (cl ? cl : chat(data)))
           setChannel(data)
           history.push('/')
