@@ -6,6 +6,7 @@ export interface Settings {
   chatCommand: string
   winnerMessage: string
   sendMessages: boolean
+  blocklist: string[]
 }
 
 export type ChannelInfo = Partial<{

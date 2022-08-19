@@ -22,12 +22,7 @@ export function InstantGiveaway({
       className="bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-all hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700"
       onClick={async () => {
         if (!channelInfo.login) return
-        const giveawayWinner = await getInstantGiveaway(
-          channelInfo,
-          settings.subLuck,
-          settings.followersOnly,
-          settings.numberOfWinners
-        )
+        const giveawayWinner = await getInstantGiveaway(channelInfo, settings)
         if (!giveawayWinner.length) {
           toast.error('No winners found that match conditions!', { position: 'bottom-center' })
           return
@@ -64,14 +59,7 @@ export function ChatGiveaway({
     <button
       className="bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-transform hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700"
       onClick={async () => {
-        const giveawayWinner = await getChatGiveaway(
-          channelInfo,
-          chatEvents,
-          settings.chatCommand,
-          settings.subLuck,
-          settings.followersOnly,
-          settings.numberOfWinners
-        )
+        const giveawayWinner = await getChatGiveaway(channelInfo, chatEvents, settings.chatCommand, settings)
         if (!giveawayWinner.length) {
           toast.error('No winners found that match conditions!', { position: 'bottom-center' })
           return

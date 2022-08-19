@@ -515,7 +515,7 @@
             }
             return element2;
           };
-          function createElement5(type, config, children) {
+          function createElement6(type, config, children) {
             var propName;
             var props = {};
             var key = null;
@@ -1563,7 +1563,7 @@
                 error("React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
               }
             }
-            var element2 = createElement5.apply(this, arguments);
+            var element2 = createElement6.apply(this, arguments);
             if (element2 == null) {
               return element2;
             }
@@ -2457,11 +2457,11 @@
       if (true) {
         (function() {
           "use strict";
-          var React16 = require_react();
+          var React17 = require_react();
           var _assign = require_object_assign();
           var Scheduler = require_scheduler();
           var tracing = require_tracing();
-          var ReactSharedInternals = React16.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React17.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function warn(format) {
             {
               for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -2493,7 +2493,7 @@
               Function.prototype.apply.call(console[level], console, argsWithFormat);
             }
           }
-          if (!React16) {
+          if (!React17) {
             {
               throw Error("ReactDOM was loaded before React. Make sure you load the React package before loading ReactDOM.");
             }
@@ -3709,7 +3709,7 @@
           var didWarnInvalidChild = false;
           function flattenChildren(children) {
             var content = "";
-            React16.Children.forEach(children, function(child) {
+            React17.Children.forEach(children, function(child) {
               if (child == null) {
                 return;
               }
@@ -3720,7 +3720,7 @@
           function validateProps(element2, props) {
             {
               if (typeof props.children === "object" && props.children !== null) {
-                React16.Children.forEach(props.children, function(child) {
+                React17.Children.forEach(props.children, function(child) {
                   if (child == null) {
                     return;
                   }
@@ -8474,7 +8474,7 @@
               }
             }
           }
-          function createElement5(type, props, rootContainerElement, parentNamespace) {
+          function createElement6(type, props, rootContainerElement, parentNamespace) {
             var isCustomComponentTag;
             var ownerDocument = getOwnerDocumentFromRootContainer(rootContainerElement);
             var domElement;
@@ -9351,7 +9351,7 @@
               }
               parentNamespace = hostContextDev.namespace;
             }
-            var domElement = createElement5(type, props, rootContainerInstance, parentNamespace);
+            var domElement = createElement6(type, props, rootContainerInstance, parentNamespace);
             precacheFiberNode(internalInstanceHandle, domElement);
             updateFiberProps(domElement, props);
             return domElement;
@@ -10913,7 +10913,7 @@
           }
           var fakeInternalInstance = {};
           var isArray = Array.isArray;
-          var emptyRefsObject = new React16.Component().refs;
+          var emptyRefsObject = new React17.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -24071,7 +24071,7 @@ ${JSON.stringify(message, null, 4)}`);
         return to.concat(ar || Array.prototype.slice.call(from));
       };
       Object.defineProperty(exports, "__esModule", { value: true });
-      var React16 = __importStar(require_react());
+      var React17 = __importStar(require_react());
       var utils_1 = require_utils2();
       var types_1 = require_types();
       var INCREASE_KEYS = ["ArrowRight", "ArrowUp", "k", "PageUp"];
@@ -24080,7 +24080,7 @@ ${JSON.stringify(message, null, 4)}`);
         __extends(Range3, _super);
         function Range3(props) {
           var _this = _super.call(this, props) || this;
-          _this.trackRef = React16.createRef();
+          _this.trackRef = React17.createRef();
           _this.thumbRefs = [];
           _this.state = {
             draggedTrackPos: [-1, -1],
@@ -24398,7 +24398,7 @@ ${JSON.stringify(message, null, 4)}`);
             _this.numOfMarks = (props2.max - props2.min) / _this.props.step;
             _this.markRefs = [];
             for (var i2 = 0; i2 < _this.numOfMarks + 1; i2++) {
-              _this.markRefs[i2] = React16.createRef();
+              _this.markRefs[i2] = React17.createRef();
             }
           };
           _this.calculateMarkOffsets = function() {
@@ -24439,7 +24439,7 @@ ${JSON.stringify(message, null, 4)}`);
           _this.schdOnTouchMove = (0, utils_1.schd)(_this.onTouchMove);
           _this.schdOnEnd = (0, utils_1.schd)(_this.onEnd);
           _this.thumbRefs = props.values.map(function() {
-            return React16.createRef();
+            return React17.createRef();
           });
           _this.updateMarkRefs(props);
           return _this;
@@ -24579,7 +24579,7 @@ ${JSON.stringify(message, null, 4)}`);
           max: 100
         };
         return Range3;
-      }(React16.Component);
+      }(React17.Component);
       exports.default = Range2;
     }
   });
@@ -27261,17 +27261,17 @@ to {
   }
 
   // src/utils/giveaways.ts
-  async function getChatGiveaway(channelInfo, chatItems, chatCommand, subLuck = 2, followerOnly = true, numberOfWinners = 1) {
+  async function getChatGiveaway(channelInfo, chatItems, chatCommand, settings) {
     console.info("[giveaway][chat][start]");
-    let users = chatItems.filter((c2) => chatCommand ? c2.msg.toLowerCase().includes(chatCommand.toLowerCase()) : true).reduce((acc, c2) => acc.some((i2) => i2.username === c2.username) ? acc : acc.concat(c2), []).flatMap((c2) => c2.isSubscriber ? Array.from({ length: subLuck }, () => c2) : c2);
-    if (followerOnly) {
+    let users = chatItems.filter((c2) => chatCommand ? c2.msg.toLowerCase().includes(chatCommand.toLowerCase()) : true).reduce((acc, c2) => acc.some((i2) => i2.username === c2.username) ? acc : acc.concat(c2), []).flatMap((c2) => c2.isSubscriber ? Array.from({ length: settings.subLuck }, () => c2) : c2);
+    if (settings.followersOnly) {
       const followers = await getFollowers(channelInfo);
       users = users.filter((u3) => followers.has(u3.username));
     }
     console.info("[giveaway][chat][end]");
     let winnersList = [];
-    return Array.from({ length: numberOfWinners }, () => {
-      const winner = getRandomArrayItem(users.filter((u3) => !winnersList.includes(u3.username)));
+    return Array.from({ length: settings.numberOfWinners }, () => {
+      const winner = getRandomArrayItem(users.filter((u3) => !winnersList.includes(u3.username)).filter((u3) => !settings.blocklist.map((b2) => b2.trim()).includes(u3.displayName) && !settings.blocklist.map((b2) => b2.trim()).includes(u3.username)));
       if (!winner)
         return;
       winnersList.push(winner.username);
@@ -27282,11 +27282,11 @@ to {
       };
     }).filter(Boolean);
   }
-  async function getInstantGiveaway(channelInfo, subLuck = 2, followerOnly = true, numberOfWinners = 1) {
+  async function getInstantGiveaway(channelInfo, settings) {
     console.info("[giveaway][instant][start]");
     let viewers = await getViewers(channelInfo);
     console.info({ viewers: viewers.length });
-    if (followerOnly) {
+    if (settings.followersOnly) {
       const [followersList, subsList] = await Promise.all([getFollowers(channelInfo), getSubs(channelInfo)]);
       const combined = viewers.filter((v2) => followersList.has(v2)).map((u3) => {
         return {
@@ -27296,12 +27296,12 @@ to {
         };
       });
       console.info("[giveaway][instant]", { followers: combined.length });
-      viewers = combined.flatMap((c2) => c2.isSubscriber ? Array.from({ length: subLuck }, () => c2) : c2).map((i2) => i2.login);
+      viewers = combined.flatMap((c2) => c2.isSubscriber ? Array.from({ length: settings.subLuck }, () => c2) : c2).map((i2) => i2.login);
     }
     console.info("[giveaway][instant][end]");
     let winnersList = [];
-    return Array.from({ length: numberOfWinners }, () => {
-      const winner = getRandomArrayItem(viewers.filter((u3) => !winnersList.includes(u3)));
+    return Array.from({ length: settings.numberOfWinners }, () => {
+      const winner = getRandomArrayItem(viewers.filter((u3) => !winnersList.includes(u3)).filter((u3) => !settings.blocklist.map((b2) => b2.trim()).includes(u3)));
       if (!winner)
         return;
       winnersList.push(winner);
@@ -27406,14 +27406,23 @@ to {
   function FaClock(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M256,8C119,8,8,119,8,256S119,504,256,504,504,393,504,256,393,8,256,8Zm92.49,313h0l-20,25a16,16,0,0,1-22.49,2.5h0l-67-49.72a40,40,0,0,1-15-31.23V112a16,16,0,0,1,16-16h32a16,16,0,0,1,16,16V256l58,42.5A16,16,0,0,1,348.49,321Z" } }] })(props);
   }
+  function FaCogs(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 640 512" }, "child": [{ "tag": "path", "attr": { "d": "M512.1 191l-8.2 14.3c-3 5.3-9.4 7.5-15.1 5.4-11.8-4.4-22.6-10.7-32.1-18.6-4.6-3.8-5.8-10.5-2.8-15.7l8.2-14.3c-6.9-8-12.3-17.3-15.9-27.4h-16.5c-6 0-11.2-4.3-12.2-10.3-2-12-2.1-24.6 0-37.1 1-6 6.2-10.4 12.2-10.4h16.5c3.6-10.1 9-19.4 15.9-27.4l-8.2-14.3c-3-5.2-1.9-11.9 2.8-15.7 9.5-7.9 20.4-14.2 32.1-18.6 5.7-2.1 12.1.1 15.1 5.4l8.2 14.3c10.5-1.9 21.2-1.9 31.7 0L552 6.3c3-5.3 9.4-7.5 15.1-5.4 11.8 4.4 22.6 10.7 32.1 18.6 4.6 3.8 5.8 10.5 2.8 15.7l-8.2 14.3c6.9 8 12.3 17.3 15.9 27.4h16.5c6 0 11.2 4.3 12.2 10.3 2 12 2.1 24.6 0 37.1-1 6-6.2 10.4-12.2 10.4h-16.5c-3.6 10.1-9 19.4-15.9 27.4l8.2 14.3c3 5.2 1.9 11.9-2.8 15.7-9.5 7.9-20.4 14.2-32.1 18.6-5.7 2.1-12.1-.1-15.1-5.4l-8.2-14.3c-10.4 1.9-21.2 1.9-31.7 0zm-10.5-58.8c38.5 29.6 82.4-14.3 52.8-52.8-38.5-29.7-82.4 14.3-52.8 52.8zM386.3 286.1l33.7 16.8c10.1 5.8 14.5 18.1 10.5 29.1-8.9 24.2-26.4 46.4-42.6 65.8-7.4 8.9-20.2 11.1-30.3 5.3l-29.1-16.8c-16 13.7-34.6 24.6-54.9 31.7v33.6c0 11.6-8.3 21.6-19.7 23.6-24.6 4.2-50.4 4.4-75.9 0-11.5-2-20-11.9-20-23.6V418c-20.3-7.2-38.9-18-54.9-31.7L74 403c-10 5.8-22.9 3.6-30.3-5.3-16.2-19.4-33.3-41.6-42.2-65.7-4-10.9.4-23.2 10.5-29.1l33.3-16.8c-3.9-20.9-3.9-42.4 0-63.4L12 205.8c-10.1-5.8-14.6-18.1-10.5-29 8.9-24.2 26-46.4 42.2-65.8 7.4-8.9 20.2-11.1 30.3-5.3l29.1 16.8c16-13.7 34.6-24.6 54.9-31.7V57.1c0-11.5 8.2-21.5 19.6-23.5 24.6-4.2 50.5-4.4 76-.1 11.5 2 20 11.9 20 23.6v33.6c20.3 7.2 38.9 18 54.9 31.7l29.1-16.8c10-5.8 22.9-3.6 30.3 5.3 16.2 19.4 33.2 41.6 42.1 65.8 4 10.9.1 23.2-10 29.1l-33.7 16.8c3.9 21 3.9 42.5 0 63.5zm-117.6 21.1c59.2-77-28.7-164.9-105.7-105.7-59.2 77 28.7 164.9 105.7 105.7zm243.4 182.7l-8.2 14.3c-3 5.3-9.4 7.5-15.1 5.4-11.8-4.4-22.6-10.7-32.1-18.6-4.6-3.8-5.8-10.5-2.8-15.7l8.2-14.3c-6.9-8-12.3-17.3-15.9-27.4h-16.5c-6 0-11.2-4.3-12.2-10.3-2-12-2.1-24.6 0-37.1 1-6 6.2-10.4 12.2-10.4h16.5c3.6-10.1 9-19.4 15.9-27.4l-8.2-14.3c-3-5.2-1.9-11.9 2.8-15.7 9.5-7.9 20.4-14.2 32.1-18.6 5.7-2.1 12.1.1 15.1 5.4l8.2 14.3c10.5-1.9 21.2-1.9 31.7 0l8.2-14.3c3-5.3 9.4-7.5 15.1-5.4 11.8 4.4 22.6 10.7 32.1 18.6 4.6 3.8 5.8 10.5 2.8 15.7l-8.2 14.3c6.9 8 12.3 17.3 15.9 27.4h16.5c6 0 11.2 4.3 12.2 10.3 2 12 2.1 24.6 0 37.1-1 6-6.2 10.4-12.2 10.4h-16.5c-3.6 10.1-9 19.4-15.9 27.4l8.2 14.3c3 5.2 1.9 11.9-2.8 15.7-9.5 7.9-20.4 14.2-32.1 18.6-5.7 2.1-12.1-.1-15.1-5.4l-8.2-14.3c-10.4 1.9-21.2 1.9-31.7 0zM501.6 431c38.5 29.6 82.4-14.3 52.8-52.8-38.5-29.6-82.4 14.3-52.8 52.8z" } }] })(props);
+  }
   function FaDice(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 640 512" }, "child": [{ "tag": "path", "attr": { "d": "M592 192H473.26c12.69 29.59 7.12 65.2-17 89.32L320 417.58V464c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48V240c0-26.51-21.49-48-48-48zM480 376c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm-46.37-186.7L258.7 14.37c-19.16-19.16-50.23-19.16-69.39 0L14.37 189.3c-19.16 19.16-19.16 50.23 0 69.39L189.3 433.63c19.16 19.16 50.23 19.16 69.39 0L433.63 258.7c19.16-19.17 19.16-50.24 0-69.4zM96 248c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm128 128c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm0-128c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm0-128c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm128 128c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24z" } }] })(props);
+  }
+  function FaExclamationTriangle(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 576 512" }, "child": [{ "tag": "path", "attr": { "d": "M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z" } }] })(props);
   }
   function FaPauseCircle(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm-16 328c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h48c8.8 0 16 7.2 16 16v160zm112 0c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h48c8.8 0 16 7.2 16 16v160z" } }] })(props);
   }
   function FaPlayCircle(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm115.7 272l-176 101c-15.8 8.8-35.7-2.5-35.7-21V152c0-18.4 19.8-29.8 35.7-21l176 107c16.4 9.2 16.4 32.9 0 42z" } }] })(props);
+  }
+  function FaPlus(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 448 512" }, "child": [{ "tag": "path", "attr": { "d": "M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" } }] })(props);
   }
   function FaRobot(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 640 512" }, "child": [{ "tag": "path", "attr": { "d": "M32,224H64V416H32A31.96166,31.96166,0,0,1,0,384V256A31.96166,31.96166,0,0,1,32,224Zm512-48V448a64.06328,64.06328,0,0,1-64,64H160a64.06328,64.06328,0,0,1-64-64V176a79.974,79.974,0,0,1,80-80H288V32a32,32,0,0,1,64,0V96H464A79.974,79.974,0,0,1,544,176ZM264,256a40,40,0,1,0-40,40A39.997,39.997,0,0,0,264,256Zm-8,128H192v32h64Zm96,0H288v32h64ZM456,256a40,40,0,1,0-40,40A39.997,39.997,0,0,0,456,256Zm-8,128H384v32h64ZM640,256V384a31.96166,31.96166,0,0,1-32,32H576V224h32A31.96166,31.96166,0,0,1,640,256Z" } }] })(props);
@@ -28754,7 +28763,7 @@ to {
       onClick: async () => {
         if (!channelInfo.login)
           return;
-        const giveawayWinner = await getInstantGiveaway(channelInfo, settings.subLuck, settings.followersOnly, settings.numberOfWinners);
+        const giveawayWinner = await getInstantGiveaway(channelInfo, settings);
         if (!giveawayWinner.length) {
           Et.error("No winners found that match conditions!", { position: "bottom-center" });
           return;
@@ -28782,7 +28791,7 @@ to {
     return /* @__PURE__ */ import_react14.default.createElement("button", {
       className: "bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-transform hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700",
       onClick: async () => {
-        const giveawayWinner = await getChatGiveaway(channelInfo, chatEvents, settings.chatCommand, settings.subLuck, settings.followersOnly, settings.numberOfWinners);
+        const giveawayWinner = await getChatGiveaway(channelInfo, chatEvents, settings.chatCommand, settings);
         if (!giveawayWinner.length) {
           Et.error("No winners found that match conditions!", { position: "bottom-center" });
           return;
@@ -29036,6 +29045,57 @@ to {
     }, giveaway.type)));
   }
 
+  // src/components/screens/Settings.tsx
+  var React13 = __toModule(require_react());
+  function SettingsScreen({
+    settings,
+    setSettings
+  }) {
+    return /* @__PURE__ */ React13.createElement("div", {
+      className: "mt-4 flex flex-col gap-2 flex-1"
+    }, /* @__PURE__ */ React13.createElement("h1", {
+      className: "text-3xl"
+    }, "Settings"), /* @__PURE__ */ React13.createElement("div", {
+      className: "flex flex-col gap-2"
+    }, /* @__PURE__ */ React13.createElement("div", {
+      className: "flex flex-row gap-2"
+    }, /* @__PURE__ */ React13.createElement("div", {
+      className: "flex-1"
+    }, /* @__PURE__ */ React13.createElement("h2", {
+      className: "text-2xl"
+    }, "Blocklist ", /* @__PURE__ */ React13.createElement("small", null, "(", settings.blocklist.length, ")")), /* @__PURE__ */ React13.createElement("small", {
+      className: "text-m"
+    }, "These users will be excluded from giveaways")), /* @__PURE__ */ React13.createElement("button", {
+      className: "border border-purple-600 rounded-md px-3 flex flex-row gap-1 justify-center items-center",
+      onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { blocklist: (s2.blocklist || []).concat("") }))
+    }, /* @__PURE__ */ React13.createElement(FaPlus, null), " Add Item")), /* @__PURE__ */ React13.createElement("div", {
+      className: "grid grid-cols-3 gap-2"
+    }, (settings.blocklist || []).map((u3, i2) => /* @__PURE__ */ React13.createElement("div", {
+      className: "relative flex-1"
+    }, /* @__PURE__ */ React13.createElement("input", {
+      className: "bg-gray-700 px-2 py-1 rounded-md border-b border-purple-500 w-full overflow-ellipsis",
+      placeholder: "Name...",
+      value: u3,
+      onChange: (e2) => setSettings((s2) => {
+        const list = s2.blocklist;
+        list[i2] = e2.target.value;
+        return __spreadProps(__spreadValues({}, s2), { blocklist: list });
+      }),
+      title: "Chat command to enter - leave empty for none"
+    }), /* @__PURE__ */ React13.createElement("button", {
+      className: "text-red-600 absolute right-2 top-1.5 text-xl",
+      onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { blocklist: removeIdx(s2.blocklist, i2) }))
+    }, /* @__PURE__ */ React13.createElement(FaTimes, null)))))), /* @__PURE__ */ React13.createElement("div", {
+      className: "flex-1 flex items-end justify-end"
+    }, /* @__PURE__ */ React13.createElement("button", {
+      className: "bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity",
+      onClick: async () => {
+        await Neutralino.storage.setData("main-channelinfo", null);
+        window.location.reload();
+      }
+    }, /* @__PURE__ */ React13.createElement(FaExclamationTriangle, null), " Reset Channel Info")));
+  }
+
   // src/components/primitives/Header.tsx
   var import_react19 = __toModule(require_react());
   function Header({
@@ -29049,7 +29109,7 @@ to {
     return /* @__PURE__ */ import_react19.default.createElement("div", {
       className: "flex flex-row justify-start gap-2"
     }, /* @__PURE__ */ import_react19.default.createElement("div", {
-      className: "flex-1"
+      className: "flex-1 flex flex-row gap-2 items-center"
     }, /* @__PURE__ */ import_react19.default.createElement("div", {
       className: "inline-block"
     }, /* @__PURE__ */ import_react19.default.createElement(Link, {
@@ -29062,7 +29122,11 @@ to {
       className: "relative -top-0.5 ml-1"
     }, "Giveaway-o-tron") : /* @__PURE__ */ import_react19.default.createElement(FaAngleLeft, {
       className: "text-xl"
-    }))))), /* @__PURE__ */ import_react19.default.createElement("form", {
+    })))), location.pathname === "/setup" ? null : /* @__PURE__ */ import_react19.default.createElement(Link, {
+      to: "/settings"
+    }, /* @__PURE__ */ import_react19.default.createElement("div", {
+      className: "bg-purple-600 p-2 flex justify-center items-center rounded-md"
+    }, /* @__PURE__ */ import_react19.default.createElement(FaCogs, null)))), /* @__PURE__ */ import_react19.default.createElement("form", {
       className: "flex flex-row",
       onSubmit: (e2) => {
         e2.preventDefault();
@@ -29100,7 +29164,8 @@ to {
       followersOnly: true,
       chatCommand: "",
       winnerMessage: "PartyHat @name won!",
-      sendMessages: false
+      sendMessages: false,
+      blocklist: ["streamelements", "streamlabs", "nightbot"]
     });
     const [client, setClient] = import_react20.default.useState(null);
     const [channelInfo, setChannelInfo] = useStorage("channelInfo", {}, (c2) => {
@@ -29160,7 +29225,13 @@ to {
     })), /* @__PURE__ */ import_react20.default.createElement(Route, {
       path: "/giveaways",
       exact: true
-    }, /* @__PURE__ */ import_react20.default.createElement(PastGiveaways, null))), /* @__PURE__ */ import_react20.default.createElement(Oe, null));
+    }, /* @__PURE__ */ import_react20.default.createElement(PastGiveaways, null)), /* @__PURE__ */ import_react20.default.createElement(Route, {
+      path: "/settings",
+      exact: true
+    }, /* @__PURE__ */ import_react20.default.createElement(SettingsScreen, {
+      settings,
+      setSettings
+    }))), /* @__PURE__ */ import_react20.default.createElement(Oe, null));
   }
 
   // src/index.tsx

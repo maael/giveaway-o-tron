@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react'
-import { FaRobot as LogoIco, FaTwitch as TwitchIco, FaAngleLeft as LeftIco } from 'react-icons/fa'
+import { FaRobot as LogoIco, FaTwitch as TwitchIco, FaAngleLeft as LeftIco, FaCogs } from 'react-icons/fa'
 import { Link, useLocation } from 'react-router-dom'
 import { ChannelInfo } from '~/utils'
 import chat from '../../chat'
@@ -19,7 +19,7 @@ export default function Header({
   const homeRoute = channelInfo.login ? '/' : '/setup'
   return (
     <div className="flex flex-row justify-start gap-2">
-      <div className="flex-1">
+      <div className="flex-1 flex flex-row gap-2 items-center">
         <div className="inline-block">
           <Link to={homeRoute}>
             <h1 className="flex flex-row gap-1 items-center text-white bg-purple-600 rounded-md px-3 py-1 transform hover:scale-105 transition-transform shadow-md">
@@ -32,6 +32,13 @@ export default function Header({
             </h1>
           </Link>
         </div>
+        {location.pathname === '/setup' ? null : (
+          <Link to="/settings">
+            <div className="bg-purple-600 p-2 flex justify-center items-center rounded-md">
+              <FaCogs />
+            </div>
+          </Link>
+        )}
       </div>
       <form
         className="flex flex-row"

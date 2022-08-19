@@ -6,6 +6,7 @@ import useStorage from './components/hooks/useStorage'
 import MainScreen from './components/screens/Main'
 import SetupScreen from './components/screens/Setup'
 import PastGiveawaysScreen from './components/screens/PastGiveaways'
+import SettingsScreen from './components/screens/Settings'
 import Header from './components/primitives/Header'
 import { ChannelInfo, Settings, useAuthEvents } from './utils'
 
@@ -26,6 +27,7 @@ function InnerApp() {
     chatCommand: '',
     winnerMessage: 'PartyHat @name won!',
     sendMessages: false,
+    blocklist: ['streamelements', 'streamlabs', 'nightbot'],
   })
   const [client, setClient] = React.useState<ReturnType<typeof chat> | null>(null)
   const [channelInfo, setChannelInfo] = useStorage<ChannelInfo>('channelInfo', {}, (c) => {
@@ -75,6 +77,9 @@ function InnerApp() {
         </Route>
         <Route path="/giveaways" exact>
           <PastGiveawaysScreen />
+        </Route>
+        <Route path="/settings" exact>
+          <SettingsScreen settings={settings} setSettings={setSettings} />
         </Route>
       </Switch>
       <Toaster />

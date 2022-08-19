@@ -5,7 +5,7 @@ interface GiveawayData {
   id: string
   createdAt: string
   type: string
-  settings: Omit<Settings, 'autoConnect'>
+  settings: Omit<Settings, 'autoConnect' | 'blocklist'>
   winners: { login: string; isSubscriber: boolean; follows: boolean }[]
 }
 
