@@ -1,4 +1,5 @@
 import toast from 'react-hot-toast'
+import { validateToken } from './auth'
 import { getSubs, getFollowers } from './twitch'
 import { ChannelInfo } from './types'
 
@@ -35,8 +36,12 @@ export default async function watch() {
     if (info) {
       const channelInfo = JSON.parse(info) as ChannelInfo
       if (!channelInfo.login) return
+      await validateToken(channelInfo.token!, channelInfo.refreshToken!)
+      const freshInfo = await Neutralino.storage.getData('main-channelInfo')
+      const freshChannelInfo = JSON.parse(freshInfo) as ChannelInfo
+      console.info('what', freshChannelInfo)
       clearInterval(interval)
-      await Promise.all([getFollowers(channelInfo), getSubs(channelInfo)])
+      await Promise.all([getFollowers(freshChannelInfo), getSubs(freshChannelInfo)])
       toast.success('Finished Twitch caches, ready!', { position: 'bottom-right' })
     }
   }, 2000)

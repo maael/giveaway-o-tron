@@ -1,75 +1,8 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import { useHistory } from 'react-router-dom'
 import { FaTwitch as TwitchIco } from 'react-icons/fa'
-import { ChannelInfo } from '../../utils'
+import { ChannelInfo, validateToken } from '../../utils'
 import chat from '../../chat'
-
-async function validateToken(token: string, refreshToken: string) {
-  try {
-    const res = await fetch(`https://id.twitch.tv/oauth2/validate`, {
-      headers: {
-        Authorization: `OAuth ${token}`,
-      },
-    })
-    if (res.status === 401) {
-      return refreshTokenFlow(refreshToken)
-    }
-    const data = (await res.json()) as any
-    console.info('[validate]', data)
-    return {
-      token,
-      refreshToken,
-      clientId: data.client_id,
-      login: data.login === 'odialo' ? 'mukluk' : data.login,
-      userId: data.user_id,
-    }
-  } catch {
-    return null
-  }
-}
-
-export async function refreshTokenFlow(refreshToken: string) {
-  const channelInfo = await JSON.parse(await Neutralino.storage.getData('main-channelinfo'))
-  const details = {
-    client_id: channelInfo.clientId,
-    client_secret: 'Password!', // TODO: Figure out how to do this
-    grant_type: 'refresh_token',
-    refresh_token: refreshToken,
-  }
-
-  const formBody: string[] = []
-  for (let property in details) {
-    const encodedKey = encodeURIComponent(property)
-    const encodedValue = encodeURIComponent(details[property])
-    formBody.push(`${encodedKey}=${encodedValue}`)
-  }
-  const body = formBody.join('&')
-  const res = await fetch(`https://id.twitch.tv/oauth2/token`, {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    method: 'POST',
-    body,
-  })
-  if (res.status === 403) {
-    console.error('[refresh][error]')
-    throw Error('Refresh token failed')
-  }
-  const data = (await res.json()) as {
-    access_token: string
-    refresh_token: string
-  }
-  await Neutralino.storage.setData(
-    'main-channelinfo',
-    JSON.stringify({ ...channelInfo, accessToken: data.access_token, refreshToken: data.refresh_token })
-  )
-  return {
-    token: data.access_token,
-    clientId: channelInfo.clientId,
-    login: channelInfo.login,
-    userId: channelInfo.userId,
-  }
-}
 
 export default function Setup({
   resetChat,

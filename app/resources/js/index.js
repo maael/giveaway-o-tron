@@ -1073,7 +1073,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect3(create, deps) {
+          function useEffect4(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1643,7 +1643,7 @@
           exports.useCallback = useCallback3;
           exports.useContext = useContext2;
           exports.useDebugValue = useDebugValue;
-          exports.useEffect = useEffect3;
+          exports.useEffect = useEffect4;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useLayoutEffect = useLayoutEffect;
           exports.useMemo = useMemo;
@@ -2457,11 +2457,11 @@
       if (true) {
         (function() {
           "use strict";
-          var React15 = require_react();
+          var React16 = require_react();
           var _assign = require_object_assign();
           var Scheduler = require_scheduler();
           var tracing = require_tracing();
-          var ReactSharedInternals = React15.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React16.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function warn(format) {
             {
               for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -2493,7 +2493,7 @@
               Function.prototype.apply.call(console[level], console, argsWithFormat);
             }
           }
-          if (!React15) {
+          if (!React16) {
             {
               throw Error("ReactDOM was loaded before React. Make sure you load the React package before loading ReactDOM.");
             }
@@ -3709,7 +3709,7 @@
           var didWarnInvalidChild = false;
           function flattenChildren(children) {
             var content = "";
-            React15.Children.forEach(children, function(child) {
+            React16.Children.forEach(children, function(child) {
               if (child == null) {
                 return;
               }
@@ -3720,7 +3720,7 @@
           function validateProps(element2, props) {
             {
               if (typeof props.children === "object" && props.children !== null) {
-                React15.Children.forEach(props.children, function(child) {
+                React16.Children.forEach(props.children, function(child) {
                   if (child == null) {
                     return;
                   }
@@ -10913,7 +10913,7 @@
           }
           var fakeInternalInstance = {};
           var isArray = Array.isArray;
-          var emptyRefsObject = new React15.Component().refs;
+          var emptyRefsObject = new React16.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -24071,7 +24071,7 @@ ${JSON.stringify(message, null, 4)}`);
         return to.concat(ar || Array.prototype.slice.call(from));
       };
       Object.defineProperty(exports, "__esModule", { value: true });
-      var React15 = __importStar(require_react());
+      var React16 = __importStar(require_react());
       var utils_1 = require_utils2();
       var types_1 = require_types();
       var INCREASE_KEYS = ["ArrowRight", "ArrowUp", "k", "PageUp"];
@@ -24080,7 +24080,7 @@ ${JSON.stringify(message, null, 4)}`);
         __extends(Range3, _super);
         function Range3(props) {
           var _this = _super.call(this, props) || this;
-          _this.trackRef = React15.createRef();
+          _this.trackRef = React16.createRef();
           _this.thumbRefs = [];
           _this.state = {
             draggedTrackPos: [-1, -1],
@@ -24398,7 +24398,7 @@ ${JSON.stringify(message, null, 4)}`);
             _this.numOfMarks = (props2.max - props2.min) / _this.props.step;
             _this.markRefs = [];
             for (var i2 = 0; i2 < _this.numOfMarks + 1; i2++) {
-              _this.markRefs[i2] = React15.createRef();
+              _this.markRefs[i2] = React16.createRef();
             }
           };
           _this.calculateMarkOffsets = function() {
@@ -24439,7 +24439,7 @@ ${JSON.stringify(message, null, 4)}`);
           _this.schdOnTouchMove = (0, utils_1.schd)(_this.onTouchMove);
           _this.schdOnEnd = (0, utils_1.schd)(_this.onEnd);
           _this.thumbRefs = props.values.map(function() {
-            return React15.createRef();
+            return React16.createRef();
           });
           _this.updateMarkRefs(props);
           return _this;
@@ -24579,7 +24579,7 @@ ${JSON.stringify(message, null, 4)}`);
           max: 100
         };
         return Range3;
-      }(React15.Component);
+      }(React16.Component);
       exports.default = Range2;
     }
   });
@@ -24666,11 +24666,11 @@ ${JSON.stringify(message, null, 4)}`);
   });
 
   // src/index.tsx
-  var import_react19 = __toModule(require_react());
+  var import_react21 = __toModule(require_react());
   var import_react_dom = __toModule(require_react_dom());
 
   // src/App.tsx
-  var import_react18 = __toModule(require_react());
+  var import_react20 = __toModule(require_react());
 
   // node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js
   function _setPrototypeOf(o2, p2) {
@@ -27024,6 +27024,91 @@ to {
     return items[Math.floor(Math.random() * items.length)];
   }
 
+  // src/utils/auth.ts
+  var import_react8 = __toModule(require_react());
+  var AuthEvent = class extends EventTarget {
+    emit(type, channelInfo) {
+      this.dispatchEvent(new CustomEvent(type, { detail: channelInfo }));
+    }
+  };
+  var authEmitter = new AuthEvent();
+  function useAuthEvents(onRefresh) {
+    (0, import_react8.useEffect)(() => {
+      function handler(e2) {
+        onRefresh(e2.detail);
+      }
+      authEmitter.addEventListener("refresh", handler);
+      return () => authEmitter.removeEventListener("refresh", handler);
+    }, [authEmitter, onRefresh]);
+  }
+  async function validateToken(token, refreshToken) {
+    try {
+      const res = await fetch(`https://id.twitch.tv/oauth2/validate`, {
+        headers: {
+          Authorization: `OAuth ${token}`
+        }
+      });
+      if (res.status === 401) {
+        console.warn("[validate][refresh]");
+        return refreshTokenFlow(refreshToken);
+      }
+      const data = await res.json();
+      console.info("[validate]", data);
+      return {
+        token,
+        refreshToken,
+        clientId: data.client_id,
+        login: data.login === "odialo" ? "mukluk" : data.login,
+        userId: data.user_id
+      };
+    } catch (e2) {
+      console.info("[validate][error]", e2);
+      return null;
+    }
+  }
+  async function refreshTokenFlow(refreshToken) {
+    console.info("[refreshTokenFlow]", refreshToken);
+    const channelInfo = await JSON.parse(await Neutralino.storage.getData("main-channelinfo"));
+    const details = {
+      client_id: channelInfo.clientId,
+      client_secret: atob(globalThis.NL_TS),
+      grant_type: "refresh_token",
+      refresh_token: refreshToken
+    };
+    const formBody = [];
+    for (let property in details) {
+      const encodedKey = encodeURIComponent(property);
+      const encodedValue = encodeURIComponent(details[property]);
+      formBody.push(`${encodedKey}=${encodedValue}`);
+    }
+    const body = formBody.join("&");
+    const res = await fetch(`https://id.twitch.tv/oauth2/token`, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: "POST",
+      body
+    });
+    if (res.status === 403) {
+      console.error("[refresh][error]");
+      throw Error("Refresh token failed");
+    }
+    const data = await res.json();
+    await Neutralino.storage.setData("main-channelinfo", JSON.stringify(__spreadProps(__spreadValues({}, channelInfo), { token: data.access_token, refreshToken: data.refresh_token })));
+    authEmitter.emit("refresh", {
+      token: data.access_token,
+      clientId: channelInfo.clientId,
+      login: channelInfo.login,
+      userId: channelInfo.userId
+    });
+    return {
+      token: data.access_token,
+      clientId: channelInfo.clientId,
+      login: channelInfo.login,
+      userId: channelInfo.userId
+    };
+  }
+
   // src/utils/twitchCaches.ts
   var CACHE_KEY;
   (function(CACHE_KEY2) {
@@ -27054,236 +27139,15 @@ to {
         const channelInfo = JSON.parse(info);
         if (!channelInfo.login)
           return;
+        await validateToken(channelInfo.token, channelInfo.refreshToken);
+        const freshInfo = await Neutralino.storage.getData("main-channelInfo");
+        const freshChannelInfo = JSON.parse(freshInfo);
+        console.info("what", freshChannelInfo);
         clearInterval(interval);
-        await Promise.all([getFollowers(channelInfo), getSubs(channelInfo)]);
+        await Promise.all([getFollowers(freshChannelInfo), getSubs(freshChannelInfo)]);
         Et.success("Finished Twitch caches, ready!", { position: "bottom-right" });
       }
     }, 2e3);
-  }
-
-  // src/components/screens/Setup.tsx
-  var import_react10 = __toModule(require_react());
-
-  // node_modules/react-icons/lib/esm/iconBase.js
-  var import_react9 = __toModule(require_react());
-
-  // node_modules/react-icons/lib/esm/iconContext.js
-  var import_react8 = __toModule(require_react());
-  var DefaultContext = {
-    color: void 0,
-    size: void 0,
-    className: void 0,
-    style: void 0,
-    attr: void 0
-  };
-  var IconContext = import_react8.default.createContext && import_react8.default.createContext(DefaultContext);
-
-  // node_modules/react-icons/lib/esm/iconBase.js
-  var __assign = function() {
-    __assign = Object.assign || function(t2) {
-      for (var s2, i2 = 1, n3 = arguments.length; i2 < n3; i2++) {
-        s2 = arguments[i2];
-        for (var p2 in s2)
-          if (Object.prototype.hasOwnProperty.call(s2, p2))
-            t2[p2] = s2[p2];
-      }
-      return t2;
-    };
-    return __assign.apply(this, arguments);
-  };
-  var __rest = function(s2, e2) {
-    var t2 = {};
-    for (var p2 in s2)
-      if (Object.prototype.hasOwnProperty.call(s2, p2) && e2.indexOf(p2) < 0)
-        t2[p2] = s2[p2];
-    if (s2 != null && typeof Object.getOwnPropertySymbols === "function")
-      for (var i2 = 0, p2 = Object.getOwnPropertySymbols(s2); i2 < p2.length; i2++) {
-        if (e2.indexOf(p2[i2]) < 0 && Object.prototype.propertyIsEnumerable.call(s2, p2[i2]))
-          t2[p2[i2]] = s2[p2[i2]];
-      }
-    return t2;
-  };
-  function Tree2Element(tree) {
-    return tree && tree.map(function(node, i2) {
-      return import_react9.default.createElement(node.tag, __assign({
-        key: i2
-      }, node.attr), Tree2Element(node.child));
-    });
-  }
-  function GenIcon(data) {
-    return function(props) {
-      return import_react9.default.createElement(IconBase, __assign({
-        attr: __assign({}, data.attr)
-      }, props), Tree2Element(data.child));
-    };
-  }
-  function IconBase(props) {
-    var elem = function(conf) {
-      var attr = props.attr, size = props.size, title = props.title, svgProps = __rest(props, ["attr", "size", "title"]);
-      var computedSize = size || conf.size || "1em";
-      var className;
-      if (conf.className)
-        className = conf.className;
-      if (props.className)
-        className = (className ? className + " " : "") + props.className;
-      return import_react9.default.createElement("svg", __assign({
-        stroke: "currentColor",
-        fill: "currentColor",
-        strokeWidth: "0"
-      }, conf.attr, attr, svgProps, {
-        className,
-        style: __assign(__assign({
-          color: props.color || conf.color
-        }, conf.style), props.style),
-        height: computedSize,
-        width: computedSize,
-        xmlns: "http://www.w3.org/2000/svg"
-      }), title && import_react9.default.createElement("title", null, title), props.children);
-    };
-    return IconContext !== void 0 ? import_react9.default.createElement(IconContext.Consumer, null, function(conf) {
-      return elem(conf);
-    }) : elem(DefaultContext);
-  }
-
-  // node_modules/react-icons/fa/index.esm.js
-  function FaTwitch(props) {
-    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M391.17,103.47H352.54v109.7h38.63ZM285,103H246.37V212.75H285ZM120.83,0,24.31,91.42V420.58H140.14V512l96.53-91.42h77.25L487.69,256V0ZM449.07,237.75l-77.22,73.12H294.61l-67.6,64v-64H140.14V36.58H449.07Z" } }] })(props);
-  }
-  function FaAngleLeft(props) {
-    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 256 512" }, "child": [{ "tag": "path", "attr": { "d": "M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z" } }] })(props);
-  }
-  function FaCheck(props) {
-    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" } }] })(props);
-  }
-  function FaClock(props) {
-    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M256,8C119,8,8,119,8,256S119,504,256,504,504,393,504,256,393,8,256,8Zm92.49,313h0l-20,25a16,16,0,0,1-22.49,2.5h0l-67-49.72a40,40,0,0,1-15-31.23V112a16,16,0,0,1,16-16h32a16,16,0,0,1,16,16V256l58,42.5A16,16,0,0,1,348.49,321Z" } }] })(props);
-  }
-  function FaDice(props) {
-    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 640 512" }, "child": [{ "tag": "path", "attr": { "d": "M592 192H473.26c12.69 29.59 7.12 65.2-17 89.32L320 417.58V464c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48V240c0-26.51-21.49-48-48-48zM480 376c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm-46.37-186.7L258.7 14.37c-19.16-19.16-50.23-19.16-69.39 0L14.37 189.3c-19.16 19.16-19.16 50.23 0 69.39L189.3 433.63c19.16 19.16 50.23 19.16 69.39 0L433.63 258.7c19.16-19.17 19.16-50.24 0-69.4zM96 248c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm128 128c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm0-128c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm0-128c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm128 128c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24z" } }] })(props);
-  }
-  function FaPauseCircle(props) {
-    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm-16 328c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h48c8.8 0 16 7.2 16 16v160zm112 0c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h48c8.8 0 16 7.2 16 16v160z" } }] })(props);
-  }
-  function FaPlayCircle(props) {
-    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm115.7 272l-176 101c-15.8 8.8-35.7-2.5-35.7-21V152c0-18.4 19.8-29.8 35.7-21l176 107c16.4 9.2 16.4 32.9 0 42z" } }] })(props);
-  }
-  function FaRobot(props) {
-    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 640 512" }, "child": [{ "tag": "path", "attr": { "d": "M32,224H64V416H32A31.96166,31.96166,0,0,1,0,384V256A31.96166,31.96166,0,0,1,32,224Zm512-48V448a64.06328,64.06328,0,0,1-64,64H160a64.06328,64.06328,0,0,1-64-64V176a79.974,79.974,0,0,1,80-80H288V32a32,32,0,0,1,64,0V96H464A79.974,79.974,0,0,1,544,176ZM264,256a40,40,0,1,0-40,40A39.997,39.997,0,0,0,264,256Zm-8,128H192v32h64Zm96,0H288v32h64ZM456,256a40,40,0,1,0-40,40A39.997,39.997,0,0,0,456,256Zm-8,128H384v32h64ZM640,256V384a31.96166,31.96166,0,0,1-32,32H576V224h32A31.96166,31.96166,0,0,1,640,256Z" } }] })(props);
-  }
-  function FaTimesCircle(props) {
-    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z" } }] })(props);
-  }
-  function FaTimes(props) {
-    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 352 512" }, "child": [{ "tag": "path", "attr": { "d": "M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z" } }] })(props);
-  }
-
-  // src/components/screens/Setup.tsx
-  async function validateToken(token, refreshToken) {
-    try {
-      const res = await fetch(`https://id.twitch.tv/oauth2/validate`, {
-        headers: {
-          Authorization: `OAuth ${token}`
-        }
-      });
-      if (res.status === 401) {
-        return refreshTokenFlow(refreshToken);
-      }
-      const data = await res.json();
-      console.info("[validate]", data);
-      return {
-        token,
-        refreshToken,
-        clientId: data.client_id,
-        login: data.login === "odialo" ? "mukluk" : data.login,
-        userId: data.user_id
-      };
-    } catch (e2) {
-      return null;
-    }
-  }
-  async function refreshTokenFlow(refreshToken) {
-    const channelInfo = await JSON.parse(await Neutralino.storage.getData("main-channelinfo"));
-    const details = {
-      client_id: channelInfo.clientId,
-      client_secret: "Password!",
-      grant_type: "refresh_token",
-      refresh_token: refreshToken
-    };
-    const formBody = [];
-    for (let property in details) {
-      const encodedKey = encodeURIComponent(property);
-      const encodedValue = encodeURIComponent(details[property]);
-      formBody.push(`${encodedKey}=${encodedValue}`);
-    }
-    const body = formBody.join("&");
-    const res = await fetch(`https://id.twitch.tv/oauth2/token`, {
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      method: "POST",
-      body
-    });
-    if (res.status === 403) {
-      console.error("[refresh][error]");
-      throw Error("Refresh token failed");
-    }
-    const data = await res.json();
-    await Neutralino.storage.setData("main-channelinfo", JSON.stringify(__spreadProps(__spreadValues({}, channelInfo), { accessToken: data.access_token, refreshToken: data.refresh_token })));
-    return {
-      token: data.access_token,
-      clientId: channelInfo.clientId,
-      login: channelInfo.login,
-      userId: channelInfo.userId
-    };
-  }
-  function Setup({
-    resetChat,
-    setClient,
-    channel,
-    setChannel
-  }) {
-    const history = useHistory();
-    import_react10.default.useEffect(() => {
-      if (channel.login) {
-        history.push("/");
-      }
-    }, [channel.login]);
-    return /* @__PURE__ */ import_react10.default.createElement("div", {
-      className: "flex flex-col justify-center items-center h-full gap-3 -mt-10"
-    }, /* @__PURE__ */ import_react10.default.createElement("div", {
-      className: "text-2xl"
-    }, "Setup"), /* @__PURE__ */ import_react10.default.createElement("button", {
-      onClick: () => Neutralino.os.open("https://giveaway-o-tron.vercel.app")
-    }, "Click here to authenticate with Twitch and get the required tokens \u2192"), /* @__PURE__ */ import_react10.default.createElement("form", {
-      className: "flex flex-col gap-2 justify-center items-center",
-      onSubmit: async (e2) => {
-        e2.preventDefault();
-        const accessToken = e2.currentTarget.elements.accessToken.value.trim();
-        const refreshToken = e2.currentTarget.elements.refreshToken.value.trim();
-        const data = await validateToken(accessToken, refreshToken);
-        if (!data)
-          return;
-        resetChat();
-        console.info("[setup][client]", data);
-        if (data.login)
-          setClient((cl) => cl ? cl : init(data));
-        setChannel(data);
-        history.push("/");
-      }
-    }, /* @__PURE__ */ import_react10.default.createElement("input", {
-      className: "bg-gray-700 px-2 py-1 rounded-md border-b border-purple-500 overflow-ellipsis",
-      placeholder: "Access Token...",
-      name: "accessToken",
-      type: "password"
-    }), /* @__PURE__ */ import_react10.default.createElement("input", {
-      className: "bg-gray-700 px-2 py-1 rounded-md border-b border-purple-500 overflow-ellipsis",
-      placeholder: "Refresh Token...",
-      name: "refreshToken",
-      type: "password"
-    }), /* @__PURE__ */ import_react10.default.createElement("button", {
-      className: "bg-purple-600 text-white py-1 px-3 rounded-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 w-32 justify-center",
-      title: "Setup connection"
-    }, /* @__PURE__ */ import_react10.default.createElement(FaTwitch, null), " Setup")));
   }
 
   // src/utils/twitch.ts
@@ -27295,8 +27159,14 @@ to {
       }
     });
     if (res.status === 401) {
-      await refreshTokenFlow("");
-      return callTwitchApi(channelInfo, path);
+      console.error("[callTwitchApi][401]");
+      const data = await res.json();
+      if (data.message.includes("scope")) {
+        throw new Error(data.message);
+      } else {
+        const newwInfo = await refreshTokenFlow(channelInfo.refreshToken);
+        return callTwitchApi(newwInfo, path);
+      }
     }
     return res;
   }
@@ -27324,7 +27194,7 @@ to {
       let cache2 = new Cache(channelInfo.login, cacheKey);
       const existingCache = await cache2.get();
       if (dumbCache.size === 0) {
-        console.info(`[${type}[existing]`, existingCache.size);
+        console.info(`[${type}][existing]`, existingCache.size);
         dumbCache = new Map([...existingCache]);
       }
       let percentThresholdTotal = 0;
@@ -27436,6 +27306,119 @@ to {
 
   // src/components/primitives/Settings.tsx
   var import_react13 = __toModule(require_react());
+
+  // node_modules/react-icons/lib/esm/iconBase.js
+  var import_react10 = __toModule(require_react());
+
+  // node_modules/react-icons/lib/esm/iconContext.js
+  var import_react9 = __toModule(require_react());
+  var DefaultContext = {
+    color: void 0,
+    size: void 0,
+    className: void 0,
+    style: void 0,
+    attr: void 0
+  };
+  var IconContext = import_react9.default.createContext && import_react9.default.createContext(DefaultContext);
+
+  // node_modules/react-icons/lib/esm/iconBase.js
+  var __assign = function() {
+    __assign = Object.assign || function(t2) {
+      for (var s2, i2 = 1, n3 = arguments.length; i2 < n3; i2++) {
+        s2 = arguments[i2];
+        for (var p2 in s2)
+          if (Object.prototype.hasOwnProperty.call(s2, p2))
+            t2[p2] = s2[p2];
+      }
+      return t2;
+    };
+    return __assign.apply(this, arguments);
+  };
+  var __rest = function(s2, e2) {
+    var t2 = {};
+    for (var p2 in s2)
+      if (Object.prototype.hasOwnProperty.call(s2, p2) && e2.indexOf(p2) < 0)
+        t2[p2] = s2[p2];
+    if (s2 != null && typeof Object.getOwnPropertySymbols === "function")
+      for (var i2 = 0, p2 = Object.getOwnPropertySymbols(s2); i2 < p2.length; i2++) {
+        if (e2.indexOf(p2[i2]) < 0 && Object.prototype.propertyIsEnumerable.call(s2, p2[i2]))
+          t2[p2[i2]] = s2[p2[i2]];
+      }
+    return t2;
+  };
+  function Tree2Element(tree) {
+    return tree && tree.map(function(node, i2) {
+      return import_react10.default.createElement(node.tag, __assign({
+        key: i2
+      }, node.attr), Tree2Element(node.child));
+    });
+  }
+  function GenIcon(data) {
+    return function(props) {
+      return import_react10.default.createElement(IconBase, __assign({
+        attr: __assign({}, data.attr)
+      }, props), Tree2Element(data.child));
+    };
+  }
+  function IconBase(props) {
+    var elem = function(conf) {
+      var attr = props.attr, size = props.size, title = props.title, svgProps = __rest(props, ["attr", "size", "title"]);
+      var computedSize = size || conf.size || "1em";
+      var className;
+      if (conf.className)
+        className = conf.className;
+      if (props.className)
+        className = (className ? className + " " : "") + props.className;
+      return import_react10.default.createElement("svg", __assign({
+        stroke: "currentColor",
+        fill: "currentColor",
+        strokeWidth: "0"
+      }, conf.attr, attr, svgProps, {
+        className,
+        style: __assign(__assign({
+          color: props.color || conf.color
+        }, conf.style), props.style),
+        height: computedSize,
+        width: computedSize,
+        xmlns: "http://www.w3.org/2000/svg"
+      }), title && import_react10.default.createElement("title", null, title), props.children);
+    };
+    return IconContext !== void 0 ? import_react10.default.createElement(IconContext.Consumer, null, function(conf) {
+      return elem(conf);
+    }) : elem(DefaultContext);
+  }
+
+  // node_modules/react-icons/fa/index.esm.js
+  function FaTwitch(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M391.17,103.47H352.54v109.7h38.63ZM285,103H246.37V212.75H285ZM120.83,0,24.31,91.42V420.58H140.14V512l96.53-91.42h77.25L487.69,256V0ZM449.07,237.75l-77.22,73.12H294.61l-67.6,64v-64H140.14V36.58H449.07Z" } }] })(props);
+  }
+  function FaAngleLeft(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 256 512" }, "child": [{ "tag": "path", "attr": { "d": "M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z" } }] })(props);
+  }
+  function FaCheck(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" } }] })(props);
+  }
+  function FaClock(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M256,8C119,8,8,119,8,256S119,504,256,504,504,393,504,256,393,8,256,8Zm92.49,313h0l-20,25a16,16,0,0,1-22.49,2.5h0l-67-49.72a40,40,0,0,1-15-31.23V112a16,16,0,0,1,16-16h32a16,16,0,0,1,16,16V256l58,42.5A16,16,0,0,1,348.49,321Z" } }] })(props);
+  }
+  function FaDice(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 640 512" }, "child": [{ "tag": "path", "attr": { "d": "M592 192H473.26c12.69 29.59 7.12 65.2-17 89.32L320 417.58V464c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48V240c0-26.51-21.49-48-48-48zM480 376c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm-46.37-186.7L258.7 14.37c-19.16-19.16-50.23-19.16-69.39 0L14.37 189.3c-19.16 19.16-19.16 50.23 0 69.39L189.3 433.63c19.16 19.16 50.23 19.16 69.39 0L433.63 258.7c19.16-19.17 19.16-50.24 0-69.4zM96 248c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm128 128c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm0-128c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm0-128c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm128 128c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24z" } }] })(props);
+  }
+  function FaPauseCircle(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm-16 328c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h48c8.8 0 16 7.2 16 16v160zm112 0c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h48c8.8 0 16 7.2 16 16v160z" } }] })(props);
+  }
+  function FaPlayCircle(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm115.7 272l-176 101c-15.8 8.8-35.7-2.5-35.7-21V152c0-18.4 19.8-29.8 35.7-21l176 107c16.4 9.2 16.4 32.9 0 42z" } }] })(props);
+  }
+  function FaRobot(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 640 512" }, "child": [{ "tag": "path", "attr": { "d": "M32,224H64V416H32A31.96166,31.96166,0,0,1,0,384V256A31.96166,31.96166,0,0,1,32,224Zm512-48V448a64.06328,64.06328,0,0,1-64,64H160a64.06328,64.06328,0,0,1-64-64V176a79.974,79.974,0,0,1,80-80H288V32a32,32,0,0,1,64,0V96H464A79.974,79.974,0,0,1,544,176ZM264,256a40,40,0,1,0-40,40A39.997,39.997,0,0,0,264,256Zm-8,128H192v32h64Zm96,0H288v32h64ZM456,256a40,40,0,1,0-40,40A39.997,39.997,0,0,0,456,256Zm-8,128H384v32h64ZM640,256V384a31.96166,31.96166,0,0,1-32,32H576V224h32A31.96166,31.96166,0,0,1,640,256Z" } }] })(props);
+  }
+  function FaTimesCircle(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z" } }] })(props);
+  }
+  function FaTimes(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 352 512" }, "child": [{ "tag": "path", "attr": { "d": "M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z" } }] })(props);
+  }
 
   // node_modules/react-countdown/dist/index.es.js
   var import_react11 = __toModule(require_react());
@@ -28936,8 +28919,120 @@ to {
     }));
   }
 
-  // src/components/primitives/Header.tsx
+  // src/components/screens/Setup.tsx
   var import_react17 = __toModule(require_react());
+  function Setup({
+    resetChat,
+    setClient,
+    channel,
+    setChannel
+  }) {
+    const history = useHistory();
+    import_react17.default.useEffect(() => {
+      if (channel.login) {
+        history.push("/");
+      }
+    }, [channel.login]);
+    return /* @__PURE__ */ import_react17.default.createElement("div", {
+      className: "flex flex-col justify-center items-center h-full gap-3 -mt-10"
+    }, /* @__PURE__ */ import_react17.default.createElement("div", {
+      className: "text-2xl"
+    }, "Setup"), /* @__PURE__ */ import_react17.default.createElement("button", {
+      onClick: () => Neutralino.os.open("https://giveaway-o-tron.vercel.app")
+    }, "Click here to authenticate with Twitch and get the required tokens \u2192"), /* @__PURE__ */ import_react17.default.createElement("form", {
+      className: "flex flex-col gap-2 justify-center items-center",
+      onSubmit: async (e2) => {
+        e2.preventDefault();
+        const accessToken = e2.currentTarget.elements.accessToken.value.trim();
+        const refreshToken = e2.currentTarget.elements.refreshToken.value.trim();
+        const data = await validateToken(accessToken, refreshToken);
+        if (!data)
+          return;
+        resetChat();
+        console.info("[setup][client]", data);
+        if (data.login)
+          setClient((cl) => cl ? cl : init(data));
+        setChannel(data);
+        history.push("/");
+      }
+    }, /* @__PURE__ */ import_react17.default.createElement("input", {
+      className: "bg-gray-700 px-2 py-1 rounded-md border-b border-purple-500 overflow-ellipsis",
+      placeholder: "Access Token...",
+      name: "accessToken",
+      type: "password"
+    }), /* @__PURE__ */ import_react17.default.createElement("input", {
+      className: "bg-gray-700 px-2 py-1 rounded-md border-b border-purple-500 overflow-ellipsis",
+      placeholder: "Refresh Token...",
+      name: "refreshToken",
+      type: "password"
+    }), /* @__PURE__ */ import_react17.default.createElement("button", {
+      className: "bg-purple-600 text-white py-1 px-3 rounded-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 w-32 justify-center",
+      title: "Setup connection"
+    }, /* @__PURE__ */ import_react17.default.createElement(FaTwitch, null), " Setup")));
+  }
+
+  // src/components/screens/PastGiveaways.tsx
+  var import_react18 = __toModule(require_react());
+  var GIVEAWAYS = [
+    {
+      id: "1",
+      createdAt: new Date().toISOString(),
+      type: "Instant Viewer Giveaway",
+      settings: {
+        followersOnly: true,
+        numberOfWinners: 2,
+        chatCommand: "",
+        sendMessages: false,
+        winnerMessage: "PartyHat Yes",
+        subLuck: 1
+      },
+      winners: [
+        {
+          login: "Test User",
+          isSubscriber: false,
+          follows: true
+        },
+        {
+          login: "Test User",
+          isSubscriber: false,
+          follows: true
+        }
+      ]
+    },
+    {
+      id: "2",
+      createdAt: new Date().toISOString(),
+      type: "Active Chatter Giveaway",
+      settings: {
+        followersOnly: true,
+        numberOfWinners: 2,
+        chatCommand: "",
+        sendMessages: false,
+        winnerMessage: "PartyHat Yes",
+        subLuck: 1
+      },
+      winners: [
+        {
+          login: "Test User",
+          isSubscriber: false,
+          follows: true
+        },
+        {
+          login: "Test User",
+          isSubscriber: false,
+          follows: true
+        }
+      ]
+    }
+  ];
+  function PastGiveaways() {
+    return /* @__PURE__ */ import_react18.default.createElement("div", null, /* @__PURE__ */ import_react18.default.createElement("div", null, "Past Giveaways"), GIVEAWAYS.map((giveaway) => /* @__PURE__ */ import_react18.default.createElement("div", {
+      id: giveaway.id
+    }, giveaway.type)));
+  }
+
+  // src/components/primitives/Header.tsx
+  var import_react19 = __toModule(require_react());
   function Header({
     client,
     resetChat,
@@ -28946,23 +29041,23 @@ to {
   }) {
     const location = useLocation();
     const homeRoute = channelInfo.login ? "/" : "/setup";
-    return /* @__PURE__ */ import_react17.default.createElement("div", {
+    return /* @__PURE__ */ import_react19.default.createElement("div", {
       className: "flex flex-row justify-start gap-2"
-    }, /* @__PURE__ */ import_react17.default.createElement("div", {
+    }, /* @__PURE__ */ import_react19.default.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ import_react17.default.createElement("div", {
+    }, /* @__PURE__ */ import_react19.default.createElement("div", {
       className: "inline-block"
-    }, /* @__PURE__ */ import_react17.default.createElement(Link, {
+    }, /* @__PURE__ */ import_react19.default.createElement(Link, {
       to: homeRoute
-    }, /* @__PURE__ */ import_react17.default.createElement("h1", {
+    }, /* @__PURE__ */ import_react19.default.createElement("h1", {
       className: "flex flex-row gap-1 items-center text-white bg-purple-600 rounded-md px-3 py-1 transform hover:scale-105 transition-transform shadow-md"
-    }, /* @__PURE__ */ import_react17.default.createElement(FaRobot, {
+    }, /* @__PURE__ */ import_react19.default.createElement(FaRobot, {
       className: "text-2xl"
-    }), " ", location.pathname === homeRoute ? /* @__PURE__ */ import_react17.default.createElement("span", {
+    }), " ", location.pathname === homeRoute ? /* @__PURE__ */ import_react19.default.createElement("span", {
       className: "relative -top-0.5 ml-1"
-    }, "Giveaway-o-tron") : /* @__PURE__ */ import_react17.default.createElement(FaAngleLeft, {
+    }, "Giveaway-o-tron") : /* @__PURE__ */ import_react19.default.createElement(FaAngleLeft, {
       className: "text-xl"
-    }))))), /* @__PURE__ */ import_react17.default.createElement("form", {
+    }))))), /* @__PURE__ */ import_react19.default.createElement("form", {
       className: "flex flex-row",
       onSubmit: (e2) => {
         e2.preventDefault();
@@ -28974,23 +29069,23 @@ to {
           setClient(init(channelInfo));
         }
       }
-    }, /* @__PURE__ */ import_react17.default.createElement("input", {
+    }, /* @__PURE__ */ import_react19.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-l-md border-b border-l border-purple-500",
       placeholder: "Channel Name",
       value: channelInfo.login,
       disabled: true,
       title: !!client ? "Disconnect to change" : "Set channel to connect to"
-    }), /* @__PURE__ */ import_react17.default.createElement("button", {
+    }), /* @__PURE__ */ import_react19.default.createElement("button", {
       className: "bg-purple-600 text-white py-1 px-3 rounded-r-sm transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 w-32 justify-center",
       title: "Connect to chat"
-    }, /* @__PURE__ */ import_react17.default.createElement(FaTwitch, null), " ", client ? "Disconnect" : "Connect")));
+    }, /* @__PURE__ */ import_react19.default.createElement(FaTwitch, null), " ", client ? "Disconnect" : "Connect")));
   }
 
   // src/App.tsx
   function App() {
-    return /* @__PURE__ */ import_react18.default.createElement(MemoryRouter, {
+    return /* @__PURE__ */ import_react20.default.createElement(MemoryRouter, {
       initialEntries: ["/setup"]
-    }, /* @__PURE__ */ import_react18.default.createElement(InnerApp, null));
+    }, /* @__PURE__ */ import_react20.default.createElement(InnerApp, null));
   }
   function InnerApp() {
     const [settings, setSettings] = useStorage("settings", {
@@ -29002,7 +29097,7 @@ to {
       winnerMessage: "PartyHat @name won!",
       sendMessages: false
     });
-    const [client, setClient] = import_react18.default.useState(null);
+    const [client, setClient] = import_react20.default.useState(null);
     const [channelInfo, setChannelInfo] = useStorage("channelInfo", {}, (c2) => {
       console.info("[client][app]", c2);
       if (!c2.login)
@@ -29011,33 +29106,35 @@ to {
       if (settings.autoConnect)
         setClient((cl) => cl ? cl : init(c2));
     });
-    import_react18.default.useEffect(() => {
+    const updateClientInfo = import_react20.default.useCallback((d3) => setChannelInfo(d3), []);
+    useAuthEvents(updateClientInfo);
+    import_react20.default.useEffect(() => {
       if (channelInfo.login) {
         if (settings.autoConnect)
           setClient((cl) => cl ? cl : init(channelInfo));
       }
     }, [channelInfo.login]);
-    const onNewChat = import_react18.default.useCallback((chat) => {
+    const onNewChat = import_react20.default.useCallback((chat) => {
       console.info("[chat]", chat);
     }, []);
-    const [chatPaused, setChatPaused] = import_react18.default.useState(false);
+    const [chatPaused, setChatPaused] = import_react20.default.useState(false);
     const [chatEvents, resetChat] = useChatEvents(chatPaused, onNewChat);
-    const chatEventsRef = import_react18.default.useRef(chatEvents);
-    import_react18.default.useEffect(() => {
+    const chatEventsRef = import_react20.default.useRef(chatEvents);
+    import_react20.default.useEffect(() => {
       chatEventsRef.current = chatEvents;
     }, [chatEvents]);
-    import_react18.default.useEffect(() => {
+    import_react20.default.useEffect(() => {
       window["myApp"].setTitle(channelInfo.login, !!client);
     }, [channelInfo.login, client]);
-    return /* @__PURE__ */ import_react18.default.createElement(import_react18.default.Fragment, null, /* @__PURE__ */ import_react18.default.createElement(Header, {
+    return /* @__PURE__ */ import_react20.default.createElement(import_react20.default.Fragment, null, /* @__PURE__ */ import_react20.default.createElement(Header, {
       client,
       resetChat,
       setClient,
       channelInfo
-    }), /* @__PURE__ */ import_react18.default.createElement(Switch, null, /* @__PURE__ */ import_react18.default.createElement(Route, {
+    }), /* @__PURE__ */ import_react20.default.createElement(Switch, null, /* @__PURE__ */ import_react20.default.createElement(Route, {
       path: "/",
       exact: true
-    }, /* @__PURE__ */ import_react18.default.createElement(MainScreen, {
+    }, /* @__PURE__ */ import_react20.default.createElement(MainScreen, {
       client,
       chatEvents,
       settings,
@@ -29047,15 +29144,18 @@ to {
       chatPaused,
       setChatPaused,
       resetChat
-    })), /* @__PURE__ */ import_react18.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react20.default.createElement(Route, {
       path: "/setup",
       exact: true
-    }, /* @__PURE__ */ import_react18.default.createElement(Setup, {
+    }, /* @__PURE__ */ import_react20.default.createElement(Setup, {
       resetChat,
       setClient,
       channel: channelInfo,
       setChannel: setChannelInfo
-    }))), /* @__PURE__ */ import_react18.default.createElement(Oe, null));
+    })), /* @__PURE__ */ import_react20.default.createElement(Route, {
+      path: "/giveaways",
+      exact: true
+    }, /* @__PURE__ */ import_react20.default.createElement(PastGiveaways, null))), /* @__PURE__ */ import_react20.default.createElement(Oe, null));
   }
 
   // src/index.tsx
@@ -29071,7 +29171,7 @@ to {
   Neutralino.events.on("windowClose", window["myApp"].onWindowClose);
   Neutralino.events.on("ready", () => {
     void watch();
-    import_react_dom.default.render(/* @__PURE__ */ import_react19.default.createElement(App, null), document.querySelector("#app"));
+    import_react_dom.default.render(/* @__PURE__ */ import_react21.default.createElement(App, null), document.querySelector("#app"));
   });
 })();
 /*

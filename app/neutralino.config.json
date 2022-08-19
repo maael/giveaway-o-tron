@@ -11,7 +11,7 @@
   },
   "nativeBlockList": [],
   "globalVariables": {
-    "TEST": "Test Value"
+    "TS": "MDZ6dGY1amYwdzd1dDFzaWF1c3hnOHFnZmx2ZGJm"
   },
   "modes": {
     "window": {
@@ -32,7 +32,7 @@
     },
     "browser": {
       "globalVariables": {
-        "TEST": "Test value browser"
+        "TS": "MDZ6dGY1amYwdzd1dDFzaWF1c3hnOHFnZmx2ZGJm"
       },
       "nativeBlockList": ["filesystem.*"]
     },

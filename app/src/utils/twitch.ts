@@ -2,7 +2,7 @@ import { ChannelInfo, ChattersApiData } from './types'
 import { wait } from './misc'
 import toast from 'react-hot-toast'
 import { Cache, CACHE_KEY } from './twitchCaches'
-import { refreshTokenFlow } from '~/components/screens/Setup'
+import { refreshTokenFlow } from './auth'
 
 async function callTwitchApi(channelInfo: ChannelInfo, path: string) {
   const res = await fetch(`https://api.twitch.tv/helix/${path}`, {
@@ -12,8 +12,14 @@ async function callTwitchApi(channelInfo: ChannelInfo, path: string) {
     },
   })
   if (res.status === 401) {
-    await refreshTokenFlow('')
-    return callTwitchApi(channelInfo, path)
+    console.error('[callTwitchApi][401]')
+    const data = await res.json()
+    if (data.message.includes('scope')) {
+      throw new Error(data.message)
+    } else {
+      const newwInfo = await refreshTokenFlow(channelInfo.refreshToken!)
+      return callTwitchApi(newwInfo, path)
+    }
   }
   return res
 }
@@ -73,7 +79,7 @@ async function genericCacher(
     let cache = new Cache(channelInfo.login!, cacheKey)
     const existingCache = await cache.get()
     if (dumbCache.size === 0) {
-      console.info(`[${type}[existing]`, existingCache.size)
+      console.info(`[${type}][existing]`, existingCache.size)
       dumbCache = new Map([...existingCache])
     }
     let percentThresholdTotal = 0

@@ -5,8 +5,9 @@ import chat, { ChatItem, useChatEvents } from './chat'
 import useStorage from './components/hooks/useStorage'
 import MainScreen from './components/screens/Main'
 import SetupScreen from './components/screens/Setup'
+import PastGiveawaysScreen from './components/screens/PastGiveaways'
 import Header from './components/primitives/Header'
-import { ChannelInfo, Settings } from './utils'
+import { ChannelInfo, Settings, useAuthEvents } from './utils'
 
 export default function App() {
   return (
@@ -33,6 +34,8 @@ function InnerApp() {
     console.info('[client][app][startClient]')
     if (settings.autoConnect) setClient((cl) => (cl ? cl : chat(c)))
   })
+  const updateClientInfo = React.useCallback((d) => setChannelInfo(d), [])
+  useAuthEvents(updateClientInfo)
   React.useEffect(() => {
     if (channelInfo.login) {
       if (settings.autoConnect) setClient((cl) => (cl ? cl : chat(channelInfo)))
@@ -69,6 +72,9 @@ function InnerApp() {
         </Route>
         <Route path="/setup" exact>
           <SetupScreen resetChat={resetChat} setClient={setClient} channel={channelInfo} setChannel={setChannelInfo} />
+        </Route>
+        <Route path="/giveaways" exact>
+          <PastGiveawaysScreen />
         </Route>
       </Switch>
       <Toaster />
