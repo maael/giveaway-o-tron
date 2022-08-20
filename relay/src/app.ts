@@ -6,7 +6,12 @@ const app = express();
 const server = http.createServer(app);
 const port = process.env.PORT || 3001;
 
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: true,
+    methods: ["GET"],
+  },
+});
 
 io.on("connection", (socket) => {
   console.log("a user connected");
