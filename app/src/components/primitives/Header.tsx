@@ -51,7 +51,7 @@ export default function Header({
             </div>
           </Link>
         )}
-        {location.pathname === '/setup' ? null : (
+        {location.pathname === '/setup' && ['odialo', 'mukluk'].includes(channelInfo.login!) ? null : (
           <button
             title="Get url for OBS browser source based alerts animation"
             className="bg-purple-600 p-2 flex justify-center items-center rounded-md"
