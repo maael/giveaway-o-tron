@@ -34,7 +34,7 @@ export async function getChatGiveaway(
         )
     )
     if (!winner) return
-    // pastWinners.add(winner.username)
+    pastWinners.add(winner.username)
     relay.emit('event', { winner: winner.username })
     return {
       username: winner.username,
@@ -70,7 +70,7 @@ export async function getInstantGiveaway(channelInfo: ChannelInfo, settings: Set
       viewers.filter((u) => !pastWinners.has(u)).filter((u) => !settings.blocklist.map((b) => b.trim()).includes(u))
     )
     if (!winner) return
-    // pastWinners.add(winner)
+    pastWinners.add(winner)
     relay.emit('event', { winner })
     return winner
   }).filter(Boolean) as string[]
