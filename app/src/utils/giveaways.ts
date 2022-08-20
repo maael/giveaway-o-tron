@@ -3,6 +3,7 @@ import { ChannelInfo, Settings } from './types'
 import { getRandomArrayItem, handleChatCommand } from './misc'
 import { getFollowers, getSubs, getViewers } from './twitch'
 import relay from './relay'
+import toast from 'react-hot-toast'
 
 const pastWinners = new Set()
 
@@ -13,14 +14,27 @@ export async function getChatGiveaway(
   settings: Settings
 ) {
   console.info('[giveaway][chat][start]')
+  let subCount = 0
+  let subEntries = 0
   let users = chatItems
     .filter((c) => handleChatCommand(c, chatCommand))
     .reduce<ChatItem[]>((acc, c) => (acc.some((i) => i.username === c.username) ? acc : acc.concat(c)), [])
-    .flatMap((c) => (c.isSubscriber ? Array.from({ length: settings.subLuck }, () => c) : c))
+    .flatMap((c) => {
+      if (c.isSubscriber) {
+        subCount += 1
+        subEntries += settings.subLuck
+        return Array.from({ length: settings.subLuck }, () => c)
+      }
+      return c
+    })
   if (settings.followersOnly) {
     const followers = await getFollowers(channelInfo)
     users = users.filter((u) => followers.has(u.username))
   }
+
+  toast.success(`${subCount} sub${subCount === 1 ? '' : 's'} in giveaway, with ${subEntries} tickets`, {
+    position: 'bottom-center',
+  })
 
   console.info('[giveaway][chat][end]')
   return Array.from({ length: settings.numberOfWinners }, () => {
@@ -47,6 +61,8 @@ export async function getChatGiveaway(
 export async function getInstantGiveaway(channelInfo: ChannelInfo, settings: Settings) {
   console.info('[giveaway][instant][start]')
   let viewers = await getViewers(channelInfo)
+  let subCount = 0
+  let subEntries = 0
   console.info({ viewers: viewers.length })
   if (settings.followersOnly) {
     const [followersList, subsList] = await Promise.all([getFollowers(channelInfo), getSubs(channelInfo)])
@@ -61,9 +77,19 @@ export async function getInstantGiveaway(channelInfo: ChannelInfo, settings: Set
       })
     console.info('[giveaway][instant]', { followers: combined.length })
     viewers = combined
-      .flatMap((c) => (c.isSubscriber ? Array.from({ length: settings.subLuck }, () => c) : c))
+      .flatMap((c) => {
+        if (c.isSubscriber) {
+          subCount += 1
+          subEntries += settings.subLuck
+          return Array.from({ length: settings.subLuck }, () => c)
+        }
+        return c
+      })
       .map((i) => i.login)
   }
+  toast.success(`${subCount} sub${subCount === 1 ? '' : 's'} in giveaway, with ${subEntries} tickets`, {
+    position: 'bottom-center',
+  })
   console.info('[giveaway][instant][end]')
   return Array.from({ length: settings.numberOfWinners }, () => {
     const winner = getRandomArrayItem(

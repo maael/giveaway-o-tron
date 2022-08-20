@@ -29505,16 +29505,29 @@ to {
   var pastWinners = new Set();
   async function getChatGiveaway(channelInfo, chatItems, chatCommand, settings) {
     console.info("[giveaway][chat][start]");
-    let users = chatItems.filter((c2) => handleChatCommand(c2, chatCommand)).reduce((acc, c2) => acc.some((i3) => i3.username === c2.username) ? acc : acc.concat(c2), []).flatMap((c2) => c2.isSubscriber ? Array.from({ length: settings.subLuck }, () => c2) : c2);
+    let subCount = 0;
+    let subEntries = 0;
+    let users = chatItems.filter((c2) => handleChatCommand(c2, chatCommand)).reduce((acc, c2) => acc.some((i3) => i3.username === c2.username) ? acc : acc.concat(c2), []).flatMap((c2) => {
+      if (c2.isSubscriber) {
+        subCount += 1;
+        subEntries += settings.subLuck;
+        return Array.from({ length: settings.subLuck }, () => c2);
+      }
+      return c2;
+    });
     if (settings.followersOnly) {
       const followers = await getFollowers(channelInfo);
       users = users.filter((u3) => followers.has(u3.username));
     }
+    Et.success(`${subCount} sub${subCount === 1 ? "" : "s"} in giveaway, with ${subEntries} tickets`, {
+      position: "bottom-center"
+    });
     console.info("[giveaway][chat][end]");
     return Array.from({ length: settings.numberOfWinners }, () => {
       const winner = getRandomArrayItem(users.filter((u3) => !pastWinners.has(u3.username)).filter((u3) => !settings.blocklist.map((b2) => b2.trim()).includes(u3.displayName) && !settings.blocklist.map((b2) => b2.trim()).includes(u3.username)));
       if (!winner)
         return;
+      pastWinners.add(winner.username);
       relay_default.emit("event", { winner: winner.username });
       return {
         username: winner.username,
@@ -29526,6 +29539,8 @@ to {
   async function getInstantGiveaway(channelInfo, settings) {
     console.info("[giveaway][instant][start]");
     let viewers = await getViewers(channelInfo);
+    let subCount = 0;
+    let subEntries = 0;
     console.info({ viewers: viewers.length });
     if (settings.followersOnly) {
       const [followersList, subsList] = await Promise.all([getFollowers(channelInfo), getSubs(channelInfo)]);
@@ -29537,13 +29552,24 @@ to {
         };
       });
       console.info("[giveaway][instant]", { followers: combined.length });
-      viewers = combined.flatMap((c2) => c2.isSubscriber ? Array.from({ length: settings.subLuck }, () => c2) : c2).map((i3) => i3.login);
+      viewers = combined.flatMap((c2) => {
+        if (c2.isSubscriber) {
+          subCount += 1;
+          subEntries += settings.subLuck;
+          return Array.from({ length: settings.subLuck }, () => c2);
+        }
+        return c2;
+      }).map((i3) => i3.login);
     }
+    Et.success(`${subCount} sub${subCount === 1 ? "" : "s"} in giveaway, with ${subEntries} tickets`, {
+      position: "bottom-center"
+    });
     console.info("[giveaway][instant][end]");
     return Array.from({ length: settings.numberOfWinners }, () => {
       const winner = getRandomArrayItem(viewers.filter((u3) => !pastWinners.has(u3)).filter((u3) => !settings.blocklist.map((b2) => b2.trim()).includes(u3)));
       if (!winner)
         return;
+      pastWinners.add(winner);
       relay_default.emit("event", { winner });
       return winner;
     }).filter(Boolean);
@@ -31461,7 +31487,7 @@ to {
       to: "/settings"
     }, /* @__PURE__ */ import_react19.default.createElement("div", {
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md"
-    }, /* @__PURE__ */ import_react19.default.createElement(FaCogs, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react19.default.createElement("button", {
+    }, /* @__PURE__ */ import_react19.default.createElement(FaCogs, null))), location2.pathname === "/setup" && ["odialo", "mukluk"].includes(channelInfo.login) ? null : /* @__PURE__ */ import_react19.default.createElement("button", {
       title: "Get url for OBS browser source based alerts animation",
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
       onClick: () => {
