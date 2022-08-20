@@ -1,6 +1,6 @@
 import { ChatItem } from '../chat'
 import { ChannelInfo, Settings } from './types'
-import { getRandomArrayItem } from './misc'
+import { getRandomArrayItem, handleChatCommand } from './misc'
 import { getFollowers, getSubs, getViewers } from './twitch'
 
 const pastWinners = new Set()
@@ -13,7 +13,7 @@ export async function getChatGiveaway(
 ) {
   console.info('[giveaway][chat][start]')
   let users = chatItems
-    .filter((c) => (chatCommand ? c.msg.toLowerCase().includes(chatCommand.toLowerCase()) : true))
+    .filter((c) => handleChatCommand(c, chatCommand))
     .reduce<ChatItem[]>((acc, c) => (acc.some((i) => i.username === c.username) ? acc : acc.concat(c)), [])
     .flatMap((c) => (c.isSubscriber ? Array.from({ length: settings.subLuck }, () => c) : c))
   if (settings.followersOnly) {

@@ -28,6 +28,7 @@ function InnerApp() {
     winnerMessage: 'PartyHat @name won!',
     sendMessages: false,
     blocklist: ['streamelements', 'streamlabs', 'nightbot'],
+    autoScroll: true,
   })
   const [client, setClient] = React.useState<ReturnType<typeof chat> | null>(null)
   const [channelInfo, setChannelInfo] = useStorage<ChannelInfo>('channelInfo', {}, (c) => {

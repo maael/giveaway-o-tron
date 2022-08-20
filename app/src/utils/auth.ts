@@ -36,7 +36,7 @@ export async function validateToken(token: string, refreshToken: string) {
       token,
       refreshToken,
       clientId: data.client_id,
-      login: data.login === 'odialo' ? 'mukluk' : data.login,
+      login: data.login,
       userId: data.user_id,
     }
   } catch (e) {

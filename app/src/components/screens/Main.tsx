@@ -47,6 +47,8 @@ export default function MainScreen({
         paused={chatPaused}
         setPaused={setChatPaused}
         clear={resetChat}
+        settings={settings}
+        setSettings={setSettings}
       />
     </>
   )

@@ -9,7 +9,7 @@ import { Settings } from '../../utils'
 const countDownRenderer = ({ hours, minutes, seconds, completed }) => {
   if (completed) {
     // Render a complete state
-    return <div className="animate-pulse">Finished! Chat is paused, just do the giveaway!</div>
+    return <div className="animate-pulse">Finished! Chat is paused, do the giveaway!</div>
   } else {
     // Render a countdown
     return (
@@ -29,19 +29,26 @@ interface Props {
   resetChat: () => void
 }
 
+const StableCountdown = React.memo(function StableCountdown({
+  value,
+  onComplete,
+}: {
+  value: number
+  onComplete: () => void
+}) {
+  return <Countdown renderer={countDownRenderer} date={Date.now() + value} onComplete={onComplete} />
+})
+
 const Time = React.memo(function Time({ setChatPaused, resetChat }: Pick<Props, 'setChatPaused' | 'resetChat'>) {
   const [active, setActive] = React.useState(false)
   const [value, setValue] = React.useState(ONE_MIN)
+  const onComplete = React.useCallback(() => {
+    toast.success('Timer finished! Chat paused, do a giveaway...', { position: 'bottom-center' })
+    setChatPaused(true)
+  }, [])
   return active ? (
     <div className="flex-1 border border-purple-600 rounded-md flex justify-center items-center text-center relative">
-      <Countdown
-        renderer={countDownRenderer}
-        date={Date.now() + value}
-        onComplete={() => {
-          toast.success('Timer finished! Chat paused, do a giveaway...', { position: 'bottom-center' })
-          setChatPaused(true)
-        }}
-      />
+      <StableCountdown value={value} onComplete={onComplete} />
       <FaTimes
         className="absolute right-3 top-2 text-red-500 select-none cursor-pointer"
         onClick={() => setActive(false)}

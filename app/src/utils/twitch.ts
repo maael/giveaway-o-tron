@@ -6,21 +6,21 @@ import { refreshTokenFlow } from './auth'
 
 const BOTS = ['streamelements', 'streamlabs', 'nightbot']
 
-async function callTwitchApi(channelInfo: ChannelInfo, path: string) {
+async function callTwitchApi(channelInfo: ChannelInfo, path: string, isRefresh: boolean = false) {
   const res = await fetch(`https://api.twitch.tv/helix/${path}`, {
     headers: {
       Authorization: `Bearer ${channelInfo.token}`,
       'Client-ID': `${channelInfo.clientId}`,
     },
   })
-  if (res.status === 401) {
+  if (res.status === 401 && !isRefresh) {
     console.error('[callTwitchApi][401]')
     const data = await res.json()
     if (data.message.includes('scope')) {
       throw new Error(data.message)
     } else {
       const newwInfo = await refreshTokenFlow(channelInfo.refreshToken!)
-      return callTwitchApi(newwInfo, path)
+      return callTwitchApi(newwInfo, path, true)
     }
   }
   return res

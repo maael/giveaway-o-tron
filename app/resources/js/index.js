@@ -27023,6 +27023,17 @@ to {
   function getRandomArrayItem(items) {
     return items[Math.floor(Math.random() * items.length)];
   }
+  var specialCommands = {
+    $gw2_account$: /(^|\s)\w+\.\d{4}($|\s)/
+  };
+  function handleChatCommand(chatItem, command) {
+    const translatedCommand = specialCommands[command] || command;
+    if (typeof translatedCommand === "string") {
+      return translatedCommand ? chatItem.msg.toLowerCase().includes(translatedCommand.toLowerCase()) : true;
+    } else {
+      return chatItem.msg.match(translatedCommand) !== null;
+    }
+  }
 
   // src/utils/auth.ts
   var import_react8 = __toModule(require_react());
@@ -27058,7 +27069,7 @@ to {
         token,
         refreshToken,
         clientId: data.client_id,
-        login: data.login === "odialo" ? "mukluk" : data.login,
+        login: data.login,
         userId: data.user_id
       };
     } catch (e2) {
@@ -27142,31 +27153,35 @@ to {
         await validateToken(channelInfo.token, channelInfo.refreshToken);
         const freshInfo = await Neutralino.storage.getData("main-channelInfo");
         const freshChannelInfo = JSON.parse(freshInfo);
-        console.info("what", freshChannelInfo);
         clearInterval(interval);
-        await Promise.all([getFollowers(freshChannelInfo), getSubs(freshChannelInfo)]);
-        Et.success("Finished Twitch caches, ready!", { position: "bottom-right" });
+        startPollingData(freshChannelInfo, true);
       }
     }, 2e3);
+  }
+  async function startPollingData(channelInfo, first = false) {
+    await Promise.all([getFollowers(channelInfo), getSubs(channelInfo)]);
+    Et.success(`${first ? "Finished Twitch caches, ready" : "Updated"}!`, { position: "bottom-right" });
+    await wait(6e4 * 5);
+    await startPollingData(channelInfo);
   }
 
   // src/utils/twitch.ts
   var BOTS = ["streamelements", "streamlabs", "nightbot"];
-  async function callTwitchApi(channelInfo, path) {
+  async function callTwitchApi(channelInfo, path, isRefresh = false) {
     const res = await fetch(`https://api.twitch.tv/helix/${path}`, {
       headers: {
         Authorization: `Bearer ${channelInfo.token}`,
         "Client-ID": `${channelInfo.clientId}`
       }
     });
-    if (res.status === 401) {
+    if (res.status === 401 && !isRefresh) {
       console.error("[callTwitchApi][401]");
       const data = await res.json();
       if (data.message.includes("scope")) {
         throw new Error(data.message);
       } else {
         const newwInfo = await refreshTokenFlow(channelInfo.refreshToken);
-        return callTwitchApi(newwInfo, path);
+        return callTwitchApi(newwInfo, path, true);
       }
     }
     return res;
@@ -27261,20 +27276,20 @@ to {
   }
 
   // src/utils/giveaways.ts
+  var pastWinners = new Set();
   async function getChatGiveaway(channelInfo, chatItems, chatCommand, settings) {
     console.info("[giveaway][chat][start]");
-    let users = chatItems.filter((c2) => chatCommand ? c2.msg.toLowerCase().includes(chatCommand.toLowerCase()) : true).reduce((acc, c2) => acc.some((i2) => i2.username === c2.username) ? acc : acc.concat(c2), []).flatMap((c2) => c2.isSubscriber ? Array.from({ length: settings.subLuck }, () => c2) : c2);
+    let users = chatItems.filter((c2) => handleChatCommand(c2, chatCommand)).reduce((acc, c2) => acc.some((i2) => i2.username === c2.username) ? acc : acc.concat(c2), []).flatMap((c2) => c2.isSubscriber ? Array.from({ length: settings.subLuck }, () => c2) : c2);
     if (settings.followersOnly) {
       const followers = await getFollowers(channelInfo);
       users = users.filter((u3) => followers.has(u3.username));
     }
     console.info("[giveaway][chat][end]");
-    let winnersList = [];
     return Array.from({ length: settings.numberOfWinners }, () => {
-      const winner = getRandomArrayItem(users.filter((u3) => !winnersList.includes(u3.username)).filter((u3) => !settings.blocklist.map((b2) => b2.trim()).includes(u3.displayName) && !settings.blocklist.map((b2) => b2.trim()).includes(u3.username)));
+      const winner = getRandomArrayItem(users.filter((u3) => !pastWinners.has(u3.username)).filter((u3) => !settings.blocklist.map((b2) => b2.trim()).includes(u3.displayName) && !settings.blocklist.map((b2) => b2.trim()).includes(u3.username)));
       if (!winner)
         return;
-      winnersList.push(winner.username);
+      pastWinners.add(winner.username);
       return {
         username: winner.username,
         isSubscriber: winner.isSubscriber,
@@ -27299,12 +27314,11 @@ to {
       viewers = combined.flatMap((c2) => c2.isSubscriber ? Array.from({ length: settings.subLuck }, () => c2) : c2).map((i2) => i2.login);
     }
     console.info("[giveaway][instant][end]");
-    let winnersList = [];
     return Array.from({ length: settings.numberOfWinners }, () => {
-      const winner = getRandomArrayItem(viewers.filter((u3) => !winnersList.includes(u3)).filter((u3) => !settings.blocklist.map((b2) => b2.trim()).includes(u3)));
+      const winner = getRandomArrayItem(viewers.filter((u3) => !pastWinners.has(u3)).filter((u3) => !settings.blocklist.map((b2) => b2.trim()).includes(u3)));
       if (!winner)
         return;
-      winnersList.push(winner);
+      pastWinners.add(winner);
       return winner;
     }).filter(Boolean);
   }
@@ -28630,24 +28644,34 @@ to {
     if (completed) {
       return /* @__PURE__ */ import_react13.default.createElement("div", {
         className: "animate-pulse"
-      }, "Finished! Chat is paused, just do the giveaway!");
+      }, "Finished! Chat is paused, do the giveaway!");
     } else {
       return /* @__PURE__ */ import_react13.default.createElement("span", null, zeroPad(hours, 2), " : ", zeroPad(minutes, 2), " : ", zeroPad(seconds, 2));
     }
   };
   var ONE_MIN = 1e3 * 60;
+  var StableCountdown = import_react13.default.memo(function StableCountdown2({
+    value,
+    onComplete
+  }) {
+    return /* @__PURE__ */ import_react13.default.createElement(index_es_default, {
+      renderer: countDownRenderer,
+      date: Date.now() + value,
+      onComplete
+    });
+  });
   var Time = import_react13.default.memo(function Time2({ setChatPaused, resetChat }) {
     const [active, setActive] = import_react13.default.useState(false);
     const [value, setValue] = import_react13.default.useState(ONE_MIN);
+    const onComplete = import_react13.default.useCallback(() => {
+      Et.success("Timer finished! Chat paused, do a giveaway...", { position: "bottom-center" });
+      setChatPaused(true);
+    }, []);
     return active ? /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex justify-center items-center text-center relative"
-    }, /* @__PURE__ */ import_react13.default.createElement(index_es_default, {
-      renderer: countDownRenderer,
-      date: Date.now() + value,
-      onComplete: () => {
-        Et.success("Timer finished! Chat paused, do a giveaway...", { position: "bottom-center" });
-        setChatPaused(true);
-      }
+    }, /* @__PURE__ */ import_react13.default.createElement(StableCountdown, {
+      value,
+      onComplete
     }), /* @__PURE__ */ import_react13.default.createElement(FaTimes, {
       className: "absolute right-3 top-2 text-red-500 select-none cursor-pointer",
       onClick: () => setActive(false),
@@ -28770,9 +28794,7 @@ to {
         }
         giveawayWinner.forEach((w) => {
           if (settings.sendMessages) {
-            giveawayWinner.forEach((w2) => {
-              client == null ? void 0 : client.say(channelInfo.login, settings.winnerMessage.replace("@name", `@${w2}`));
-            });
+            client == null ? void 0 : client.say(channelInfo.login, settings.winnerMessage.replace("@name", `@${w}`));
           }
         });
         setWinners((w) => w.concat(giveawayWinner.map((u3) => ({ username: u3 }))));
@@ -28830,21 +28852,51 @@ to {
   // src/components/primitives/ChatBox.tsx
   var import_react15 = __toModule(require_react());
   var import_classnames = __toModule(require_classnames());
+  function isVisibleIn(ele, container, buffer = 50) {
+    const eleTop = ele.offsetTop;
+    const eleBottom = eleTop + ele.clientHeight;
+    const containerTop = container.scrollTop;
+    const containerBottom = containerTop + container.clientHeight + buffer;
+    return eleTop >= containerTop && eleBottom <= containerBottom || eleTop < containerTop && containerTop < eleBottom || eleTop < containerBottom && containerBottom < eleBottom;
+  }
   function ChatBox({
     chatEvents,
     winners,
     paused,
     setPaused,
-    clear
+    clear,
+    settings,
+    setSettings
   }) {
+    var _a;
+    const shouldAutoScroll = (_a = settings.autoScroll) != null ? _a : true;
     const limitedMessages = chatEvents.filter((c2) => winners.length ? winners.map((c3) => c3.username).includes(c2.username) : true);
+    const chatBottomRef = import_react15.default.useRef(null);
+    const chatRef = import_react15.default.useRef(null);
+    import_react15.default.useLayoutEffect(() => {
+      var _a2;
+      if (chatRef.current && chatBottomRef.current) {
+        const shouldScroll = isVisibleIn(chatBottomRef.current, chatRef.current);
+        if (shouldScroll && shouldAutoScroll) {
+          (_a2 = chatBottomRef.current) == null ? void 0 : _a2.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+        }
+      }
+    }, [limitedMessages, shouldAutoScroll]);
     return /* @__PURE__ */ import_react15.default.createElement(import_react15.default.Fragment, null, /* @__PURE__ */ import_react15.default.createElement("div", {
       className: "mt-2 rounded-md bg-gray-700 flex-1 flex flex-col relative overflow-hidden"
     }, /* @__PURE__ */ import_react15.default.createElement("div", {
       className: "bg-gray-600 absolute top-0 right-0 left-0 h-8 flex justify-between px-5 items-center text-white z-50"
     }, /* @__PURE__ */ import_react15.default.createElement("div", null, chatEvents.length, " message", chatEvents.length === 1 ? "" : "s"), winners.length ? /* @__PURE__ */ import_react15.default.createElement("div", null, limitedMessages.length, " winner message", limitedMessages.length === 1 ? "" : "s") : null, /* @__PURE__ */ import_react15.default.createElement("div", {
       className: "flex flex-row justify-center items-center gap-2 text-xl"
-    }, paused ? /* @__PURE__ */ import_react15.default.createElement(FaPlayCircle, {
+    }, /* @__PURE__ */ import_react15.default.createElement("button", {
+      className: (0, import_classnames.default)("text-xs flex justify-center items-center gap-1 border border-purple-600 px-2 py-1 rounded-md", {
+        "bg-purple-600": shouldAutoScroll
+      }),
+      onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { autoScroll: !s2.autoScroll }))
+    }, shouldAutoScroll ? /* @__PURE__ */ import_react15.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react15.default.createElement(FaTimes, null), " Following"), paused ? /* @__PURE__ */ import_react15.default.createElement(FaPlayCircle, {
       className: "select-none cursor-pointer transition-opacity hover:opacity-70",
       onClick: () => setPaused((p2) => !p2),
       title: "Resume chat"
@@ -28861,7 +28913,8 @@ to {
     }, chatEvents.length === 0 ? /* @__PURE__ */ import_react15.default.createElement("span", {
       className: (0, import_classnames.default)("relative left-2 top-9")
     }, "Logs will appear here...") : /* @__PURE__ */ import_react15.default.createElement("div", {
-      className: (0, import_classnames.default)("absolute right-0 left-0 bottom-0 overflow-y-scroll px-2 pt-1 pb-3 flex flex-col gap-1 top-8")
+      className: (0, import_classnames.default)("absolute right-0 left-0 bottom-0 overflow-y-scroll px-2 pt-1 pb-3 flex flex-col gap-1 top-8"),
+      ref: chatRef
     }, limitedMessages.map((c2) => {
       return /* @__PURE__ */ import_react15.default.createElement("div", {
         key: c2.id
@@ -28875,6 +28928,8 @@ to {
       }, "S") : null), /* @__PURE__ */ import_react15.default.createElement("span", {
         style: { color: c2.color }
       }, "[", c2.displayName, "]"), " ", highlightAction(c2.displayName, c2.msg));
+    }), /* @__PURE__ */ import_react15.default.createElement("div", {
+      ref: chatBottomRef
     })))));
   }
   function highlightAction(displayName, msg) {
@@ -28929,7 +28984,9 @@ to {
       winners,
       paused: chatPaused,
       setPaused: setChatPaused,
-      clear: resetChat
+      clear: resetChat,
+      settings,
+      setSettings
     }));
   }
 
@@ -29165,7 +29222,8 @@ to {
       chatCommand: "",
       winnerMessage: "PartyHat @name won!",
       sendMessages: false,
-      blocklist: ["streamelements", "streamlabs", "nightbot"]
+      blocklist: ["streamelements", "streamlabs", "nightbot"],
+      autoScroll: true
     });
     const [client, setClient] = import_react20.default.useState(null);
     const [channelInfo, setChannelInfo] = useStorage("channelInfo", {}, (c2) => {

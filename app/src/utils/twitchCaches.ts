@@ -40,7 +40,6 @@ export default async function watch() {
       await validateToken(channelInfo.token!, channelInfo.refreshToken!)
       const freshInfo = await Neutralino.storage.getData('main-channelInfo')
       const freshChannelInfo = JSON.parse(freshInfo) as ChannelInfo
-      console.info('what', freshChannelInfo)
       clearInterval(interval)
       startPollingData(freshChannelInfo, true)
     }
@@ -49,7 +48,7 @@ export default async function watch() {
 
 async function startPollingData(channelInfo: ChannelInfo, first: boolean = false) {
   await Promise.all([getFollowers(channelInfo), getSubs(channelInfo)])
-  toast.success(`${first ? 'Finished' : 'Updated'} Twitch caches, ready!`, { position: 'bottom-right' })
-  await wait(60_000)
+  toast.success(`${first ? 'Finished Twitch caches, ready' : 'Updated'}!`, { position: 'bottom-right' })
+  await wait(60_000 * 5)
   await startPollingData(channelInfo)
 }

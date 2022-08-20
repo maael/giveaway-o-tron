@@ -34,11 +34,15 @@
       "globalVariables": {
         "TS": "MDZ6dGY1amYwdzd1dDFzaWF1c3hnOHFnZmx2ZGJm"
       },
-      "nativeBlockList": ["filesystem.*"]
+      "nativeBlockList": [
+        "filesystem.*"
+      ]
     },
     "cloud": {
       "url": "/resources/#cloud",
-      "nativeAllowList": ["app.*"]
+      "nativeAllowList": [
+        "app.*"
+      ]
     }
   },
   "cli": {

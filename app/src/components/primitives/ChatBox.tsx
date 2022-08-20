@@ -2,7 +2,24 @@ import React, { Dispatch, SetStateAction } from 'react'
 import cls from 'classnames'
 import { ChatItem } from '../../chat'
 import { WinnerUser } from '../primitives/giveaways'
-import { FaPauseCircle, FaPlayCircle, FaTimesCircle } from 'react-icons/fa'
+import { FaCheck, FaPauseCircle, FaPlayCircle, FaTimes, FaTimesCircle } from 'react-icons/fa'
+import { Settings } from '~/utils'
+
+function isVisibleIn(ele: HTMLElement, container: HTMLElement, buffer: number = 50) {
+  const eleTop = ele.offsetTop
+  const eleBottom = eleTop + ele.clientHeight
+
+  const containerTop = container.scrollTop
+  const containerBottom = containerTop + container.clientHeight + buffer
+
+  // The element is fully visible in the container
+  return (
+    (eleTop >= containerTop && eleBottom <= containerBottom) ||
+    // Some part of the element is visible in the container
+    (eleTop < containerTop && containerTop < eleBottom) ||
+    (eleTop < containerBottom && containerBottom < eleBottom)
+  )
+}
 
 export default function ChatBox({
   chatEvents,
@@ -10,16 +27,35 @@ export default function ChatBox({
   paused,
   setPaused,
   clear,
+  settings,
+  setSettings,
 }: {
   chatEvents: ChatItem[]
   winners: WinnerUser[]
   paused: boolean
   setPaused: Dispatch<SetStateAction<boolean>>
   clear: () => void
+  settings: Settings
+  setSettings: Dispatch<SetStateAction<Settings>>
 }) {
+  const shouldAutoScroll = settings.autoScroll ?? true
   const limitedMessages = chatEvents.filter((c) =>
     winners.length ? winners.map((c) => c.username).includes(c.username) : true
   )
+  const chatBottomRef = React.useRef<null | HTMLDivElement>(null)
+  const chatRef = React.useRef<null | HTMLDivElement>(null)
+  React.useLayoutEffect(() => {
+    if (chatRef.current && chatBottomRef.current) {
+      const shouldScroll = isVisibleIn(chatBottomRef.current, chatRef.current)
+      if (shouldScroll && shouldAutoScroll) {
+        chatBottomRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        })
+      }
+    }
+  }, [limitedMessages, shouldAutoScroll])
+
   return (
     <>
       <div className="mt-2 rounded-md bg-gray-700 flex-1 flex flex-col relative overflow-hidden">
@@ -33,6 +69,17 @@ export default function ChatBox({
             </div>
           ) : null}
           <div className="flex flex-row justify-center items-center gap-2 text-xl">
+            <button
+              className={cls(
+                'text-xs flex justify-center items-center gap-1 border border-purple-600 px-2 py-1 rounded-md',
+                {
+                  'bg-purple-600': shouldAutoScroll,
+                }
+              )}
+              onClick={() => setSettings((s) => ({ ...s, autoScroll: !s.autoScroll }))}
+            >
+              {shouldAutoScroll ? <FaCheck /> : <FaTimes />} Following
+            </button>
             {paused ? (
               <FaPlayCircle
                 className="select-none cursor-pointer transition-opacity hover:opacity-70"
@@ -61,6 +108,7 @@ export default function ChatBox({
               className={cls(
                 'absolute right-0 left-0 bottom-0 overflow-y-scroll px-2 pt-1 pb-3 flex flex-col gap-1 top-8'
               )}
+              ref={chatRef}
             >
               {limitedMessages.map((c) => {
                 return (
@@ -83,6 +131,7 @@ export default function ChatBox({
                   </div>
                 )
               })}
+              <div ref={chatBottomRef}></div>
             </div>
           )}
         </div>

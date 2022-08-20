@@ -1,3 +1,5 @@
+import { ChatItem } from '~/chat'
+
 export function removeIdx<T>(ar: T[], idx: number): T[] {
   return ar.slice(0, idx).concat(ar.slice(idx + 1))
 }
@@ -15,4 +17,17 @@ export function chunkArray<T>(arr: T[], chunkSize: number): T[][] {
     chunks.push(chunk)
   }
   return chunks
+}
+
+const specialCommands = {
+  $gw2_account$: /(^|\s)\w+\.\d{4}($|\s)/,
+}
+
+export function handleChatCommand(chatItem: ChatItem, command: string) {
+  const translatedCommand: string | RegExp = specialCommands[command] || command
+  if (typeof translatedCommand === 'string') {
+    return translatedCommand ? chatItem.msg.toLowerCase().includes(translatedCommand.toLowerCase()) : true
+  } else {
+    return chatItem.msg.match(translatedCommand) !== null
+  }
 }

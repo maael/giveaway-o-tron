@@ -7,6 +7,7 @@ export interface Settings {
   winnerMessage: string
   sendMessages: boolean
   blocklist: string[]
+  autoScroll?: boolean
 }
 
 export type ChannelInfo = Partial<{
