@@ -1,5 +1,6 @@
 import toast from 'react-hot-toast'
 import { validateToken } from './auth'
+import { wait } from './misc'
 import { getSubs, getFollowers } from './twitch'
 import { ChannelInfo } from './types'
 
@@ -41,8 +42,14 @@ export default async function watch() {
       const freshChannelInfo = JSON.parse(freshInfo) as ChannelInfo
       console.info('what', freshChannelInfo)
       clearInterval(interval)
-      await Promise.all([getFollowers(freshChannelInfo), getSubs(freshChannelInfo)])
-      toast.success('Finished Twitch caches, ready!', { position: 'bottom-right' })
+      startPollingData(freshChannelInfo, true)
     }
   }, 2000)
+}
+
+async function startPollingData(channelInfo: ChannelInfo, first: boolean = false) {
+  await Promise.all([getFollowers(channelInfo), getSubs(channelInfo)])
+  toast.success(`${first ? 'Finished' : 'Updated'} Twitch caches, ready!`, { position: 'bottom-right' })
+  await wait(60_000)
+  await startPollingData(channelInfo)
 }
