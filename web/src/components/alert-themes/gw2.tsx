@@ -28,7 +28,7 @@ export default function GW2Alerts() {
       refAnimationInstance.current({
         ...opts,
         origin: { y: 0.7 },
-        particleCount: Math.floor(300 * particleRatio),
+        particleCount: Math.floor(100 * particleRatio),
         colors: ['#FFE476', '#E0A702', '#D7A008'],
       })
   }, [])
