@@ -34,12 +34,12 @@ export default function GW2Alerts() {
   }, [])
 
   const fire = React.useCallback(() => {
-    makeShot(0.5, {
-      spread: 120,
-      decay: 0.85,
+    makeShot(0.25, {
+      spread: 80,
+      decay: 0.9,
       scalar: 0.8,
-      startVelocity: 55,
-      gravity: 0.5,
+      startVelocity: 45,
+      gravity: 0.8,
     })
   }, [makeShot])
   const handleEvent = React.useCallback(
