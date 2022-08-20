@@ -3,6 +3,8 @@ import { ChannelInfo, Settings } from './types'
 import { getRandomArrayItem } from './misc'
 import { getFollowers, getSubs, getViewers } from './twitch'
 
+const pastWinners = new Set()
+
 export async function getChatGiveaway(
   channelInfo: ChannelInfo,
   chatItems: ChatItem[],
@@ -20,11 +22,10 @@ export async function getChatGiveaway(
   }
 
   console.info('[giveaway][chat][end]')
-  let winnersList: string[] = []
   return Array.from({ length: settings.numberOfWinners }, () => {
     const winner = getRandomArrayItem(
       users
-        .filter((u) => !winnersList.includes(u.username))
+        .filter((u) => !pastWinners.has(u.username))
         .filter(
           (u) =>
             !settings.blocklist.map((b) => b.trim()).includes(u.displayName) &&
@@ -32,7 +33,7 @@ export async function getChatGiveaway(
         )
     )
     if (!winner) return
-    winnersList.push(winner.username)
+    pastWinners.add(winner.username)
     return {
       username: winner.username,
       isSubscriber: winner.isSubscriber,
@@ -62,15 +63,12 @@ export async function getInstantGiveaway(channelInfo: ChannelInfo, settings: Set
       .map((i) => i.login)
   }
   console.info('[giveaway][instant][end]')
-  let winnersList: string[] = []
   return Array.from({ length: settings.numberOfWinners }, () => {
     const winner = getRandomArrayItem(
-      viewers
-        .filter((u) => !winnersList.includes(u))
-        .filter((u) => !settings.blocklist.map((b) => b.trim()).includes(u))
+      viewers.filter((u) => !pastWinners.has(u)).filter((u) => !settings.blocklist.map((b) => b.trim()).includes(u))
     )
     if (!winner) return
-    winnersList.push(winner)
+    pastWinners.add(winner)
     return winner
   }).filter(Boolean) as string[]
 }
