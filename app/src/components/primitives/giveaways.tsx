@@ -29,9 +29,7 @@ export function InstantGiveaway({
         }
         giveawayWinner.forEach((w) => {
           if (settings.sendMessages) {
-            giveawayWinner.forEach((w) => {
-              client?.say(channelInfo.login!, settings.winnerMessage.replace('@name', `@${w}`))
-            })
+            client?.say(channelInfo.login!, settings.winnerMessage.replace('@name', `@${w}`))
           }
         })
         setWinners((w) => w.concat(giveawayWinner.map((u) => ({ username: u }))))
