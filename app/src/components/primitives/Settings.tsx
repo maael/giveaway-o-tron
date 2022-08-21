@@ -160,12 +160,21 @@ export default function SettingsComponent({ settings, setSettings, setChatPaused
           onChange={(val) => setSettings((s) => ({ ...s, subLuck: val }))}
         />
         <Slider
-          label="Number of Winners"
+          label="Winners"
           title="How many winners to draw per giveaway"
           value={settings.numberOfWinners}
           min={1}
           max={10}
           onChange={(val) => setSettings((s) => ({ ...s, numberOfWinners: val }))}
+        />
+        <Slider
+          label="Spam Limit"
+          title="How many messages of chat command if present before being removed from selection"
+          value={settings.spamLimit || 1}
+          min={1}
+          max={10}
+          onChange={(val) => setSettings((s) => ({ ...s, spamLimit: val }))}
+          renderValue={(val) => <>{val === 1 ? 'Off' : `${val}+`}</>}
         />
       </div>
     </>

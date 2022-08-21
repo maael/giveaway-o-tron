@@ -29507,7 +29507,22 @@ to {
     let subCount = 0;
     let subEntries = 0;
     let followers;
-    let users = chatItems.filter((c2) => handleChatCommand(c2, chatCommand)).reduce((acc, c2) => acc.some((i3) => i3.username === c2.username) ? acc : acc.concat(c2), []).flatMap((c2) => {
+    const chatCommandEvents = chatItems.filter((c2) => handleChatCommand(c2, chatCommand));
+    const spamCounts = chatCommandEvents.reduce((acc, u3) => {
+      acc.set(u3.username, (acc.get(u3.username) || 0) + 1);
+      return acc;
+    }, new Map());
+    let users = chatCommandEvents.reduce((acc, c2) => acc.some((i3) => i3.username === c2.username) ? acc : acc.concat(c2), []).filter((i3) => {
+      if (!settings.chatCommand)
+        return true;
+      if (!settings.spamLimit || settings.spamLimit === 1)
+        return true;
+      const count = spamCounts.get(i3.username);
+      if (count === void 0)
+        return;
+      const didSpam = count > settings.spamLimit;
+      return !didSpam;
+    }).flatMap((c2) => {
       if (c2.isSubscriber) {
         subCount += 1;
         subEntries += settings.subLuck;
@@ -30857,7 +30872,7 @@ to {
       className: "px-2 flex-1 flex justify-center items-center"
     }, /* @__PURE__ */ import_react12.default.createElement(SliderInner, __spreadValues({}, props))), /* @__PURE__ */ import_react12.default.createElement("div", {
       className: "justify-center items-center text-center flex pr-4"
-    }, props.value));
+    }, props.renderValue ? props.renderValue(props.value) : props.value));
   }
   function SliderInner({ value: value2, label, min, max, step = 1, onChange }) {
     const values = [value2];
@@ -31019,12 +31034,20 @@ to {
       max: 10,
       onChange: (val) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { subLuck: val }))
     }), /* @__PURE__ */ import_react13.default.createElement(SliderOuter, {
-      label: "Number of Winners",
+      label: "Winners",
       title: "How many winners to draw per giveaway",
       value: settings.numberOfWinners,
       min: 1,
       max: 10,
       onChange: (val) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { numberOfWinners: val }))
+    }), /* @__PURE__ */ import_react13.default.createElement(SliderOuter, {
+      label: "Spam Limit",
+      title: "How many messages of chat command if present before being removed from selection",
+      value: settings.spamLimit || 1,
+      min: 1,
+      max: 10,
+      onChange: (val) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { spamLimit: val })),
+      renderValue: (val) => /* @__PURE__ */ import_react13.default.createElement(import_react13.default.Fragment, null, val === 1 ? "Off" : `${val}+`)
     })));
   }
 
@@ -32882,7 +32905,8 @@ to {
       winnerMessage: "PartyHat @name won!",
       sendMessages: false,
       blocklist: ["streamelements", "streamlabs", "nightbot"],
-      autoScroll: true
+      autoScroll: true,
+      spamLimit: 1
     });
     const [winners, setWinners] = import_react21.default.useState([]);
     const [client, setClient] = import_react21.default.useState(null);

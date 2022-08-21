@@ -17,9 +17,21 @@ export async function getChatGiveaway(
   let subCount = 0
   let subEntries = 0
   let followers: null | Map<any, any>
-  let users = chatItems
-    .filter((c) => handleChatCommand(c, chatCommand))
+  const chatCommandEvents = chatItems.filter((c) => handleChatCommand(c, chatCommand))
+  const spamCounts = chatCommandEvents.reduce((acc, u) => {
+    acc.set(u.username, (acc.get(u.username) || 0) + 1)
+    return acc
+  }, new Map<string, number>())
+  let users = chatCommandEvents
     .reduce<ChatItem[]>((acc, c) => (acc.some((i) => i.username === c.username) ? acc : acc.concat(c)), [])
+    .filter((i) => {
+      if (!settings.chatCommand) return true
+      if (!settings.spamLimit || settings.spamLimit === 1) return true
+      const count = spamCounts.get(i.username)
+      if (count === undefined) return
+      const didSpam = count > settings.spamLimit
+      return !didSpam
+    })
     .flatMap((c) => {
       if (c.isSubscriber) {
         subCount += 1

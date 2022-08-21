@@ -8,6 +8,7 @@ export interface Settings {
   sendMessages: boolean
   blocklist: string[]
   autoScroll?: boolean
+  spamLimit?: number
 }
 
 export type ChannelInfo = Partial<{
