@@ -104,7 +104,7 @@ export function ChatGiveaway({
           (
             [
               {
-                type: GiveawayType.Instant,
+                type: GiveawayType.Chat,
                 createdAt: new Date().toISOString(),
                 winners: giveawayWinner,
                 settings: settings,
