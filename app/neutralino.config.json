@@ -1,6 +1,7 @@
 {
   "applicationId": "js.giveaway.otron",
   "defaultMode": "window",
+  "version": "1.12.0",
   "port": 0,
   "url": "/resources/",
   "enableServer": true,
@@ -11,7 +12,9 @@
   },
   "nativeBlockList": [],
   "globalVariables": {
-    "TS": "MDZ6dGY1amYwdzd1dDFzaWF1c3hnOHFnZmx2ZGJm"
+    "TS": "MDZ6dGY1amYwdzd1dDFzaWF1c3hnOHFnZmx2ZGJm",
+    "TID": "aWQ0Zm9qbzQ1NWoxbjJybGR6ODgycmV0dHZ1aHl1",
+    "APP_VERSION": "1.12.0"
   },
   "modes": {
     "window": {
@@ -32,7 +35,9 @@
     },
     "browser": {
       "globalVariables": {
-        "TS": "MDZ6dGY1amYwdzd1dDFzaWF1c3hnOHFnZmx2ZGJm"
+        "TS": "MDZ6dGY1amYwdzd1dDFzaWF1c3hnOHFnZmx2ZGJm",
+        "TID": "aWQ0Zm9qbzQ1NWoxbjJybGR6ODgycmV0dHZ1aHl1",
+        "APP_VERSION": "1.12.0"
       },
       "nativeBlockList": ["filesystem.*"]
     },

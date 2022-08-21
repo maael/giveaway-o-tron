@@ -225,34 +225,34 @@
           {
             ReactSharedInternals.ReactDebugCurrentFrame = ReactDebugCurrentFrame;
           }
-          function warn(format) {
+          function warn(format2) {
             {
               for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
                 args[_key - 1] = arguments[_key];
               }
-              printWarning("warn", format, args);
+              printWarning("warn", format2, args);
             }
           }
-          function error(format) {
+          function error(format2) {
             {
               for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
                 args[_key2 - 1] = arguments[_key2];
               }
-              printWarning("error", format, args);
+              printWarning("error", format2, args);
             }
           }
-          function printWarning(level, format, args) {
+          function printWarning(level, format2, args) {
             {
               var ReactDebugCurrentFrame2 = ReactSharedInternals.ReactDebugCurrentFrame;
               var stack = ReactDebugCurrentFrame2.getStackAddendum();
               if (stack !== "") {
-                format += "%s";
+                format2 += "%s";
                 args = args.concat([stack]);
               }
               var argsWithFormat = args.map(function(item) {
                 return "" + item;
               });
-              argsWithFormat.unshift("Warning: " + format);
+              argsWithFormat.unshift("Warning: " + format2);
               Function.prototype.apply.call(console[level], console, argsWithFormat);
             }
           }
@@ -2462,43 +2462,43 @@
       if (true) {
         (function() {
           "use strict";
-          var React18 = require_react();
+          var React19 = require_react();
           var _assign = require_object_assign();
           var Scheduler = require_scheduler();
           var tracing = require_tracing();
-          var ReactSharedInternals = React18.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-          function warn(format) {
+          var ReactSharedInternals = React19.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          function warn(format2) {
             {
               for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
                 args[_key - 1] = arguments[_key];
               }
-              printWarning("warn", format, args);
+              printWarning("warn", format2, args);
             }
           }
-          function error(format) {
+          function error(format2) {
             {
               for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
                 args[_key2 - 1] = arguments[_key2];
               }
-              printWarning("error", format, args);
+              printWarning("error", format2, args);
             }
           }
-          function printWarning(level, format, args) {
+          function printWarning(level, format2, args) {
             {
               var ReactDebugCurrentFrame2 = ReactSharedInternals.ReactDebugCurrentFrame;
               var stack = ReactDebugCurrentFrame2.getStackAddendum();
               if (stack !== "") {
-                format += "%s";
+                format2 += "%s";
                 args = args.concat([stack]);
               }
               var argsWithFormat = args.map(function(item) {
                 return "" + item;
               });
-              argsWithFormat.unshift("Warning: " + format);
+              argsWithFormat.unshift("Warning: " + format2);
               Function.prototype.apply.call(console[level], console, argsWithFormat);
             }
           }
-          if (!React18) {
+          if (!React19) {
             {
               throw Error("ReactDOM was loaded before React. Make sure you load the React package before loading ReactDOM.");
             }
@@ -3714,7 +3714,7 @@
           var didWarnInvalidChild = false;
           function flattenChildren(children) {
             var content = "";
-            React18.Children.forEach(children, function(child) {
+            React19.Children.forEach(children, function(child) {
               if (child == null) {
                 return;
               }
@@ -3725,7 +3725,7 @@
           function validateProps(element2, props) {
             {
               if (typeof props.children === "object" && props.children !== null) {
-                React18.Children.forEach(props.children, function(child) {
+                React19.Children.forEach(props.children, function(child) {
                   if (child == null) {
                     return;
                   }
@@ -4951,8 +4951,8 @@
             {
               var invalidProps = [];
               for (var key in props) {
-                var isValid = validateProperty(type, key);
-                if (!isValid) {
+                var isValid2 = validateProperty(type, key);
+                if (!isValid2) {
                   invalidProps.push(key);
                 }
               }
@@ -5095,8 +5095,8 @@
             {
               var unknownProps = [];
               for (var key in props) {
-                var isValid = validateProperty$1(type, key, props[key], eventRegistry);
-                if (!isValid) {
+                var isValid2 = validateProperty$1(type, key, props[key], eventRegistry);
+                if (!isValid2) {
                   unknownProps.push(key);
                 }
               }
@@ -10918,7 +10918,7 @@
           }
           var fakeInternalInstance = {};
           var isArray = Array.isArray;
-          var emptyRefsObject = new React18.Component().refs;
+          var emptyRefsObject = new React19.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -11163,8 +11163,8 @@
             var contextType = ctor.contextType;
             {
               if ("contextType" in ctor) {
-                var isValid = contextType === null || contextType !== void 0 && contextType.$$typeof === REACT_CONTEXT_TYPE && contextType._context === void 0;
-                if (!isValid && !didWarnAboutInvalidateContextType.has(ctor)) {
+                var isValid2 = contextType === null || contextType !== void 0 && contextType.$$typeof === REACT_CONTEXT_TYPE && contextType._context === void 0;
+                if (!isValid2 && !didWarnAboutInvalidateContextType.has(ctor)) {
                   didWarnAboutInvalidateContextType.add(ctor);
                   var addendum = "";
                   if (contextType === void 0) {
@@ -24076,7 +24076,7 @@ ${JSON.stringify(message, null, 4)}`);
         return to.concat(ar || Array.prototype.slice.call(from));
       };
       Object.defineProperty(exports, "__esModule", { value: true });
-      var React18 = __importStar(require_react());
+      var React19 = __importStar(require_react());
       var utils_1 = require_utils2();
       var types_1 = require_types();
       var INCREASE_KEYS = ["ArrowRight", "ArrowUp", "k", "PageUp"];
@@ -24085,7 +24085,7 @@ ${JSON.stringify(message, null, 4)}`);
         __extends(Range3, _super);
         function Range3(props) {
           var _this = _super.call(this, props) || this;
-          _this.trackRef = React18.createRef();
+          _this.trackRef = React19.createRef();
           _this.thumbRefs = [];
           _this.state = {
             draggedTrackPos: [-1, -1],
@@ -24403,7 +24403,7 @@ ${JSON.stringify(message, null, 4)}`);
             _this.numOfMarks = (props2.max - props2.min) / _this.props.step;
             _this.markRefs = [];
             for (var i3 = 0; i3 < _this.numOfMarks + 1; i3++) {
-              _this.markRefs[i3] = React18.createRef();
+              _this.markRefs[i3] = React19.createRef();
             }
           };
           _this.calculateMarkOffsets = function() {
@@ -24444,7 +24444,7 @@ ${JSON.stringify(message, null, 4)}`);
           _this.schdOnTouchMove = (0, utils_1.schd)(_this.onTouchMove);
           _this.schdOnEnd = (0, utils_1.schd)(_this.onEnd);
           _this.thumbRefs = props.values.map(function() {
-            return React18.createRef();
+            return React19.createRef();
           });
           _this.updateMarkRefs(props);
           return _this;
@@ -24584,7 +24584,7 @@ ${JSON.stringify(message, null, 4)}`);
           max: 100
         };
         return Range3;
-      }(React18.Component);
+      }(React19.Component);
       exports.default = Range2;
     }
   });
@@ -24671,11 +24671,11 @@ ${JSON.stringify(message, null, 4)}`);
   });
 
   // src/index.tsx
-  var import_react21 = __toModule(require_react());
+  var import_react22 = __toModule(require_react());
   var import_react_dom = __toModule(require_react_dom());
 
   // src/App.tsx
-  var import_react20 = __toModule(require_react());
+  var import_react21 = __toModule(require_react());
 
   // node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js
   function _setPrototypeOf(o2, p2) {
@@ -26897,11 +26897,11 @@ to {
     }
   };
   var chatEmitter = new ChatEvent();
-  function useChatEvents(paused, onChat) {
+  function useChatEvents(paused, winners, onChat) {
     const [chat, setChat] = (0, import_react6.useState)([]);
     (0, import_react6.useEffect)(() => {
       function handleChat(d3) {
-        if (paused)
+        if (paused && !winners.some((w) => w.username === d3.detail.username))
           return;
         setChat((c2) => c2.concat(d3.detail));
         onChat(d3.detail);
@@ -26910,7 +26910,7 @@ to {
       return () => {
         chatEmitter.removeEventListener("chat", handleChat);
       };
-    }, [setChat, onChat, paused]);
+    }, [setChat, onChat, paused, winners]);
     const resetChat = (0, import_react6.useCallback)(() => {
       setChat([]);
     }, [setChat]);
@@ -27057,19 +27057,19 @@ to {
       return () => authEmitter.removeEventListener("refresh", handler);
     }, [authEmitter, onRefresh]);
   }
-  async function validateToken(token, refreshToken) {
+  async function validateToken(token, refreshToken, isRefreshValidate = false) {
     try {
       const res = await fetch(`https://id.twitch.tv/oauth2/validate`, {
         headers: {
           Authorization: `OAuth ${token}`
         }
       });
-      if (res.status === 401) {
+      if (res.status === 401 && !isRefreshValidate) {
         console.warn("[validate][refresh]");
         return refreshTokenFlow(refreshToken);
       }
       const data = await res.json();
-      console.info("[validate]", data);
+      console.info("[validate]", data, token, refreshToken);
       return {
         token,
         refreshToken,
@@ -27086,7 +27086,7 @@ to {
     console.info("[refreshTokenFlow]", refreshToken);
     const channelInfo = await JSON.parse(await Neutralino.storage.getData("main-channelinfo"));
     const details = {
-      client_id: channelInfo.clientId,
+      client_id: channelInfo.clientId || atob(globalThis.NL_TID),
       client_secret: atob(globalThis.NL_TS),
       grant_type: "refresh_token",
       refresh_token: refreshToken
@@ -27111,18 +27111,10 @@ to {
     }
     const data = await res.json();
     await Neutralino.storage.setData("main-channelinfo", JSON.stringify(__spreadProps(__spreadValues({}, channelInfo), { token: data.access_token, refreshToken: data.refresh_token })));
-    authEmitter.emit("refresh", {
-      token: data.access_token,
-      clientId: channelInfo.clientId,
-      login: channelInfo.login,
-      userId: channelInfo.userId
-    });
-    return {
-      token: data.access_token,
-      clientId: channelInfo.clientId,
-      login: channelInfo.login,
-      userId: channelInfo.userId
-    };
+    const validated = await validateToken(data.access_token, data.refresh_token);
+    if (validated)
+      authEmitter.emit("refresh", __spreadProps(__spreadValues({}, validated), { refreshToken: data.refresh_token }));
+    return validated;
   }
 
   // src/utils/twitchCaches.ts
@@ -27279,6 +27271,13 @@ to {
       return dumbCache;
     }
   }
+
+  // src/utils/types.ts
+  var GiveawayType;
+  (function(GiveawayType2) {
+    GiveawayType2["Instant"] = "Instant";
+    GiveawayType2["Chat"] = "Chat";
+  })(GiveawayType || (GiveawayType = {}));
 
   // node_modules/engine.io-parser/build/esm/commons.js
   var PACKET_TYPES = Object.create(null);
@@ -29507,6 +29506,7 @@ to {
     console.info("[giveaway][chat][start]");
     let subCount = 0;
     let subEntries = 0;
+    let followers;
     let users = chatItems.filter((c2) => handleChatCommand(c2, chatCommand)).reduce((acc, c2) => acc.some((i3) => i3.username === c2.username) ? acc : acc.concat(c2), []).flatMap((c2) => {
       if (c2.isSubscriber) {
         subCount += 1;
@@ -29516,7 +29516,7 @@ to {
       return c2;
     });
     if (settings.followersOnly) {
-      const followers = await getFollowers(channelInfo);
+      followers = await getFollowers(channelInfo);
       users = users.filter((u3) => followers.has(u3.username));
     }
     Et.success(`${subCount} sub${subCount === 1 ? "" : "s"} in giveaway, with ${subEntries} tickets`, {
@@ -29530,9 +29530,9 @@ to {
       pastWinners.add(winner.username);
       relay_default.emit("event", { winner: winner.username });
       return {
-        username: winner.username,
-        isSubscriber: winner.isSubscriber,
-        id: winner.id
+        login: winner.username,
+        wasSubscriber: winner.isSubscriber,
+        wasFollower: followers == null ? void 0 : followers.has(winner.username)
       };
     }).filter(Boolean);
   }
@@ -29541,9 +29541,12 @@ to {
     let viewers = await getViewers(channelInfo);
     let subCount = 0;
     let subEntries = 0;
+    let subsList, followersList;
     console.info({ viewers: viewers.length });
     if (settings.followersOnly) {
-      const [followersList, subsList] = await Promise.all([getFollowers(channelInfo), getSubs(channelInfo)]);
+      const [followersListMap, subsListMap] = await Promise.all([getFollowers(channelInfo), getSubs(channelInfo)]);
+      followersList = followersListMap;
+      subsList = subsListMap;
       const combined = viewers.filter((v2) => followersList.has(v2)).map((u3) => {
         return {
           login: u3,
@@ -29572,7 +29575,10 @@ to {
       pastWinners.add(winner);
       relay_default.emit("event", { winner });
       return winner;
-    }).filter(Boolean);
+    }).filter(Boolean).map((u3) => {
+      var _a, _b;
+      return { login: u3, wasSubscriber: (_a = subsList == null ? void 0 : subsList.has(u3)) != null ? _a : null, wasFollower: (_b = followersList == null ? void 0 : followersList.has(u3)) != null ? _b : null };
+    });
   }
 
   // src/components/primitives/Settings.tsx
@@ -30367,8 +30373,8 @@ to {
     return function() {
       var options = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
       var width = options.width ? String(options.width) : args.defaultWidth;
-      var format = args.formats[width] || args.formats[args.defaultWidth];
-      return format;
+      var format2 = args.formats[width] || args.formats[args.defaultWidth];
+      return format2;
     };
   }
 
@@ -31035,7 +31041,8 @@ to {
     setWinners,
     channelInfo,
     settings,
-    client
+    client,
+    setPastGiveaways
   }) {
     return /* @__PURE__ */ import_react14.default.createElement("button", {
       className: "bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-all hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700",
@@ -31052,7 +31059,16 @@ to {
             client == null ? void 0 : client.say(channelInfo.login, settings.winnerMessage.replace("@name", `@${w}`));
           }
         });
-        setWinners((w) => w.concat(giveawayWinner.map((u3) => ({ username: u3 }))));
+        setWinners((w) => w.concat(giveawayWinner.map((u3) => ({ username: u3.login }))));
+        setPastGiveaways((p2) => [
+          {
+            type: GiveawayType.Instant,
+            createdAt: new Date().toISOString(),
+            winners: giveawayWinner,
+            settings,
+            notes: ""
+          }
+        ].concat(p2));
       }
     }, /* @__PURE__ */ import_react14.default.createElement(FaDice, {
       className: "text-2xl"
@@ -31063,7 +31079,8 @@ to {
     setWinners,
     channelInfo,
     settings,
-    client
+    client,
+    setPastGiveaways
   }) {
     return /* @__PURE__ */ import_react14.default.createElement("button", {
       className: "bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-transform hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700",
@@ -31075,10 +31092,23 @@ to {
         }
         if (settings.sendMessages) {
           giveawayWinner.forEach((w) => {
-            client == null ? void 0 : client.say(channelInfo.login, settings.winnerMessage.replace("@name", `@${w.username}`));
+            client == null ? void 0 : client.say(channelInfo.login, settings.winnerMessage.replace("@name", `@${w.login}`));
           });
         }
-        setWinners((w) => w.concat(giveawayWinner));
+        setWinners((w) => w.concat(giveawayWinner.map((w2) => ({
+          username: w2.login,
+          isFollower: !!w2.wasFollower,
+          isSubscriber: !!w2.wasSubscriber
+        }))));
+        setPastGiveaways((p2) => [
+          {
+            type: GiveawayType.Instant,
+            createdAt: new Date().toISOString(),
+            winners: giveawayWinner,
+            settings,
+            notes: ""
+          }
+        ].concat(p2));
       }
     }, /* @__PURE__ */ import_react14.default.createElement(FaDice, {
       className: "text-2xl"
@@ -31210,9 +31240,11 @@ to {
     client,
     chatPaused,
     setChatPaused,
-    resetChat
+    resetChat,
+    winners,
+    setWinners,
+    setPastGiveaways
   }) {
-    const [winners, setWinners] = import_react16.default.useState([]);
     return /* @__PURE__ */ import_react16.default.createElement(import_react16.default.Fragment, null, /* @__PURE__ */ import_react16.default.createElement(Winner, {
       winners,
       onClear: (idx) => setWinners((w) => removeIdx(w, idx))
@@ -31222,13 +31254,15 @@ to {
       settings,
       channelInfo,
       setWinners,
-      client
+      client,
+      setPastGiveaways
     }), /* @__PURE__ */ import_react16.default.createElement(ChatGiveaway, {
       settings,
       channelInfo,
       chatEvents,
       setWinners,
-      client
+      client,
+      setPastGiveaways
     })), /* @__PURE__ */ import_react16.default.createElement(SettingsComponent, {
       settings,
       setSettings,
@@ -31299,92 +31333,1394 @@ to {
 
   // src/components/screens/PastGiveaways.tsx
   var import_react18 = __toModule(require_react());
-  var GIVEAWAYS = [
-    {
-      id: "1",
-      createdAt: new Date().toISOString(),
-      type: "Instant Viewer Giveaway",
-      settings: {
-        followersOnly: true,
-        numberOfWinners: 2,
-        chatCommand: "",
-        sendMessages: false,
-        winnerMessage: "PartyHat Yes",
-        subLuck: 1
-      },
-      winners: [
-        {
-          login: "Test User",
-          isSubscriber: false,
-          follows: true
-        },
-        {
-          login: "Test User",
-          isSubscriber: false,
-          follows: true
-        }
-      ]
-    },
-    {
-      id: "2",
-      createdAt: new Date().toISOString(),
-      type: "Active Chatter Giveaway",
-      settings: {
-        followersOnly: true,
-        numberOfWinners: 2,
-        chatCommand: "",
-        sendMessages: false,
-        winnerMessage: "PartyHat Yes",
-        subLuck: 1
-      },
-      winners: [
-        {
-          login: "Test User",
-          isSubscriber: false,
-          follows: true
-        },
-        {
-          login: "Test User",
-          isSubscriber: false,
-          follows: true
-        }
-      ]
+
+  // node_modules/date-fns/esm/differenceInCalendarMonths/index.js
+  function differenceInCalendarMonths(dirtyDateLeft, dirtyDateRight) {
+    requiredArgs(2, arguments);
+    var dateLeft = toDate(dirtyDateLeft);
+    var dateRight = toDate(dirtyDateRight);
+    var yearDiff = dateLeft.getFullYear() - dateRight.getFullYear();
+    var monthDiff = dateLeft.getMonth() - dateRight.getMonth();
+    return yearDiff * 12 + monthDiff;
+  }
+
+  // node_modules/date-fns/esm/endOfDay/index.js
+  function endOfDay(dirtyDate) {
+    requiredArgs(1, arguments);
+    var date = toDate(dirtyDate);
+    date.setHours(23, 59, 59, 999);
+    return date;
+  }
+
+  // node_modules/date-fns/esm/endOfMonth/index.js
+  function endOfMonth(dirtyDate) {
+    requiredArgs(1, arguments);
+    var date = toDate(dirtyDate);
+    var month = date.getMonth();
+    date.setFullYear(date.getFullYear(), month + 1, 0);
+    date.setHours(23, 59, 59, 999);
+    return date;
+  }
+
+  // node_modules/date-fns/esm/isLastDayOfMonth/index.js
+  function isLastDayOfMonth(dirtyDate) {
+    requiredArgs(1, arguments);
+    var date = toDate(dirtyDate);
+    return endOfDay(date).getTime() === endOfMonth(date).getTime();
+  }
+
+  // node_modules/date-fns/esm/differenceInMonths/index.js
+  function differenceInMonths(dirtyDateLeft, dirtyDateRight) {
+    requiredArgs(2, arguments);
+    var dateLeft = toDate(dirtyDateLeft);
+    var dateRight = toDate(dirtyDateRight);
+    var sign = compareAsc(dateLeft, dateRight);
+    var difference = Math.abs(differenceInCalendarMonths(dateLeft, dateRight));
+    var result;
+    if (difference < 1) {
+      result = 0;
+    } else {
+      if (dateLeft.getMonth() === 1 && dateLeft.getDate() > 27) {
+        dateLeft.setDate(30);
+      }
+      dateLeft.setMonth(dateLeft.getMonth() - sign * difference);
+      var isLastMonthNotFull = compareAsc(dateLeft, dateRight) === -sign;
+      if (isLastDayOfMonth(toDate(dirtyDateLeft)) && difference === 1 && compareAsc(dirtyDateLeft, dateRight) === 1) {
+        isLastMonthNotFull = false;
+      }
+      result = sign * (difference - Number(isLastMonthNotFull));
     }
-  ];
-  function PastGiveaways() {
-    return /* @__PURE__ */ import_react18.default.createElement("div", null, /* @__PURE__ */ import_react18.default.createElement("div", null, "Past Giveaways"), GIVEAWAYS.map((giveaway) => /* @__PURE__ */ import_react18.default.createElement("div", {
-      id: giveaway.id
-    }, giveaway.type)));
+    return result === 0 ? 0 : result;
+  }
+
+  // node_modules/date-fns/esm/differenceInMilliseconds/index.js
+  function differenceInMilliseconds(dateLeft, dateRight) {
+    requiredArgs(2, arguments);
+    return toDate(dateLeft).getTime() - toDate(dateRight).getTime();
+  }
+
+  // node_modules/date-fns/esm/_lib/roundingMethods/index.js
+  var roundingMap = {
+    ceil: Math.ceil,
+    round: Math.round,
+    floor: Math.floor,
+    trunc: function(value2) {
+      return value2 < 0 ? Math.ceil(value2) : Math.floor(value2);
+    }
+  };
+  var defaultRoundingMethod = "trunc";
+  function getRoundingMethod(method) {
+    return method ? roundingMap[method] : roundingMap[defaultRoundingMethod];
+  }
+
+  // node_modules/date-fns/esm/differenceInSeconds/index.js
+  function differenceInSeconds(dateLeft, dateRight, options) {
+    requiredArgs(2, arguments);
+    var diff = differenceInMilliseconds(dateLeft, dateRight) / 1e3;
+    return getRoundingMethod(options === null || options === void 0 ? void 0 : options.roundingMethod)(diff);
+  }
+
+  // node_modules/date-fns/esm/formatDistance/index.js
+  var MINUTES_IN_DAY2 = 1440;
+  var MINUTES_IN_ALMOST_TWO_DAYS = 2520;
+  var MINUTES_IN_MONTH2 = 43200;
+  var MINUTES_IN_TWO_MONTHS = 86400;
+  function formatDistance2(dirtyDate, dirtyBaseDate, options) {
+    var _ref, _options$locale;
+    requiredArgs(2, arguments);
+    var defaultOptions2 = getDefaultOptions();
+    var locale2 = (_ref = (_options$locale = options === null || options === void 0 ? void 0 : options.locale) !== null && _options$locale !== void 0 ? _options$locale : defaultOptions2.locale) !== null && _ref !== void 0 ? _ref : defaultLocale_default;
+    if (!locale2.formatDistance) {
+      throw new RangeError("locale must contain formatDistance property");
+    }
+    var comparison = compareAsc(dirtyDate, dirtyBaseDate);
+    if (isNaN(comparison)) {
+      throw new RangeError("Invalid time value");
+    }
+    var localizeOptions = assign(cloneObject(options), {
+      addSuffix: Boolean(options === null || options === void 0 ? void 0 : options.addSuffix),
+      comparison
+    });
+    var dateLeft;
+    var dateRight;
+    if (comparison > 0) {
+      dateLeft = toDate(dirtyBaseDate);
+      dateRight = toDate(dirtyDate);
+    } else {
+      dateLeft = toDate(dirtyDate);
+      dateRight = toDate(dirtyBaseDate);
+    }
+    var seconds = differenceInSeconds(dateRight, dateLeft);
+    var offsetInSeconds = (getTimezoneOffsetInMilliseconds(dateRight) - getTimezoneOffsetInMilliseconds(dateLeft)) / 1e3;
+    var minutes = Math.round((seconds - offsetInSeconds) / 60);
+    var months;
+    if (minutes < 2) {
+      if (options !== null && options !== void 0 && options.includeSeconds) {
+        if (seconds < 5) {
+          return locale2.formatDistance("lessThanXSeconds", 5, localizeOptions);
+        } else if (seconds < 10) {
+          return locale2.formatDistance("lessThanXSeconds", 10, localizeOptions);
+        } else if (seconds < 20) {
+          return locale2.formatDistance("lessThanXSeconds", 20, localizeOptions);
+        } else if (seconds < 40) {
+          return locale2.formatDistance("halfAMinute", 0, localizeOptions);
+        } else if (seconds < 60) {
+          return locale2.formatDistance("lessThanXMinutes", 1, localizeOptions);
+        } else {
+          return locale2.formatDistance("xMinutes", 1, localizeOptions);
+        }
+      } else {
+        if (minutes === 0) {
+          return locale2.formatDistance("lessThanXMinutes", 1, localizeOptions);
+        } else {
+          return locale2.formatDistance("xMinutes", minutes, localizeOptions);
+        }
+      }
+    } else if (minutes < 45) {
+      return locale2.formatDistance("xMinutes", minutes, localizeOptions);
+    } else if (minutes < 90) {
+      return locale2.formatDistance("aboutXHours", 1, localizeOptions);
+    } else if (minutes < MINUTES_IN_DAY2) {
+      var hours = Math.round(minutes / 60);
+      return locale2.formatDistance("aboutXHours", hours, localizeOptions);
+    } else if (minutes < MINUTES_IN_ALMOST_TWO_DAYS) {
+      return locale2.formatDistance("xDays", 1, localizeOptions);
+    } else if (minutes < MINUTES_IN_MONTH2) {
+      var days = Math.round(minutes / MINUTES_IN_DAY2);
+      return locale2.formatDistance("xDays", days, localizeOptions);
+    } else if (minutes < MINUTES_IN_TWO_MONTHS) {
+      months = Math.round(minutes / MINUTES_IN_MONTH2);
+      return locale2.formatDistance("aboutXMonths", months, localizeOptions);
+    }
+    months = differenceInMonths(dateRight, dateLeft);
+    if (months < 12) {
+      var nearestMonth = Math.round(minutes / MINUTES_IN_MONTH2);
+      return locale2.formatDistance("xMonths", nearestMonth, localizeOptions);
+    } else {
+      var monthsSinceStartOfYear = months % 12;
+      var years = Math.floor(months / 12);
+      if (monthsSinceStartOfYear < 3) {
+        return locale2.formatDistance("aboutXYears", years, localizeOptions);
+      } else if (monthsSinceStartOfYear < 9) {
+        return locale2.formatDistance("overXYears", years, localizeOptions);
+      } else {
+        return locale2.formatDistance("almostXYears", years + 1, localizeOptions);
+      }
+    }
+  }
+
+  // node_modules/date-fns/esm/formatDistanceToNow/index.js
+  function formatDistanceToNow(dirtyDate, options) {
+    requiredArgs(1, arguments);
+    return formatDistance2(dirtyDate, Date.now(), options);
+  }
+
+  // node_modules/date-fns/esm/isDate/index.js
+  function isDate(value2) {
+    requiredArgs(1, arguments);
+    return value2 instanceof Date || typeof value2 === "object" && Object.prototype.toString.call(value2) === "[object Date]";
+  }
+
+  // node_modules/date-fns/esm/isValid/index.js
+  function isValid(dirtyDate) {
+    requiredArgs(1, arguments);
+    if (!isDate(dirtyDate) && typeof dirtyDate !== "number") {
+      return false;
+    }
+    var date = toDate(dirtyDate);
+    return !isNaN(Number(date));
+  }
+
+  // node_modules/date-fns/esm/_lib/toInteger/index.js
+  function toInteger(dirtyNumber) {
+    if (dirtyNumber === null || dirtyNumber === true || dirtyNumber === false) {
+      return NaN;
+    }
+    var number2 = Number(dirtyNumber);
+    if (isNaN(number2)) {
+      return number2;
+    }
+    return number2 < 0 ? Math.ceil(number2) : Math.floor(number2);
+  }
+
+  // node_modules/date-fns/esm/addMilliseconds/index.js
+  function addMilliseconds(dirtyDate, dirtyAmount) {
+    requiredArgs(2, arguments);
+    var timestamp = toDate(dirtyDate).getTime();
+    var amount = toInteger(dirtyAmount);
+    return new Date(timestamp + amount);
+  }
+
+  // node_modules/date-fns/esm/subMilliseconds/index.js
+  function subMilliseconds(dirtyDate, dirtyAmount) {
+    requiredArgs(2, arguments);
+    var amount = toInteger(dirtyAmount);
+    return addMilliseconds(dirtyDate, -amount);
+  }
+
+  // node_modules/date-fns/esm/_lib/getUTCDayOfYear/index.js
+  var MILLISECONDS_IN_DAY = 864e5;
+  function getUTCDayOfYear(dirtyDate) {
+    requiredArgs(1, arguments);
+    var date = toDate(dirtyDate);
+    var timestamp = date.getTime();
+    date.setUTCMonth(0, 1);
+    date.setUTCHours(0, 0, 0, 0);
+    var startOfYearTimestamp = date.getTime();
+    var difference = timestamp - startOfYearTimestamp;
+    return Math.floor(difference / MILLISECONDS_IN_DAY) + 1;
+  }
+
+  // node_modules/date-fns/esm/_lib/startOfUTCISOWeek/index.js
+  function startOfUTCISOWeek(dirtyDate) {
+    requiredArgs(1, arguments);
+    var weekStartsOn = 1;
+    var date = toDate(dirtyDate);
+    var day = date.getUTCDay();
+    var diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
+    date.setUTCDate(date.getUTCDate() - diff);
+    date.setUTCHours(0, 0, 0, 0);
+    return date;
+  }
+
+  // node_modules/date-fns/esm/_lib/getUTCISOWeekYear/index.js
+  function getUTCISOWeekYear(dirtyDate) {
+    requiredArgs(1, arguments);
+    var date = toDate(dirtyDate);
+    var year = date.getUTCFullYear();
+    var fourthOfJanuaryOfNextYear = new Date(0);
+    fourthOfJanuaryOfNextYear.setUTCFullYear(year + 1, 0, 4);
+    fourthOfJanuaryOfNextYear.setUTCHours(0, 0, 0, 0);
+    var startOfNextYear = startOfUTCISOWeek(fourthOfJanuaryOfNextYear);
+    var fourthOfJanuaryOfThisYear = new Date(0);
+    fourthOfJanuaryOfThisYear.setUTCFullYear(year, 0, 4);
+    fourthOfJanuaryOfThisYear.setUTCHours(0, 0, 0, 0);
+    var startOfThisYear = startOfUTCISOWeek(fourthOfJanuaryOfThisYear);
+    if (date.getTime() >= startOfNextYear.getTime()) {
+      return year + 1;
+    } else if (date.getTime() >= startOfThisYear.getTime()) {
+      return year;
+    } else {
+      return year - 1;
+    }
+  }
+
+  // node_modules/date-fns/esm/_lib/startOfUTCISOWeekYear/index.js
+  function startOfUTCISOWeekYear(dirtyDate) {
+    requiredArgs(1, arguments);
+    var year = getUTCISOWeekYear(dirtyDate);
+    var fourthOfJanuary = new Date(0);
+    fourthOfJanuary.setUTCFullYear(year, 0, 4);
+    fourthOfJanuary.setUTCHours(0, 0, 0, 0);
+    var date = startOfUTCISOWeek(fourthOfJanuary);
+    return date;
+  }
+
+  // node_modules/date-fns/esm/_lib/getUTCISOWeek/index.js
+  var MILLISECONDS_IN_WEEK = 6048e5;
+  function getUTCISOWeek(dirtyDate) {
+    requiredArgs(1, arguments);
+    var date = toDate(dirtyDate);
+    var diff = startOfUTCISOWeek(date).getTime() - startOfUTCISOWeekYear(date).getTime();
+    return Math.round(diff / MILLISECONDS_IN_WEEK) + 1;
+  }
+
+  // node_modules/date-fns/esm/_lib/startOfUTCWeek/index.js
+  function startOfUTCWeek(dirtyDate, options) {
+    var _ref, _ref2, _ref3, _options$weekStartsOn, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
+    requiredArgs(1, arguments);
+    var defaultOptions2 = getDefaultOptions();
+    var weekStartsOn = toInteger((_ref = (_ref2 = (_ref3 = (_options$weekStartsOn = options === null || options === void 0 ? void 0 : options.weekStartsOn) !== null && _options$weekStartsOn !== void 0 ? _options$weekStartsOn : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.weekStartsOn) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions2.weekStartsOn) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions2.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.weekStartsOn) !== null && _ref !== void 0 ? _ref : 0);
+    if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
+      throw new RangeError("weekStartsOn must be between 0 and 6 inclusively");
+    }
+    var date = toDate(dirtyDate);
+    var day = date.getUTCDay();
+    var diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
+    date.setUTCDate(date.getUTCDate() - diff);
+    date.setUTCHours(0, 0, 0, 0);
+    return date;
+  }
+
+  // node_modules/date-fns/esm/_lib/getUTCWeekYear/index.js
+  function getUTCWeekYear(dirtyDate, options) {
+    var _ref, _ref2, _ref3, _options$firstWeekCon, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
+    requiredArgs(1, arguments);
+    var date = toDate(dirtyDate);
+    var year = date.getUTCFullYear();
+    var defaultOptions2 = getDefaultOptions();
+    var firstWeekContainsDate = toInteger((_ref = (_ref2 = (_ref3 = (_options$firstWeekCon = options === null || options === void 0 ? void 0 : options.firstWeekContainsDate) !== null && _options$firstWeekCon !== void 0 ? _options$firstWeekCon : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.firstWeekContainsDate) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions2.firstWeekContainsDate) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions2.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.firstWeekContainsDate) !== null && _ref !== void 0 ? _ref : 1);
+    if (!(firstWeekContainsDate >= 1 && firstWeekContainsDate <= 7)) {
+      throw new RangeError("firstWeekContainsDate must be between 1 and 7 inclusively");
+    }
+    var firstWeekOfNextYear = new Date(0);
+    firstWeekOfNextYear.setUTCFullYear(year + 1, 0, firstWeekContainsDate);
+    firstWeekOfNextYear.setUTCHours(0, 0, 0, 0);
+    var startOfNextYear = startOfUTCWeek(firstWeekOfNextYear, options);
+    var firstWeekOfThisYear = new Date(0);
+    firstWeekOfThisYear.setUTCFullYear(year, 0, firstWeekContainsDate);
+    firstWeekOfThisYear.setUTCHours(0, 0, 0, 0);
+    var startOfThisYear = startOfUTCWeek(firstWeekOfThisYear, options);
+    if (date.getTime() >= startOfNextYear.getTime()) {
+      return year + 1;
+    } else if (date.getTime() >= startOfThisYear.getTime()) {
+      return year;
+    } else {
+      return year - 1;
+    }
+  }
+
+  // node_modules/date-fns/esm/_lib/startOfUTCWeekYear/index.js
+  function startOfUTCWeekYear(dirtyDate, options) {
+    var _ref, _ref2, _ref3, _options$firstWeekCon, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
+    requiredArgs(1, arguments);
+    var defaultOptions2 = getDefaultOptions();
+    var firstWeekContainsDate = toInteger((_ref = (_ref2 = (_ref3 = (_options$firstWeekCon = options === null || options === void 0 ? void 0 : options.firstWeekContainsDate) !== null && _options$firstWeekCon !== void 0 ? _options$firstWeekCon : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.firstWeekContainsDate) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions2.firstWeekContainsDate) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions2.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.firstWeekContainsDate) !== null && _ref !== void 0 ? _ref : 1);
+    var year = getUTCWeekYear(dirtyDate, options);
+    var firstWeek = new Date(0);
+    firstWeek.setUTCFullYear(year, 0, firstWeekContainsDate);
+    firstWeek.setUTCHours(0, 0, 0, 0);
+    var date = startOfUTCWeek(firstWeek, options);
+    return date;
+  }
+
+  // node_modules/date-fns/esm/_lib/getUTCWeek/index.js
+  var MILLISECONDS_IN_WEEK2 = 6048e5;
+  function getUTCWeek(dirtyDate, options) {
+    requiredArgs(1, arguments);
+    var date = toDate(dirtyDate);
+    var diff = startOfUTCWeek(date, options).getTime() - startOfUTCWeekYear(date, options).getTime();
+    return Math.round(diff / MILLISECONDS_IN_WEEK2) + 1;
+  }
+
+  // node_modules/date-fns/esm/_lib/addLeadingZeros/index.js
+  function addLeadingZeros(number2, targetLength) {
+    var sign = number2 < 0 ? "-" : "";
+    var output = Math.abs(number2).toString();
+    while (output.length < targetLength) {
+      output = "0" + output;
+    }
+    return sign + output;
+  }
+
+  // node_modules/date-fns/esm/_lib/format/lightFormatters/index.js
+  var formatters = {
+    y: function(date, token) {
+      var signedYear = date.getUTCFullYear();
+      var year = signedYear > 0 ? signedYear : 1 - signedYear;
+      return addLeadingZeros(token === "yy" ? year % 100 : year, token.length);
+    },
+    M: function(date, token) {
+      var month = date.getUTCMonth();
+      return token === "M" ? String(month + 1) : addLeadingZeros(month + 1, 2);
+    },
+    d: function(date, token) {
+      return addLeadingZeros(date.getUTCDate(), token.length);
+    },
+    a: function(date, token) {
+      var dayPeriodEnumValue = date.getUTCHours() / 12 >= 1 ? "pm" : "am";
+      switch (token) {
+        case "a":
+        case "aa":
+          return dayPeriodEnumValue.toUpperCase();
+        case "aaa":
+          return dayPeriodEnumValue;
+        case "aaaaa":
+          return dayPeriodEnumValue[0];
+        case "aaaa":
+        default:
+          return dayPeriodEnumValue === "am" ? "a.m." : "p.m.";
+      }
+    },
+    h: function(date, token) {
+      return addLeadingZeros(date.getUTCHours() % 12 || 12, token.length);
+    },
+    H: function(date, token) {
+      return addLeadingZeros(date.getUTCHours(), token.length);
+    },
+    m: function(date, token) {
+      return addLeadingZeros(date.getUTCMinutes(), token.length);
+    },
+    s: function(date, token) {
+      return addLeadingZeros(date.getUTCSeconds(), token.length);
+    },
+    S: function(date, token) {
+      var numberOfDigits = token.length;
+      var milliseconds = date.getUTCMilliseconds();
+      var fractionalSeconds = Math.floor(milliseconds * Math.pow(10, numberOfDigits - 3));
+      return addLeadingZeros(fractionalSeconds, token.length);
+    }
+  };
+  var lightFormatters_default = formatters;
+
+  // node_modules/date-fns/esm/_lib/format/formatters/index.js
+  var dayPeriodEnum = {
+    am: "am",
+    pm: "pm",
+    midnight: "midnight",
+    noon: "noon",
+    morning: "morning",
+    afternoon: "afternoon",
+    evening: "evening",
+    night: "night"
+  };
+  var formatters2 = {
+    G: function(date, token, localize2) {
+      var era = date.getUTCFullYear() > 0 ? 1 : 0;
+      switch (token) {
+        case "G":
+        case "GG":
+        case "GGG":
+          return localize2.era(era, {
+            width: "abbreviated"
+          });
+        case "GGGGG":
+          return localize2.era(era, {
+            width: "narrow"
+          });
+        case "GGGG":
+        default:
+          return localize2.era(era, {
+            width: "wide"
+          });
+      }
+    },
+    y: function(date, token, localize2) {
+      if (token === "yo") {
+        var signedYear = date.getUTCFullYear();
+        var year = signedYear > 0 ? signedYear : 1 - signedYear;
+        return localize2.ordinalNumber(year, {
+          unit: "year"
+        });
+      }
+      return lightFormatters_default.y(date, token);
+    },
+    Y: function(date, token, localize2, options) {
+      var signedWeekYear = getUTCWeekYear(date, options);
+      var weekYear = signedWeekYear > 0 ? signedWeekYear : 1 - signedWeekYear;
+      if (token === "YY") {
+        var twoDigitYear = weekYear % 100;
+        return addLeadingZeros(twoDigitYear, 2);
+      }
+      if (token === "Yo") {
+        return localize2.ordinalNumber(weekYear, {
+          unit: "year"
+        });
+      }
+      return addLeadingZeros(weekYear, token.length);
+    },
+    R: function(date, token) {
+      var isoWeekYear = getUTCISOWeekYear(date);
+      return addLeadingZeros(isoWeekYear, token.length);
+    },
+    u: function(date, token) {
+      var year = date.getUTCFullYear();
+      return addLeadingZeros(year, token.length);
+    },
+    Q: function(date, token, localize2) {
+      var quarter = Math.ceil((date.getUTCMonth() + 1) / 3);
+      switch (token) {
+        case "Q":
+          return String(quarter);
+        case "QQ":
+          return addLeadingZeros(quarter, 2);
+        case "Qo":
+          return localize2.ordinalNumber(quarter, {
+            unit: "quarter"
+          });
+        case "QQQ":
+          return localize2.quarter(quarter, {
+            width: "abbreviated",
+            context: "formatting"
+          });
+        case "QQQQQ":
+          return localize2.quarter(quarter, {
+            width: "narrow",
+            context: "formatting"
+          });
+        case "QQQQ":
+        default:
+          return localize2.quarter(quarter, {
+            width: "wide",
+            context: "formatting"
+          });
+      }
+    },
+    q: function(date, token, localize2) {
+      var quarter = Math.ceil((date.getUTCMonth() + 1) / 3);
+      switch (token) {
+        case "q":
+          return String(quarter);
+        case "qq":
+          return addLeadingZeros(quarter, 2);
+        case "qo":
+          return localize2.ordinalNumber(quarter, {
+            unit: "quarter"
+          });
+        case "qqq":
+          return localize2.quarter(quarter, {
+            width: "abbreviated",
+            context: "standalone"
+          });
+        case "qqqqq":
+          return localize2.quarter(quarter, {
+            width: "narrow",
+            context: "standalone"
+          });
+        case "qqqq":
+        default:
+          return localize2.quarter(quarter, {
+            width: "wide",
+            context: "standalone"
+          });
+      }
+    },
+    M: function(date, token, localize2) {
+      var month = date.getUTCMonth();
+      switch (token) {
+        case "M":
+        case "MM":
+          return lightFormatters_default.M(date, token);
+        case "Mo":
+          return localize2.ordinalNumber(month + 1, {
+            unit: "month"
+          });
+        case "MMM":
+          return localize2.month(month, {
+            width: "abbreviated",
+            context: "formatting"
+          });
+        case "MMMMM":
+          return localize2.month(month, {
+            width: "narrow",
+            context: "formatting"
+          });
+        case "MMMM":
+        default:
+          return localize2.month(month, {
+            width: "wide",
+            context: "formatting"
+          });
+      }
+    },
+    L: function(date, token, localize2) {
+      var month = date.getUTCMonth();
+      switch (token) {
+        case "L":
+          return String(month + 1);
+        case "LL":
+          return addLeadingZeros(month + 1, 2);
+        case "Lo":
+          return localize2.ordinalNumber(month + 1, {
+            unit: "month"
+          });
+        case "LLL":
+          return localize2.month(month, {
+            width: "abbreviated",
+            context: "standalone"
+          });
+        case "LLLLL":
+          return localize2.month(month, {
+            width: "narrow",
+            context: "standalone"
+          });
+        case "LLLL":
+        default:
+          return localize2.month(month, {
+            width: "wide",
+            context: "standalone"
+          });
+      }
+    },
+    w: function(date, token, localize2, options) {
+      var week = getUTCWeek(date, options);
+      if (token === "wo") {
+        return localize2.ordinalNumber(week, {
+          unit: "week"
+        });
+      }
+      return addLeadingZeros(week, token.length);
+    },
+    I: function(date, token, localize2) {
+      var isoWeek = getUTCISOWeek(date);
+      if (token === "Io") {
+        return localize2.ordinalNumber(isoWeek, {
+          unit: "week"
+        });
+      }
+      return addLeadingZeros(isoWeek, token.length);
+    },
+    d: function(date, token, localize2) {
+      if (token === "do") {
+        return localize2.ordinalNumber(date.getUTCDate(), {
+          unit: "date"
+        });
+      }
+      return lightFormatters_default.d(date, token);
+    },
+    D: function(date, token, localize2) {
+      var dayOfYear = getUTCDayOfYear(date);
+      if (token === "Do") {
+        return localize2.ordinalNumber(dayOfYear, {
+          unit: "dayOfYear"
+        });
+      }
+      return addLeadingZeros(dayOfYear, token.length);
+    },
+    E: function(date, token, localize2) {
+      var dayOfWeek = date.getUTCDay();
+      switch (token) {
+        case "E":
+        case "EE":
+        case "EEE":
+          return localize2.day(dayOfWeek, {
+            width: "abbreviated",
+            context: "formatting"
+          });
+        case "EEEEE":
+          return localize2.day(dayOfWeek, {
+            width: "narrow",
+            context: "formatting"
+          });
+        case "EEEEEE":
+          return localize2.day(dayOfWeek, {
+            width: "short",
+            context: "formatting"
+          });
+        case "EEEE":
+        default:
+          return localize2.day(dayOfWeek, {
+            width: "wide",
+            context: "formatting"
+          });
+      }
+    },
+    e: function(date, token, localize2, options) {
+      var dayOfWeek = date.getUTCDay();
+      var localDayOfWeek = (dayOfWeek - options.weekStartsOn + 8) % 7 || 7;
+      switch (token) {
+        case "e":
+          return String(localDayOfWeek);
+        case "ee":
+          return addLeadingZeros(localDayOfWeek, 2);
+        case "eo":
+          return localize2.ordinalNumber(localDayOfWeek, {
+            unit: "day"
+          });
+        case "eee":
+          return localize2.day(dayOfWeek, {
+            width: "abbreviated",
+            context: "formatting"
+          });
+        case "eeeee":
+          return localize2.day(dayOfWeek, {
+            width: "narrow",
+            context: "formatting"
+          });
+        case "eeeeee":
+          return localize2.day(dayOfWeek, {
+            width: "short",
+            context: "formatting"
+          });
+        case "eeee":
+        default:
+          return localize2.day(dayOfWeek, {
+            width: "wide",
+            context: "formatting"
+          });
+      }
+    },
+    c: function(date, token, localize2, options) {
+      var dayOfWeek = date.getUTCDay();
+      var localDayOfWeek = (dayOfWeek - options.weekStartsOn + 8) % 7 || 7;
+      switch (token) {
+        case "c":
+          return String(localDayOfWeek);
+        case "cc":
+          return addLeadingZeros(localDayOfWeek, token.length);
+        case "co":
+          return localize2.ordinalNumber(localDayOfWeek, {
+            unit: "day"
+          });
+        case "ccc":
+          return localize2.day(dayOfWeek, {
+            width: "abbreviated",
+            context: "standalone"
+          });
+        case "ccccc":
+          return localize2.day(dayOfWeek, {
+            width: "narrow",
+            context: "standalone"
+          });
+        case "cccccc":
+          return localize2.day(dayOfWeek, {
+            width: "short",
+            context: "standalone"
+          });
+        case "cccc":
+        default:
+          return localize2.day(dayOfWeek, {
+            width: "wide",
+            context: "standalone"
+          });
+      }
+    },
+    i: function(date, token, localize2) {
+      var dayOfWeek = date.getUTCDay();
+      var isoDayOfWeek = dayOfWeek === 0 ? 7 : dayOfWeek;
+      switch (token) {
+        case "i":
+          return String(isoDayOfWeek);
+        case "ii":
+          return addLeadingZeros(isoDayOfWeek, token.length);
+        case "io":
+          return localize2.ordinalNumber(isoDayOfWeek, {
+            unit: "day"
+          });
+        case "iii":
+          return localize2.day(dayOfWeek, {
+            width: "abbreviated",
+            context: "formatting"
+          });
+        case "iiiii":
+          return localize2.day(dayOfWeek, {
+            width: "narrow",
+            context: "formatting"
+          });
+        case "iiiiii":
+          return localize2.day(dayOfWeek, {
+            width: "short",
+            context: "formatting"
+          });
+        case "iiii":
+        default:
+          return localize2.day(dayOfWeek, {
+            width: "wide",
+            context: "formatting"
+          });
+      }
+    },
+    a: function(date, token, localize2) {
+      var hours = date.getUTCHours();
+      var dayPeriodEnumValue = hours / 12 >= 1 ? "pm" : "am";
+      switch (token) {
+        case "a":
+        case "aa":
+          return localize2.dayPeriod(dayPeriodEnumValue, {
+            width: "abbreviated",
+            context: "formatting"
+          });
+        case "aaa":
+          return localize2.dayPeriod(dayPeriodEnumValue, {
+            width: "abbreviated",
+            context: "formatting"
+          }).toLowerCase();
+        case "aaaaa":
+          return localize2.dayPeriod(dayPeriodEnumValue, {
+            width: "narrow",
+            context: "formatting"
+          });
+        case "aaaa":
+        default:
+          return localize2.dayPeriod(dayPeriodEnumValue, {
+            width: "wide",
+            context: "formatting"
+          });
+      }
+    },
+    b: function(date, token, localize2) {
+      var hours = date.getUTCHours();
+      var dayPeriodEnumValue;
+      if (hours === 12) {
+        dayPeriodEnumValue = dayPeriodEnum.noon;
+      } else if (hours === 0) {
+        dayPeriodEnumValue = dayPeriodEnum.midnight;
+      } else {
+        dayPeriodEnumValue = hours / 12 >= 1 ? "pm" : "am";
+      }
+      switch (token) {
+        case "b":
+        case "bb":
+          return localize2.dayPeriod(dayPeriodEnumValue, {
+            width: "abbreviated",
+            context: "formatting"
+          });
+        case "bbb":
+          return localize2.dayPeriod(dayPeriodEnumValue, {
+            width: "abbreviated",
+            context: "formatting"
+          }).toLowerCase();
+        case "bbbbb":
+          return localize2.dayPeriod(dayPeriodEnumValue, {
+            width: "narrow",
+            context: "formatting"
+          });
+        case "bbbb":
+        default:
+          return localize2.dayPeriod(dayPeriodEnumValue, {
+            width: "wide",
+            context: "formatting"
+          });
+      }
+    },
+    B: function(date, token, localize2) {
+      var hours = date.getUTCHours();
+      var dayPeriodEnumValue;
+      if (hours >= 17) {
+        dayPeriodEnumValue = dayPeriodEnum.evening;
+      } else if (hours >= 12) {
+        dayPeriodEnumValue = dayPeriodEnum.afternoon;
+      } else if (hours >= 4) {
+        dayPeriodEnumValue = dayPeriodEnum.morning;
+      } else {
+        dayPeriodEnumValue = dayPeriodEnum.night;
+      }
+      switch (token) {
+        case "B":
+        case "BB":
+        case "BBB":
+          return localize2.dayPeriod(dayPeriodEnumValue, {
+            width: "abbreviated",
+            context: "formatting"
+          });
+        case "BBBBB":
+          return localize2.dayPeriod(dayPeriodEnumValue, {
+            width: "narrow",
+            context: "formatting"
+          });
+        case "BBBB":
+        default:
+          return localize2.dayPeriod(dayPeriodEnumValue, {
+            width: "wide",
+            context: "formatting"
+          });
+      }
+    },
+    h: function(date, token, localize2) {
+      if (token === "ho") {
+        var hours = date.getUTCHours() % 12;
+        if (hours === 0)
+          hours = 12;
+        return localize2.ordinalNumber(hours, {
+          unit: "hour"
+        });
+      }
+      return lightFormatters_default.h(date, token);
+    },
+    H: function(date, token, localize2) {
+      if (token === "Ho") {
+        return localize2.ordinalNumber(date.getUTCHours(), {
+          unit: "hour"
+        });
+      }
+      return lightFormatters_default.H(date, token);
+    },
+    K: function(date, token, localize2) {
+      var hours = date.getUTCHours() % 12;
+      if (token === "Ko") {
+        return localize2.ordinalNumber(hours, {
+          unit: "hour"
+        });
+      }
+      return addLeadingZeros(hours, token.length);
+    },
+    k: function(date, token, localize2) {
+      var hours = date.getUTCHours();
+      if (hours === 0)
+        hours = 24;
+      if (token === "ko") {
+        return localize2.ordinalNumber(hours, {
+          unit: "hour"
+        });
+      }
+      return addLeadingZeros(hours, token.length);
+    },
+    m: function(date, token, localize2) {
+      if (token === "mo") {
+        return localize2.ordinalNumber(date.getUTCMinutes(), {
+          unit: "minute"
+        });
+      }
+      return lightFormatters_default.m(date, token);
+    },
+    s: function(date, token, localize2) {
+      if (token === "so") {
+        return localize2.ordinalNumber(date.getUTCSeconds(), {
+          unit: "second"
+        });
+      }
+      return lightFormatters_default.s(date, token);
+    },
+    S: function(date, token) {
+      return lightFormatters_default.S(date, token);
+    },
+    X: function(date, token, _localize, options) {
+      var originalDate = options._originalDate || date;
+      var timezoneOffset = originalDate.getTimezoneOffset();
+      if (timezoneOffset === 0) {
+        return "Z";
+      }
+      switch (token) {
+        case "X":
+          return formatTimezoneWithOptionalMinutes(timezoneOffset);
+        case "XXXX":
+        case "XX":
+          return formatTimezone(timezoneOffset);
+        case "XXXXX":
+        case "XXX":
+        default:
+          return formatTimezone(timezoneOffset, ":");
+      }
+    },
+    x: function(date, token, _localize, options) {
+      var originalDate = options._originalDate || date;
+      var timezoneOffset = originalDate.getTimezoneOffset();
+      switch (token) {
+        case "x":
+          return formatTimezoneWithOptionalMinutes(timezoneOffset);
+        case "xxxx":
+        case "xx":
+          return formatTimezone(timezoneOffset);
+        case "xxxxx":
+        case "xxx":
+        default:
+          return formatTimezone(timezoneOffset, ":");
+      }
+    },
+    O: function(date, token, _localize, options) {
+      var originalDate = options._originalDate || date;
+      var timezoneOffset = originalDate.getTimezoneOffset();
+      switch (token) {
+        case "O":
+        case "OO":
+        case "OOO":
+          return "GMT" + formatTimezoneShort(timezoneOffset, ":");
+        case "OOOO":
+        default:
+          return "GMT" + formatTimezone(timezoneOffset, ":");
+      }
+    },
+    z: function(date, token, _localize, options) {
+      var originalDate = options._originalDate || date;
+      var timezoneOffset = originalDate.getTimezoneOffset();
+      switch (token) {
+        case "z":
+        case "zz":
+        case "zzz":
+          return "GMT" + formatTimezoneShort(timezoneOffset, ":");
+        case "zzzz":
+        default:
+          return "GMT" + formatTimezone(timezoneOffset, ":");
+      }
+    },
+    t: function(date, token, _localize, options) {
+      var originalDate = options._originalDate || date;
+      var timestamp = Math.floor(originalDate.getTime() / 1e3);
+      return addLeadingZeros(timestamp, token.length);
+    },
+    T: function(date, token, _localize, options) {
+      var originalDate = options._originalDate || date;
+      var timestamp = originalDate.getTime();
+      return addLeadingZeros(timestamp, token.length);
+    }
+  };
+  function formatTimezoneShort(offset, dirtyDelimiter) {
+    var sign = offset > 0 ? "-" : "+";
+    var absOffset = Math.abs(offset);
+    var hours = Math.floor(absOffset / 60);
+    var minutes = absOffset % 60;
+    if (minutes === 0) {
+      return sign + String(hours);
+    }
+    var delimiter = dirtyDelimiter || "";
+    return sign + String(hours) + delimiter + addLeadingZeros(minutes, 2);
+  }
+  function formatTimezoneWithOptionalMinutes(offset, dirtyDelimiter) {
+    if (offset % 60 === 0) {
+      var sign = offset > 0 ? "-" : "+";
+      return sign + addLeadingZeros(Math.abs(offset) / 60, 2);
+    }
+    return formatTimezone(offset, dirtyDelimiter);
+  }
+  function formatTimezone(offset, dirtyDelimiter) {
+    var delimiter = dirtyDelimiter || "";
+    var sign = offset > 0 ? "-" : "+";
+    var absOffset = Math.abs(offset);
+    var hours = addLeadingZeros(Math.floor(absOffset / 60), 2);
+    var minutes = addLeadingZeros(absOffset % 60, 2);
+    return sign + hours + delimiter + minutes;
+  }
+  var formatters_default = formatters2;
+
+  // node_modules/date-fns/esm/_lib/format/longFormatters/index.js
+  var dateLongFormatter = function(pattern, formatLong2) {
+    switch (pattern) {
+      case "P":
+        return formatLong2.date({
+          width: "short"
+        });
+      case "PP":
+        return formatLong2.date({
+          width: "medium"
+        });
+      case "PPP":
+        return formatLong2.date({
+          width: "long"
+        });
+      case "PPPP":
+      default:
+        return formatLong2.date({
+          width: "full"
+        });
+    }
+  };
+  var timeLongFormatter = function(pattern, formatLong2) {
+    switch (pattern) {
+      case "p":
+        return formatLong2.time({
+          width: "short"
+        });
+      case "pp":
+        return formatLong2.time({
+          width: "medium"
+        });
+      case "ppp":
+        return formatLong2.time({
+          width: "long"
+        });
+      case "pppp":
+      default:
+        return formatLong2.time({
+          width: "full"
+        });
+    }
+  };
+  var dateTimeLongFormatter = function(pattern, formatLong2) {
+    var matchResult = pattern.match(/(P+)(p+)?/) || [];
+    var datePattern = matchResult[1];
+    var timePattern = matchResult[2];
+    if (!timePattern) {
+      return dateLongFormatter(pattern, formatLong2);
+    }
+    var dateTimeFormat;
+    switch (datePattern) {
+      case "P":
+        dateTimeFormat = formatLong2.dateTime({
+          width: "short"
+        });
+        break;
+      case "PP":
+        dateTimeFormat = formatLong2.dateTime({
+          width: "medium"
+        });
+        break;
+      case "PPP":
+        dateTimeFormat = formatLong2.dateTime({
+          width: "long"
+        });
+        break;
+      case "PPPP":
+      default:
+        dateTimeFormat = formatLong2.dateTime({
+          width: "full"
+        });
+        break;
+    }
+    return dateTimeFormat.replace("{{date}}", dateLongFormatter(datePattern, formatLong2)).replace("{{time}}", timeLongFormatter(timePattern, formatLong2));
+  };
+  var longFormatters = {
+    p: timeLongFormatter,
+    P: dateTimeLongFormatter
+  };
+  var longFormatters_default = longFormatters;
+
+  // node_modules/date-fns/esm/_lib/protectedTokens/index.js
+  var protectedDayOfYearTokens = ["D", "DD"];
+  var protectedWeekYearTokens = ["YY", "YYYY"];
+  function isProtectedDayOfYearToken(token) {
+    return protectedDayOfYearTokens.indexOf(token) !== -1;
+  }
+  function isProtectedWeekYearToken(token) {
+    return protectedWeekYearTokens.indexOf(token) !== -1;
+  }
+  function throwProtectedError(token, format2, input) {
+    if (token === "YYYY") {
+      throw new RangeError("Use `yyyy` instead of `YYYY` (in `".concat(format2, "`) for formatting years to the input `").concat(input, "`; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md"));
+    } else if (token === "YY") {
+      throw new RangeError("Use `yy` instead of `YY` (in `".concat(format2, "`) for formatting years to the input `").concat(input, "`; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md"));
+    } else if (token === "D") {
+      throw new RangeError("Use `d` instead of `D` (in `".concat(format2, "`) for formatting days of the month to the input `").concat(input, "`; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md"));
+    } else if (token === "DD") {
+      throw new RangeError("Use `dd` instead of `DD` (in `".concat(format2, "`) for formatting days of the month to the input `").concat(input, "`; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md"));
+    }
+  }
+
+  // node_modules/date-fns/esm/format/index.js
+  var formattingTokensRegExp = /[yYQqMLwIdDecihHKkms]o|(\w)\1*|''|'(''|[^'])+('|$)|./g;
+  var longFormattingTokensRegExp = /P+p+|P+|p+|''|'(''|[^'])+('|$)|./g;
+  var escapedStringRegExp = /^'([^]*?)'?$/;
+  var doubleQuoteRegExp = /''/g;
+  var unescapedLatinCharacterRegExp = /[a-zA-Z]/;
+  function format(dirtyDate, dirtyFormatStr, options) {
+    var _ref, _options$locale, _ref2, _ref3, _ref4, _options$firstWeekCon, _options$locale2, _options$locale2$opti, _defaultOptions$local, _defaultOptions$local2, _ref5, _ref6, _ref7, _options$weekStartsOn, _options$locale3, _options$locale3$opti, _defaultOptions$local3, _defaultOptions$local4;
+    requiredArgs(2, arguments);
+    var formatStr = String(dirtyFormatStr);
+    var defaultOptions2 = getDefaultOptions();
+    var locale2 = (_ref = (_options$locale = options === null || options === void 0 ? void 0 : options.locale) !== null && _options$locale !== void 0 ? _options$locale : defaultOptions2.locale) !== null && _ref !== void 0 ? _ref : defaultLocale_default;
+    var firstWeekContainsDate = toInteger((_ref2 = (_ref3 = (_ref4 = (_options$firstWeekCon = options === null || options === void 0 ? void 0 : options.firstWeekContainsDate) !== null && _options$firstWeekCon !== void 0 ? _options$firstWeekCon : options === null || options === void 0 ? void 0 : (_options$locale2 = options.locale) === null || _options$locale2 === void 0 ? void 0 : (_options$locale2$opti = _options$locale2.options) === null || _options$locale2$opti === void 0 ? void 0 : _options$locale2$opti.firstWeekContainsDate) !== null && _ref4 !== void 0 ? _ref4 : defaultOptions2.firstWeekContainsDate) !== null && _ref3 !== void 0 ? _ref3 : (_defaultOptions$local = defaultOptions2.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.firstWeekContainsDate) !== null && _ref2 !== void 0 ? _ref2 : 1);
+    if (!(firstWeekContainsDate >= 1 && firstWeekContainsDate <= 7)) {
+      throw new RangeError("firstWeekContainsDate must be between 1 and 7 inclusively");
+    }
+    var weekStartsOn = toInteger((_ref5 = (_ref6 = (_ref7 = (_options$weekStartsOn = options === null || options === void 0 ? void 0 : options.weekStartsOn) !== null && _options$weekStartsOn !== void 0 ? _options$weekStartsOn : options === null || options === void 0 ? void 0 : (_options$locale3 = options.locale) === null || _options$locale3 === void 0 ? void 0 : (_options$locale3$opti = _options$locale3.options) === null || _options$locale3$opti === void 0 ? void 0 : _options$locale3$opti.weekStartsOn) !== null && _ref7 !== void 0 ? _ref7 : defaultOptions2.weekStartsOn) !== null && _ref6 !== void 0 ? _ref6 : (_defaultOptions$local3 = defaultOptions2.locale) === null || _defaultOptions$local3 === void 0 ? void 0 : (_defaultOptions$local4 = _defaultOptions$local3.options) === null || _defaultOptions$local4 === void 0 ? void 0 : _defaultOptions$local4.weekStartsOn) !== null && _ref5 !== void 0 ? _ref5 : 0);
+    if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
+      throw new RangeError("weekStartsOn must be between 0 and 6 inclusively");
+    }
+    if (!locale2.localize) {
+      throw new RangeError("locale must contain localize property");
+    }
+    if (!locale2.formatLong) {
+      throw new RangeError("locale must contain formatLong property");
+    }
+    var originalDate = toDate(dirtyDate);
+    if (!isValid(originalDate)) {
+      throw new RangeError("Invalid time value");
+    }
+    var timezoneOffset = getTimezoneOffsetInMilliseconds(originalDate);
+    var utcDate = subMilliseconds(originalDate, timezoneOffset);
+    var formatterOptions = {
+      firstWeekContainsDate,
+      weekStartsOn,
+      locale: locale2,
+      _originalDate: originalDate
+    };
+    var result = formatStr.match(longFormattingTokensRegExp).map(function(substring) {
+      var firstCharacter = substring[0];
+      if (firstCharacter === "p" || firstCharacter === "P") {
+        var longFormatter = longFormatters_default[firstCharacter];
+        return longFormatter(substring, locale2.formatLong);
+      }
+      return substring;
+    }).join("").match(formattingTokensRegExp).map(function(substring) {
+      if (substring === "''") {
+        return "'";
+      }
+      var firstCharacter = substring[0];
+      if (firstCharacter === "'") {
+        return cleanEscapedString(substring);
+      }
+      var formatter = formatters_default[firstCharacter];
+      if (formatter) {
+        if (!(options !== null && options !== void 0 && options.useAdditionalWeekYearTokens) && isProtectedWeekYearToken(substring)) {
+          throwProtectedError(substring, dirtyFormatStr, String(dirtyDate));
+        }
+        if (!(options !== null && options !== void 0 && options.useAdditionalDayOfYearTokens) && isProtectedDayOfYearToken(substring)) {
+          throwProtectedError(substring, dirtyFormatStr, String(dirtyDate));
+        }
+        return formatter(utcDate, substring, locale2.localize, formatterOptions);
+      }
+      if (firstCharacter.match(unescapedLatinCharacterRegExp)) {
+        throw new RangeError("Format string contains an unescaped latin alphabet character `" + firstCharacter + "`");
+      }
+      return substring;
+    }).join("");
+    return result;
+  }
+  function cleanEscapedString(input) {
+    var matched = input.match(escapedStringRegExp);
+    if (!matched) {
+      return input;
+    }
+    return matched[1].replace(doubleQuoteRegExp, "'");
+  }
+
+  // src/components/screens/PastGiveaways.tsx
+  var typeNameMap = {
+    [GiveawayType.Chat]: "Active Chatter Giveaway",
+    [GiveawayType.Instant]: "Viewers Instant Giveaway"
+  };
+  function SettingItem({ label, value: value2 }) {
+    return /* @__PURE__ */ import_react18.default.createElement("div", {
+      className: "flex flex-row justify-center items-center flex-1"
+    }, /* @__PURE__ */ import_react18.default.createElement("div", {
+      className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md"
+    }, label), /* @__PURE__ */ import_react18.default.createElement("div", {
+      className: "bg-gray-600 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1 overflow-ellipsis h-full max-w-full flex justify-center items-center"
+    }, typeof value2 === "boolean" ? value2 ? /* @__PURE__ */ import_react18.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react18.default.createElement(FaTimes, null) : value2));
+  }
+  function PastGiveaways({
+    giveaways,
+    setPastGiveaways
+  }) {
+    return /* @__PURE__ */ import_react18.default.createElement("div", {
+      className: "mt-4 flex flex-col gap-5 flex-1 pb-5"
+    }, /* @__PURE__ */ import_react18.default.createElement("h1", {
+      className: "text-3xl flex items-center"
+    }, giveaways.length, " Past Giveaway", giveaways.length === 1 ? "" : "s"), giveaways.map((giveaway, idx) => /* @__PURE__ */ import_react18.default.createElement("div", {
+      key: idx,
+      className: "border border-purple-600 rounded-md px-3 py-2 flex flex-col gap-2 bg-gray-700"
+    }, /* @__PURE__ */ import_react18.default.createElement("div", {
+      className: "flex flex-row gap-1 justify-between font-bold"
+    }, typeNameMap[giveaway.type], /* @__PURE__ */ import_react18.default.createElement("div", {
+      title: format(new Date(giveaway.createdAt), "PPPppp"),
+      className: "flex flex-row gap-1 justify-center items-center"
+    }, /* @__PURE__ */ import_react18.default.createElement(FaClock, {
+      className: "text-xs"
+    }), formatDistanceToNow(new Date(giveaway.createdAt), { addSuffix: true }))), /* @__PURE__ */ import_react18.default.createElement("div", {
+      className: "flex flex-row justify-center items-center flex-1"
+    }, /* @__PURE__ */ import_react18.default.createElement("div", {
+      className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md"
+    }, "Notes"), /* @__PURE__ */ import_react18.default.createElement("input", {
+      className: "bg-gray-600 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1 overflow-ellipsis h-full max-w-full flex justify-center items-center",
+      placeholder: "Notes...",
+      value: giveaway.notes || "",
+      onChange: (e2) => setPastGiveaways((p2) => {
+        const giveawayIdxToChange = p2.findIndex((i3) => i3.createdAt === giveaway.createdAt);
+        if (giveawayIdxToChange === -1)
+          return p2;
+        const clone = JSON.parse(JSON.stringify(p2));
+        clone[giveawayIdxToChange].notes = e2.target.value;
+        return clone;
+      })
+    })), /* @__PURE__ */ import_react18.default.createElement("div", null, /* @__PURE__ */ import_react18.default.createElement("div", {
+      className: "border-b border-purple-600 mb-2"
+    }, "Winners"), /* @__PURE__ */ import_react18.default.createElement("div", {
+      className: "flex flex-cols gap-2 px-2"
+    }, giveaway.winners.map((w, widx) => /* @__PURE__ */ import_react18.default.createElement("div", {
+      key: `${idx}-${widx}`,
+      className: "border border-purple-600 rounded-md flex flex-row gap-1 flex-1 items-center"
+    }, /* @__PURE__ */ import_react18.default.createElement("div", {
+      className: "bg-purple-600 text-white h-full flex justify-center items-center px-3 py-2"
+    }, w.login), /* @__PURE__ */ import_react18.default.createElement("div", {
+      className: "px-3 py-2 flex flex-row gap-3 flex-1"
+    }, /* @__PURE__ */ import_react18.default.createElement("div", {
+      className: "flex flex-row items-center gap-1"
+    }, "Sub:", " ", w.wasSubscriber ? /* @__PURE__ */ import_react18.default.createElement(FaCheck, {
+      className: "text-green-600"
+    }) : /* @__PURE__ */ import_react18.default.createElement(FaTimes, {
+      className: "text-red-600"
+    })), /* @__PURE__ */ import_react18.default.createElement("div", {
+      className: "flex flex-row items-center gap-1"
+    }, "Follower:", " ", w.wasFollower ? /* @__PURE__ */ import_react18.default.createElement(FaCheck, {
+      className: "text-green-600"
+    }) : /* @__PURE__ */ import_react18.default.createElement(FaTimes, {
+      className: "text-red-600"
+    })), /* @__PURE__ */ import_react18.default.createElement("div", {
+      className: "flex flex-row justify-center items-center flex-1"
+    }, /* @__PURE__ */ import_react18.default.createElement("div", {
+      className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md"
+    }, "Notes"), /* @__PURE__ */ import_react18.default.createElement("input", {
+      className: "bg-gray-600 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1 overflow-ellipsis h-full max-w-full flex justify-center items-center",
+      placeholder: "Notes...",
+      value: w.notes,
+      onChange: (e2) => setPastGiveaways((p2) => {
+        const giveawayIdxToChange = p2.findIndex((i3) => i3.createdAt === giveaway.createdAt);
+        if (giveawayIdxToChange === -1)
+          return p2;
+        const winnerIdxToChange = p2[giveawayIdxToChange].winners.findIndex((gw) => gw.login === w.login);
+        if (winnerIdxToChange === -1)
+          return p2;
+        const clone = JSON.parse(JSON.stringify(p2));
+        clone[giveawayIdxToChange].winners[winnerIdxToChange].notes = e2.target.value;
+        return clone;
+      })
+    }))))))), /* @__PURE__ */ import_react18.default.createElement("div", null, /* @__PURE__ */ import_react18.default.createElement("div", {
+      className: "border-b border-purple-600 mb-2"
+    }, "Settings"), /* @__PURE__ */ import_react18.default.createElement("div", {
+      className: "grid grid-cols-4 gap-2 px-2"
+    }, /* @__PURE__ */ import_react18.default.createElement(SettingItem, {
+      label: "Sub Luck",
+      value: giveaway.settings.subLuck.toString()
+    }), /* @__PURE__ */ import_react18.default.createElement(SettingItem, {
+      label: "# Winners",
+      value: giveaway.settings.numberOfWinners.toString()
+    }), /* @__PURE__ */ import_react18.default.createElement(SettingItem, {
+      label: "Followers Only",
+      value: giveaway.settings.followersOnly
+    }), /* @__PURE__ */ import_react18.default.createElement(SettingItem, {
+      label: "Send Messages",
+      value: giveaway.settings.sendMessages
+    }), /* @__PURE__ */ import_react18.default.createElement("div", {
+      className: "grid col-span-4"
+    }, /* @__PURE__ */ import_react18.default.createElement(SettingItem, {
+      label: "Chat Command",
+      value: giveaway.settings.chatCommand.toString() || "No command"
+    })), /* @__PURE__ */ import_react18.default.createElement("div", {
+      className: "grid col-span-4"
+    }, /* @__PURE__ */ import_react18.default.createElement(SettingItem, {
+      label: "Winner Message",
+      value: giveaway.settings.winnerMessage.toString()
+    })))))));
   }
 
   // src/components/screens/Settings.tsx
-  var React13 = __toModule(require_react());
+  var React14 = __toModule(require_react());
+
+  // src/utils/updates.tsx
+  var import_react19 = __toModule(require_react());
+  var APP_VERSION = globalThis.NL_APP_VERSION;
+  async function getLatestDifferentRelease() {
+    try {
+      const currentVersion = APP_VERSION;
+      const data = await fetch(`https://api.github.com/repos/maael/giveaway-o-tron/releases/latest`).then((res) => res.json());
+      const updateInfo = {
+        name: data.name,
+        url: data.html_url,
+        body: data.body
+      };
+      console.info("[update][latest]", updateInfo, currentVersion);
+      if (updateInfo.name !== `v${currentVersion}`) {
+        return updateInfo;
+      }
+      return null;
+    } catch (e2) {
+      console.error("[updates]", e2.message);
+      return null;
+    }
+  }
+  function useUpdateCheck() {
+    import_react19.default.useEffect(() => {
+      ;
+      (async () => {
+        const latestRelease = await getLatestDifferentRelease();
+        if (latestRelease)
+          Et((t2) => {
+            return /* @__PURE__ */ import_react19.default.createElement("button", {
+              onClick: () => Neutralino.os.open(latestRelease == null ? void 0 : latestRelease.url),
+              className: "underline text-purple-600"
+            }, "Update ", latestRelease == null ? void 0 : latestRelease.name, " available, go to download \u2192");
+          });
+      })();
+    }, []);
+  }
+
+  // src/components/screens/Settings.tsx
   function SettingsScreen({
     settings,
     setSettings
   }) {
-    return /* @__PURE__ */ React13.createElement("div", {
+    return /* @__PURE__ */ React14.createElement("div", {
       className: "mt-4 flex flex-col gap-2 flex-1"
-    }, /* @__PURE__ */ React13.createElement("h1", {
+    }, /* @__PURE__ */ React14.createElement("h1", {
       className: "text-3xl"
-    }, "Settings"), /* @__PURE__ */ React13.createElement("div", {
+    }, "Settings"), /* @__PURE__ */ React14.createElement("div", {
       className: "flex flex-col gap-2"
-    }, /* @__PURE__ */ React13.createElement("div", {
+    }, /* @__PURE__ */ React14.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ React13.createElement("div", {
+    }, /* @__PURE__ */ React14.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ React13.createElement("h2", {
+    }, /* @__PURE__ */ React14.createElement("h2", {
       className: "text-2xl"
-    }, "Blocklist ", /* @__PURE__ */ React13.createElement("small", null, "(", settings.blocklist.length, ")")), /* @__PURE__ */ React13.createElement("small", {
+    }, "Blocklist ", /* @__PURE__ */ React14.createElement("small", null, "(", settings.blocklist.length, ")")), /* @__PURE__ */ React14.createElement("small", {
       className: "text-m"
-    }, "These users will be excluded from giveaways")), /* @__PURE__ */ React13.createElement("button", {
+    }, "These users will be excluded from giveaways")), /* @__PURE__ */ React14.createElement("button", {
       className: "border border-purple-600 rounded-md px-3 flex flex-row gap-1 justify-center items-center",
       onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { blocklist: (s2.blocklist || []).concat("") }))
-    }, /* @__PURE__ */ React13.createElement(FaPlus, null), " Add Item")), /* @__PURE__ */ React13.createElement("div", {
+    }, /* @__PURE__ */ React14.createElement(FaPlus, null), " Add Item")), /* @__PURE__ */ React14.createElement("div", {
       className: "grid grid-cols-3 gap-2"
-    }, (settings.blocklist || []).map((u3, i3) => /* @__PURE__ */ React13.createElement("div", {
-      className: "relative flex-1"
-    }, /* @__PURE__ */ React13.createElement("input", {
+    }, (settings.blocklist || []).map((u3, i3) => /* @__PURE__ */ React14.createElement("div", {
+      className: "relative flex-1",
+      key: u3
+    }, /* @__PURE__ */ React14.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-md border-b border-purple-500 w-full overflow-ellipsis",
       placeholder: "Name...",
       value: u3,
@@ -31394,25 +32730,30 @@ to {
         return __spreadProps(__spreadValues({}, s2), { blocklist: list });
       }),
       title: "Chat command to enter - leave empty for none"
-    }), /* @__PURE__ */ React13.createElement("button", {
+    }), /* @__PURE__ */ React14.createElement("button", {
       className: "text-red-600 absolute right-2 top-1.5 text-xl",
       onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { blocklist: removeIdx(s2.blocklist, i3) }))
-    }, /* @__PURE__ */ React13.createElement(FaTimes, null)))))), /* @__PURE__ */ React13.createElement("div", {
-      className: "flex-1 flex items-end justify-end"
-    }, /* @__PURE__ */ React13.createElement("button", {
+    }, /* @__PURE__ */ React14.createElement(FaTimes, null)))))), /* @__PURE__ */ React14.createElement("div", {
+      className: "flex-1 flex items-end"
+    }, /* @__PURE__ */ React14.createElement("div", {
+      className: "flex-1"
+    }, /* @__PURE__ */ React14.createElement("button", {
+      className: "text-purple-200 opacity-80 text-xs",
+      onClick: () => Neutralino.os.open(`https://github.com/maael/giveaway-o-tron/releases/v${APP_VERSION}`)
+    }, "Version: ", APP_VERSION ? `v${APP_VERSION}` : "Unknown Version")), /* @__PURE__ */ React14.createElement("button", {
       className: "bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity",
       onClick: async () => {
         await Neutralino.storage.setData("main-channelinfo", null);
         window.location.reload();
       }
-    }, /* @__PURE__ */ React13.createElement(FaExclamationTriangle, null), " Reset Channel Info")));
+    }, /* @__PURE__ */ React14.createElement(FaExclamationTriangle, null), " Reset Channel Info")));
   }
 
   // src/components/primitives/Header.tsx
-  var import_react19 = __toModule(require_react());
+  var import_react20 = __toModule(require_react());
 
   // src/components/hooks/useCopyToClipboard.ts
-  var React14 = __toModule(require_react());
+  var React15 = __toModule(require_react());
   var useCopyToClipboard = (text, options = { resetTimeout: 1e3 }) => {
     const copyToClipboard = (str) => {
       var _a, _b, _c, _d;
@@ -31433,10 +32774,10 @@ to {
       }
       return success;
     };
-    const mounted = React14.useRef(false);
-    const resetTimer = React14.useRef();
-    const [copied, setCopied] = React14.useState(false);
-    React14.useEffect(() => {
+    const mounted = React15.useRef(false);
+    const resetTimer = React15.useRef();
+    const [copied, setCopied] = React15.useState(false);
+    React15.useEffect(() => {
       mounted.current = true;
       return () => {
         if (resetTimer.current)
@@ -31444,13 +32785,13 @@ to {
         mounted.current = false;
       };
     }, []);
-    const copy = React14.useCallback(() => {
+    const copy = React15.useCallback(() => {
       if (resetTimer.current)
         clearTimeout(resetTimer.current);
       setCopied(copyToClipboard(text));
       resetTimer.current = setTimeout(() => setCopied(false), options.resetTimeout);
     }, [text, options.resetTimeout]);
-    React14.useEffect(() => () => {
+    React15.useEffect(() => () => {
       setCopied(false);
     }, [text]);
     return [copied, copy];
@@ -31467,34 +32808,40 @@ to {
     const location2 = useLocation();
     const homeRoute = channelInfo.login ? "/" : "/setup";
     const [copiedAlertURL, copyAlertURL] = useCopyToClipboard_default(`https://giveaway-o-tron.vercel.app/alerts/gw2?channel=${channelInfo.userId}`);
-    return /* @__PURE__ */ import_react19.default.createElement("div", {
+    return /* @__PURE__ */ import_react20.default.createElement("div", {
       className: "flex flex-row justify-start gap-2"
-    }, /* @__PURE__ */ import_react19.default.createElement("div", {
+    }, /* @__PURE__ */ import_react20.default.createElement("div", {
       className: "flex-1 flex flex-row gap-2 items-center"
-    }, /* @__PURE__ */ import_react19.default.createElement("div", {
+    }, /* @__PURE__ */ import_react20.default.createElement("div", {
       className: "inline-block"
-    }, /* @__PURE__ */ import_react19.default.createElement(Link, {
+    }, /* @__PURE__ */ import_react20.default.createElement(Link, {
       to: homeRoute
-    }, /* @__PURE__ */ import_react19.default.createElement("h1", {
+    }, /* @__PURE__ */ import_react20.default.createElement("h1", {
       className: "flex flex-row gap-1 items-center text-white bg-purple-600 rounded-md px-3 py-1 transform hover:scale-105 transition-transform shadow-md"
-    }, /* @__PURE__ */ import_react19.default.createElement(FaRobot, {
+    }, /* @__PURE__ */ import_react20.default.createElement(FaRobot, {
       className: "text-2xl"
-    }), " ", location2.pathname === homeRoute ? /* @__PURE__ */ import_react19.default.createElement("span", {
+    }), " ", location2.pathname === homeRoute ? /* @__PURE__ */ import_react20.default.createElement("span", {
       className: "relative -top-0.5 ml-1"
-    }, "Giveaway-o-tron") : /* @__PURE__ */ import_react19.default.createElement(FaAngleLeft, {
+    }, "Giveaway-o-tron") : /* @__PURE__ */ import_react20.default.createElement(FaAngleLeft, {
       className: "text-xl"
-    })))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react19.default.createElement(Link, {
+    })))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react20.default.createElement(Link, {
       to: "/settings"
-    }, /* @__PURE__ */ import_react19.default.createElement("div", {
-      className: "bg-purple-600 p-2 flex justify-center items-center rounded-md"
-    }, /* @__PURE__ */ import_react19.default.createElement(FaCogs, null))), location2.pathname === "/setup" && ["odialo", "mukluk"].includes(channelInfo.login) ? null : /* @__PURE__ */ import_react19.default.createElement("button", {
+    }, /* @__PURE__ */ import_react20.default.createElement("div", {
+      className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
+      title: "Settings (blocklist etc)"
+    }, /* @__PURE__ */ import_react20.default.createElement(FaCogs, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react20.default.createElement(Link, {
+      to: "/giveaways"
+    }, /* @__PURE__ */ import_react20.default.createElement("div", {
+      className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
+      title: "Past giveways"
+    }, /* @__PURE__ */ import_react20.default.createElement(FaClock, null))), location2.pathname === "/setup" && ["odialo", "mukluk"].includes(channelInfo.login) ? null : /* @__PURE__ */ import_react20.default.createElement("button", {
       title: "Get url for OBS browser source based alerts animation",
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
       onClick: () => {
         copyAlertURL();
         Et.success("Copied! Use as OBS browser source!", { position: "bottom-center" });
       }
-    }, copiedAlertURL ? /* @__PURE__ */ import_react19.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react19.default.createElement(FaMagic, null))), /* @__PURE__ */ import_react19.default.createElement("form", {
+    }, copiedAlertURL ? /* @__PURE__ */ import_react20.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react20.default.createElement(FaMagic, null))), /* @__PURE__ */ import_react20.default.createElement("form", {
       className: "flex flex-row",
       onSubmit: (e2) => {
         e2.preventDefault();
@@ -31506,25 +32853,26 @@ to {
           setClient(init(channelInfo));
         }
       }
-    }, /* @__PURE__ */ import_react19.default.createElement("input", {
+    }, /* @__PURE__ */ import_react20.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-l-md border-b border-l border-purple-500",
       placeholder: "Channel Name",
       value: channelInfo.login,
       disabled: true,
       title: !!client ? "Disconnect to change" : "Set channel to connect to"
-    }), /* @__PURE__ */ import_react19.default.createElement("button", {
+    }), /* @__PURE__ */ import_react20.default.createElement("button", {
       className: "bg-purple-600 text-white py-1 px-3 rounded-r-sm transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 w-32 justify-center",
       title: "Connect to chat"
-    }, /* @__PURE__ */ import_react19.default.createElement(FaTwitch, null), " ", client ? "Disconnect" : "Connect")));
+    }, /* @__PURE__ */ import_react20.default.createElement(FaTwitch, null), " ", client ? "Disconnect" : "Connect")));
   }
 
   // src/App.tsx
   function App() {
-    return /* @__PURE__ */ import_react20.default.createElement(MemoryRouter, {
+    return /* @__PURE__ */ import_react21.default.createElement(MemoryRouter, {
       initialEntries: ["/setup"]
-    }, /* @__PURE__ */ import_react20.default.createElement(InnerApp, null));
+    }, /* @__PURE__ */ import_react21.default.createElement(InnerApp, null));
   }
   function InnerApp() {
+    useUpdateCheck();
     const [settings, setSettings] = useStorage("settings", {
       autoConnect: true,
       subLuck: 2,
@@ -31536,7 +32884,8 @@ to {
       blocklist: ["streamelements", "streamlabs", "nightbot"],
       autoScroll: true
     });
-    const [client, setClient] = import_react20.default.useState(null);
+    const [winners, setWinners] = import_react21.default.useState([]);
+    const [client, setClient] = import_react21.default.useState(null);
     const [channelInfo, setChannelInfo] = useStorage("channelInfo", {}, (c2) => {
       console.info("[client][app]", c2);
       if (!c2.login)
@@ -31545,35 +32894,39 @@ to {
       if (settings.autoConnect)
         setClient((cl) => cl ? cl : init(c2));
     });
-    const updateClientInfo = import_react20.default.useCallback((d3) => setChannelInfo(d3), []);
+    const updateClientInfo = import_react21.default.useCallback((d3) => {
+      console.info("[auth][client][update]", d3);
+      setChannelInfo(d3);
+    }, []);
     useAuthEvents(updateClientInfo);
-    import_react20.default.useEffect(() => {
+    import_react21.default.useEffect(() => {
       if (channelInfo.login) {
         if (settings.autoConnect)
           setClient((cl) => cl ? cl : init(channelInfo));
       }
     }, [channelInfo.login]);
-    const onNewChat = import_react20.default.useCallback((chat) => {
+    const onNewChat = import_react21.default.useCallback((chat) => {
       console.info("[chat]", chat);
     }, []);
-    const [chatPaused, setChatPaused] = import_react20.default.useState(false);
-    const [chatEvents, resetChat] = useChatEvents(chatPaused, onNewChat);
-    const chatEventsRef = import_react20.default.useRef(chatEvents);
-    import_react20.default.useEffect(() => {
+    const [chatPaused, setChatPaused] = import_react21.default.useState(false);
+    const [chatEvents, resetChat] = useChatEvents(chatPaused, winners, onNewChat);
+    const chatEventsRef = import_react21.default.useRef(chatEvents);
+    import_react21.default.useEffect(() => {
       chatEventsRef.current = chatEvents;
     }, [chatEvents]);
-    import_react20.default.useEffect(() => {
+    import_react21.default.useEffect(() => {
       window["myApp"].setTitle(channelInfo.login, !!client);
     }, [channelInfo.login, client]);
-    return /* @__PURE__ */ import_react20.default.createElement(import_react20.default.Fragment, null, /* @__PURE__ */ import_react20.default.createElement(Header, {
+    const [pastGiveaways, setPastGiveaways] = useStorage("past-giveaways", []);
+    return /* @__PURE__ */ import_react21.default.createElement(import_react21.default.Fragment, null, /* @__PURE__ */ import_react21.default.createElement(Header, {
       client,
       resetChat,
       setClient,
       channelInfo
-    }), /* @__PURE__ */ import_react20.default.createElement(Switch, null, /* @__PURE__ */ import_react20.default.createElement(Route, {
+    }), /* @__PURE__ */ import_react21.default.createElement(Switch, null, /* @__PURE__ */ import_react21.default.createElement(Route, {
       path: "/",
       exact: true
-    }, /* @__PURE__ */ import_react20.default.createElement(MainScreen, {
+    }, /* @__PURE__ */ import_react21.default.createElement(MainScreen, {
       client,
       chatEvents,
       settings,
@@ -31582,25 +32935,31 @@ to {
       channelInfo,
       chatPaused,
       setChatPaused,
-      resetChat
-    })), /* @__PURE__ */ import_react20.default.createElement(Route, {
+      resetChat,
+      winners,
+      setWinners,
+      setPastGiveaways
+    })), /* @__PURE__ */ import_react21.default.createElement(Route, {
       path: "/setup",
       exact: true
-    }, /* @__PURE__ */ import_react20.default.createElement(Setup, {
+    }, /* @__PURE__ */ import_react21.default.createElement(Setup, {
       resetChat,
       setClient,
       channel: channelInfo,
       setChannel: setChannelInfo
-    })), /* @__PURE__ */ import_react20.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react21.default.createElement(Route, {
       path: "/giveaways",
       exact: true
-    }, /* @__PURE__ */ import_react20.default.createElement(PastGiveaways, null)), /* @__PURE__ */ import_react20.default.createElement(Route, {
+    }, /* @__PURE__ */ import_react21.default.createElement(PastGiveaways, {
+      giveaways: pastGiveaways,
+      setPastGiveaways
+    })), /* @__PURE__ */ import_react21.default.createElement(Route, {
       path: "/settings",
       exact: true
-    }, /* @__PURE__ */ import_react20.default.createElement(SettingsScreen, {
+    }, /* @__PURE__ */ import_react21.default.createElement(SettingsScreen, {
       settings,
       setSettings
-    }))), /* @__PURE__ */ import_react20.default.createElement(Oe, null));
+    }))), /* @__PURE__ */ import_react21.default.createElement(Oe, null));
   }
 
   // src/index.tsx
@@ -31616,7 +32975,7 @@ to {
   Neutralino.events.on("windowClose", window["myApp"].onWindowClose);
   Neutralino.events.on("ready", () => {
     void watch();
-    import_react_dom.default.render(/* @__PURE__ */ import_react21.default.createElement(App, null), document.querySelector("#app"));
+    import_react_dom.default.render(/* @__PURE__ */ import_react22.default.createElement(App, null), document.querySelector("#app"));
   });
 })();
 /*

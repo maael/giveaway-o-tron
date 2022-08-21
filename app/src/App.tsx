@@ -8,7 +8,9 @@ import SetupScreen from './components/screens/Setup'
 import PastGiveawaysScreen from './components/screens/PastGiveaways'
 import SettingsScreen from './components/screens/Settings'
 import Header from './components/primitives/Header'
-import { ChannelInfo, Settings, useAuthEvents } from './utils'
+import { ChannelInfo, GiveawayResult, Settings, useAuthEvents } from './utils'
+import { WinnerUser } from './components/primitives/giveaways'
+import { useUpdateCheck } from './utils/updates'
 
 export default function App() {
   return (
@@ -19,6 +21,7 @@ export default function App() {
 }
 
 function InnerApp() {
+  useUpdateCheck()
   const [settings, setSettings] = useStorage<Settings>('settings', {
     autoConnect: true,
     subLuck: 2,
@@ -30,6 +33,7 @@ function InnerApp() {
     blocklist: ['streamelements', 'streamlabs', 'nightbot'],
     autoScroll: true,
   })
+  const [winners, setWinners] = React.useState<WinnerUser[]>([])
   const [client, setClient] = React.useState<ReturnType<typeof chat> | null>(null)
   const [channelInfo, setChannelInfo] = useStorage<ChannelInfo>('channelInfo', {}, (c) => {
     console.info('[client][app]', c)
@@ -37,7 +41,10 @@ function InnerApp() {
     console.info('[client][app][startClient]')
     if (settings.autoConnect) setClient((cl) => (cl ? cl : chat(c)))
   })
-  const updateClientInfo = React.useCallback((d) => setChannelInfo(d), [])
+  const updateClientInfo = React.useCallback((d) => {
+    console.info('[auth][client][update]', d)
+    setChannelInfo(d)
+  }, [])
   useAuthEvents(updateClientInfo)
   React.useEffect(() => {
     if (channelInfo.login) {
@@ -48,7 +55,7 @@ function InnerApp() {
     console.info('[chat]', chat)
   }, [])
   const [chatPaused, setChatPaused] = React.useState(false)
-  const [chatEvents, resetChat] = useChatEvents(chatPaused, onNewChat)
+  const [chatEvents, resetChat] = useChatEvents(chatPaused, winners, onNewChat)
   const chatEventsRef = React.useRef(chatEvents)
   React.useEffect(() => {
     chatEventsRef.current = chatEvents
@@ -56,6 +63,7 @@ function InnerApp() {
   React.useEffect(() => {
     window['myApp'].setTitle(channelInfo.login, !!client)
   }, [channelInfo.login, client])
+  const [pastGiveaways, setPastGiveaways] = useStorage<GiveawayResult[]>('past-giveaways', [])
   return (
     <>
       <Header client={client} resetChat={resetChat} setClient={setClient} channelInfo={channelInfo} />
@@ -71,13 +79,16 @@ function InnerApp() {
             chatPaused={chatPaused}
             setChatPaused={setChatPaused}
             resetChat={resetChat}
+            winners={winners}
+            setWinners={setWinners}
+            setPastGiveaways={setPastGiveaways}
           />
         </Route>
         <Route path="/setup" exact>
           <SetupScreen resetChat={resetChat} setClient={setClient} channel={channelInfo} setChannel={setChannelInfo} />
         </Route>
         <Route path="/giveaways" exact>
-          <PastGiveawaysScreen />
+          <PastGiveawaysScreen giveaways={pastGiveaways} setPastGiveaways={setPastGiveaways} />
         </Route>
         <Route path="/settings" exact>
           <SettingsScreen settings={settings} setSettings={setSettings} />

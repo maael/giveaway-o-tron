@@ -6,6 +6,7 @@ import {
   FaCogs,
   FaMagic,
   FaCheck,
+  FaClock,
 } from 'react-icons/fa'
 import { Link, useLocation } from 'react-router-dom'
 import toast from 'react-hot-toast'
@@ -46,8 +47,18 @@ export default function Header({
         </div>
         {location.pathname === '/setup' ? null : (
           <Link to="/settings">
-            <div className="bg-purple-600 p-2 flex justify-center items-center rounded-md">
+            <div
+              className="bg-purple-600 p-2 flex justify-center items-center rounded-md"
+              title="Settings (blocklist etc)"
+            >
               <FaCogs />
+            </div>
+          </Link>
+        )}
+        {location.pathname === '/setup' ? null : (
+          <Link to="/giveaways">
+            <div className="bg-purple-600 p-2 flex justify-center items-center rounded-md" title="Past giveways">
+              <FaClock />
             </div>
           </Link>
         )}

@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import { ChatItem } from '../../chat'
-import { Settings as TSettings, removeIdx, ChannelInfo } from '../../utils'
+import { Settings as TSettings, removeIdx, ChannelInfo, GiveawayResult } from '../../utils'
 import chat from '../../chat'
 import Settings from '../primitives/Settings'
 import { Winner, InstantGiveaway, ChatGiveaway, WinnerUser } from '../primitives/giveaways'
@@ -15,6 +15,9 @@ export default function MainScreen({
   chatPaused,
   setChatPaused,
   resetChat,
+  winners,
+  setWinners,
+  setPastGiveaways,
 }: {
   client: ReturnType<typeof chat> | null
   chatEvents: ChatItem[]
@@ -25,19 +28,28 @@ export default function MainScreen({
   chatPaused: boolean
   setChatPaused: Dispatch<SetStateAction<Boolean>>
   resetChat: () => void
+  winners: WinnerUser[]
+  setWinners: Dispatch<SetStateAction<WinnerUser[]>>
+  setPastGiveaways: Dispatch<SetStateAction<GiveawayResult[]>>
 }) {
-  const [winners, setWinners] = React.useState<WinnerUser[]>([])
   return (
     <>
       <Winner winners={winners} onClear={(idx) => setWinners((w) => removeIdx(w, idx))} />
       <div className="flex flex-row gap-2">
-        <InstantGiveaway settings={settings} channelInfo={channelInfo} setWinners={setWinners} client={client} />
+        <InstantGiveaway
+          settings={settings}
+          channelInfo={channelInfo}
+          setWinners={setWinners}
+          client={client}
+          setPastGiveaways={setPastGiveaways}
+        />
         <ChatGiveaway
           settings={settings}
           channelInfo={channelInfo}
           chatEvents={chatEvents}
           setWinners={setWinners}
           client={client}
+          setPastGiveaways={setPastGiveaways}
         />
       </div>
       <Settings settings={settings} setSettings={setSettings} setChatPaused={setChatPaused} resetChat={resetChat} />

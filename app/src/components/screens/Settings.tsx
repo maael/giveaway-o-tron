@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { FaExclamationTriangle, FaPlus, FaTimes } from 'react-icons/fa'
 import { removeIdx, Settings } from '~/utils'
+import { APP_VERSION } from '~/utils/updates'
 
 export default function SettingsScreen({
   settings,
@@ -29,7 +30,7 @@ export default function SettingsScreen({
         </div>
         <div className="grid grid-cols-3 gap-2">
           {(settings.blocklist || []).map((u, i) => (
-            <div className="relative flex-1">
+            <div className="relative flex-1" key={u}>
               <input
                 className="bg-gray-700 px-2 py-1 rounded-md border-b border-purple-500 w-full overflow-ellipsis"
                 placeholder="Name..."
@@ -53,7 +54,15 @@ export default function SettingsScreen({
           ))}
         </div>
       </div>
-      <div className="flex-1 flex items-end justify-end">
+      <div className="flex-1 flex items-end">
+        <div className="flex-1">
+          <button
+            className="text-purple-200 opacity-80 text-xs"
+            onClick={() => Neutralino.os.open(`https://github.com/maael/giveaway-o-tron/releases/v${APP_VERSION}`)}
+          >
+            Version: {APP_VERSION ? `v${APP_VERSION}` : 'Unknown Version'}
+          </button>
+        </div>
         <button
           className="bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity"
           onClick={async () => {

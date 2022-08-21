@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import tmi from 'tmi.js'
 import toast from 'react-hot-toast'
 import { ChannelInfo, wait } from './utils'
+import { WinnerUser } from './components/primitives/giveaways'
 
 export interface ChatItem {
   id: string
@@ -23,11 +24,15 @@ export class ChatEvent extends EventTarget {
 
 export const chatEmitter = new ChatEvent()
 
-export function useChatEvents(paused: boolean, onChat: (chat: ChatItem) => void): [ChatItem[], () => void] {
+export function useChatEvents(
+  paused: boolean,
+  winners: WinnerUser[],
+  onChat: (chat: ChatItem) => void
+): [ChatItem[], () => void] {
   const [chat, setChat] = useState<ChatItem[]>([])
   useEffect(() => {
     function handleChat(d: CustomEvent<ChatItem>) {
-      if (paused) return
+      if (paused && !winners.some((w) => w.username === d.detail.username)) return
       setChat((c) => c.concat(d.detail))
       onChat(d.detail)
     }
@@ -35,7 +40,7 @@ export function useChatEvents(paused: boolean, onChat: (chat: ChatItem) => void)
     return () => {
       chatEmitter.removeEventListener('chat', handleChat)
     }
-  }, [setChat, onChat, paused])
+  }, [setChat, onChat, paused, winners])
   const resetChat = useCallback(() => {
     setChat([])
   }, [setChat])

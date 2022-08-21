@@ -3,7 +3,14 @@ import { GiPartyPopper } from 'react-icons/gi'
 import { FaDice, FaTimes } from 'react-icons/fa'
 import toast from 'react-hot-toast'
 import { ChatItem } from '../../chat'
-import { Settings as TSettings, getInstantGiveaway, getChatGiveaway, ChannelInfo } from '../../utils'
+import {
+  Settings as TSettings,
+  getInstantGiveaway,
+  getChatGiveaway,
+  ChannelInfo,
+  GiveawayResult,
+  GiveawayType,
+} from '../../utils'
 import chat from '../../chat'
 
 export function InstantGiveaway({
@@ -11,11 +18,13 @@ export function InstantGiveaway({
   channelInfo,
   settings,
   client,
+  setPastGiveaways,
 }: {
   setWinners: Dispatch<SetStateAction<WinnerUser[]>>
   channelInfo: ChannelInfo
   settings: TSettings
   client: ReturnType<typeof chat> | null
+  setPastGiveaways: Dispatch<SetStateAction<GiveawayResult[]>>
 }) {
   return (
     <button
@@ -32,7 +41,20 @@ export function InstantGiveaway({
             client?.say(channelInfo.login!, settings.winnerMessage.replace('@name', `@${w}`))
           }
         })
-        setWinners((w) => w.concat(giveawayWinner.map((u) => ({ username: u }))))
+        setWinners((w) => w.concat(giveawayWinner.map((u) => ({ username: u.login }))))
+        setPastGiveaways((p) =>
+          (
+            [
+              {
+                type: GiveawayType.Instant,
+                createdAt: new Date().toISOString(),
+                winners: giveawayWinner,
+                settings: settings,
+                notes: '',
+              },
+            ] as GiveawayResult[]
+          ).concat(p)
+        )
       }}
     >
       <FaDice className="text-2xl" /> Viewers Instant Giveaway
@@ -46,12 +68,14 @@ export function ChatGiveaway({
   channelInfo,
   settings,
   client,
+  setPastGiveaways,
 }: {
   chatEvents: ChatItem[]
   setWinners: Dispatch<SetStateAction<WinnerUser[]>>
   channelInfo: ChannelInfo
   settings: TSettings
   client: ReturnType<typeof chat> | null
+  setPastGiveaways: Dispatch<SetStateAction<GiveawayResult[]>>
 }) {
   return (
     <button
@@ -64,10 +88,31 @@ export function ChatGiveaway({
         }
         if (settings.sendMessages) {
           giveawayWinner.forEach((w) => {
-            client?.say(channelInfo.login!, settings.winnerMessage.replace('@name', `@${w.username}`))
+            client?.say(channelInfo.login!, settings.winnerMessage.replace('@name', `@${w.login}`))
           })
         }
-        setWinners((w) => w.concat(giveawayWinner))
+        setWinners((w) =>
+          w.concat(
+            giveawayWinner.map((w) => ({
+              username: w.login,
+              isFollower: !!w.wasFollower,
+              isSubscriber: !!w.wasSubscriber,
+            }))
+          )
+        )
+        setPastGiveaways((p) =>
+          (
+            [
+              {
+                type: GiveawayType.Instant,
+                createdAt: new Date().toISOString(),
+                winners: giveawayWinner,
+                settings: settings,
+                notes: '',
+              },
+            ] as GiveawayResult[]
+          ).concat(p)
+        )
       }}
     >
       <FaDice className="text-2xl" /> Active Chatter Giveaway

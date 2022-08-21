@@ -29,3 +29,21 @@ export interface ChattersApiData {
     global_mods: string[]
   }
 }
+
+export enum GiveawayType {
+  Instant = 'Instant',
+  Chat = 'Chat',
+}
+
+export interface GiveawayResult {
+  settings: Omit<Settings, 'autoScroll' | 'autoConnect'>
+  winners: {
+    login: string
+    wasSubscriber: boolean | null
+    wasFollower: boolean | null
+    notes?: string
+  }[]
+  createdAt: string
+  type: GiveawayType
+  notes: string
+}
