@@ -3,7 +3,14 @@ const fs = require('fs')
 const configPath = path.join(_dirname, '..', 'neutralino.config.json')
 const config = require(configPath)
 
-config.version = process.env.APP_VERSION
+const githubRef = process.env.GITHUB_REF
+let githubVersion
+if (githubRef.startsWith('refs/tags/v')) {
+  githubVersion = githubRef.replace('refs/tags/v', '')
+}
+
+config.version = process.env.APP_VERSION || githubVersion
+
 config.enableInspector = false
 config.alwaysOnTop = false
 
