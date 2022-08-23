@@ -8,7 +8,7 @@ import SetupScreen from './components/screens/Setup'
 import PastGiveawaysScreen from './components/screens/PastGiveaways'
 import SettingsScreen from './components/screens/Settings'
 import Header from './components/primitives/Header'
-import { ChannelInfo, GiveawayResult, handleChatCommand, Settings, useAuthEvents } from './utils'
+import { ChannelInfo, GiveawayResult, Settings, useAuthEvents } from './utils'
 import { WinnerUser } from './components/primitives/giveaways'
 import { useUpdateCheck } from './utils/updates'
 

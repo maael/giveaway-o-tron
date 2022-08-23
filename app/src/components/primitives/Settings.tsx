@@ -73,6 +73,7 @@ const Time = React.memo(function Time({ setChatPaused, resetChat }: Pick<Props, 
         className="bg-purple-600 px-2 py-1 flex-0 select-none cursor-pointer flex flex-row justify-center items-center gap-1 transition-colors hover:bg-purple-700"
         onClick={() => {
           resetChat()
+          setChatPaused(false)
           setActive(true)
         }}
         title="Will clear chat"
