@@ -53,15 +53,19 @@ export default function MainScreen({
         />
       </div>
       <Settings settings={settings} setSettings={setSettings} setChatPaused={setChatPaused} resetChat={resetChat} />
-      <ChatBox
-        chatEvents={chatEvents}
-        winners={winners}
-        paused={chatPaused}
-        setPaused={setChatPaused}
-        clear={resetChat}
-        settings={settings}
-        setSettings={setSettings}
-      />
+      {settings.performanceMode && !winners.length ? (
+        <div className="flex justify-center items-center h-full">{chatEvents.length} messages</div>
+      ) : (
+        <ChatBox
+          chatEvents={chatEvents}
+          winners={winners}
+          paused={chatPaused}
+          setPaused={setChatPaused}
+          clear={resetChat}
+          settings={settings}
+          setSettings={setSettings}
+        />
+      )}
     </>
   )
 }

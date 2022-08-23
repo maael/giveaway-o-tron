@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { FaExclamationTriangle, FaPlus, FaTimes } from 'react-icons/fa'
+import { FaCheck, FaExclamationTriangle, FaPlus, FaTimes } from 'react-icons/fa'
 import { removeIdx, Settings } from '~/utils'
 import { APP_VERSION } from '~/utils/updates'
 
@@ -54,7 +54,32 @@ export default function SettingsScreen({
           ))}
         </div>
       </div>
-      <div className="flex-1 flex items-end">
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-row gap-2">
+          <div className="flex-1">
+            <h2 className="text-2xl">Performance Mode</h2>
+            <small className="text-m">
+              Will hide chat when there are no winners, and disable chat scroll following
+            </small>
+          </div>
+        </div>
+        <div className="flex-1 border border-purple-600 rounded-md flex relative">
+          <div
+            className="bg-purple-600 px-2 py-1 flex-0"
+            title="If enabled, will send messages tagging winners in Twitch chat"
+          >
+            Enabled?
+          </div>
+
+          <button
+            className="flex-1 text-2xl text-center justify-center items-center flex transition-opacity hover:opacity-60"
+            onClick={() => setSettings((s) => ({ ...s, performanceMode: !s.performanceMode }))}
+          >
+            {settings.performanceMode ? <FaCheck /> : <FaTimes />}
+          </button>
+        </div>
+      </div>
+      <div className="flex-1 flex items-end gap-2">
         <div className="flex-1">
           <button
             className="text-purple-200 opacity-80 text-xs"
@@ -63,6 +88,14 @@ export default function SettingsScreen({
             Version: {APP_VERSION ? `v${APP_VERSION}` : 'Unknown Version'}
           </button>
         </div>
+        <button
+          className="bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity"
+          onClick={async () => {
+            Neutralino.os.open(`https://giveaway-o-tron.vercel.app/api/auth/signout`)
+          }}
+        >
+          <FaExclamationTriangle /> Sign Out Token Tool
+        </button>
         <button
           className="bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity"
           onClick={async () => {

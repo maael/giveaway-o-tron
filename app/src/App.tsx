@@ -33,6 +33,7 @@ function InnerApp() {
     blocklist: ['streamelements', 'streamlabs', 'nightbot'],
     autoScroll: true,
     spamLimit: 1,
+    performanceMode: false,
   })
   const [winners, setWinners] = React.useState<WinnerUser[]>([])
   const [client, setClient] = React.useState<ReturnType<typeof chat> | null>(null)

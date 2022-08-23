@@ -9,6 +9,7 @@ export interface Settings {
   blocklist: string[]
   autoScroll?: boolean
   spamLimit?: number
+  performanceMode?: boolean
 }
 
 export type ChannelInfo = Partial<{

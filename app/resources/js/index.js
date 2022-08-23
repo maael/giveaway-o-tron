@@ -31291,7 +31291,9 @@ to {
       setSettings,
       setChatPaused,
       resetChat
-    }), /* @__PURE__ */ import_react16.default.createElement(ChatBox, {
+    }), settings.performanceMode && !winners.length ? /* @__PURE__ */ import_react16.default.createElement("div", {
+      className: "flex justify-center items-center h-full"
+    }, chatEvents.length, " messages") : /* @__PURE__ */ import_react16.default.createElement(ChatBox, {
       chatEvents,
       winners,
       paused: chatPaused,
@@ -32757,13 +32759,36 @@ to {
       className: "text-red-600 absolute right-2 top-1.5 text-xl",
       onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { blocklist: removeIdx(s2.blocklist, i3) }))
     }, /* @__PURE__ */ React14.createElement(FaTimes, null)))))), /* @__PURE__ */ React14.createElement("div", {
-      className: "flex-1 flex items-end"
+      className: "flex flex-col gap-2"
+    }, /* @__PURE__ */ React14.createElement("div", {
+      className: "flex flex-row gap-2"
+    }, /* @__PURE__ */ React14.createElement("div", {
+      className: "flex-1"
+    }, /* @__PURE__ */ React14.createElement("h2", {
+      className: "text-2xl"
+    }, "Performance Mode"), /* @__PURE__ */ React14.createElement("small", {
+      className: "text-m"
+    }, "Will hide chat when there are no winners, and disable chat scroll following"))), /* @__PURE__ */ React14.createElement("div", {
+      className: "flex-1 border border-purple-600 rounded-md flex relative"
+    }, /* @__PURE__ */ React14.createElement("div", {
+      className: "bg-purple-600 px-2 py-1 flex-0",
+      title: "If enabled, will send messages tagging winners in Twitch chat"
+    }, "Enabled?"), /* @__PURE__ */ React14.createElement("button", {
+      className: "flex-1 text-2xl text-center justify-center items-center flex transition-opacity hover:opacity-60",
+      onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { performanceMode: !s2.performanceMode }))
+    }, settings.performanceMode ? /* @__PURE__ */ React14.createElement(FaCheck, null) : /* @__PURE__ */ React14.createElement(FaTimes, null)))), /* @__PURE__ */ React14.createElement("div", {
+      className: "flex-1 flex items-end gap-2"
     }, /* @__PURE__ */ React14.createElement("div", {
       className: "flex-1"
     }, /* @__PURE__ */ React14.createElement("button", {
       className: "text-purple-200 opacity-80 text-xs",
       onClick: () => Neutralino.os.open(`https://github.com/maael/giveaway-o-tron/releases/v${APP_VERSION}`)
     }, "Version: ", APP_VERSION ? `v${APP_VERSION}` : "Unknown Version")), /* @__PURE__ */ React14.createElement("button", {
+      className: "bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity",
+      onClick: async () => {
+        Neutralino.os.open(`https://giveaway-o-tron.vercel.app/api/auth/signout`);
+      }
+    }, /* @__PURE__ */ React14.createElement(FaExclamationTriangle, null), " Sign Out Token Tool"), /* @__PURE__ */ React14.createElement("button", {
       className: "bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity",
       onClick: async () => {
         await Neutralino.storage.setData("main-channelinfo", null);
@@ -32906,7 +32931,8 @@ to {
       sendMessages: false,
       blocklist: ["streamelements", "streamlabs", "nightbot"],
       autoScroll: true,
-      spamLimit: 1
+      spamLimit: 1,
+      performanceMode: false
     });
     const [winners, setWinners] = import_react21.default.useState([]);
     const [client, setClient] = import_react21.default.useState(null);
