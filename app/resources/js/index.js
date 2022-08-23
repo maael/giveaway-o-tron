@@ -26922,9 +26922,6 @@ to {
       identity: {
         username: channelInfo.login,
         password: `oauth:${channelInfo.token}`
-      },
-      options: {
-        debug: true
       }
     };
     const client = new import_tmi.default.client(opts);
@@ -31292,8 +31289,20 @@ to {
       setChatPaused,
       resetChat
     }), settings.performanceMode && !winners.length ? /* @__PURE__ */ import_react16.default.createElement("div", {
-      className: "flex justify-center items-center h-full"
-    }, chatEvents.length, " messages") : /* @__PURE__ */ import_react16.default.createElement(ChatBox, {
+      className: "flex justify-center items-center h-full gap-2 flex-row"
+    }, /* @__PURE__ */ import_react16.default.createElement("div", null, chatEvents.length, " messages"), chatPaused ? /* @__PURE__ */ import_react16.default.createElement(FaPlayCircle, {
+      className: "select-none cursor-pointer transition-opacity hover:opacity-70",
+      onClick: () => setChatPaused((p2) => !p2),
+      title: "Resume chat"
+    }) : /* @__PURE__ */ import_react16.default.createElement(FaPauseCircle, {
+      className: "select-none cursor-pointer  transition-opacity hover:opacity-70",
+      onClick: () => setChatPaused((p2) => !p2),
+      title: "Pause chat, misses messages while paused"
+    }), /* @__PURE__ */ import_react16.default.createElement(FaTimesCircle, {
+      className: "text-red-500 select-none cursor-pointer  transition-opacity hover:opacity-70",
+      onClick: () => resetChat(),
+      title: "Clear chat"
+    })) : /* @__PURE__ */ import_react16.default.createElement(ChatBox, {
       chatEvents,
       winners,
       paused: chatPaused,
@@ -32955,8 +32964,7 @@ to {
           setClient((cl) => cl ? cl : init(channelInfo));
       }
     }, [channelInfo.login]);
-    const onNewChat = import_react21.default.useCallback((chat) => {
-      console.info("[chat]", chat);
+    const onNewChat = import_react21.default.useCallback((_chat) => {
     }, []);
     const [chatPaused, setChatPaused] = import_react21.default.useState(false);
     const [chatEvents, resetChat] = useChatEvents(chatPaused, winners, onNewChat);

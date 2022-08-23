@@ -5,6 +5,7 @@ import chat from '../../chat'
 import Settings from '../primitives/Settings'
 import { Winner, InstantGiveaway, ChatGiveaway, WinnerUser } from '../primitives/giveaways'
 import ChatBox from '../primitives/ChatBox'
+import { FaPauseCircle, FaPlayCircle, FaTimesCircle } from 'react-icons/fa'
 
 export default function MainScreen({
   chatEvents,
@@ -54,7 +55,27 @@ export default function MainScreen({
       </div>
       <Settings settings={settings} setSettings={setSettings} setChatPaused={setChatPaused} resetChat={resetChat} />
       {settings.performanceMode && !winners.length ? (
-        <div className="flex justify-center items-center h-full">{chatEvents.length} messages</div>
+        <div className="flex justify-center items-center h-full gap-2 flex-row">
+          <div>{chatEvents.length} messages</div>
+          {chatPaused ? (
+            <FaPlayCircle
+              className="select-none cursor-pointer transition-opacity hover:opacity-70"
+              onClick={() => setChatPaused((p) => !p)}
+              title="Resume chat"
+            />
+          ) : (
+            <FaPauseCircle
+              className="select-none cursor-pointer  transition-opacity hover:opacity-70"
+              onClick={() => setChatPaused((p) => !p)}
+              title="Pause chat, misses messages while paused"
+            />
+          )}
+          <FaTimesCircle
+            className="text-red-500 select-none cursor-pointer  transition-opacity hover:opacity-70"
+            onClick={() => resetChat()}
+            title="Clear chat"
+          />
+        </div>
       ) : (
         <ChatBox
           chatEvents={chatEvents}

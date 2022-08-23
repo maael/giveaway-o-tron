@@ -53,9 +53,7 @@ function InnerApp() {
       if (settings.autoConnect) setClient((cl) => (cl ? cl : chat(channelInfo)))
     }
   }, [channelInfo.login])
-  const onNewChat = React.useCallback((chat: ChatItem) => {
-    console.info('[chat]', chat)
-  }, [])
+  const onNewChat = React.useCallback((_chat: ChatItem) => {}, [])
   const [chatPaused, setChatPaused] = React.useState(false)
   const [chatEvents, resetChat] = useChatEvents(chatPaused, winners, onNewChat)
   const chatEventsRef = React.useRef(chatEvents)

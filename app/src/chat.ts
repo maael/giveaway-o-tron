@@ -55,9 +55,6 @@ export default function init(channelInfo: ChannelInfo) {
       username: channelInfo.login,
       password: `oauth:${channelInfo.token}`,
     },
-    options: {
-      debug: true,
-    },
   }
 
   // Create a client with our options
