@@ -19,19 +19,21 @@ export function InstantGiveaway({
   settings,
   client,
   setPastGiveaways,
+  forfeits,
 }: {
   setWinners: Dispatch<SetStateAction<WinnerUser[]>>
   channelInfo: ChannelInfo
   settings: TSettings
   client: ReturnType<typeof chat> | null
   setPastGiveaways: Dispatch<SetStateAction<GiveawayResult[]>>
+  forfeits: string[]
 }) {
   return (
     <button
       className="bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-all hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700"
       onClick={async () => {
         if (!channelInfo.login) return
-        const giveawayWinner = await getInstantGiveaway(channelInfo, settings)
+        const giveawayWinner = await getInstantGiveaway(channelInfo, settings, forfeits)
         if (!giveawayWinner.length) {
           toast.error('No winners found that match conditions!', { position: 'bottom-center' })
           return
@@ -69,6 +71,7 @@ export function ChatGiveaway({
   settings,
   client,
   setPastGiveaways,
+  forfeits,
 }: {
   chatEvents: ChatItem[]
   setWinners: Dispatch<SetStateAction<WinnerUser[]>>
@@ -76,12 +79,13 @@ export function ChatGiveaway({
   settings: TSettings
   client: ReturnType<typeof chat> | null
   setPastGiveaways: Dispatch<SetStateAction<GiveawayResult[]>>
+  forfeits: string[]
 }) {
   return (
     <button
       className="bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-transform hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700"
       onClick={async () => {
-        const giveawayWinner = await getChatGiveaway(channelInfo, chatEvents, settings.chatCommand, settings)
+        const giveawayWinner = await getChatGiveaway(channelInfo, chatEvents, settings.chatCommand, settings, forfeits)
         if (!giveawayWinner.length) {
           toast.error('No winners found that match conditions!', { position: 'bottom-center' })
           return

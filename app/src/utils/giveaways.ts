@@ -11,8 +11,10 @@ export async function getChatGiveaway(
   channelInfo: ChannelInfo,
   chatItems: ChatItem[],
   chatCommand: string,
-  settings: Settings
+  settings: Settings,
+  forfeits: string[]
 ): Promise<GiveawayResult['winners']> {
+  const forfeitSet = new Set([...forfeits])
   console.info('[giveaway][chat][start]')
   let subCount = 0
   let subEntries = 0
@@ -53,7 +55,7 @@ export async function getChatGiveaway(
   return Array.from({ length: settings.numberOfWinners }, () => {
     const winner = getRandomArrayItem(
       users
-        .filter((u) => !pastWinners.has(u.username))
+        .filter((u) => !pastWinners.has(u.username) && !forfeitSet.has(u.username))
         .filter(
           (u) =>
             !settings.blocklist.map((b) => b.trim()).includes(u.displayName) &&
@@ -73,8 +75,10 @@ export async function getChatGiveaway(
 
 export async function getInstantGiveaway(
   channelInfo: ChannelInfo,
-  settings: Settings
+  settings: Settings,
+  forfeits: string[]
 ): Promise<GiveawayResult['winners']> {
+  const forfeitSet = new Set([...forfeits])
   console.info('[giveaway][instant][start]')
   let viewers = await getViewers(channelInfo)
   let subCount = 0
@@ -113,7 +117,9 @@ export async function getInstantGiveaway(
   return (
     Array.from({ length: settings.numberOfWinners }, () => {
       const winner = getRandomArrayItem(
-        viewers.filter((u) => !pastWinners.has(u)).filter((u) => !settings.blocklist.map((b) => b.trim()).includes(u))
+        viewers
+          .filter((u) => !pastWinners.has(u) && !forfeitSet.has(u))
+          .filter((u) => !settings.blocklist.map((b) => b.trim()).includes(u))
       )
       if (!winner) return
       pastWinners.add(winner)

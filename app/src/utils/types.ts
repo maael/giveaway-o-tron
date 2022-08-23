@@ -10,6 +10,7 @@ export interface Settings {
   autoScroll?: boolean
   spamLimit?: number
   performanceMode?: boolean
+  forfeitCommand?: string
 }
 
 export type ChannelInfo = Partial<{

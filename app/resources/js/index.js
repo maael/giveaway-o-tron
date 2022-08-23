@@ -26901,10 +26901,10 @@ to {
     const [chat, setChat] = (0, import_react6.useState)([]);
     (0, import_react6.useEffect)(() => {
       function handleChat(d3) {
+        onChat(d3.detail);
         if (paused && !winners.some((w) => w.username === d3.detail.username))
           return;
         setChat((c2) => c2.concat(d3.detail));
-        onChat(d3.detail);
       }
       chatEmitter.addEventListener("chat", handleChat);
       return () => {
@@ -29499,7 +29499,8 @@ to {
 
   // src/utils/giveaways.ts
   var pastWinners = new Set();
-  async function getChatGiveaway(channelInfo, chatItems, chatCommand, settings) {
+  async function getChatGiveaway(channelInfo, chatItems, chatCommand, settings, forfeits) {
+    const forfeitSet = new Set([...forfeits]);
     console.info("[giveaway][chat][start]");
     let subCount = 0;
     let subEntries = 0;
@@ -29536,7 +29537,7 @@ to {
     });
     console.info("[giveaway][chat][end]");
     return Array.from({ length: settings.numberOfWinners }, () => {
-      const winner = getRandomArrayItem(users.filter((u3) => !pastWinners.has(u3.username)).filter((u3) => !settings.blocklist.map((b2) => b2.trim()).includes(u3.displayName) && !settings.blocklist.map((b2) => b2.trim()).includes(u3.username)));
+      const winner = getRandomArrayItem(users.filter((u3) => !pastWinners.has(u3.username) && !forfeitSet.has(u3.username)).filter((u3) => !settings.blocklist.map((b2) => b2.trim()).includes(u3.displayName) && !settings.blocklist.map((b2) => b2.trim()).includes(u3.username)));
       if (!winner)
         return;
       pastWinners.add(winner.username);
@@ -29548,7 +29549,8 @@ to {
       };
     }).filter(Boolean);
   }
-  async function getInstantGiveaway(channelInfo, settings) {
+  async function getInstantGiveaway(channelInfo, settings, forfeits) {
+    const forfeitSet = new Set([...forfeits]);
     console.info("[giveaway][instant][start]");
     let viewers = await getViewers(channelInfo);
     let subCount = 0;
@@ -29581,7 +29583,7 @@ to {
     });
     console.info("[giveaway][instant][end]");
     return Array.from({ length: settings.numberOfWinners }, () => {
-      const winner = getRandomArrayItem(viewers.filter((u3) => !pastWinners.has(u3)).filter((u3) => !settings.blocklist.map((b2) => b2.trim()).includes(u3)));
+      const winner = getRandomArrayItem(viewers.filter((u3) => !pastWinners.has(u3) && !forfeitSet.has(u3)).filter((u3) => !settings.blocklist.map((b2) => b2.trim()).includes(u3)));
       if (!winner)
         return;
       pastWinners.add(winner);
@@ -31062,14 +31064,15 @@ to {
     channelInfo,
     settings,
     client,
-    setPastGiveaways
+    setPastGiveaways,
+    forfeits
   }) {
     return /* @__PURE__ */ import_react14.default.createElement("button", {
       className: "bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-all hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700",
       onClick: async () => {
         if (!channelInfo.login)
           return;
-        const giveawayWinner = await getInstantGiveaway(channelInfo, settings);
+        const giveawayWinner = await getInstantGiveaway(channelInfo, settings, forfeits);
         if (!giveawayWinner.length) {
           Et.error("No winners found that match conditions!", { position: "bottom-center" });
           return;
@@ -31100,12 +31103,13 @@ to {
     channelInfo,
     settings,
     client,
-    setPastGiveaways
+    setPastGiveaways,
+    forfeits
   }) {
     return /* @__PURE__ */ import_react14.default.createElement("button", {
       className: "bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-transform hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700",
       onClick: async () => {
-        const giveawayWinner = await getChatGiveaway(channelInfo, chatEvents, settings.chatCommand, settings);
+        const giveawayWinner = await getChatGiveaway(channelInfo, chatEvents, settings.chatCommand, settings, forfeits);
         if (!giveawayWinner.length) {
           Et.error("No winners found that match conditions!", { position: "bottom-center" });
           return;
@@ -31263,7 +31267,8 @@ to {
     resetChat,
     winners,
     setWinners,
-    setPastGiveaways
+    setPastGiveaways,
+    forfeits
   }) {
     return /* @__PURE__ */ import_react16.default.createElement(import_react16.default.Fragment, null, /* @__PURE__ */ import_react16.default.createElement(Winner, {
       winners,
@@ -31275,14 +31280,16 @@ to {
       channelInfo,
       setWinners,
       client,
-      setPastGiveaways
+      setPastGiveaways,
+      forfeits
     }), /* @__PURE__ */ import_react16.default.createElement(ChatGiveaway, {
       settings,
       channelInfo,
       chatEvents,
       setWinners,
       client,
-      setPastGiveaways
+      setPastGiveaways,
+      forfeits
     })), /* @__PURE__ */ import_react16.default.createElement(SettingsComponent, {
       settings,
       setSettings,
@@ -32730,10 +32737,12 @@ to {
   // src/components/screens/Settings.tsx
   function SettingsScreen({
     settings,
-    setSettings
+    setSettings,
+    forfeits,
+    setForfeits
   }) {
     return /* @__PURE__ */ React14.createElement("div", {
-      className: "mt-4 flex flex-col gap-2 flex-1"
+      className: "mt-4 flex flex-col gap-5 flex-1"
     }, /* @__PURE__ */ React14.createElement("h1", {
       className: "text-3xl"
     }, "Settings"), /* @__PURE__ */ React14.createElement("div", {
@@ -32786,6 +32795,34 @@ to {
       className: "flex-1 text-2xl text-center justify-center items-center flex transition-opacity hover:opacity-60",
       onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { performanceMode: !s2.performanceMode }))
     }, settings.performanceMode ? /* @__PURE__ */ React14.createElement(FaCheck, null) : /* @__PURE__ */ React14.createElement(FaTimes, null)))), /* @__PURE__ */ React14.createElement("div", {
+      className: "flex flex-col gap-2"
+    }, /* @__PURE__ */ React14.createElement("div", {
+      className: "flex flex-row gap-2"
+    }, /* @__PURE__ */ React14.createElement("div", {
+      className: "flex-1"
+    }, /* @__PURE__ */ React14.createElement("h2", {
+      className: "text-2xl"
+    }, "Giveaway Forfeit Command"), /* @__PURE__ */ React14.createElement("small", {
+      className: "text-m"
+    }, "If a user types anything that matchs this command, they will forfeit winner any command, until list is cleared. No spaces."))), /* @__PURE__ */ React14.createElement("div", {
+      className: "flex flex-row gap-4"
+    }, /* @__PURE__ */ React14.createElement("div", {
+      className: "flex flex-row justify-center items-center flex-1"
+    }, /* @__PURE__ */ React14.createElement("div", {
+      className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md",
+      title: "Filters messages to include this"
+    }, "Forfeit Command"), /* @__PURE__ */ React14.createElement("input", {
+      className: "bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1",
+      placeholder: "Empty means no forfeits...",
+      value: settings.forfeitCommand || "",
+      onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { forfeitCommand: e2.target.value.trim() })),
+      title: "Forfeit command..."
+    })), /* @__PURE__ */ React14.createElement("div", {
+      className: "flex-0 bg-purple-600 px-2 py-1 rounded-md flex justify-center items-center"
+    }, "Number of forfeits: ", forfeits.length), /* @__PURE__ */ React14.createElement("button", {
+      className: "flex-0 bg-red-600 px-2 py-1 rounded-md flex justify-center items-center gap-1",
+      onClick: () => setForfeits([])
+    }, /* @__PURE__ */ React14.createElement(FaTimes, null), " Reset List"))), /* @__PURE__ */ React14.createElement("div", {
       className: "flex-1 flex items-end gap-2"
     }, /* @__PURE__ */ React14.createElement("div", {
       className: "flex-1"
@@ -32941,7 +32978,8 @@ to {
       blocklist: ["streamelements", "streamlabs", "nightbot"],
       autoScroll: true,
       spamLimit: 1,
-      performanceMode: false
+      performanceMode: false,
+      forfeitCommand: ""
     });
     const [winners, setWinners] = import_react21.default.useState([]);
     const [client, setClient] = import_react21.default.useState(null);
@@ -32964,8 +33002,12 @@ to {
           setClient((cl) => cl ? cl : init(channelInfo));
       }
     }, [channelInfo.login]);
-    const onNewChat = import_react21.default.useCallback((_chat) => {
-    }, []);
+    const [forfeits, setForfeits] = import_react21.default.useState([]);
+    const onNewChat = import_react21.default.useCallback((chat) => {
+      if (settings.forfeitCommand && chat.msg.toLowerCase().includes(settings.forfeitCommand)) {
+        setForfeits((f3) => f3.concat(chat.username));
+      }
+    }, [settings.forfeitCommand]);
     const [chatPaused, setChatPaused] = import_react21.default.useState(false);
     const [chatEvents, resetChat] = useChatEvents(chatPaused, winners, onNewChat);
     const chatEventsRef = import_react21.default.useRef(chatEvents);
@@ -32996,7 +33038,8 @@ to {
       resetChat,
       winners,
       setWinners,
-      setPastGiveaways
+      setPastGiveaways,
+      forfeits
     })), /* @__PURE__ */ import_react21.default.createElement(Route, {
       path: "/setup",
       exact: true
@@ -33016,7 +33059,9 @@ to {
       exact: true
     }, /* @__PURE__ */ import_react21.default.createElement(SettingsScreen, {
       settings,
-      setSettings
+      setSettings,
+      forfeits,
+      setForfeits
     }))), /* @__PURE__ */ import_react21.default.createElement(Oe, null));
   }
 

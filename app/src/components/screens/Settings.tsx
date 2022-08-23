@@ -6,12 +6,16 @@ import { APP_VERSION } from '~/utils/updates'
 export default function SettingsScreen({
   settings,
   setSettings,
+  forfeits,
+  setForfeits,
 }: {
   settings: Settings
   setSettings: React.Dispatch<React.SetStateAction<Settings>>
+  forfeits: string[]
+  setForfeits: React.Dispatch<React.SetStateAction<string[]>>
 }) {
   return (
-    <div className="mt-4 flex flex-col gap-2 flex-1">
+    <div className="mt-4 flex flex-col gap-5 flex-1">
       <h1 className="text-3xl">Settings</h1>
       <div className="flex flex-col gap-2">
         <div className="flex flex-row gap-2">
@@ -76,6 +80,40 @@ export default function SettingsScreen({
             onClick={() => setSettings((s) => ({ ...s, performanceMode: !s.performanceMode }))}
           >
             {settings.performanceMode ? <FaCheck /> : <FaTimes />}
+          </button>
+        </div>
+      </div>
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-row gap-2">
+          <div className="flex-1">
+            <h2 className="text-2xl">Giveaway Forfeit Command</h2>
+            <small className="text-m">
+              If a user types anything that matchs this command, they will forfeit winner any command, until list is
+              cleared. No spaces.
+            </small>
+          </div>
+        </div>
+        <div className="flex flex-row gap-4">
+          <div className="flex flex-row justify-center items-center flex-1">
+            <div className="flex-0 bg-purple-600 px-2 py-1 rounded-l-md" title="Filters messages to include this">
+              Forfeit Command
+            </div>
+            <input
+              className="bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1"
+              placeholder="Empty means no forfeits..."
+              value={settings.forfeitCommand || ''}
+              onChange={(e) => setSettings((s) => ({ ...s, forfeitCommand: e.target.value.trim() }))}
+              title="Forfeit command..."
+            />
+          </div>
+          <div className="flex-0 bg-purple-600 px-2 py-1 rounded-md flex justify-center items-center">
+            Number of forfeits: {forfeits.length}
+          </div>
+          <button
+            className="flex-0 bg-red-600 px-2 py-1 rounded-md flex justify-center items-center gap-1"
+            onClick={() => setForfeits([])}
+          >
+            <FaTimes /> Reset List
           </button>
         </div>
       </div>

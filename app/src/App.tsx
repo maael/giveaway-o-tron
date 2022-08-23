@@ -8,7 +8,7 @@ import SetupScreen from './components/screens/Setup'
 import PastGiveawaysScreen from './components/screens/PastGiveaways'
 import SettingsScreen from './components/screens/Settings'
 import Header from './components/primitives/Header'
-import { ChannelInfo, GiveawayResult, Settings, useAuthEvents } from './utils'
+import { ChannelInfo, GiveawayResult, handleChatCommand, Settings, useAuthEvents } from './utils'
 import { WinnerUser } from './components/primitives/giveaways'
 import { useUpdateCheck } from './utils/updates'
 
@@ -34,6 +34,7 @@ function InnerApp() {
     autoScroll: true,
     spamLimit: 1,
     performanceMode: false,
+    forfeitCommand: '',
   })
   const [winners, setWinners] = React.useState<WinnerUser[]>([])
   const [client, setClient] = React.useState<ReturnType<typeof chat> | null>(null)
@@ -53,7 +54,15 @@ function InnerApp() {
       if (settings.autoConnect) setClient((cl) => (cl ? cl : chat(channelInfo)))
     }
   }, [channelInfo.login])
-  const onNewChat = React.useCallback((_chat: ChatItem) => {}, [])
+  const [forfeits, setForfeits] = React.useState<string[]>([])
+  const onNewChat = React.useCallback(
+    (chat: ChatItem) => {
+      if (settings.forfeitCommand && chat.msg.toLowerCase().includes(settings.forfeitCommand.toLowerCase())) {
+        setForfeits((f) => f.concat(chat.username))
+      }
+    },
+    [settings.forfeitCommand]
+  )
   const [chatPaused, setChatPaused] = React.useState(false)
   const [chatEvents, resetChat] = useChatEvents(chatPaused, winners, onNewChat)
   const chatEventsRef = React.useRef(chatEvents)
@@ -82,6 +91,7 @@ function InnerApp() {
             winners={winners}
             setWinners={setWinners}
             setPastGiveaways={setPastGiveaways}
+            forfeits={forfeits}
           />
         </Route>
         <Route path="/setup" exact>
@@ -91,7 +101,7 @@ function InnerApp() {
           <PastGiveawaysScreen giveaways={pastGiveaways} setPastGiveaways={setPastGiveaways} />
         </Route>
         <Route path="/settings" exact>
-          <SettingsScreen settings={settings} setSettings={setSettings} />
+          <SettingsScreen settings={settings} setSettings={setSettings} forfeits={forfeits} setForfeits={setForfeits} />
         </Route>
       </Switch>
       <Toaster />

@@ -32,9 +32,9 @@ export function useChatEvents(
   const [chat, setChat] = useState<ChatItem[]>([])
   useEffect(() => {
     function handleChat(d: CustomEvent<ChatItem>) {
+      onChat(d.detail)
       if (paused && !winners.some((w) => w.username === d.detail.username)) return
       setChat((c) => c.concat(d.detail))
-      onChat(d.detail)
     }
     chatEmitter.addEventListener('chat', handleChat)
     return () => {

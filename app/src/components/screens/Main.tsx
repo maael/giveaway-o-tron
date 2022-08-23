@@ -19,6 +19,7 @@ export default function MainScreen({
   winners,
   setWinners,
   setPastGiveaways,
+  forfeits,
 }: {
   client: ReturnType<typeof chat> | null
   chatEvents: ChatItem[]
@@ -32,6 +33,7 @@ export default function MainScreen({
   winners: WinnerUser[]
   setWinners: Dispatch<SetStateAction<WinnerUser[]>>
   setPastGiveaways: Dispatch<SetStateAction<GiveawayResult[]>>
+  forfeits: string[]
 }) {
   return (
     <>
@@ -43,6 +45,7 @@ export default function MainScreen({
           setWinners={setWinners}
           client={client}
           setPastGiveaways={setPastGiveaways}
+          forfeits={forfeits}
         />
         <ChatGiveaway
           settings={settings}
@@ -51,6 +54,7 @@ export default function MainScreen({
           setWinners={setWinners}
           client={client}
           setPastGiveaways={setPastGiveaways}
+          forfeits={forfeits}
         />
       </div>
       <Settings settings={settings} setSettings={setSettings} setChatPaused={setChatPaused} resetChat={resetChat} />
