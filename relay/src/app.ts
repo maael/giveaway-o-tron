@@ -14,13 +14,17 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-  console.log("a user connected");
+  const channelRoom = socket.handshake.query?.channel;
+  console.log("[connection]", { channel: channelRoom });
+  if (channelRoom) {
+    socket.join(`${channelRoom}`);
+  }
   socket.on("event", (msg) => {
-    console.log("broadcast");
-    socket.broadcast.emit("event", msg);
+    console.log("[event][relay]", channelRoom, msg);
+    socket.to(`${msg.channel}`).emit("event", msg);
   });
   socket.on("disconnect", () => {
-    console.log("user disconnected");
+    console.log("[disconnect]");
   });
 });
 
