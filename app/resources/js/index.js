@@ -29541,7 +29541,7 @@ to {
       if (!winner)
         return;
       pastWinners.add(winner.username);
-      relay_default.emit("event", { winner: winner.username });
+      relay_default.emit("event", { winner: winner.username, channelId: channelInfo.userId, login: channelInfo.login });
       return {
         login: winner.username,
         wasSubscriber: winner.isSubscriber,
@@ -29587,7 +29587,7 @@ to {
       if (!winner)
         return;
       pastWinners.add(winner);
-      relay_default.emit("event", { winner });
+      relay_default.emit("event", { winner, channelId: channelInfo.userId, login: channelInfo.login });
       return winner;
     }).filter(Boolean).map((u3) => {
       var _a, _b;
@@ -30970,6 +30970,7 @@ to {
       className: "bg-purple-600 px-2 py-1 flex-0 select-none cursor-pointer flex flex-row justify-center items-center gap-1 transition-colors hover:bg-purple-700",
       onClick: () => {
         resetChat();
+        setChatPaused(false);
         setActive(true);
       },
       title: "Will clear chat"
@@ -33004,7 +33005,7 @@ to {
     }, [channelInfo.login]);
     const [forfeits, setForfeits] = import_react21.default.useState([]);
     const onNewChat = import_react21.default.useCallback((chat) => {
-      if (settings.forfeitCommand && chat.msg.toLowerCase().includes(settings.forfeitCommand)) {
+      if (settings.forfeitCommand && chat.msg.toLowerCase().includes(settings.forfeitCommand.toLowerCase())) {
         setForfeits((f3) => f3.concat(chat.username));
       }
     }, [settings.forfeitCommand]);
