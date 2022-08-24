@@ -43,7 +43,8 @@ export default function GW2Alerts() {
     })
   }, [makeShot])
   const handleEvent = React.useCallback(
-    (e: { winner: string }) => {
+    (e: { winner: string; channelId: number }) => {
+      if (!channel || !e.channelId || (e.channelId || '').toString() !== (channel?.toString() || '')) return
       toast.remove()
       toast.custom((t) => {
         if (t.visible) fire()
@@ -66,7 +67,7 @@ export default function GW2Alerts() {
         )
       })
     },
-    [fire]
+    [fire, channel]
   )
   React.useEffect(() => {
     const socket = io(`wss://giveaway-o-tron-relay.onrender.com`)

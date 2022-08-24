@@ -64,7 +64,7 @@ export async function getChatGiveaway(
     )
     if (!winner) return
     pastWinners.add(winner.username)
-    relay.emit('event', { winner: winner.username })
+    relay.emit('event', { winner: winner.username, channelId: channelInfo.userId, login: channelInfo.login })
     return {
       login: winner.username,
       wasSubscriber: winner.isSubscriber,
@@ -123,7 +123,7 @@ export async function getInstantGiveaway(
       )
       if (!winner) return
       pastWinners.add(winner)
-      relay.emit('event', { winner })
+      relay.emit('event', { winner, channelId: channelInfo.userId, login: channelInfo.login })
       return winner
     }).filter(Boolean) as string[]
   ).map((u) => ({ login: u, wasSubscriber: subsList?.has(u) ?? null, wasFollower: followersList?.has(u) ?? null }))
