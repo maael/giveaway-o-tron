@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import chat, { ChatItem, useChatEvents } from './chat'
@@ -8,7 +8,7 @@ import SetupScreen from './components/screens/Setup'
 import PastGiveawaysScreen from './components/screens/PastGiveaways'
 import SettingsScreen from './components/screens/Settings'
 import Header from './components/primitives/Header'
-import { ChannelInfo, GiveawayResult, Settings, useAuthEvents } from './utils'
+import { ChannelInfo, defaultSettings, GiveawayResult, Settings, useAuthEvents } from './utils'
 import { WinnerUser } from './components/primitives/giveaways'
 import { useUpdateCheck } from './utils/updates'
 
@@ -22,20 +22,7 @@ export default function App() {
 
 function InnerApp() {
   useUpdateCheck()
-  const [settings, setSettings] = useStorage<Settings>('settings', {
-    autoConnect: true,
-    subLuck: 2,
-    numberOfWinners: 1,
-    followersOnly: true,
-    chatCommand: '',
-    winnerMessage: 'PartyHat @name won!',
-    sendMessages: false,
-    blocklist: ['streamelements', 'streamlabs', 'nightbot'],
-    autoScroll: true,
-    spamLimit: 1,
-    performanceMode: false,
-    forfeitCommand: '',
-  })
+  const [settings, setSettings] = useStorage<Settings>('settings', defaultSettings)
   const [winners, setWinners] = React.useState<WinnerUser[]>([])
   const [client, setClient] = React.useState<ReturnType<typeof chat> | null>(null)
   const [channelInfo, setChannelInfo] = useStorage<ChannelInfo>('channelInfo', {}, (c) => {
@@ -65,10 +52,6 @@ function InnerApp() {
   )
   const [chatPaused, setChatPaused] = React.useState(false)
   const [chatEvents, resetChat] = useChatEvents(chatPaused, winners, onNewChat)
-  const chatEventsRef = React.useRef(chatEvents)
-  React.useEffect(() => {
-    chatEventsRef.current = chatEvents
-  }, [chatEvents])
   React.useEffect(() => {
     window['myApp'].setTitle(channelInfo.login, !!client)
   }, [channelInfo.login, client])

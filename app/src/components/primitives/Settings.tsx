@@ -4,6 +4,7 @@ import Countdown, { zeroPad } from 'react-countdown'
 import toast from 'react-hot-toast'
 import format from 'date-fns/formatDistanceStrict'
 import Slider, { SliderInner } from './Slider'
+import relay from '../../utils/relay'
 import { Settings } from '../../utils'
 
 const countDownRenderer = ({ hours, minutes, seconds, completed }) => {
@@ -27,6 +28,7 @@ interface Props {
   setSettings: Dispatch<SetStateAction<Settings>>
   setChatPaused: Dispatch<SetStateAction<Boolean>>
   resetChat: () => void
+  channelId?: string
 }
 
 const StableCountdown = React.memo(function StableCountdown({
@@ -39,19 +41,28 @@ const StableCountdown = React.memo(function StableCountdown({
   return <Countdown renderer={countDownRenderer} date={Date.now() + value} onComplete={onComplete} />
 })
 
-const Time = React.memo(function Time({ setChatPaused, resetChat }: Pick<Props, 'setChatPaused' | 'resetChat'>) {
+const Time = React.memo(function Time({
+  setChatPaused,
+  resetChat,
+  chatCommand,
+  channelId,
+}: { chatCommand: Props['settings']['chatCommand'] } & Pick<Props, 'channelId' | 'setChatPaused' | 'resetChat'>) {
   const [active, setActive] = React.useState(false)
   const [value, setValue] = React.useState(ONE_MIN)
   const onComplete = React.useCallback(() => {
     toast.success('Timer finished! Chat paused, do a giveaway...', { position: 'bottom-center' })
+    relay.emit('event', { type: 'timer-end', channelId, ts: new Date().toISOString() })
     setChatPaused(true)
-  }, [])
+  }, [channelId])
   return active ? (
     <div className="flex-1 border border-purple-600 rounded-md flex justify-center items-center text-center relative">
       <StableCountdown value={value} onComplete={onComplete} />
       <FaTimes
         className="absolute right-3 top-2 text-red-500 select-none cursor-pointer"
-        onClick={() => setActive(false)}
+        onClick={() => {
+          setActive(false)
+          relay.emit('event', { type: 'timer-cancel', channelId })
+        }}
         title="Cancel the timer"
       />
     </div>
@@ -75,6 +86,7 @@ const Time = React.memo(function Time({ setChatPaused, resetChat }: Pick<Props, 
           resetChat()
           setChatPaused(false)
           setActive(true)
+          relay.emit('event', { type: 'timer-start', channelId, ts: new Date().toISOString(), chatCommand })
         }}
         title="Will clear chat"
       >
@@ -84,7 +96,7 @@ const Time = React.memo(function Time({ setChatPaused, resetChat }: Pick<Props, 
   )
 })
 
-export default function SettingsComponent({ settings, setSettings, setChatPaused, resetChat }: Props) {
+export default function SettingsComponent({ channelId, settings, setSettings, setChatPaused, resetChat }: Props) {
   return (
     <>
       <div className="flex flex-row gap-2 mt-2">
@@ -149,7 +161,12 @@ export default function SettingsComponent({ settings, setSettings, setChatPaused
             </button>
           </div>
         </div>
-        <Time setChatPaused={setChatPaused} resetChat={() => resetChat()} />
+        <Time
+          setChatPaused={setChatPaused}
+          resetChat={() => resetChat()}
+          channelId={channelId}
+          chatCommand={settings.chatCommand}
+        />
       </div>
       <div className="flex flex-row gap-2 mt-2">
         <Slider

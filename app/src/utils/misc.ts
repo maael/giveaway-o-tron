@@ -1,4 +1,5 @@
 import { ChatItem } from '~/chat'
+import { AlertTheme, Settings } from './types'
 
 export function removeIdx<T>(ar: T[], idx: number): T[] {
   return ar.slice(0, idx).concat(ar.slice(idx + 1))
@@ -30,4 +31,25 @@ export function handleChatCommand(chatItem: ChatItem, command: string) {
   } else {
     return chatItem.msg.match(translatedCommand) !== null
   }
+}
+
+export const defaultSettings: Required<Settings> = {
+  autoConnect: true,
+  subLuck: 2,
+  numberOfWinners: 1,
+  followersOnly: true,
+  chatCommand: '',
+  winnerMessage: 'PartyHat @name won!',
+  sendMessages: false,
+  blocklist: ['streamelements', 'streamlabs', 'nightbot'],
+  autoScroll: true,
+  spamLimit: 1,
+  performanceMode: false,
+  forfeitCommand: '',
+  alertDuration: 4000,
+  alertTheme: AlertTheme.GW2,
+}
+
+export const alertThemeMap: Record<AlertTheme, string> = {
+  [AlertTheme.GW2]: 'Guild Wars 2',
 }

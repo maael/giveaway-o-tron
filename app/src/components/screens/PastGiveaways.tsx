@@ -19,7 +19,7 @@ function SettingItem<T>({ label, value }: { label: string; value: T }) {
     </div>
   )
 }
-
+const LIMIT_GIVEAWAY_LIST = 10
 export default function PastGiveaways({
   giveaways,
   setPastGiveaways,
@@ -30,9 +30,10 @@ export default function PastGiveaways({
   return (
     <div className="mt-4 flex flex-col gap-5 flex-1 pb-5">
       <h1 className="text-3xl flex items-center">
-        {giveaways.length} Past Giveaway{giveaways.length === 1 ? '' : 's'}
+        Last {Math.min(giveaways.length, LIMIT_GIVEAWAY_LIST)} of {giveaways.length} Total Past Giveaway
+        {giveaways.length === 1 ? '' : 's'}
       </h1>
-      {giveaways.map((giveaway, idx) => (
+      {giveaways.slice(0, LIMIT_GIVEAWAY_LIST).map((giveaway, idx) => (
         <div key={idx} className="border border-purple-600 rounded-md px-3 py-2 flex flex-col gap-2 bg-gray-700">
           <div className="flex flex-row gap-1 justify-between font-bold">
             {typeNameMap[giveaway.type]}

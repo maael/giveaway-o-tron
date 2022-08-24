@@ -11,6 +11,12 @@ export interface Settings {
   spamLimit?: number
   performanceMode?: boolean
   forfeitCommand?: string
+  alertDuration?: number
+  alertTheme?: AlertTheme.GW2
+}
+
+export enum AlertTheme {
+  GW2 = 'gw2',
 }
 
 export type ChannelInfo = Partial<{

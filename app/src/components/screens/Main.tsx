@@ -4,8 +4,8 @@ import { Settings as TSettings, removeIdx, ChannelInfo, GiveawayResult } from '.
 import chat from '../../chat'
 import Settings from '../primitives/Settings'
 import { Winner, InstantGiveaway, ChatGiveaway, WinnerUser } from '../primitives/giveaways'
-import ChatBox from '../primitives/ChatBox'
-import { FaPauseCircle, FaPlayCircle, FaTimesCircle } from 'react-icons/fa'
+import ChatBox, { ChatControls } from '../primitives/ChatBox'
+import formatDuration from 'date-fns/formatDuration'
 
 export default function MainScreen({
   chatEvents,
@@ -35,6 +35,13 @@ export default function MainScreen({
   setPastGiveaways: Dispatch<SetStateAction<GiveawayResult[]>>
   forfeits: string[]
 }) {
+  const messageDelay = React.useMemo(() => {
+    const mostRecent = chatEvents[chatEvents.length - 1]
+    if (!mostRecent) return '0 seconds delay'
+    return `~${formatDuration({
+      seconds: (mostRecent.receivedTs - mostRecent.tmiTs) / 1000,
+    })} delay`
+  }, [chatEvents])
   return (
     <>
       <Winner winners={winners} onClear={(idx) => setWinners((w) => removeIdx(w, idx))} />
@@ -57,31 +64,24 @@ export default function MainScreen({
           forfeits={forfeits}
         />
       </div>
-      <Settings settings={settings} setSettings={setSettings} setChatPaused={setChatPaused} resetChat={resetChat} />
+      <Settings
+        channelId={channelInfo.userId}
+        settings={settings}
+        setSettings={setSettings}
+        setChatPaused={setChatPaused}
+        resetChat={resetChat}
+      />
       {settings.performanceMode && !winners.length ? (
-        <div className="flex justify-center items-center h-full gap-2 flex-row">
-          <div>{chatEvents.length} messages</div>
-          {chatPaused ? (
-            <FaPlayCircle
-              className="select-none cursor-pointer transition-opacity hover:opacity-70"
-              onClick={() => setChatPaused((p) => !p)}
-              title="Resume chat"
-            />
-          ) : (
-            <FaPauseCircle
-              className="select-none cursor-pointer  transition-opacity hover:opacity-70"
-              onClick={() => setChatPaused((p) => !p)}
-              title="Pause chat, misses messages while paused"
-            />
-          )}
-          <FaTimesCircle
-            className="text-red-500 select-none cursor-pointer  transition-opacity hover:opacity-70"
-            onClick={() => resetChat()}
-            title="Clear chat"
-          />
+        <div className="h-full gap-2 flex flex-col justify-center items-center">
+          <div className="flex justify-center items-center gap-2 flex-row">
+            <div>{chatEvents.length} messages</div>
+            <ChatControls chatEvents={chatEvents} paused={chatPaused} setPaused={setChatPaused} clear={resetChat} />
+          </div>
+          <div>{messageDelay}</div>
         </div>
       ) : (
         <ChatBox
+          messageDelay={messageDelay}
           chatEvents={chatEvents}
           winners={winners}
           paused={chatPaused}

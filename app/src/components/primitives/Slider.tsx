@@ -12,6 +12,8 @@ interface Props {
   renderValue?: (val: number) => JSX.Element
 }
 
+export const ONE_S = 1_000
+
 export default function SliderOuter(props: Props) {
   return (
     <div className="flex-1 border border-purple-600 rounded-md flex relative">

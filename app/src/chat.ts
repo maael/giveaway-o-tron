@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useState } from 'react'
 import tmi from 'tmi.js'
 import toast from 'react-hot-toast'
-import { ChannelInfo, wait } from './utils'
+import { ChannelInfo } from './utils'
 import { WinnerUser } from './components/primitives/giveaways'
+import { format } from 'date-fns'
 
 export interface ChatItem {
   id: string
@@ -13,7 +14,13 @@ export interface ChatItem {
   username: string
   type: string
   msg: string
-  words: string[]
+  returningChatter: boolean
+  firstMessage: boolean
+  isMod: boolean
+  userId: string
+  tmiTs: number
+  receivedTs: number
+  formattedTmiTs: string
 }
 
 export class ChatEvent extends EventTarget {
@@ -70,9 +77,7 @@ export default function init(channelInfo: ChannelInfo) {
       return
     } // Ignore messages from the bot
 
-    // Remove whitespace from chat message
-    const words = msg.trim().toLowerCase().split(' ')
-
+    const tmiTs = Number(context['tmi-sent-ts'])
     const data: ChatItem = {
       id: context.id,
       color: context.color,
@@ -82,7 +87,13 @@ export default function init(channelInfo: ChannelInfo) {
       username: context.username,
       type: context['message-type'],
       msg,
-      words,
+      returningChatter: context['returning-chatter'],
+      firstMessage: context['first-msg'],
+      isMod: context['mod'],
+      userId: context['user-id'],
+      tmiTs,
+      receivedTs: Date.now(),
+      formattedTmiTs: format(new Date(tmiTs), 'HH:mm:ss'),
     }
 
     chatEmitter.emit(data)

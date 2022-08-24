@@ -1,7 +1,9 @@
+import format from 'date-fns/formatDistanceStrict'
 import * as React from 'react'
 import { FaCheck, FaExclamationTriangle, FaPlus, FaTimes } from 'react-icons/fa'
-import { removeIdx, Settings } from '~/utils'
+import { alertThemeMap, defaultSettings, removeIdx, Settings } from '~/utils'
 import { APP_VERSION } from '~/utils/updates'
+import { ONE_S, SliderInner } from '../primitives/Slider'
 
 export default function SettingsScreen({
   settings,
@@ -15,7 +17,7 @@ export default function SettingsScreen({
   setForfeits: React.Dispatch<React.SetStateAction<string[]>>
 }) {
   return (
-    <div className="mt-4 flex flex-col gap-5 flex-1">
+    <div className="mt-4 flex flex-col gap-3 flex-1">
       <h1 className="text-3xl">Settings</h1>
       <div className="flex flex-col gap-2">
         <div className="flex flex-row gap-2">
@@ -115,6 +117,46 @@ export default function SettingsScreen({
           >
             <FaTimes /> Reset List
           </button>
+        </div>
+      </div>
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-row gap-2">
+          <div className="flex-1">
+            <h2 className="text-2xl">Alert Settings</h2>
+          </div>
+        </div>
+        <div className="flex flex-row gap-2 justify-center items-center">
+          <div className="flex-1 border border-purple-600 rounded-md flex relative">
+            <div
+              className="bg-purple-600 px-2 py-1 flex-0"
+              title="Will clear chat, and then pause it after the time, to enable a giveaway with cut off"
+            >
+              Alert Duration
+            </div>
+            <div className="px-2 flex-1 flex justify-center items-center">
+              <SliderInner
+                min={ONE_S}
+                max={ONE_S * 30}
+                value={settings.alertDuration || defaultSettings.alertDuration}
+                step={ONE_S}
+                onChange={(v) => setSettings((s) => ({ ...s, alertDuration: v }))}
+              />
+            </div>
+            <div className="flex-1 justify-center items-center text-center flex">
+              {format(Date.now() + (settings.alertDuration || defaultSettings.alertDuration), new Date())}
+            </div>
+          </div>
+          <div className="flex-1 border border-purple-600 rounded-md flex relative">
+            <div
+              className="bg-purple-600 px-2 py-1 flex-0"
+              title="Will clear chat, and then pause it after the time, to enable a giveaway with cut off"
+            >
+              Alert Theme
+            </div>
+            <div className="px-2 flex-1 flex justify-center items-center">
+              {alertThemeMap[settings.alertTheme || defaultSettings.alertTheme]}
+            </div>
+          </div>
         </div>
       </div>
       <div className="flex-1 flex items-end gap-2">

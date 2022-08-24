@@ -1090,7 +1090,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
-          function useMemo(create, deps) {
+          function useMemo2(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useMemo(create, deps);
           }
@@ -1651,7 +1651,7 @@
           exports.useEffect = useEffect5;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useLayoutEffect = useLayoutEffect;
-          exports.useMemo = useMemo;
+          exports.useMemo = useMemo2;
           exports.useReducer = useReducer;
           exports.useRef = useRef2;
           exports.useState = useState4;
@@ -26891,6 +26891,1867 @@ to {
   // src/chat.ts
   var import_react6 = __toModule(require_react());
   var import_tmi = __toModule(require_tmi());
+
+  // node_modules/date-fns/esm/_lib/toInteger/index.js
+  function toInteger(dirtyNumber) {
+    if (dirtyNumber === null || dirtyNumber === true || dirtyNumber === false) {
+      return NaN;
+    }
+    var number2 = Number(dirtyNumber);
+    if (isNaN(number2)) {
+      return number2;
+    }
+    return number2 < 0 ? Math.ceil(number2) : Math.floor(number2);
+  }
+
+  // node_modules/date-fns/esm/_lib/requiredArgs/index.js
+  function requiredArgs(required, args) {
+    if (args.length < required) {
+      throw new TypeError(required + " argument" + (required > 1 ? "s" : "") + " required, but only " + args.length + " present");
+    }
+  }
+
+  // node_modules/date-fns/esm/toDate/index.js
+  function toDate(argument) {
+    requiredArgs(1, arguments);
+    var argStr = Object.prototype.toString.call(argument);
+    if (argument instanceof Date || typeof argument === "object" && argStr === "[object Date]") {
+      return new Date(argument.getTime());
+    } else if (typeof argument === "number" || argStr === "[object Number]") {
+      return new Date(argument);
+    } else {
+      if ((typeof argument === "string" || argStr === "[object String]") && typeof console !== "undefined") {
+        console.warn("Starting with v2.0.0-beta.1 date-fns doesn't accept strings as date arguments. Please use `parseISO` to parse strings. See: https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#string-arguments");
+        console.warn(new Error().stack);
+      }
+      return new Date(NaN);
+    }
+  }
+
+  // node_modules/date-fns/esm/addMilliseconds/index.js
+  function addMilliseconds(dirtyDate, dirtyAmount) {
+    requiredArgs(2, arguments);
+    var timestamp = toDate(dirtyDate).getTime();
+    var amount = toInteger(dirtyAmount);
+    return new Date(timestamp + amount);
+  }
+
+  // node_modules/date-fns/esm/_lib/defaultOptions/index.js
+  var defaultOptions = {};
+  function getDefaultOptions() {
+    return defaultOptions;
+  }
+
+  // node_modules/date-fns/esm/_lib/getTimezoneOffsetInMilliseconds/index.js
+  function getTimezoneOffsetInMilliseconds(date) {
+    var utcDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()));
+    utcDate.setUTCFullYear(date.getFullYear());
+    return date.getTime() - utcDate.getTime();
+  }
+
+  // node_modules/date-fns/esm/compareAsc/index.js
+  function compareAsc(dirtyDateLeft, dirtyDateRight) {
+    requiredArgs(2, arguments);
+    var dateLeft = toDate(dirtyDateLeft);
+    var dateRight = toDate(dirtyDateRight);
+    var diff = dateLeft.getTime() - dateRight.getTime();
+    if (diff < 0) {
+      return -1;
+    } else if (diff > 0) {
+      return 1;
+    } else {
+      return diff;
+    }
+  }
+
+  // node_modules/date-fns/esm/isDate/index.js
+  function isDate(value2) {
+    requiredArgs(1, arguments);
+    return value2 instanceof Date || typeof value2 === "object" && Object.prototype.toString.call(value2) === "[object Date]";
+  }
+
+  // node_modules/date-fns/esm/isValid/index.js
+  function isValid(dirtyDate) {
+    requiredArgs(1, arguments);
+    if (!isDate(dirtyDate) && typeof dirtyDate !== "number") {
+      return false;
+    }
+    var date = toDate(dirtyDate);
+    return !isNaN(Number(date));
+  }
+
+  // node_modules/date-fns/esm/differenceInCalendarMonths/index.js
+  function differenceInCalendarMonths(dirtyDateLeft, dirtyDateRight) {
+    requiredArgs(2, arguments);
+    var dateLeft = toDate(dirtyDateLeft);
+    var dateRight = toDate(dirtyDateRight);
+    var yearDiff = dateLeft.getFullYear() - dateRight.getFullYear();
+    var monthDiff = dateLeft.getMonth() - dateRight.getMonth();
+    return yearDiff * 12 + monthDiff;
+  }
+
+  // node_modules/date-fns/esm/differenceInMilliseconds/index.js
+  function differenceInMilliseconds(dateLeft, dateRight) {
+    requiredArgs(2, arguments);
+    return toDate(dateLeft).getTime() - toDate(dateRight).getTime();
+  }
+
+  // node_modules/date-fns/esm/_lib/roundingMethods/index.js
+  var roundingMap = {
+    ceil: Math.ceil,
+    round: Math.round,
+    floor: Math.floor,
+    trunc: function(value2) {
+      return value2 < 0 ? Math.ceil(value2) : Math.floor(value2);
+    }
+  };
+  var defaultRoundingMethod = "trunc";
+  function getRoundingMethod(method) {
+    return method ? roundingMap[method] : roundingMap[defaultRoundingMethod];
+  }
+
+  // node_modules/date-fns/esm/endOfDay/index.js
+  function endOfDay(dirtyDate) {
+    requiredArgs(1, arguments);
+    var date = toDate(dirtyDate);
+    date.setHours(23, 59, 59, 999);
+    return date;
+  }
+
+  // node_modules/date-fns/esm/endOfMonth/index.js
+  function endOfMonth(dirtyDate) {
+    requiredArgs(1, arguments);
+    var date = toDate(dirtyDate);
+    var month = date.getMonth();
+    date.setFullYear(date.getFullYear(), month + 1, 0);
+    date.setHours(23, 59, 59, 999);
+    return date;
+  }
+
+  // node_modules/date-fns/esm/isLastDayOfMonth/index.js
+  function isLastDayOfMonth(dirtyDate) {
+    requiredArgs(1, arguments);
+    var date = toDate(dirtyDate);
+    return endOfDay(date).getTime() === endOfMonth(date).getTime();
+  }
+
+  // node_modules/date-fns/esm/differenceInMonths/index.js
+  function differenceInMonths(dirtyDateLeft, dirtyDateRight) {
+    requiredArgs(2, arguments);
+    var dateLeft = toDate(dirtyDateLeft);
+    var dateRight = toDate(dirtyDateRight);
+    var sign = compareAsc(dateLeft, dateRight);
+    var difference = Math.abs(differenceInCalendarMonths(dateLeft, dateRight));
+    var result;
+    if (difference < 1) {
+      result = 0;
+    } else {
+      if (dateLeft.getMonth() === 1 && dateLeft.getDate() > 27) {
+        dateLeft.setDate(30);
+      }
+      dateLeft.setMonth(dateLeft.getMonth() - sign * difference);
+      var isLastMonthNotFull = compareAsc(dateLeft, dateRight) === -sign;
+      if (isLastDayOfMonth(toDate(dirtyDateLeft)) && difference === 1 && compareAsc(dirtyDateLeft, dateRight) === 1) {
+        isLastMonthNotFull = false;
+      }
+      result = sign * (difference - Number(isLastMonthNotFull));
+    }
+    return result === 0 ? 0 : result;
+  }
+
+  // node_modules/date-fns/esm/differenceInSeconds/index.js
+  function differenceInSeconds(dateLeft, dateRight, options) {
+    requiredArgs(2, arguments);
+    var diff = differenceInMilliseconds(dateLeft, dateRight) / 1e3;
+    return getRoundingMethod(options === null || options === void 0 ? void 0 : options.roundingMethod)(diff);
+  }
+
+  // node_modules/date-fns/esm/subMilliseconds/index.js
+  function subMilliseconds(dirtyDate, dirtyAmount) {
+    requiredArgs(2, arguments);
+    var amount = toInteger(dirtyAmount);
+    return addMilliseconds(dirtyDate, -amount);
+  }
+
+  // node_modules/date-fns/esm/_lib/getUTCDayOfYear/index.js
+  var MILLISECONDS_IN_DAY = 864e5;
+  function getUTCDayOfYear(dirtyDate) {
+    requiredArgs(1, arguments);
+    var date = toDate(dirtyDate);
+    var timestamp = date.getTime();
+    date.setUTCMonth(0, 1);
+    date.setUTCHours(0, 0, 0, 0);
+    var startOfYearTimestamp = date.getTime();
+    var difference = timestamp - startOfYearTimestamp;
+    return Math.floor(difference / MILLISECONDS_IN_DAY) + 1;
+  }
+
+  // node_modules/date-fns/esm/_lib/startOfUTCISOWeek/index.js
+  function startOfUTCISOWeek(dirtyDate) {
+    requiredArgs(1, arguments);
+    var weekStartsOn = 1;
+    var date = toDate(dirtyDate);
+    var day = date.getUTCDay();
+    var diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
+    date.setUTCDate(date.getUTCDate() - diff);
+    date.setUTCHours(0, 0, 0, 0);
+    return date;
+  }
+
+  // node_modules/date-fns/esm/_lib/getUTCISOWeekYear/index.js
+  function getUTCISOWeekYear(dirtyDate) {
+    requiredArgs(1, arguments);
+    var date = toDate(dirtyDate);
+    var year = date.getUTCFullYear();
+    var fourthOfJanuaryOfNextYear = new Date(0);
+    fourthOfJanuaryOfNextYear.setUTCFullYear(year + 1, 0, 4);
+    fourthOfJanuaryOfNextYear.setUTCHours(0, 0, 0, 0);
+    var startOfNextYear = startOfUTCISOWeek(fourthOfJanuaryOfNextYear);
+    var fourthOfJanuaryOfThisYear = new Date(0);
+    fourthOfJanuaryOfThisYear.setUTCFullYear(year, 0, 4);
+    fourthOfJanuaryOfThisYear.setUTCHours(0, 0, 0, 0);
+    var startOfThisYear = startOfUTCISOWeek(fourthOfJanuaryOfThisYear);
+    if (date.getTime() >= startOfNextYear.getTime()) {
+      return year + 1;
+    } else if (date.getTime() >= startOfThisYear.getTime()) {
+      return year;
+    } else {
+      return year - 1;
+    }
+  }
+
+  // node_modules/date-fns/esm/_lib/startOfUTCISOWeekYear/index.js
+  function startOfUTCISOWeekYear(dirtyDate) {
+    requiredArgs(1, arguments);
+    var year = getUTCISOWeekYear(dirtyDate);
+    var fourthOfJanuary = new Date(0);
+    fourthOfJanuary.setUTCFullYear(year, 0, 4);
+    fourthOfJanuary.setUTCHours(0, 0, 0, 0);
+    var date = startOfUTCISOWeek(fourthOfJanuary);
+    return date;
+  }
+
+  // node_modules/date-fns/esm/_lib/getUTCISOWeek/index.js
+  var MILLISECONDS_IN_WEEK = 6048e5;
+  function getUTCISOWeek(dirtyDate) {
+    requiredArgs(1, arguments);
+    var date = toDate(dirtyDate);
+    var diff = startOfUTCISOWeek(date).getTime() - startOfUTCISOWeekYear(date).getTime();
+    return Math.round(diff / MILLISECONDS_IN_WEEK) + 1;
+  }
+
+  // node_modules/date-fns/esm/_lib/startOfUTCWeek/index.js
+  function startOfUTCWeek(dirtyDate, options) {
+    var _ref, _ref2, _ref3, _options$weekStartsOn, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
+    requiredArgs(1, arguments);
+    var defaultOptions2 = getDefaultOptions();
+    var weekStartsOn = toInteger((_ref = (_ref2 = (_ref3 = (_options$weekStartsOn = options === null || options === void 0 ? void 0 : options.weekStartsOn) !== null && _options$weekStartsOn !== void 0 ? _options$weekStartsOn : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.weekStartsOn) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions2.weekStartsOn) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions2.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.weekStartsOn) !== null && _ref !== void 0 ? _ref : 0);
+    if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
+      throw new RangeError("weekStartsOn must be between 0 and 6 inclusively");
+    }
+    var date = toDate(dirtyDate);
+    var day = date.getUTCDay();
+    var diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
+    date.setUTCDate(date.getUTCDate() - diff);
+    date.setUTCHours(0, 0, 0, 0);
+    return date;
+  }
+
+  // node_modules/date-fns/esm/_lib/getUTCWeekYear/index.js
+  function getUTCWeekYear(dirtyDate, options) {
+    var _ref, _ref2, _ref3, _options$firstWeekCon, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
+    requiredArgs(1, arguments);
+    var date = toDate(dirtyDate);
+    var year = date.getUTCFullYear();
+    var defaultOptions2 = getDefaultOptions();
+    var firstWeekContainsDate = toInteger((_ref = (_ref2 = (_ref3 = (_options$firstWeekCon = options === null || options === void 0 ? void 0 : options.firstWeekContainsDate) !== null && _options$firstWeekCon !== void 0 ? _options$firstWeekCon : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.firstWeekContainsDate) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions2.firstWeekContainsDate) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions2.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.firstWeekContainsDate) !== null && _ref !== void 0 ? _ref : 1);
+    if (!(firstWeekContainsDate >= 1 && firstWeekContainsDate <= 7)) {
+      throw new RangeError("firstWeekContainsDate must be between 1 and 7 inclusively");
+    }
+    var firstWeekOfNextYear = new Date(0);
+    firstWeekOfNextYear.setUTCFullYear(year + 1, 0, firstWeekContainsDate);
+    firstWeekOfNextYear.setUTCHours(0, 0, 0, 0);
+    var startOfNextYear = startOfUTCWeek(firstWeekOfNextYear, options);
+    var firstWeekOfThisYear = new Date(0);
+    firstWeekOfThisYear.setUTCFullYear(year, 0, firstWeekContainsDate);
+    firstWeekOfThisYear.setUTCHours(0, 0, 0, 0);
+    var startOfThisYear = startOfUTCWeek(firstWeekOfThisYear, options);
+    if (date.getTime() >= startOfNextYear.getTime()) {
+      return year + 1;
+    } else if (date.getTime() >= startOfThisYear.getTime()) {
+      return year;
+    } else {
+      return year - 1;
+    }
+  }
+
+  // node_modules/date-fns/esm/_lib/startOfUTCWeekYear/index.js
+  function startOfUTCWeekYear(dirtyDate, options) {
+    var _ref, _ref2, _ref3, _options$firstWeekCon, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
+    requiredArgs(1, arguments);
+    var defaultOptions2 = getDefaultOptions();
+    var firstWeekContainsDate = toInteger((_ref = (_ref2 = (_ref3 = (_options$firstWeekCon = options === null || options === void 0 ? void 0 : options.firstWeekContainsDate) !== null && _options$firstWeekCon !== void 0 ? _options$firstWeekCon : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.firstWeekContainsDate) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions2.firstWeekContainsDate) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions2.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.firstWeekContainsDate) !== null && _ref !== void 0 ? _ref : 1);
+    var year = getUTCWeekYear(dirtyDate, options);
+    var firstWeek = new Date(0);
+    firstWeek.setUTCFullYear(year, 0, firstWeekContainsDate);
+    firstWeek.setUTCHours(0, 0, 0, 0);
+    var date = startOfUTCWeek(firstWeek, options);
+    return date;
+  }
+
+  // node_modules/date-fns/esm/_lib/getUTCWeek/index.js
+  var MILLISECONDS_IN_WEEK2 = 6048e5;
+  function getUTCWeek(dirtyDate, options) {
+    requiredArgs(1, arguments);
+    var date = toDate(dirtyDate);
+    var diff = startOfUTCWeek(date, options).getTime() - startOfUTCWeekYear(date, options).getTime();
+    return Math.round(diff / MILLISECONDS_IN_WEEK2) + 1;
+  }
+
+  // node_modules/date-fns/esm/_lib/addLeadingZeros/index.js
+  function addLeadingZeros(number2, targetLength) {
+    var sign = number2 < 0 ? "-" : "";
+    var output = Math.abs(number2).toString();
+    while (output.length < targetLength) {
+      output = "0" + output;
+    }
+    return sign + output;
+  }
+
+  // node_modules/date-fns/esm/_lib/format/lightFormatters/index.js
+  var formatters = {
+    y: function(date, token) {
+      var signedYear = date.getUTCFullYear();
+      var year = signedYear > 0 ? signedYear : 1 - signedYear;
+      return addLeadingZeros(token === "yy" ? year % 100 : year, token.length);
+    },
+    M: function(date, token) {
+      var month = date.getUTCMonth();
+      return token === "M" ? String(month + 1) : addLeadingZeros(month + 1, 2);
+    },
+    d: function(date, token) {
+      return addLeadingZeros(date.getUTCDate(), token.length);
+    },
+    a: function(date, token) {
+      var dayPeriodEnumValue = date.getUTCHours() / 12 >= 1 ? "pm" : "am";
+      switch (token) {
+        case "a":
+        case "aa":
+          return dayPeriodEnumValue.toUpperCase();
+        case "aaa":
+          return dayPeriodEnumValue;
+        case "aaaaa":
+          return dayPeriodEnumValue[0];
+        case "aaaa":
+        default:
+          return dayPeriodEnumValue === "am" ? "a.m." : "p.m.";
+      }
+    },
+    h: function(date, token) {
+      return addLeadingZeros(date.getUTCHours() % 12 || 12, token.length);
+    },
+    H: function(date, token) {
+      return addLeadingZeros(date.getUTCHours(), token.length);
+    },
+    m: function(date, token) {
+      return addLeadingZeros(date.getUTCMinutes(), token.length);
+    },
+    s: function(date, token) {
+      return addLeadingZeros(date.getUTCSeconds(), token.length);
+    },
+    S: function(date, token) {
+      var numberOfDigits = token.length;
+      var milliseconds = date.getUTCMilliseconds();
+      var fractionalSeconds = Math.floor(milliseconds * Math.pow(10, numberOfDigits - 3));
+      return addLeadingZeros(fractionalSeconds, token.length);
+    }
+  };
+  var lightFormatters_default = formatters;
+
+  // node_modules/date-fns/esm/_lib/format/formatters/index.js
+  var dayPeriodEnum = {
+    am: "am",
+    pm: "pm",
+    midnight: "midnight",
+    noon: "noon",
+    morning: "morning",
+    afternoon: "afternoon",
+    evening: "evening",
+    night: "night"
+  };
+  var formatters2 = {
+    G: function(date, token, localize2) {
+      var era = date.getUTCFullYear() > 0 ? 1 : 0;
+      switch (token) {
+        case "G":
+        case "GG":
+        case "GGG":
+          return localize2.era(era, {
+            width: "abbreviated"
+          });
+        case "GGGGG":
+          return localize2.era(era, {
+            width: "narrow"
+          });
+        case "GGGG":
+        default:
+          return localize2.era(era, {
+            width: "wide"
+          });
+      }
+    },
+    y: function(date, token, localize2) {
+      if (token === "yo") {
+        var signedYear = date.getUTCFullYear();
+        var year = signedYear > 0 ? signedYear : 1 - signedYear;
+        return localize2.ordinalNumber(year, {
+          unit: "year"
+        });
+      }
+      return lightFormatters_default.y(date, token);
+    },
+    Y: function(date, token, localize2, options) {
+      var signedWeekYear = getUTCWeekYear(date, options);
+      var weekYear = signedWeekYear > 0 ? signedWeekYear : 1 - signedWeekYear;
+      if (token === "YY") {
+        var twoDigitYear = weekYear % 100;
+        return addLeadingZeros(twoDigitYear, 2);
+      }
+      if (token === "Yo") {
+        return localize2.ordinalNumber(weekYear, {
+          unit: "year"
+        });
+      }
+      return addLeadingZeros(weekYear, token.length);
+    },
+    R: function(date, token) {
+      var isoWeekYear = getUTCISOWeekYear(date);
+      return addLeadingZeros(isoWeekYear, token.length);
+    },
+    u: function(date, token) {
+      var year = date.getUTCFullYear();
+      return addLeadingZeros(year, token.length);
+    },
+    Q: function(date, token, localize2) {
+      var quarter = Math.ceil((date.getUTCMonth() + 1) / 3);
+      switch (token) {
+        case "Q":
+          return String(quarter);
+        case "QQ":
+          return addLeadingZeros(quarter, 2);
+        case "Qo":
+          return localize2.ordinalNumber(quarter, {
+            unit: "quarter"
+          });
+        case "QQQ":
+          return localize2.quarter(quarter, {
+            width: "abbreviated",
+            context: "formatting"
+          });
+        case "QQQQQ":
+          return localize2.quarter(quarter, {
+            width: "narrow",
+            context: "formatting"
+          });
+        case "QQQQ":
+        default:
+          return localize2.quarter(quarter, {
+            width: "wide",
+            context: "formatting"
+          });
+      }
+    },
+    q: function(date, token, localize2) {
+      var quarter = Math.ceil((date.getUTCMonth() + 1) / 3);
+      switch (token) {
+        case "q":
+          return String(quarter);
+        case "qq":
+          return addLeadingZeros(quarter, 2);
+        case "qo":
+          return localize2.ordinalNumber(quarter, {
+            unit: "quarter"
+          });
+        case "qqq":
+          return localize2.quarter(quarter, {
+            width: "abbreviated",
+            context: "standalone"
+          });
+        case "qqqqq":
+          return localize2.quarter(quarter, {
+            width: "narrow",
+            context: "standalone"
+          });
+        case "qqqq":
+        default:
+          return localize2.quarter(quarter, {
+            width: "wide",
+            context: "standalone"
+          });
+      }
+    },
+    M: function(date, token, localize2) {
+      var month = date.getUTCMonth();
+      switch (token) {
+        case "M":
+        case "MM":
+          return lightFormatters_default.M(date, token);
+        case "Mo":
+          return localize2.ordinalNumber(month + 1, {
+            unit: "month"
+          });
+        case "MMM":
+          return localize2.month(month, {
+            width: "abbreviated",
+            context: "formatting"
+          });
+        case "MMMMM":
+          return localize2.month(month, {
+            width: "narrow",
+            context: "formatting"
+          });
+        case "MMMM":
+        default:
+          return localize2.month(month, {
+            width: "wide",
+            context: "formatting"
+          });
+      }
+    },
+    L: function(date, token, localize2) {
+      var month = date.getUTCMonth();
+      switch (token) {
+        case "L":
+          return String(month + 1);
+        case "LL":
+          return addLeadingZeros(month + 1, 2);
+        case "Lo":
+          return localize2.ordinalNumber(month + 1, {
+            unit: "month"
+          });
+        case "LLL":
+          return localize2.month(month, {
+            width: "abbreviated",
+            context: "standalone"
+          });
+        case "LLLLL":
+          return localize2.month(month, {
+            width: "narrow",
+            context: "standalone"
+          });
+        case "LLLL":
+        default:
+          return localize2.month(month, {
+            width: "wide",
+            context: "standalone"
+          });
+      }
+    },
+    w: function(date, token, localize2, options) {
+      var week = getUTCWeek(date, options);
+      if (token === "wo") {
+        return localize2.ordinalNumber(week, {
+          unit: "week"
+        });
+      }
+      return addLeadingZeros(week, token.length);
+    },
+    I: function(date, token, localize2) {
+      var isoWeek = getUTCISOWeek(date);
+      if (token === "Io") {
+        return localize2.ordinalNumber(isoWeek, {
+          unit: "week"
+        });
+      }
+      return addLeadingZeros(isoWeek, token.length);
+    },
+    d: function(date, token, localize2) {
+      if (token === "do") {
+        return localize2.ordinalNumber(date.getUTCDate(), {
+          unit: "date"
+        });
+      }
+      return lightFormatters_default.d(date, token);
+    },
+    D: function(date, token, localize2) {
+      var dayOfYear = getUTCDayOfYear(date);
+      if (token === "Do") {
+        return localize2.ordinalNumber(dayOfYear, {
+          unit: "dayOfYear"
+        });
+      }
+      return addLeadingZeros(dayOfYear, token.length);
+    },
+    E: function(date, token, localize2) {
+      var dayOfWeek = date.getUTCDay();
+      switch (token) {
+        case "E":
+        case "EE":
+        case "EEE":
+          return localize2.day(dayOfWeek, {
+            width: "abbreviated",
+            context: "formatting"
+          });
+        case "EEEEE":
+          return localize2.day(dayOfWeek, {
+            width: "narrow",
+            context: "formatting"
+          });
+        case "EEEEEE":
+          return localize2.day(dayOfWeek, {
+            width: "short",
+            context: "formatting"
+          });
+        case "EEEE":
+        default:
+          return localize2.day(dayOfWeek, {
+            width: "wide",
+            context: "formatting"
+          });
+      }
+    },
+    e: function(date, token, localize2, options) {
+      var dayOfWeek = date.getUTCDay();
+      var localDayOfWeek = (dayOfWeek - options.weekStartsOn + 8) % 7 || 7;
+      switch (token) {
+        case "e":
+          return String(localDayOfWeek);
+        case "ee":
+          return addLeadingZeros(localDayOfWeek, 2);
+        case "eo":
+          return localize2.ordinalNumber(localDayOfWeek, {
+            unit: "day"
+          });
+        case "eee":
+          return localize2.day(dayOfWeek, {
+            width: "abbreviated",
+            context: "formatting"
+          });
+        case "eeeee":
+          return localize2.day(dayOfWeek, {
+            width: "narrow",
+            context: "formatting"
+          });
+        case "eeeeee":
+          return localize2.day(dayOfWeek, {
+            width: "short",
+            context: "formatting"
+          });
+        case "eeee":
+        default:
+          return localize2.day(dayOfWeek, {
+            width: "wide",
+            context: "formatting"
+          });
+      }
+    },
+    c: function(date, token, localize2, options) {
+      var dayOfWeek = date.getUTCDay();
+      var localDayOfWeek = (dayOfWeek - options.weekStartsOn + 8) % 7 || 7;
+      switch (token) {
+        case "c":
+          return String(localDayOfWeek);
+        case "cc":
+          return addLeadingZeros(localDayOfWeek, token.length);
+        case "co":
+          return localize2.ordinalNumber(localDayOfWeek, {
+            unit: "day"
+          });
+        case "ccc":
+          return localize2.day(dayOfWeek, {
+            width: "abbreviated",
+            context: "standalone"
+          });
+        case "ccccc":
+          return localize2.day(dayOfWeek, {
+            width: "narrow",
+            context: "standalone"
+          });
+        case "cccccc":
+          return localize2.day(dayOfWeek, {
+            width: "short",
+            context: "standalone"
+          });
+        case "cccc":
+        default:
+          return localize2.day(dayOfWeek, {
+            width: "wide",
+            context: "standalone"
+          });
+      }
+    },
+    i: function(date, token, localize2) {
+      var dayOfWeek = date.getUTCDay();
+      var isoDayOfWeek = dayOfWeek === 0 ? 7 : dayOfWeek;
+      switch (token) {
+        case "i":
+          return String(isoDayOfWeek);
+        case "ii":
+          return addLeadingZeros(isoDayOfWeek, token.length);
+        case "io":
+          return localize2.ordinalNumber(isoDayOfWeek, {
+            unit: "day"
+          });
+        case "iii":
+          return localize2.day(dayOfWeek, {
+            width: "abbreviated",
+            context: "formatting"
+          });
+        case "iiiii":
+          return localize2.day(dayOfWeek, {
+            width: "narrow",
+            context: "formatting"
+          });
+        case "iiiiii":
+          return localize2.day(dayOfWeek, {
+            width: "short",
+            context: "formatting"
+          });
+        case "iiii":
+        default:
+          return localize2.day(dayOfWeek, {
+            width: "wide",
+            context: "formatting"
+          });
+      }
+    },
+    a: function(date, token, localize2) {
+      var hours = date.getUTCHours();
+      var dayPeriodEnumValue = hours / 12 >= 1 ? "pm" : "am";
+      switch (token) {
+        case "a":
+        case "aa":
+          return localize2.dayPeriod(dayPeriodEnumValue, {
+            width: "abbreviated",
+            context: "formatting"
+          });
+        case "aaa":
+          return localize2.dayPeriod(dayPeriodEnumValue, {
+            width: "abbreviated",
+            context: "formatting"
+          }).toLowerCase();
+        case "aaaaa":
+          return localize2.dayPeriod(dayPeriodEnumValue, {
+            width: "narrow",
+            context: "formatting"
+          });
+        case "aaaa":
+        default:
+          return localize2.dayPeriod(dayPeriodEnumValue, {
+            width: "wide",
+            context: "formatting"
+          });
+      }
+    },
+    b: function(date, token, localize2) {
+      var hours = date.getUTCHours();
+      var dayPeriodEnumValue;
+      if (hours === 12) {
+        dayPeriodEnumValue = dayPeriodEnum.noon;
+      } else if (hours === 0) {
+        dayPeriodEnumValue = dayPeriodEnum.midnight;
+      } else {
+        dayPeriodEnumValue = hours / 12 >= 1 ? "pm" : "am";
+      }
+      switch (token) {
+        case "b":
+        case "bb":
+          return localize2.dayPeriod(dayPeriodEnumValue, {
+            width: "abbreviated",
+            context: "formatting"
+          });
+        case "bbb":
+          return localize2.dayPeriod(dayPeriodEnumValue, {
+            width: "abbreviated",
+            context: "formatting"
+          }).toLowerCase();
+        case "bbbbb":
+          return localize2.dayPeriod(dayPeriodEnumValue, {
+            width: "narrow",
+            context: "formatting"
+          });
+        case "bbbb":
+        default:
+          return localize2.dayPeriod(dayPeriodEnumValue, {
+            width: "wide",
+            context: "formatting"
+          });
+      }
+    },
+    B: function(date, token, localize2) {
+      var hours = date.getUTCHours();
+      var dayPeriodEnumValue;
+      if (hours >= 17) {
+        dayPeriodEnumValue = dayPeriodEnum.evening;
+      } else if (hours >= 12) {
+        dayPeriodEnumValue = dayPeriodEnum.afternoon;
+      } else if (hours >= 4) {
+        dayPeriodEnumValue = dayPeriodEnum.morning;
+      } else {
+        dayPeriodEnumValue = dayPeriodEnum.night;
+      }
+      switch (token) {
+        case "B":
+        case "BB":
+        case "BBB":
+          return localize2.dayPeriod(dayPeriodEnumValue, {
+            width: "abbreviated",
+            context: "formatting"
+          });
+        case "BBBBB":
+          return localize2.dayPeriod(dayPeriodEnumValue, {
+            width: "narrow",
+            context: "formatting"
+          });
+        case "BBBB":
+        default:
+          return localize2.dayPeriod(dayPeriodEnumValue, {
+            width: "wide",
+            context: "formatting"
+          });
+      }
+    },
+    h: function(date, token, localize2) {
+      if (token === "ho") {
+        var hours = date.getUTCHours() % 12;
+        if (hours === 0)
+          hours = 12;
+        return localize2.ordinalNumber(hours, {
+          unit: "hour"
+        });
+      }
+      return lightFormatters_default.h(date, token);
+    },
+    H: function(date, token, localize2) {
+      if (token === "Ho") {
+        return localize2.ordinalNumber(date.getUTCHours(), {
+          unit: "hour"
+        });
+      }
+      return lightFormatters_default.H(date, token);
+    },
+    K: function(date, token, localize2) {
+      var hours = date.getUTCHours() % 12;
+      if (token === "Ko") {
+        return localize2.ordinalNumber(hours, {
+          unit: "hour"
+        });
+      }
+      return addLeadingZeros(hours, token.length);
+    },
+    k: function(date, token, localize2) {
+      var hours = date.getUTCHours();
+      if (hours === 0)
+        hours = 24;
+      if (token === "ko") {
+        return localize2.ordinalNumber(hours, {
+          unit: "hour"
+        });
+      }
+      return addLeadingZeros(hours, token.length);
+    },
+    m: function(date, token, localize2) {
+      if (token === "mo") {
+        return localize2.ordinalNumber(date.getUTCMinutes(), {
+          unit: "minute"
+        });
+      }
+      return lightFormatters_default.m(date, token);
+    },
+    s: function(date, token, localize2) {
+      if (token === "so") {
+        return localize2.ordinalNumber(date.getUTCSeconds(), {
+          unit: "second"
+        });
+      }
+      return lightFormatters_default.s(date, token);
+    },
+    S: function(date, token) {
+      return lightFormatters_default.S(date, token);
+    },
+    X: function(date, token, _localize, options) {
+      var originalDate = options._originalDate || date;
+      var timezoneOffset = originalDate.getTimezoneOffset();
+      if (timezoneOffset === 0) {
+        return "Z";
+      }
+      switch (token) {
+        case "X":
+          return formatTimezoneWithOptionalMinutes(timezoneOffset);
+        case "XXXX":
+        case "XX":
+          return formatTimezone(timezoneOffset);
+        case "XXXXX":
+        case "XXX":
+        default:
+          return formatTimezone(timezoneOffset, ":");
+      }
+    },
+    x: function(date, token, _localize, options) {
+      var originalDate = options._originalDate || date;
+      var timezoneOffset = originalDate.getTimezoneOffset();
+      switch (token) {
+        case "x":
+          return formatTimezoneWithOptionalMinutes(timezoneOffset);
+        case "xxxx":
+        case "xx":
+          return formatTimezone(timezoneOffset);
+        case "xxxxx":
+        case "xxx":
+        default:
+          return formatTimezone(timezoneOffset, ":");
+      }
+    },
+    O: function(date, token, _localize, options) {
+      var originalDate = options._originalDate || date;
+      var timezoneOffset = originalDate.getTimezoneOffset();
+      switch (token) {
+        case "O":
+        case "OO":
+        case "OOO":
+          return "GMT" + formatTimezoneShort(timezoneOffset, ":");
+        case "OOOO":
+        default:
+          return "GMT" + formatTimezone(timezoneOffset, ":");
+      }
+    },
+    z: function(date, token, _localize, options) {
+      var originalDate = options._originalDate || date;
+      var timezoneOffset = originalDate.getTimezoneOffset();
+      switch (token) {
+        case "z":
+        case "zz":
+        case "zzz":
+          return "GMT" + formatTimezoneShort(timezoneOffset, ":");
+        case "zzzz":
+        default:
+          return "GMT" + formatTimezone(timezoneOffset, ":");
+      }
+    },
+    t: function(date, token, _localize, options) {
+      var originalDate = options._originalDate || date;
+      var timestamp = Math.floor(originalDate.getTime() / 1e3);
+      return addLeadingZeros(timestamp, token.length);
+    },
+    T: function(date, token, _localize, options) {
+      var originalDate = options._originalDate || date;
+      var timestamp = originalDate.getTime();
+      return addLeadingZeros(timestamp, token.length);
+    }
+  };
+  function formatTimezoneShort(offset, dirtyDelimiter) {
+    var sign = offset > 0 ? "-" : "+";
+    var absOffset = Math.abs(offset);
+    var hours = Math.floor(absOffset / 60);
+    var minutes = absOffset % 60;
+    if (minutes === 0) {
+      return sign + String(hours);
+    }
+    var delimiter = dirtyDelimiter || "";
+    return sign + String(hours) + delimiter + addLeadingZeros(minutes, 2);
+  }
+  function formatTimezoneWithOptionalMinutes(offset, dirtyDelimiter) {
+    if (offset % 60 === 0) {
+      var sign = offset > 0 ? "-" : "+";
+      return sign + addLeadingZeros(Math.abs(offset) / 60, 2);
+    }
+    return formatTimezone(offset, dirtyDelimiter);
+  }
+  function formatTimezone(offset, dirtyDelimiter) {
+    var delimiter = dirtyDelimiter || "";
+    var sign = offset > 0 ? "-" : "+";
+    var absOffset = Math.abs(offset);
+    var hours = addLeadingZeros(Math.floor(absOffset / 60), 2);
+    var minutes = addLeadingZeros(absOffset % 60, 2);
+    return sign + hours + delimiter + minutes;
+  }
+  var formatters_default = formatters2;
+
+  // node_modules/date-fns/esm/_lib/format/longFormatters/index.js
+  var dateLongFormatter = function(pattern, formatLong2) {
+    switch (pattern) {
+      case "P":
+        return formatLong2.date({
+          width: "short"
+        });
+      case "PP":
+        return formatLong2.date({
+          width: "medium"
+        });
+      case "PPP":
+        return formatLong2.date({
+          width: "long"
+        });
+      case "PPPP":
+      default:
+        return formatLong2.date({
+          width: "full"
+        });
+    }
+  };
+  var timeLongFormatter = function(pattern, formatLong2) {
+    switch (pattern) {
+      case "p":
+        return formatLong2.time({
+          width: "short"
+        });
+      case "pp":
+        return formatLong2.time({
+          width: "medium"
+        });
+      case "ppp":
+        return formatLong2.time({
+          width: "long"
+        });
+      case "pppp":
+      default:
+        return formatLong2.time({
+          width: "full"
+        });
+    }
+  };
+  var dateTimeLongFormatter = function(pattern, formatLong2) {
+    var matchResult = pattern.match(/(P+)(p+)?/) || [];
+    var datePattern = matchResult[1];
+    var timePattern = matchResult[2];
+    if (!timePattern) {
+      return dateLongFormatter(pattern, formatLong2);
+    }
+    var dateTimeFormat;
+    switch (datePattern) {
+      case "P":
+        dateTimeFormat = formatLong2.dateTime({
+          width: "short"
+        });
+        break;
+      case "PP":
+        dateTimeFormat = formatLong2.dateTime({
+          width: "medium"
+        });
+        break;
+      case "PPP":
+        dateTimeFormat = formatLong2.dateTime({
+          width: "long"
+        });
+        break;
+      case "PPPP":
+      default:
+        dateTimeFormat = formatLong2.dateTime({
+          width: "full"
+        });
+        break;
+    }
+    return dateTimeFormat.replace("{{date}}", dateLongFormatter(datePattern, formatLong2)).replace("{{time}}", timeLongFormatter(timePattern, formatLong2));
+  };
+  var longFormatters = {
+    p: timeLongFormatter,
+    P: dateTimeLongFormatter
+  };
+  var longFormatters_default = longFormatters;
+
+  // node_modules/date-fns/esm/_lib/protectedTokens/index.js
+  var protectedDayOfYearTokens = ["D", "DD"];
+  var protectedWeekYearTokens = ["YY", "YYYY"];
+  function isProtectedDayOfYearToken(token) {
+    return protectedDayOfYearTokens.indexOf(token) !== -1;
+  }
+  function isProtectedWeekYearToken(token) {
+    return protectedWeekYearTokens.indexOf(token) !== -1;
+  }
+  function throwProtectedError(token, format2, input) {
+    if (token === "YYYY") {
+      throw new RangeError("Use `yyyy` instead of `YYYY` (in `".concat(format2, "`) for formatting years to the input `").concat(input, "`; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md"));
+    } else if (token === "YY") {
+      throw new RangeError("Use `yy` instead of `YY` (in `".concat(format2, "`) for formatting years to the input `").concat(input, "`; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md"));
+    } else if (token === "D") {
+      throw new RangeError("Use `d` instead of `D` (in `".concat(format2, "`) for formatting days of the month to the input `").concat(input, "`; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md"));
+    } else if (token === "DD") {
+      throw new RangeError("Use `dd` instead of `DD` (in `".concat(format2, "`) for formatting days of the month to the input `").concat(input, "`; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md"));
+    }
+  }
+
+  // node_modules/date-fns/esm/locale/en-US/_lib/formatDistance/index.js
+  var formatDistanceLocale = {
+    lessThanXSeconds: {
+      one: "less than a second",
+      other: "less than {{count}} seconds"
+    },
+    xSeconds: {
+      one: "1 second",
+      other: "{{count}} seconds"
+    },
+    halfAMinute: "half a minute",
+    lessThanXMinutes: {
+      one: "less than a minute",
+      other: "less than {{count}} minutes"
+    },
+    xMinutes: {
+      one: "1 minute",
+      other: "{{count}} minutes"
+    },
+    aboutXHours: {
+      one: "about 1 hour",
+      other: "about {{count}} hours"
+    },
+    xHours: {
+      one: "1 hour",
+      other: "{{count}} hours"
+    },
+    xDays: {
+      one: "1 day",
+      other: "{{count}} days"
+    },
+    aboutXWeeks: {
+      one: "about 1 week",
+      other: "about {{count}} weeks"
+    },
+    xWeeks: {
+      one: "1 week",
+      other: "{{count}} weeks"
+    },
+    aboutXMonths: {
+      one: "about 1 month",
+      other: "about {{count}} months"
+    },
+    xMonths: {
+      one: "1 month",
+      other: "{{count}} months"
+    },
+    aboutXYears: {
+      one: "about 1 year",
+      other: "about {{count}} years"
+    },
+    xYears: {
+      one: "1 year",
+      other: "{{count}} years"
+    },
+    overXYears: {
+      one: "over 1 year",
+      other: "over {{count}} years"
+    },
+    almostXYears: {
+      one: "almost 1 year",
+      other: "almost {{count}} years"
+    }
+  };
+  var formatDistance = function(token, count, options) {
+    var result;
+    var tokenValue = formatDistanceLocale[token];
+    if (typeof tokenValue === "string") {
+      result = tokenValue;
+    } else if (count === 1) {
+      result = tokenValue.one;
+    } else {
+      result = tokenValue.other.replace("{{count}}", count.toString());
+    }
+    if (options !== null && options !== void 0 && options.addSuffix) {
+      if (options.comparison && options.comparison > 0) {
+        return "in " + result;
+      } else {
+        return result + " ago";
+      }
+    }
+    return result;
+  };
+  var formatDistance_default = formatDistance;
+
+  // node_modules/date-fns/esm/locale/_lib/buildFormatLongFn/index.js
+  function buildFormatLongFn(args) {
+    return function() {
+      var options = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
+      var width = options.width ? String(options.width) : args.defaultWidth;
+      var format2 = args.formats[width] || args.formats[args.defaultWidth];
+      return format2;
+    };
+  }
+
+  // node_modules/date-fns/esm/locale/en-US/_lib/formatLong/index.js
+  var dateFormats = {
+    full: "EEEE, MMMM do, y",
+    long: "MMMM do, y",
+    medium: "MMM d, y",
+    short: "MM/dd/yyyy"
+  };
+  var timeFormats = {
+    full: "h:mm:ss a zzzz",
+    long: "h:mm:ss a z",
+    medium: "h:mm:ss a",
+    short: "h:mm a"
+  };
+  var dateTimeFormats = {
+    full: "{{date}} 'at' {{time}}",
+    long: "{{date}} 'at' {{time}}",
+    medium: "{{date}}, {{time}}",
+    short: "{{date}}, {{time}}"
+  };
+  var formatLong = {
+    date: buildFormatLongFn({
+      formats: dateFormats,
+      defaultWidth: "full"
+    }),
+    time: buildFormatLongFn({
+      formats: timeFormats,
+      defaultWidth: "full"
+    }),
+    dateTime: buildFormatLongFn({
+      formats: dateTimeFormats,
+      defaultWidth: "full"
+    })
+  };
+  var formatLong_default = formatLong;
+
+  // node_modules/date-fns/esm/locale/en-US/_lib/formatRelative/index.js
+  var formatRelativeLocale = {
+    lastWeek: "'last' eeee 'at' p",
+    yesterday: "'yesterday at' p",
+    today: "'today at' p",
+    tomorrow: "'tomorrow at' p",
+    nextWeek: "eeee 'at' p",
+    other: "P"
+  };
+  var formatRelative = function(token, _date, _baseDate, _options) {
+    return formatRelativeLocale[token];
+  };
+  var formatRelative_default = formatRelative;
+
+  // node_modules/date-fns/esm/locale/_lib/buildLocalizeFn/index.js
+  function buildLocalizeFn(args) {
+    return function(dirtyIndex, options) {
+      var context2 = options !== null && options !== void 0 && options.context ? String(options.context) : "standalone";
+      var valuesArray;
+      if (context2 === "formatting" && args.formattingValues) {
+        var defaultWidth = args.defaultFormattingWidth || args.defaultWidth;
+        var width = options !== null && options !== void 0 && options.width ? String(options.width) : defaultWidth;
+        valuesArray = args.formattingValues[width] || args.formattingValues[defaultWidth];
+      } else {
+        var _defaultWidth = args.defaultWidth;
+        var _width = options !== null && options !== void 0 && options.width ? String(options.width) : args.defaultWidth;
+        valuesArray = args.values[_width] || args.values[_defaultWidth];
+      }
+      var index2 = args.argumentCallback ? args.argumentCallback(dirtyIndex) : dirtyIndex;
+      return valuesArray[index2];
+    };
+  }
+
+  // node_modules/date-fns/esm/locale/en-US/_lib/localize/index.js
+  var eraValues = {
+    narrow: ["B", "A"],
+    abbreviated: ["BC", "AD"],
+    wide: ["Before Christ", "Anno Domini"]
+  };
+  var quarterValues = {
+    narrow: ["1", "2", "3", "4"],
+    abbreviated: ["Q1", "Q2", "Q3", "Q4"],
+    wide: ["1st quarter", "2nd quarter", "3rd quarter", "4th quarter"]
+  };
+  var monthValues = {
+    narrow: ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"],
+    abbreviated: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    wide: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+  };
+  var dayValues = {
+    narrow: ["S", "M", "T", "W", "T", "F", "S"],
+    short: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+    abbreviated: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    wide: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+  };
+  var dayPeriodValues = {
+    narrow: {
+      am: "a",
+      pm: "p",
+      midnight: "mi",
+      noon: "n",
+      morning: "morning",
+      afternoon: "afternoon",
+      evening: "evening",
+      night: "night"
+    },
+    abbreviated: {
+      am: "AM",
+      pm: "PM",
+      midnight: "midnight",
+      noon: "noon",
+      morning: "morning",
+      afternoon: "afternoon",
+      evening: "evening",
+      night: "night"
+    },
+    wide: {
+      am: "a.m.",
+      pm: "p.m.",
+      midnight: "midnight",
+      noon: "noon",
+      morning: "morning",
+      afternoon: "afternoon",
+      evening: "evening",
+      night: "night"
+    }
+  };
+  var formattingDayPeriodValues = {
+    narrow: {
+      am: "a",
+      pm: "p",
+      midnight: "mi",
+      noon: "n",
+      morning: "in the morning",
+      afternoon: "in the afternoon",
+      evening: "in the evening",
+      night: "at night"
+    },
+    abbreviated: {
+      am: "AM",
+      pm: "PM",
+      midnight: "midnight",
+      noon: "noon",
+      morning: "in the morning",
+      afternoon: "in the afternoon",
+      evening: "in the evening",
+      night: "at night"
+    },
+    wide: {
+      am: "a.m.",
+      pm: "p.m.",
+      midnight: "midnight",
+      noon: "noon",
+      morning: "in the morning",
+      afternoon: "in the afternoon",
+      evening: "in the evening",
+      night: "at night"
+    }
+  };
+  var ordinalNumber = function(dirtyNumber, _options) {
+    var number2 = Number(dirtyNumber);
+    var rem100 = number2 % 100;
+    if (rem100 > 20 || rem100 < 10) {
+      switch (rem100 % 10) {
+        case 1:
+          return number2 + "st";
+        case 2:
+          return number2 + "nd";
+        case 3:
+          return number2 + "rd";
+      }
+    }
+    return number2 + "th";
+  };
+  var localize = {
+    ordinalNumber,
+    era: buildLocalizeFn({
+      values: eraValues,
+      defaultWidth: "wide"
+    }),
+    quarter: buildLocalizeFn({
+      values: quarterValues,
+      defaultWidth: "wide",
+      argumentCallback: function(quarter) {
+        return quarter - 1;
+      }
+    }),
+    month: buildLocalizeFn({
+      values: monthValues,
+      defaultWidth: "wide"
+    }),
+    day: buildLocalizeFn({
+      values: dayValues,
+      defaultWidth: "wide"
+    }),
+    dayPeriod: buildLocalizeFn({
+      values: dayPeriodValues,
+      defaultWidth: "wide",
+      formattingValues: formattingDayPeriodValues,
+      defaultFormattingWidth: "wide"
+    })
+  };
+  var localize_default = localize;
+
+  // node_modules/date-fns/esm/locale/_lib/buildMatchFn/index.js
+  function buildMatchFn(args) {
+    return function(string2) {
+      var options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+      var width = options.width;
+      var matchPattern = width && args.matchPatterns[width] || args.matchPatterns[args.defaultMatchWidth];
+      var matchResult = string2.match(matchPattern);
+      if (!matchResult) {
+        return null;
+      }
+      var matchedString = matchResult[0];
+      var parsePatterns = width && args.parsePatterns[width] || args.parsePatterns[args.defaultParseWidth];
+      var key = Array.isArray(parsePatterns) ? findIndex(parsePatterns, function(pattern) {
+        return pattern.test(matchedString);
+      }) : findKey(parsePatterns, function(pattern) {
+        return pattern.test(matchedString);
+      });
+      var value2;
+      value2 = args.valueCallback ? args.valueCallback(key) : key;
+      value2 = options.valueCallback ? options.valueCallback(value2) : value2;
+      var rest = string2.slice(matchedString.length);
+      return {
+        value: value2,
+        rest
+      };
+    };
+  }
+  function findKey(object, predicate) {
+    for (var key in object) {
+      if (object.hasOwnProperty(key) && predicate(object[key])) {
+        return key;
+      }
+    }
+    return void 0;
+  }
+  function findIndex(array, predicate) {
+    for (var key = 0; key < array.length; key++) {
+      if (predicate(array[key])) {
+        return key;
+      }
+    }
+    return void 0;
+  }
+
+  // node_modules/date-fns/esm/locale/_lib/buildMatchPatternFn/index.js
+  function buildMatchPatternFn(args) {
+    return function(string2) {
+      var options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+      var matchResult = string2.match(args.matchPattern);
+      if (!matchResult)
+        return null;
+      var matchedString = matchResult[0];
+      var parseResult = string2.match(args.parsePattern);
+      if (!parseResult)
+        return null;
+      var value2 = args.valueCallback ? args.valueCallback(parseResult[0]) : parseResult[0];
+      value2 = options.valueCallback ? options.valueCallback(value2) : value2;
+      var rest = string2.slice(matchedString.length);
+      return {
+        value: value2,
+        rest
+      };
+    };
+  }
+
+  // node_modules/date-fns/esm/locale/en-US/_lib/match/index.js
+  var matchOrdinalNumberPattern = /^(\d+)(th|st|nd|rd)?/i;
+  var parseOrdinalNumberPattern = /\d+/i;
+  var matchEraPatterns = {
+    narrow: /^(b|a)/i,
+    abbreviated: /^(b\.?\s?c\.?|b\.?\s?c\.?\s?e\.?|a\.?\s?d\.?|c\.?\s?e\.?)/i,
+    wide: /^(before christ|before common era|anno domini|common era)/i
+  };
+  var parseEraPatterns = {
+    any: [/^b/i, /^(a|c)/i]
+  };
+  var matchQuarterPatterns = {
+    narrow: /^[1234]/i,
+    abbreviated: /^q[1234]/i,
+    wide: /^[1234](th|st|nd|rd)? quarter/i
+  };
+  var parseQuarterPatterns = {
+    any: [/1/i, /2/i, /3/i, /4/i]
+  };
+  var matchMonthPatterns = {
+    narrow: /^[jfmasond]/i,
+    abbreviated: /^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i,
+    wide: /^(january|february|march|april|may|june|july|august|september|october|november|december)/i
+  };
+  var parseMonthPatterns = {
+    narrow: [/^j/i, /^f/i, /^m/i, /^a/i, /^m/i, /^j/i, /^j/i, /^a/i, /^s/i, /^o/i, /^n/i, /^d/i],
+    any: [/^ja/i, /^f/i, /^mar/i, /^ap/i, /^may/i, /^jun/i, /^jul/i, /^au/i, /^s/i, /^o/i, /^n/i, /^d/i]
+  };
+  var matchDayPatterns = {
+    narrow: /^[smtwf]/i,
+    short: /^(su|mo|tu|we|th|fr|sa)/i,
+    abbreviated: /^(sun|mon|tue|wed|thu|fri|sat)/i,
+    wide: /^(sunday|monday|tuesday|wednesday|thursday|friday|saturday)/i
+  };
+  var parseDayPatterns = {
+    narrow: [/^s/i, /^m/i, /^t/i, /^w/i, /^t/i, /^f/i, /^s/i],
+    any: [/^su/i, /^m/i, /^tu/i, /^w/i, /^th/i, /^f/i, /^sa/i]
+  };
+  var matchDayPeriodPatterns = {
+    narrow: /^(a|p|mi|n|(in the|at) (morning|afternoon|evening|night))/i,
+    any: /^([ap]\.?\s?m\.?|midnight|noon|(in the|at) (morning|afternoon|evening|night))/i
+  };
+  var parseDayPeriodPatterns = {
+    any: {
+      am: /^a/i,
+      pm: /^p/i,
+      midnight: /^mi/i,
+      noon: /^no/i,
+      morning: /morning/i,
+      afternoon: /afternoon/i,
+      evening: /evening/i,
+      night: /night/i
+    }
+  };
+  var match = {
+    ordinalNumber: buildMatchPatternFn({
+      matchPattern: matchOrdinalNumberPattern,
+      parsePattern: parseOrdinalNumberPattern,
+      valueCallback: function(value2) {
+        return parseInt(value2, 10);
+      }
+    }),
+    era: buildMatchFn({
+      matchPatterns: matchEraPatterns,
+      defaultMatchWidth: "wide",
+      parsePatterns: parseEraPatterns,
+      defaultParseWidth: "any"
+    }),
+    quarter: buildMatchFn({
+      matchPatterns: matchQuarterPatterns,
+      defaultMatchWidth: "wide",
+      parsePatterns: parseQuarterPatterns,
+      defaultParseWidth: "any",
+      valueCallback: function(index2) {
+        return index2 + 1;
+      }
+    }),
+    month: buildMatchFn({
+      matchPatterns: matchMonthPatterns,
+      defaultMatchWidth: "wide",
+      parsePatterns: parseMonthPatterns,
+      defaultParseWidth: "any"
+    }),
+    day: buildMatchFn({
+      matchPatterns: matchDayPatterns,
+      defaultMatchWidth: "wide",
+      parsePatterns: parseDayPatterns,
+      defaultParseWidth: "any"
+    }),
+    dayPeriod: buildMatchFn({
+      matchPatterns: matchDayPeriodPatterns,
+      defaultMatchWidth: "any",
+      parsePatterns: parseDayPeriodPatterns,
+      defaultParseWidth: "any"
+    })
+  };
+  var match_default = match;
+
+  // node_modules/date-fns/esm/locale/en-US/index.js
+  var locale = {
+    code: "en-US",
+    formatDistance: formatDistance_default,
+    formatLong: formatLong_default,
+    formatRelative: formatRelative_default,
+    localize: localize_default,
+    match: match_default,
+    options: {
+      weekStartsOn: 0,
+      firstWeekContainsDate: 1
+    }
+  };
+  var en_US_default = locale;
+
+  // node_modules/date-fns/esm/_lib/defaultLocale/index.js
+  var defaultLocale_default = en_US_default;
+
+  // node_modules/date-fns/esm/format/index.js
+  var formattingTokensRegExp = /[yYQqMLwIdDecihHKkms]o|(\w)\1*|''|'(''|[^'])+('|$)|./g;
+  var longFormattingTokensRegExp = /P+p+|P+|p+|''|'(''|[^'])+('|$)|./g;
+  var escapedStringRegExp = /^'([^]*?)'?$/;
+  var doubleQuoteRegExp = /''/g;
+  var unescapedLatinCharacterRegExp = /[a-zA-Z]/;
+  function format(dirtyDate, dirtyFormatStr, options) {
+    var _ref, _options$locale, _ref2, _ref3, _ref4, _options$firstWeekCon, _options$locale2, _options$locale2$opti, _defaultOptions$local, _defaultOptions$local2, _ref5, _ref6, _ref7, _options$weekStartsOn, _options$locale3, _options$locale3$opti, _defaultOptions$local3, _defaultOptions$local4;
+    requiredArgs(2, arguments);
+    var formatStr = String(dirtyFormatStr);
+    var defaultOptions2 = getDefaultOptions();
+    var locale2 = (_ref = (_options$locale = options === null || options === void 0 ? void 0 : options.locale) !== null && _options$locale !== void 0 ? _options$locale : defaultOptions2.locale) !== null && _ref !== void 0 ? _ref : defaultLocale_default;
+    var firstWeekContainsDate = toInteger((_ref2 = (_ref3 = (_ref4 = (_options$firstWeekCon = options === null || options === void 0 ? void 0 : options.firstWeekContainsDate) !== null && _options$firstWeekCon !== void 0 ? _options$firstWeekCon : options === null || options === void 0 ? void 0 : (_options$locale2 = options.locale) === null || _options$locale2 === void 0 ? void 0 : (_options$locale2$opti = _options$locale2.options) === null || _options$locale2$opti === void 0 ? void 0 : _options$locale2$opti.firstWeekContainsDate) !== null && _ref4 !== void 0 ? _ref4 : defaultOptions2.firstWeekContainsDate) !== null && _ref3 !== void 0 ? _ref3 : (_defaultOptions$local = defaultOptions2.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.firstWeekContainsDate) !== null && _ref2 !== void 0 ? _ref2 : 1);
+    if (!(firstWeekContainsDate >= 1 && firstWeekContainsDate <= 7)) {
+      throw new RangeError("firstWeekContainsDate must be between 1 and 7 inclusively");
+    }
+    var weekStartsOn = toInteger((_ref5 = (_ref6 = (_ref7 = (_options$weekStartsOn = options === null || options === void 0 ? void 0 : options.weekStartsOn) !== null && _options$weekStartsOn !== void 0 ? _options$weekStartsOn : options === null || options === void 0 ? void 0 : (_options$locale3 = options.locale) === null || _options$locale3 === void 0 ? void 0 : (_options$locale3$opti = _options$locale3.options) === null || _options$locale3$opti === void 0 ? void 0 : _options$locale3$opti.weekStartsOn) !== null && _ref7 !== void 0 ? _ref7 : defaultOptions2.weekStartsOn) !== null && _ref6 !== void 0 ? _ref6 : (_defaultOptions$local3 = defaultOptions2.locale) === null || _defaultOptions$local3 === void 0 ? void 0 : (_defaultOptions$local4 = _defaultOptions$local3.options) === null || _defaultOptions$local4 === void 0 ? void 0 : _defaultOptions$local4.weekStartsOn) !== null && _ref5 !== void 0 ? _ref5 : 0);
+    if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
+      throw new RangeError("weekStartsOn must be between 0 and 6 inclusively");
+    }
+    if (!locale2.localize) {
+      throw new RangeError("locale must contain localize property");
+    }
+    if (!locale2.formatLong) {
+      throw new RangeError("locale must contain formatLong property");
+    }
+    var originalDate = toDate(dirtyDate);
+    if (!isValid(originalDate)) {
+      throw new RangeError("Invalid time value");
+    }
+    var timezoneOffset = getTimezoneOffsetInMilliseconds(originalDate);
+    var utcDate = subMilliseconds(originalDate, timezoneOffset);
+    var formatterOptions = {
+      firstWeekContainsDate,
+      weekStartsOn,
+      locale: locale2,
+      _originalDate: originalDate
+    };
+    var result = formatStr.match(longFormattingTokensRegExp).map(function(substring) {
+      var firstCharacter = substring[0];
+      if (firstCharacter === "p" || firstCharacter === "P") {
+        var longFormatter = longFormatters_default[firstCharacter];
+        return longFormatter(substring, locale2.formatLong);
+      }
+      return substring;
+    }).join("").match(formattingTokensRegExp).map(function(substring) {
+      if (substring === "''") {
+        return "'";
+      }
+      var firstCharacter = substring[0];
+      if (firstCharacter === "'") {
+        return cleanEscapedString(substring);
+      }
+      var formatter = formatters_default[firstCharacter];
+      if (formatter) {
+        if (!(options !== null && options !== void 0 && options.useAdditionalWeekYearTokens) && isProtectedWeekYearToken(substring)) {
+          throwProtectedError(substring, dirtyFormatStr, String(dirtyDate));
+        }
+        if (!(options !== null && options !== void 0 && options.useAdditionalDayOfYearTokens) && isProtectedDayOfYearToken(substring)) {
+          throwProtectedError(substring, dirtyFormatStr, String(dirtyDate));
+        }
+        return formatter(utcDate, substring, locale2.localize, formatterOptions);
+      }
+      if (firstCharacter.match(unescapedLatinCharacterRegExp)) {
+        throw new RangeError("Format string contains an unescaped latin alphabet character `" + firstCharacter + "`");
+      }
+      return substring;
+    }).join("");
+    return result;
+  }
+  function cleanEscapedString(input) {
+    var matched = input.match(escapedStringRegExp);
+    if (!matched) {
+      return input;
+    }
+    return matched[1].replace(doubleQuoteRegExp, "'");
+  }
+
+  // node_modules/date-fns/esm/_lib/assign/index.js
+  function assign(target, object) {
+    if (target == null) {
+      throw new TypeError("assign requires that input parameter not be null or undefined");
+    }
+    for (var property in object) {
+      if (Object.prototype.hasOwnProperty.call(object, property)) {
+        ;
+        target[property] = object[property];
+      }
+    }
+    return target;
+  }
+
+  // node_modules/date-fns/esm/_lib/cloneObject/index.js
+  function cloneObject(object) {
+    return assign({}, object);
+  }
+
+  // node_modules/date-fns/esm/formatDistance/index.js
+  var MINUTES_IN_DAY = 1440;
+  var MINUTES_IN_ALMOST_TWO_DAYS = 2520;
+  var MINUTES_IN_MONTH = 43200;
+  var MINUTES_IN_TWO_MONTHS = 86400;
+  function formatDistance2(dirtyDate, dirtyBaseDate, options) {
+    var _ref, _options$locale;
+    requiredArgs(2, arguments);
+    var defaultOptions2 = getDefaultOptions();
+    var locale2 = (_ref = (_options$locale = options === null || options === void 0 ? void 0 : options.locale) !== null && _options$locale !== void 0 ? _options$locale : defaultOptions2.locale) !== null && _ref !== void 0 ? _ref : defaultLocale_default;
+    if (!locale2.formatDistance) {
+      throw new RangeError("locale must contain formatDistance property");
+    }
+    var comparison = compareAsc(dirtyDate, dirtyBaseDate);
+    if (isNaN(comparison)) {
+      throw new RangeError("Invalid time value");
+    }
+    var localizeOptions = assign(cloneObject(options), {
+      addSuffix: Boolean(options === null || options === void 0 ? void 0 : options.addSuffix),
+      comparison
+    });
+    var dateLeft;
+    var dateRight;
+    if (comparison > 0) {
+      dateLeft = toDate(dirtyBaseDate);
+      dateRight = toDate(dirtyDate);
+    } else {
+      dateLeft = toDate(dirtyDate);
+      dateRight = toDate(dirtyBaseDate);
+    }
+    var seconds = differenceInSeconds(dateRight, dateLeft);
+    var offsetInSeconds = (getTimezoneOffsetInMilliseconds(dateRight) - getTimezoneOffsetInMilliseconds(dateLeft)) / 1e3;
+    var minutes = Math.round((seconds - offsetInSeconds) / 60);
+    var months;
+    if (minutes < 2) {
+      if (options !== null && options !== void 0 && options.includeSeconds) {
+        if (seconds < 5) {
+          return locale2.formatDistance("lessThanXSeconds", 5, localizeOptions);
+        } else if (seconds < 10) {
+          return locale2.formatDistance("lessThanXSeconds", 10, localizeOptions);
+        } else if (seconds < 20) {
+          return locale2.formatDistance("lessThanXSeconds", 20, localizeOptions);
+        } else if (seconds < 40) {
+          return locale2.formatDistance("halfAMinute", 0, localizeOptions);
+        } else if (seconds < 60) {
+          return locale2.formatDistance("lessThanXMinutes", 1, localizeOptions);
+        } else {
+          return locale2.formatDistance("xMinutes", 1, localizeOptions);
+        }
+      } else {
+        if (minutes === 0) {
+          return locale2.formatDistance("lessThanXMinutes", 1, localizeOptions);
+        } else {
+          return locale2.formatDistance("xMinutes", minutes, localizeOptions);
+        }
+      }
+    } else if (minutes < 45) {
+      return locale2.formatDistance("xMinutes", minutes, localizeOptions);
+    } else if (minutes < 90) {
+      return locale2.formatDistance("aboutXHours", 1, localizeOptions);
+    } else if (minutes < MINUTES_IN_DAY) {
+      var hours = Math.round(minutes / 60);
+      return locale2.formatDistance("aboutXHours", hours, localizeOptions);
+    } else if (minutes < MINUTES_IN_ALMOST_TWO_DAYS) {
+      return locale2.formatDistance("xDays", 1, localizeOptions);
+    } else if (minutes < MINUTES_IN_MONTH) {
+      var days = Math.round(minutes / MINUTES_IN_DAY);
+      return locale2.formatDistance("xDays", days, localizeOptions);
+    } else if (minutes < MINUTES_IN_TWO_MONTHS) {
+      months = Math.round(minutes / MINUTES_IN_MONTH);
+      return locale2.formatDistance("aboutXMonths", months, localizeOptions);
+    }
+    months = differenceInMonths(dateRight, dateLeft);
+    if (months < 12) {
+      var nearestMonth = Math.round(minutes / MINUTES_IN_MONTH);
+      return locale2.formatDistance("xMonths", nearestMonth, localizeOptions);
+    } else {
+      var monthsSinceStartOfYear = months % 12;
+      var years = Math.floor(months / 12);
+      if (monthsSinceStartOfYear < 3) {
+        return locale2.formatDistance("aboutXYears", years, localizeOptions);
+      } else if (monthsSinceStartOfYear < 9) {
+        return locale2.formatDistance("overXYears", years, localizeOptions);
+      } else {
+        return locale2.formatDistance("almostXYears", years + 1, localizeOptions);
+      }
+    }
+  }
+
+  // node_modules/date-fns/esm/formatDistanceStrict/index.js
+  var MILLISECONDS_IN_MINUTE = 1e3 * 60;
+  var MINUTES_IN_DAY2 = 60 * 24;
+  var MINUTES_IN_MONTH2 = MINUTES_IN_DAY2 * 30;
+  var MINUTES_IN_YEAR = MINUTES_IN_DAY2 * 365;
+  function formatDistanceStrict(dirtyDate, dirtyBaseDate, options) {
+    var _ref, _options$locale, _options$roundingMeth;
+    requiredArgs(2, arguments);
+    var defaultOptions2 = getDefaultOptions();
+    var locale2 = (_ref = (_options$locale = options === null || options === void 0 ? void 0 : options.locale) !== null && _options$locale !== void 0 ? _options$locale : defaultOptions2.locale) !== null && _ref !== void 0 ? _ref : defaultLocale_default;
+    if (!locale2.formatDistance) {
+      throw new RangeError("locale must contain localize.formatDistance property");
+    }
+    var comparison = compareAsc(dirtyDate, dirtyBaseDate);
+    if (isNaN(comparison)) {
+      throw new RangeError("Invalid time value");
+    }
+    var localizeOptions = assign(cloneObject(options), {
+      addSuffix: Boolean(options === null || options === void 0 ? void 0 : options.addSuffix),
+      comparison
+    });
+    var dateLeft;
+    var dateRight;
+    if (comparison > 0) {
+      dateLeft = toDate(dirtyBaseDate);
+      dateRight = toDate(dirtyDate);
+    } else {
+      dateLeft = toDate(dirtyDate);
+      dateRight = toDate(dirtyBaseDate);
+    }
+    var roundingMethod = String((_options$roundingMeth = options === null || options === void 0 ? void 0 : options.roundingMethod) !== null && _options$roundingMeth !== void 0 ? _options$roundingMeth : "round");
+    var roundingMethodFn;
+    if (roundingMethod === "floor") {
+      roundingMethodFn = Math.floor;
+    } else if (roundingMethod === "ceil") {
+      roundingMethodFn = Math.ceil;
+    } else if (roundingMethod === "round") {
+      roundingMethodFn = Math.round;
+    } else {
+      throw new RangeError("roundingMethod must be 'floor', 'ceil' or 'round'");
+    }
+    var milliseconds = dateRight.getTime() - dateLeft.getTime();
+    var minutes = milliseconds / MILLISECONDS_IN_MINUTE;
+    var timezoneOffset = getTimezoneOffsetInMilliseconds(dateRight) - getTimezoneOffsetInMilliseconds(dateLeft);
+    var dstNormalizedMinutes = (milliseconds - timezoneOffset) / MILLISECONDS_IN_MINUTE;
+    var defaultUnit = options === null || options === void 0 ? void 0 : options.unit;
+    var unit;
+    if (!defaultUnit) {
+      if (minutes < 1) {
+        unit = "second";
+      } else if (minutes < 60) {
+        unit = "minute";
+      } else if (minutes < MINUTES_IN_DAY2) {
+        unit = "hour";
+      } else if (dstNormalizedMinutes < MINUTES_IN_MONTH2) {
+        unit = "day";
+      } else if (dstNormalizedMinutes < MINUTES_IN_YEAR) {
+        unit = "month";
+      } else {
+        unit = "year";
+      }
+    } else {
+      unit = String(defaultUnit);
+    }
+    if (unit === "second") {
+      var seconds = roundingMethodFn(milliseconds / 1e3);
+      return locale2.formatDistance("xSeconds", seconds, localizeOptions);
+    } else if (unit === "minute") {
+      var roundedMinutes = roundingMethodFn(minutes);
+      return locale2.formatDistance("xMinutes", roundedMinutes, localizeOptions);
+    } else if (unit === "hour") {
+      var hours = roundingMethodFn(minutes / 60);
+      return locale2.formatDistance("xHours", hours, localizeOptions);
+    } else if (unit === "day") {
+      var days = roundingMethodFn(dstNormalizedMinutes / MINUTES_IN_DAY2);
+      return locale2.formatDistance("xDays", days, localizeOptions);
+    } else if (unit === "month") {
+      var months = roundingMethodFn(dstNormalizedMinutes / MINUTES_IN_MONTH2);
+      return months === 12 && defaultUnit !== "month" ? locale2.formatDistance("xYears", 1, localizeOptions) : locale2.formatDistance("xMonths", months, localizeOptions);
+    } else if (unit === "year") {
+      var years = roundingMethodFn(dstNormalizedMinutes / MINUTES_IN_YEAR);
+      return locale2.formatDistance("xYears", years, localizeOptions);
+    }
+    throw new RangeError("unit must be 'second', 'minute', 'hour', 'day', 'month' or 'year'");
+  }
+
+  // node_modules/date-fns/esm/formatDistanceToNow/index.js
+  function formatDistanceToNow(dirtyDate, options) {
+    requiredArgs(1, arguments);
+    return formatDistance2(dirtyDate, Date.now(), options);
+  }
+
+  // node_modules/date-fns/esm/formatDuration/index.js
+  var defaultFormat = ["years", "months", "weeks", "days", "hours", "minutes", "seconds"];
+  function formatDuration(duration, options) {
+    var _ref, _options$locale, _options$format, _options$zero, _options$delimiter;
+    if (arguments.length < 1) {
+      throw new TypeError("1 argument required, but only ".concat(arguments.length, " present"));
+    }
+    var defaultOptions2 = getDefaultOptions();
+    var locale2 = (_ref = (_options$locale = options === null || options === void 0 ? void 0 : options.locale) !== null && _options$locale !== void 0 ? _options$locale : defaultOptions2.locale) !== null && _ref !== void 0 ? _ref : defaultLocale_default;
+    var format2 = (_options$format = options === null || options === void 0 ? void 0 : options.format) !== null && _options$format !== void 0 ? _options$format : defaultFormat;
+    var zero = (_options$zero = options === null || options === void 0 ? void 0 : options.zero) !== null && _options$zero !== void 0 ? _options$zero : false;
+    var delimiter = (_options$delimiter = options === null || options === void 0 ? void 0 : options.delimiter) !== null && _options$delimiter !== void 0 ? _options$delimiter : " ";
+    if (!locale2.formatDistance) {
+      return "";
+    }
+    var result = format2.reduce(function(acc, unit) {
+      var token = "x".concat(unit.replace(/(^.)/, function(m3) {
+        return m3.toUpperCase();
+      }));
+      var value2 = duration[unit];
+      if (typeof value2 === "number" && (zero || duration[unit])) {
+        return acc.concat(locale2.formatDistance(token, value2));
+      }
+      return acc;
+    }, []).join(delimiter);
+    return result;
+  }
+
+  // src/chat.ts
   var ChatEvent = class extends EventTarget {
     emit(data) {
       this.dispatchEvent(new CustomEvent("chat", { detail: data }));
@@ -26931,7 +28792,7 @@ to {
       if (self2) {
         return;
       }
-      const words = msg.trim().toLowerCase().split(" ");
+      const tmiTs = Number(context2["tmi-sent-ts"]);
       const data = {
         id: context2.id,
         color: context2.color,
@@ -26941,7 +28802,13 @@ to {
         username: context2.username,
         type: context2["message-type"],
         msg,
-        words
+        returningChatter: context2["returning-chatter"],
+        firstMessage: context2["first-msg"],
+        isMod: context2["mod"],
+        userId: context2["user-id"],
+        tmiTs,
+        receivedTs: Date.now(),
+        formattedTmiTs: format(new Date(tmiTs), "HH:mm:ss")
       };
       chatEmitter.emit(data);
     }
@@ -27017,6 +28884,17 @@ to {
   // src/components/screens/Main.tsx
   var import_react16 = __toModule(require_react());
 
+  // src/utils/types.ts
+  var AlertTheme;
+  (function(AlertTheme2) {
+    AlertTheme2["GW2"] = "gw2";
+  })(AlertTheme || (AlertTheme = {}));
+  var GiveawayType;
+  (function(GiveawayType2) {
+    GiveawayType2["Instant"] = "Instant";
+    GiveawayType2["Chat"] = "Chat";
+  })(GiveawayType || (GiveawayType = {}));
+
   // src/utils/misc.ts
   function removeIdx(ar, idx) {
     return ar.slice(0, idx).concat(ar.slice(idx + 1));
@@ -27036,6 +28914,25 @@ to {
       return chatItem.msg.match(translatedCommand) !== null;
     }
   }
+  var defaultSettings = {
+    autoConnect: true,
+    subLuck: 2,
+    numberOfWinners: 1,
+    followersOnly: true,
+    chatCommand: "",
+    winnerMessage: "PartyHat @name won!",
+    sendMessages: false,
+    blocklist: ["streamelements", "streamlabs", "nightbot"],
+    autoScroll: true,
+    spamLimit: 1,
+    performanceMode: false,
+    forfeitCommand: "",
+    alertDuration: 4e3,
+    alertTheme: AlertTheme.GW2
+  };
+  var alertThemeMap = {
+    [AlertTheme.GW2]: "Guild Wars 2"
+  };
 
   // src/utils/auth.ts
   var import_react8 = __toModule(require_react());
@@ -27268,13 +29165,6 @@ to {
       return dumbCache;
     }
   }
-
-  // src/utils/types.ts
-  var GiveawayType;
-  (function(GiveawayType2) {
-    GiveawayType2["Instant"] = "Instant";
-    GiveawayType2["Chat"] = "Chat";
-  })(GiveawayType || (GiveawayType = {}));
 
   // node_modules/engine.io-parser/build/esm/commons.js
   var PACKET_TYPES = Object.create(null);
@@ -29541,7 +31431,14 @@ to {
       if (!winner)
         return;
       pastWinners.add(winner.username);
-      relay_default.emit("event", { winner: winner.username, channelId: channelInfo.userId, login: channelInfo.login });
+      relay_default.emit("event", {
+        type: "winner",
+        winner: winner.username,
+        channelId: channelInfo.userId,
+        login: channelInfo.login,
+        alertDuration: settings.alertDuration,
+        alertTheme: settings.alertTheme
+      });
       return {
         login: winner.username,
         wasSubscriber: winner.isSubscriber,
@@ -29587,7 +31484,14 @@ to {
       if (!winner)
         return;
       pastWinners.add(winner);
-      relay_default.emit("event", { winner, channelId: channelInfo.userId, login: channelInfo.login });
+      relay_default.emit("event", {
+        type: "winner",
+        winner,
+        channelId: channelInfo.userId,
+        login: channelInfo.login,
+        alertDuration: settings.alertDuration,
+        alertTheme: settings.alertTheme
+      });
       return winner;
     }).filter(Boolean).map((u3) => {
       var _a, _b;
@@ -29715,6 +31619,12 @@ to {
   }
   function FaRobot(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 640 512" }, "child": [{ "tag": "path", "attr": { "d": "M32,224H64V416H32A31.96166,31.96166,0,0,1,0,384V256A31.96166,31.96166,0,0,1,32,224Zm512-48V448a64.06328,64.06328,0,0,1-64,64H160a64.06328,64.06328,0,0,1-64-64V176a79.974,79.974,0,0,1,80-80H288V32a32,32,0,0,1,64,0V96H464A79.974,79.974,0,0,1,544,176ZM264,256a40,40,0,1,0-40,40A39.997,39.997,0,0,0,264,256Zm-8,128H192v32h64Zm96,0H288v32h64ZM456,256a40,40,0,1,0-40,40A39.997,39.997,0,0,0,456,256Zm-8,128H384v32h64ZM640,256V384a31.96166,31.96166,0,0,1-32,32H576V224h32A31.96166,31.96166,0,0,1,640,256Z" } }] })(props);
+  }
+  function FaSave(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 448 512" }, "child": [{ "tag": "path", "attr": { "d": "M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM224 416c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64s64 28.654 64 64c0 35.346-28.654 64-64 64zm96-304.52V212c0 6.627-5.373 12-12 12H76c-6.627 0-12-5.373-12-12V108c0-6.627 5.373-12 12-12h228.52c3.183 0 6.235 1.264 8.485 3.515l3.48 3.48A11.996 11.996 0 0 1 320 111.48z" } }] })(props);
+  }
+  function FaSearch(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" } }] })(props);
   }
   function FaTimesCircle(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z" } }] })(props);
@@ -30226,641 +32136,10 @@ to {
   };
   var index_es_default = Countdown$1;
 
-  // node_modules/date-fns/esm/_lib/defaultOptions/index.js
-  var defaultOptions = {};
-  function getDefaultOptions() {
-    return defaultOptions;
-  }
-
-  // node_modules/date-fns/esm/_lib/getTimezoneOffsetInMilliseconds/index.js
-  function getTimezoneOffsetInMilliseconds(date) {
-    var utcDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()));
-    utcDate.setUTCFullYear(date.getFullYear());
-    return date.getTime() - utcDate.getTime();
-  }
-
-  // node_modules/date-fns/esm/_lib/requiredArgs/index.js
-  function requiredArgs(required, args) {
-    if (args.length < required) {
-      throw new TypeError(required + " argument" + (required > 1 ? "s" : "") + " required, but only " + args.length + " present");
-    }
-  }
-
-  // node_modules/date-fns/esm/toDate/index.js
-  function toDate(argument) {
-    requiredArgs(1, arguments);
-    var argStr = Object.prototype.toString.call(argument);
-    if (argument instanceof Date || typeof argument === "object" && argStr === "[object Date]") {
-      return new Date(argument.getTime());
-    } else if (typeof argument === "number" || argStr === "[object Number]") {
-      return new Date(argument);
-    } else {
-      if ((typeof argument === "string" || argStr === "[object String]") && typeof console !== "undefined") {
-        console.warn("Starting with v2.0.0-beta.1 date-fns doesn't accept strings as date arguments. Please use `parseISO` to parse strings. See: https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#string-arguments");
-        console.warn(new Error().stack);
-      }
-      return new Date(NaN);
-    }
-  }
-
-  // node_modules/date-fns/esm/compareAsc/index.js
-  function compareAsc(dirtyDateLeft, dirtyDateRight) {
-    requiredArgs(2, arguments);
-    var dateLeft = toDate(dirtyDateLeft);
-    var dateRight = toDate(dirtyDateRight);
-    var diff = dateLeft.getTime() - dateRight.getTime();
-    if (diff < 0) {
-      return -1;
-    } else if (diff > 0) {
-      return 1;
-    } else {
-      return diff;
-    }
-  }
-
-  // node_modules/date-fns/esm/_lib/assign/index.js
-  function assign(target, object) {
-    if (target == null) {
-      throw new TypeError("assign requires that input parameter not be null or undefined");
-    }
-    for (var property in object) {
-      if (Object.prototype.hasOwnProperty.call(object, property)) {
-        ;
-        target[property] = object[property];
-      }
-    }
-    return target;
-  }
-
-  // node_modules/date-fns/esm/_lib/cloneObject/index.js
-  function cloneObject(object) {
-    return assign({}, object);
-  }
-
-  // node_modules/date-fns/esm/locale/en-US/_lib/formatDistance/index.js
-  var formatDistanceLocale = {
-    lessThanXSeconds: {
-      one: "less than a second",
-      other: "less than {{count}} seconds"
-    },
-    xSeconds: {
-      one: "1 second",
-      other: "{{count}} seconds"
-    },
-    halfAMinute: "half a minute",
-    lessThanXMinutes: {
-      one: "less than a minute",
-      other: "less than {{count}} minutes"
-    },
-    xMinutes: {
-      one: "1 minute",
-      other: "{{count}} minutes"
-    },
-    aboutXHours: {
-      one: "about 1 hour",
-      other: "about {{count}} hours"
-    },
-    xHours: {
-      one: "1 hour",
-      other: "{{count}} hours"
-    },
-    xDays: {
-      one: "1 day",
-      other: "{{count}} days"
-    },
-    aboutXWeeks: {
-      one: "about 1 week",
-      other: "about {{count}} weeks"
-    },
-    xWeeks: {
-      one: "1 week",
-      other: "{{count}} weeks"
-    },
-    aboutXMonths: {
-      one: "about 1 month",
-      other: "about {{count}} months"
-    },
-    xMonths: {
-      one: "1 month",
-      other: "{{count}} months"
-    },
-    aboutXYears: {
-      one: "about 1 year",
-      other: "about {{count}} years"
-    },
-    xYears: {
-      one: "1 year",
-      other: "{{count}} years"
-    },
-    overXYears: {
-      one: "over 1 year",
-      other: "over {{count}} years"
-    },
-    almostXYears: {
-      one: "almost 1 year",
-      other: "almost {{count}} years"
-    }
-  };
-  var formatDistance = function(token, count, options) {
-    var result;
-    var tokenValue = formatDistanceLocale[token];
-    if (typeof tokenValue === "string") {
-      result = tokenValue;
-    } else if (count === 1) {
-      result = tokenValue.one;
-    } else {
-      result = tokenValue.other.replace("{{count}}", count.toString());
-    }
-    if (options !== null && options !== void 0 && options.addSuffix) {
-      if (options.comparison && options.comparison > 0) {
-        return "in " + result;
-      } else {
-        return result + " ago";
-      }
-    }
-    return result;
-  };
-  var formatDistance_default = formatDistance;
-
-  // node_modules/date-fns/esm/locale/_lib/buildFormatLongFn/index.js
-  function buildFormatLongFn(args) {
-    return function() {
-      var options = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
-      var width = options.width ? String(options.width) : args.defaultWidth;
-      var format2 = args.formats[width] || args.formats[args.defaultWidth];
-      return format2;
-    };
-  }
-
-  // node_modules/date-fns/esm/locale/en-US/_lib/formatLong/index.js
-  var dateFormats = {
-    full: "EEEE, MMMM do, y",
-    long: "MMMM do, y",
-    medium: "MMM d, y",
-    short: "MM/dd/yyyy"
-  };
-  var timeFormats = {
-    full: "h:mm:ss a zzzz",
-    long: "h:mm:ss a z",
-    medium: "h:mm:ss a",
-    short: "h:mm a"
-  };
-  var dateTimeFormats = {
-    full: "{{date}} 'at' {{time}}",
-    long: "{{date}} 'at' {{time}}",
-    medium: "{{date}}, {{time}}",
-    short: "{{date}}, {{time}}"
-  };
-  var formatLong = {
-    date: buildFormatLongFn({
-      formats: dateFormats,
-      defaultWidth: "full"
-    }),
-    time: buildFormatLongFn({
-      formats: timeFormats,
-      defaultWidth: "full"
-    }),
-    dateTime: buildFormatLongFn({
-      formats: dateTimeFormats,
-      defaultWidth: "full"
-    })
-  };
-  var formatLong_default = formatLong;
-
-  // node_modules/date-fns/esm/locale/en-US/_lib/formatRelative/index.js
-  var formatRelativeLocale = {
-    lastWeek: "'last' eeee 'at' p",
-    yesterday: "'yesterday at' p",
-    today: "'today at' p",
-    tomorrow: "'tomorrow at' p",
-    nextWeek: "eeee 'at' p",
-    other: "P"
-  };
-  var formatRelative = function(token, _date, _baseDate, _options) {
-    return formatRelativeLocale[token];
-  };
-  var formatRelative_default = formatRelative;
-
-  // node_modules/date-fns/esm/locale/_lib/buildLocalizeFn/index.js
-  function buildLocalizeFn(args) {
-    return function(dirtyIndex, options) {
-      var context2 = options !== null && options !== void 0 && options.context ? String(options.context) : "standalone";
-      var valuesArray;
-      if (context2 === "formatting" && args.formattingValues) {
-        var defaultWidth = args.defaultFormattingWidth || args.defaultWidth;
-        var width = options !== null && options !== void 0 && options.width ? String(options.width) : defaultWidth;
-        valuesArray = args.formattingValues[width] || args.formattingValues[defaultWidth];
-      } else {
-        var _defaultWidth = args.defaultWidth;
-        var _width = options !== null && options !== void 0 && options.width ? String(options.width) : args.defaultWidth;
-        valuesArray = args.values[_width] || args.values[_defaultWidth];
-      }
-      var index2 = args.argumentCallback ? args.argumentCallback(dirtyIndex) : dirtyIndex;
-      return valuesArray[index2];
-    };
-  }
-
-  // node_modules/date-fns/esm/locale/en-US/_lib/localize/index.js
-  var eraValues = {
-    narrow: ["B", "A"],
-    abbreviated: ["BC", "AD"],
-    wide: ["Before Christ", "Anno Domini"]
-  };
-  var quarterValues = {
-    narrow: ["1", "2", "3", "4"],
-    abbreviated: ["Q1", "Q2", "Q3", "Q4"],
-    wide: ["1st quarter", "2nd quarter", "3rd quarter", "4th quarter"]
-  };
-  var monthValues = {
-    narrow: ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"],
-    abbreviated: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    wide: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-  };
-  var dayValues = {
-    narrow: ["S", "M", "T", "W", "T", "F", "S"],
-    short: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
-    abbreviated: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-    wide: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-  };
-  var dayPeriodValues = {
-    narrow: {
-      am: "a",
-      pm: "p",
-      midnight: "mi",
-      noon: "n",
-      morning: "morning",
-      afternoon: "afternoon",
-      evening: "evening",
-      night: "night"
-    },
-    abbreviated: {
-      am: "AM",
-      pm: "PM",
-      midnight: "midnight",
-      noon: "noon",
-      morning: "morning",
-      afternoon: "afternoon",
-      evening: "evening",
-      night: "night"
-    },
-    wide: {
-      am: "a.m.",
-      pm: "p.m.",
-      midnight: "midnight",
-      noon: "noon",
-      morning: "morning",
-      afternoon: "afternoon",
-      evening: "evening",
-      night: "night"
-    }
-  };
-  var formattingDayPeriodValues = {
-    narrow: {
-      am: "a",
-      pm: "p",
-      midnight: "mi",
-      noon: "n",
-      morning: "in the morning",
-      afternoon: "in the afternoon",
-      evening: "in the evening",
-      night: "at night"
-    },
-    abbreviated: {
-      am: "AM",
-      pm: "PM",
-      midnight: "midnight",
-      noon: "noon",
-      morning: "in the morning",
-      afternoon: "in the afternoon",
-      evening: "in the evening",
-      night: "at night"
-    },
-    wide: {
-      am: "a.m.",
-      pm: "p.m.",
-      midnight: "midnight",
-      noon: "noon",
-      morning: "in the morning",
-      afternoon: "in the afternoon",
-      evening: "in the evening",
-      night: "at night"
-    }
-  };
-  var ordinalNumber = function(dirtyNumber, _options) {
-    var number2 = Number(dirtyNumber);
-    var rem100 = number2 % 100;
-    if (rem100 > 20 || rem100 < 10) {
-      switch (rem100 % 10) {
-        case 1:
-          return number2 + "st";
-        case 2:
-          return number2 + "nd";
-        case 3:
-          return number2 + "rd";
-      }
-    }
-    return number2 + "th";
-  };
-  var localize = {
-    ordinalNumber,
-    era: buildLocalizeFn({
-      values: eraValues,
-      defaultWidth: "wide"
-    }),
-    quarter: buildLocalizeFn({
-      values: quarterValues,
-      defaultWidth: "wide",
-      argumentCallback: function(quarter) {
-        return quarter - 1;
-      }
-    }),
-    month: buildLocalizeFn({
-      values: monthValues,
-      defaultWidth: "wide"
-    }),
-    day: buildLocalizeFn({
-      values: dayValues,
-      defaultWidth: "wide"
-    }),
-    dayPeriod: buildLocalizeFn({
-      values: dayPeriodValues,
-      defaultWidth: "wide",
-      formattingValues: formattingDayPeriodValues,
-      defaultFormattingWidth: "wide"
-    })
-  };
-  var localize_default = localize;
-
-  // node_modules/date-fns/esm/locale/_lib/buildMatchFn/index.js
-  function buildMatchFn(args) {
-    return function(string2) {
-      var options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
-      var width = options.width;
-      var matchPattern = width && args.matchPatterns[width] || args.matchPatterns[args.defaultMatchWidth];
-      var matchResult = string2.match(matchPattern);
-      if (!matchResult) {
-        return null;
-      }
-      var matchedString = matchResult[0];
-      var parsePatterns = width && args.parsePatterns[width] || args.parsePatterns[args.defaultParseWidth];
-      var key = Array.isArray(parsePatterns) ? findIndex(parsePatterns, function(pattern) {
-        return pattern.test(matchedString);
-      }) : findKey(parsePatterns, function(pattern) {
-        return pattern.test(matchedString);
-      });
-      var value2;
-      value2 = args.valueCallback ? args.valueCallback(key) : key;
-      value2 = options.valueCallback ? options.valueCallback(value2) : value2;
-      var rest = string2.slice(matchedString.length);
-      return {
-        value: value2,
-        rest
-      };
-    };
-  }
-  function findKey(object, predicate) {
-    for (var key in object) {
-      if (object.hasOwnProperty(key) && predicate(object[key])) {
-        return key;
-      }
-    }
-    return void 0;
-  }
-  function findIndex(array, predicate) {
-    for (var key = 0; key < array.length; key++) {
-      if (predicate(array[key])) {
-        return key;
-      }
-    }
-    return void 0;
-  }
-
-  // node_modules/date-fns/esm/locale/_lib/buildMatchPatternFn/index.js
-  function buildMatchPatternFn(args) {
-    return function(string2) {
-      var options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
-      var matchResult = string2.match(args.matchPattern);
-      if (!matchResult)
-        return null;
-      var matchedString = matchResult[0];
-      var parseResult = string2.match(args.parsePattern);
-      if (!parseResult)
-        return null;
-      var value2 = args.valueCallback ? args.valueCallback(parseResult[0]) : parseResult[0];
-      value2 = options.valueCallback ? options.valueCallback(value2) : value2;
-      var rest = string2.slice(matchedString.length);
-      return {
-        value: value2,
-        rest
-      };
-    };
-  }
-
-  // node_modules/date-fns/esm/locale/en-US/_lib/match/index.js
-  var matchOrdinalNumberPattern = /^(\d+)(th|st|nd|rd)?/i;
-  var parseOrdinalNumberPattern = /\d+/i;
-  var matchEraPatterns = {
-    narrow: /^(b|a)/i,
-    abbreviated: /^(b\.?\s?c\.?|b\.?\s?c\.?\s?e\.?|a\.?\s?d\.?|c\.?\s?e\.?)/i,
-    wide: /^(before christ|before common era|anno domini|common era)/i
-  };
-  var parseEraPatterns = {
-    any: [/^b/i, /^(a|c)/i]
-  };
-  var matchQuarterPatterns = {
-    narrow: /^[1234]/i,
-    abbreviated: /^q[1234]/i,
-    wide: /^[1234](th|st|nd|rd)? quarter/i
-  };
-  var parseQuarterPatterns = {
-    any: [/1/i, /2/i, /3/i, /4/i]
-  };
-  var matchMonthPatterns = {
-    narrow: /^[jfmasond]/i,
-    abbreviated: /^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i,
-    wide: /^(january|february|march|april|may|june|july|august|september|october|november|december)/i
-  };
-  var parseMonthPatterns = {
-    narrow: [/^j/i, /^f/i, /^m/i, /^a/i, /^m/i, /^j/i, /^j/i, /^a/i, /^s/i, /^o/i, /^n/i, /^d/i],
-    any: [/^ja/i, /^f/i, /^mar/i, /^ap/i, /^may/i, /^jun/i, /^jul/i, /^au/i, /^s/i, /^o/i, /^n/i, /^d/i]
-  };
-  var matchDayPatterns = {
-    narrow: /^[smtwf]/i,
-    short: /^(su|mo|tu|we|th|fr|sa)/i,
-    abbreviated: /^(sun|mon|tue|wed|thu|fri|sat)/i,
-    wide: /^(sunday|monday|tuesday|wednesday|thursday|friday|saturday)/i
-  };
-  var parseDayPatterns = {
-    narrow: [/^s/i, /^m/i, /^t/i, /^w/i, /^t/i, /^f/i, /^s/i],
-    any: [/^su/i, /^m/i, /^tu/i, /^w/i, /^th/i, /^f/i, /^sa/i]
-  };
-  var matchDayPeriodPatterns = {
-    narrow: /^(a|p|mi|n|(in the|at) (morning|afternoon|evening|night))/i,
-    any: /^([ap]\.?\s?m\.?|midnight|noon|(in the|at) (morning|afternoon|evening|night))/i
-  };
-  var parseDayPeriodPatterns = {
-    any: {
-      am: /^a/i,
-      pm: /^p/i,
-      midnight: /^mi/i,
-      noon: /^no/i,
-      morning: /morning/i,
-      afternoon: /afternoon/i,
-      evening: /evening/i,
-      night: /night/i
-    }
-  };
-  var match = {
-    ordinalNumber: buildMatchPatternFn({
-      matchPattern: matchOrdinalNumberPattern,
-      parsePattern: parseOrdinalNumberPattern,
-      valueCallback: function(value2) {
-        return parseInt(value2, 10);
-      }
-    }),
-    era: buildMatchFn({
-      matchPatterns: matchEraPatterns,
-      defaultMatchWidth: "wide",
-      parsePatterns: parseEraPatterns,
-      defaultParseWidth: "any"
-    }),
-    quarter: buildMatchFn({
-      matchPatterns: matchQuarterPatterns,
-      defaultMatchWidth: "wide",
-      parsePatterns: parseQuarterPatterns,
-      defaultParseWidth: "any",
-      valueCallback: function(index2) {
-        return index2 + 1;
-      }
-    }),
-    month: buildMatchFn({
-      matchPatterns: matchMonthPatterns,
-      defaultMatchWidth: "wide",
-      parsePatterns: parseMonthPatterns,
-      defaultParseWidth: "any"
-    }),
-    day: buildMatchFn({
-      matchPatterns: matchDayPatterns,
-      defaultMatchWidth: "wide",
-      parsePatterns: parseDayPatterns,
-      defaultParseWidth: "any"
-    }),
-    dayPeriod: buildMatchFn({
-      matchPatterns: matchDayPeriodPatterns,
-      defaultMatchWidth: "any",
-      parsePatterns: parseDayPeriodPatterns,
-      defaultParseWidth: "any"
-    })
-  };
-  var match_default = match;
-
-  // node_modules/date-fns/esm/locale/en-US/index.js
-  var locale = {
-    code: "en-US",
-    formatDistance: formatDistance_default,
-    formatLong: formatLong_default,
-    formatRelative: formatRelative_default,
-    localize: localize_default,
-    match: match_default,
-    options: {
-      weekStartsOn: 0,
-      firstWeekContainsDate: 1
-    }
-  };
-  var en_US_default = locale;
-
-  // node_modules/date-fns/esm/_lib/defaultLocale/index.js
-  var defaultLocale_default = en_US_default;
-
-  // node_modules/date-fns/esm/formatDistanceStrict/index.js
-  var MILLISECONDS_IN_MINUTE = 1e3 * 60;
-  var MINUTES_IN_DAY = 60 * 24;
-  var MINUTES_IN_MONTH = MINUTES_IN_DAY * 30;
-  var MINUTES_IN_YEAR = MINUTES_IN_DAY * 365;
-  function formatDistanceStrict(dirtyDate, dirtyBaseDate, options) {
-    var _ref, _options$locale, _options$roundingMeth;
-    requiredArgs(2, arguments);
-    var defaultOptions2 = getDefaultOptions();
-    var locale2 = (_ref = (_options$locale = options === null || options === void 0 ? void 0 : options.locale) !== null && _options$locale !== void 0 ? _options$locale : defaultOptions2.locale) !== null && _ref !== void 0 ? _ref : defaultLocale_default;
-    if (!locale2.formatDistance) {
-      throw new RangeError("locale must contain localize.formatDistance property");
-    }
-    var comparison = compareAsc(dirtyDate, dirtyBaseDate);
-    if (isNaN(comparison)) {
-      throw new RangeError("Invalid time value");
-    }
-    var localizeOptions = assign(cloneObject(options), {
-      addSuffix: Boolean(options === null || options === void 0 ? void 0 : options.addSuffix),
-      comparison
-    });
-    var dateLeft;
-    var dateRight;
-    if (comparison > 0) {
-      dateLeft = toDate(dirtyBaseDate);
-      dateRight = toDate(dirtyDate);
-    } else {
-      dateLeft = toDate(dirtyDate);
-      dateRight = toDate(dirtyBaseDate);
-    }
-    var roundingMethod = String((_options$roundingMeth = options === null || options === void 0 ? void 0 : options.roundingMethod) !== null && _options$roundingMeth !== void 0 ? _options$roundingMeth : "round");
-    var roundingMethodFn;
-    if (roundingMethod === "floor") {
-      roundingMethodFn = Math.floor;
-    } else if (roundingMethod === "ceil") {
-      roundingMethodFn = Math.ceil;
-    } else if (roundingMethod === "round") {
-      roundingMethodFn = Math.round;
-    } else {
-      throw new RangeError("roundingMethod must be 'floor', 'ceil' or 'round'");
-    }
-    var milliseconds = dateRight.getTime() - dateLeft.getTime();
-    var minutes = milliseconds / MILLISECONDS_IN_MINUTE;
-    var timezoneOffset = getTimezoneOffsetInMilliseconds(dateRight) - getTimezoneOffsetInMilliseconds(dateLeft);
-    var dstNormalizedMinutes = (milliseconds - timezoneOffset) / MILLISECONDS_IN_MINUTE;
-    var defaultUnit = options === null || options === void 0 ? void 0 : options.unit;
-    var unit;
-    if (!defaultUnit) {
-      if (minutes < 1) {
-        unit = "second";
-      } else if (minutes < 60) {
-        unit = "minute";
-      } else if (minutes < MINUTES_IN_DAY) {
-        unit = "hour";
-      } else if (dstNormalizedMinutes < MINUTES_IN_MONTH) {
-        unit = "day";
-      } else if (dstNormalizedMinutes < MINUTES_IN_YEAR) {
-        unit = "month";
-      } else {
-        unit = "year";
-      }
-    } else {
-      unit = String(defaultUnit);
-    }
-    if (unit === "second") {
-      var seconds = roundingMethodFn(milliseconds / 1e3);
-      return locale2.formatDistance("xSeconds", seconds, localizeOptions);
-    } else if (unit === "minute") {
-      var roundedMinutes = roundingMethodFn(minutes);
-      return locale2.formatDistance("xMinutes", roundedMinutes, localizeOptions);
-    } else if (unit === "hour") {
-      var hours = roundingMethodFn(minutes / 60);
-      return locale2.formatDistance("xHours", hours, localizeOptions);
-    } else if (unit === "day") {
-      var days = roundingMethodFn(dstNormalizedMinutes / MINUTES_IN_DAY);
-      return locale2.formatDistance("xDays", days, localizeOptions);
-    } else if (unit === "month") {
-      var months = roundingMethodFn(dstNormalizedMinutes / MINUTES_IN_MONTH);
-      return months === 12 && defaultUnit !== "month" ? locale2.formatDistance("xYears", 1, localizeOptions) : locale2.formatDistance("xMonths", months, localizeOptions);
-    } else if (unit === "year") {
-      var years = roundingMethodFn(dstNormalizedMinutes / MINUTES_IN_YEAR);
-      return locale2.formatDistance("xYears", years, localizeOptions);
-    }
-    throw new RangeError("unit must be 'second', 'minute', 'hour', 'day', 'month' or 'year'");
-  }
-
   // src/components/primitives/Slider.tsx
   var import_react12 = __toModule(require_react());
   var import_react_range = __toModule(require_lib());
+  var ONE_S = 1e3;
   function SliderOuter(props) {
     return /* @__PURE__ */ import_react12.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
@@ -30935,13 +32214,19 @@ to {
       onComplete
     });
   });
-  var Time = import_react13.default.memo(function Time2({ setChatPaused, resetChat }) {
+  var Time = import_react13.default.memo(function Time2({
+    setChatPaused,
+    resetChat,
+    chatCommand,
+    channelId
+  }) {
     const [active, setActive] = import_react13.default.useState(false);
     const [value2, setValue] = import_react13.default.useState(ONE_MIN);
     const onComplete = import_react13.default.useCallback(() => {
       Et.success("Timer finished! Chat paused, do a giveaway...", { position: "bottom-center" });
+      relay_default.emit("event", { type: "timer-end", channelId, ts: new Date().toISOString() });
       setChatPaused(true);
-    }, []);
+    }, [channelId]);
     return active ? /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex justify-center items-center text-center relative"
     }, /* @__PURE__ */ import_react13.default.createElement(StableCountdown, {
@@ -30949,7 +32234,10 @@ to {
       onComplete
     }), /* @__PURE__ */ import_react13.default.createElement(FaTimes, {
       className: "absolute right-3 top-2 text-red-500 select-none cursor-pointer",
-      onClick: () => setActive(false),
+      onClick: () => {
+        setActive(false);
+        relay_default.emit("event", { type: "timer-cancel", channelId });
+      },
       title: "Cancel the timer"
     })) : /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
@@ -30972,11 +32260,12 @@ to {
         resetChat();
         setChatPaused(false);
         setActive(true);
+        relay_default.emit("event", { type: "timer-start", channelId, ts: new Date().toISOString(), chatCommand });
       },
       title: "Will clear chat"
     }, /* @__PURE__ */ import_react13.default.createElement(FaClock, null), " Start"));
   });
-  function SettingsComponent({ settings, setSettings, setChatPaused, resetChat }) {
+  function SettingsComponent({ channelId, settings, setSettings, setChatPaused, resetChat }) {
     return /* @__PURE__ */ import_react13.default.createElement(import_react13.default.Fragment, null, /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex flex-row gap-2 mt-2"
     }, /* @__PURE__ */ import_react13.default.createElement("div", {
@@ -31023,7 +32312,9 @@ to {
       onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { sendMessages: !s2.sendMessages }))
     }, settings.sendMessages ? /* @__PURE__ */ import_react13.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react13.default.createElement(FaTimes, null)))), /* @__PURE__ */ import_react13.default.createElement(Time, {
       setChatPaused,
-      resetChat: () => resetChat()
+      resetChat: () => resetChat(),
+      channelId,
+      chatCommand: settings.chatCommand
     })), /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex flex-row gap-2 mt-2"
     }, /* @__PURE__ */ import_react13.default.createElement(SliderOuter, {
@@ -31169,6 +32460,34 @@ to {
     const containerBottom = containerTop + container.clientHeight + buffer;
     return eleTop >= containerTop && eleBottom <= containerBottom || eleTop < containerTop && containerTop < eleBottom || eleTop < containerBottom && containerBottom < eleBottom;
   }
+  function ChatControls({
+    chatEvents,
+    paused,
+    setPaused,
+    clear
+  }) {
+    return /* @__PURE__ */ import_react15.default.createElement(import_react15.default.Fragment, null, paused ? /* @__PURE__ */ import_react15.default.createElement(FaPlayCircle, {
+      className: "select-none cursor-pointer transition-opacity hover:opacity-70",
+      onClick: () => setPaused((p2) => !p2),
+      title: "Resume chat"
+    }) : /* @__PURE__ */ import_react15.default.createElement(FaPauseCircle, {
+      className: "select-none cursor-pointer  transition-opacity hover:opacity-70",
+      onClick: () => setPaused((p2) => !p2),
+      title: "Pause chat, misses messages while paused"
+    }), /* @__PURE__ */ import_react15.default.createElement(FaTimesCircle, {
+      className: "text-red-500 select-none cursor-pointer  transition-opacity hover:opacity-70",
+      onClick: () => clear(),
+      title: "Clear chat"
+    }), /* @__PURE__ */ import_react15.default.createElement(FaSave, {
+      className: "select-none cursor-pointer  transition-opacity hover:opacity-70",
+      title: "Saves all messages (not just those shown)",
+      onClick: async () => {
+        const ts = format(new Date(), "yyyy-MM-dd--HH-mm-ss");
+        await Neutralino.storage.setData(`${ts}-chat`, JSON.stringify(chatEvents, void 0, 2));
+        Et.success(`Saved ${chatEvents.length} messages`, { position: "bottom-right" });
+      }
+    }));
+  }
   function ChatBox({
     chatEvents,
     winners,
@@ -31176,7 +32495,8 @@ to {
     setPaused,
     clear,
     settings,
-    setSettings
+    setSettings,
+    messageDelay
   }) {
     var _a;
     const shouldAutoScroll = (_a = settings.autoScroll) != null ? _a : true;
@@ -31195,29 +32515,41 @@ to {
         }
       }
     }, [limitedMessages, shouldAutoScroll]);
+    const [search, setSearch] = import_react15.default.useState("");
+    const searchedMessages = search ? limitedMessages.filter((m3) => m3.username.toLowerCase().includes(search.toLowerCase()) || m3.msg.toLowerCase().includes(search.toLowerCase())) : limitedMessages;
     return /* @__PURE__ */ import_react15.default.createElement(import_react15.default.Fragment, null, /* @__PURE__ */ import_react15.default.createElement("div", {
       className: "mt-2 rounded-md bg-gray-700 flex-1 flex flex-col relative overflow-hidden"
     }, /* @__PURE__ */ import_react15.default.createElement("div", {
-      className: "bg-gray-600 absolute top-0 right-0 left-0 h-8 flex justify-between px-5 items-center text-white z-50"
-    }, /* @__PURE__ */ import_react15.default.createElement("div", null, chatEvents.length, " message", chatEvents.length === 1 ? "" : "s"), winners.length ? /* @__PURE__ */ import_react15.default.createElement("div", null, limitedMessages.length, " winner message", limitedMessages.length === 1 ? "" : "s") : null, /* @__PURE__ */ import_react15.default.createElement("div", {
-      className: "flex flex-row justify-center items-center gap-2 text-xl"
-    }, /* @__PURE__ */ import_react15.default.createElement("button", {
+      className: "bg-gray-600 absolute top-0 right-0 left-0 h-8 gap-2 flex justify-between px-5 items-center text-white z-50"
+    }, /* @__PURE__ */ import_react15.default.createElement("div", {
+      className: "flex flex-row justify-center items-center flex-1 text-xs"
+    }, /* @__PURE__ */ import_react15.default.createElement("div", {
+      className: "flex-0 bg-purple-600 px-2 py-1.5 border border-purple-600 rounded-l-md",
+      title: "This will be sent to chat by your account to tell winners, if Send Message is enabled below"
+    }, /* @__PURE__ */ import_react15.default.createElement(FaSearch, null)), /* @__PURE__ */ import_react15.default.createElement("input", {
+      className: "bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-600 flex-1",
+      placeholder: "Search...",
+      value: search,
+      onChange: (e2) => setSearch(e2.target.value),
+      title: "Search chat"
+    })), /* @__PURE__ */ import_react15.default.createElement("div", {
+      className: "flex-1"
+    }, chatEvents.length, " message", chatEvents.length === 1 ? "" : "s"), /* @__PURE__ */ import_react15.default.createElement("div", {
+      className: "flex-1 text-yellow-600 text-xs"
+    }, winners.length ? /* @__PURE__ */ import_react15.default.createElement(import_react15.default.Fragment, null, limitedMessages.length, " winner message", limitedMessages.length === 1 ? "" : "s") : null), /* @__PURE__ */ import_react15.default.createElement("div", {
+      className: "flex flex-row justify-center items-center gap-2 text-xl flex-2"
+    }, /* @__PURE__ */ import_react15.default.createElement("div", {
+      className: "text-xs"
+    }, messageDelay), /* @__PURE__ */ import_react15.default.createElement("button", {
       className: (0, import_classnames.default)("text-xs flex justify-center items-center gap-1 border border-purple-600 px-2 py-1 rounded-md", {
         "bg-purple-600": shouldAutoScroll
       }),
       onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { autoScroll: !s2.autoScroll }))
-    }, shouldAutoScroll ? /* @__PURE__ */ import_react15.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react15.default.createElement(FaTimes, null), " Following"), paused ? /* @__PURE__ */ import_react15.default.createElement(FaPlayCircle, {
-      className: "select-none cursor-pointer transition-opacity hover:opacity-70",
-      onClick: () => setPaused((p2) => !p2),
-      title: "Resume chat"
-    }) : /* @__PURE__ */ import_react15.default.createElement(FaPauseCircle, {
-      className: "select-none cursor-pointer  transition-opacity hover:opacity-70",
-      onClick: () => setPaused((p2) => !p2),
-      title: "Pause chat, misses messages while paused"
-    }), /* @__PURE__ */ import_react15.default.createElement(FaTimesCircle, {
-      className: "text-red-500 select-none cursor-pointer  transition-opacity hover:opacity-70",
-      onClick: () => clear(),
-      title: "Clear chat"
+    }, shouldAutoScroll ? /* @__PURE__ */ import_react15.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react15.default.createElement(FaTimes, null), " Following"), /* @__PURE__ */ import_react15.default.createElement(ChatControls, {
+      chatEvents,
+      paused,
+      setPaused,
+      clear
     }))), /* @__PURE__ */ import_react15.default.createElement("div", {
       className: "relative flex-1"
     }, chatEvents.length === 0 ? /* @__PURE__ */ import_react15.default.createElement("span", {
@@ -31225,35 +32557,28 @@ to {
     }, "Logs will appear here...") : /* @__PURE__ */ import_react15.default.createElement("div", {
       className: (0, import_classnames.default)("absolute right-0 left-0 bottom-0 overflow-y-scroll px-2 pt-1 pb-3 flex flex-col gap-1 top-8"),
       ref: chatRef
-    }, limitedMessages.map((c2) => {
+    }, searchedMessages.map((c2) => {
       return /* @__PURE__ */ import_react15.default.createElement("div", {
         key: c2.id
       }, /* @__PURE__ */ import_react15.default.createElement("span", {
-        className: (0, import_classnames.default)("rounded-full bg-gray-300 h-4 w-4 inline-block mr-1", {
-          "bg-yellow-500": c2.isSubscriber
+        className: "text-xs"
+      }, "[", c2.formattedTmiTs, "]"), /* @__PURE__ */ import_react15.default.createElement("span", {
+        className: (0, import_classnames.default)("rounded-full bg-gray-300 h-4 w-4 inline-block mx-1 relative top-1", {
+          "bg-yellow-500": c2.isSubscriber,
+          "bg-purple-600": c2.isMod
         })
-      }, c2.isSubscriber ? /* @__PURE__ */ import_react15.default.createElement("span", {
+      }, c2.isMod ? /* @__PURE__ */ import_react15.default.createElement("span", {
+        className: "flex justify-center items-center text-xs cursor-default select-none",
+        title: "Mod"
+      }, "M") : c2.isSubscriber ? /* @__PURE__ */ import_react15.default.createElement("span", {
         className: "flex justify-center items-center text-xs cursor-default select-none",
         title: "Subscriber"
       }, "S") : null), /* @__PURE__ */ import_react15.default.createElement("span", {
         style: { color: c2.color }
-      }, "[", c2.displayName, "]"), " ", highlightAction(c2.displayName, c2.msg));
+      }, "[", c2.displayName, "]"), " ", c2.msg);
     }), /* @__PURE__ */ import_react15.default.createElement("div", {
       ref: chatBottomRef
     })))));
-  }
-  function highlightAction(displayName, msg) {
-    const words = msg.split(" ");
-    const matchIdx = -1;
-    return matchIdx > -1 ? [
-      words.slice(0, matchIdx).join(" "),
-      /* @__PURE__ */ import_react15.default.createElement("span", {
-        key: "highlight",
-        className: "bg-purple-500 text-white rounded-sm font-bold text-center",
-        style: { padding: "1px 2px", margin: "0px 4px" }
-      }, " ", words[matchIdx], " "),
-      words.slice(matchIdx + 1).join(" ")
-    ] : [msg];
   }
 
   // src/components/screens/Main.tsx
@@ -31271,6 +32596,14 @@ to {
     setPastGiveaways,
     forfeits
   }) {
+    const messageDelay = import_react16.default.useMemo(() => {
+      const mostRecent = chatEvents[chatEvents.length - 1];
+      if (!mostRecent)
+        return "0 seconds delay";
+      return `~${formatDuration({
+        seconds: (mostRecent.receivedTs - mostRecent.tmiTs) / 1e3
+      })} delay`;
+    }, [chatEvents]);
     return /* @__PURE__ */ import_react16.default.createElement(import_react16.default.Fragment, null, /* @__PURE__ */ import_react16.default.createElement(Winner, {
       winners,
       onClear: (idx) => setWinners((w) => removeIdx(w, idx))
@@ -31292,25 +32625,22 @@ to {
       setPastGiveaways,
       forfeits
     })), /* @__PURE__ */ import_react16.default.createElement(SettingsComponent, {
+      channelId: channelInfo.userId,
       settings,
       setSettings,
       setChatPaused,
       resetChat
     }), settings.performanceMode && !winners.length ? /* @__PURE__ */ import_react16.default.createElement("div", {
-      className: "flex justify-center items-center h-full gap-2 flex-row"
-    }, /* @__PURE__ */ import_react16.default.createElement("div", null, chatEvents.length, " messages"), chatPaused ? /* @__PURE__ */ import_react16.default.createElement(FaPlayCircle, {
-      className: "select-none cursor-pointer transition-opacity hover:opacity-70",
-      onClick: () => setChatPaused((p2) => !p2),
-      title: "Resume chat"
-    }) : /* @__PURE__ */ import_react16.default.createElement(FaPauseCircle, {
-      className: "select-none cursor-pointer  transition-opacity hover:opacity-70",
-      onClick: () => setChatPaused((p2) => !p2),
-      title: "Pause chat, misses messages while paused"
-    }), /* @__PURE__ */ import_react16.default.createElement(FaTimesCircle, {
-      className: "text-red-500 select-none cursor-pointer  transition-opacity hover:opacity-70",
-      onClick: () => resetChat(),
-      title: "Clear chat"
-    })) : /* @__PURE__ */ import_react16.default.createElement(ChatBox, {
+      className: "h-full gap-2 flex flex-col justify-center items-center"
+    }, /* @__PURE__ */ import_react16.default.createElement("div", {
+      className: "flex justify-center items-center gap-2 flex-row"
+    }, /* @__PURE__ */ import_react16.default.createElement("div", null, chatEvents.length, " messages"), /* @__PURE__ */ import_react16.default.createElement(ChatControls, {
+      chatEvents,
+      paused: chatPaused,
+      setPaused: setChatPaused,
+      clear: resetChat
+    })), /* @__PURE__ */ import_react16.default.createElement("div", null, messageDelay)) : /* @__PURE__ */ import_react16.default.createElement(ChatBox, {
+      messageDelay,
       chatEvents,
       winners,
       paused: chatPaused,
@@ -31375,1207 +32705,6 @@ to {
 
   // src/components/screens/PastGiveaways.tsx
   var import_react18 = __toModule(require_react());
-
-  // node_modules/date-fns/esm/differenceInCalendarMonths/index.js
-  function differenceInCalendarMonths(dirtyDateLeft, dirtyDateRight) {
-    requiredArgs(2, arguments);
-    var dateLeft = toDate(dirtyDateLeft);
-    var dateRight = toDate(dirtyDateRight);
-    var yearDiff = dateLeft.getFullYear() - dateRight.getFullYear();
-    var monthDiff = dateLeft.getMonth() - dateRight.getMonth();
-    return yearDiff * 12 + monthDiff;
-  }
-
-  // node_modules/date-fns/esm/endOfDay/index.js
-  function endOfDay(dirtyDate) {
-    requiredArgs(1, arguments);
-    var date = toDate(dirtyDate);
-    date.setHours(23, 59, 59, 999);
-    return date;
-  }
-
-  // node_modules/date-fns/esm/endOfMonth/index.js
-  function endOfMonth(dirtyDate) {
-    requiredArgs(1, arguments);
-    var date = toDate(dirtyDate);
-    var month = date.getMonth();
-    date.setFullYear(date.getFullYear(), month + 1, 0);
-    date.setHours(23, 59, 59, 999);
-    return date;
-  }
-
-  // node_modules/date-fns/esm/isLastDayOfMonth/index.js
-  function isLastDayOfMonth(dirtyDate) {
-    requiredArgs(1, arguments);
-    var date = toDate(dirtyDate);
-    return endOfDay(date).getTime() === endOfMonth(date).getTime();
-  }
-
-  // node_modules/date-fns/esm/differenceInMonths/index.js
-  function differenceInMonths(dirtyDateLeft, dirtyDateRight) {
-    requiredArgs(2, arguments);
-    var dateLeft = toDate(dirtyDateLeft);
-    var dateRight = toDate(dirtyDateRight);
-    var sign = compareAsc(dateLeft, dateRight);
-    var difference = Math.abs(differenceInCalendarMonths(dateLeft, dateRight));
-    var result;
-    if (difference < 1) {
-      result = 0;
-    } else {
-      if (dateLeft.getMonth() === 1 && dateLeft.getDate() > 27) {
-        dateLeft.setDate(30);
-      }
-      dateLeft.setMonth(dateLeft.getMonth() - sign * difference);
-      var isLastMonthNotFull = compareAsc(dateLeft, dateRight) === -sign;
-      if (isLastDayOfMonth(toDate(dirtyDateLeft)) && difference === 1 && compareAsc(dirtyDateLeft, dateRight) === 1) {
-        isLastMonthNotFull = false;
-      }
-      result = sign * (difference - Number(isLastMonthNotFull));
-    }
-    return result === 0 ? 0 : result;
-  }
-
-  // node_modules/date-fns/esm/differenceInMilliseconds/index.js
-  function differenceInMilliseconds(dateLeft, dateRight) {
-    requiredArgs(2, arguments);
-    return toDate(dateLeft).getTime() - toDate(dateRight).getTime();
-  }
-
-  // node_modules/date-fns/esm/_lib/roundingMethods/index.js
-  var roundingMap = {
-    ceil: Math.ceil,
-    round: Math.round,
-    floor: Math.floor,
-    trunc: function(value2) {
-      return value2 < 0 ? Math.ceil(value2) : Math.floor(value2);
-    }
-  };
-  var defaultRoundingMethod = "trunc";
-  function getRoundingMethod(method) {
-    return method ? roundingMap[method] : roundingMap[defaultRoundingMethod];
-  }
-
-  // node_modules/date-fns/esm/differenceInSeconds/index.js
-  function differenceInSeconds(dateLeft, dateRight, options) {
-    requiredArgs(2, arguments);
-    var diff = differenceInMilliseconds(dateLeft, dateRight) / 1e3;
-    return getRoundingMethod(options === null || options === void 0 ? void 0 : options.roundingMethod)(diff);
-  }
-
-  // node_modules/date-fns/esm/formatDistance/index.js
-  var MINUTES_IN_DAY2 = 1440;
-  var MINUTES_IN_ALMOST_TWO_DAYS = 2520;
-  var MINUTES_IN_MONTH2 = 43200;
-  var MINUTES_IN_TWO_MONTHS = 86400;
-  function formatDistance2(dirtyDate, dirtyBaseDate, options) {
-    var _ref, _options$locale;
-    requiredArgs(2, arguments);
-    var defaultOptions2 = getDefaultOptions();
-    var locale2 = (_ref = (_options$locale = options === null || options === void 0 ? void 0 : options.locale) !== null && _options$locale !== void 0 ? _options$locale : defaultOptions2.locale) !== null && _ref !== void 0 ? _ref : defaultLocale_default;
-    if (!locale2.formatDistance) {
-      throw new RangeError("locale must contain formatDistance property");
-    }
-    var comparison = compareAsc(dirtyDate, dirtyBaseDate);
-    if (isNaN(comparison)) {
-      throw new RangeError("Invalid time value");
-    }
-    var localizeOptions = assign(cloneObject(options), {
-      addSuffix: Boolean(options === null || options === void 0 ? void 0 : options.addSuffix),
-      comparison
-    });
-    var dateLeft;
-    var dateRight;
-    if (comparison > 0) {
-      dateLeft = toDate(dirtyBaseDate);
-      dateRight = toDate(dirtyDate);
-    } else {
-      dateLeft = toDate(dirtyDate);
-      dateRight = toDate(dirtyBaseDate);
-    }
-    var seconds = differenceInSeconds(dateRight, dateLeft);
-    var offsetInSeconds = (getTimezoneOffsetInMilliseconds(dateRight) - getTimezoneOffsetInMilliseconds(dateLeft)) / 1e3;
-    var minutes = Math.round((seconds - offsetInSeconds) / 60);
-    var months;
-    if (minutes < 2) {
-      if (options !== null && options !== void 0 && options.includeSeconds) {
-        if (seconds < 5) {
-          return locale2.formatDistance("lessThanXSeconds", 5, localizeOptions);
-        } else if (seconds < 10) {
-          return locale2.formatDistance("lessThanXSeconds", 10, localizeOptions);
-        } else if (seconds < 20) {
-          return locale2.formatDistance("lessThanXSeconds", 20, localizeOptions);
-        } else if (seconds < 40) {
-          return locale2.formatDistance("halfAMinute", 0, localizeOptions);
-        } else if (seconds < 60) {
-          return locale2.formatDistance("lessThanXMinutes", 1, localizeOptions);
-        } else {
-          return locale2.formatDistance("xMinutes", 1, localizeOptions);
-        }
-      } else {
-        if (minutes === 0) {
-          return locale2.formatDistance("lessThanXMinutes", 1, localizeOptions);
-        } else {
-          return locale2.formatDistance("xMinutes", minutes, localizeOptions);
-        }
-      }
-    } else if (minutes < 45) {
-      return locale2.formatDistance("xMinutes", minutes, localizeOptions);
-    } else if (minutes < 90) {
-      return locale2.formatDistance("aboutXHours", 1, localizeOptions);
-    } else if (minutes < MINUTES_IN_DAY2) {
-      var hours = Math.round(minutes / 60);
-      return locale2.formatDistance("aboutXHours", hours, localizeOptions);
-    } else if (minutes < MINUTES_IN_ALMOST_TWO_DAYS) {
-      return locale2.formatDistance("xDays", 1, localizeOptions);
-    } else if (minutes < MINUTES_IN_MONTH2) {
-      var days = Math.round(minutes / MINUTES_IN_DAY2);
-      return locale2.formatDistance("xDays", days, localizeOptions);
-    } else if (minutes < MINUTES_IN_TWO_MONTHS) {
-      months = Math.round(minutes / MINUTES_IN_MONTH2);
-      return locale2.formatDistance("aboutXMonths", months, localizeOptions);
-    }
-    months = differenceInMonths(dateRight, dateLeft);
-    if (months < 12) {
-      var nearestMonth = Math.round(minutes / MINUTES_IN_MONTH2);
-      return locale2.formatDistance("xMonths", nearestMonth, localizeOptions);
-    } else {
-      var monthsSinceStartOfYear = months % 12;
-      var years = Math.floor(months / 12);
-      if (monthsSinceStartOfYear < 3) {
-        return locale2.formatDistance("aboutXYears", years, localizeOptions);
-      } else if (monthsSinceStartOfYear < 9) {
-        return locale2.formatDistance("overXYears", years, localizeOptions);
-      } else {
-        return locale2.formatDistance("almostXYears", years + 1, localizeOptions);
-      }
-    }
-  }
-
-  // node_modules/date-fns/esm/formatDistanceToNow/index.js
-  function formatDistanceToNow(dirtyDate, options) {
-    requiredArgs(1, arguments);
-    return formatDistance2(dirtyDate, Date.now(), options);
-  }
-
-  // node_modules/date-fns/esm/isDate/index.js
-  function isDate(value2) {
-    requiredArgs(1, arguments);
-    return value2 instanceof Date || typeof value2 === "object" && Object.prototype.toString.call(value2) === "[object Date]";
-  }
-
-  // node_modules/date-fns/esm/isValid/index.js
-  function isValid(dirtyDate) {
-    requiredArgs(1, arguments);
-    if (!isDate(dirtyDate) && typeof dirtyDate !== "number") {
-      return false;
-    }
-    var date = toDate(dirtyDate);
-    return !isNaN(Number(date));
-  }
-
-  // node_modules/date-fns/esm/_lib/toInteger/index.js
-  function toInteger(dirtyNumber) {
-    if (dirtyNumber === null || dirtyNumber === true || dirtyNumber === false) {
-      return NaN;
-    }
-    var number2 = Number(dirtyNumber);
-    if (isNaN(number2)) {
-      return number2;
-    }
-    return number2 < 0 ? Math.ceil(number2) : Math.floor(number2);
-  }
-
-  // node_modules/date-fns/esm/addMilliseconds/index.js
-  function addMilliseconds(dirtyDate, dirtyAmount) {
-    requiredArgs(2, arguments);
-    var timestamp = toDate(dirtyDate).getTime();
-    var amount = toInteger(dirtyAmount);
-    return new Date(timestamp + amount);
-  }
-
-  // node_modules/date-fns/esm/subMilliseconds/index.js
-  function subMilliseconds(dirtyDate, dirtyAmount) {
-    requiredArgs(2, arguments);
-    var amount = toInteger(dirtyAmount);
-    return addMilliseconds(dirtyDate, -amount);
-  }
-
-  // node_modules/date-fns/esm/_lib/getUTCDayOfYear/index.js
-  var MILLISECONDS_IN_DAY = 864e5;
-  function getUTCDayOfYear(dirtyDate) {
-    requiredArgs(1, arguments);
-    var date = toDate(dirtyDate);
-    var timestamp = date.getTime();
-    date.setUTCMonth(0, 1);
-    date.setUTCHours(0, 0, 0, 0);
-    var startOfYearTimestamp = date.getTime();
-    var difference = timestamp - startOfYearTimestamp;
-    return Math.floor(difference / MILLISECONDS_IN_DAY) + 1;
-  }
-
-  // node_modules/date-fns/esm/_lib/startOfUTCISOWeek/index.js
-  function startOfUTCISOWeek(dirtyDate) {
-    requiredArgs(1, arguments);
-    var weekStartsOn = 1;
-    var date = toDate(dirtyDate);
-    var day = date.getUTCDay();
-    var diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
-    date.setUTCDate(date.getUTCDate() - diff);
-    date.setUTCHours(0, 0, 0, 0);
-    return date;
-  }
-
-  // node_modules/date-fns/esm/_lib/getUTCISOWeekYear/index.js
-  function getUTCISOWeekYear(dirtyDate) {
-    requiredArgs(1, arguments);
-    var date = toDate(dirtyDate);
-    var year = date.getUTCFullYear();
-    var fourthOfJanuaryOfNextYear = new Date(0);
-    fourthOfJanuaryOfNextYear.setUTCFullYear(year + 1, 0, 4);
-    fourthOfJanuaryOfNextYear.setUTCHours(0, 0, 0, 0);
-    var startOfNextYear = startOfUTCISOWeek(fourthOfJanuaryOfNextYear);
-    var fourthOfJanuaryOfThisYear = new Date(0);
-    fourthOfJanuaryOfThisYear.setUTCFullYear(year, 0, 4);
-    fourthOfJanuaryOfThisYear.setUTCHours(0, 0, 0, 0);
-    var startOfThisYear = startOfUTCISOWeek(fourthOfJanuaryOfThisYear);
-    if (date.getTime() >= startOfNextYear.getTime()) {
-      return year + 1;
-    } else if (date.getTime() >= startOfThisYear.getTime()) {
-      return year;
-    } else {
-      return year - 1;
-    }
-  }
-
-  // node_modules/date-fns/esm/_lib/startOfUTCISOWeekYear/index.js
-  function startOfUTCISOWeekYear(dirtyDate) {
-    requiredArgs(1, arguments);
-    var year = getUTCISOWeekYear(dirtyDate);
-    var fourthOfJanuary = new Date(0);
-    fourthOfJanuary.setUTCFullYear(year, 0, 4);
-    fourthOfJanuary.setUTCHours(0, 0, 0, 0);
-    var date = startOfUTCISOWeek(fourthOfJanuary);
-    return date;
-  }
-
-  // node_modules/date-fns/esm/_lib/getUTCISOWeek/index.js
-  var MILLISECONDS_IN_WEEK = 6048e5;
-  function getUTCISOWeek(dirtyDate) {
-    requiredArgs(1, arguments);
-    var date = toDate(dirtyDate);
-    var diff = startOfUTCISOWeek(date).getTime() - startOfUTCISOWeekYear(date).getTime();
-    return Math.round(diff / MILLISECONDS_IN_WEEK) + 1;
-  }
-
-  // node_modules/date-fns/esm/_lib/startOfUTCWeek/index.js
-  function startOfUTCWeek(dirtyDate, options) {
-    var _ref, _ref2, _ref3, _options$weekStartsOn, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
-    requiredArgs(1, arguments);
-    var defaultOptions2 = getDefaultOptions();
-    var weekStartsOn = toInteger((_ref = (_ref2 = (_ref3 = (_options$weekStartsOn = options === null || options === void 0 ? void 0 : options.weekStartsOn) !== null && _options$weekStartsOn !== void 0 ? _options$weekStartsOn : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.weekStartsOn) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions2.weekStartsOn) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions2.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.weekStartsOn) !== null && _ref !== void 0 ? _ref : 0);
-    if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
-      throw new RangeError("weekStartsOn must be between 0 and 6 inclusively");
-    }
-    var date = toDate(dirtyDate);
-    var day = date.getUTCDay();
-    var diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
-    date.setUTCDate(date.getUTCDate() - diff);
-    date.setUTCHours(0, 0, 0, 0);
-    return date;
-  }
-
-  // node_modules/date-fns/esm/_lib/getUTCWeekYear/index.js
-  function getUTCWeekYear(dirtyDate, options) {
-    var _ref, _ref2, _ref3, _options$firstWeekCon, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
-    requiredArgs(1, arguments);
-    var date = toDate(dirtyDate);
-    var year = date.getUTCFullYear();
-    var defaultOptions2 = getDefaultOptions();
-    var firstWeekContainsDate = toInteger((_ref = (_ref2 = (_ref3 = (_options$firstWeekCon = options === null || options === void 0 ? void 0 : options.firstWeekContainsDate) !== null && _options$firstWeekCon !== void 0 ? _options$firstWeekCon : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.firstWeekContainsDate) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions2.firstWeekContainsDate) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions2.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.firstWeekContainsDate) !== null && _ref !== void 0 ? _ref : 1);
-    if (!(firstWeekContainsDate >= 1 && firstWeekContainsDate <= 7)) {
-      throw new RangeError("firstWeekContainsDate must be between 1 and 7 inclusively");
-    }
-    var firstWeekOfNextYear = new Date(0);
-    firstWeekOfNextYear.setUTCFullYear(year + 1, 0, firstWeekContainsDate);
-    firstWeekOfNextYear.setUTCHours(0, 0, 0, 0);
-    var startOfNextYear = startOfUTCWeek(firstWeekOfNextYear, options);
-    var firstWeekOfThisYear = new Date(0);
-    firstWeekOfThisYear.setUTCFullYear(year, 0, firstWeekContainsDate);
-    firstWeekOfThisYear.setUTCHours(0, 0, 0, 0);
-    var startOfThisYear = startOfUTCWeek(firstWeekOfThisYear, options);
-    if (date.getTime() >= startOfNextYear.getTime()) {
-      return year + 1;
-    } else if (date.getTime() >= startOfThisYear.getTime()) {
-      return year;
-    } else {
-      return year - 1;
-    }
-  }
-
-  // node_modules/date-fns/esm/_lib/startOfUTCWeekYear/index.js
-  function startOfUTCWeekYear(dirtyDate, options) {
-    var _ref, _ref2, _ref3, _options$firstWeekCon, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
-    requiredArgs(1, arguments);
-    var defaultOptions2 = getDefaultOptions();
-    var firstWeekContainsDate = toInteger((_ref = (_ref2 = (_ref3 = (_options$firstWeekCon = options === null || options === void 0 ? void 0 : options.firstWeekContainsDate) !== null && _options$firstWeekCon !== void 0 ? _options$firstWeekCon : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.firstWeekContainsDate) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions2.firstWeekContainsDate) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions2.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.firstWeekContainsDate) !== null && _ref !== void 0 ? _ref : 1);
-    var year = getUTCWeekYear(dirtyDate, options);
-    var firstWeek = new Date(0);
-    firstWeek.setUTCFullYear(year, 0, firstWeekContainsDate);
-    firstWeek.setUTCHours(0, 0, 0, 0);
-    var date = startOfUTCWeek(firstWeek, options);
-    return date;
-  }
-
-  // node_modules/date-fns/esm/_lib/getUTCWeek/index.js
-  var MILLISECONDS_IN_WEEK2 = 6048e5;
-  function getUTCWeek(dirtyDate, options) {
-    requiredArgs(1, arguments);
-    var date = toDate(dirtyDate);
-    var diff = startOfUTCWeek(date, options).getTime() - startOfUTCWeekYear(date, options).getTime();
-    return Math.round(diff / MILLISECONDS_IN_WEEK2) + 1;
-  }
-
-  // node_modules/date-fns/esm/_lib/addLeadingZeros/index.js
-  function addLeadingZeros(number2, targetLength) {
-    var sign = number2 < 0 ? "-" : "";
-    var output = Math.abs(number2).toString();
-    while (output.length < targetLength) {
-      output = "0" + output;
-    }
-    return sign + output;
-  }
-
-  // node_modules/date-fns/esm/_lib/format/lightFormatters/index.js
-  var formatters = {
-    y: function(date, token) {
-      var signedYear = date.getUTCFullYear();
-      var year = signedYear > 0 ? signedYear : 1 - signedYear;
-      return addLeadingZeros(token === "yy" ? year % 100 : year, token.length);
-    },
-    M: function(date, token) {
-      var month = date.getUTCMonth();
-      return token === "M" ? String(month + 1) : addLeadingZeros(month + 1, 2);
-    },
-    d: function(date, token) {
-      return addLeadingZeros(date.getUTCDate(), token.length);
-    },
-    a: function(date, token) {
-      var dayPeriodEnumValue = date.getUTCHours() / 12 >= 1 ? "pm" : "am";
-      switch (token) {
-        case "a":
-        case "aa":
-          return dayPeriodEnumValue.toUpperCase();
-        case "aaa":
-          return dayPeriodEnumValue;
-        case "aaaaa":
-          return dayPeriodEnumValue[0];
-        case "aaaa":
-        default:
-          return dayPeriodEnumValue === "am" ? "a.m." : "p.m.";
-      }
-    },
-    h: function(date, token) {
-      return addLeadingZeros(date.getUTCHours() % 12 || 12, token.length);
-    },
-    H: function(date, token) {
-      return addLeadingZeros(date.getUTCHours(), token.length);
-    },
-    m: function(date, token) {
-      return addLeadingZeros(date.getUTCMinutes(), token.length);
-    },
-    s: function(date, token) {
-      return addLeadingZeros(date.getUTCSeconds(), token.length);
-    },
-    S: function(date, token) {
-      var numberOfDigits = token.length;
-      var milliseconds = date.getUTCMilliseconds();
-      var fractionalSeconds = Math.floor(milliseconds * Math.pow(10, numberOfDigits - 3));
-      return addLeadingZeros(fractionalSeconds, token.length);
-    }
-  };
-  var lightFormatters_default = formatters;
-
-  // node_modules/date-fns/esm/_lib/format/formatters/index.js
-  var dayPeriodEnum = {
-    am: "am",
-    pm: "pm",
-    midnight: "midnight",
-    noon: "noon",
-    morning: "morning",
-    afternoon: "afternoon",
-    evening: "evening",
-    night: "night"
-  };
-  var formatters2 = {
-    G: function(date, token, localize2) {
-      var era = date.getUTCFullYear() > 0 ? 1 : 0;
-      switch (token) {
-        case "G":
-        case "GG":
-        case "GGG":
-          return localize2.era(era, {
-            width: "abbreviated"
-          });
-        case "GGGGG":
-          return localize2.era(era, {
-            width: "narrow"
-          });
-        case "GGGG":
-        default:
-          return localize2.era(era, {
-            width: "wide"
-          });
-      }
-    },
-    y: function(date, token, localize2) {
-      if (token === "yo") {
-        var signedYear = date.getUTCFullYear();
-        var year = signedYear > 0 ? signedYear : 1 - signedYear;
-        return localize2.ordinalNumber(year, {
-          unit: "year"
-        });
-      }
-      return lightFormatters_default.y(date, token);
-    },
-    Y: function(date, token, localize2, options) {
-      var signedWeekYear = getUTCWeekYear(date, options);
-      var weekYear = signedWeekYear > 0 ? signedWeekYear : 1 - signedWeekYear;
-      if (token === "YY") {
-        var twoDigitYear = weekYear % 100;
-        return addLeadingZeros(twoDigitYear, 2);
-      }
-      if (token === "Yo") {
-        return localize2.ordinalNumber(weekYear, {
-          unit: "year"
-        });
-      }
-      return addLeadingZeros(weekYear, token.length);
-    },
-    R: function(date, token) {
-      var isoWeekYear = getUTCISOWeekYear(date);
-      return addLeadingZeros(isoWeekYear, token.length);
-    },
-    u: function(date, token) {
-      var year = date.getUTCFullYear();
-      return addLeadingZeros(year, token.length);
-    },
-    Q: function(date, token, localize2) {
-      var quarter = Math.ceil((date.getUTCMonth() + 1) / 3);
-      switch (token) {
-        case "Q":
-          return String(quarter);
-        case "QQ":
-          return addLeadingZeros(quarter, 2);
-        case "Qo":
-          return localize2.ordinalNumber(quarter, {
-            unit: "quarter"
-          });
-        case "QQQ":
-          return localize2.quarter(quarter, {
-            width: "abbreviated",
-            context: "formatting"
-          });
-        case "QQQQQ":
-          return localize2.quarter(quarter, {
-            width: "narrow",
-            context: "formatting"
-          });
-        case "QQQQ":
-        default:
-          return localize2.quarter(quarter, {
-            width: "wide",
-            context: "formatting"
-          });
-      }
-    },
-    q: function(date, token, localize2) {
-      var quarter = Math.ceil((date.getUTCMonth() + 1) / 3);
-      switch (token) {
-        case "q":
-          return String(quarter);
-        case "qq":
-          return addLeadingZeros(quarter, 2);
-        case "qo":
-          return localize2.ordinalNumber(quarter, {
-            unit: "quarter"
-          });
-        case "qqq":
-          return localize2.quarter(quarter, {
-            width: "abbreviated",
-            context: "standalone"
-          });
-        case "qqqqq":
-          return localize2.quarter(quarter, {
-            width: "narrow",
-            context: "standalone"
-          });
-        case "qqqq":
-        default:
-          return localize2.quarter(quarter, {
-            width: "wide",
-            context: "standalone"
-          });
-      }
-    },
-    M: function(date, token, localize2) {
-      var month = date.getUTCMonth();
-      switch (token) {
-        case "M":
-        case "MM":
-          return lightFormatters_default.M(date, token);
-        case "Mo":
-          return localize2.ordinalNumber(month + 1, {
-            unit: "month"
-          });
-        case "MMM":
-          return localize2.month(month, {
-            width: "abbreviated",
-            context: "formatting"
-          });
-        case "MMMMM":
-          return localize2.month(month, {
-            width: "narrow",
-            context: "formatting"
-          });
-        case "MMMM":
-        default:
-          return localize2.month(month, {
-            width: "wide",
-            context: "formatting"
-          });
-      }
-    },
-    L: function(date, token, localize2) {
-      var month = date.getUTCMonth();
-      switch (token) {
-        case "L":
-          return String(month + 1);
-        case "LL":
-          return addLeadingZeros(month + 1, 2);
-        case "Lo":
-          return localize2.ordinalNumber(month + 1, {
-            unit: "month"
-          });
-        case "LLL":
-          return localize2.month(month, {
-            width: "abbreviated",
-            context: "standalone"
-          });
-        case "LLLLL":
-          return localize2.month(month, {
-            width: "narrow",
-            context: "standalone"
-          });
-        case "LLLL":
-        default:
-          return localize2.month(month, {
-            width: "wide",
-            context: "standalone"
-          });
-      }
-    },
-    w: function(date, token, localize2, options) {
-      var week = getUTCWeek(date, options);
-      if (token === "wo") {
-        return localize2.ordinalNumber(week, {
-          unit: "week"
-        });
-      }
-      return addLeadingZeros(week, token.length);
-    },
-    I: function(date, token, localize2) {
-      var isoWeek = getUTCISOWeek(date);
-      if (token === "Io") {
-        return localize2.ordinalNumber(isoWeek, {
-          unit: "week"
-        });
-      }
-      return addLeadingZeros(isoWeek, token.length);
-    },
-    d: function(date, token, localize2) {
-      if (token === "do") {
-        return localize2.ordinalNumber(date.getUTCDate(), {
-          unit: "date"
-        });
-      }
-      return lightFormatters_default.d(date, token);
-    },
-    D: function(date, token, localize2) {
-      var dayOfYear = getUTCDayOfYear(date);
-      if (token === "Do") {
-        return localize2.ordinalNumber(dayOfYear, {
-          unit: "dayOfYear"
-        });
-      }
-      return addLeadingZeros(dayOfYear, token.length);
-    },
-    E: function(date, token, localize2) {
-      var dayOfWeek = date.getUTCDay();
-      switch (token) {
-        case "E":
-        case "EE":
-        case "EEE":
-          return localize2.day(dayOfWeek, {
-            width: "abbreviated",
-            context: "formatting"
-          });
-        case "EEEEE":
-          return localize2.day(dayOfWeek, {
-            width: "narrow",
-            context: "formatting"
-          });
-        case "EEEEEE":
-          return localize2.day(dayOfWeek, {
-            width: "short",
-            context: "formatting"
-          });
-        case "EEEE":
-        default:
-          return localize2.day(dayOfWeek, {
-            width: "wide",
-            context: "formatting"
-          });
-      }
-    },
-    e: function(date, token, localize2, options) {
-      var dayOfWeek = date.getUTCDay();
-      var localDayOfWeek = (dayOfWeek - options.weekStartsOn + 8) % 7 || 7;
-      switch (token) {
-        case "e":
-          return String(localDayOfWeek);
-        case "ee":
-          return addLeadingZeros(localDayOfWeek, 2);
-        case "eo":
-          return localize2.ordinalNumber(localDayOfWeek, {
-            unit: "day"
-          });
-        case "eee":
-          return localize2.day(dayOfWeek, {
-            width: "abbreviated",
-            context: "formatting"
-          });
-        case "eeeee":
-          return localize2.day(dayOfWeek, {
-            width: "narrow",
-            context: "formatting"
-          });
-        case "eeeeee":
-          return localize2.day(dayOfWeek, {
-            width: "short",
-            context: "formatting"
-          });
-        case "eeee":
-        default:
-          return localize2.day(dayOfWeek, {
-            width: "wide",
-            context: "formatting"
-          });
-      }
-    },
-    c: function(date, token, localize2, options) {
-      var dayOfWeek = date.getUTCDay();
-      var localDayOfWeek = (dayOfWeek - options.weekStartsOn + 8) % 7 || 7;
-      switch (token) {
-        case "c":
-          return String(localDayOfWeek);
-        case "cc":
-          return addLeadingZeros(localDayOfWeek, token.length);
-        case "co":
-          return localize2.ordinalNumber(localDayOfWeek, {
-            unit: "day"
-          });
-        case "ccc":
-          return localize2.day(dayOfWeek, {
-            width: "abbreviated",
-            context: "standalone"
-          });
-        case "ccccc":
-          return localize2.day(dayOfWeek, {
-            width: "narrow",
-            context: "standalone"
-          });
-        case "cccccc":
-          return localize2.day(dayOfWeek, {
-            width: "short",
-            context: "standalone"
-          });
-        case "cccc":
-        default:
-          return localize2.day(dayOfWeek, {
-            width: "wide",
-            context: "standalone"
-          });
-      }
-    },
-    i: function(date, token, localize2) {
-      var dayOfWeek = date.getUTCDay();
-      var isoDayOfWeek = dayOfWeek === 0 ? 7 : dayOfWeek;
-      switch (token) {
-        case "i":
-          return String(isoDayOfWeek);
-        case "ii":
-          return addLeadingZeros(isoDayOfWeek, token.length);
-        case "io":
-          return localize2.ordinalNumber(isoDayOfWeek, {
-            unit: "day"
-          });
-        case "iii":
-          return localize2.day(dayOfWeek, {
-            width: "abbreviated",
-            context: "formatting"
-          });
-        case "iiiii":
-          return localize2.day(dayOfWeek, {
-            width: "narrow",
-            context: "formatting"
-          });
-        case "iiiiii":
-          return localize2.day(dayOfWeek, {
-            width: "short",
-            context: "formatting"
-          });
-        case "iiii":
-        default:
-          return localize2.day(dayOfWeek, {
-            width: "wide",
-            context: "formatting"
-          });
-      }
-    },
-    a: function(date, token, localize2) {
-      var hours = date.getUTCHours();
-      var dayPeriodEnumValue = hours / 12 >= 1 ? "pm" : "am";
-      switch (token) {
-        case "a":
-        case "aa":
-          return localize2.dayPeriod(dayPeriodEnumValue, {
-            width: "abbreviated",
-            context: "formatting"
-          });
-        case "aaa":
-          return localize2.dayPeriod(dayPeriodEnumValue, {
-            width: "abbreviated",
-            context: "formatting"
-          }).toLowerCase();
-        case "aaaaa":
-          return localize2.dayPeriod(dayPeriodEnumValue, {
-            width: "narrow",
-            context: "formatting"
-          });
-        case "aaaa":
-        default:
-          return localize2.dayPeriod(dayPeriodEnumValue, {
-            width: "wide",
-            context: "formatting"
-          });
-      }
-    },
-    b: function(date, token, localize2) {
-      var hours = date.getUTCHours();
-      var dayPeriodEnumValue;
-      if (hours === 12) {
-        dayPeriodEnumValue = dayPeriodEnum.noon;
-      } else if (hours === 0) {
-        dayPeriodEnumValue = dayPeriodEnum.midnight;
-      } else {
-        dayPeriodEnumValue = hours / 12 >= 1 ? "pm" : "am";
-      }
-      switch (token) {
-        case "b":
-        case "bb":
-          return localize2.dayPeriod(dayPeriodEnumValue, {
-            width: "abbreviated",
-            context: "formatting"
-          });
-        case "bbb":
-          return localize2.dayPeriod(dayPeriodEnumValue, {
-            width: "abbreviated",
-            context: "formatting"
-          }).toLowerCase();
-        case "bbbbb":
-          return localize2.dayPeriod(dayPeriodEnumValue, {
-            width: "narrow",
-            context: "formatting"
-          });
-        case "bbbb":
-        default:
-          return localize2.dayPeriod(dayPeriodEnumValue, {
-            width: "wide",
-            context: "formatting"
-          });
-      }
-    },
-    B: function(date, token, localize2) {
-      var hours = date.getUTCHours();
-      var dayPeriodEnumValue;
-      if (hours >= 17) {
-        dayPeriodEnumValue = dayPeriodEnum.evening;
-      } else if (hours >= 12) {
-        dayPeriodEnumValue = dayPeriodEnum.afternoon;
-      } else if (hours >= 4) {
-        dayPeriodEnumValue = dayPeriodEnum.morning;
-      } else {
-        dayPeriodEnumValue = dayPeriodEnum.night;
-      }
-      switch (token) {
-        case "B":
-        case "BB":
-        case "BBB":
-          return localize2.dayPeriod(dayPeriodEnumValue, {
-            width: "abbreviated",
-            context: "formatting"
-          });
-        case "BBBBB":
-          return localize2.dayPeriod(dayPeriodEnumValue, {
-            width: "narrow",
-            context: "formatting"
-          });
-        case "BBBB":
-        default:
-          return localize2.dayPeriod(dayPeriodEnumValue, {
-            width: "wide",
-            context: "formatting"
-          });
-      }
-    },
-    h: function(date, token, localize2) {
-      if (token === "ho") {
-        var hours = date.getUTCHours() % 12;
-        if (hours === 0)
-          hours = 12;
-        return localize2.ordinalNumber(hours, {
-          unit: "hour"
-        });
-      }
-      return lightFormatters_default.h(date, token);
-    },
-    H: function(date, token, localize2) {
-      if (token === "Ho") {
-        return localize2.ordinalNumber(date.getUTCHours(), {
-          unit: "hour"
-        });
-      }
-      return lightFormatters_default.H(date, token);
-    },
-    K: function(date, token, localize2) {
-      var hours = date.getUTCHours() % 12;
-      if (token === "Ko") {
-        return localize2.ordinalNumber(hours, {
-          unit: "hour"
-        });
-      }
-      return addLeadingZeros(hours, token.length);
-    },
-    k: function(date, token, localize2) {
-      var hours = date.getUTCHours();
-      if (hours === 0)
-        hours = 24;
-      if (token === "ko") {
-        return localize2.ordinalNumber(hours, {
-          unit: "hour"
-        });
-      }
-      return addLeadingZeros(hours, token.length);
-    },
-    m: function(date, token, localize2) {
-      if (token === "mo") {
-        return localize2.ordinalNumber(date.getUTCMinutes(), {
-          unit: "minute"
-        });
-      }
-      return lightFormatters_default.m(date, token);
-    },
-    s: function(date, token, localize2) {
-      if (token === "so") {
-        return localize2.ordinalNumber(date.getUTCSeconds(), {
-          unit: "second"
-        });
-      }
-      return lightFormatters_default.s(date, token);
-    },
-    S: function(date, token) {
-      return lightFormatters_default.S(date, token);
-    },
-    X: function(date, token, _localize, options) {
-      var originalDate = options._originalDate || date;
-      var timezoneOffset = originalDate.getTimezoneOffset();
-      if (timezoneOffset === 0) {
-        return "Z";
-      }
-      switch (token) {
-        case "X":
-          return formatTimezoneWithOptionalMinutes(timezoneOffset);
-        case "XXXX":
-        case "XX":
-          return formatTimezone(timezoneOffset);
-        case "XXXXX":
-        case "XXX":
-        default:
-          return formatTimezone(timezoneOffset, ":");
-      }
-    },
-    x: function(date, token, _localize, options) {
-      var originalDate = options._originalDate || date;
-      var timezoneOffset = originalDate.getTimezoneOffset();
-      switch (token) {
-        case "x":
-          return formatTimezoneWithOptionalMinutes(timezoneOffset);
-        case "xxxx":
-        case "xx":
-          return formatTimezone(timezoneOffset);
-        case "xxxxx":
-        case "xxx":
-        default:
-          return formatTimezone(timezoneOffset, ":");
-      }
-    },
-    O: function(date, token, _localize, options) {
-      var originalDate = options._originalDate || date;
-      var timezoneOffset = originalDate.getTimezoneOffset();
-      switch (token) {
-        case "O":
-        case "OO":
-        case "OOO":
-          return "GMT" + formatTimezoneShort(timezoneOffset, ":");
-        case "OOOO":
-        default:
-          return "GMT" + formatTimezone(timezoneOffset, ":");
-      }
-    },
-    z: function(date, token, _localize, options) {
-      var originalDate = options._originalDate || date;
-      var timezoneOffset = originalDate.getTimezoneOffset();
-      switch (token) {
-        case "z":
-        case "zz":
-        case "zzz":
-          return "GMT" + formatTimezoneShort(timezoneOffset, ":");
-        case "zzzz":
-        default:
-          return "GMT" + formatTimezone(timezoneOffset, ":");
-      }
-    },
-    t: function(date, token, _localize, options) {
-      var originalDate = options._originalDate || date;
-      var timestamp = Math.floor(originalDate.getTime() / 1e3);
-      return addLeadingZeros(timestamp, token.length);
-    },
-    T: function(date, token, _localize, options) {
-      var originalDate = options._originalDate || date;
-      var timestamp = originalDate.getTime();
-      return addLeadingZeros(timestamp, token.length);
-    }
-  };
-  function formatTimezoneShort(offset, dirtyDelimiter) {
-    var sign = offset > 0 ? "-" : "+";
-    var absOffset = Math.abs(offset);
-    var hours = Math.floor(absOffset / 60);
-    var minutes = absOffset % 60;
-    if (minutes === 0) {
-      return sign + String(hours);
-    }
-    var delimiter = dirtyDelimiter || "";
-    return sign + String(hours) + delimiter + addLeadingZeros(minutes, 2);
-  }
-  function formatTimezoneWithOptionalMinutes(offset, dirtyDelimiter) {
-    if (offset % 60 === 0) {
-      var sign = offset > 0 ? "-" : "+";
-      return sign + addLeadingZeros(Math.abs(offset) / 60, 2);
-    }
-    return formatTimezone(offset, dirtyDelimiter);
-  }
-  function formatTimezone(offset, dirtyDelimiter) {
-    var delimiter = dirtyDelimiter || "";
-    var sign = offset > 0 ? "-" : "+";
-    var absOffset = Math.abs(offset);
-    var hours = addLeadingZeros(Math.floor(absOffset / 60), 2);
-    var minutes = addLeadingZeros(absOffset % 60, 2);
-    return sign + hours + delimiter + minutes;
-  }
-  var formatters_default = formatters2;
-
-  // node_modules/date-fns/esm/_lib/format/longFormatters/index.js
-  var dateLongFormatter = function(pattern, formatLong2) {
-    switch (pattern) {
-      case "P":
-        return formatLong2.date({
-          width: "short"
-        });
-      case "PP":
-        return formatLong2.date({
-          width: "medium"
-        });
-      case "PPP":
-        return formatLong2.date({
-          width: "long"
-        });
-      case "PPPP":
-      default:
-        return formatLong2.date({
-          width: "full"
-        });
-    }
-  };
-  var timeLongFormatter = function(pattern, formatLong2) {
-    switch (pattern) {
-      case "p":
-        return formatLong2.time({
-          width: "short"
-        });
-      case "pp":
-        return formatLong2.time({
-          width: "medium"
-        });
-      case "ppp":
-        return formatLong2.time({
-          width: "long"
-        });
-      case "pppp":
-      default:
-        return formatLong2.time({
-          width: "full"
-        });
-    }
-  };
-  var dateTimeLongFormatter = function(pattern, formatLong2) {
-    var matchResult = pattern.match(/(P+)(p+)?/) || [];
-    var datePattern = matchResult[1];
-    var timePattern = matchResult[2];
-    if (!timePattern) {
-      return dateLongFormatter(pattern, formatLong2);
-    }
-    var dateTimeFormat;
-    switch (datePattern) {
-      case "P":
-        dateTimeFormat = formatLong2.dateTime({
-          width: "short"
-        });
-        break;
-      case "PP":
-        dateTimeFormat = formatLong2.dateTime({
-          width: "medium"
-        });
-        break;
-      case "PPP":
-        dateTimeFormat = formatLong2.dateTime({
-          width: "long"
-        });
-        break;
-      case "PPPP":
-      default:
-        dateTimeFormat = formatLong2.dateTime({
-          width: "full"
-        });
-        break;
-    }
-    return dateTimeFormat.replace("{{date}}", dateLongFormatter(datePattern, formatLong2)).replace("{{time}}", timeLongFormatter(timePattern, formatLong2));
-  };
-  var longFormatters = {
-    p: timeLongFormatter,
-    P: dateTimeLongFormatter
-  };
-  var longFormatters_default = longFormatters;
-
-  // node_modules/date-fns/esm/_lib/protectedTokens/index.js
-  var protectedDayOfYearTokens = ["D", "DD"];
-  var protectedWeekYearTokens = ["YY", "YYYY"];
-  function isProtectedDayOfYearToken(token) {
-    return protectedDayOfYearTokens.indexOf(token) !== -1;
-  }
-  function isProtectedWeekYearToken(token) {
-    return protectedWeekYearTokens.indexOf(token) !== -1;
-  }
-  function throwProtectedError(token, format2, input) {
-    if (token === "YYYY") {
-      throw new RangeError("Use `yyyy` instead of `YYYY` (in `".concat(format2, "`) for formatting years to the input `").concat(input, "`; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md"));
-    } else if (token === "YY") {
-      throw new RangeError("Use `yy` instead of `YY` (in `".concat(format2, "`) for formatting years to the input `").concat(input, "`; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md"));
-    } else if (token === "D") {
-      throw new RangeError("Use `d` instead of `D` (in `".concat(format2, "`) for formatting days of the month to the input `").concat(input, "`; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md"));
-    } else if (token === "DD") {
-      throw new RangeError("Use `dd` instead of `DD` (in `".concat(format2, "`) for formatting days of the month to the input `").concat(input, "`; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md"));
-    }
-  }
-
-  // node_modules/date-fns/esm/format/index.js
-  var formattingTokensRegExp = /[yYQqMLwIdDecihHKkms]o|(\w)\1*|''|'(''|[^'])+('|$)|./g;
-  var longFormattingTokensRegExp = /P+p+|P+|p+|''|'(''|[^'])+('|$)|./g;
-  var escapedStringRegExp = /^'([^]*?)'?$/;
-  var doubleQuoteRegExp = /''/g;
-  var unescapedLatinCharacterRegExp = /[a-zA-Z]/;
-  function format(dirtyDate, dirtyFormatStr, options) {
-    var _ref, _options$locale, _ref2, _ref3, _ref4, _options$firstWeekCon, _options$locale2, _options$locale2$opti, _defaultOptions$local, _defaultOptions$local2, _ref5, _ref6, _ref7, _options$weekStartsOn, _options$locale3, _options$locale3$opti, _defaultOptions$local3, _defaultOptions$local4;
-    requiredArgs(2, arguments);
-    var formatStr = String(dirtyFormatStr);
-    var defaultOptions2 = getDefaultOptions();
-    var locale2 = (_ref = (_options$locale = options === null || options === void 0 ? void 0 : options.locale) !== null && _options$locale !== void 0 ? _options$locale : defaultOptions2.locale) !== null && _ref !== void 0 ? _ref : defaultLocale_default;
-    var firstWeekContainsDate = toInteger((_ref2 = (_ref3 = (_ref4 = (_options$firstWeekCon = options === null || options === void 0 ? void 0 : options.firstWeekContainsDate) !== null && _options$firstWeekCon !== void 0 ? _options$firstWeekCon : options === null || options === void 0 ? void 0 : (_options$locale2 = options.locale) === null || _options$locale2 === void 0 ? void 0 : (_options$locale2$opti = _options$locale2.options) === null || _options$locale2$opti === void 0 ? void 0 : _options$locale2$opti.firstWeekContainsDate) !== null && _ref4 !== void 0 ? _ref4 : defaultOptions2.firstWeekContainsDate) !== null && _ref3 !== void 0 ? _ref3 : (_defaultOptions$local = defaultOptions2.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.firstWeekContainsDate) !== null && _ref2 !== void 0 ? _ref2 : 1);
-    if (!(firstWeekContainsDate >= 1 && firstWeekContainsDate <= 7)) {
-      throw new RangeError("firstWeekContainsDate must be between 1 and 7 inclusively");
-    }
-    var weekStartsOn = toInteger((_ref5 = (_ref6 = (_ref7 = (_options$weekStartsOn = options === null || options === void 0 ? void 0 : options.weekStartsOn) !== null && _options$weekStartsOn !== void 0 ? _options$weekStartsOn : options === null || options === void 0 ? void 0 : (_options$locale3 = options.locale) === null || _options$locale3 === void 0 ? void 0 : (_options$locale3$opti = _options$locale3.options) === null || _options$locale3$opti === void 0 ? void 0 : _options$locale3$opti.weekStartsOn) !== null && _ref7 !== void 0 ? _ref7 : defaultOptions2.weekStartsOn) !== null && _ref6 !== void 0 ? _ref6 : (_defaultOptions$local3 = defaultOptions2.locale) === null || _defaultOptions$local3 === void 0 ? void 0 : (_defaultOptions$local4 = _defaultOptions$local3.options) === null || _defaultOptions$local4 === void 0 ? void 0 : _defaultOptions$local4.weekStartsOn) !== null && _ref5 !== void 0 ? _ref5 : 0);
-    if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
-      throw new RangeError("weekStartsOn must be between 0 and 6 inclusively");
-    }
-    if (!locale2.localize) {
-      throw new RangeError("locale must contain localize property");
-    }
-    if (!locale2.formatLong) {
-      throw new RangeError("locale must contain formatLong property");
-    }
-    var originalDate = toDate(dirtyDate);
-    if (!isValid(originalDate)) {
-      throw new RangeError("Invalid time value");
-    }
-    var timezoneOffset = getTimezoneOffsetInMilliseconds(originalDate);
-    var utcDate = subMilliseconds(originalDate, timezoneOffset);
-    var formatterOptions = {
-      firstWeekContainsDate,
-      weekStartsOn,
-      locale: locale2,
-      _originalDate: originalDate
-    };
-    var result = formatStr.match(longFormattingTokensRegExp).map(function(substring) {
-      var firstCharacter = substring[0];
-      if (firstCharacter === "p" || firstCharacter === "P") {
-        var longFormatter = longFormatters_default[firstCharacter];
-        return longFormatter(substring, locale2.formatLong);
-      }
-      return substring;
-    }).join("").match(formattingTokensRegExp).map(function(substring) {
-      if (substring === "''") {
-        return "'";
-      }
-      var firstCharacter = substring[0];
-      if (firstCharacter === "'") {
-        return cleanEscapedString(substring);
-      }
-      var formatter = formatters_default[firstCharacter];
-      if (formatter) {
-        if (!(options !== null && options !== void 0 && options.useAdditionalWeekYearTokens) && isProtectedWeekYearToken(substring)) {
-          throwProtectedError(substring, dirtyFormatStr, String(dirtyDate));
-        }
-        if (!(options !== null && options !== void 0 && options.useAdditionalDayOfYearTokens) && isProtectedDayOfYearToken(substring)) {
-          throwProtectedError(substring, dirtyFormatStr, String(dirtyDate));
-        }
-        return formatter(utcDate, substring, locale2.localize, formatterOptions);
-      }
-      if (firstCharacter.match(unescapedLatinCharacterRegExp)) {
-        throw new RangeError("Format string contains an unescaped latin alphabet character `" + firstCharacter + "`");
-      }
-      return substring;
-    }).join("");
-    return result;
-  }
-  function cleanEscapedString(input) {
-    var matched = input.match(escapedStringRegExp);
-    if (!matched) {
-      return input;
-    }
-    return matched[1].replace(doubleQuoteRegExp, "'");
-  }
-
-  // src/components/screens/PastGiveaways.tsx
   var typeNameMap = {
     [GiveawayType.Chat]: "Active Chatter Giveaway",
     [GiveawayType.Instant]: "Viewers Instant Giveaway"
@@ -32589,6 +32718,7 @@ to {
       className: "bg-gray-600 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1 overflow-ellipsis h-full max-w-full flex justify-center items-center"
     }, typeof value2 === "boolean" ? value2 ? /* @__PURE__ */ import_react18.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react18.default.createElement(FaTimes, null) : value2));
   }
+  var LIMIT_GIVEAWAY_LIST = 10;
   function PastGiveaways({
     giveaways,
     setPastGiveaways
@@ -32597,7 +32727,7 @@ to {
       className: "mt-4 flex flex-col gap-5 flex-1 pb-5"
     }, /* @__PURE__ */ import_react18.default.createElement("h1", {
       className: "text-3xl flex items-center"
-    }, giveaways.length, " Past Giveaway", giveaways.length === 1 ? "" : "s"), giveaways.map((giveaway, idx) => /* @__PURE__ */ import_react18.default.createElement("div", {
+    }, "Last ", Math.min(giveaways.length, LIMIT_GIVEAWAY_LIST), " of ", giveaways.length, " Total Past Giveaway", giveaways.length === 1 ? "" : "s"), giveaways.slice(0, LIMIT_GIVEAWAY_LIST).map((giveaway, idx) => /* @__PURE__ */ import_react18.default.createElement("div", {
       key: idx,
       className: "border border-purple-600 rounded-md px-3 py-2 flex flex-col gap-2 bg-gray-700"
     }, /* @__PURE__ */ import_react18.default.createElement("div", {
@@ -32743,7 +32873,7 @@ to {
     setForfeits
   }) {
     return /* @__PURE__ */ React14.createElement("div", {
-      className: "mt-4 flex flex-col gap-5 flex-1"
+      className: "mt-4 flex flex-col gap-3 flex-1"
     }, /* @__PURE__ */ React14.createElement("h1", {
       className: "text-3xl"
     }, "Settings"), /* @__PURE__ */ React14.createElement("div", {
@@ -32824,6 +32954,38 @@ to {
       className: "flex-0 bg-red-600 px-2 py-1 rounded-md flex justify-center items-center gap-1",
       onClick: () => setForfeits([])
     }, /* @__PURE__ */ React14.createElement(FaTimes, null), " Reset List"))), /* @__PURE__ */ React14.createElement("div", {
+      className: "flex flex-col gap-2"
+    }, /* @__PURE__ */ React14.createElement("div", {
+      className: "flex flex-row gap-2"
+    }, /* @__PURE__ */ React14.createElement("div", {
+      className: "flex-1"
+    }, /* @__PURE__ */ React14.createElement("h2", {
+      className: "text-2xl"
+    }, "Alert Settings"))), /* @__PURE__ */ React14.createElement("div", {
+      className: "flex flex-row gap-2 justify-center items-center"
+    }, /* @__PURE__ */ React14.createElement("div", {
+      className: "flex-1 border border-purple-600 rounded-md flex relative"
+    }, /* @__PURE__ */ React14.createElement("div", {
+      className: "bg-purple-600 px-2 py-1 flex-0",
+      title: "Will clear chat, and then pause it after the time, to enable a giveaway with cut off"
+    }, "Alert Duration"), /* @__PURE__ */ React14.createElement("div", {
+      className: "px-2 flex-1 flex justify-center items-center"
+    }, /* @__PURE__ */ React14.createElement(SliderInner, {
+      min: ONE_S,
+      max: ONE_S * 30,
+      value: settings.alertDuration || defaultSettings.alertDuration,
+      step: ONE_S,
+      onChange: (v2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { alertDuration: v2 }))
+    })), /* @__PURE__ */ React14.createElement("div", {
+      className: "flex-1 justify-center items-center text-center flex"
+    }, formatDistanceStrict(Date.now() + (settings.alertDuration || defaultSettings.alertDuration), new Date()))), /* @__PURE__ */ React14.createElement("div", {
+      className: "flex-1 border border-purple-600 rounded-md flex relative"
+    }, /* @__PURE__ */ React14.createElement("div", {
+      className: "bg-purple-600 px-2 py-1 flex-0",
+      title: "Will clear chat, and then pause it after the time, to enable a giveaway with cut off"
+    }, "Alert Theme"), /* @__PURE__ */ React14.createElement("div", {
+      className: "px-2 flex-1 flex justify-center items-center"
+    }, alertThemeMap[settings.alertTheme || defaultSettings.alertTheme])))), /* @__PURE__ */ React14.createElement("div", {
       className: "flex-1 flex items-end gap-2"
     }, /* @__PURE__ */ React14.createElement("div", {
       className: "flex-1"
@@ -32968,20 +33130,7 @@ to {
   }
   function InnerApp() {
     useUpdateCheck();
-    const [settings, setSettings] = useStorage("settings", {
-      autoConnect: true,
-      subLuck: 2,
-      numberOfWinners: 1,
-      followersOnly: true,
-      chatCommand: "",
-      winnerMessage: "PartyHat @name won!",
-      sendMessages: false,
-      blocklist: ["streamelements", "streamlabs", "nightbot"],
-      autoScroll: true,
-      spamLimit: 1,
-      performanceMode: false,
-      forfeitCommand: ""
-    });
+    const [settings, setSettings] = useStorage("settings", defaultSettings);
     const [winners, setWinners] = import_react21.default.useState([]);
     const [client, setClient] = import_react21.default.useState(null);
     const [channelInfo, setChannelInfo] = useStorage("channelInfo", {}, (c2) => {
@@ -33011,10 +33160,6 @@ to {
     }, [settings.forfeitCommand]);
     const [chatPaused, setChatPaused] = import_react21.default.useState(false);
     const [chatEvents, resetChat] = useChatEvents(chatPaused, winners, onNewChat);
-    const chatEventsRef = import_react21.default.useRef(chatEvents);
-    import_react21.default.useEffect(() => {
-      chatEventsRef.current = chatEvents;
-    }, [chatEvents]);
     import_react21.default.useEffect(() => {
       window["myApp"].setTitle(channelInfo.login, !!client);
     }, [channelInfo.login, client]);
