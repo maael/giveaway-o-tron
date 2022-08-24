@@ -12,10 +12,12 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#fd015d" />
+        <meta name="theme-color" content="#1e293b" />
       </Head>
       <DefaultSeo {...SEO} />
-      <Component {...pageProps} />
+      <div className="flex flex-col gap-5 px-10 lg:px-3 mx-auto max-w-6xl pt-3 pb-20">
+        <Component {...pageProps} />
+      </div>
       <EmojiFavicon emoji="🤖" />
     </>
   )

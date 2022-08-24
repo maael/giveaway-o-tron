@@ -1,23 +1,22 @@
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
+import Link from 'next/link'
 import * as React from 'react'
 import { IconType } from 'react-icons'
 import {
   FaClock,
   FaDice,
-  FaDownload,
   FaExclamation,
   FaGifts,
-  FaGithub,
   FaHammer,
   FaHeart,
   FaICursor,
   FaList,
   FaQuoteLeft,
-  FaRobot,
   FaSadTear,
 } from 'react-icons/fa'
 import { TwitterTweetEmbed } from 'react-twitter-embed'
+import Header from '~/components/primitives/Header'
 
 const TwitchPlayer = dynamic(() => import('react-twitch-embed-video'), {
   ssr: false,
@@ -25,20 +24,8 @@ const TwitchPlayer = dynamic(() => import('react-twitch-embed-video'), {
 
 export default function Index() {
   return (
-    <div className="flex flex-col gap-5 px-10 lg:px-3 mx-auto max-w-6xl pt-3 pb-20">
-      <div className="flex flex-col md:flex-row gap-3 justify-between items-center pb-20">
-        <h1 className="flex flex-row justify-center items-center gap-2 bg-purple-600 px-3 py-1 rounded-md text-2xl shadow-md">
-          <FaRobot /> Giveaway-o-tron
-        </h1>
-        <div className="flex flex-row gap-2">
-          <a className="button" href="https://github.com/maael/giveaway-o-tron/releases/latest">
-            <FaDownload /> Download
-          </a>
-          <a className="button text-2xl px-4" href="https://github.com/maael/giveaway-o-tron">
-            <FaGithub />
-          </a>
-        </div>
-      </div>
+    <>
+      <Header />
       <div>
         <div className="w-full md:w-2/3 relative aspect-video mx-auto shadow-[0_3px_40px_5px_rgba(0,0,0,0.3)] shadow-purple-600 -mt-8 md:mt-0">
           <Image src="/images/screenshot.png" className="shadow-lg" layout="fill" />
@@ -52,12 +39,18 @@ export default function Index() {
           dose of reliablility on top
         </p>
         <div className="flex flex-row gap-4 justify-center items-center">
-          <a className="button">Get Started</a>
-          <a className="button bg-opacity-50">Learn More</a>
+          <Link href="/guide">
+            <a className="button">Get Started</a>
+          </Link>
+          <a href="#mainfeatures" className="button bg-opacity-50">
+            Learn More
+          </a>
         </div>
       </div>
       <div className="py-10 flex flex-col gap-4 justify-center items-center max-w-md mx-auto text-center">
-        <h2 className="text-4xl font-bold">Main Features</h2>
+        <a id="mainfeatures">
+          <h2 className="text-4xl font-bold">Main Features</h2>
+        </a>
         <p className="text-lg opacity-80">Jam-packed with all the features you could want for a giveaway!</p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 px-2 md:px-20 -mt-5 items-start mb-2">
@@ -110,7 +103,7 @@ export default function Index() {
       </div>
       <PlayerWrapper video="1567875737" time="0h38m10s" />
       <PlayerWrapper video="1570309446" time="2h31m08s" />
-    </div>
+    </>
   )
 }
 

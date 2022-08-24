@@ -1,6 +1,6 @@
-const title = 'Matt Elphick | Software Engineer'
-const description = 'Software engineer mainly messing around with JavaScript.'
-const url = 'https://mael.tech/'
+const title = 'Giveaway-o-tron | A Twitch giveaway tool'
+const description = 'A Twitch giveaway tool packed with features'
+const url = 'https://giveaway-o-tron.mael.tech'
 
 export default {
   title,
@@ -13,10 +13,5 @@ export default {
     site_name: title,
     type: 'website',
     locale: 'en_GB',
-  },
-  twitter: {
-    handle: '@mattaelphick',
-    site: '@mattaelphick',
-    cardType: 'summary_large_image',
   },
 }
