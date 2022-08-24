@@ -31617,6 +31617,9 @@ to {
   function FaPlus(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 448 512" }, "child": [{ "tag": "path", "attr": { "d": "M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" } }] })(props);
   }
+  function FaQuestion(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 384 512" }, "child": [{ "tag": "path", "attr": { "d": "M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z" } }] })(props);
+  }
   function FaRobot(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 640 512" }, "child": [{ "tag": "path", "attr": { "d": "M32,224H64V416H32A31.96166,31.96166,0,0,1,0,384V256A31.96166,31.96166,0,0,1,32,224Zm512-48V448a64.06328,64.06328,0,0,1-64,64H160a64.06328,64.06328,0,0,1-64-64V176a79.974,79.974,0,0,1,80-80H288V32a32,32,0,0,1,64,0V96H464A79.974,79.974,0,0,1,544,176ZM264,256a40,40,0,1,0-40,40A39.997,39.997,0,0,0,264,256Zm-8,128H192v32h64Zm96,0H288v32h64ZM456,256a40,40,0,1,0-40,40A39.997,39.997,0,0,0,456,256Zm-8,128H384v32h64ZM640,256V384a31.96166,31.96166,0,0,1-32,32H576V224h32A31.96166,31.96166,0,0,1,640,256Z" } }] })(props);
   }
@@ -32668,15 +32671,23 @@ to {
     return /* @__PURE__ */ import_react17.default.createElement("div", {
       className: "flex flex-col justify-center items-center h-full gap-3 -mt-10"
     }, /* @__PURE__ */ import_react17.default.createElement("div", {
-      className: "text-2xl"
-    }, "Setup"), /* @__PURE__ */ import_react17.default.createElement("button", {
-      onClick: () => Neutralino.os.open("https://giveaway-o-tron.vercel.app")
-    }, "Click here to authenticate with Twitch and get the required tokens \u2192"), /* @__PURE__ */ import_react17.default.createElement("form", {
+      className: "text-3xl"
+    }, "First Time Setup"), /* @__PURE__ */ import_react17.default.createElement("p", {
+      className: "max-w-md text-center opacity-70"
+    }, "Click below to open a browser and log in with your Twitch account, to get the tokens needed below."), /* @__PURE__ */ import_react17.default.createElement("button", {
+      className: "bg-purple-600 text-white py-1 px-3 rounded-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 justify-center",
+      onClick: () => Neutralino.os.open("https://giveaway-o-tron.vercel.app"),
+      title: "Go to Twitch"
+    }, "Authenticate with Twitch to get tokens \u2192"), /* @__PURE__ */ import_react17.default.createElement("p", {
+      className: "max-w-lg text-center opacity-70 mt-4"
+    }, "Once you have the tokens, you can post them below."), /* @__PURE__ */ import_react17.default.createElement("form", {
       className: "flex flex-col gap-2 justify-center items-center",
       onSubmit: async (e2) => {
         e2.preventDefault();
         const accessToken = e2.currentTarget.elements.accessToken.value.trim();
         const refreshToken = e2.currentTarget.elements.refreshToken.value.trim();
+        if (!accessToken || !refreshToken)
+          return;
         const data = await validateToken(accessToken, refreshToken);
         if (!data)
           return;
@@ -32698,9 +32709,11 @@ to {
       name: "refreshToken",
       type: "password"
     }), /* @__PURE__ */ import_react17.default.createElement("button", {
-      className: "bg-purple-600 text-white py-1 px-3 rounded-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 w-32 justify-center",
+      className: "bg-purple-600 text-white py-1 px-5 rounded-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 justify-center text-xl mt-2",
       title: "Setup connection"
-    }, /* @__PURE__ */ import_react17.default.createElement(FaTwitch, null), " Setup")));
+    }, /* @__PURE__ */ import_react17.default.createElement(FaTwitch, null), /* @__PURE__ */ import_react17.default.createElement("span", {
+      className: "relative -top-0.5"
+    }, "Finish Setup"))));
   }
 
   // src/components/screens/PastGiveaways.tsx
@@ -33091,14 +33104,20 @@ to {
     }, /* @__PURE__ */ import_react20.default.createElement("div", {
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
       title: "Past giveways"
-    }, /* @__PURE__ */ import_react20.default.createElement(FaClock, null))), location2.pathname === "/setup" && ["odialo", "mukluk"].includes(channelInfo.login) ? null : /* @__PURE__ */ import_react20.default.createElement("button", {
+    }, /* @__PURE__ */ import_react20.default.createElement(FaClock, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react20.default.createElement("button", {
       title: "Get url for OBS browser source based alerts animation",
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
       onClick: () => {
         copyAlertURL();
         Et.success("Copied! Use as OBS browser source!", { position: "bottom-center" });
       }
-    }, copiedAlertURL ? /* @__PURE__ */ import_react20.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react20.default.createElement(FaMagic, null))), /* @__PURE__ */ import_react20.default.createElement("form", {
+    }, copiedAlertURL ? /* @__PURE__ */ import_react20.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react20.default.createElement(FaMagic, null)), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react20.default.createElement("button", {
+      title: "Open FAQ",
+      className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
+      onClick: () => {
+        Neutralino.os.open("https://giveaway-o-tron.mael.tech/guide#faq");
+      }
+    }, /* @__PURE__ */ import_react20.default.createElement(FaQuestion, null))), /* @__PURE__ */ import_react20.default.createElement("form", {
       className: "flex flex-row",
       onSubmit: (e2) => {
         e2.preventDefault();

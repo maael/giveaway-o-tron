@@ -7,6 +7,7 @@ import {
   FaMagic,
   FaCheck,
   FaClock,
+  FaQuestion,
 } from 'react-icons/fa'
 import { Link, useLocation } from 'react-router-dom'
 import toast from 'react-hot-toast'
@@ -62,7 +63,7 @@ export default function Header({
             </div>
           </Link>
         )}
-        {location.pathname === '/setup' && ['odialo', 'mukluk'].includes(channelInfo.login!) ? null : (
+        {location.pathname === '/setup' ? null : (
           <button
             title="Get url for OBS browser source based alerts animation"
             className="bg-purple-600 p-2 flex justify-center items-center rounded-md"
@@ -72,6 +73,17 @@ export default function Header({
             }}
           >
             {copiedAlertURL ? <FaCheck /> : <FaMagic />}
+          </button>
+        )}
+        {location.pathname === '/setup' ? null : (
+          <button
+            title="Open FAQ"
+            className="bg-purple-600 p-2 flex justify-center items-center rounded-md"
+            onClick={() => {
+              Neutralino.os.open('https://giveaway-o-tron.mael.tech/guide#faq')
+            }}
+          >
+            <FaQuestion />
           </button>
         )}
       </div>
