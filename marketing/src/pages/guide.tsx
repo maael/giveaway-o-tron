@@ -1,9 +1,9 @@
 import Header from '~/components/primitives/Header'
 
-export default function Guide() {
+export default function Guide({ fathom }) {
   return (
     <>
-      <Header />
+      <Header fathom={fathom} />
       <div className="py-2 flex flex-col gap-8 justify-center items-center mx-auto text-center -mt-20">
         <h1 className="text-6xl font-bold">Guide</h1>
         <div className="flex flex-row gap-4 justify-center items-center">
@@ -16,37 +16,42 @@ export default function Guide() {
         </div>
         <a id="setup">
           <h2 className="text-5xl font-bold">Setup</h2>
-          <ol className="text-left flex flex-col gap-2 mt-5 list-decimal max-w-2xl mx-auto px-2">
-            <li>
-              Download the{' '}
-              <em className="text-purple-600 font-bold bg-gray-900 px-3 py-1 mx-1 rounded-md not-italic">
-                giveaway-o-tron.zip
-              </em>{' '}
-              file of the latest release from{' '}
-              <a href="https://github.com/maael/giveaway-o-tron/releases/latest">here</a>
-            </li>
-            <li>Unzip the folder</li>
-            <li>
-              Run the{' '}
-              <em className="text-purple-600 font-bold bg-gray-900 px-2 py-1 rounded-md not-italic">
-                giveaway-o-tron.exe
-              </em>{' '}
-              file in the folder
-            </li>
-            <li>It will show you the setup page, click on the link to direct to Twitch to get the required tokens</li>
-            <li>Copy and paste the tokens to the app, and hit the button</li>
-            <li>You should now see your chat!</li>
-            <li>
-              Before doing giveaways or using on stream, you'll need to let it collect your initial followers and
-              subscribers - it'll let you know how it's doing with messages in the bottom right of the app
-            </li>
-            <li>
-              Once you see a message saying{' '}
-              <em className="text-purple-600 font-bold bg-gray-900 px-2 py-1 rounded-md not-italic">Done</em> you're
-              good to go!
-            </li>
-          </ol>
         </a>
+        <ol className="text-left flex flex-col gap-2 mt-5 list-decimal max-w-2xl mx-auto px-2">
+          <li>
+            Download the{' '}
+            <em className="text-purple-600 font-bold bg-gray-900 px-3 py-1 mx-1 rounded-md not-italic">
+              giveaway-o-tron.zip
+            </em>{' '}
+            file of the latest release from{' '}
+            <a
+              href="https://github.com/maael/giveaway-o-tron/releases/latest"
+              onClick={() => fathom.trackGoal('YTV1LXUB', 0)}
+            >
+              here
+            </a>
+          </li>
+          <li>Unzip the folder</li>
+          <li>
+            Run the{' '}
+            <em className="text-purple-600 font-bold bg-gray-900 px-2 py-1 rounded-md not-italic">
+              giveaway-o-tron.exe
+            </em>{' '}
+            file in the folder
+          </li>
+          <li>It will show you the setup page, click on the link to direct to Twitch to get the required tokens</li>
+          <li>Copy and paste the tokens to the app, and hit the button</li>
+          <li>You should now see your chat!</li>
+          <li>
+            Before doing giveaways or using on stream, you'll need to let it collect your initial followers and
+            subscribers - it'll let you know how it's doing with messages in the bottom right of the app
+          </li>
+          <li>
+            Once you see a message saying{' '}
+            <em className="text-purple-600 font-bold bg-gray-900 px-2 py-1 rounded-md not-italic">Done</em> you're good
+            to go!
+          </li>
+        </ol>
         <a id="faq">
           <h2 className="text-5xl font-bold">FAQ</h2>
         </a>

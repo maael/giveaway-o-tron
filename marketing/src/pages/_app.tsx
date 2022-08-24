@@ -7,7 +7,7 @@ import SEO from '~/../next-seo.config'
 import EmojiFavicon from '~/components/primitives/EmojiFavicon'
 
 function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
-  useFathom()
+  const fathom = useFathom()
   return (
     <>
       <Head>
@@ -16,7 +16,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
       </Head>
       <DefaultSeo {...SEO} />
       <div className="flex flex-col gap-5 px-10 lg:px-3 mx-auto max-w-6xl pt-3 pb-20">
-        <Component {...pageProps} />
+        <Component {...pageProps} fathom={fathom} />
       </div>
       <EmojiFavicon emoji="🤖" />
     </>

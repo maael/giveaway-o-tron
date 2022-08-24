@@ -29,4 +29,6 @@ export default function useFathom() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  return Fathom
 }

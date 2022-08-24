@@ -22,10 +22,10 @@ const TwitchPlayer = dynamic(() => import('react-twitch-embed-video'), {
   ssr: false,
 })
 
-export default function Index() {
+export default function Index({ fathom }) {
   return (
     <>
-      <Header />
+      <Header fathom={fathom} />
       <div>
         <div className="w-full md:w-2/3 relative aspect-video mx-auto shadow-[0_3px_40px_5px_rgba(0,0,0,0.3)] shadow-purple-600 -mt-8 md:mt-0">
           <Image src="/images/screenshot.png" className="shadow-lg" layout="fill" />
