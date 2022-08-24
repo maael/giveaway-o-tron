@@ -13,6 +13,17 @@ const io = new Server(server, {
   },
 });
 
+interface WinnerMessage {
+  type: "winner";
+  channelId: string;
+  winner: string;
+  login: string;
+  alertDuration: number;
+  alertTheme: string;
+}
+
+type Message = WinnerMessage;
+
 io.on("connection", (socket) => {
   const channelRoom = socket.handshake.query?.channel;
   console.log("[connection]", { channel: channelRoom });
@@ -21,7 +32,7 @@ io.on("connection", (socket) => {
   }
   socket.on("event", (msg) => {
     console.log("[event][relay]", channelRoom, msg);
-    socket.to(`${msg.channel}`).emit("event", msg);
+    socket.to(`${msg.channelId}`).emit("event", msg);
   });
   socket.on("disconnect", () => {
     console.log("[disconnect]");
