@@ -4,7 +4,7 @@ export default function Guide() {
   return (
     <>
       <Header />
-      <div className="py-2 flex flex-col gap-8 justify-center items-center mx-auto text-center -mt-15">
+      <div className="py-2 flex flex-col gap-8 justify-center items-center mx-auto text-center -mt-20">
         <h1 className="text-6xl font-bold">Guide</h1>
         <div className="flex flex-row gap-4 justify-center items-center">
           <a href="#setup" className="button">
@@ -22,7 +22,8 @@ export default function Guide() {
               <em className="text-purple-600 font-bold bg-gray-900 px-3 py-1 mx-1 rounded-md not-italic">
                 giveaway-o-tron.zip
               </em>{' '}
-              file of the latest release from <a href="">here</a>
+              file of the latest release from{' '}
+              <a href="https://github.com/maael/giveaway-o-tron/releases/latest">here</a>
             </li>
             <li>Unzip the folder</li>
             <li>
@@ -50,7 +51,7 @@ export default function Guide() {
           <h2 className="text-5xl font-bold">FAQ</h2>
         </a>
         <h3 className="text-3xl font-bold">What are the available special commands?</h3>
-        <p className="opacity-80 text-center max-w-xl">
+        <p className="opacity-80 text-center max-w-xl -mt-6">
           Put these directly as they appear here into the chat command setting field, including any $ symbols etc.
         </p>
         <div className="text-left flex flex-col gap-2 list-disc max-w-2xl mx-auto px-2 -mt-4">
