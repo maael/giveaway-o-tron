@@ -32,6 +32,8 @@
     "react-dom": "^18.0.0",
     "react-hot-toast": "^2.3.0",
     "react-icons": "^4.4.0",
+    "react-twitch-embed-video": "^3.0.2",
+    "react-twitter-embed": "^4.0.4",
     "tailwindcss-animate": "^1.0.5"
   },
   "devDependencies": {
