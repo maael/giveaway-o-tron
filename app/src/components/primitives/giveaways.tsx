@@ -146,7 +146,7 @@ export function Winner({
           <GiPartyPopper className="text-purple-300 text-xl" />
           <FaBullhorn
             className="text-2xl absolute right-12 cursor-pointer select-none transform opacity-80 transition-opacity hover:opacity-100 hover:scale-105"
-            onClick={() => announceWinner({ ...anounceArgs, winner: winner.username! })}
+            onClick={() => announceWinner({ ...anounceArgs, winner: winner.username!, force: true })}
           />
           <FaTimes
             className="text-2xl absolute right-5 text-red-500 cursor-pointer transform opacity-80 transition-opacity hover:opacity-100 select-none hover:scale-105"

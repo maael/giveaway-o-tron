@@ -136,9 +136,10 @@ export interface AnnounceArgs {
   channelInfo: ChannelInfo
   settings: Settings
   winner: string
+  force?: boolean
 }
-export function announceWinner({ chatClient, channelInfo, settings, winner }: AnnounceArgs) {
-  if (settings.autoAnnounce !== undefined && settings.autoAnnounce === false) return
+export function announceWinner({ chatClient, channelInfo, settings, winner, force }: AnnounceArgs) {
+  if (force !== true && settings.autoAnnounce !== undefined && settings.autoAnnounce === false) return
   relay.emit('event', {
     type: 'winner',
     winner,

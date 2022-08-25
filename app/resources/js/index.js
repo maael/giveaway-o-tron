@@ -31506,8 +31506,8 @@ to {
       return { login: u3, wasSubscriber: (_a = subsList == null ? void 0 : subsList.has(u3)) != null ? _a : null, wasFollower: (_b = followersList == null ? void 0 : followersList.has(u3)) != null ? _b : null };
     });
   }
-  function announceWinner({ chatClient, channelInfo, settings, winner }) {
-    if (settings.autoAnnounce !== void 0 && settings.autoAnnounce === false)
+  function announceWinner({ chatClient, channelInfo, settings, winner, force }) {
+    if (force !== true && settings.autoAnnounce !== void 0 && settings.autoAnnounce === false)
       return;
     relay_default.emit("event", {
       type: "winner",
@@ -32472,7 +32472,7 @@ to {
       className: "text-purple-300 text-xl"
     }), /* @__PURE__ */ import_react14.default.createElement(FaBullhorn, {
       className: "text-2xl absolute right-12 cursor-pointer select-none transform opacity-80 transition-opacity hover:opacity-100 hover:scale-105",
-      onClick: () => announceWinner(__spreadProps(__spreadValues({}, anounceArgs), { winner: winner.username }))
+      onClick: () => announceWinner(__spreadProps(__spreadValues({}, anounceArgs), { winner: winner.username, force: true }))
     }), /* @__PURE__ */ import_react14.default.createElement(FaTimes, {
       className: "text-2xl absolute right-5 text-red-500 cursor-pointer transform opacity-80 transition-opacity hover:opacity-100 select-none hover:scale-105",
       onClick: () => onClear(i3)
