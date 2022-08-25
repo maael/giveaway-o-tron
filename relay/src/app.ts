@@ -23,6 +23,10 @@ interface WinnerMessage {
   alertTheme: string;
   discordGuildId?: string;
   discordChannelId?: string;
+  discordColour?: number;
+  discordTitle?: string;
+  discordBody?: string;
+  giveawayName?: string;
 }
 
 type Message = WinnerMessage;
@@ -39,10 +43,14 @@ io.on("connection", (socket) => {
 
     if (msg.type === "winner" && msg.discordGuildId && msg.discordChannelId) {
       await sendMessage(msg.discordGuildId, msg.discordChannelId, {
-        colour: 0x9333ea,
-        title: "A new giveaway winner!",
+        colour: msg.discordColour || 0x9333ea,
+        title: msg.discordTitle || "A new giveaway winner!",
         link: `https://twitch.tv/${msg.login}`,
-        body: `:tada: ${msg.winner} won a giveaway! [Join the stream here](@link)`,
+        body:
+          msg.discordBody ||
+          `:tada: $winner won a giveaway for $prize! [Join the stream here]($link)`,
+        winner: msg.winner,
+        giveawayName: msg.giveawayName,
       });
     }
   });

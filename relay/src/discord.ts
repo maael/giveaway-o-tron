@@ -21,6 +21,8 @@ export interface MessageData {
   title: string;
   body: string;
   link: string;
+  winner: string;
+  giveawayName?: string;
 }
 
 export async function sendMessage(
@@ -30,6 +32,10 @@ export async function sendMessage(
 ) {
   try {
     console.log("[discord][message][send]", { guildId, channelId, message });
+    if (!guildId || !channelId) {
+      console.log("[discord][message][skip]", { guildId, channelId, message });
+      return;
+    }
     const guild = await client.guilds.fetch(guildId);
     const channel = (await guild.channels.fetch(
       channelId
@@ -40,7 +46,12 @@ export async function sendMessage(
           .setColor(message.colour)
           .setTitle(message.title)
           .setURL(message.link)
-          .setDescription(message.body.replace("@link", message.link)),
+          .setDescription(
+            message.body
+              .replace("$winner", message.winner || "Someone")
+              .replace("$prize", message.giveawayName || "something")
+              .replace("$link", message.link)
+          ),
       ],
     });
     console.log("[discord][message][sent]", { guildId, channelId, message });
