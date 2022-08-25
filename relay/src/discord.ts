@@ -21,7 +21,7 @@ export interface MessageData {
   title: string;
   body: string;
   link: string;
-  winner: string;
+  winner?: string;
   giveawayName?: string;
 }
 
@@ -41,6 +41,9 @@ export async function sendMessage(
       channelId
     )) as ActualChannelType;
     const roles = await guild.roles.fetch();
+    const title = message.title
+      .replace("$winner", message.winner || "Someone")
+      .replace("$prize", message.giveawayName || "something");
     let body = message.body
       .replace("$winner", message.winner || "Someone")
       .replace("$prize", message.giveawayName || "something")
@@ -53,7 +56,7 @@ export async function sendMessage(
       embeds: [
         new EmbedBuilder()
           .setColor(message.colour)
-          .setTitle(message.title)
+          .setTitle(title)
           .setURL(message.link)
           .setDescription(body),
       ],

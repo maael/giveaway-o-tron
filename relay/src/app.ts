@@ -26,6 +26,7 @@ interface WinnerMessage {
   discordColour?: number;
   discordTitle?: string;
   discordBody?: string;
+  discordEnabled?: boolean;
   giveawayName?: string;
 }
 
@@ -41,16 +42,45 @@ io.on("connection", (socket) => {
     console.log("[event][relay]", channelRoom, msg);
     socket.to(`${msg.channelId}`).emit("event", msg);
 
-    if (msg.type === "winner" && msg.discordGuildId && msg.discordChannelId) {
+    if (!msg.discordGuildId || !msg.discordChannelId || !msg.discordEnabled) {
+      return;
+    }
+    const link = `https://twitch.tv/${msg.login}`;
+    const colour = msg.discordColour || 0x9333ea;
+    if (msg.type === "winner") {
       await sendMessage(msg.discordGuildId, msg.discordChannelId, {
-        colour: msg.discordColour || 0x9333ea,
+        colour,
         title: msg.discordTitle || "A new giveaway winner!",
-        link: `https://twitch.tv/${msg.login}`,
+        link,
         body:
           msg.discordBody ||
-          `:tada: $winner won a giveaway for $prize! [Join the stream here]($link)`,
+          `:tada: $winner won a giveaway! [Join the stream here]($link)`,
         winner: msg.winner,
         giveawayName: msg.giveawayName,
+      });
+    } else if (msg.type === "timer-start") {
+      /** Timer Event */
+      await sendMessage(msg.discordGuildId, msg.discordChannelId, {
+        colour,
+        title: msg.discordTitle || "A giveaway has opened!",
+        link,
+        body: msg.discordBody || "[Join the stream now]($link)",
+      });
+    } else if (msg.type === "timer-end") {
+      /** Timer Event */
+      await sendMessage(msg.discordGuildId, msg.discordChannelId, {
+        colour,
+        title: msg.discordTitle || "A giveaway has closed!",
+        link,
+        body: msg.discordBody || "[Join the stream now]($link)",
+      });
+    } else if (msg.type === "timer-cancel") {
+      /** Timer Event */
+      await sendMessage(msg.discordGuildId, msg.discordChannelId, {
+        colour,
+        title: msg.discordTitle || "A giveaway was cancelled!",
+        link,
+        body: msg.discordBody || "[Join the stream now]($link)",
       });
     }
   });

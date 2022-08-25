@@ -1,12 +1,14 @@
+import cls from 'classnames'
 import React, { HTMLAttributes } from 'react'
 
 export default function Input({
   label,
   title,
+  outerClassName,
   ...inputProps
-}: HTMLAttributes<HTMLInputElement> & { label: string; value?: string }) {
+}: HTMLAttributes<HTMLInputElement> & { label: string; value?: string; outerClassName?: string }) {
   return (
-    <div className="flex flex-row justify-center items-center flex-1">
+    <div className={cls(outerClassName, 'flex flex-row justify-center items-center flex-1')}>
       <div className="flex-0 bg-purple-600 px-2 py-1 rounded-l-md h-full" title={title}>
         {label}
       </div>

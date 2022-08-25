@@ -81,6 +81,7 @@ export default function MainScreen({
         setSettings={setSettings}
         setChatPaused={setChatPaused}
         resetChat={resetChat}
+        discordSettings={discordSettings}
       />
       {settings.performanceMode && !winners.length ? (
         <div className="h-full gap-2 flex flex-col justify-center items-center">

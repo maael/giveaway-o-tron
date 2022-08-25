@@ -6,7 +6,7 @@ import format from 'date-fns/formatDistanceStrict'
 import { Howl } from 'howler'
 import Slider, { SliderInner } from './Slider'
 import relay from '../../utils/relay'
-import { Settings } from '../../utils'
+import { DiscordSettings, getDiscordColour, Settings } from '../../utils'
 
 const bell = new Howl({
   src: ['sounds/pleasing-bell.ogg'],
@@ -34,6 +34,7 @@ interface Props {
   setChatPaused: Dispatch<SetStateAction<Boolean>>
   resetChat: () => void
   channelId?: string
+  discordSettings: DiscordSettings
 }
 
 const StableCountdown = React.memo(function StableCountdown({
@@ -53,16 +54,27 @@ const Time = React.memo(function Time({
   channelId,
   timerBell,
   setSettings,
+  discordSettings,
 }: {
   chatCommand: Props['settings']['chatCommand']
   timerBell: Props['settings']['timerBell']
   setSettings: Props['setSettings']
-} & Pick<Props, 'channelId' | 'setChatPaused' | 'resetChat'>) {
+} & Pick<Props, 'channelId' | 'setChatPaused' | 'resetChat' | 'discordSettings'>) {
   const [active, setActive] = React.useState(false)
   const [value, setValue] = React.useState(ONE_MIN)
   const onComplete = React.useCallback(() => {
     toast.success('Timer finished! Chat paused, do a giveaway...', { position: 'bottom-center' })
-    relay.emit('event', { type: 'timer-end', channelId, ts: new Date().toISOString() })
+    relay.emit('event', {
+      type: 'timer-end',
+      channelId,
+      ts: new Date().toISOString(),
+      discordGuildId: discordSettings.guildId,
+      discordChannelId: discordSettings.channelId,
+      discordColour: getDiscordColour(discordSettings.messageColour),
+      discordTitle: discordSettings.endTitle,
+      discordBody: discordSettings.endBody,
+      discordEnabled: discordSettings.endEnabled,
+    })
     setChatPaused(true)
     if (timerBell) bell.play()
   }, [channelId, timerBell])
@@ -104,7 +116,18 @@ const Time = React.memo(function Time({
           resetChat()
           setChatPaused(false)
           setActive(true)
-          relay.emit('event', { type: 'timer-start', channelId, ts: new Date().toISOString(), chatCommand })
+          relay.emit('event', {
+            type: 'timer-start',
+            channelId,
+            ts: new Date().toISOString(),
+            chatCommand,
+            discordGuildId: discordSettings.guildId,
+            discordChannelId: discordSettings.channelId,
+            discordColour: getDiscordColour(discordSettings.messageColour),
+            discordTitle: discordSettings.startTitle,
+            discordBody: discordSettings.startBody,
+            discordEnabled: discordSettings.startEnabled,
+          })
         }}
         title="Will clear chat"
       >
@@ -114,7 +137,14 @@ const Time = React.memo(function Time({
   )
 })
 
-export default function SettingsComponent({ channelId, settings, setSettings, setChatPaused, resetChat }: Props) {
+export default function SettingsComponent({
+  channelId,
+  settings,
+  setSettings,
+  setChatPaused,
+  resetChat,
+  discordSettings,
+}: Props) {
   return (
     <>
       <div className="flex flex-row gap-2 mt-2">
@@ -186,6 +216,7 @@ export default function SettingsComponent({ channelId, settings, setSettings, se
           chatCommand={settings.chatCommand}
           timerBell={settings.timerBell}
           setSettings={setSettings}
+          discordSettings={discordSettings}
         />
       </div>
       <div className="flex flex-row gap-2 mt-2">

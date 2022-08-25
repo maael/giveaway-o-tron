@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import { FaEnvelope } from 'react-icons/fa'
 import { DiscordSettings } from '~/utils'
+import Checkbox from '../primitives/Checkbox'
 import Input from '../primitives/Input'
 
 export default function Discord({
@@ -49,45 +50,110 @@ export default function Discord({
         <li>Do the same again but for a channel</li>
       </ol>
       <h1 className="text-xl">Message Settings</h1>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 text-sm">
         <Input
+          outerClassName="flex-2"
           label="Message Colour"
           placeholder="Hex code..."
           value={settings.messageColour || ''}
           onChange={(e) => setSettings((s) => ({ ...s, messageColour: (e.target as any).value }))}
         />
-        <Input
-          label="Message Title"
-          placeholder="Title..."
-          value={settings.messageTitle || ''}
-          onChange={(e) => setSettings((s) => ({ ...s, messageTitle: (e.target as any).value }))}
-        />
-        <Input
-          label="Message Body"
-          placeholder="Body..."
-          value={settings.messageBody || ''}
-          onChange={(e) => setSettings((s) => ({ ...s, messageBody: (e.target as any).value }))}
-        />
-        <p className="px-2 mb-3 opacity-90 text-sm">Some special keywords you can include are:</p>
+        <div className="flex flex-row justify-center items-center gap-2">
+          <div className="flex-1 bg-purple-600 px-2 py-1 text-center rounded-md">Giveaway Start:</div>
+          <Input
+            outerClassName="flex-2"
+            label="Title"
+            placeholder="Title..."
+            value={settings.startTitle || ''}
+            onChange={(e) => setSettings((s) => ({ ...s, startTitle: (e.target as any).value }))}
+          />
+          <Input
+            outerClassName="flex-3"
+            label="Body"
+            placeholder="Body..."
+            value={settings.startBody || ''}
+            onChange={(e) => setSettings((s) => ({ ...s, startBody: (e.target as any).value }))}
+          />
+          <Checkbox
+            className="bg-purple-600 rounded-md h-full px-2 py-1"
+            value={settings.startEnabled ?? true}
+            name="startEnabled"
+            onChange={setSettings}
+            title="Enable Discord messages for starting giveaways"
+          />
+        </div>
+        <div className="flex flex-row justify-center items-center gap-2">
+          <div className="flex-1 bg-purple-600 px-2 py-1 text-center rounded-md">Giveaway End:</div>
+          <Input
+            outerClassName="flex-2"
+            label="Title"
+            placeholder="Title..."
+            value={settings.endTitle || ''}
+            onChange={(e) => setSettings((s) => ({ ...s, endTitle: (e.target as any).value }))}
+          />
+          <Input
+            outerClassName="flex-3"
+            label="Body"
+            placeholder="Body..."
+            value={settings.endBody || ''}
+            onChange={(e) => setSettings((s) => ({ ...s, endBody: (e.target as any).value }))}
+          />
+          <Checkbox
+            className="bg-purple-600 rounded-md h-full px-2 py-1"
+            value={settings.endEnabled ?? true}
+            name="endEnabled"
+            onChange={setSettings}
+            title="Enable Discord messages for ending giveaways"
+          />
+        </div>
+        <div className="flex flex-row justify-center items-center gap-2">
+          <div className="flex-1 bg-purple-600 px-2 py-1 text-center rounded-md">Winner:</div>
+          <Input
+            outerClassName="flex-2"
+            label="Title"
+            placeholder="Title..."
+            value={settings.winnerTitle || ''}
+            onChange={(e) => setSettings((s) => ({ ...s, winnerTitle: (e.target as any).value }))}
+          />
+          <Input
+            outerClassName="flex-3"
+            label="Body"
+            placeholder="Body..."
+            value={settings.winnerBody || ''}
+            onChange={(e) => setSettings((s) => ({ ...s, winnerBody: (e.target as any).value }))}
+          />
+          <Checkbox
+            className="bg-purple-600 rounded-md h-full px-2 py-1"
+            value={settings.winnerEnabled ?? true}
+            name="winnerEnabled"
+            onChange={setSettings}
+            title="Enable Discord messages for winners"
+          />
+        </div>
+        <p className="px-2 mb-3 opacity-90 text-sm">
+          You can mention roles with @rolename. Some special keywords you can include are:
+        </p>
         <div className="flex flex-col gap-2 -mt-3 text-sm">
           <div className="flex flex-row gap-2 relative">
             <div className="w-1/5 flex justify-end items-start">
               <em className="not-italic px-3 py-1 bg-gray-700 text-purple-400 rounded-md">$winner</em>
             </div>
-            <p className="flex flex-row items-center">Will be replaced by the winners username</p>
+            <p className="flex flex-row items-center">Will be replaced by the winners username (title and body)</p>
           </div>
           <div className="flex flex-row gap-2">
             <div className="w-1/5 flex justify-end items-start">
               <em className="not-italic px-3 py-1 bg-gray-700 text-purple-400 rounded-md">$prize</em>
             </div>
-            <p className="flex flex-row items-center">Will be replaced by the giveaway name if there is one</p>
+            <p className="flex flex-row items-center">
+              Will be replaced by the giveaway name if there is one (title and body)
+            </p>
           </div>
           <div className="flex flex-row gap-2">
             <div className="w-1/5 flex justify-end items-start">
               <em className="not-italic px-3 py-1 bg-gray-700 text-purple-400 rounded-md">[any text]($link)</em>
             </div>
             <p className="flex flex-row items-center">
-              Will be replaced by the text between the square brackets, linking to your Twitch
+              Will be replaced by the text between the square brackets, linking to your Twitch (body only)
             </p>
           </div>
         </div>

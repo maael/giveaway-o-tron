@@ -1,6 +1,6 @@
 import { Chat, ChatItem } from '../chat'
 import { ChannelInfo, DiscordSettings, GiveawayResult, Settings } from './types'
-import { getRandomArrayItem, handleChatCommand } from './misc'
+import { getDiscordColour, getRandomArrayItem, handleChatCommand } from './misc'
 import { getFollowers, getSubs, getViewers } from './twitch'
 import relay from './relay'
 import toast from 'react-hot-toast'
@@ -143,7 +143,7 @@ export interface AnnounceArgs {
 }
 export function announceWinner({ chatClient, channelInfo, settings, discordSettings, winner, force }: AnnounceArgs) {
   if (force !== true && settings.autoAnnounce !== undefined && settings.autoAnnounce === false) return
-  const colour = Number(`0x${discordSettings.messageColour?.replace('#', '')}`)
+  const colour = getDiscordColour(discordSettings.messageColour)
   relay.emit('event', {
     type: 'winner',
     winner,
@@ -153,9 +153,10 @@ export function announceWinner({ chatClient, channelInfo, settings, discordSetti
     alertTheme: settings.alertTheme,
     discordGuildId: discordSettings.guildId,
     discordChannelId: discordSettings.channelId,
-    discordColour: isNaN(colour) ? undefined : colour,
-    discordTitle: discordSettings.messageTitle,
-    discordBody: discordSettings.messageBody,
+    discordColour: colour,
+    discordTitle: discordSettings.winnerTitle,
+    discordBody: discordSettings.winnerBody,
+    discordEnabled: discordSettings.winnerEnabled,
     giveawayName: '',
   })
   if (settings.sendMessages) {

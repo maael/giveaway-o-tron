@@ -18,7 +18,7 @@ export default function SettingsScreen({
 }) {
   return (
     <div className="mt-2 flex flex-col gap-3 flex-1">
-      <h1 className="text-3xl">Settings</h1>
+      <h1 className="text-3xl -mb-1">Settings</h1>
       <div className="flex flex-col gap-2">
         <div className="flex flex-row gap-2">
           <div className="flex-1">
@@ -34,7 +34,7 @@ export default function SettingsScreen({
             <FaPlus /> Add Item
           </button>
         </div>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-4 gap-2 text-sm">
           {(settings.blocklist || []).map((u, i) => (
             <div className="relative flex-1" key={u}>
               <input

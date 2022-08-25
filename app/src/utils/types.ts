@@ -22,8 +22,15 @@ export interface DiscordSettings {
   guildId?: string
   channelId?: string
   messageColour?: string
-  messageTitle?: string
-  messageBody?: string
+  startTitle?: string
+  startBody?: string
+  startEnabled?: boolean
+  endTitle?: string
+  endBody?: string
+  endEnabled?: boolean
+  winnerTitle?: string
+  winnerBody?: string
+  winnerEnabled?: boolean
 }
 
 export enum AlertTheme {

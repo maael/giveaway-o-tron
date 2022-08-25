@@ -31914,6 +31914,14 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 
+.flex-2 {
+  flex: 2 !important;
+}
+
+.flex-3 {
+  flex: 3 !important;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
