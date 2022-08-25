@@ -1,6 +1,7 @@
 import express from "express";
 import http from "http";
 import { Server } from "socket.io";
+import { sendMessage } from "./discord";
 
 const app = express();
 const server = http.createServer(app);
@@ -20,6 +21,8 @@ interface WinnerMessage {
   login: string;
   alertDuration: number;
   alertTheme: string;
+  discordGuildId?: string;
+  discordChannelId?: string;
 }
 
 type Message = WinnerMessage;
@@ -30,9 +33,18 @@ io.on("connection", (socket) => {
   if (channelRoom) {
     socket.join(`${channelRoom}`);
   }
-  socket.on("event", (msg) => {
+  socket.on("event", async (msg: Message) => {
     console.log("[event][relay]", channelRoom, msg);
     socket.to(`${msg.channelId}`).emit("event", msg);
+
+    if (msg.type === "winner" && msg.discordGuildId && msg.discordChannelId) {
+      await sendMessage(msg.discordGuildId, msg.discordChannelId, {
+        colour: 0x9333ea,
+        title: "A new giveaway winner!",
+        link: `https://twitch.tv/${msg.login}`,
+        body: `:tada: ${msg.winner} won a giveaway! [Join the stream here](@link)`,
+      });
+    }
   });
   socket.on("disconnect", () => {
     console.log("[disconnect]");
