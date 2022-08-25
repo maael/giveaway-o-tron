@@ -23,6 +23,8 @@ export interface ChatItem {
   formattedTmiTs: string
 }
 
+export type Chat = ReturnType<typeof init> | null
+
 export class ChatEvent extends EventTarget {
   emit(data: ChatItem) {
     this.dispatchEvent(new CustomEvent('chat', { detail: data }))

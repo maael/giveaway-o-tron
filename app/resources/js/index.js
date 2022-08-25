@@ -23,6 +23,18 @@
   };
   var __spreadProps = (a2, b2) => __defProps(a2, __getOwnPropDescs(b2));
   var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
+  var __objRest = (source, exclude) => {
+    var target = {};
+    for (var prop in source)
+      if (__hasOwnProp.call(source, prop) && exclude.indexOf(prop) < 0)
+        target[prop] = source[prop];
+    if (source != null && __getOwnPropSymbols)
+      for (var prop of __getOwnPropSymbols(source)) {
+        if (exclude.indexOf(prop) < 0 && __propIsEnum.call(source, prop))
+          target[prop] = source[prop];
+      }
+    return target;
+  };
   var __commonJS = (cb, mod) => function __require() {
     return mod || (0, cb[Object.keys(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
   };
@@ -28922,13 +28934,23 @@ to {
     chatCommand: "",
     winnerMessage: "PartyHat @name won!",
     sendMessages: false,
-    blocklist: ["streamelements", "streamlabs", "nightbot"],
+    blocklist: [
+      "streamelements",
+      "streamlabs",
+      "nightbot",
+      "sery_bot",
+      "soundalerts",
+      "pretzelrocks",
+      "fossabot",
+      "moobot"
+    ],
     autoScroll: true,
     spamLimit: 1,
     performanceMode: false,
     forfeitCommand: "",
     alertDuration: 4e3,
-    alertTheme: AlertTheme.GW2
+    alertTheme: AlertTheme.GW2,
+    autoAnnounce: true
   };
   var alertThemeMap = {
     [AlertTheme.GW2]: "Guild Wars 2"
@@ -31389,7 +31411,7 @@ to {
 
   // src/utils/giveaways.ts
   var pastWinners = new Set();
-  async function getChatGiveaway(channelInfo, chatItems, chatCommand, settings, forfeits) {
+  async function getChatGiveaway(chatClient, channelInfo, chatItems, chatCommand, settings, forfeits) {
     const forfeitSet = new Set([...forfeits]);
     console.info("[giveaway][chat][start]");
     let subCount = 0;
@@ -31431,14 +31453,7 @@ to {
       if (!winner)
         return;
       pastWinners.add(winner.username);
-      relay_default.emit("event", {
-        type: "winner",
-        winner: winner.username,
-        channelId: channelInfo.userId,
-        login: channelInfo.login,
-        alertDuration: settings.alertDuration,
-        alertTheme: settings.alertTheme
-      });
+      announceWinner({ chatClient, channelInfo, settings, winner: winner.username });
       return {
         login: winner.username,
         wasSubscriber: winner.isSubscriber,
@@ -31446,7 +31461,7 @@ to {
       };
     }).filter(Boolean);
   }
-  async function getInstantGiveaway(channelInfo, settings, forfeits) {
+  async function getInstantGiveaway(chatClient, channelInfo, settings, forfeits) {
     const forfeitSet = new Set([...forfeits]);
     console.info("[giveaway][instant][start]");
     let viewers = await getViewers(channelInfo);
@@ -31484,19 +31499,27 @@ to {
       if (!winner)
         return;
       pastWinners.add(winner);
-      relay_default.emit("event", {
-        type: "winner",
-        winner,
-        channelId: channelInfo.userId,
-        login: channelInfo.login,
-        alertDuration: settings.alertDuration,
-        alertTheme: settings.alertTheme
-      });
+      announceWinner({ chatClient, channelInfo, settings, winner });
       return winner;
     }).filter(Boolean).map((u3) => {
       var _a, _b;
       return { login: u3, wasSubscriber: (_a = subsList == null ? void 0 : subsList.has(u3)) != null ? _a : null, wasFollower: (_b = followersList == null ? void 0 : followersList.has(u3)) != null ? _b : null };
     });
+  }
+  function announceWinner({ chatClient, channelInfo, settings, winner }) {
+    if (settings.autoAnnounce !== void 0 && settings.autoAnnounce === false)
+      return;
+    relay_default.emit("event", {
+      type: "winner",
+      winner,
+      channelId: channelInfo.userId,
+      login: channelInfo.login,
+      alertDuration: settings.alertDuration,
+      alertTheme: settings.alertTheme
+    });
+    if (settings.sendMessages) {
+      chatClient == null ? void 0 : chatClient.say(channelInfo.login, settings.winnerMessage.replace("@name", `@${winner}`));
+    }
   }
 
   // src/components/primitives/Settings.tsx
@@ -31589,6 +31612,9 @@ to {
   }
   function FaAngleLeft(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 256 512" }, "child": [{ "tag": "path", "attr": { "d": "M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z" } }] })(props);
+  }
+  function FaBullhorn(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 576 512" }, "child": [{ "tag": "path", "attr": { "d": "M576 240c0-23.63-12.95-44.04-32-55.12V32.01C544 23.26 537.02 0 512 0c-7.12 0-14.19 2.38-19.98 7.02l-85.03 68.03C364.28 109.19 310.66 128 256 128H64c-35.35 0-64 28.65-64 64v96c0 35.35 28.65 64 64 64h33.7c-1.39 10.48-2.18 21.14-2.18 32 0 39.77 9.26 77.35 25.56 110.94 5.19 10.69 16.52 17.06 28.4 17.06h74.28c26.05 0 41.69-29.84 25.9-50.56-16.4-21.52-26.15-48.36-26.15-77.44 0-11.11 1.62-21.79 4.41-32H256c54.66 0 108.28 18.81 150.98 52.95l85.03 68.03a32.023 32.023 0 0 0 19.98 7.02c24.92 0 32-22.78 32-32V295.13C563.05 284.04 576 263.63 576 240zm-96 141.42l-33.05-26.44C392.95 311.78 325.12 288 256 288v-96c69.12 0 136.95-23.78 190.95-66.98L480 98.58v282.84z" } }] })(props);
   }
   function FaCheck(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" } }] })(props);
@@ -32367,16 +32393,11 @@ to {
       onClick: async () => {
         if (!channelInfo.login)
           return;
-        const giveawayWinner = await getInstantGiveaway(channelInfo, settings, forfeits);
+        const giveawayWinner = await getInstantGiveaway(client, channelInfo, settings, forfeits);
         if (!giveawayWinner.length) {
           Et.error("No winners found that match conditions!", { position: "bottom-center" });
           return;
         }
-        giveawayWinner.forEach((w) => {
-          if (settings.sendMessages) {
-            client == null ? void 0 : client.say(channelInfo.login, settings.winnerMessage.replace("@name", `@${w}`));
-          }
-        });
         setWinners((w) => w.concat(giveawayWinner.map((u3) => ({ username: u3.login }))));
         setPastGiveaways((p2) => [
           {
@@ -32404,15 +32425,10 @@ to {
     return /* @__PURE__ */ import_react14.default.createElement("button", {
       className: "bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-transform hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700",
       onClick: async () => {
-        const giveawayWinner = await getChatGiveaway(channelInfo, chatEvents, settings.chatCommand, settings, forfeits);
+        const giveawayWinner = await getChatGiveaway(client, channelInfo, chatEvents, settings.chatCommand, settings, forfeits);
         if (!giveawayWinner.length) {
           Et.error("No winners found that match conditions!", { position: "bottom-center" });
           return;
-        }
-        if (settings.sendMessages) {
-          giveawayWinner.forEach((w) => {
-            client == null ? void 0 : client.say(channelInfo.login, settings.winnerMessage.replace("@name", `@${w.login}`));
-          });
         }
         setWinners((w) => w.concat(giveawayWinner.map((w2) => ({
           username: w2.login,
@@ -32433,7 +32449,14 @@ to {
       className: "text-2xl"
     }), " Active Chatter Giveaway");
   }
-  function Winner({ winners, onClear }) {
+  function Winner(_a) {
+    var _b = _a, {
+      winners,
+      onClear
+    } = _b, anounceArgs = __objRest(_b, [
+      "winners",
+      "onClear"
+    ]);
     return winners.length ? /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "grid gap-1 grid-cols-2 mt-3"
     }, winners.map((winner, i3) => /* @__PURE__ */ import_react14.default.createElement("div", {
@@ -32447,8 +32470,11 @@ to {
       className: "px-2"
     }, winner.username, " wins!"), " ", /* @__PURE__ */ import_react14.default.createElement(GiPartyPopper, {
       className: "text-purple-300 text-xl"
+    }), /* @__PURE__ */ import_react14.default.createElement(FaBullhorn, {
+      className: "text-2xl absolute right-12 cursor-pointer select-none transform opacity-80 transition-opacity hover:opacity-100 hover:scale-105",
+      onClick: () => announceWinner(__spreadProps(__spreadValues({}, anounceArgs), { winner: winner.username }))
     }), /* @__PURE__ */ import_react14.default.createElement(FaTimes, {
-      className: "text-2xl absolute right-5 text-red-500 cursor-pointer select-none",
+      className: "text-2xl absolute right-5 text-red-500 cursor-pointer transform opacity-80 transition-opacity hover:opacity-100 select-none hover:scale-105",
       onClick: () => onClear(i3)
     })))) : null;
   }
@@ -32609,7 +32635,10 @@ to {
     }, [chatEvents]);
     return /* @__PURE__ */ import_react16.default.createElement(import_react16.default.Fragment, null, /* @__PURE__ */ import_react16.default.createElement(Winner, {
       winners,
-      onClear: (idx) => setWinners((w) => removeIdx(w, idx))
+      onClear: (idx) => setWinners((w) => removeIdx(w, idx)),
+      chatClient: client,
+      settings,
+      channelInfo
     }), /* @__PURE__ */ import_react16.default.createElement("div", {
       className: "flex flex-row gap-2"
     }, /* @__PURE__ */ import_react16.default.createElement(InstantGiveaway, {
@@ -32886,7 +32915,7 @@ to {
     setForfeits
   }) {
     return /* @__PURE__ */ React14.createElement("div", {
-      className: "mt-4 flex flex-col gap-3 flex-1"
+      className: "mt-2 flex flex-col gap-3 flex-1"
     }, /* @__PURE__ */ React14.createElement("h1", {
       className: "text-3xl"
     }, "Settings"), /* @__PURE__ */ React14.createElement("div", {
@@ -32896,7 +32925,7 @@ to {
     }, /* @__PURE__ */ React14.createElement("div", {
       className: "flex-1"
     }, /* @__PURE__ */ React14.createElement("h2", {
-      className: "text-2xl"
+      className: "text-xl"
     }, "Blocklist ", /* @__PURE__ */ React14.createElement("small", null, "(", settings.blocklist.length, ")")), /* @__PURE__ */ React14.createElement("small", {
       className: "text-m"
     }, "These users will be excluded from giveaways")), /* @__PURE__ */ React14.createElement("button", {
@@ -32927,7 +32956,7 @@ to {
     }, /* @__PURE__ */ React14.createElement("div", {
       className: "flex-1"
     }, /* @__PURE__ */ React14.createElement("h2", {
-      className: "text-2xl"
+      className: "text-xl"
     }, "Performance Mode"), /* @__PURE__ */ React14.createElement("small", {
       className: "text-m"
     }, "Will hide chat when there are no winners, and disable chat scroll following"))), /* @__PURE__ */ React14.createElement("div", {
@@ -32945,7 +32974,7 @@ to {
     }, /* @__PURE__ */ React14.createElement("div", {
       className: "flex-1"
     }, /* @__PURE__ */ React14.createElement("h2", {
-      className: "text-2xl"
+      className: "text-xl"
     }, "Giveaway Forfeit Command"), /* @__PURE__ */ React14.createElement("small", {
       className: "text-m"
     }, "If a user types anything that matchs this command, they will forfeit winner any command, until list is cleared. No spaces."))), /* @__PURE__ */ React14.createElement("div", {
@@ -32973,7 +33002,7 @@ to {
     }, /* @__PURE__ */ React14.createElement("div", {
       className: "flex-1"
     }, /* @__PURE__ */ React14.createElement("h2", {
-      className: "text-2xl"
+      className: "text-xl"
     }, "Alert Settings"))), /* @__PURE__ */ React14.createElement("div", {
       className: "flex flex-row gap-2 justify-center items-center"
     }, /* @__PURE__ */ React14.createElement("div", {
@@ -32981,7 +33010,7 @@ to {
     }, /* @__PURE__ */ React14.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",
       title: "Will clear chat, and then pause it after the time, to enable a giveaway with cut off"
-    }, "Alert Duration"), /* @__PURE__ */ React14.createElement("div", {
+    }, "Duration"), /* @__PURE__ */ React14.createElement("div", {
       className: "px-2 flex-1 flex justify-center items-center"
     }, /* @__PURE__ */ React14.createElement(SliderInner, {
       min: ONE_S,
@@ -32996,9 +33025,17 @@ to {
     }, /* @__PURE__ */ React14.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",
       title: "Will clear chat, and then pause it after the time, to enable a giveaway with cut off"
-    }, "Alert Theme"), /* @__PURE__ */ React14.createElement("div", {
+    }, "Theme"), /* @__PURE__ */ React14.createElement("div", {
       className: "px-2 flex-1 flex justify-center items-center"
-    }, alertThemeMap[settings.alertTheme || defaultSettings.alertTheme])))), /* @__PURE__ */ React14.createElement("div", {
+    }, alertThemeMap[settings.alertTheme || defaultSettings.alertTheme])), /* @__PURE__ */ React14.createElement("div", {
+      className: "flex-1 border border-purple-600 rounded-md flex relative"
+    }, /* @__PURE__ */ React14.createElement("div", {
+      className: "bg-purple-600 px-2 py-1 flex-0",
+      title: "If enabled, will automatically send the alert and chat message, otherwise you have to manually send them"
+    }, "Auto Announce"), /* @__PURE__ */ React14.createElement("button", {
+      className: "flex-1 text-2xl text-center justify-center items-center flex transition-opacity hover:opacity-60",
+      onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { autoAnnounce: s2.autoAnnounce === void 0 ? false : !s2.autoAnnounce }))
+    }, settings.autoAnnounce || settings.autoAnnounce === void 0 ? /* @__PURE__ */ React14.createElement(FaCheck, null) : /* @__PURE__ */ React14.createElement(FaTimes, null))))), /* @__PURE__ */ React14.createElement("div", {
       className: "flex-1 flex items-end gap-2"
     }, /* @__PURE__ */ React14.createElement("div", {
       className: "flex-1"

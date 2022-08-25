@@ -1,4 +1,4 @@
-import { ChatItem } from '../chat'
+import { Chat, ChatItem } from '../chat'
 import { ChannelInfo, GiveawayResult, Settings } from './types'
 import { getRandomArrayItem, handleChatCommand } from './misc'
 import { getFollowers, getSubs, getViewers } from './twitch'
@@ -8,6 +8,7 @@ import toast from 'react-hot-toast'
 const pastWinners = new Set()
 
 export async function getChatGiveaway(
+  chatClient: Chat,
   channelInfo: ChannelInfo,
   chatItems: ChatItem[],
   chatCommand: string,
@@ -64,14 +65,7 @@ export async function getChatGiveaway(
     )
     if (!winner) return
     pastWinners.add(winner.username)
-    relay.emit('event', {
-      type: 'winner',
-      winner: winner.username,
-      channelId: channelInfo.userId,
-      login: channelInfo.login,
-      alertDuration: settings.alertDuration,
-      alertTheme: settings.alertTheme,
-    })
+    announceWinner({ chatClient, channelInfo, settings, winner: winner.username })
     return {
       login: winner.username,
       wasSubscriber: winner.isSubscriber,
@@ -81,6 +75,7 @@ export async function getChatGiveaway(
 }
 
 export async function getInstantGiveaway(
+  chatClient: Chat,
   channelInfo: ChannelInfo,
   settings: Settings,
   forfeits: string[]
@@ -130,15 +125,29 @@ export async function getInstantGiveaway(
       )
       if (!winner) return
       pastWinners.add(winner)
-      relay.emit('event', {
-        type: 'winner',
-        winner,
-        channelId: channelInfo.userId,
-        login: channelInfo.login,
-        alertDuration: settings.alertDuration,
-        alertTheme: settings.alertTheme,
-      })
+      announceWinner({ chatClient, channelInfo, settings, winner })
       return winner
     }).filter(Boolean) as string[]
   ).map((u) => ({ login: u, wasSubscriber: subsList?.has(u) ?? null, wasFollower: followersList?.has(u) ?? null }))
+}
+
+export interface AnnounceArgs {
+  chatClient: Chat
+  channelInfo: ChannelInfo
+  settings: Settings
+  winner: string
+}
+export function announceWinner({ chatClient, channelInfo, settings, winner }: AnnounceArgs) {
+  if (settings.autoAnnounce !== undefined && settings.autoAnnounce === false) return
+  relay.emit('event', {
+    type: 'winner',
+    winner,
+    channelId: channelInfo.userId,
+    login: channelInfo.login,
+    alertDuration: settings.alertDuration,
+    alertTheme: settings.alertTheme,
+  })
+  if (settings.sendMessages) {
+    chatClient?.say(channelInfo.login!, settings.winnerMessage.replace('@name', `@${winner}`))
+  }
 }

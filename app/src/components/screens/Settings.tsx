@@ -17,12 +17,12 @@ export default function SettingsScreen({
   setForfeits: React.Dispatch<React.SetStateAction<string[]>>
 }) {
   return (
-    <div className="mt-4 flex flex-col gap-3 flex-1">
+    <div className="mt-2 flex flex-col gap-3 flex-1">
       <h1 className="text-3xl">Settings</h1>
       <div className="flex flex-col gap-2">
         <div className="flex flex-row gap-2">
           <div className="flex-1">
-            <h2 className="text-2xl">
+            <h2 className="text-xl">
               Blocklist <small>({settings.blocklist.length})</small>
             </h2>
             <small className="text-m">These users will be excluded from giveaways</small>
@@ -63,7 +63,7 @@ export default function SettingsScreen({
       <div className="flex flex-col gap-2">
         <div className="flex flex-row gap-2">
           <div className="flex-1">
-            <h2 className="text-2xl">Performance Mode</h2>
+            <h2 className="text-xl">Performance Mode</h2>
             <small className="text-m">
               Will hide chat when there are no winners, and disable chat scroll following
             </small>
@@ -88,7 +88,7 @@ export default function SettingsScreen({
       <div className="flex flex-col gap-2">
         <div className="flex flex-row gap-2">
           <div className="flex-1">
-            <h2 className="text-2xl">Giveaway Forfeit Command</h2>
+            <h2 className="text-xl">Giveaway Forfeit Command</h2>
             <small className="text-m">
               If a user types anything that matchs this command, they will forfeit winner any command, until list is
               cleared. No spaces.
@@ -122,7 +122,7 @@ export default function SettingsScreen({
       <div className="flex flex-col gap-2">
         <div className="flex flex-row gap-2">
           <div className="flex-1">
-            <h2 className="text-2xl">Alert Settings</h2>
+            <h2 className="text-xl">Alert Settings</h2>
           </div>
         </div>
         <div className="flex flex-row gap-2 justify-center items-center">
@@ -131,7 +131,7 @@ export default function SettingsScreen({
               className="bg-purple-600 px-2 py-1 flex-0"
               title="Will clear chat, and then pause it after the time, to enable a giveaway with cut off"
             >
-              Alert Duration
+              Duration
             </div>
             <div className="px-2 flex-1 flex justify-center items-center">
               <SliderInner
@@ -151,11 +151,28 @@ export default function SettingsScreen({
               className="bg-purple-600 px-2 py-1 flex-0"
               title="Will clear chat, and then pause it after the time, to enable a giveaway with cut off"
             >
-              Alert Theme
+              Theme
             </div>
             <div className="px-2 flex-1 flex justify-center items-center">
               {alertThemeMap[settings.alertTheme || defaultSettings.alertTheme]}
             </div>
+          </div>
+          <div className="flex-1 border border-purple-600 rounded-md flex relative">
+            <div
+              className="bg-purple-600 px-2 py-1 flex-0"
+              title="If enabled, will automatically send the alert and chat message, otherwise you have to manually send them"
+            >
+              Auto Announce
+            </div>
+
+            <button
+              className="flex-1 text-2xl text-center justify-center items-center flex transition-opacity hover:opacity-60"
+              onClick={() =>
+                setSettings((s) => ({ ...s, autoAnnounce: s.autoAnnounce === undefined ? false : !s.autoAnnounce }))
+              }
+            >
+              {settings.autoAnnounce || settings.autoAnnounce === undefined ? <FaCheck /> : <FaTimes />}
+            </button>
           </div>
         </div>
       </div>

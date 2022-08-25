@@ -13,6 +13,7 @@ export interface Settings {
   forfeitCommand?: string
   alertDuration?: number
   alertTheme?: AlertTheme.GW2
+  autoAnnounce?: boolean
 }
 
 export enum AlertTheme {

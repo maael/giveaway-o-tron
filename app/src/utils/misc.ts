@@ -41,13 +41,23 @@ export const defaultSettings: Required<Settings> = {
   chatCommand: '',
   winnerMessage: 'PartyHat @name won!',
   sendMessages: false,
-  blocklist: ['streamelements', 'streamlabs', 'nightbot'],
+  blocklist: [
+    'streamelements',
+    'streamlabs',
+    'nightbot',
+    'sery_bot',
+    'soundalerts',
+    'pretzelrocks',
+    'fossabot',
+    'moobot',
+  ],
   autoScroll: true,
   spamLimit: 1,
   performanceMode: false,
   forfeitCommand: '',
   alertDuration: 4000,
   alertTheme: AlertTheme.GW2,
+  autoAnnounce: true,
 }
 
 export const alertThemeMap: Record<AlertTheme, string> = {

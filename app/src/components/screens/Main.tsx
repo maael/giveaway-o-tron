@@ -44,7 +44,13 @@ export default function MainScreen({
   }, [chatEvents])
   return (
     <>
-      <Winner winners={winners} onClear={(idx) => setWinners((w) => removeIdx(w, idx))} />
+      <Winner
+        winners={winners}
+        onClear={(idx) => setWinners((w) => removeIdx(w, idx))}
+        chatClient={client}
+        settings={settings}
+        channelInfo={channelInfo}
+      />
       <div className="flex flex-row gap-2">
         <InstantGiveaway
           settings={settings}
