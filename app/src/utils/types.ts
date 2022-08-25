@@ -14,6 +14,16 @@ export interface Settings {
   alertDuration?: number
   alertTheme?: AlertTheme.GW2
   autoAnnounce?: boolean
+  timerBell?: boolean
+  giveawayName?: string
+}
+
+export interface DiscordSettings {
+  guildId?: string
+  channelId?: string
+  messageColour?: string
+  messageTitle?: string
+  messageBody?: string
 }
 
 export enum AlertTheme {

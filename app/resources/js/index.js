@@ -1102,7 +1102,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
-          function useMemo2(create, deps) {
+          function useMemo(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useMemo(create, deps);
           }
@@ -1663,7 +1663,7 @@
           exports.useEffect = useEffect5;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useLayoutEffect = useLayoutEffect;
-          exports.useMemo = useMemo2;
+          exports.useMemo = useMemo;
           exports.useReducer = useReducer;
           exports.useRef = useRef2;
           exports.useState = useState4;
@@ -2474,11 +2474,11 @@
       if (true) {
         (function() {
           "use strict";
-          var React19 = require_react();
+          var React21 = require_react();
           var _assign = require_object_assign();
           var Scheduler = require_scheduler();
           var tracing = require_tracing();
-          var ReactSharedInternals = React19.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React21.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function warn(format2) {
             {
               for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -2510,7 +2510,7 @@
               Function.prototype.apply.call(console[level], console, argsWithFormat);
             }
           }
-          if (!React19) {
+          if (!React21) {
             {
               throw Error("ReactDOM was loaded before React. Make sure you load the React package before loading ReactDOM.");
             }
@@ -3726,7 +3726,7 @@
           var didWarnInvalidChild = false;
           function flattenChildren(children) {
             var content = "";
-            React19.Children.forEach(children, function(child) {
+            React21.Children.forEach(children, function(child) {
               if (child == null) {
                 return;
               }
@@ -3737,7 +3737,7 @@
           function validateProps(element2, props) {
             {
               if (typeof props.children === "object" && props.children !== null) {
-                React19.Children.forEach(props.children, function(child) {
+                React21.Children.forEach(props.children, function(child) {
                   if (child == null) {
                     return;
                   }
@@ -10930,7 +10930,7 @@
           }
           var fakeInternalInstance = {};
           var isArray = Array.isArray;
-          var emptyRefsObject = new React19.Component().refs;
+          var emptyRefsObject = new React21.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -23704,6 +23704,1956 @@ ${JSON.stringify(message, null, 4)}`);
     }
   });
 
+  // node_modules/howler/dist/howler.js
+  var require_howler = __commonJS({
+    "node_modules/howler/dist/howler.js"(exports) {
+      (function() {
+        "use strict";
+        var HowlerGlobal2 = function() {
+          this.init();
+        };
+        HowlerGlobal2.prototype = {
+          init: function() {
+            var self2 = this || Howler2;
+            self2._counter = 1e3;
+            self2._html5AudioPool = [];
+            self2.html5PoolSize = 10;
+            self2._codecs = {};
+            self2._howls = [];
+            self2._muted = false;
+            self2._volume = 1;
+            self2._canPlayEvent = "canplaythrough";
+            self2._navigator = typeof window !== "undefined" && window.navigator ? window.navigator : null;
+            self2.masterGain = null;
+            self2.noAudio = false;
+            self2.usingWebAudio = true;
+            self2.autoSuspend = true;
+            self2.ctx = null;
+            self2.autoUnlock = true;
+            self2._setup();
+            return self2;
+          },
+          volume: function(vol) {
+            var self2 = this || Howler2;
+            vol = parseFloat(vol);
+            if (!self2.ctx) {
+              setupAudioContext();
+            }
+            if (typeof vol !== "undefined" && vol >= 0 && vol <= 1) {
+              self2._volume = vol;
+              if (self2._muted) {
+                return self2;
+              }
+              if (self2.usingWebAudio) {
+                self2.masterGain.gain.setValueAtTime(vol, Howler2.ctx.currentTime);
+              }
+              for (var i3 = 0; i3 < self2._howls.length; i3++) {
+                if (!self2._howls[i3]._webAudio) {
+                  var ids = self2._howls[i3]._getSoundIds();
+                  for (var j3 = 0; j3 < ids.length; j3++) {
+                    var sound = self2._howls[i3]._soundById(ids[j3]);
+                    if (sound && sound._node) {
+                      sound._node.volume = sound._volume * vol;
+                    }
+                  }
+                }
+              }
+              return self2;
+            }
+            return self2._volume;
+          },
+          mute: function(muted) {
+            var self2 = this || Howler2;
+            if (!self2.ctx) {
+              setupAudioContext();
+            }
+            self2._muted = muted;
+            if (self2.usingWebAudio) {
+              self2.masterGain.gain.setValueAtTime(muted ? 0 : self2._volume, Howler2.ctx.currentTime);
+            }
+            for (var i3 = 0; i3 < self2._howls.length; i3++) {
+              if (!self2._howls[i3]._webAudio) {
+                var ids = self2._howls[i3]._getSoundIds();
+                for (var j3 = 0; j3 < ids.length; j3++) {
+                  var sound = self2._howls[i3]._soundById(ids[j3]);
+                  if (sound && sound._node) {
+                    sound._node.muted = muted ? true : sound._muted;
+                  }
+                }
+              }
+            }
+            return self2;
+          },
+          stop: function() {
+            var self2 = this || Howler2;
+            for (var i3 = 0; i3 < self2._howls.length; i3++) {
+              self2._howls[i3].stop();
+            }
+            return self2;
+          },
+          unload: function() {
+            var self2 = this || Howler2;
+            for (var i3 = self2._howls.length - 1; i3 >= 0; i3--) {
+              self2._howls[i3].unload();
+            }
+            if (self2.usingWebAudio && self2.ctx && typeof self2.ctx.close !== "undefined") {
+              self2.ctx.close();
+              self2.ctx = null;
+              setupAudioContext();
+            }
+            return self2;
+          },
+          codecs: function(ext) {
+            return (this || Howler2)._codecs[ext.replace(/^x-/, "")];
+          },
+          _setup: function() {
+            var self2 = this || Howler2;
+            self2.state = self2.ctx ? self2.ctx.state || "suspended" : "suspended";
+            self2._autoSuspend();
+            if (!self2.usingWebAudio) {
+              if (typeof Audio !== "undefined") {
+                try {
+                  var test = new Audio();
+                  if (typeof test.oncanplaythrough === "undefined") {
+                    self2._canPlayEvent = "canplay";
+                  }
+                } catch (e2) {
+                  self2.noAudio = true;
+                }
+              } else {
+                self2.noAudio = true;
+              }
+            }
+            try {
+              var test = new Audio();
+              if (test.muted) {
+                self2.noAudio = true;
+              }
+            } catch (e2) {
+            }
+            if (!self2.noAudio) {
+              self2._setupCodecs();
+            }
+            return self2;
+          },
+          _setupCodecs: function() {
+            var self2 = this || Howler2;
+            var audioTest = null;
+            try {
+              audioTest = typeof Audio !== "undefined" ? new Audio() : null;
+            } catch (err) {
+              return self2;
+            }
+            if (!audioTest || typeof audioTest.canPlayType !== "function") {
+              return self2;
+            }
+            var mpegTest = audioTest.canPlayType("audio/mpeg;").replace(/^no$/, "");
+            var ua = self2._navigator ? self2._navigator.userAgent : "";
+            var checkOpera = ua.match(/OPR\/([0-6].)/g);
+            var isOldOpera = checkOpera && parseInt(checkOpera[0].split("/")[1], 10) < 33;
+            var checkSafari = ua.indexOf("Safari") !== -1 && ua.indexOf("Chrome") === -1;
+            var safariVersion = ua.match(/Version\/(.*?) /);
+            var isOldSafari = checkSafari && safariVersion && parseInt(safariVersion[1], 10) < 15;
+            self2._codecs = {
+              mp3: !!(!isOldOpera && (mpegTest || audioTest.canPlayType("audio/mp3;").replace(/^no$/, ""))),
+              mpeg: !!mpegTest,
+              opus: !!audioTest.canPlayType('audio/ogg; codecs="opus"').replace(/^no$/, ""),
+              ogg: !!audioTest.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/, ""),
+              oga: !!audioTest.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/, ""),
+              wav: !!(audioTest.canPlayType('audio/wav; codecs="1"') || audioTest.canPlayType("audio/wav")).replace(/^no$/, ""),
+              aac: !!audioTest.canPlayType("audio/aac;").replace(/^no$/, ""),
+              caf: !!audioTest.canPlayType("audio/x-caf;").replace(/^no$/, ""),
+              m4a: !!(audioTest.canPlayType("audio/x-m4a;") || audioTest.canPlayType("audio/m4a;") || audioTest.canPlayType("audio/aac;")).replace(/^no$/, ""),
+              m4b: !!(audioTest.canPlayType("audio/x-m4b;") || audioTest.canPlayType("audio/m4b;") || audioTest.canPlayType("audio/aac;")).replace(/^no$/, ""),
+              mp4: !!(audioTest.canPlayType("audio/x-mp4;") || audioTest.canPlayType("audio/mp4;") || audioTest.canPlayType("audio/aac;")).replace(/^no$/, ""),
+              weba: !!(!isOldSafari && audioTest.canPlayType('audio/webm; codecs="vorbis"').replace(/^no$/, "")),
+              webm: !!(!isOldSafari && audioTest.canPlayType('audio/webm; codecs="vorbis"').replace(/^no$/, "")),
+              dolby: !!audioTest.canPlayType('audio/mp4; codecs="ec-3"').replace(/^no$/, ""),
+              flac: !!(audioTest.canPlayType("audio/x-flac;") || audioTest.canPlayType("audio/flac;")).replace(/^no$/, "")
+            };
+            return self2;
+          },
+          _unlockAudio: function() {
+            var self2 = this || Howler2;
+            if (self2._audioUnlocked || !self2.ctx) {
+              return;
+            }
+            self2._audioUnlocked = false;
+            self2.autoUnlock = false;
+            if (!self2._mobileUnloaded && self2.ctx.sampleRate !== 44100) {
+              self2._mobileUnloaded = true;
+              self2.unload();
+            }
+            self2._scratchBuffer = self2.ctx.createBuffer(1, 1, 22050);
+            var unlock = function(e2) {
+              while (self2._html5AudioPool.length < self2.html5PoolSize) {
+                try {
+                  var audioNode = new Audio();
+                  audioNode._unlocked = true;
+                  self2._releaseHtml5Audio(audioNode);
+                } catch (e3) {
+                  self2.noAudio = true;
+                  break;
+                }
+              }
+              for (var i3 = 0; i3 < self2._howls.length; i3++) {
+                if (!self2._howls[i3]._webAudio) {
+                  var ids = self2._howls[i3]._getSoundIds();
+                  for (var j3 = 0; j3 < ids.length; j3++) {
+                    var sound = self2._howls[i3]._soundById(ids[j3]);
+                    if (sound && sound._node && !sound._node._unlocked) {
+                      sound._node._unlocked = true;
+                      sound._node.load();
+                    }
+                  }
+                }
+              }
+              self2._autoResume();
+              var source = self2.ctx.createBufferSource();
+              source.buffer = self2._scratchBuffer;
+              source.connect(self2.ctx.destination);
+              if (typeof source.start === "undefined") {
+                source.noteOn(0);
+              } else {
+                source.start(0);
+              }
+              if (typeof self2.ctx.resume === "function") {
+                self2.ctx.resume();
+              }
+              source.onended = function() {
+                source.disconnect(0);
+                self2._audioUnlocked = true;
+                document.removeEventListener("touchstart", unlock, true);
+                document.removeEventListener("touchend", unlock, true);
+                document.removeEventListener("click", unlock, true);
+                document.removeEventListener("keydown", unlock, true);
+                for (var i4 = 0; i4 < self2._howls.length; i4++) {
+                  self2._howls[i4]._emit("unlock");
+                }
+              };
+            };
+            document.addEventListener("touchstart", unlock, true);
+            document.addEventListener("touchend", unlock, true);
+            document.addEventListener("click", unlock, true);
+            document.addEventListener("keydown", unlock, true);
+            return self2;
+          },
+          _obtainHtml5Audio: function() {
+            var self2 = this || Howler2;
+            if (self2._html5AudioPool.length) {
+              return self2._html5AudioPool.pop();
+            }
+            var testPlay = new Audio().play();
+            if (testPlay && typeof Promise !== "undefined" && (testPlay instanceof Promise || typeof testPlay.then === "function")) {
+              testPlay.catch(function() {
+                console.warn("HTML5 Audio pool exhausted, returning potentially locked audio object.");
+              });
+            }
+            return new Audio();
+          },
+          _releaseHtml5Audio: function(audio) {
+            var self2 = this || Howler2;
+            if (audio._unlocked) {
+              self2._html5AudioPool.push(audio);
+            }
+            return self2;
+          },
+          _autoSuspend: function() {
+            var self2 = this;
+            if (!self2.autoSuspend || !self2.ctx || typeof self2.ctx.suspend === "undefined" || !Howler2.usingWebAudio) {
+              return;
+            }
+            for (var i3 = 0; i3 < self2._howls.length; i3++) {
+              if (self2._howls[i3]._webAudio) {
+                for (var j3 = 0; j3 < self2._howls[i3]._sounds.length; j3++) {
+                  if (!self2._howls[i3]._sounds[j3]._paused) {
+                    return self2;
+                  }
+                }
+              }
+            }
+            if (self2._suspendTimer) {
+              clearTimeout(self2._suspendTimer);
+            }
+            self2._suspendTimer = setTimeout(function() {
+              if (!self2.autoSuspend) {
+                return;
+              }
+              self2._suspendTimer = null;
+              self2.state = "suspending";
+              var handleSuspension = function() {
+                self2.state = "suspended";
+                if (self2._resumeAfterSuspend) {
+                  delete self2._resumeAfterSuspend;
+                  self2._autoResume();
+                }
+              };
+              self2.ctx.suspend().then(handleSuspension, handleSuspension);
+            }, 3e4);
+            return self2;
+          },
+          _autoResume: function() {
+            var self2 = this;
+            if (!self2.ctx || typeof self2.ctx.resume === "undefined" || !Howler2.usingWebAudio) {
+              return;
+            }
+            if (self2.state === "running" && self2.ctx.state !== "interrupted" && self2._suspendTimer) {
+              clearTimeout(self2._suspendTimer);
+              self2._suspendTimer = null;
+            } else if (self2.state === "suspended" || self2.state === "running" && self2.ctx.state === "interrupted") {
+              self2.ctx.resume().then(function() {
+                self2.state = "running";
+                for (var i3 = 0; i3 < self2._howls.length; i3++) {
+                  self2._howls[i3]._emit("resume");
+                }
+              });
+              if (self2._suspendTimer) {
+                clearTimeout(self2._suspendTimer);
+                self2._suspendTimer = null;
+              }
+            } else if (self2.state === "suspending") {
+              self2._resumeAfterSuspend = true;
+            }
+            return self2;
+          }
+        };
+        var Howler2 = new HowlerGlobal2();
+        var Howl3 = function(o2) {
+          var self2 = this;
+          if (!o2.src || o2.src.length === 0) {
+            console.error("An array of source files must be passed with any new Howl.");
+            return;
+          }
+          self2.init(o2);
+        };
+        Howl3.prototype = {
+          init: function(o2) {
+            var self2 = this;
+            if (!Howler2.ctx) {
+              setupAudioContext();
+            }
+            self2._autoplay = o2.autoplay || false;
+            self2._format = typeof o2.format !== "string" ? o2.format : [o2.format];
+            self2._html5 = o2.html5 || false;
+            self2._muted = o2.mute || false;
+            self2._loop = o2.loop || false;
+            self2._pool = o2.pool || 5;
+            self2._preload = typeof o2.preload === "boolean" || o2.preload === "metadata" ? o2.preload : true;
+            self2._rate = o2.rate || 1;
+            self2._sprite = o2.sprite || {};
+            self2._src = typeof o2.src !== "string" ? o2.src : [o2.src];
+            self2._volume = o2.volume !== void 0 ? o2.volume : 1;
+            self2._xhr = {
+              method: o2.xhr && o2.xhr.method ? o2.xhr.method : "GET",
+              headers: o2.xhr && o2.xhr.headers ? o2.xhr.headers : null,
+              withCredentials: o2.xhr && o2.xhr.withCredentials ? o2.xhr.withCredentials : false
+            };
+            self2._duration = 0;
+            self2._state = "unloaded";
+            self2._sounds = [];
+            self2._endTimers = {};
+            self2._queue = [];
+            self2._playLock = false;
+            self2._onend = o2.onend ? [{ fn: o2.onend }] : [];
+            self2._onfade = o2.onfade ? [{ fn: o2.onfade }] : [];
+            self2._onload = o2.onload ? [{ fn: o2.onload }] : [];
+            self2._onloaderror = o2.onloaderror ? [{ fn: o2.onloaderror }] : [];
+            self2._onplayerror = o2.onplayerror ? [{ fn: o2.onplayerror }] : [];
+            self2._onpause = o2.onpause ? [{ fn: o2.onpause }] : [];
+            self2._onplay = o2.onplay ? [{ fn: o2.onplay }] : [];
+            self2._onstop = o2.onstop ? [{ fn: o2.onstop }] : [];
+            self2._onmute = o2.onmute ? [{ fn: o2.onmute }] : [];
+            self2._onvolume = o2.onvolume ? [{ fn: o2.onvolume }] : [];
+            self2._onrate = o2.onrate ? [{ fn: o2.onrate }] : [];
+            self2._onseek = o2.onseek ? [{ fn: o2.onseek }] : [];
+            self2._onunlock = o2.onunlock ? [{ fn: o2.onunlock }] : [];
+            self2._onresume = [];
+            self2._webAudio = Howler2.usingWebAudio && !self2._html5;
+            if (typeof Howler2.ctx !== "undefined" && Howler2.ctx && Howler2.autoUnlock) {
+              Howler2._unlockAudio();
+            }
+            Howler2._howls.push(self2);
+            if (self2._autoplay) {
+              self2._queue.push({
+                event: "play",
+                action: function() {
+                  self2.play();
+                }
+              });
+            }
+            if (self2._preload && self2._preload !== "none") {
+              self2.load();
+            }
+            return self2;
+          },
+          load: function() {
+            var self2 = this;
+            var url2 = null;
+            if (Howler2.noAudio) {
+              self2._emit("loaderror", null, "No audio support.");
+              return;
+            }
+            if (typeof self2._src === "string") {
+              self2._src = [self2._src];
+            }
+            for (var i3 = 0; i3 < self2._src.length; i3++) {
+              var ext, str;
+              if (self2._format && self2._format[i3]) {
+                ext = self2._format[i3];
+              } else {
+                str = self2._src[i3];
+                if (typeof str !== "string") {
+                  self2._emit("loaderror", null, "Non-string found in selected audio sources - ignoring.");
+                  continue;
+                }
+                ext = /^data:audio\/([^;,]+);/i.exec(str);
+                if (!ext) {
+                  ext = /\.([^.]+)$/.exec(str.split("?", 1)[0]);
+                }
+                if (ext) {
+                  ext = ext[1].toLowerCase();
+                }
+              }
+              if (!ext) {
+                console.warn('No file extension was found. Consider using the "format" property or specify an extension.');
+              }
+              if (ext && Howler2.codecs(ext)) {
+                url2 = self2._src[i3];
+                break;
+              }
+            }
+            if (!url2) {
+              self2._emit("loaderror", null, "No codec support for selected audio sources.");
+              return;
+            }
+            self2._src = url2;
+            self2._state = "loading";
+            if (window.location.protocol === "https:" && url2.slice(0, 5) === "http:") {
+              self2._html5 = true;
+              self2._webAudio = false;
+            }
+            new Sound2(self2);
+            if (self2._webAudio) {
+              loadBuffer(self2);
+            }
+            return self2;
+          },
+          play: function(sprite, internal) {
+            var self2 = this;
+            var id = null;
+            if (typeof sprite === "number") {
+              id = sprite;
+              sprite = null;
+            } else if (typeof sprite === "string" && self2._state === "loaded" && !self2._sprite[sprite]) {
+              return null;
+            } else if (typeof sprite === "undefined") {
+              sprite = "__default";
+              if (!self2._playLock) {
+                var num = 0;
+                for (var i3 = 0; i3 < self2._sounds.length; i3++) {
+                  if (self2._sounds[i3]._paused && !self2._sounds[i3]._ended) {
+                    num++;
+                    id = self2._sounds[i3]._id;
+                  }
+                }
+                if (num === 1) {
+                  sprite = null;
+                } else {
+                  id = null;
+                }
+              }
+            }
+            var sound = id ? self2._soundById(id) : self2._inactiveSound();
+            if (!sound) {
+              return null;
+            }
+            if (id && !sprite) {
+              sprite = sound._sprite || "__default";
+            }
+            if (self2._state !== "loaded") {
+              sound._sprite = sprite;
+              sound._ended = false;
+              var soundId = sound._id;
+              self2._queue.push({
+                event: "play",
+                action: function() {
+                  self2.play(soundId);
+                }
+              });
+              return soundId;
+            }
+            if (id && !sound._paused) {
+              if (!internal) {
+                self2._loadQueue("play");
+              }
+              return sound._id;
+            }
+            if (self2._webAudio) {
+              Howler2._autoResume();
+            }
+            var seek = Math.max(0, sound._seek > 0 ? sound._seek : self2._sprite[sprite][0] / 1e3);
+            var duration = Math.max(0, (self2._sprite[sprite][0] + self2._sprite[sprite][1]) / 1e3 - seek);
+            var timeout = duration * 1e3 / Math.abs(sound._rate);
+            var start = self2._sprite[sprite][0] / 1e3;
+            var stop = (self2._sprite[sprite][0] + self2._sprite[sprite][1]) / 1e3;
+            sound._sprite = sprite;
+            sound._ended = false;
+            var setParams = function() {
+              sound._paused = false;
+              sound._seek = seek;
+              sound._start = start;
+              sound._stop = stop;
+              sound._loop = !!(sound._loop || self2._sprite[sprite][2]);
+            };
+            if (seek >= stop) {
+              self2._ended(sound);
+              return;
+            }
+            var node = sound._node;
+            if (self2._webAudio) {
+              var playWebAudio = function() {
+                self2._playLock = false;
+                setParams();
+                self2._refreshBuffer(sound);
+                var vol = sound._muted || self2._muted ? 0 : sound._volume;
+                node.gain.setValueAtTime(vol, Howler2.ctx.currentTime);
+                sound._playStart = Howler2.ctx.currentTime;
+                if (typeof node.bufferSource.start === "undefined") {
+                  sound._loop ? node.bufferSource.noteGrainOn(0, seek, 86400) : node.bufferSource.noteGrainOn(0, seek, duration);
+                } else {
+                  sound._loop ? node.bufferSource.start(0, seek, 86400) : node.bufferSource.start(0, seek, duration);
+                }
+                if (timeout !== Infinity) {
+                  self2._endTimers[sound._id] = setTimeout(self2._ended.bind(self2, sound), timeout);
+                }
+                if (!internal) {
+                  setTimeout(function() {
+                    self2._emit("play", sound._id);
+                    self2._loadQueue();
+                  }, 0);
+                }
+              };
+              if (Howler2.state === "running" && Howler2.ctx.state !== "interrupted") {
+                playWebAudio();
+              } else {
+                self2._playLock = true;
+                self2.once("resume", playWebAudio);
+                self2._clearTimer(sound._id);
+              }
+            } else {
+              var playHtml5 = function() {
+                node.currentTime = seek;
+                node.muted = sound._muted || self2._muted || Howler2._muted || node.muted;
+                node.volume = sound._volume * Howler2.volume();
+                node.playbackRate = sound._rate;
+                try {
+                  var play = node.play();
+                  if (play && typeof Promise !== "undefined" && (play instanceof Promise || typeof play.then === "function")) {
+                    self2._playLock = true;
+                    setParams();
+                    play.then(function() {
+                      self2._playLock = false;
+                      node._unlocked = true;
+                      if (!internal) {
+                        self2._emit("play", sound._id);
+                      } else {
+                        self2._loadQueue();
+                      }
+                    }).catch(function() {
+                      self2._playLock = false;
+                      self2._emit("playerror", sound._id, "Playback was unable to start. This is most commonly an issue on mobile devices and Chrome where playback was not within a user interaction.");
+                      sound._ended = true;
+                      sound._paused = true;
+                    });
+                  } else if (!internal) {
+                    self2._playLock = false;
+                    setParams();
+                    self2._emit("play", sound._id);
+                  }
+                  node.playbackRate = sound._rate;
+                  if (node.paused) {
+                    self2._emit("playerror", sound._id, "Playback was unable to start. This is most commonly an issue on mobile devices and Chrome where playback was not within a user interaction.");
+                    return;
+                  }
+                  if (sprite !== "__default" || sound._loop) {
+                    self2._endTimers[sound._id] = setTimeout(self2._ended.bind(self2, sound), timeout);
+                  } else {
+                    self2._endTimers[sound._id] = function() {
+                      self2._ended(sound);
+                      node.removeEventListener("ended", self2._endTimers[sound._id], false);
+                    };
+                    node.addEventListener("ended", self2._endTimers[sound._id], false);
+                  }
+                } catch (err) {
+                  self2._emit("playerror", sound._id, err);
+                }
+              };
+              if (node.src === "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA") {
+                node.src = self2._src;
+                node.load();
+              }
+              var loadedNoReadyState = window && window.ejecta || !node.readyState && Howler2._navigator.isCocoonJS;
+              if (node.readyState >= 3 || loadedNoReadyState) {
+                playHtml5();
+              } else {
+                self2._playLock = true;
+                self2._state = "loading";
+                var listener = function() {
+                  self2._state = "loaded";
+                  playHtml5();
+                  node.removeEventListener(Howler2._canPlayEvent, listener, false);
+                };
+                node.addEventListener(Howler2._canPlayEvent, listener, false);
+                self2._clearTimer(sound._id);
+              }
+            }
+            return sound._id;
+          },
+          pause: function(id) {
+            var self2 = this;
+            if (self2._state !== "loaded" || self2._playLock) {
+              self2._queue.push({
+                event: "pause",
+                action: function() {
+                  self2.pause(id);
+                }
+              });
+              return self2;
+            }
+            var ids = self2._getSoundIds(id);
+            for (var i3 = 0; i3 < ids.length; i3++) {
+              self2._clearTimer(ids[i3]);
+              var sound = self2._soundById(ids[i3]);
+              if (sound && !sound._paused) {
+                sound._seek = self2.seek(ids[i3]);
+                sound._rateSeek = 0;
+                sound._paused = true;
+                self2._stopFade(ids[i3]);
+                if (sound._node) {
+                  if (self2._webAudio) {
+                    if (!sound._node.bufferSource) {
+                      continue;
+                    }
+                    if (typeof sound._node.bufferSource.stop === "undefined") {
+                      sound._node.bufferSource.noteOff(0);
+                    } else {
+                      sound._node.bufferSource.stop(0);
+                    }
+                    self2._cleanBuffer(sound._node);
+                  } else if (!isNaN(sound._node.duration) || sound._node.duration === Infinity) {
+                    sound._node.pause();
+                  }
+                }
+              }
+              if (!arguments[1]) {
+                self2._emit("pause", sound ? sound._id : null);
+              }
+            }
+            return self2;
+          },
+          stop: function(id, internal) {
+            var self2 = this;
+            if (self2._state !== "loaded" || self2._playLock) {
+              self2._queue.push({
+                event: "stop",
+                action: function() {
+                  self2.stop(id);
+                }
+              });
+              return self2;
+            }
+            var ids = self2._getSoundIds(id);
+            for (var i3 = 0; i3 < ids.length; i3++) {
+              self2._clearTimer(ids[i3]);
+              var sound = self2._soundById(ids[i3]);
+              if (sound) {
+                sound._seek = sound._start || 0;
+                sound._rateSeek = 0;
+                sound._paused = true;
+                sound._ended = true;
+                self2._stopFade(ids[i3]);
+                if (sound._node) {
+                  if (self2._webAudio) {
+                    if (sound._node.bufferSource) {
+                      if (typeof sound._node.bufferSource.stop === "undefined") {
+                        sound._node.bufferSource.noteOff(0);
+                      } else {
+                        sound._node.bufferSource.stop(0);
+                      }
+                      self2._cleanBuffer(sound._node);
+                    }
+                  } else if (!isNaN(sound._node.duration) || sound._node.duration === Infinity) {
+                    sound._node.currentTime = sound._start || 0;
+                    sound._node.pause();
+                    if (sound._node.duration === Infinity) {
+                      self2._clearSound(sound._node);
+                    }
+                  }
+                }
+                if (!internal) {
+                  self2._emit("stop", sound._id);
+                }
+              }
+            }
+            return self2;
+          },
+          mute: function(muted, id) {
+            var self2 = this;
+            if (self2._state !== "loaded" || self2._playLock) {
+              self2._queue.push({
+                event: "mute",
+                action: function() {
+                  self2.mute(muted, id);
+                }
+              });
+              return self2;
+            }
+            if (typeof id === "undefined") {
+              if (typeof muted === "boolean") {
+                self2._muted = muted;
+              } else {
+                return self2._muted;
+              }
+            }
+            var ids = self2._getSoundIds(id);
+            for (var i3 = 0; i3 < ids.length; i3++) {
+              var sound = self2._soundById(ids[i3]);
+              if (sound) {
+                sound._muted = muted;
+                if (sound._interval) {
+                  self2._stopFade(sound._id);
+                }
+                if (self2._webAudio && sound._node) {
+                  sound._node.gain.setValueAtTime(muted ? 0 : sound._volume, Howler2.ctx.currentTime);
+                } else if (sound._node) {
+                  sound._node.muted = Howler2._muted ? true : muted;
+                }
+                self2._emit("mute", sound._id);
+              }
+            }
+            return self2;
+          },
+          volume: function() {
+            var self2 = this;
+            var args = arguments;
+            var vol, id;
+            if (args.length === 0) {
+              return self2._volume;
+            } else if (args.length === 1 || args.length === 2 && typeof args[1] === "undefined") {
+              var ids = self2._getSoundIds();
+              var index2 = ids.indexOf(args[0]);
+              if (index2 >= 0) {
+                id = parseInt(args[0], 10);
+              } else {
+                vol = parseFloat(args[0]);
+              }
+            } else if (args.length >= 2) {
+              vol = parseFloat(args[0]);
+              id = parseInt(args[1], 10);
+            }
+            var sound;
+            if (typeof vol !== "undefined" && vol >= 0 && vol <= 1) {
+              if (self2._state !== "loaded" || self2._playLock) {
+                self2._queue.push({
+                  event: "volume",
+                  action: function() {
+                    self2.volume.apply(self2, args);
+                  }
+                });
+                return self2;
+              }
+              if (typeof id === "undefined") {
+                self2._volume = vol;
+              }
+              id = self2._getSoundIds(id);
+              for (var i3 = 0; i3 < id.length; i3++) {
+                sound = self2._soundById(id[i3]);
+                if (sound) {
+                  sound._volume = vol;
+                  if (!args[2]) {
+                    self2._stopFade(id[i3]);
+                  }
+                  if (self2._webAudio && sound._node && !sound._muted) {
+                    sound._node.gain.setValueAtTime(vol, Howler2.ctx.currentTime);
+                  } else if (sound._node && !sound._muted) {
+                    sound._node.volume = vol * Howler2.volume();
+                  }
+                  self2._emit("volume", sound._id);
+                }
+              }
+            } else {
+              sound = id ? self2._soundById(id) : self2._sounds[0];
+              return sound ? sound._volume : 0;
+            }
+            return self2;
+          },
+          fade: function(from, to, len, id) {
+            var self2 = this;
+            if (self2._state !== "loaded" || self2._playLock) {
+              self2._queue.push({
+                event: "fade",
+                action: function() {
+                  self2.fade(from, to, len, id);
+                }
+              });
+              return self2;
+            }
+            from = Math.min(Math.max(0, parseFloat(from)), 1);
+            to = Math.min(Math.max(0, parseFloat(to)), 1);
+            len = parseFloat(len);
+            self2.volume(from, id);
+            var ids = self2._getSoundIds(id);
+            for (var i3 = 0; i3 < ids.length; i3++) {
+              var sound = self2._soundById(ids[i3]);
+              if (sound) {
+                if (!id) {
+                  self2._stopFade(ids[i3]);
+                }
+                if (self2._webAudio && !sound._muted) {
+                  var currentTime = Howler2.ctx.currentTime;
+                  var end = currentTime + len / 1e3;
+                  sound._volume = from;
+                  sound._node.gain.setValueAtTime(from, currentTime);
+                  sound._node.gain.linearRampToValueAtTime(to, end);
+                }
+                self2._startFadeInterval(sound, from, to, len, ids[i3], typeof id === "undefined");
+              }
+            }
+            return self2;
+          },
+          _startFadeInterval: function(sound, from, to, len, id, isGroup) {
+            var self2 = this;
+            var vol = from;
+            var diff = to - from;
+            var steps = Math.abs(diff / 0.01);
+            var stepLen = Math.max(4, steps > 0 ? len / steps : len);
+            var lastTick = Date.now();
+            sound._fadeTo = to;
+            sound._interval = setInterval(function() {
+              var tick = (Date.now() - lastTick) / len;
+              lastTick = Date.now();
+              vol += diff * tick;
+              vol = Math.round(vol * 100) / 100;
+              if (diff < 0) {
+                vol = Math.max(to, vol);
+              } else {
+                vol = Math.min(to, vol);
+              }
+              if (self2._webAudio) {
+                sound._volume = vol;
+              } else {
+                self2.volume(vol, sound._id, true);
+              }
+              if (isGroup) {
+                self2._volume = vol;
+              }
+              if (to < from && vol <= to || to > from && vol >= to) {
+                clearInterval(sound._interval);
+                sound._interval = null;
+                sound._fadeTo = null;
+                self2.volume(to, sound._id);
+                self2._emit("fade", sound._id);
+              }
+            }, stepLen);
+          },
+          _stopFade: function(id) {
+            var self2 = this;
+            var sound = self2._soundById(id);
+            if (sound && sound._interval) {
+              if (self2._webAudio) {
+                sound._node.gain.cancelScheduledValues(Howler2.ctx.currentTime);
+              }
+              clearInterval(sound._interval);
+              sound._interval = null;
+              self2.volume(sound._fadeTo, id);
+              sound._fadeTo = null;
+              self2._emit("fade", id);
+            }
+            return self2;
+          },
+          loop: function() {
+            var self2 = this;
+            var args = arguments;
+            var loop, id, sound;
+            if (args.length === 0) {
+              return self2._loop;
+            } else if (args.length === 1) {
+              if (typeof args[0] === "boolean") {
+                loop = args[0];
+                self2._loop = loop;
+              } else {
+                sound = self2._soundById(parseInt(args[0], 10));
+                return sound ? sound._loop : false;
+              }
+            } else if (args.length === 2) {
+              loop = args[0];
+              id = parseInt(args[1], 10);
+            }
+            var ids = self2._getSoundIds(id);
+            for (var i3 = 0; i3 < ids.length; i3++) {
+              sound = self2._soundById(ids[i3]);
+              if (sound) {
+                sound._loop = loop;
+                if (self2._webAudio && sound._node && sound._node.bufferSource) {
+                  sound._node.bufferSource.loop = loop;
+                  if (loop) {
+                    sound._node.bufferSource.loopStart = sound._start || 0;
+                    sound._node.bufferSource.loopEnd = sound._stop;
+                    if (self2.playing(ids[i3])) {
+                      self2.pause(ids[i3], true);
+                      self2.play(ids[i3], true);
+                    }
+                  }
+                }
+              }
+            }
+            return self2;
+          },
+          rate: function() {
+            var self2 = this;
+            var args = arguments;
+            var rate, id;
+            if (args.length === 0) {
+              id = self2._sounds[0]._id;
+            } else if (args.length === 1) {
+              var ids = self2._getSoundIds();
+              var index2 = ids.indexOf(args[0]);
+              if (index2 >= 0) {
+                id = parseInt(args[0], 10);
+              } else {
+                rate = parseFloat(args[0]);
+              }
+            } else if (args.length === 2) {
+              rate = parseFloat(args[0]);
+              id = parseInt(args[1], 10);
+            }
+            var sound;
+            if (typeof rate === "number") {
+              if (self2._state !== "loaded" || self2._playLock) {
+                self2._queue.push({
+                  event: "rate",
+                  action: function() {
+                    self2.rate.apply(self2, args);
+                  }
+                });
+                return self2;
+              }
+              if (typeof id === "undefined") {
+                self2._rate = rate;
+              }
+              id = self2._getSoundIds(id);
+              for (var i3 = 0; i3 < id.length; i3++) {
+                sound = self2._soundById(id[i3]);
+                if (sound) {
+                  if (self2.playing(id[i3])) {
+                    sound._rateSeek = self2.seek(id[i3]);
+                    sound._playStart = self2._webAudio ? Howler2.ctx.currentTime : sound._playStart;
+                  }
+                  sound._rate = rate;
+                  if (self2._webAudio && sound._node && sound._node.bufferSource) {
+                    sound._node.bufferSource.playbackRate.setValueAtTime(rate, Howler2.ctx.currentTime);
+                  } else if (sound._node) {
+                    sound._node.playbackRate = rate;
+                  }
+                  var seek = self2.seek(id[i3]);
+                  var duration = (self2._sprite[sound._sprite][0] + self2._sprite[sound._sprite][1]) / 1e3 - seek;
+                  var timeout = duration * 1e3 / Math.abs(sound._rate);
+                  if (self2._endTimers[id[i3]] || !sound._paused) {
+                    self2._clearTimer(id[i3]);
+                    self2._endTimers[id[i3]] = setTimeout(self2._ended.bind(self2, sound), timeout);
+                  }
+                  self2._emit("rate", sound._id);
+                }
+              }
+            } else {
+              sound = self2._soundById(id);
+              return sound ? sound._rate : self2._rate;
+            }
+            return self2;
+          },
+          seek: function() {
+            var self2 = this;
+            var args = arguments;
+            var seek, id;
+            if (args.length === 0) {
+              if (self2._sounds.length) {
+                id = self2._sounds[0]._id;
+              }
+            } else if (args.length === 1) {
+              var ids = self2._getSoundIds();
+              var index2 = ids.indexOf(args[0]);
+              if (index2 >= 0) {
+                id = parseInt(args[0], 10);
+              } else if (self2._sounds.length) {
+                id = self2._sounds[0]._id;
+                seek = parseFloat(args[0]);
+              }
+            } else if (args.length === 2) {
+              seek = parseFloat(args[0]);
+              id = parseInt(args[1], 10);
+            }
+            if (typeof id === "undefined") {
+              return 0;
+            }
+            if (typeof seek === "number" && (self2._state !== "loaded" || self2._playLock)) {
+              self2._queue.push({
+                event: "seek",
+                action: function() {
+                  self2.seek.apply(self2, args);
+                }
+              });
+              return self2;
+            }
+            var sound = self2._soundById(id);
+            if (sound) {
+              if (typeof seek === "number" && seek >= 0) {
+                var playing = self2.playing(id);
+                if (playing) {
+                  self2.pause(id, true);
+                }
+                sound._seek = seek;
+                sound._ended = false;
+                self2._clearTimer(id);
+                if (!self2._webAudio && sound._node && !isNaN(sound._node.duration)) {
+                  sound._node.currentTime = seek;
+                }
+                var seekAndEmit = function() {
+                  if (playing) {
+                    self2.play(id, true);
+                  }
+                  self2._emit("seek", id);
+                };
+                if (playing && !self2._webAudio) {
+                  var emitSeek = function() {
+                    if (!self2._playLock) {
+                      seekAndEmit();
+                    } else {
+                      setTimeout(emitSeek, 0);
+                    }
+                  };
+                  setTimeout(emitSeek, 0);
+                } else {
+                  seekAndEmit();
+                }
+              } else {
+                if (self2._webAudio) {
+                  var realTime = self2.playing(id) ? Howler2.ctx.currentTime - sound._playStart : 0;
+                  var rateSeek = sound._rateSeek ? sound._rateSeek - sound._seek : 0;
+                  return sound._seek + (rateSeek + realTime * Math.abs(sound._rate));
+                } else {
+                  return sound._node.currentTime;
+                }
+              }
+            }
+            return self2;
+          },
+          playing: function(id) {
+            var self2 = this;
+            if (typeof id === "number") {
+              var sound = self2._soundById(id);
+              return sound ? !sound._paused : false;
+            }
+            for (var i3 = 0; i3 < self2._sounds.length; i3++) {
+              if (!self2._sounds[i3]._paused) {
+                return true;
+              }
+            }
+            return false;
+          },
+          duration: function(id) {
+            var self2 = this;
+            var duration = self2._duration;
+            var sound = self2._soundById(id);
+            if (sound) {
+              duration = self2._sprite[sound._sprite][1] / 1e3;
+            }
+            return duration;
+          },
+          state: function() {
+            return this._state;
+          },
+          unload: function() {
+            var self2 = this;
+            var sounds = self2._sounds;
+            for (var i3 = 0; i3 < sounds.length; i3++) {
+              if (!sounds[i3]._paused) {
+                self2.stop(sounds[i3]._id);
+              }
+              if (!self2._webAudio) {
+                self2._clearSound(sounds[i3]._node);
+                sounds[i3]._node.removeEventListener("error", sounds[i3]._errorFn, false);
+                sounds[i3]._node.removeEventListener(Howler2._canPlayEvent, sounds[i3]._loadFn, false);
+                sounds[i3]._node.removeEventListener("ended", sounds[i3]._endFn, false);
+                Howler2._releaseHtml5Audio(sounds[i3]._node);
+              }
+              delete sounds[i3]._node;
+              self2._clearTimer(sounds[i3]._id);
+            }
+            var index2 = Howler2._howls.indexOf(self2);
+            if (index2 >= 0) {
+              Howler2._howls.splice(index2, 1);
+            }
+            var remCache = true;
+            for (i3 = 0; i3 < Howler2._howls.length; i3++) {
+              if (Howler2._howls[i3]._src === self2._src || self2._src.indexOf(Howler2._howls[i3]._src) >= 0) {
+                remCache = false;
+                break;
+              }
+            }
+            if (cache3 && remCache) {
+              delete cache3[self2._src];
+            }
+            Howler2.noAudio = false;
+            self2._state = "unloaded";
+            self2._sounds = [];
+            self2 = null;
+            return null;
+          },
+          on: function(event, fn, id, once) {
+            var self2 = this;
+            var events = self2["_on" + event];
+            if (typeof fn === "function") {
+              events.push(once ? { id, fn, once } : { id, fn });
+            }
+            return self2;
+          },
+          off: function(event, fn, id) {
+            var self2 = this;
+            var events = self2["_on" + event];
+            var i3 = 0;
+            if (typeof fn === "number") {
+              id = fn;
+              fn = null;
+            }
+            if (fn || id) {
+              for (i3 = 0; i3 < events.length; i3++) {
+                var isId = id === events[i3].id;
+                if (fn === events[i3].fn && isId || !fn && isId) {
+                  events.splice(i3, 1);
+                  break;
+                }
+              }
+            } else if (event) {
+              self2["_on" + event] = [];
+            } else {
+              var keys = Object.keys(self2);
+              for (i3 = 0; i3 < keys.length; i3++) {
+                if (keys[i3].indexOf("_on") === 0 && Array.isArray(self2[keys[i3]])) {
+                  self2[keys[i3]] = [];
+                }
+              }
+            }
+            return self2;
+          },
+          once: function(event, fn, id) {
+            var self2 = this;
+            self2.on(event, fn, id, 1);
+            return self2;
+          },
+          _emit: function(event, id, msg) {
+            var self2 = this;
+            var events = self2["_on" + event];
+            for (var i3 = events.length - 1; i3 >= 0; i3--) {
+              if (!events[i3].id || events[i3].id === id || event === "load") {
+                setTimeout(function(fn) {
+                  fn.call(this, id, msg);
+                }.bind(self2, events[i3].fn), 0);
+                if (events[i3].once) {
+                  self2.off(event, events[i3].fn, events[i3].id);
+                }
+              }
+            }
+            self2._loadQueue(event);
+            return self2;
+          },
+          _loadQueue: function(event) {
+            var self2 = this;
+            if (self2._queue.length > 0) {
+              var task = self2._queue[0];
+              if (task.event === event) {
+                self2._queue.shift();
+                self2._loadQueue();
+              }
+              if (!event) {
+                task.action();
+              }
+            }
+            return self2;
+          },
+          _ended: function(sound) {
+            var self2 = this;
+            var sprite = sound._sprite;
+            if (!self2._webAudio && sound._node && !sound._node.paused && !sound._node.ended && sound._node.currentTime < sound._stop) {
+              setTimeout(self2._ended.bind(self2, sound), 100);
+              return self2;
+            }
+            var loop = !!(sound._loop || self2._sprite[sprite][2]);
+            self2._emit("end", sound._id);
+            if (!self2._webAudio && loop) {
+              self2.stop(sound._id, true).play(sound._id);
+            }
+            if (self2._webAudio && loop) {
+              self2._emit("play", sound._id);
+              sound._seek = sound._start || 0;
+              sound._rateSeek = 0;
+              sound._playStart = Howler2.ctx.currentTime;
+              var timeout = (sound._stop - sound._start) * 1e3 / Math.abs(sound._rate);
+              self2._endTimers[sound._id] = setTimeout(self2._ended.bind(self2, sound), timeout);
+            }
+            if (self2._webAudio && !loop) {
+              sound._paused = true;
+              sound._ended = true;
+              sound._seek = sound._start || 0;
+              sound._rateSeek = 0;
+              self2._clearTimer(sound._id);
+              self2._cleanBuffer(sound._node);
+              Howler2._autoSuspend();
+            }
+            if (!self2._webAudio && !loop) {
+              self2.stop(sound._id, true);
+            }
+            return self2;
+          },
+          _clearTimer: function(id) {
+            var self2 = this;
+            if (self2._endTimers[id]) {
+              if (typeof self2._endTimers[id] !== "function") {
+                clearTimeout(self2._endTimers[id]);
+              } else {
+                var sound = self2._soundById(id);
+                if (sound && sound._node) {
+                  sound._node.removeEventListener("ended", self2._endTimers[id], false);
+                }
+              }
+              delete self2._endTimers[id];
+            }
+            return self2;
+          },
+          _soundById: function(id) {
+            var self2 = this;
+            for (var i3 = 0; i3 < self2._sounds.length; i3++) {
+              if (id === self2._sounds[i3]._id) {
+                return self2._sounds[i3];
+              }
+            }
+            return null;
+          },
+          _inactiveSound: function() {
+            var self2 = this;
+            self2._drain();
+            for (var i3 = 0; i3 < self2._sounds.length; i3++) {
+              if (self2._sounds[i3]._ended) {
+                return self2._sounds[i3].reset();
+              }
+            }
+            return new Sound2(self2);
+          },
+          _drain: function() {
+            var self2 = this;
+            var limit = self2._pool;
+            var cnt = 0;
+            var i3 = 0;
+            if (self2._sounds.length < limit) {
+              return;
+            }
+            for (i3 = 0; i3 < self2._sounds.length; i3++) {
+              if (self2._sounds[i3]._ended) {
+                cnt++;
+              }
+            }
+            for (i3 = self2._sounds.length - 1; i3 >= 0; i3--) {
+              if (cnt <= limit) {
+                return;
+              }
+              if (self2._sounds[i3]._ended) {
+                if (self2._webAudio && self2._sounds[i3]._node) {
+                  self2._sounds[i3]._node.disconnect(0);
+                }
+                self2._sounds.splice(i3, 1);
+                cnt--;
+              }
+            }
+          },
+          _getSoundIds: function(id) {
+            var self2 = this;
+            if (typeof id === "undefined") {
+              var ids = [];
+              for (var i3 = 0; i3 < self2._sounds.length; i3++) {
+                ids.push(self2._sounds[i3]._id);
+              }
+              return ids;
+            } else {
+              return [id];
+            }
+          },
+          _refreshBuffer: function(sound) {
+            var self2 = this;
+            sound._node.bufferSource = Howler2.ctx.createBufferSource();
+            sound._node.bufferSource.buffer = cache3[self2._src];
+            if (sound._panner) {
+              sound._node.bufferSource.connect(sound._panner);
+            } else {
+              sound._node.bufferSource.connect(sound._node);
+            }
+            sound._node.bufferSource.loop = sound._loop;
+            if (sound._loop) {
+              sound._node.bufferSource.loopStart = sound._start || 0;
+              sound._node.bufferSource.loopEnd = sound._stop || 0;
+            }
+            sound._node.bufferSource.playbackRate.setValueAtTime(sound._rate, Howler2.ctx.currentTime);
+            return self2;
+          },
+          _cleanBuffer: function(node) {
+            var self2 = this;
+            var isIOS = Howler2._navigator && Howler2._navigator.vendor.indexOf("Apple") >= 0;
+            if (Howler2._scratchBuffer && node.bufferSource) {
+              node.bufferSource.onended = null;
+              node.bufferSource.disconnect(0);
+              if (isIOS) {
+                try {
+                  node.bufferSource.buffer = Howler2._scratchBuffer;
+                } catch (e2) {
+                }
+              }
+            }
+            node.bufferSource = null;
+            return self2;
+          },
+          _clearSound: function(node) {
+            var checkIE = /MSIE |Trident\//.test(Howler2._navigator && Howler2._navigator.userAgent);
+            if (!checkIE) {
+              node.src = "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA";
+            }
+          }
+        };
+        var Sound2 = function(howl) {
+          this._parent = howl;
+          this.init();
+        };
+        Sound2.prototype = {
+          init: function() {
+            var self2 = this;
+            var parent = self2._parent;
+            self2._muted = parent._muted;
+            self2._loop = parent._loop;
+            self2._volume = parent._volume;
+            self2._rate = parent._rate;
+            self2._seek = 0;
+            self2._paused = true;
+            self2._ended = true;
+            self2._sprite = "__default";
+            self2._id = ++Howler2._counter;
+            parent._sounds.push(self2);
+            self2.create();
+            return self2;
+          },
+          create: function() {
+            var self2 = this;
+            var parent = self2._parent;
+            var volume = Howler2._muted || self2._muted || self2._parent._muted ? 0 : self2._volume;
+            if (parent._webAudio) {
+              self2._node = typeof Howler2.ctx.createGain === "undefined" ? Howler2.ctx.createGainNode() : Howler2.ctx.createGain();
+              self2._node.gain.setValueAtTime(volume, Howler2.ctx.currentTime);
+              self2._node.paused = true;
+              self2._node.connect(Howler2.masterGain);
+            } else if (!Howler2.noAudio) {
+              self2._node = Howler2._obtainHtml5Audio();
+              self2._errorFn = self2._errorListener.bind(self2);
+              self2._node.addEventListener("error", self2._errorFn, false);
+              self2._loadFn = self2._loadListener.bind(self2);
+              self2._node.addEventListener(Howler2._canPlayEvent, self2._loadFn, false);
+              self2._endFn = self2._endListener.bind(self2);
+              self2._node.addEventListener("ended", self2._endFn, false);
+              self2._node.src = parent._src;
+              self2._node.preload = parent._preload === true ? "auto" : parent._preload;
+              self2._node.volume = volume * Howler2.volume();
+              self2._node.load();
+            }
+            return self2;
+          },
+          reset: function() {
+            var self2 = this;
+            var parent = self2._parent;
+            self2._muted = parent._muted;
+            self2._loop = parent._loop;
+            self2._volume = parent._volume;
+            self2._rate = parent._rate;
+            self2._seek = 0;
+            self2._rateSeek = 0;
+            self2._paused = true;
+            self2._ended = true;
+            self2._sprite = "__default";
+            self2._id = ++Howler2._counter;
+            return self2;
+          },
+          _errorListener: function() {
+            var self2 = this;
+            self2._parent._emit("loaderror", self2._id, self2._node.error ? self2._node.error.code : 0);
+            self2._node.removeEventListener("error", self2._errorFn, false);
+          },
+          _loadListener: function() {
+            var self2 = this;
+            var parent = self2._parent;
+            parent._duration = Math.ceil(self2._node.duration * 10) / 10;
+            if (Object.keys(parent._sprite).length === 0) {
+              parent._sprite = { __default: [0, parent._duration * 1e3] };
+            }
+            if (parent._state !== "loaded") {
+              parent._state = "loaded";
+              parent._emit("load");
+              parent._loadQueue();
+            }
+            self2._node.removeEventListener(Howler2._canPlayEvent, self2._loadFn, false);
+          },
+          _endListener: function() {
+            var self2 = this;
+            var parent = self2._parent;
+            if (parent._duration === Infinity) {
+              parent._duration = Math.ceil(self2._node.duration * 10) / 10;
+              if (parent._sprite.__default[1] === Infinity) {
+                parent._sprite.__default[1] = parent._duration * 1e3;
+              }
+              parent._ended(self2);
+            }
+            self2._node.removeEventListener("ended", self2._endFn, false);
+          }
+        };
+        var cache3 = {};
+        var loadBuffer = function(self2) {
+          var url2 = self2._src;
+          if (cache3[url2]) {
+            self2._duration = cache3[url2].duration;
+            loadSound(self2);
+            return;
+          }
+          if (/^data:[^;]+;base64,/.test(url2)) {
+            var data = atob(url2.split(",")[1]);
+            var dataView = new Uint8Array(data.length);
+            for (var i3 = 0; i3 < data.length; ++i3) {
+              dataView[i3] = data.charCodeAt(i3);
+            }
+            decodeAudioData(dataView.buffer, self2);
+          } else {
+            var xhr = new XMLHttpRequest();
+            xhr.open(self2._xhr.method, url2, true);
+            xhr.withCredentials = self2._xhr.withCredentials;
+            xhr.responseType = "arraybuffer";
+            if (self2._xhr.headers) {
+              Object.keys(self2._xhr.headers).forEach(function(key) {
+                xhr.setRequestHeader(key, self2._xhr.headers[key]);
+              });
+            }
+            xhr.onload = function() {
+              var code = (xhr.status + "")[0];
+              if (code !== "0" && code !== "2" && code !== "3") {
+                self2._emit("loaderror", null, "Failed loading audio file with status: " + xhr.status + ".");
+                return;
+              }
+              decodeAudioData(xhr.response, self2);
+            };
+            xhr.onerror = function() {
+              if (self2._webAudio) {
+                self2._html5 = true;
+                self2._webAudio = false;
+                self2._sounds = [];
+                delete cache3[url2];
+                self2.load();
+              }
+            };
+            safeXhrSend(xhr);
+          }
+        };
+        var safeXhrSend = function(xhr) {
+          try {
+            xhr.send();
+          } catch (e2) {
+            xhr.onerror();
+          }
+        };
+        var decodeAudioData = function(arraybuffer, self2) {
+          var error = function() {
+            self2._emit("loaderror", null, "Decoding audio data failed.");
+          };
+          var success = function(buffer) {
+            if (buffer && self2._sounds.length > 0) {
+              cache3[self2._src] = buffer;
+              loadSound(self2, buffer);
+            } else {
+              error();
+            }
+          };
+          if (typeof Promise !== "undefined" && Howler2.ctx.decodeAudioData.length === 1) {
+            Howler2.ctx.decodeAudioData(arraybuffer).then(success).catch(error);
+          } else {
+            Howler2.ctx.decodeAudioData(arraybuffer, success, error);
+          }
+        };
+        var loadSound = function(self2, buffer) {
+          if (buffer && !self2._duration) {
+            self2._duration = buffer.duration;
+          }
+          if (Object.keys(self2._sprite).length === 0) {
+            self2._sprite = { __default: [0, self2._duration * 1e3] };
+          }
+          if (self2._state !== "loaded") {
+            self2._state = "loaded";
+            self2._emit("load");
+            self2._loadQueue();
+          }
+        };
+        var setupAudioContext = function() {
+          if (!Howler2.usingWebAudio) {
+            return;
+          }
+          try {
+            if (typeof AudioContext !== "undefined") {
+              Howler2.ctx = new AudioContext();
+            } else if (typeof webkitAudioContext !== "undefined") {
+              Howler2.ctx = new webkitAudioContext();
+            } else {
+              Howler2.usingWebAudio = false;
+            }
+          } catch (e2) {
+            Howler2.usingWebAudio = false;
+          }
+          if (!Howler2.ctx) {
+            Howler2.usingWebAudio = false;
+          }
+          var iOS = /iP(hone|od|ad)/.test(Howler2._navigator && Howler2._navigator.platform);
+          var appVersion = Howler2._navigator && Howler2._navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/);
+          var version = appVersion ? parseInt(appVersion[1], 10) : null;
+          if (iOS && version && version < 9) {
+            var safari = /safari/.test(Howler2._navigator && Howler2._navigator.userAgent.toLowerCase());
+            if (Howler2._navigator && !safari) {
+              Howler2.usingWebAudio = false;
+            }
+          }
+          if (Howler2.usingWebAudio) {
+            Howler2.masterGain = typeof Howler2.ctx.createGain === "undefined" ? Howler2.ctx.createGainNode() : Howler2.ctx.createGain();
+            Howler2.masterGain.gain.setValueAtTime(Howler2._muted ? 0 : Howler2._volume, Howler2.ctx.currentTime);
+            Howler2.masterGain.connect(Howler2.ctx.destination);
+          }
+          Howler2._setup();
+        };
+        if (typeof define === "function" && define.amd) {
+          define([], function() {
+            return {
+              Howler: Howler2,
+              Howl: Howl3
+            };
+          });
+        }
+        if (typeof exports !== "undefined") {
+          exports.Howler = Howler2;
+          exports.Howl = Howl3;
+        }
+        if (typeof global !== "undefined") {
+          global.HowlerGlobal = HowlerGlobal2;
+          global.Howler = Howler2;
+          global.Howl = Howl3;
+          global.Sound = Sound2;
+        } else if (typeof window !== "undefined") {
+          window.HowlerGlobal = HowlerGlobal2;
+          window.Howler = Howler2;
+          window.Howl = Howl3;
+          window.Sound = Sound2;
+        }
+      })();
+      (function() {
+        "use strict";
+        HowlerGlobal.prototype._pos = [0, 0, 0];
+        HowlerGlobal.prototype._orientation = [0, 0, -1, 0, 1, 0];
+        HowlerGlobal.prototype.stereo = function(pan) {
+          var self2 = this;
+          if (!self2.ctx || !self2.ctx.listener) {
+            return self2;
+          }
+          for (var i3 = self2._howls.length - 1; i3 >= 0; i3--) {
+            self2._howls[i3].stereo(pan);
+          }
+          return self2;
+        };
+        HowlerGlobal.prototype.pos = function(x2, y, z) {
+          var self2 = this;
+          if (!self2.ctx || !self2.ctx.listener) {
+            return self2;
+          }
+          y = typeof y !== "number" ? self2._pos[1] : y;
+          z = typeof z !== "number" ? self2._pos[2] : z;
+          if (typeof x2 === "number") {
+            self2._pos = [x2, y, z];
+            if (typeof self2.ctx.listener.positionX !== "undefined") {
+              self2.ctx.listener.positionX.setTargetAtTime(self2._pos[0], Howler.ctx.currentTime, 0.1);
+              self2.ctx.listener.positionY.setTargetAtTime(self2._pos[1], Howler.ctx.currentTime, 0.1);
+              self2.ctx.listener.positionZ.setTargetAtTime(self2._pos[2], Howler.ctx.currentTime, 0.1);
+            } else {
+              self2.ctx.listener.setPosition(self2._pos[0], self2._pos[1], self2._pos[2]);
+            }
+          } else {
+            return self2._pos;
+          }
+          return self2;
+        };
+        HowlerGlobal.prototype.orientation = function(x2, y, z, xUp, yUp, zUp) {
+          var self2 = this;
+          if (!self2.ctx || !self2.ctx.listener) {
+            return self2;
+          }
+          var or = self2._orientation;
+          y = typeof y !== "number" ? or[1] : y;
+          z = typeof z !== "number" ? or[2] : z;
+          xUp = typeof xUp !== "number" ? or[3] : xUp;
+          yUp = typeof yUp !== "number" ? or[4] : yUp;
+          zUp = typeof zUp !== "number" ? or[5] : zUp;
+          if (typeof x2 === "number") {
+            self2._orientation = [x2, y, z, xUp, yUp, zUp];
+            if (typeof self2.ctx.listener.forwardX !== "undefined") {
+              self2.ctx.listener.forwardX.setTargetAtTime(x2, Howler.ctx.currentTime, 0.1);
+              self2.ctx.listener.forwardY.setTargetAtTime(y, Howler.ctx.currentTime, 0.1);
+              self2.ctx.listener.forwardZ.setTargetAtTime(z, Howler.ctx.currentTime, 0.1);
+              self2.ctx.listener.upX.setTargetAtTime(xUp, Howler.ctx.currentTime, 0.1);
+              self2.ctx.listener.upY.setTargetAtTime(yUp, Howler.ctx.currentTime, 0.1);
+              self2.ctx.listener.upZ.setTargetAtTime(zUp, Howler.ctx.currentTime, 0.1);
+            } else {
+              self2.ctx.listener.setOrientation(x2, y, z, xUp, yUp, zUp);
+            }
+          } else {
+            return or;
+          }
+          return self2;
+        };
+        Howl.prototype.init = function(_super) {
+          return function(o2) {
+            var self2 = this;
+            self2._orientation = o2.orientation || [1, 0, 0];
+            self2._stereo = o2.stereo || null;
+            self2._pos = o2.pos || null;
+            self2._pannerAttr = {
+              coneInnerAngle: typeof o2.coneInnerAngle !== "undefined" ? o2.coneInnerAngle : 360,
+              coneOuterAngle: typeof o2.coneOuterAngle !== "undefined" ? o2.coneOuterAngle : 360,
+              coneOuterGain: typeof o2.coneOuterGain !== "undefined" ? o2.coneOuterGain : 0,
+              distanceModel: typeof o2.distanceModel !== "undefined" ? o2.distanceModel : "inverse",
+              maxDistance: typeof o2.maxDistance !== "undefined" ? o2.maxDistance : 1e4,
+              panningModel: typeof o2.panningModel !== "undefined" ? o2.panningModel : "HRTF",
+              refDistance: typeof o2.refDistance !== "undefined" ? o2.refDistance : 1,
+              rolloffFactor: typeof o2.rolloffFactor !== "undefined" ? o2.rolloffFactor : 1
+            };
+            self2._onstereo = o2.onstereo ? [{ fn: o2.onstereo }] : [];
+            self2._onpos = o2.onpos ? [{ fn: o2.onpos }] : [];
+            self2._onorientation = o2.onorientation ? [{ fn: o2.onorientation }] : [];
+            return _super.call(this, o2);
+          };
+        }(Howl.prototype.init);
+        Howl.prototype.stereo = function(pan, id) {
+          var self2 = this;
+          if (!self2._webAudio) {
+            return self2;
+          }
+          if (self2._state !== "loaded") {
+            self2._queue.push({
+              event: "stereo",
+              action: function() {
+                self2.stereo(pan, id);
+              }
+            });
+            return self2;
+          }
+          var pannerType = typeof Howler.ctx.createStereoPanner === "undefined" ? "spatial" : "stereo";
+          if (typeof id === "undefined") {
+            if (typeof pan === "number") {
+              self2._stereo = pan;
+              self2._pos = [pan, 0, 0];
+            } else {
+              return self2._stereo;
+            }
+          }
+          var ids = self2._getSoundIds(id);
+          for (var i3 = 0; i3 < ids.length; i3++) {
+            var sound = self2._soundById(ids[i3]);
+            if (sound) {
+              if (typeof pan === "number") {
+                sound._stereo = pan;
+                sound._pos = [pan, 0, 0];
+                if (sound._node) {
+                  sound._pannerAttr.panningModel = "equalpower";
+                  if (!sound._panner || !sound._panner.pan) {
+                    setupPanner(sound, pannerType);
+                  }
+                  if (pannerType === "spatial") {
+                    if (typeof sound._panner.positionX !== "undefined") {
+                      sound._panner.positionX.setValueAtTime(pan, Howler.ctx.currentTime);
+                      sound._panner.positionY.setValueAtTime(0, Howler.ctx.currentTime);
+                      sound._panner.positionZ.setValueAtTime(0, Howler.ctx.currentTime);
+                    } else {
+                      sound._panner.setPosition(pan, 0, 0);
+                    }
+                  } else {
+                    sound._panner.pan.setValueAtTime(pan, Howler.ctx.currentTime);
+                  }
+                }
+                self2._emit("stereo", sound._id);
+              } else {
+                return sound._stereo;
+              }
+            }
+          }
+          return self2;
+        };
+        Howl.prototype.pos = function(x2, y, z, id) {
+          var self2 = this;
+          if (!self2._webAudio) {
+            return self2;
+          }
+          if (self2._state !== "loaded") {
+            self2._queue.push({
+              event: "pos",
+              action: function() {
+                self2.pos(x2, y, z, id);
+              }
+            });
+            return self2;
+          }
+          y = typeof y !== "number" ? 0 : y;
+          z = typeof z !== "number" ? -0.5 : z;
+          if (typeof id === "undefined") {
+            if (typeof x2 === "number") {
+              self2._pos = [x2, y, z];
+            } else {
+              return self2._pos;
+            }
+          }
+          var ids = self2._getSoundIds(id);
+          for (var i3 = 0; i3 < ids.length; i3++) {
+            var sound = self2._soundById(ids[i3]);
+            if (sound) {
+              if (typeof x2 === "number") {
+                sound._pos = [x2, y, z];
+                if (sound._node) {
+                  if (!sound._panner || sound._panner.pan) {
+                    setupPanner(sound, "spatial");
+                  }
+                  if (typeof sound._panner.positionX !== "undefined") {
+                    sound._panner.positionX.setValueAtTime(x2, Howler.ctx.currentTime);
+                    sound._panner.positionY.setValueAtTime(y, Howler.ctx.currentTime);
+                    sound._panner.positionZ.setValueAtTime(z, Howler.ctx.currentTime);
+                  } else {
+                    sound._panner.setPosition(x2, y, z);
+                  }
+                }
+                self2._emit("pos", sound._id);
+              } else {
+                return sound._pos;
+              }
+            }
+          }
+          return self2;
+        };
+        Howl.prototype.orientation = function(x2, y, z, id) {
+          var self2 = this;
+          if (!self2._webAudio) {
+            return self2;
+          }
+          if (self2._state !== "loaded") {
+            self2._queue.push({
+              event: "orientation",
+              action: function() {
+                self2.orientation(x2, y, z, id);
+              }
+            });
+            return self2;
+          }
+          y = typeof y !== "number" ? self2._orientation[1] : y;
+          z = typeof z !== "number" ? self2._orientation[2] : z;
+          if (typeof id === "undefined") {
+            if (typeof x2 === "number") {
+              self2._orientation = [x2, y, z];
+            } else {
+              return self2._orientation;
+            }
+          }
+          var ids = self2._getSoundIds(id);
+          for (var i3 = 0; i3 < ids.length; i3++) {
+            var sound = self2._soundById(ids[i3]);
+            if (sound) {
+              if (typeof x2 === "number") {
+                sound._orientation = [x2, y, z];
+                if (sound._node) {
+                  if (!sound._panner) {
+                    if (!sound._pos) {
+                      sound._pos = self2._pos || [0, 0, -0.5];
+                    }
+                    setupPanner(sound, "spatial");
+                  }
+                  if (typeof sound._panner.orientationX !== "undefined") {
+                    sound._panner.orientationX.setValueAtTime(x2, Howler.ctx.currentTime);
+                    sound._panner.orientationY.setValueAtTime(y, Howler.ctx.currentTime);
+                    sound._panner.orientationZ.setValueAtTime(z, Howler.ctx.currentTime);
+                  } else {
+                    sound._panner.setOrientation(x2, y, z);
+                  }
+                }
+                self2._emit("orientation", sound._id);
+              } else {
+                return sound._orientation;
+              }
+            }
+          }
+          return self2;
+        };
+        Howl.prototype.pannerAttr = function() {
+          var self2 = this;
+          var args = arguments;
+          var o2, id, sound;
+          if (!self2._webAudio) {
+            return self2;
+          }
+          if (args.length === 0) {
+            return self2._pannerAttr;
+          } else if (args.length === 1) {
+            if (typeof args[0] === "object") {
+              o2 = args[0];
+              if (typeof id === "undefined") {
+                if (!o2.pannerAttr) {
+                  o2.pannerAttr = {
+                    coneInnerAngle: o2.coneInnerAngle,
+                    coneOuterAngle: o2.coneOuterAngle,
+                    coneOuterGain: o2.coneOuterGain,
+                    distanceModel: o2.distanceModel,
+                    maxDistance: o2.maxDistance,
+                    refDistance: o2.refDistance,
+                    rolloffFactor: o2.rolloffFactor,
+                    panningModel: o2.panningModel
+                  };
+                }
+                self2._pannerAttr = {
+                  coneInnerAngle: typeof o2.pannerAttr.coneInnerAngle !== "undefined" ? o2.pannerAttr.coneInnerAngle : self2._coneInnerAngle,
+                  coneOuterAngle: typeof o2.pannerAttr.coneOuterAngle !== "undefined" ? o2.pannerAttr.coneOuterAngle : self2._coneOuterAngle,
+                  coneOuterGain: typeof o2.pannerAttr.coneOuterGain !== "undefined" ? o2.pannerAttr.coneOuterGain : self2._coneOuterGain,
+                  distanceModel: typeof o2.pannerAttr.distanceModel !== "undefined" ? o2.pannerAttr.distanceModel : self2._distanceModel,
+                  maxDistance: typeof o2.pannerAttr.maxDistance !== "undefined" ? o2.pannerAttr.maxDistance : self2._maxDistance,
+                  refDistance: typeof o2.pannerAttr.refDistance !== "undefined" ? o2.pannerAttr.refDistance : self2._refDistance,
+                  rolloffFactor: typeof o2.pannerAttr.rolloffFactor !== "undefined" ? o2.pannerAttr.rolloffFactor : self2._rolloffFactor,
+                  panningModel: typeof o2.pannerAttr.panningModel !== "undefined" ? o2.pannerAttr.panningModel : self2._panningModel
+                };
+              }
+            } else {
+              sound = self2._soundById(parseInt(args[0], 10));
+              return sound ? sound._pannerAttr : self2._pannerAttr;
+            }
+          } else if (args.length === 2) {
+            o2 = args[0];
+            id = parseInt(args[1], 10);
+          }
+          var ids = self2._getSoundIds(id);
+          for (var i3 = 0; i3 < ids.length; i3++) {
+            sound = self2._soundById(ids[i3]);
+            if (sound) {
+              var pa = sound._pannerAttr;
+              pa = {
+                coneInnerAngle: typeof o2.coneInnerAngle !== "undefined" ? o2.coneInnerAngle : pa.coneInnerAngle,
+                coneOuterAngle: typeof o2.coneOuterAngle !== "undefined" ? o2.coneOuterAngle : pa.coneOuterAngle,
+                coneOuterGain: typeof o2.coneOuterGain !== "undefined" ? o2.coneOuterGain : pa.coneOuterGain,
+                distanceModel: typeof o2.distanceModel !== "undefined" ? o2.distanceModel : pa.distanceModel,
+                maxDistance: typeof o2.maxDistance !== "undefined" ? o2.maxDistance : pa.maxDistance,
+                refDistance: typeof o2.refDistance !== "undefined" ? o2.refDistance : pa.refDistance,
+                rolloffFactor: typeof o2.rolloffFactor !== "undefined" ? o2.rolloffFactor : pa.rolloffFactor,
+                panningModel: typeof o2.panningModel !== "undefined" ? o2.panningModel : pa.panningModel
+              };
+              var panner = sound._panner;
+              if (panner) {
+                panner.coneInnerAngle = pa.coneInnerAngle;
+                panner.coneOuterAngle = pa.coneOuterAngle;
+                panner.coneOuterGain = pa.coneOuterGain;
+                panner.distanceModel = pa.distanceModel;
+                panner.maxDistance = pa.maxDistance;
+                panner.refDistance = pa.refDistance;
+                panner.rolloffFactor = pa.rolloffFactor;
+                panner.panningModel = pa.panningModel;
+              } else {
+                if (!sound._pos) {
+                  sound._pos = self2._pos || [0, 0, -0.5];
+                }
+                setupPanner(sound, "spatial");
+              }
+            }
+          }
+          return self2;
+        };
+        Sound.prototype.init = function(_super) {
+          return function() {
+            var self2 = this;
+            var parent = self2._parent;
+            self2._orientation = parent._orientation;
+            self2._stereo = parent._stereo;
+            self2._pos = parent._pos;
+            self2._pannerAttr = parent._pannerAttr;
+            _super.call(this);
+            if (self2._stereo) {
+              parent.stereo(self2._stereo);
+            } else if (self2._pos) {
+              parent.pos(self2._pos[0], self2._pos[1], self2._pos[2], self2._id);
+            }
+          };
+        }(Sound.prototype.init);
+        Sound.prototype.reset = function(_super) {
+          return function() {
+            var self2 = this;
+            var parent = self2._parent;
+            self2._orientation = parent._orientation;
+            self2._stereo = parent._stereo;
+            self2._pos = parent._pos;
+            self2._pannerAttr = parent._pannerAttr;
+            if (self2._stereo) {
+              parent.stereo(self2._stereo);
+            } else if (self2._pos) {
+              parent.pos(self2._pos[0], self2._pos[1], self2._pos[2], self2._id);
+            } else if (self2._panner) {
+              self2._panner.disconnect(0);
+              self2._panner = void 0;
+              parent._refreshBuffer(self2);
+            }
+            return _super.call(this);
+          };
+        }(Sound.prototype.reset);
+        var setupPanner = function(sound, type) {
+          type = type || "spatial";
+          if (type === "spatial") {
+            sound._panner = Howler.ctx.createPanner();
+            sound._panner.coneInnerAngle = sound._pannerAttr.coneInnerAngle;
+            sound._panner.coneOuterAngle = sound._pannerAttr.coneOuterAngle;
+            sound._panner.coneOuterGain = sound._pannerAttr.coneOuterGain;
+            sound._panner.distanceModel = sound._pannerAttr.distanceModel;
+            sound._panner.maxDistance = sound._pannerAttr.maxDistance;
+            sound._panner.refDistance = sound._pannerAttr.refDistance;
+            sound._panner.rolloffFactor = sound._pannerAttr.rolloffFactor;
+            sound._panner.panningModel = sound._pannerAttr.panningModel;
+            if (typeof sound._panner.positionX !== "undefined") {
+              sound._panner.positionX.setValueAtTime(sound._pos[0], Howler.ctx.currentTime);
+              sound._panner.positionY.setValueAtTime(sound._pos[1], Howler.ctx.currentTime);
+              sound._panner.positionZ.setValueAtTime(sound._pos[2], Howler.ctx.currentTime);
+            } else {
+              sound._panner.setPosition(sound._pos[0], sound._pos[1], sound._pos[2]);
+            }
+            if (typeof sound._panner.orientationX !== "undefined") {
+              sound._panner.orientationX.setValueAtTime(sound._orientation[0], Howler.ctx.currentTime);
+              sound._panner.orientationY.setValueAtTime(sound._orientation[1], Howler.ctx.currentTime);
+              sound._panner.orientationZ.setValueAtTime(sound._orientation[2], Howler.ctx.currentTime);
+            } else {
+              sound._panner.setOrientation(sound._orientation[0], sound._orientation[1], sound._orientation[2]);
+            }
+          } else {
+            sound._panner = Howler.ctx.createStereoPanner();
+            sound._panner.pan.setValueAtTime(sound._stereo, Howler.ctx.currentTime);
+          }
+          sound._panner.connect(sound._node);
+          if (!sound._paused) {
+            sound._parent.pause(sound._id, true).play(sound._id, true);
+          }
+        };
+      })();
+    }
+  });
+
   // node_modules/react-range/lib/types.js
   var require_types = __commonJS({
     "node_modules/react-range/lib/types.js"(exports) {
@@ -24088,7 +26038,7 @@ ${JSON.stringify(message, null, 4)}`);
         return to.concat(ar || Array.prototype.slice.call(from));
       };
       Object.defineProperty(exports, "__esModule", { value: true });
-      var React19 = __importStar(require_react());
+      var React21 = __importStar(require_react());
       var utils_1 = require_utils2();
       var types_1 = require_types();
       var INCREASE_KEYS = ["ArrowRight", "ArrowUp", "k", "PageUp"];
@@ -24097,7 +26047,7 @@ ${JSON.stringify(message, null, 4)}`);
         __extends(Range3, _super);
         function Range3(props) {
           var _this = _super.call(this, props) || this;
-          _this.trackRef = React19.createRef();
+          _this.trackRef = React21.createRef();
           _this.thumbRefs = [];
           _this.state = {
             draggedTrackPos: [-1, -1],
@@ -24415,7 +26365,7 @@ ${JSON.stringify(message, null, 4)}`);
             _this.numOfMarks = (props2.max - props2.min) / _this.props.step;
             _this.markRefs = [];
             for (var i3 = 0; i3 < _this.numOfMarks + 1; i3++) {
-              _this.markRefs[i3] = React19.createRef();
+              _this.markRefs[i3] = React21.createRef();
             }
           };
           _this.calculateMarkOffsets = function() {
@@ -24456,7 +26406,7 @@ ${JSON.stringify(message, null, 4)}`);
           _this.schdOnTouchMove = (0, utils_1.schd)(_this.onTouchMove);
           _this.schdOnEnd = (0, utils_1.schd)(_this.onEnd);
           _this.thumbRefs = props.values.map(function() {
-            return React19.createRef();
+            return React21.createRef();
           });
           _this.updateMarkRefs(props);
           return _this;
@@ -24596,7 +26546,7 @@ ${JSON.stringify(message, null, 4)}`);
           max: 100
         };
         return Range3;
-      }(React19.Component);
+      }(React21.Component);
       exports.default = Range2;
     }
   });
@@ -24683,11 +26633,11 @@ ${JSON.stringify(message, null, 4)}`);
   });
 
   // src/index.tsx
-  var import_react22 = __toModule(require_react());
+  var import_react24 = __toModule(require_react());
   var import_react_dom = __toModule(require_react_dom());
 
   // src/App.tsx
-  var import_react21 = __toModule(require_react());
+  var import_react23 = __toModule(require_react());
 
   // node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js
   function _setPrototypeOf(o2, p2) {
@@ -28950,7 +30900,9 @@ to {
     forfeitCommand: "",
     alertDuration: 4e3,
     alertTheme: AlertTheme.GW2,
-    autoAnnounce: true
+    autoAnnounce: true,
+    giveawayName: "",
+    timerBell: false
   };
   var alertThemeMap = {
     [AlertTheme.GW2]: "Guild Wars 2"
@@ -31411,7 +33363,7 @@ to {
 
   // src/utils/giveaways.ts
   var pastWinners = new Set();
-  async function getChatGiveaway(chatClient, channelInfo, chatItems, chatCommand, settings, forfeits) {
+  async function getChatGiveaway(chatClient, channelInfo, chatItems, chatCommand, settings, discordSettings, forfeits) {
     const forfeitSet = new Set([...forfeits]);
     console.info("[giveaway][chat][start]");
     let subCount = 0;
@@ -31453,7 +33405,7 @@ to {
       if (!winner)
         return;
       pastWinners.add(winner.username);
-      announceWinner({ chatClient, channelInfo, settings, winner: winner.username });
+      announceWinner({ chatClient, channelInfo, settings, winner: winner.username, discordSettings });
       return {
         login: winner.username,
         wasSubscriber: winner.isSubscriber,
@@ -31461,7 +33413,7 @@ to {
       };
     }).filter(Boolean);
   }
-  async function getInstantGiveaway(chatClient, channelInfo, settings, forfeits) {
+  async function getInstantGiveaway(chatClient, channelInfo, settings, discordSettings, forfeits) {
     const forfeitSet = new Set([...forfeits]);
     console.info("[giveaway][instant][start]");
     let viewers = await getViewers(channelInfo);
@@ -31499,23 +33451,31 @@ to {
       if (!winner)
         return;
       pastWinners.add(winner);
-      announceWinner({ chatClient, channelInfo, settings, winner });
+      announceWinner({ chatClient, channelInfo, settings, winner, discordSettings });
       return winner;
     }).filter(Boolean).map((u3) => {
       var _a, _b;
       return { login: u3, wasSubscriber: (_a = subsList == null ? void 0 : subsList.has(u3)) != null ? _a : null, wasFollower: (_b = followersList == null ? void 0 : followersList.has(u3)) != null ? _b : null };
     });
   }
-  function announceWinner({ chatClient, channelInfo, settings, winner, force }) {
+  function announceWinner({ chatClient, channelInfo, settings, discordSettings, winner, force }) {
+    var _a;
     if (force !== true && settings.autoAnnounce !== void 0 && settings.autoAnnounce === false)
       return;
+    const colour = Number(`0x${(_a = discordSettings.messageColour) == null ? void 0 : _a.replace("#", "")}`);
     relay_default.emit("event", {
       type: "winner",
       winner,
       channelId: channelInfo.userId,
       login: channelInfo.login,
       alertDuration: settings.alertDuration,
-      alertTheme: settings.alertTheme
+      alertTheme: settings.alertTheme,
+      discordGuildId: discordSettings.guildId,
+      discordChannelId: discordSettings.channelId,
+      discordColour: isNaN(colour) ? void 0 : colour,
+      discordTitle: discordSettings.messageTitle,
+      discordBody: discordSettings.messageBody,
+      giveawayName: ""
     });
     if (settings.sendMessages) {
       chatClient == null ? void 0 : chatClient.say(channelInfo.login, settings.winnerMessage.replace("@name", `@${winner}`));
@@ -31607,11 +33567,20 @@ to {
   }
 
   // node_modules/react-icons/fa/index.esm.js
+  function FaDiscord(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 640 512" }, "child": [{ "tag": "path", "attr": { "d": "M524.531,69.836a1.5,1.5,0,0,0-.764-.7A485.065,485.065,0,0,0,404.081,32.03a1.816,1.816,0,0,0-1.923.91,337.461,337.461,0,0,0-14.9,30.6,447.848,447.848,0,0,0-134.426,0,309.541,309.541,0,0,0-15.135-30.6,1.89,1.89,0,0,0-1.924-.91A483.689,483.689,0,0,0,116.085,69.137a1.712,1.712,0,0,0-.788.676C39.068,183.651,18.186,294.69,28.43,404.354a2.016,2.016,0,0,0,.765,1.375A487.666,487.666,0,0,0,176.02,479.918a1.9,1.9,0,0,0,2.063-.676A348.2,348.2,0,0,0,208.12,430.4a1.86,1.86,0,0,0-1.019-2.588,321.173,321.173,0,0,1-45.868-21.853,1.885,1.885,0,0,1-.185-3.126c3.082-2.309,6.166-4.711,9.109-7.137a1.819,1.819,0,0,1,1.9-.256c96.229,43.917,200.41,43.917,295.5,0a1.812,1.812,0,0,1,1.924.233c2.944,2.426,6.027,4.851,9.132,7.16a1.884,1.884,0,0,1-.162,3.126,301.407,301.407,0,0,1-45.89,21.83,1.875,1.875,0,0,0-1,2.611,391.055,391.055,0,0,0,30.014,48.815,1.864,1.864,0,0,0,2.063.7A486.048,486.048,0,0,0,610.7,405.729a1.882,1.882,0,0,0,.765-1.352C623.729,277.594,590.933,167.465,524.531,69.836ZM222.491,337.58c-28.972,0-52.844-26.587-52.844-59.239S193.056,219.1,222.491,219.1c29.665,0,53.306,26.82,52.843,59.239C275.334,310.993,251.924,337.58,222.491,337.58Zm195.38,0c-28.971,0-52.843-26.587-52.843-59.239S388.437,219.1,417.871,219.1c29.667,0,53.307,26.82,52.844,59.239C470.715,310.993,447.538,337.58,417.871,337.58Z" } }] })(props);
+  }
   function FaTwitch(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M391.17,103.47H352.54v109.7h38.63ZM285,103H246.37V212.75H285ZM120.83,0,24.31,91.42V420.58H140.14V512l96.53-91.42h77.25L487.69,256V0ZM449.07,237.75l-77.22,73.12H294.61l-67.6,64v-64H140.14V36.58H449.07Z" } }] })(props);
   }
   function FaAngleLeft(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 256 512" }, "child": [{ "tag": "path", "attr": { "d": "M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z" } }] })(props);
+  }
+  function FaBellSlash(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 640 512" }, "child": [{ "tag": "path", "attr": { "d": "M633.82 458.1l-90.62-70.05c.19-1.38.8-2.66.8-4.06.05-7.55-2.61-15.27-8.61-21.71-19.32-20.76-55.47-51.99-55.47-154.29 0-77.7-54.48-139.9-127.94-155.16V32c0-17.67-14.32-32-31.98-32s-31.98 14.33-31.98 32v20.84c-40.33 8.38-74.66 31.07-97.59 62.57L45.47 3.37C38.49-2.05 28.43-.8 23.01 6.18L3.37 31.45C-2.05 38.42-.8 48.47 6.18 53.9l588.35 454.73c6.98 5.43 17.03 4.17 22.46-2.81l19.64-25.27c5.42-6.97 4.17-17.02-2.81-22.45zM157.23 251.54c-8.61 67.96-36.41 93.33-52.62 110.75-6 6.45-8.66 14.16-8.61 21.71.11 16.4 12.98 32 32.1 32h241.92L157.23 251.54zM320 512c35.32 0 63.97-28.65 63.97-64H256.03c0 35.35 28.65 64 63.97 64z" } }] })(props);
+  }
+  function FaBell(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 448 512" }, "child": [{ "tag": "path", "attr": { "d": "M224 512c35.32 0 63.97-28.65 63.97-64H160.03c0 35.35 28.65 64 63.97 64zm215.39-149.71c-19.32-20.76-55.47-51.99-55.47-154.29 0-77.7-54.48-139.9-127.94-155.16V32c0-17.67-14.32-32-31.98-32s-31.98 14.33-31.98 32v20.84C118.56 68.1 64.08 130.3 64.08 208c0 102.3-36.15 133.53-55.47 154.29-6 6.45-8.66 14.16-8.61 21.71.11 16.4 12.98 32 32.1 32h383.8c19.12 0 32-15.6 32.1-32 .05-7.55-2.61-15.27-8.61-21.71z" } }] })(props);
   }
   function FaBullhorn(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 576 512" }, "child": [{ "tag": "path", "attr": { "d": "M576 240c0-23.63-12.95-44.04-32-55.12V32.01C544 23.26 537.02 0 512 0c-7.12 0-14.19 2.38-19.98 7.02l-85.03 68.03C364.28 109.19 310.66 128 256 128H64c-35.35 0-64 28.65-64 64v96c0 35.35 28.65 64 64 64h33.7c-1.39 10.48-2.18 21.14-2.18 32 0 39.77 9.26 77.35 25.56 110.94 5.19 10.69 16.52 17.06 28.4 17.06h74.28c26.05 0 41.69-29.84 25.9-50.56-16.4-21.52-26.15-48.36-26.15-77.44 0-11.11 1.62-21.79 4.41-32H256c54.66 0 108.28 18.81 150.98 52.95l85.03 68.03a32.023 32.023 0 0 0 19.98 7.02c24.92 0 32-22.78 32-32V295.13C563.05 284.04 576 263.63 576 240zm-96 141.42l-33.05-26.44C392.95 311.78 325.12 288 256 288v-96c69.12 0 136.95-23.78 190.95-66.98L480 98.58v282.84z" } }] })(props);
@@ -31627,6 +33596,9 @@ to {
   }
   function FaDice(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 640 512" }, "child": [{ "tag": "path", "attr": { "d": "M592 192H473.26c12.69 29.59 7.12 65.2-17 89.32L320 417.58V464c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48V240c0-26.51-21.49-48-48-48zM480 376c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm-46.37-186.7L258.7 14.37c-19.16-19.16-50.23-19.16-69.39 0L14.37 189.3c-19.16 19.16-19.16 50.23 0 69.39L189.3 433.63c19.16 19.16 50.23 19.16 69.39 0L433.63 258.7c19.16-19.17 19.16-50.24 0-69.4zM96 248c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm128 128c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm0-128c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm0-128c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm128 128c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24z" } }] })(props);
+  }
+  function FaEnvelope(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z" } }] })(props);
   }
   function FaExclamationTriangle(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 576 512" }, "child": [{ "tag": "path", "attr": { "d": "M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z" } }] })(props);
@@ -32165,6 +34137,9 @@ to {
   };
   var index_es_default = Countdown$1;
 
+  // src/components/primitives/Settings.tsx
+  var import_howler = __toModule(require_howler());
+
   // src/components/primitives/Slider.tsx
   var import_react12 = __toModule(require_react());
   var import_react_range = __toModule(require_lib());
@@ -32223,6 +34198,9 @@ to {
   }
 
   // src/components/primitives/Settings.tsx
+  var bell = new import_howler.Howl({
+    src: ["sounds/pleasing-bell.ogg"]
+  });
   var countDownRenderer = ({ hours, minutes, seconds, completed }) => {
     if (completed) {
       return /* @__PURE__ */ import_react13.default.createElement("div", {
@@ -32247,7 +34225,9 @@ to {
     setChatPaused,
     resetChat,
     chatCommand,
-    channelId
+    channelId,
+    timerBell,
+    setSettings
   }) {
     const [active, setActive] = import_react13.default.useState(false);
     const [value2, setValue] = import_react13.default.useState(ONE_MIN);
@@ -32255,7 +34235,9 @@ to {
       Et.success("Timer finished! Chat paused, do a giveaway...", { position: "bottom-center" });
       relay_default.emit("event", { type: "timer-end", channelId, ts: new Date().toISOString() });
       setChatPaused(true);
-    }, [channelId]);
+      if (timerBell)
+        bell.play();
+    }, [channelId, timerBell]);
     return active ? /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex justify-center items-center text-center relative"
     }, /* @__PURE__ */ import_react13.default.createElement(StableCountdown, {
@@ -32284,6 +34266,9 @@ to {
     })), /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex-1 justify-center items-center text-center flex"
     }, formatDistanceStrict(Date.now() + value2, new Date())), /* @__PURE__ */ import_react13.default.createElement("button", {
+      className: "flex justify-center items-center pr-3",
+      onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { timerBell: !s2.timerBell }))
+    }, timerBell ? /* @__PURE__ */ import_react13.default.createElement(FaBell, null) : /* @__PURE__ */ import_react13.default.createElement(FaBellSlash, null)), /* @__PURE__ */ import_react13.default.createElement("button", {
       className: "bg-purple-600 px-2 py-1 flex-0 select-none cursor-pointer flex flex-row justify-center items-center gap-1 transition-colors hover:bg-purple-700",
       onClick: () => {
         resetChat();
@@ -32343,7 +34328,9 @@ to {
       setChatPaused,
       resetChat: () => resetChat(),
       channelId,
-      chatCommand: settings.chatCommand
+      chatCommand: settings.chatCommand,
+      timerBell: settings.timerBell,
+      setSettings
     })), /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex flex-row gap-2 mt-2"
     }, /* @__PURE__ */ import_react13.default.createElement(SliderOuter, {
@@ -32383,6 +34370,7 @@ to {
   function InstantGiveaway({
     setWinners,
     channelInfo,
+    discordSettings,
     settings,
     client,
     setPastGiveaways,
@@ -32393,7 +34381,7 @@ to {
       onClick: async () => {
         if (!channelInfo.login)
           return;
-        const giveawayWinner = await getInstantGiveaway(client, channelInfo, settings, forfeits);
+        const giveawayWinner = await getInstantGiveaway(client, channelInfo, settings, discordSettings, forfeits);
         if (!giveawayWinner.length) {
           Et.error("No winners found that match conditions!", { position: "bottom-center" });
           return;
@@ -32417,6 +34405,7 @@ to {
     chatEvents,
     setWinners,
     channelInfo,
+    discordSettings,
     settings,
     client,
     setPastGiveaways,
@@ -32425,7 +34414,7 @@ to {
     return /* @__PURE__ */ import_react14.default.createElement("button", {
       className: "bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-transform hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700",
       onClick: async () => {
-        const giveawayWinner = await getChatGiveaway(client, channelInfo, chatEvents, settings.chatCommand, settings, forfeits);
+        const giveawayWinner = await getChatGiveaway(client, channelInfo, chatEvents, settings.chatCommand, settings, discordSettings, forfeits);
         if (!giveawayWinner.length) {
           Et.error("No winners found that match conditions!", { position: "bottom-center" });
           return;
@@ -32613,6 +34602,7 @@ to {
   // src/components/screens/Main.tsx
   function MainScreen({
     chatEvents,
+    discordSettings,
     settings,
     setSettings,
     channelInfo,
@@ -32638,10 +34628,12 @@ to {
       onClear: (idx) => setWinners((w) => removeIdx(w, idx)),
       chatClient: client,
       settings,
+      discordSettings,
       channelInfo
     }), /* @__PURE__ */ import_react16.default.createElement("div", {
       className: "flex flex-row gap-2"
     }, /* @__PURE__ */ import_react16.default.createElement(InstantGiveaway, {
+      discordSettings,
       settings,
       channelInfo,
       setWinners,
@@ -32649,6 +34641,7 @@ to {
       setPastGiveaways,
       forfeits
     }), /* @__PURE__ */ import_react16.default.createElement(ChatGiveaway, {
+      discordSettings,
       settings,
       channelInfo,
       chatEvents,
@@ -33137,6 +35130,11 @@ to {
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
       title: "Settings (blocklist etc)"
     }, /* @__PURE__ */ import_react20.default.createElement(FaCogs, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react20.default.createElement(Link, {
+      to: "/discord"
+    }, /* @__PURE__ */ import_react20.default.createElement("div", {
+      className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
+      title: "Discord integration"
+    }, /* @__PURE__ */ import_react20.default.createElement(FaDiscord, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react20.default.createElement(Link, {
       to: "/giveaways"
     }, /* @__PURE__ */ import_react20.default.createElement("div", {
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
@@ -33178,17 +35176,123 @@ to {
     }, /* @__PURE__ */ import_react20.default.createElement(FaTwitch, null), " ", client ? "Disconnect" : "Connect")));
   }
 
+  // src/components/screens/Discord.tsx
+  var import_react22 = __toModule(require_react());
+
+  // src/components/primitives/Input.tsx
+  var import_react21 = __toModule(require_react());
+  function Input(_a) {
+    var _b = _a, {
+      label,
+      title
+    } = _b, inputProps = __objRest(_b, [
+      "label",
+      "title"
+    ]);
+    return /* @__PURE__ */ import_react21.default.createElement("div", {
+      className: "flex flex-row justify-center items-center flex-1"
+    }, /* @__PURE__ */ import_react21.default.createElement("div", {
+      className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md h-full",
+      title
+    }, label), /* @__PURE__ */ import_react21.default.createElement("input", __spreadValues({
+      className: "bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1 h-full overflow-ellipsis"
+    }, inputProps)));
+  }
+
+  // src/components/screens/Discord.tsx
+  function Discord({
+    settings,
+    setSettings
+  }) {
+    return /* @__PURE__ */ import_react22.default.createElement("div", {
+      className: "mt-2 flex flex-col gap-2 flex-1"
+    }, /* @__PURE__ */ import_react22.default.createElement("div", {
+      className: "flex flex-row justify-between items-center"
+    }, /* @__PURE__ */ import_react22.default.createElement("h1", {
+      className: "text-3xl"
+    }, "Discord"), /* @__PURE__ */ import_react22.default.createElement("button", {
+      className: "bg-purple-600 text-white py-1 px-5 rounded-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 justify-center text-xl mt-2",
+      onClick: () => {
+        Neutralino.os.open("https://discord.com/api/oauth2/authorize?client_id=1012331926301974558&permissions=150528&scope=bot");
+      }
+    }, /* @__PURE__ */ import_react22.default.createElement(FaEnvelope, null), " Invite Bot")), /* @__PURE__ */ import_react22.default.createElement("div", {
+      className: "flex flex-row gap-2"
+    }, /* @__PURE__ */ import_react22.default.createElement(Input, {
+      label: "Server ID",
+      placeholder: "ID...",
+      value: settings.guildId || "",
+      onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { guildId: e2.target.value }))
+    }), /* @__PURE__ */ import_react22.default.createElement(Input, {
+      label: "Channel ID",
+      placeholder: "ID...",
+      value: settings.channelId || "",
+      onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { channelId: e2.target.value }))
+    })), /* @__PURE__ */ import_react22.default.createElement("p", {
+      className: "text-sm opacity-90 text-center"
+    }, "After inviting the bot using the button above, find these IDs by:"), /* @__PURE__ */ import_react22.default.createElement("ol", {
+      className: "text-sm list-decimal max-w-md mx-auto opacity-90 -mt-1"
+    }, /* @__PURE__ */ import_react22.default.createElement("li", null, "In Discord, go to settings"), /* @__PURE__ */ import_react22.default.createElement("li", null, "Go to Appearance, Advanced, and enable Developer Mode"), /* @__PURE__ */ import_react22.default.createElement("li", null, "Right click on your Discord Server icon in the sidebar, and select Copy ID, and paste above"), /* @__PURE__ */ import_react22.default.createElement("li", null, "Do the same again but for a channel")), /* @__PURE__ */ import_react22.default.createElement("h1", {
+      className: "text-xl"
+    }, "Message Settings"), /* @__PURE__ */ import_react22.default.createElement("div", {
+      className: "flex flex-col gap-2"
+    }, /* @__PURE__ */ import_react22.default.createElement(Input, {
+      label: "Message Colour",
+      placeholder: "Hex code...",
+      value: settings.messageColour || "",
+      onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { messageColour: e2.target.value }))
+    }), /* @__PURE__ */ import_react22.default.createElement(Input, {
+      label: "Message Title",
+      placeholder: "Title...",
+      value: settings.messageTitle || "",
+      onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { messageTitle: e2.target.value }))
+    }), /* @__PURE__ */ import_react22.default.createElement(Input, {
+      label: "Message Body",
+      placeholder: "Body...",
+      value: settings.messageBody || "",
+      onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { messageBody: e2.target.value }))
+    }), /* @__PURE__ */ import_react22.default.createElement("p", {
+      className: "px-2 mb-3 opacity-90 text-sm"
+    }, "Some special keywords you can include are:"), /* @__PURE__ */ import_react22.default.createElement("div", {
+      className: "flex flex-col gap-2 -mt-3 text-sm"
+    }, /* @__PURE__ */ import_react22.default.createElement("div", {
+      className: "flex flex-row gap-2 relative"
+    }, /* @__PURE__ */ import_react22.default.createElement("div", {
+      className: "w-1/5 flex justify-end items-start"
+    }, /* @__PURE__ */ import_react22.default.createElement("em", {
+      className: "not-italic px-3 py-1 bg-gray-700 text-purple-400 rounded-md"
+    }, "$winner")), /* @__PURE__ */ import_react22.default.createElement("p", {
+      className: "flex flex-row items-center"
+    }, "Will be replaced by the winners username")), /* @__PURE__ */ import_react22.default.createElement("div", {
+      className: "flex flex-row gap-2"
+    }, /* @__PURE__ */ import_react22.default.createElement("div", {
+      className: "w-1/5 flex justify-end items-start"
+    }, /* @__PURE__ */ import_react22.default.createElement("em", {
+      className: "not-italic px-3 py-1 bg-gray-700 text-purple-400 rounded-md"
+    }, "$prize")), /* @__PURE__ */ import_react22.default.createElement("p", {
+      className: "flex flex-row items-center"
+    }, "Will be replaced by the giveaway name if there is one")), /* @__PURE__ */ import_react22.default.createElement("div", {
+      className: "flex flex-row gap-2"
+    }, /* @__PURE__ */ import_react22.default.createElement("div", {
+      className: "w-1/5 flex justify-end items-start"
+    }, /* @__PURE__ */ import_react22.default.createElement("em", {
+      className: "not-italic px-3 py-1 bg-gray-700 text-purple-400 rounded-md"
+    }, "[any text]($link)")), /* @__PURE__ */ import_react22.default.createElement("p", {
+      className: "flex flex-row items-center"
+    }, "Will be replaced by the text between the square brackets, linking to your Twitch")))));
+  }
+
   // src/App.tsx
   function App() {
-    return /* @__PURE__ */ import_react21.default.createElement(MemoryRouter, {
+    return /* @__PURE__ */ import_react23.default.createElement(MemoryRouter, {
       initialEntries: ["/setup"]
-    }, /* @__PURE__ */ import_react21.default.createElement(InnerApp, null));
+    }, /* @__PURE__ */ import_react23.default.createElement(InnerApp, null));
   }
   function InnerApp() {
     useUpdateCheck();
     const [settings, setSettings] = useStorage("settings", defaultSettings);
-    const [winners, setWinners] = import_react21.default.useState([]);
-    const [client, setClient] = import_react21.default.useState(null);
+    const [discordSettings, setDiscordSettings] = useStorage("discord", {});
+    const [winners, setWinners] = import_react23.default.useState([]);
+    const [client, setClient] = import_react23.default.useState(null);
     const [channelInfo, setChannelInfo] = useStorage("channelInfo", {}, (c2) => {
       console.info("[client][app]", c2);
       if (!c2.login)
@@ -33197,40 +35301,41 @@ to {
       if (settings.autoConnect)
         setClient((cl) => cl ? cl : init(c2));
     });
-    const updateClientInfo = import_react21.default.useCallback((d3) => {
+    const updateClientInfo = import_react23.default.useCallback((d3) => {
       console.info("[auth][client][update]", d3);
       setChannelInfo(d3);
     }, []);
     useAuthEvents(updateClientInfo);
-    import_react21.default.useEffect(() => {
+    import_react23.default.useEffect(() => {
       if (channelInfo.login) {
         if (settings.autoConnect)
           setClient((cl) => cl ? cl : init(channelInfo));
       }
     }, [channelInfo.login]);
-    const [forfeits, setForfeits] = import_react21.default.useState([]);
-    const onNewChat = import_react21.default.useCallback((chat) => {
+    const [forfeits, setForfeits] = import_react23.default.useState([]);
+    const onNewChat = import_react23.default.useCallback((chat) => {
       if (settings.forfeitCommand && chat.msg.toLowerCase().includes(settings.forfeitCommand.toLowerCase())) {
         setForfeits((f3) => f3.concat(chat.username));
       }
     }, [settings.forfeitCommand]);
-    const [chatPaused, setChatPaused] = import_react21.default.useState(false);
+    const [chatPaused, setChatPaused] = import_react23.default.useState(false);
     const [chatEvents, resetChat] = useChatEvents(chatPaused, winners, onNewChat);
-    import_react21.default.useEffect(() => {
+    import_react23.default.useEffect(() => {
       window["myApp"].setTitle(channelInfo.login, !!client);
     }, [channelInfo.login, client]);
     const [pastGiveaways, setPastGiveaways] = useStorage("past-giveaways", []);
-    return /* @__PURE__ */ import_react21.default.createElement(import_react21.default.Fragment, null, /* @__PURE__ */ import_react21.default.createElement(Header, {
+    return /* @__PURE__ */ import_react23.default.createElement(import_react23.default.Fragment, null, /* @__PURE__ */ import_react23.default.createElement(Header, {
       client,
       resetChat,
       setClient,
       channelInfo
-    }), /* @__PURE__ */ import_react21.default.createElement(Switch, null, /* @__PURE__ */ import_react21.default.createElement(Route, {
+    }), /* @__PURE__ */ import_react23.default.createElement(Switch, null, /* @__PURE__ */ import_react23.default.createElement(Route, {
       path: "/",
       exact: true
-    }, /* @__PURE__ */ import_react21.default.createElement(MainScreen, {
+    }, /* @__PURE__ */ import_react23.default.createElement(MainScreen, {
       client,
       chatEvents,
+      discordSettings,
       settings,
       setSettings,
       isConnected: !!client,
@@ -33242,29 +35347,35 @@ to {
       setWinners,
       setPastGiveaways,
       forfeits
-    })), /* @__PURE__ */ import_react21.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react23.default.createElement(Route, {
       path: "/setup",
       exact: true
-    }, /* @__PURE__ */ import_react21.default.createElement(Setup, {
+    }, /* @__PURE__ */ import_react23.default.createElement(Setup, {
       resetChat,
       setClient,
       channel: channelInfo,
       setChannel: setChannelInfo
-    })), /* @__PURE__ */ import_react21.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react23.default.createElement(Route, {
       path: "/giveaways",
       exact: true
-    }, /* @__PURE__ */ import_react21.default.createElement(PastGiveaways, {
+    }, /* @__PURE__ */ import_react23.default.createElement(PastGiveaways, {
       giveaways: pastGiveaways,
       setPastGiveaways
-    })), /* @__PURE__ */ import_react21.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react23.default.createElement(Route, {
       path: "/settings",
       exact: true
-    }, /* @__PURE__ */ import_react21.default.createElement(SettingsScreen, {
+    }, /* @__PURE__ */ import_react23.default.createElement(SettingsScreen, {
       settings,
       setSettings,
       forfeits,
       setForfeits
-    }))), /* @__PURE__ */ import_react21.default.createElement(Oe, null));
+    })), /* @__PURE__ */ import_react23.default.createElement(Route, {
+      path: "/discord",
+      exact: true
+    }, /* @__PURE__ */ import_react23.default.createElement(Discord, {
+      settings: discordSettings,
+      setSettings: setDiscordSettings
+    }))), /* @__PURE__ */ import_react23.default.createElement(Oe, null));
   }
 
   // src/index.tsx
@@ -33280,7 +35391,7 @@ to {
   Neutralino.events.on("windowClose", window["myApp"].onWindowClose);
   Neutralino.events.on("ready", () => {
     void watch();
-    import_react_dom.default.render(/* @__PURE__ */ import_react22.default.createElement(App, null), document.querySelector("#app"));
+    import_react_dom.default.render(/* @__PURE__ */ import_react24.default.createElement(App, null), document.querySelector("#app"));
   });
 })();
 /*
@@ -33293,6 +35404,26 @@ object-assign
   Licensed under the MIT License (MIT), see
   http://jedwatson.github.io/classnames
 */
+/*!
+ *  Spatial Plugin - Adds support for stereo and 3D audio where Web Audio is supported.
+ *  
+ *  howler.js v2.2.3
+ *  howlerjs.com
+ *
+ *  (c) 2013-2020, James Simpson of GoldFire Studios
+ *  goldfirestudios.com
+ *
+ *  MIT License
+ */
+/*!
+ *  howler.js v2.2.3
+ *  howlerjs.com
+ *
+ *  (c) 2013-2020, James Simpson of GoldFire Studios
+ *  goldfirestudios.com
+ *
+ *  MIT License
+ */
 /**
  * Checks if an event is supported in the current execution environment.
  *

@@ -1,11 +1,16 @@
 import React, { Dispatch, SetStateAction } from 'react'
-import { FaCheck, FaClock, FaTimes } from 'react-icons/fa'
+import { FaBell, FaBellSlash, FaCheck, FaClock, FaTimes } from 'react-icons/fa'
 import Countdown, { zeroPad } from 'react-countdown'
 import toast from 'react-hot-toast'
 import format from 'date-fns/formatDistanceStrict'
+import { Howl } from 'howler'
 import Slider, { SliderInner } from './Slider'
 import relay from '../../utils/relay'
 import { Settings } from '../../utils'
+
+const bell = new Howl({
+  src: ['sounds/pleasing-bell.ogg'],
+})
 
 const countDownRenderer = ({ hours, minutes, seconds, completed }) => {
   if (completed) {
@@ -46,14 +51,21 @@ const Time = React.memo(function Time({
   resetChat,
   chatCommand,
   channelId,
-}: { chatCommand: Props['settings']['chatCommand'] } & Pick<Props, 'channelId' | 'setChatPaused' | 'resetChat'>) {
+  timerBell,
+  setSettings,
+}: {
+  chatCommand: Props['settings']['chatCommand']
+  timerBell: Props['settings']['timerBell']
+  setSettings: Props['setSettings']
+} & Pick<Props, 'channelId' | 'setChatPaused' | 'resetChat'>) {
   const [active, setActive] = React.useState(false)
   const [value, setValue] = React.useState(ONE_MIN)
   const onComplete = React.useCallback(() => {
     toast.success('Timer finished! Chat paused, do a giveaway...', { position: 'bottom-center' })
     relay.emit('event', { type: 'timer-end', channelId, ts: new Date().toISOString() })
     setChatPaused(true)
-  }, [channelId])
+    if (timerBell) bell.play()
+  }, [channelId, timerBell])
   return active ? (
     <div className="flex-1 border border-purple-600 rounded-md flex justify-center items-center text-center relative">
       <StableCountdown value={value} onComplete={onComplete} />
@@ -80,6 +92,12 @@ const Time = React.memo(function Time({
       <div className="flex-1 justify-center items-center text-center flex">
         {format(Date.now() + value, new Date())}
       </div>
+      <button
+        className="flex justify-center items-center pr-3"
+        onClick={() => setSettings((s) => ({ ...s, timerBell: !s.timerBell }))}
+      >
+        {timerBell ? <FaBell /> : <FaBellSlash />}
+      </button>
       <button
         className="bg-purple-600 px-2 py-1 flex-0 select-none cursor-pointer flex flex-row justify-center items-center gap-1 transition-colors hover:bg-purple-700"
         onClick={() => {
@@ -166,6 +184,8 @@ export default function SettingsComponent({ channelId, settings, setSettings, se
           resetChat={() => resetChat()}
           channelId={channelId}
           chatCommand={settings.chatCommand}
+          timerBell={settings.timerBell}
+          setSettings={setSettings}
         />
       </div>
       <div className="flex flex-row gap-2 mt-2">

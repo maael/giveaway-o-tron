@@ -58,6 +58,8 @@ export const defaultSettings: Required<Settings> = {
   alertDuration: 4000,
   alertTheme: AlertTheme.GW2,
   autoAnnounce: true,
+  giveawayName: '',
+  timerBell: false,
 }
 
 export const alertThemeMap: Record<AlertTheme, string> = {

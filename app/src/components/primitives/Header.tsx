@@ -8,6 +8,7 @@ import {
   FaCheck,
   FaClock,
   FaQuestion,
+  FaDiscord,
 } from 'react-icons/fa'
 import { Link, useLocation } from 'react-router-dom'
 import toast from 'react-hot-toast'
@@ -53,6 +54,13 @@ export default function Header({
               title="Settings (blocklist etc)"
             >
               <FaCogs />
+            </div>
+          </Link>
+        )}
+        {location.pathname === '/setup' ? null : (
+          <Link to="/discord">
+            <div className="bg-purple-600 p-2 flex justify-center items-center rounded-md" title="Discord integration">
+              <FaDiscord />
             </div>
           </Link>
         )}

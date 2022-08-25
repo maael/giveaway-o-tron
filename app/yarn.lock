@@ -1638,6 +1638,11 @@
   dependencies:
     "lru-cache" "^6.0.0"
 
+"howler@^2.2.3":
+  "integrity" "sha512-QM0FFkw0LRX1PR8pNzJVAY25JhIWvbKMBFM4gqk+QdV+kPXOhleWGCB6AiAF/goGjIHK2e/nIElplvjQwhr0jg=="
+  "resolved" "https://registry.npmjs.org/howler/-/howler-2.2.3.tgz"
+  "version" "2.2.3"
+
 "hsl-regex@^1.0.0":
   "integrity" "sha1-1JMwx4ntgZ4nakwNJy3/owsY/m4="
   "resolved" "https://registry.npmjs.org/hsl-regex/-/hsl-regex-1.0.0.tgz"

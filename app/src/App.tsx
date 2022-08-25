@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import chat, { ChatItem, useChatEvents } from './chat'
@@ -8,9 +8,10 @@ import SetupScreen from './components/screens/Setup'
 import PastGiveawaysScreen from './components/screens/PastGiveaways'
 import SettingsScreen from './components/screens/Settings'
 import Header from './components/primitives/Header'
-import { ChannelInfo, defaultSettings, GiveawayResult, Settings, useAuthEvents } from './utils'
+import { ChannelInfo, defaultSettings, DiscordSettings, GiveawayResult, Settings, useAuthEvents } from './utils'
 import { WinnerUser } from './components/primitives/giveaways'
 import { useUpdateCheck } from './utils/updates'
+import Discord from './components/screens/Discord'
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
 function InnerApp() {
   useUpdateCheck()
   const [settings, setSettings] = useStorage<Settings>('settings', defaultSettings)
+  const [discordSettings, setDiscordSettings] = useStorage<DiscordSettings>('discord', {})
   const [winners, setWinners] = React.useState<WinnerUser[]>([])
   const [client, setClient] = React.useState<ReturnType<typeof chat> | null>(null)
   const [channelInfo, setChannelInfo] = useStorage<ChannelInfo>('channelInfo', {}, (c) => {
@@ -64,6 +66,7 @@ function InnerApp() {
           <MainScreen
             client={client}
             chatEvents={chatEvents}
+            discordSettings={discordSettings}
             settings={settings}
             setSettings={setSettings}
             isConnected={!!client}
@@ -85,6 +88,9 @@ function InnerApp() {
         </Route>
         <Route path="/settings" exact>
           <SettingsScreen settings={settings} setSettings={setSettings} forfeits={forfeits} setForfeits={setForfeits} />
+        </Route>
+        <Route path="/discord" exact>
+          <Discord settings={discordSettings} setSettings={setDiscordSettings} />
         </Route>
       </Switch>
       <Toaster />

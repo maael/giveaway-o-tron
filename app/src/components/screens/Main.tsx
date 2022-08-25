@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import { ChatItem } from '../../chat'
-import { Settings as TSettings, removeIdx, ChannelInfo, GiveawayResult } from '../../utils'
+import { Settings as TSettings, removeIdx, ChannelInfo, GiveawayResult, DiscordSettings } from '../../utils'
 import chat from '../../chat'
 import Settings from '../primitives/Settings'
 import { Winner, InstantGiveaway, ChatGiveaway, WinnerUser } from '../primitives/giveaways'
@@ -9,6 +9,7 @@ import formatDuration from 'date-fns/formatDuration'
 
 export default function MainScreen({
   chatEvents,
+  discordSettings,
   settings,
   setSettings,
   channelInfo,
@@ -23,6 +24,7 @@ export default function MainScreen({
 }: {
   client: ReturnType<typeof chat> | null
   chatEvents: ChatItem[]
+  discordSettings: DiscordSettings
   settings: TSettings
   setSettings: Dispatch<SetStateAction<TSettings>>
   isConnected: boolean
@@ -49,10 +51,12 @@ export default function MainScreen({
         onClear={(idx) => setWinners((w) => removeIdx(w, idx))}
         chatClient={client}
         settings={settings}
+        discordSettings={discordSettings}
         channelInfo={channelInfo}
       />
       <div className="flex flex-row gap-2">
         <InstantGiveaway
+          discordSettings={discordSettings}
           settings={settings}
           channelInfo={channelInfo}
           setWinners={setWinners}
@@ -61,6 +65,7 @@ export default function MainScreen({
           forfeits={forfeits}
         />
         <ChatGiveaway
+          discordSettings={discordSettings}
           settings={settings}
           channelInfo={channelInfo}
           chatEvents={chatEvents}

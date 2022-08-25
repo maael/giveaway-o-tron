@@ -1,5 +1,5 @@
 import { Chat, ChatItem } from '../chat'
-import { ChannelInfo, GiveawayResult, Settings } from './types'
+import { ChannelInfo, DiscordSettings, GiveawayResult, Settings } from './types'
 import { getRandomArrayItem, handleChatCommand } from './misc'
 import { getFollowers, getSubs, getViewers } from './twitch'
 import relay from './relay'
@@ -13,6 +13,7 @@ export async function getChatGiveaway(
   chatItems: ChatItem[],
   chatCommand: string,
   settings: Settings,
+  discordSettings: DiscordSettings,
   forfeits: string[]
 ): Promise<GiveawayResult['winners']> {
   const forfeitSet = new Set([...forfeits])
@@ -65,7 +66,7 @@ export async function getChatGiveaway(
     )
     if (!winner) return
     pastWinners.add(winner.username)
-    announceWinner({ chatClient, channelInfo, settings, winner: winner.username })
+    announceWinner({ chatClient, channelInfo, settings, winner: winner.username, discordSettings })
     return {
       login: winner.username,
       wasSubscriber: winner.isSubscriber,
@@ -78,6 +79,7 @@ export async function getInstantGiveaway(
   chatClient: Chat,
   channelInfo: ChannelInfo,
   settings: Settings,
+  discordSettings: DiscordSettings,
   forfeits: string[]
 ): Promise<GiveawayResult['winners']> {
   const forfeitSet = new Set([...forfeits])
@@ -125,7 +127,7 @@ export async function getInstantGiveaway(
       )
       if (!winner) return
       pastWinners.add(winner)
-      announceWinner({ chatClient, channelInfo, settings, winner })
+      announceWinner({ chatClient, channelInfo, settings, winner, discordSettings })
       return winner
     }).filter(Boolean) as string[]
   ).map((u) => ({ login: u, wasSubscriber: subsList?.has(u) ?? null, wasFollower: followersList?.has(u) ?? null }))
@@ -135,11 +137,13 @@ export interface AnnounceArgs {
   chatClient: Chat
   channelInfo: ChannelInfo
   settings: Settings
+  discordSettings: DiscordSettings
   winner: string
   force?: boolean
 }
-export function announceWinner({ chatClient, channelInfo, settings, winner, force }: AnnounceArgs) {
+export function announceWinner({ chatClient, channelInfo, settings, discordSettings, winner, force }: AnnounceArgs) {
   if (force !== true && settings.autoAnnounce !== undefined && settings.autoAnnounce === false) return
+  const colour = Number(`0x${discordSettings.messageColour?.replace('#', '')}`)
   relay.emit('event', {
     type: 'winner',
     winner,
@@ -147,6 +151,12 @@ export function announceWinner({ chatClient, channelInfo, settings, winner, forc
     login: channelInfo.login,
     alertDuration: settings.alertDuration,
     alertTheme: settings.alertTheme,
+    discordGuildId: discordSettings.guildId,
+    discordChannelId: discordSettings.channelId,
+    discordColour: isNaN(colour) ? undefined : colour,
+    discordTitle: discordSettings.messageTitle,
+    discordBody: discordSettings.messageBody,
+    giveawayName: '',
   })
   if (settings.sendMessages) {
     chatClient?.say(channelInfo.login!, settings.winnerMessage.replace('@name', `@${winner}`))

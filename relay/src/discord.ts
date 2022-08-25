@@ -40,18 +40,22 @@ export async function sendMessage(
     const channel = (await guild.channels.fetch(
       channelId
     )) as ActualChannelType;
+    const roles = await guild.roles.fetch();
+    let body = message.body
+      .replace("$winner", message.winner || "Someone")
+      .replace("$prize", message.giveawayName || "something")
+      .replace("$link", message.link);
+    roles.forEach((r: any) => {
+      if (r.name === "@everyone") return;
+      body = body.replace(`@${r.name}`, `<@&${r.id}>`);
+    });
     await channel.send({
       embeds: [
         new EmbedBuilder()
           .setColor(message.colour)
           .setTitle(message.title)
           .setURL(message.link)
-          .setDescription(
-            message.body
-              .replace("$winner", message.winner || "Someone")
-              .replace("$prize", message.giveawayName || "something")
-              .replace("$link", message.link)
-          ),
+          .setDescription(body),
       ],
     });
     console.log("[discord][message][sent]", { guildId, channelId, message });
