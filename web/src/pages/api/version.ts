@@ -1,5 +1,6 @@
 import { NextApiHandler } from 'next'
 import fetch from 'isomorphic-fetch'
+import cors from '~/functions/cors'
 
 const handler: NextApiHandler = async (_req, res) => {
   const data = await fetch('https://api.github.com/repos/maael/giveaway-o-tron/releases/latest').then((r) => r.json())
@@ -15,4 +16,4 @@ const handler: NextApiHandler = async (_req, res) => {
   })
 }
 
-export default handler
+export default cors(handler)
