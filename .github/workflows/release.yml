@@ -37,5 +37,5 @@ jobs:
           path: giveaway-o-tron
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: "./app/dist/giveaway-o-tron.zip"
+          artifacts: "./app/dist/giveaway-o-tron.zip,./app/dist/giveaway-o-tron/res.neu"
           token: ${{ secrets.GITHUB_TOKEN }}
