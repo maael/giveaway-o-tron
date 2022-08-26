@@ -104,7 +104,10 @@ export default function init(channelInfo: ChannelInfo) {
   // Called every time the bot connects to Twitch chat
   function onConnectedHandler(addr, port) {
     try {
-      toast.success('Connected to chat!', { position: 'bottom-center' })
+      toast.success('Connected to chat!', {
+        position: 'bottom-center',
+        style: { fontSize: '0.9rem', padding: '0.2rem' },
+      })
     } catch (e) {
       console.error('[error]', e)
     }

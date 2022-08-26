@@ -31880,13 +31880,13 @@ video {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-html,
-body {
-  height: 100%;
+html {
+  height: 100vh;
 }
 
 body {
   display: flex;
+  height: 100%;
   flex-direction: column;
   --tw-bg-opacity: 1;
   background-color: rgba(31, 41, 55, var(--tw-bg-opacity));

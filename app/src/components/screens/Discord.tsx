@@ -1,8 +1,10 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import { FaEnvelope } from 'react-icons/fa'
-import { DiscordSettings } from '~/utils'
+import format from 'date-fns/formatDistanceStrict'
+import { DiscordSettings, ONE_MIN } from '~/utils'
 import Checkbox from '../primitives/Checkbox'
 import Input from '../primitives/Input'
+import SliderOuter from '../primitives/Slider'
 
 export default function Discord({
   settings,
@@ -51,13 +53,23 @@ export default function Discord({
       </ol>
       <h1 className="text-xl">Message Settings</h1>
       <div className="flex flex-col gap-2 text-sm">
-        <Input
-          outerClassName="flex-2"
-          label="Message Colour"
-          placeholder="Hex code..."
-          value={settings.messageColour || ''}
-          onChange={(e) => setSettings((s) => ({ ...s, messageColour: (e.target as any).value }))}
-        />
+        <div className="flex flex-row justify-center items-center gap-6">
+          <Input
+            outerClassName="flex-1"
+            label="Message Colour"
+            placeholder="Hex code..."
+            value={settings.messageColour || ''}
+            onChange={(e) => setSettings((s) => ({ ...s, messageColour: (e.target as any).value }))}
+          />
+          <SliderOuter
+            label="Giveaway Alert Min Time"
+            value={settings.giveawayMinTime || ONE_MIN}
+            renderValue={(v) => <>{format(Date.now() + v, new Date())}</>}
+            min={ONE_MIN}
+            max={ONE_MIN * 30}
+            onChange={(v) => setSettings((s) => ({ ...s, giveawayMinTime: v }))}
+          />
+        </div>
         <div className="flex flex-row justify-center items-center gap-2">
           <div className="flex-1 bg-purple-600 px-2 py-1 text-center rounded-md">Giveaway Start:</div>
           <Input

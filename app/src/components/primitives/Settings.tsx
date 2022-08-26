@@ -55,15 +55,18 @@ const Time = React.memo(function Time({
   timerBell,
   setSettings,
   discordSettings,
+  duration,
 }: {
   chatCommand: Props['settings']['chatCommand']
   timerBell: Props['settings']['timerBell']
+  duration: Props['settings']['timerDuration']
   setSettings: Props['setSettings']
 } & Pick<Props, 'channelId' | 'setChatPaused' | 'resetChat' | 'discordSettings'>) {
   const [active, setActive] = React.useState(false)
-  const [value, setValue] = React.useState(ONE_MIN)
+  const value = duration || ONE_MIN
   const onComplete = React.useCallback(() => {
     toast.success('Timer finished! Chat paused, do a giveaway...', { position: 'bottom-center' })
+    const disabledDueToTimer = duration && discordSettings.giveawayMinTime && duration < discordSettings.giveawayMinTime
     relay.emit('event', {
       type: 'timer-end',
       channelId,
@@ -73,11 +76,11 @@ const Time = React.memo(function Time({
       discordColour: getDiscordColour(discordSettings.messageColour),
       discordTitle: discordSettings.endTitle,
       discordBody: discordSettings.endBody,
-      discordEnabled: discordSettings.endEnabled,
+      discordEnabled: disabledDueToTimer ? false : discordSettings.endEnabled,
     })
     setChatPaused(true)
     if (timerBell) bell.play()
-  }, [channelId, timerBell])
+  }, [channelId, timerBell, discordSettings, duration])
   return active ? (
     <div className="flex-1 border border-purple-600 rounded-md flex justify-center items-center text-center relative">
       <StableCountdown value={value} onComplete={onComplete} />
@@ -99,7 +102,13 @@ const Time = React.memo(function Time({
         Timer
       </div>
       <div className="px-2 flex-1 flex justify-center items-center">
-        <SliderInner min={ONE_MIN} max={ONE_MIN * 30} value={value} step={ONE_MIN} onChange={setValue} />
+        <SliderInner
+          min={ONE_MIN}
+          max={ONE_MIN * 30}
+          value={value}
+          step={ONE_MIN}
+          onChange={(v) => setSettings((s) => ({ ...s, timerDuration: v }))}
+        />
       </div>
       <div className="flex-1 justify-center items-center text-center flex">
         {format(Date.now() + value, new Date())}
@@ -117,6 +126,8 @@ const Time = React.memo(function Time({
           resetChat()
           setChatPaused(false)
           setActive(true)
+          const disabledDueToTimer =
+            duration && discordSettings.giveawayMinTime && duration < discordSettings.giveawayMinTime
           relay.emit('event', {
             type: 'timer-start',
             channelId,
@@ -127,7 +138,7 @@ const Time = React.memo(function Time({
             discordColour: getDiscordColour(discordSettings.messageColour),
             discordTitle: discordSettings.startTitle,
             discordBody: discordSettings.startBody,
-            discordEnabled: discordSettings.startEnabled,
+            discordEnabled: disabledDueToTimer ? false : discordSettings.startEnabled,
           })
         }}
         title="Warning: will clear chat"
@@ -177,7 +188,7 @@ export default function SettingsComponent({
           />
         </div>
       </div>
-      <div className="flex flex-row gap-2 mt-2">
+      <div className="flex flex-row gap-2 mt-2 text-sm">
         <div className="flex flex-1 flex-row gap-2">
           <div className="flex-1 border border-purple-600 rounded-md flex relative">
             <div
@@ -218,9 +229,10 @@ export default function SettingsComponent({
           timerBell={settings.timerBell}
           setSettings={setSettings}
           discordSettings={discordSettings}
+          duration={settings.timerDuration}
         />
       </div>
-      <div className="flex flex-row gap-2 mt-2">
+      <div className="flex flex-row gap-2 mt-2 text-sm">
         <Slider
           label="Sub Luck"
           title="Will enter subscribers this amount of times into the giveaways"

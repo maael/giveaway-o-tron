@@ -110,7 +110,7 @@ export default function ChatBox({
   return (
     <>
       <div className="mt-2 rounded-md bg-gray-700 flex-1 flex flex-col relative overflow-hidden">
-        <div className="bg-gray-600 absolute top-0 right-0 left-0 h-8 gap-2 flex justify-between px-5 items-center text-white z-50">
+        <div className="bg-gray-600 h-8 gap-2 flex justify-between px-5 items-center text-white z-50">
           <div className="flex flex-row justify-center items-center flex-1 text-xs">
             <div
               className="flex-0 bg-purple-600 px-2 py-1.5 border border-purple-600 rounded-l-md"
@@ -139,7 +139,7 @@ export default function ChatBox({
             ) : null}
           </div>
           <div className="flex flex-row justify-center items-center gap-2 text-xl flex-2">
-            <div className="text-xs">{messageDelay}</div>
+            <div className="text-xs text-center">{messageDelay}</div>
             <button
               className={cls(
                 'text-xs flex justify-center items-center gap-1 border border-purple-600 px-2 py-1 rounded-md',
@@ -156,12 +156,12 @@ export default function ChatBox({
         </div>
         <div className="relative flex-1">
           {chatEvents.length === 0 ? (
-            <span className={cls('relative left-2 top-9')}>Logs will appear here...</span>
+            <span className={cls('absolute inset-0 text-center flex justify-center items-center')}>
+              Logs will appear here...
+            </span>
           ) : (
             <div
-              className={cls(
-                'absolute right-0 left-0 bottom-0 overflow-y-scroll px-2 pt-1 pb-3 flex flex-col gap-1 top-8'
-              )}
+              className={cls('absolute overflow-y-auto inset-0 px-2 pt-1 pb-3 flex flex-col gap-1 h-full')}
               ref={chatRef}
             >
               {searchedMessages.map((c) => {
@@ -169,9 +169,10 @@ export default function ChatBox({
                   <div key={c.id}>
                     <span className="text-xs">[{c.formattedTmiTs}]</span>
                     <span
-                      className={cls('rounded-full bg-gray-300 h-4 w-4 inline-block mx-1 relative top-1', {
+                      className={cls('rounded-full bg-gray-300 h-4 w-4 inline-block mx-1 relative', {
                         'bg-yellow-500': c.isSubscriber,
                         'bg-purple-600': c.isMod,
+                        'top-1': !c.isSubscriber && !c.isMod,
                       })}
                     >
                       {c.isMod ? (

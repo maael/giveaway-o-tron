@@ -16,6 +16,7 @@ export interface Settings {
   autoAnnounce?: boolean
   timerBell?: boolean
   giveawayName?: string
+  timerDuration?: number
 }
 
 export interface DiscordSettings {
@@ -31,6 +32,7 @@ export interface DiscordSettings {
   winnerTitle?: string
   winnerBody?: string
   winnerEnabled?: boolean
+  giveawayMinTime?: number
 }
 
 export enum AlertTheme {
@@ -64,6 +66,13 @@ export enum GiveawayType {
 
 export interface GiveawayResult {
   settings: Omit<Settings, 'autoScroll' | 'autoConnect'>
+  giveawayStats?: {
+    users: number
+    followers: number
+    subs: number
+    finalEntries: number
+    entries: number
+  }
   winners: {
     login: string
     wasSubscriber: boolean | null

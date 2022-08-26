@@ -36,7 +36,7 @@ export default function SettingsScreen({
         </div>
         <div className="grid grid-cols-4 gap-2 text-sm">
           {(settings.blocklist || []).map((u, i) => (
-            <div className="relative flex-1" key={u}>
+            <div className="relative flex-1" key={i}>
               <input
                 className="bg-gray-700 px-2 py-1 rounded-md border-b border-purple-500 w-full overflow-ellipsis"
                 placeholder="Name..."

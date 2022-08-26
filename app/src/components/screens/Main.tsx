@@ -1,11 +1,12 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import { ChatItem } from '../../chat'
-import { Settings as TSettings, removeIdx, ChannelInfo, GiveawayResult, DiscordSettings } from '../../utils'
+import { Settings as TSettings, removeIdx, ChannelInfo, GiveawayResult, DiscordSettings, CacheStats } from '../../utils'
 import chat from '../../chat'
 import Settings from '../primitives/Settings'
 import { Winner, InstantGiveaway, ChatGiveaway, WinnerUser } from '../primitives/giveaways'
 import ChatBox, { ChatControls } from '../primitives/ChatBox'
 import formatDuration from 'date-fns/formatDuration'
+import Stats from '../primitives/Stats'
 
 export default function MainScreen({
   chatEvents,
@@ -21,6 +22,7 @@ export default function MainScreen({
   setWinners,
   setPastGiveaways,
   forfeits,
+  stats,
 }: {
   client: ReturnType<typeof chat> | null
   chatEvents: ChatItem[]
@@ -36,16 +38,17 @@ export default function MainScreen({
   setWinners: Dispatch<SetStateAction<WinnerUser[]>>
   setPastGiveaways: Dispatch<SetStateAction<GiveawayResult[]>>
   forfeits: string[]
+  stats: CacheStats
 }) {
   const messageDelay = React.useMemo(() => {
     const mostRecent = chatEvents[chatEvents.length - 1]
-    if (!mostRecent) return '0 seconds delay'
+    if (!mostRecent) return '0s delay'
     return `~${formatDuration({
-      seconds: (mostRecent.receivedTs - mostRecent.tmiTs) / 1000,
-    })} delay`
+      seconds: Number(((mostRecent.receivedTs - mostRecent.tmiTs) / 1000).toFixed(2)),
+    }).replace(' seconds', 's')} delay`
   }, [chatEvents])
   return (
-    <>
+    <div className="flex flex-col flex-1" style={{ height: '100vh' }}>
       <Winner
         winners={winners}
         onClear={(idx) => setWinners((w) => removeIdx(w, idx))}
@@ -103,6 +106,7 @@ export default function MainScreen({
           setSettings={setSettings}
         />
       )}
-    </>
+      <Stats stats={stats} />
+    </div>
   )
 }

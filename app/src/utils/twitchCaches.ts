@@ -48,7 +48,12 @@ export default async function watch() {
 
 async function startPollingData(channelInfo: ChannelInfo, first: boolean = false) {
   await Promise.all([getFollowers(channelInfo), getSubs(channelInfo)])
-  toast.success(`${first ? 'Finished Twitch caches, ready' : 'Updated'}!`, { position: 'bottom-right' })
+  toast.success(`${first ? 'Loaded initial data, ready' : 'Updated'}!`, {
+    position: 'bottom-right',
+    style: { fontSize: '0.8rem', padding: '0.2rem' },
+    duration: 3000,
+  })
+  console.info('[poll][done]')
   await wait(60_000 * 5)
   await startPollingData(channelInfo)
 }

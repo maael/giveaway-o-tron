@@ -2474,11 +2474,11 @@
       if (true) {
         (function() {
           "use strict";
-          var React22 = require_react();
+          var React24 = require_react();
           var _assign = require_object_assign();
           var Scheduler = require_scheduler();
           var tracing = require_tracing();
-          var ReactSharedInternals = React22.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React24.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function warn(format2) {
             {
               for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -2510,7 +2510,7 @@
               Function.prototype.apply.call(console[level], console, argsWithFormat);
             }
           }
-          if (!React22) {
+          if (!React24) {
             {
               throw Error("ReactDOM was loaded before React. Make sure you load the React package before loading ReactDOM.");
             }
@@ -3726,7 +3726,7 @@
           var didWarnInvalidChild = false;
           function flattenChildren(children) {
             var content = "";
-            React22.Children.forEach(children, function(child) {
+            React24.Children.forEach(children, function(child) {
               if (child == null) {
                 return;
               }
@@ -3737,7 +3737,7 @@
           function validateProps(element2, props) {
             {
               if (typeof props.children === "object" && props.children !== null) {
-                React22.Children.forEach(props.children, function(child) {
+                React24.Children.forEach(props.children, function(child) {
                   if (child == null) {
                     return;
                   }
@@ -10930,7 +10930,7 @@
           }
           var fakeInternalInstance = {};
           var isArray = Array.isArray;
-          var emptyRefsObject = new React22.Component().refs;
+          var emptyRefsObject = new React24.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -26038,7 +26038,7 @@ ${JSON.stringify(message, null, 4)}`);
         return to.concat(ar || Array.prototype.slice.call(from));
       };
       Object.defineProperty(exports, "__esModule", { value: true });
-      var React22 = __importStar(require_react());
+      var React24 = __importStar(require_react());
       var utils_1 = require_utils2();
       var types_1 = require_types();
       var INCREASE_KEYS = ["ArrowRight", "ArrowUp", "k", "PageUp"];
@@ -26047,7 +26047,7 @@ ${JSON.stringify(message, null, 4)}`);
         __extends(Range3, _super);
         function Range3(props) {
           var _this = _super.call(this, props) || this;
-          _this.trackRef = React22.createRef();
+          _this.trackRef = React24.createRef();
           _this.thumbRefs = [];
           _this.state = {
             draggedTrackPos: [-1, -1],
@@ -26365,7 +26365,7 @@ ${JSON.stringify(message, null, 4)}`);
             _this.numOfMarks = (props2.max - props2.min) / _this.props.step;
             _this.markRefs = [];
             for (var i3 = 0; i3 < _this.numOfMarks + 1; i3++) {
-              _this.markRefs[i3] = React22.createRef();
+              _this.markRefs[i3] = React24.createRef();
             }
           };
           _this.calculateMarkOffsets = function() {
@@ -26406,7 +26406,7 @@ ${JSON.stringify(message, null, 4)}`);
           _this.schdOnTouchMove = (0, utils_1.schd)(_this.onTouchMove);
           _this.schdOnEnd = (0, utils_1.schd)(_this.onEnd);
           _this.thumbRefs = props.values.map(function() {
-            return React22.createRef();
+            return React24.createRef();
           });
           _this.updateMarkRefs(props);
           return _this;
@@ -26546,7 +26546,7 @@ ${JSON.stringify(message, null, 4)}`);
           max: 100
         };
         return Range3;
-      }(React22.Component);
+      }(React24.Component);
       exports.default = Range2;
     }
   });
@@ -26633,11 +26633,11 @@ ${JSON.stringify(message, null, 4)}`);
   });
 
   // src/index.tsx
-  var import_react25 = __toModule(require_react());
+  var import_react27 = __toModule(require_react());
   var import_react_dom = __toModule(require_react_dom());
 
   // src/App.tsx
-  var import_react24 = __toModule(require_react());
+  var import_react26 = __toModule(require_react());
 
   // node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js
   function _setPrototypeOf(o2, p2) {
@@ -30776,7 +30776,10 @@ to {
     }
     function onConnectedHandler(addr, port) {
       try {
-        Et.success("Connected to chat!", { position: "bottom-center" });
+        Et.success("Connected to chat!", {
+          position: "bottom-center",
+          style: { fontSize: "0.9rem", padding: "0.2rem" }
+        });
       } catch (e2) {
         console.error("[error]", e2);
       }
@@ -30844,7 +30847,7 @@ to {
   }
 
   // src/components/screens/Main.tsx
-  var import_react16 = __toModule(require_react());
+  var import_react18 = __toModule(require_react());
 
   // src/utils/types.ts
   var AlertTheme;
@@ -30858,6 +30861,7 @@ to {
   })(GiveawayType || (GiveawayType = {}));
 
   // src/utils/misc.ts
+  var ONE_MIN = 1e3 * 60;
   function removeIdx(ar, idx) {
     return ar.slice(0, idx).concat(ar.slice(idx + 1));
   }
@@ -30902,7 +30906,8 @@ to {
     alertTheme: AlertTheme.GW2,
     autoAnnounce: true,
     giveawayName: "",
-    timerBell: false
+    timerBell: false,
+    timerDuration: ONE_MIN
   };
   var alertThemeMap = {
     [AlertTheme.GW2]: "Guild Wars 2"
@@ -31029,13 +31034,43 @@ to {
   }
   async function startPollingData(channelInfo, first = false) {
     await Promise.all([getFollowers(channelInfo), getSubs(channelInfo)]);
-    Et.success(`${first ? "Finished Twitch caches, ready" : "Updated"}!`, { position: "bottom-right" });
+    Et.success(`${first ? "Loaded initial data, ready" : "Updated"}!`, {
+      position: "bottom-right",
+      style: { fontSize: "0.8rem", padding: "0.2rem" },
+      duration: 3e3
+    });
+    console.info("[poll][done]");
     await wait(6e4 * 5);
     await startPollingData(channelInfo);
   }
 
   // src/utils/twitch.ts
+  var import_react9 = __toModule(require_react());
   var BOTS = ["streamelements", "streamlabs", "nightbot"];
+  var CacheEvents = class extends EventTarget {
+    emit(data) {
+      this.dispatchEvent(new CustomEvent("update", { detail: data }));
+    }
+  };
+  var cacheEmitter = new CacheEvents();
+  function useCacheStats() {
+    const [stats, setStats] = import_react9.default.useState({
+      followers: { count: 0, total: 0, status: "inprogress" },
+      subs: { count: 0, total: 0, status: "inprogress" }
+    });
+    import_react9.default.useEffect(() => {
+      function handle(e2) {
+        const data = e2.detail;
+        console.info("[cache:event]", data);
+        setStats((s2) => __spreadProps(__spreadValues({}, s2), { [data.type]: { count: data.count, total: data.total, status: data.status } }));
+      }
+      cacheEmitter.addEventListener("update", handle);
+      return () => {
+        cacheEmitter.removeEventListener("update", handle);
+      };
+    }, [setStats]);
+    return stats;
+  }
   async function callTwitchApi(channelInfo, path, isRefresh = false) {
     const res = await fetch(`https://api.twitch.tv/helix/${path}`, {
       headers: {
@@ -31074,6 +31109,7 @@ to {
     const wasInitialized = !!initialized[type];
     const shouldToast = dumbCache.size === 0 && !initialized[type];
     initialized[type] = true;
+    let total = 0;
     try {
       let cursor = "";
       let cache3 = new Cache(channelInfo.login, cacheKey);
@@ -31082,9 +31118,11 @@ to {
         console.info(`[${type}][existing]`, existingCache.size);
         dumbCache = new Map([...existingCache]);
       }
-      let percentThresholdTotal = 0;
       if (shouldToast) {
-        Et.success(`Loading basic ${type} cache...`, { position: "bottom-right" });
+        Et.success(`Loading ${type}...`, {
+          position: "bottom-right",
+          style: { fontSize: "0.8rem", padding: "0.2rem" }
+        });
       }
       do {
         const data = await callTwitchApi(channelInfo, `${path}${channelInfo.userId}&first=100&after=${cursor}`).then((r) => r.json());
@@ -31103,7 +31141,6 @@ to {
         const actualSize = dumbCache.size / 2;
         const foundSeenPages = chunkInCachePercent > 0.5;
         const rightTotalish = actualSize >= data.total;
-        const isCatchingUp = foundSeenPages && !rightTotalish;
         if (foundSeenPages && !wasInitialized && rightTotalish || foundSeenPages && wasInitialized) {
           console.info(`[${type}]`, "[caught-up]", { chunkInCachePercent, newItems: data.total - originalActualSize });
           break;
@@ -31112,34 +31149,26 @@ to {
           throw Error("This is nonsense");
         }
         cursor = data.pagination.cursor;
-        const percentThreshold = Math.floor(actualSize / data.total * 100 / 10);
-        const percent = (actualSize / data.total * 100).toFixed(0);
-        const timeEstimate = `~${(data.total - actualSize) / 100 * 400 / 1e3}s remaining`;
-        if (percentThreshold !== percentThresholdTotal) {
-          percentThresholdTotal = percentThreshold;
-          if (shouldToast) {
-            if (isCatchingUp) {
-              Et.success(`Basic ${type} cache catching up, was at ${percent}% done`, {
-                position: "bottom-right"
-              });
-            } else {
-              Et.success(`Basic ${type} cache ${percent}% done, ${timeEstimate}`, {
-                position: "bottom-right"
-              });
-            }
-          }
-        }
-        console.info(`[${type}]`, `${percent}%`, timeEstimate);
+        total = data.total;
+        cacheEmitter.emit({ type, total, count: Math.floor(dumbCache.size / 2), status: "inprogress" });
         if (cursor)
           await wait(100);
       } while (cursor);
       if (shouldToast)
-        Et.success(`Basic ${type} cache done!`, { position: "bottom-right" });
+        Et.success(`Loaded ${type}!`, {
+          position: "bottom-right",
+          style: { fontSize: "0.8rem", padding: "0.2rem" }
+        });
+      cacheEmitter.emit({ type, total, count: Math.floor(dumbCache.size / 2), status: "done" });
       return dumbCache;
     } catch (e2) {
       console.error(`[${type}]`, e2);
+      cacheEmitter.emit({ type, total, count: Math.floor(dumbCache.size / 2), status: "error" });
       if (shouldToast)
-        Et.error(`Failed to load basic ${type} cache!`, { position: "bottom-right" });
+        Et.error(`Failed to load ${type}!`, {
+          position: "bottom-right",
+          style: { fontSize: "0.8rem", padding: "0.2rem" }
+        });
       return dumbCache;
     }
   }
@@ -33367,18 +33396,52 @@ to {
 
   // src/utils/giveaways.ts
   var pastWinners = new Set();
+  function prepareStats() {
+    const stats = {
+      users: 0,
+      followers: 0,
+      subs: 0,
+      finalEntries: 0,
+      entries: 0,
+      toast: () => {
+      },
+      data: () => {
+        return {};
+      }
+    };
+    stats.toast = function() {
+      Et.success(`${stats.users} users, ${stats.subs} subs, ${stats.followers} followers, ${stats.finalEntries} entries`, {
+        position: "bottom-center",
+        style: { fontSize: "1rem", padding: "0.2rem" }
+      });
+    };
+    stats.data = function() {
+      return {
+        users: stats.users,
+        followers: stats.followers,
+        subs: stats.subs,
+        finalEntries: stats.finalEntries,
+        entries: stats.entries
+      };
+    };
+    return stats;
+  }
   async function getChatGiveaway(chatClient, channelInfo, chatItems, chatCommand, settings, discordSettings, forfeits) {
     const forfeitSet = new Set([...forfeits]);
+    const giveawayUserStats = prepareStats();
     console.info("[giveaway][chat][start]");
     let subCount = 0;
     let subEntries = 0;
-    let followers;
-    const chatCommandEvents = chatItems.filter((c2) => handleChatCommand(c2, chatCommand));
+    const nonblockedChatItems = chatItems.filter((u3) => !settings.blocklist.map((b2) => b2.trim()).includes(u3.displayName) && !settings.blocklist.map((b2) => b2.trim()).includes(u3.username));
+    const chatCommandEvents = nonblockedChatItems.filter((c2) => handleChatCommand(c2, chatCommand));
+    giveawayUserStats.entries = chatCommandEvents.length;
     const spamCounts = chatCommandEvents.reduce((acc, u3) => {
       acc.set(u3.username, (acc.get(u3.username) || 0) + 1);
       return acc;
     }, new Map());
-    let users = chatCommandEvents.reduce((acc, c2) => acc.some((i3) => i3.username === c2.username) ? acc : acc.concat(c2), []).filter((i3) => {
+    let users = chatCommandEvents.reduce((acc, c2) => acc.some((i3) => i3.username === c2.username) ? acc : acc.concat(c2), []);
+    giveawayUserStats.users = users.length;
+    users = users.filter((i3) => {
       if (!settings.chatCommand)
         return true;
       if (!settings.spamLimit || settings.spamLimit === 1)
@@ -33388,7 +33451,15 @@ to {
         return;
       const didSpam = count > settings.spamLimit;
       return !didSpam;
-    }).flatMap((c2) => {
+    });
+    const followers = await getFollowers(channelInfo);
+    const filteredFollowers = users.filter((u3) => followers.has(u3.username));
+    giveawayUserStats.followers = filteredFollowers.length;
+    if (settings.followersOnly) {
+      users = filteredFollowers;
+    }
+    giveawayUserStats.subs = users.filter((u3) => u3.isSubscriber).length;
+    users = users.flatMap((c2) => {
       if (c2.isSubscriber) {
         subCount += 1;
         subEntries += settings.subLuck;
@@ -33396,77 +33467,101 @@ to {
       }
       return c2;
     });
-    if (settings.followersOnly) {
-      followers = await getFollowers(channelInfo);
-      users = users.filter((u3) => followers.has(u3.username));
-    }
-    Et.success(`${subCount} sub${subCount === 1 ? "" : "s"} in giveaway, with ${subEntries} tickets`, {
-      position: "bottom-center"
-    });
+    giveawayUserStats.finalEntries = users.length;
+    giveawayUserStats.toast();
     console.info("[giveaway][chat][end]");
-    return Array.from({ length: settings.numberOfWinners }, () => {
-      const winner = getRandomArrayItem(users.filter((u3) => !pastWinners.has(u3.username) && !forfeitSet.has(u3.username)).filter((u3) => !settings.blocklist.map((b2) => b2.trim()).includes(u3.displayName) && !settings.blocklist.map((b2) => b2.trim()).includes(u3.username)));
+    const winners = Array.from({ length: settings.numberOfWinners }, () => {
+      const winner = getRandomArrayItem(users.filter((u3) => !pastWinners.has(u3.username) && !forfeitSet.has(u3.username)));
       if (!winner)
         return;
       pastWinners.add(winner.username);
-      announceWinner({ chatClient, channelInfo, settings, winner: winner.username, discordSettings });
+      announceWinner({
+        giveawayType: "chat",
+        chatClient,
+        channelInfo,
+        settings,
+        winner: winner.username,
+        discordSettings
+      });
       return {
         login: winner.username,
         wasSubscriber: winner.isSubscriber,
-        wasFollower: followers == null ? void 0 : followers.has(winner.username)
+        wasFollower: followers == null ? void 0 : followers.has(winner.username),
+        source: "chat"
       };
     }).filter(Boolean);
+    return {
+      winners,
+      giveawayStats: giveawayUserStats.data()
+    };
   }
   async function getInstantGiveaway(chatClient, channelInfo, settings, discordSettings, forfeits) {
     const forfeitSet = new Set([...forfeits]);
+    const giveawayUserStats = prepareStats();
     console.info("[giveaway][instant][start]");
     let viewers = await getViewers(channelInfo);
-    let subCount = 0;
-    let subEntries = 0;
-    let subsList, followersList;
+    viewers = viewers.filter((u3) => !settings.blocklist.map((b2) => b2.trim()).includes(u3));
     console.info({ viewers: viewers.length });
+    const [followersList, subsList] = await Promise.all([getFollowers(channelInfo), getSubs(channelInfo)]);
+    giveawayUserStats.users = viewers.length;
+    giveawayUserStats.entries = viewers.length;
+    let mappedViewers = viewers.map((v2) => ({
+      login: v2,
+      follows: followersList.has(v2),
+      isSubscriber: subsList.has(v2),
+      source: "instant"
+    }));
+    let filteredFollowers = mappedViewers.filter((v2) => v2.follows);
+    let filteredSubs = mappedViewers.filter((v2) => v2.isSubscriber);
+    giveawayUserStats.followers = filteredFollowers.length;
+    giveawayUserStats.subs = filteredSubs.length;
     if (settings.followersOnly) {
-      const [followersListMap, subsListMap] = await Promise.all([getFollowers(channelInfo), getSubs(channelInfo)]);
-      followersList = followersListMap;
-      subsList = subsListMap;
-      const combined = viewers.filter((v2) => followersList.has(v2)).map((u3) => {
-        return {
-          login: u3,
-          follows: true,
-          isSubscriber: subsList.has(u3)
-        };
-      });
-      console.info("[giveaway][instant]", { followers: combined.length });
-      viewers = combined.flatMap((c2) => {
-        if (c2.isSubscriber) {
-          subCount += 1;
-          subEntries += settings.subLuck;
-          return Array.from({ length: settings.subLuck }, () => c2);
-        }
-        return c2;
-      }).map((i3) => i3.login);
+      mappedViewers = filteredFollowers;
     }
-    Et.success(`${subCount} sub${subCount === 1 ? "" : "s"} in giveaway, with ${subEntries} tickets`, {
-      position: "bottom-center"
-    });
+    viewers = mappedViewers.flatMap((c2) => {
+      if (c2.isSubscriber) {
+        return Array.from({ length: settings.subLuck }, () => c2);
+      }
+      return c2;
+    }).map((i3) => i3.login);
+    giveawayUserStats.finalEntries = viewers.length;
+    console.info("[giveaway][instant]", giveawayUserStats);
+    giveawayUserStats.toast();
     console.info("[giveaway][instant][end]");
-    return Array.from({ length: settings.numberOfWinners }, () => {
-      const winner = getRandomArrayItem(viewers.filter((u3) => !pastWinners.has(u3) && !forfeitSet.has(u3)).filter((u3) => !settings.blocklist.map((b2) => b2.trim()).includes(u3)));
+    const winners = Array.from({ length: settings.numberOfWinners }, () => {
+      const winner = getRandomArrayItem(mappedViewers.filter((u3) => !pastWinners.has(u3.login) && !forfeitSet.has(u3.login)));
       if (!winner)
         return;
-      pastWinners.add(winner);
-      announceWinner({ chatClient, channelInfo, settings, winner, discordSettings });
-      return winner;
-    }).filter(Boolean).map((u3) => {
-      var _a, _b;
-      return { login: u3, wasSubscriber: (_a = subsList == null ? void 0 : subsList.has(u3)) != null ? _a : null, wasFollower: (_b = followersList == null ? void 0 : followersList.has(u3)) != null ? _b : null };
-    });
+      pastWinners.add(winner.login);
+      announceWinner({
+        giveawayType: "instant",
+        chatClient,
+        channelInfo,
+        settings,
+        winner: winner.login,
+        discordSettings
+      });
+      return winner.login ? { login: winner.login, wasSubscriber: winner.isSubscriber, wasFollower: winner.follows } : void 0;
+    }).filter(Boolean);
+    return {
+      winners,
+      giveawayStats: giveawayUserStats.data()
+    };
   }
-  function announceWinner({ chatClient, channelInfo, settings, discordSettings, winner, force }) {
+  function announceWinner({
+    giveawayType,
+    chatClient,
+    channelInfo,
+    settings,
+    discordSettings,
+    winner,
+    force
+  }) {
     if (force !== true && settings.autoAnnounce !== void 0 && settings.autoAnnounce === false)
       return;
+    const discordTimerNotAllowed = giveawayType === "chat" && discordSettings.giveawayMinTime && settings.timerDuration && settings.timerDuration < discordSettings.giveawayMinTime;
     const colour = getDiscordColour(discordSettings.messageColour);
-    relay_default.emit("event", {
+    const eventData = {
       type: "winner",
       winner,
       channelId: channelInfo.userId,
@@ -33478,22 +33573,24 @@ to {
       discordColour: colour,
       discordTitle: discordSettings.winnerTitle,
       discordBody: discordSettings.winnerBody,
-      discordEnabled: discordSettings.winnerEnabled,
+      discordEnabled: discordTimerNotAllowed ? false : discordSettings.winnerEnabled,
       giveawayName: ""
-    });
+    };
+    console.info("[relay][event]", eventData);
+    relay_default.emit("event", eventData);
     if (settings.sendMessages) {
       chatClient == null ? void 0 : chatClient.say(channelInfo.login, settings.winnerMessage.replace("@name", `@${winner}`));
     }
   }
 
   // src/components/primitives/Settings.tsx
-  var import_react13 = __toModule(require_react());
+  var import_react14 = __toModule(require_react());
 
   // node_modules/react-icons/lib/esm/iconBase.js
-  var import_react10 = __toModule(require_react());
+  var import_react11 = __toModule(require_react());
 
   // node_modules/react-icons/lib/esm/iconContext.js
-  var import_react9 = __toModule(require_react());
+  var import_react10 = __toModule(require_react());
   var DefaultContext = {
     color: void 0,
     size: void 0,
@@ -33501,7 +33598,7 @@ to {
     style: void 0,
     attr: void 0
   };
-  var IconContext = import_react9.default.createContext && import_react9.default.createContext(DefaultContext);
+  var IconContext = import_react10.default.createContext && import_react10.default.createContext(DefaultContext);
 
   // node_modules/react-icons/lib/esm/iconBase.js
   var __assign = function() {
@@ -33530,14 +33627,14 @@ to {
   };
   function Tree2Element(tree) {
     return tree && tree.map(function(node, i3) {
-      return import_react10.default.createElement(node.tag, __assign({
+      return import_react11.default.createElement(node.tag, __assign({
         key: i3
       }, node.attr), Tree2Element(node.child));
     });
   }
   function GenIcon(data) {
     return function(props) {
-      return import_react10.default.createElement(IconBase, __assign({
+      return import_react11.default.createElement(IconBase, __assign({
         attr: __assign({}, data.attr)
       }, props), Tree2Element(data.child));
     };
@@ -33551,7 +33648,7 @@ to {
         className = conf.className;
       if (props.className)
         className = (className ? className + " " : "") + props.className;
-      return import_react10.default.createElement("svg", __assign({
+      return import_react11.default.createElement("svg", __assign({
         stroke: "currentColor",
         fill: "currentColor",
         strokeWidth: "0"
@@ -33563,9 +33660,9 @@ to {
         height: computedSize,
         width: computedSize,
         xmlns: "http://www.w3.org/2000/svg"
-      }), title && import_react10.default.createElement("title", null, title), props.children);
+      }), title && import_react11.default.createElement("title", null, title), props.children);
     };
-    return IconContext !== void 0 ? import_react10.default.createElement(IconContext.Consumer, null, function(conf) {
+    return IconContext !== void 0 ? import_react11.default.createElement(IconContext.Consumer, null, function(conf) {
       return elem(conf);
     }) : elem(DefaultContext);
   }
@@ -33589,6 +33686,9 @@ to {
   function FaBullhorn(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 576 512" }, "child": [{ "tag": "path", "attr": { "d": "M576 240c0-23.63-12.95-44.04-32-55.12V32.01C544 23.26 537.02 0 512 0c-7.12 0-14.19 2.38-19.98 7.02l-85.03 68.03C364.28 109.19 310.66 128 256 128H64c-35.35 0-64 28.65-64 64v96c0 35.35 28.65 64 64 64h33.7c-1.39 10.48-2.18 21.14-2.18 32 0 39.77 9.26 77.35 25.56 110.94 5.19 10.69 16.52 17.06 28.4 17.06h74.28c26.05 0 41.69-29.84 25.9-50.56-16.4-21.52-26.15-48.36-26.15-77.44 0-11.11 1.62-21.79 4.41-32H256c54.66 0 108.28 18.81 150.98 52.95l85.03 68.03a32.023 32.023 0 0 0 19.98 7.02c24.92 0 32-22.78 32-32V295.13C563.05 284.04 576 263.63 576 240zm-96 141.42l-33.05-26.44C392.95 311.78 325.12 288 256 288v-96c69.12 0 136.95-23.78 190.95-66.98L480 98.58v282.84z" } }] })(props);
   }
+  function FaCheckCircle(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" } }] })(props);
+  }
   function FaCheck(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" } }] })(props);
   }
@@ -33603,6 +33703,9 @@ to {
   }
   function FaEnvelope(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z" } }] })(props);
+  }
+  function FaExclamationCircle(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zm-248 50c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z" } }] })(props);
   }
   function FaExclamationTriangle(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 576 512" }, "child": [{ "tag": "path", "attr": { "d": "M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z" } }] })(props);
@@ -33631,6 +33734,9 @@ to {
   function FaSearch(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" } }] })(props);
   }
+  function FaSpinner(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49 0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156 0c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.49-48-48-48zM108.922 60.922c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.491-48-48-48z" } }] })(props);
+  }
   function FaTimesCircle(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z" } }] })(props);
   }
@@ -33639,7 +33745,7 @@ to {
   }
 
   // node_modules/react-countdown/dist/index.es.js
-  var import_react11 = __toModule(require_react());
+  var import_react12 = __toModule(require_react());
   var import_prop_types4 = __toModule(require_prop_types());
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -33873,13 +33979,13 @@ to {
     }, {
       key: "render",
       value: function render() {
-        return this.props.children ? (0, import_react11.cloneElement)(this.props.children, {
+        return this.props.children ? (0, import_react12.cloneElement)(this.props.children, {
           count: this.state.count
         }) : null;
       }
     }]);
     return Countdown2;
-  }(import_react11.Component);
+  }(import_react12.Component);
   Countdown.propTypes = {
     count: import_prop_types4.number,
     children: import_prop_types4.element,
@@ -33897,7 +34003,7 @@ to {
       _this.offsetStartTimestamp = _this.props.autoStart ? 0 : _this.initialTimestamp;
       _this.offsetTime = 0;
       _this.legacyMode = false;
-      _this.legacyCountdownRef = (0, import_react11.createRef)();
+      _this.legacyCountdownRef = (0, import_react12.createRef)();
       _this.tick = function() {
         var timeDelta2 = _this.calcTimeDelta();
         var callback = timeDelta2.completed && !_this.props.overtime ? void 0 : _this.props.onTick;
@@ -34088,7 +34194,7 @@ to {
       value: function render() {
         if (this.legacyMode) {
           var _this$props3 = this.props, count = _this$props3.count, _children = _this$props3.children, onComplete = _this$props3.onComplete;
-          return (0, import_react11.createElement)(Countdown, {
+          return (0, import_react12.createElement)(Countdown, {
             ref: this.legacyCountdownRef,
             count,
             onComplete
@@ -34100,18 +34206,18 @@ to {
           return renderer(renderProps);
         }
         if (children && this.state.timeDelta.completed && !overtime) {
-          return (0, import_react11.cloneElement)(children, {
+          return (0, import_react12.cloneElement)(children, {
             countdown: renderProps
           });
         }
         var _renderProps$formatte = renderProps.formatted, days = _renderProps$formatte.days, hours = _renderProps$formatte.hours, minutes = _renderProps$formatte.minutes, seconds = _renderProps$formatte.seconds;
-        return (0, import_react11.createElement)("span", {
+        return (0, import_react12.createElement)("span", {
           className
         }, renderProps.total < 0 ? "-" : "", days, days ? ":" : "", hours, ":", minutes, ":", seconds);
       }
     }]);
     return Countdown$12;
-  }(import_react11.Component);
+  }(import_react12.Component);
   Countdown$1.defaultProps = Object.assign(Object.assign({}, timeDeltaFormatOptionsDefaults), {
     controlled: false,
     intervalDelay: 1e3,
@@ -34145,34 +34251,34 @@ to {
   var import_howler = __toModule(require_howler());
 
   // src/components/primitives/Slider.tsx
-  var import_react12 = __toModule(require_react());
+  var import_react13 = __toModule(require_react());
   var import_react_range = __toModule(require_lib());
   var ONE_S = 1e3;
   function SliderOuter(props) {
-    return /* @__PURE__ */ import_react12.default.createElement("div", {
+    return /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
-    }, /* @__PURE__ */ import_react12.default.createElement("div", {
+    }, /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",
       title: props.title
-    }, props.label), /* @__PURE__ */ import_react12.default.createElement("div", {
+    }, props.label), /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "px-2 flex-1 flex justify-center items-center"
-    }, /* @__PURE__ */ import_react12.default.createElement(SliderInner, __spreadValues({}, props))), /* @__PURE__ */ import_react12.default.createElement("div", {
+    }, /* @__PURE__ */ import_react13.default.createElement(SliderInner, __spreadValues({}, props))), /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "justify-center items-center text-center flex pr-4"
     }, props.renderValue ? props.renderValue(props.value) : props.value));
   }
   function SliderInner({ value: value2, label, min, max, step = 1, onChange }) {
     const values = [value2];
-    return /* @__PURE__ */ import_react12.default.createElement("div", {
+    return /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex-1 px-3"
-    }, /* @__PURE__ */ import_react12.default.createElement("div", {
+    }, /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "my-3"
-    }, /* @__PURE__ */ import_react12.default.createElement(import_react_range.Range, {
+    }, /* @__PURE__ */ import_react13.default.createElement(import_react_range.Range, {
       min,
       max,
       step,
       values,
       onChange: (values2) => onChange(values2[0]),
-      renderTrack: ({ props, children }) => /* @__PURE__ */ import_react12.default.createElement("div", __spreadProps(__spreadValues({}, props), {
+      renderTrack: ({ props, children }) => /* @__PURE__ */ import_react13.default.createElement("div", __spreadProps(__spreadValues({}, props), {
         style: __spreadProps(__spreadValues({}, props.style), {
           height: "6px",
           width: "100%",
@@ -34186,7 +34292,7 @@ to {
           })
         })
       }), children),
-      renderThumb: ({ props }) => /* @__PURE__ */ import_react12.default.createElement("div", __spreadProps(__spreadValues({}, props), {
+      renderThumb: ({ props }) => /* @__PURE__ */ import_react13.default.createElement("div", __spreadProps(__spreadValues({}, props), {
         style: __spreadProps(__spreadValues({}, props.style), {
           height: "20px",
           width: "20px",
@@ -34207,37 +34313,39 @@ to {
   });
   var countDownRenderer = ({ hours, minutes, seconds, completed }) => {
     if (completed) {
-      return /* @__PURE__ */ import_react13.default.createElement("div", {
+      return /* @__PURE__ */ import_react14.default.createElement("div", {
         className: "animate-pulse"
       }, "Finished! Chat is paused, do the giveaway!");
     } else {
-      return /* @__PURE__ */ import_react13.default.createElement("span", null, zeroPad(hours, 2), " : ", zeroPad(minutes, 2), " : ", zeroPad(seconds, 2));
+      return /* @__PURE__ */ import_react14.default.createElement("span", null, zeroPad(hours, 2), " : ", zeroPad(minutes, 2), " : ", zeroPad(seconds, 2));
     }
   };
-  var ONE_MIN = 1e3 * 60;
-  var StableCountdown = import_react13.default.memo(function StableCountdown2({
+  var ONE_MIN2 = 1e3 * 60;
+  var StableCountdown = import_react14.default.memo(function StableCountdown2({
     value: value2,
     onComplete
   }) {
-    return /* @__PURE__ */ import_react13.default.createElement(index_es_default, {
+    return /* @__PURE__ */ import_react14.default.createElement(index_es_default, {
       renderer: countDownRenderer,
       date: Date.now() + value2,
       onComplete
     });
   });
-  var Time = import_react13.default.memo(function Time2({
+  var Time = import_react14.default.memo(function Time2({
     setChatPaused,
     resetChat,
     chatCommand,
     channelId,
     timerBell,
     setSettings,
-    discordSettings
+    discordSettings,
+    duration
   }) {
-    const [active, setActive] = import_react13.default.useState(false);
-    const [value2, setValue] = import_react13.default.useState(ONE_MIN);
-    const onComplete = import_react13.default.useCallback(() => {
+    const [active, setActive] = import_react14.default.useState(false);
+    const value2 = duration || ONE_MIN2;
+    const onComplete = import_react14.default.useCallback(() => {
       Et.success("Timer finished! Chat paused, do a giveaway...", { position: "bottom-center" });
+      const disabledDueToTimer = duration && discordSettings.giveawayMinTime && duration < discordSettings.giveawayMinTime;
       relay_default.emit("event", {
         type: "timer-end",
         channelId,
@@ -34247,49 +34355,50 @@ to {
         discordColour: getDiscordColour(discordSettings.messageColour),
         discordTitle: discordSettings.endTitle,
         discordBody: discordSettings.endBody,
-        discordEnabled: discordSettings.endEnabled
+        discordEnabled: disabledDueToTimer ? false : discordSettings.endEnabled
       });
       setChatPaused(true);
       if (timerBell)
         bell.play();
-    }, [channelId, timerBell]);
-    return active ? /* @__PURE__ */ import_react13.default.createElement("div", {
+    }, [channelId, timerBell, discordSettings, duration]);
+    return active ? /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex justify-center items-center text-center relative"
-    }, /* @__PURE__ */ import_react13.default.createElement(StableCountdown, {
+    }, /* @__PURE__ */ import_react14.default.createElement(StableCountdown, {
       value: value2,
       onComplete
-    }), /* @__PURE__ */ import_react13.default.createElement(FaTimes, {
+    }), /* @__PURE__ */ import_react14.default.createElement(FaTimes, {
       className: "absolute right-3 top-2 text-red-500 select-none cursor-pointer",
       onClick: () => {
         setActive(false);
         relay_default.emit("event", { type: "timer-cancel", channelId });
       },
       title: "Cancel the timer"
-    })) : /* @__PURE__ */ import_react13.default.createElement("div", {
+    })) : /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
-    }, /* @__PURE__ */ import_react13.default.createElement("div", {
+    }, /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",
       title: "Will clear chat, and then pause it after the time, to enable a giveaway with cut off"
-    }, "Timer"), /* @__PURE__ */ import_react13.default.createElement("div", {
+    }, "Timer"), /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "px-2 flex-1 flex justify-center items-center"
-    }, /* @__PURE__ */ import_react13.default.createElement(SliderInner, {
-      min: ONE_MIN,
-      max: ONE_MIN * 30,
+    }, /* @__PURE__ */ import_react14.default.createElement(SliderInner, {
+      min: ONE_MIN2,
+      max: ONE_MIN2 * 30,
       value: value2,
-      step: ONE_MIN,
-      onChange: setValue
-    })), /* @__PURE__ */ import_react13.default.createElement("div", {
+      step: ONE_MIN2,
+      onChange: (v2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { timerDuration: v2 }))
+    })), /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "flex-1 justify-center items-center text-center flex"
-    }, formatDistanceStrict(Date.now() + value2, new Date())), /* @__PURE__ */ import_react13.default.createElement("button", {
+    }, formatDistanceStrict(Date.now() + value2, new Date())), /* @__PURE__ */ import_react14.default.createElement("button", {
       title: "If enabled will play a sound at the end of the timer",
       className: "flex justify-center items-center pr-3",
       onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { timerBell: !s2.timerBell }))
-    }, timerBell ? /* @__PURE__ */ import_react13.default.createElement(FaBell, null) : /* @__PURE__ */ import_react13.default.createElement(FaBellSlash, null)), /* @__PURE__ */ import_react13.default.createElement("button", {
+    }, timerBell ? /* @__PURE__ */ import_react14.default.createElement(FaBell, null) : /* @__PURE__ */ import_react14.default.createElement(FaBellSlash, null)), /* @__PURE__ */ import_react14.default.createElement("button", {
       className: "bg-purple-600 px-2 py-1 flex-0 select-none cursor-pointer flex flex-row justify-center items-center gap-1 transition-colors hover:bg-purple-700",
       onClick: () => {
         resetChat();
         setChatPaused(false);
         setActive(true);
+        const disabledDueToTimer = duration && discordSettings.giveawayMinTime && duration < discordSettings.giveawayMinTime;
         relay_default.emit("event", {
           type: "timer-start",
           channelId,
@@ -34300,11 +34409,11 @@ to {
           discordColour: getDiscordColour(discordSettings.messageColour),
           discordTitle: discordSettings.startTitle,
           discordBody: discordSettings.startBody,
-          discordEnabled: discordSettings.startEnabled
+          discordEnabled: disabledDueToTimer ? false : discordSettings.startEnabled
         });
       },
       title: "Warning: will clear chat"
-    }, /* @__PURE__ */ import_react13.default.createElement(FaClock, null), " Start"));
+    }, /* @__PURE__ */ import_react14.default.createElement(FaClock, null), " Start"));
   });
   function SettingsComponent({
     channelId,
@@ -34314,87 +34423,88 @@ to {
     resetChat,
     discordSettings
   }) {
-    return /* @__PURE__ */ import_react13.default.createElement(import_react13.default.Fragment, null, /* @__PURE__ */ import_react13.default.createElement("div", {
+    return /* @__PURE__ */ import_react14.default.createElement(import_react14.default.Fragment, null, /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "flex flex-row gap-2 mt-2"
-    }, /* @__PURE__ */ import_react13.default.createElement("div", {
+    }, /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "flex flex-row justify-center items-center flex-1"
-    }, /* @__PURE__ */ import_react13.default.createElement("div", {
+    }, /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md",
       title: "This will be sent to chat by your account to tell winners, if Send Message is enabled below"
-    }, "Winner Message"), /* @__PURE__ */ import_react13.default.createElement("input", {
+    }, "Winner Message"), /* @__PURE__ */ import_react14.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1",
       placeholder: "Winner Message...",
       value: settings.winnerMessage,
       onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { winnerMessage: e2.target.value })),
       title: "Chat command to enter - leave empty for none"
-    })), /* @__PURE__ */ import_react13.default.createElement("div", {
+    })), /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "flex flex-row justify-center items-center flex-1"
-    }, /* @__PURE__ */ import_react13.default.createElement("div", {
+    }, /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md",
       title: "Filters messages to include this"
-    }, "Chat Command"), /* @__PURE__ */ import_react13.default.createElement("input", {
+    }, "Chat Command"), /* @__PURE__ */ import_react14.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1",
       placeholder: "Empty means any message...",
       value: settings.chatCommand,
       onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { chatCommand: e2.target.value.trim() })),
       title: "Chat command to enter - leave empty for none"
-    }))), /* @__PURE__ */ import_react13.default.createElement("div", {
-      className: "flex flex-row gap-2 mt-2"
-    }, /* @__PURE__ */ import_react13.default.createElement("div", {
+    }))), /* @__PURE__ */ import_react14.default.createElement("div", {
+      className: "flex flex-row gap-2 mt-2 text-sm"
+    }, /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "flex flex-1 flex-row gap-2"
-    }, /* @__PURE__ */ import_react13.default.createElement("div", {
+    }, /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
-    }, /* @__PURE__ */ import_react13.default.createElement("div", {
+    }, /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",
       title: "Will limit winners to those who follow you, will slow down giveaways"
-    }, "Followers Only"), /* @__PURE__ */ import_react13.default.createElement("button", {
+    }, "Followers Only"), /* @__PURE__ */ import_react14.default.createElement("button", {
       className: "flex-1 text-2xl text-center justify-center items-center flex transition-opacity hover:opacity-60",
       onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { followersOnly: !s2.followersOnly }))
-    }, settings.followersOnly ? /* @__PURE__ */ import_react13.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react13.default.createElement(FaTimes, null))), /* @__PURE__ */ import_react13.default.createElement("div", {
+    }, settings.followersOnly ? /* @__PURE__ */ import_react14.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react14.default.createElement(FaTimes, null))), /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
-    }, /* @__PURE__ */ import_react13.default.createElement("div", {
+    }, /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",
       title: "If enabled, will send messages tagging winners in Twitch chat"
-    }, "Send Message"), /* @__PURE__ */ import_react13.default.createElement("button", {
+    }, "Send Message"), /* @__PURE__ */ import_react14.default.createElement("button", {
       className: "flex-1 text-2xl text-center justify-center items-center flex transition-opacity hover:opacity-60",
       onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { sendMessages: !s2.sendMessages }))
-    }, settings.sendMessages ? /* @__PURE__ */ import_react13.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react13.default.createElement(FaTimes, null)))), /* @__PURE__ */ import_react13.default.createElement(Time, {
+    }, settings.sendMessages ? /* @__PURE__ */ import_react14.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react14.default.createElement(FaTimes, null)))), /* @__PURE__ */ import_react14.default.createElement(Time, {
       setChatPaused,
       resetChat: () => resetChat(),
       channelId,
       chatCommand: settings.chatCommand,
       timerBell: settings.timerBell,
       setSettings,
-      discordSettings
-    })), /* @__PURE__ */ import_react13.default.createElement("div", {
-      className: "flex flex-row gap-2 mt-2"
-    }, /* @__PURE__ */ import_react13.default.createElement(SliderOuter, {
+      discordSettings,
+      duration: settings.timerDuration
+    })), /* @__PURE__ */ import_react14.default.createElement("div", {
+      className: "flex flex-row gap-2 mt-2 text-sm"
+    }, /* @__PURE__ */ import_react14.default.createElement(SliderOuter, {
       label: "Sub Luck",
       title: "Will enter subscribers this amount of times into the giveaways",
       value: settings.subLuck,
       min: 1,
       max: 10,
       onChange: (val) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { subLuck: val }))
-    }), /* @__PURE__ */ import_react13.default.createElement(SliderOuter, {
+    }), /* @__PURE__ */ import_react14.default.createElement(SliderOuter, {
       label: "Winners",
       title: "How many winners to draw per giveaway",
       value: settings.numberOfWinners,
       min: 1,
       max: 10,
       onChange: (val) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { numberOfWinners: val }))
-    }), /* @__PURE__ */ import_react13.default.createElement(SliderOuter, {
+    }), /* @__PURE__ */ import_react14.default.createElement(SliderOuter, {
       label: "Spam Limit",
       title: "How many messages of chat command if present before being removed from selection",
       value: settings.spamLimit || 1,
       min: 1,
       max: 10,
       onChange: (val) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { spamLimit: val })),
-      renderValue: (val) => /* @__PURE__ */ import_react13.default.createElement(import_react13.default.Fragment, null, val === 1 ? "Off" : `${val}+`)
+      renderValue: (val) => /* @__PURE__ */ import_react14.default.createElement(import_react14.default.Fragment, null, val === 1 ? "Off" : `${val}+`)
     })));
   }
 
   // src/components/primitives/giveaways.tsx
-  var import_react14 = __toModule(require_react());
+  var import_react15 = __toModule(require_react());
 
   // node_modules/react-icons/gi/index.esm.js
   function GiPartyPopper(props) {
@@ -34402,6 +34512,17 @@ to {
   }
 
   // src/components/primitives/giveaways.tsx
+  function filterSettings(s2) {
+    const { subLuck, numberOfWinners, followersOnly, sendMessages, chatCommand, winnerMessage } = s2;
+    return {
+      subLuck,
+      numberOfWinners,
+      followersOnly,
+      sendMessages,
+      chatCommand,
+      winnerMessage
+    };
+  }
   function InstantGiveaway({
     setWinners,
     channelInfo,
@@ -34411,29 +34532,41 @@ to {
     setPastGiveaways,
     forfeits
   }) {
-    return /* @__PURE__ */ import_react14.default.createElement("button", {
+    const [thinking, setThinking] = import_react15.default.useState(false);
+    return /* @__PURE__ */ import_react15.default.createElement("button", {
       title: "A giveaway that includes all viewers, regardless of if they've chatted or not",
       className: "bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-all hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700",
       onClick: async () => {
         if (!channelInfo.login)
           return;
-        const giveawayWinner = await getInstantGiveaway(client, channelInfo, settings, discordSettings, forfeits);
-        if (!giveawayWinner.length) {
-          Et.error("No winners found that match conditions!", { position: "bottom-center" });
-          return;
-        }
-        setWinners((w) => w.concat(giveawayWinner.map((u3) => ({ username: u3.login }))));
-        setPastGiveaways((p2) => [
-          {
-            type: GiveawayType.Instant,
-            createdAt: new Date().toISOString(),
-            winners: giveawayWinner,
-            settings,
-            notes: ""
+        try {
+          setThinking(true);
+          const { winners: giveawayWinner, giveawayStats } = await getInstantGiveaway(client, channelInfo, settings, discordSettings, forfeits);
+          if (!giveawayWinner.length) {
+            Et.error("No winners found that match conditions!", {
+              position: "bottom-center",
+              style: { fontSize: "1rem", padding: "0.2rem" }
+            });
+            return;
           }
-        ].concat(p2));
+          setWinners((w) => w.concat(giveawayWinner.map((u3) => ({ username: u3.login }))));
+          setPastGiveaways((p2) => [
+            {
+              type: GiveawayType.Instant,
+              createdAt: new Date().toISOString(),
+              winners: giveawayWinner,
+              settings: filterSettings(settings),
+              giveawayStats,
+              notes: ""
+            }
+          ].concat(p2));
+        } finally {
+          setThinking(false);
+        }
       }
-    }, /* @__PURE__ */ import_react14.default.createElement(FaDice, {
+    }, thinking ? /* @__PURE__ */ import_react15.default.createElement(FaSpinner, {
+      className: "animate-spin"
+    }) : /* @__PURE__ */ import_react15.default.createElement(FaDice, {
       className: "text-2xl"
     }), " Viewers Instant Giveaway");
   }
@@ -34447,31 +34580,43 @@ to {
     setPastGiveaways,
     forfeits
   }) {
-    return /* @__PURE__ */ import_react14.default.createElement("button", {
+    const [thinking, setThinking] = import_react15.default.useState(false);
+    return /* @__PURE__ */ import_react15.default.createElement("button", {
       title: "A giveaway that includes all viewers who have chatted, optionally with a chat command if set",
       className: "bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-transform hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700",
       onClick: async () => {
-        const giveawayWinner = await getChatGiveaway(client, channelInfo, chatEvents, settings.chatCommand, settings, discordSettings, forfeits);
-        if (!giveawayWinner.length) {
-          Et.error("No winners found that match conditions!", { position: "bottom-center" });
-          return;
-        }
-        setWinners((w) => w.concat(giveawayWinner.map((w2) => ({
-          username: w2.login,
-          isFollower: !!w2.wasFollower,
-          isSubscriber: !!w2.wasSubscriber
-        }))));
-        setPastGiveaways((p2) => [
-          {
-            type: GiveawayType.Chat,
-            createdAt: new Date().toISOString(),
-            winners: giveawayWinner,
-            settings,
-            notes: ""
+        try {
+          setThinking(true);
+          const { winners: giveawayWinner, giveawayStats } = await getChatGiveaway(client, channelInfo, chatEvents, settings.chatCommand, settings, discordSettings, forfeits);
+          if (!giveawayWinner.length) {
+            Et.error("No winners found that match conditions!", {
+              position: "bottom-center",
+              style: { fontSize: "1rem", padding: "0.2rem" }
+            });
+            return;
           }
-        ].concat(p2));
+          setWinners((w) => w.concat(giveawayWinner.map((w2) => ({
+            username: w2.login,
+            isFollower: !!w2.wasFollower,
+            isSubscriber: !!w2.wasSubscriber
+          }))));
+          setPastGiveaways((p2) => [
+            {
+              type: GiveawayType.Chat,
+              createdAt: new Date().toISOString(),
+              winners: giveawayWinner,
+              settings: filterSettings(settings),
+              giveawayStats,
+              notes: ""
+            }
+          ].concat(p2));
+        } finally {
+          setThinking(false);
+        }
       }
-    }, /* @__PURE__ */ import_react14.default.createElement(FaDice, {
+    }, thinking ? /* @__PURE__ */ import_react15.default.createElement(FaSpinner, {
+      className: "animate-spin"
+    }) : /* @__PURE__ */ import_react15.default.createElement(FaDice, {
       className: "text-2xl"
     }), " Active Chatter Giveaway");
   }
@@ -34483,30 +34628,30 @@ to {
       "winners",
       "onClear"
     ]);
-    return winners.length ? /* @__PURE__ */ import_react14.default.createElement("div", {
+    return winners.length ? /* @__PURE__ */ import_react15.default.createElement("div", {
       className: "grid gap-1 grid-cols-2 mt-3"
-    }, winners.map((winner, i3) => /* @__PURE__ */ import_react14.default.createElement("div", {
+    }, winners.map((winner, i3) => /* @__PURE__ */ import_react15.default.createElement("div", {
       key: winner.username,
       className: "bg-gray-600 text-white rounded-md overflow-hidden flex flex-row items-center justify-center px-2 py-4 text-center relative"
-    }, /* @__PURE__ */ import_react14.default.createElement("div", {
+    }, /* @__PURE__ */ import_react15.default.createElement("div", {
       className: "text-2xl absolute left-5"
-    }, i3 + 1, "."), /* @__PURE__ */ import_react14.default.createElement(GiPartyPopper, {
+    }, i3 + 1, "."), /* @__PURE__ */ import_react15.default.createElement(GiPartyPopper, {
       className: "text-purple-300 text-xl"
-    }), " ", /* @__PURE__ */ import_react14.default.createElement("div", {
+    }), " ", /* @__PURE__ */ import_react15.default.createElement("div", {
       className: "px-2"
-    }, winner.username, " wins!"), " ", /* @__PURE__ */ import_react14.default.createElement(GiPartyPopper, {
+    }, winner.username, " wins!"), " ", /* @__PURE__ */ import_react15.default.createElement(GiPartyPopper, {
       className: "text-purple-300 text-xl"
-    }), /* @__PURE__ */ import_react14.default.createElement(FaBullhorn, {
+    }), /* @__PURE__ */ import_react15.default.createElement(FaBullhorn, {
       className: "text-2xl absolute right-12 cursor-pointer select-none transform opacity-80 transition-opacity hover:opacity-100 hover:scale-105",
-      onClick: () => announceWinner(__spreadProps(__spreadValues({}, anounceArgs), { winner: winner.username, force: true }))
-    }), /* @__PURE__ */ import_react14.default.createElement(FaTimes, {
+      onClick: () => announceWinner(__spreadProps(__spreadValues({}, anounceArgs), { giveawayType: winner.source, winner: winner.username, force: true }))
+    }), /* @__PURE__ */ import_react15.default.createElement(FaTimes, {
       className: "text-2xl absolute right-5 text-red-500 cursor-pointer transform opacity-80 transition-opacity hover:opacity-100 select-none hover:scale-105",
       onClick: () => onClear(i3)
     })))) : null;
   }
 
   // src/components/primitives/ChatBox.tsx
-  var import_react15 = __toModule(require_react());
+  var import_react16 = __toModule(require_react());
   var import_classnames = __toModule(require_classnames());
   function isVisibleIn(ele, container, buffer = 50) {
     const eleTop = ele.offsetTop;
@@ -34521,19 +34666,19 @@ to {
     setPaused,
     clear
   }) {
-    return /* @__PURE__ */ import_react15.default.createElement(import_react15.default.Fragment, null, paused ? /* @__PURE__ */ import_react15.default.createElement(FaPlayCircle, {
+    return /* @__PURE__ */ import_react16.default.createElement(import_react16.default.Fragment, null, paused ? /* @__PURE__ */ import_react16.default.createElement(FaPlayCircle, {
       className: "select-none cursor-pointer transition-opacity hover:opacity-70",
       onClick: () => setPaused((p2) => !p2),
       title: "Resume chat"
-    }) : /* @__PURE__ */ import_react15.default.createElement(FaPauseCircle, {
+    }) : /* @__PURE__ */ import_react16.default.createElement(FaPauseCircle, {
       className: "select-none cursor-pointer  transition-opacity hover:opacity-70",
       onClick: () => setPaused((p2) => !p2),
       title: "Pause chat, misses messages while paused"
-    }), /* @__PURE__ */ import_react15.default.createElement(FaTimesCircle, {
+    }), /* @__PURE__ */ import_react16.default.createElement(FaTimesCircle, {
       className: "text-red-500 select-none cursor-pointer  transition-opacity hover:opacity-70",
       onClick: () => clear(),
       title: "Clear chat"
-    }), /* @__PURE__ */ import_react15.default.createElement(FaSave, {
+    }), /* @__PURE__ */ import_react16.default.createElement(FaSave, {
       className: "select-none cursor-pointer  transition-opacity hover:opacity-70",
       title: "Saves all messages (not just those shown)",
       onClick: async () => {
@@ -34556,9 +34701,9 @@ to {
     var _a;
     const shouldAutoScroll = (_a = settings.autoScroll) != null ? _a : true;
     const limitedMessages = chatEvents.filter((c2) => winners.length ? winners.map((c3) => c3.username).includes(c2.username) : true);
-    const chatBottomRef = import_react15.default.useRef(null);
-    const chatRef = import_react15.default.useRef(null);
-    import_react15.default.useLayoutEffect(() => {
+    const chatBottomRef = import_react16.default.useRef(null);
+    const chatRef = import_react16.default.useRef(null);
+    import_react16.default.useLayoutEffect(() => {
       var _a2;
       if (chatRef.current && chatBottomRef.current) {
         const shouldScroll = isVisibleIn(chatBottomRef.current, chatRef.current);
@@ -34570,70 +34715,112 @@ to {
         }
       }
     }, [limitedMessages, shouldAutoScroll]);
-    const [search, setSearch] = import_react15.default.useState("");
+    const [search, setSearch] = import_react16.default.useState("");
     const searchedMessages = search ? limitedMessages.filter((m3) => m3.username.toLowerCase().includes(search.toLowerCase()) || m3.msg.toLowerCase().includes(search.toLowerCase())) : limitedMessages;
-    return /* @__PURE__ */ import_react15.default.createElement(import_react15.default.Fragment, null, /* @__PURE__ */ import_react15.default.createElement("div", {
+    return /* @__PURE__ */ import_react16.default.createElement(import_react16.default.Fragment, null, /* @__PURE__ */ import_react16.default.createElement("div", {
       className: "mt-2 rounded-md bg-gray-700 flex-1 flex flex-col relative overflow-hidden"
-    }, /* @__PURE__ */ import_react15.default.createElement("div", {
-      className: "bg-gray-600 absolute top-0 right-0 left-0 h-8 gap-2 flex justify-between px-5 items-center text-white z-50"
-    }, /* @__PURE__ */ import_react15.default.createElement("div", {
+    }, /* @__PURE__ */ import_react16.default.createElement("div", {
+      className: "bg-gray-600 h-8 gap-2 flex justify-between px-5 items-center text-white z-50"
+    }, /* @__PURE__ */ import_react16.default.createElement("div", {
       className: "flex flex-row justify-center items-center flex-1 text-xs"
-    }, /* @__PURE__ */ import_react15.default.createElement("div", {
+    }, /* @__PURE__ */ import_react16.default.createElement("div", {
       className: "flex-0 bg-purple-600 px-2 py-1.5 border border-purple-600 rounded-l-md",
       title: "This will be sent to chat by your account to tell winners, if Send Message is enabled below"
-    }, /* @__PURE__ */ import_react15.default.createElement(FaSearch, null)), /* @__PURE__ */ import_react15.default.createElement("input", {
+    }, /* @__PURE__ */ import_react16.default.createElement(FaSearch, null)), /* @__PURE__ */ import_react16.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-600 flex-1",
       placeholder: "Search...",
       value: search,
       onChange: (e2) => setSearch(e2.target.value),
       title: "Search chat"
-    })), /* @__PURE__ */ import_react15.default.createElement("div", {
+    })), /* @__PURE__ */ import_react16.default.createElement("div", {
       className: "flex-1"
-    }, chatEvents.length, " message", chatEvents.length === 1 ? "" : "s"), /* @__PURE__ */ import_react15.default.createElement("div", {
+    }, chatEvents.length, " message", chatEvents.length === 1 ? "" : "s"), /* @__PURE__ */ import_react16.default.createElement("div", {
       className: "flex-1 text-yellow-600 text-xs"
-    }, winners.length ? /* @__PURE__ */ import_react15.default.createElement(import_react15.default.Fragment, null, limitedMessages.length, " winner message", limitedMessages.length === 1 ? "" : "s") : null), /* @__PURE__ */ import_react15.default.createElement("div", {
+    }, winners.length ? /* @__PURE__ */ import_react16.default.createElement(import_react16.default.Fragment, null, limitedMessages.length, " winner message", limitedMessages.length === 1 ? "" : "s") : null), /* @__PURE__ */ import_react16.default.createElement("div", {
       className: "flex flex-row justify-center items-center gap-2 text-xl flex-2"
-    }, /* @__PURE__ */ import_react15.default.createElement("div", {
-      className: "text-xs"
-    }, messageDelay), /* @__PURE__ */ import_react15.default.createElement("button", {
+    }, /* @__PURE__ */ import_react16.default.createElement("div", {
+      className: "text-xs text-center"
+    }, messageDelay), /* @__PURE__ */ import_react16.default.createElement("button", {
       className: (0, import_classnames.default)("text-xs flex justify-center items-center gap-1 border border-purple-600 px-2 py-1 rounded-md", {
         "bg-purple-600": shouldAutoScroll
       }),
       onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { autoScroll: !s2.autoScroll }))
-    }, shouldAutoScroll ? /* @__PURE__ */ import_react15.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react15.default.createElement(FaTimes, null), " Following"), /* @__PURE__ */ import_react15.default.createElement(ChatControls, {
+    }, shouldAutoScroll ? /* @__PURE__ */ import_react16.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react16.default.createElement(FaTimes, null), " Following"), /* @__PURE__ */ import_react16.default.createElement(ChatControls, {
       chatEvents,
       paused,
       setPaused,
       clear
-    }))), /* @__PURE__ */ import_react15.default.createElement("div", {
+    }))), /* @__PURE__ */ import_react16.default.createElement("div", {
       className: "relative flex-1"
-    }, chatEvents.length === 0 ? /* @__PURE__ */ import_react15.default.createElement("span", {
-      className: (0, import_classnames.default)("relative left-2 top-9")
-    }, "Logs will appear here...") : /* @__PURE__ */ import_react15.default.createElement("div", {
-      className: (0, import_classnames.default)("absolute right-0 left-0 bottom-0 overflow-y-scroll px-2 pt-1 pb-3 flex flex-col gap-1 top-8"),
+    }, chatEvents.length === 0 ? /* @__PURE__ */ import_react16.default.createElement("span", {
+      className: (0, import_classnames.default)("absolute inset-0 text-center flex justify-center items-center")
+    }, "Logs will appear here...") : /* @__PURE__ */ import_react16.default.createElement("div", {
+      className: (0, import_classnames.default)("absolute overflow-y-auto inset-0 px-2 pt-1 pb-3 flex flex-col gap-1 h-full"),
       ref: chatRef
     }, searchedMessages.map((c2) => {
-      return /* @__PURE__ */ import_react15.default.createElement("div", {
+      return /* @__PURE__ */ import_react16.default.createElement("div", {
         key: c2.id
-      }, /* @__PURE__ */ import_react15.default.createElement("span", {
+      }, /* @__PURE__ */ import_react16.default.createElement("span", {
         className: "text-xs"
-      }, "[", c2.formattedTmiTs, "]"), /* @__PURE__ */ import_react15.default.createElement("span", {
-        className: (0, import_classnames.default)("rounded-full bg-gray-300 h-4 w-4 inline-block mx-1 relative top-1", {
+      }, "[", c2.formattedTmiTs, "]"), /* @__PURE__ */ import_react16.default.createElement("span", {
+        className: (0, import_classnames.default)("rounded-full bg-gray-300 h-4 w-4 inline-block mx-1 relative", {
           "bg-yellow-500": c2.isSubscriber,
-          "bg-purple-600": c2.isMod
+          "bg-purple-600": c2.isMod,
+          "top-1": !c2.isSubscriber && !c2.isMod
         })
-      }, c2.isMod ? /* @__PURE__ */ import_react15.default.createElement("span", {
+      }, c2.isMod ? /* @__PURE__ */ import_react16.default.createElement("span", {
         className: "flex justify-center items-center text-xs cursor-default select-none",
         title: "Mod"
-      }, "M") : c2.isSubscriber ? /* @__PURE__ */ import_react15.default.createElement("span", {
+      }, "M") : c2.isSubscriber ? /* @__PURE__ */ import_react16.default.createElement("span", {
         className: "flex justify-center items-center text-xs cursor-default select-none",
         title: "Subscriber"
-      }, "S") : null), /* @__PURE__ */ import_react15.default.createElement("span", {
+      }, "S") : null), /* @__PURE__ */ import_react16.default.createElement("span", {
         style: { color: c2.color }
       }, "[", c2.displayName, "]"), " ", c2.msg);
-    }), /* @__PURE__ */ import_react15.default.createElement("div", {
+    }), /* @__PURE__ */ import_react16.default.createElement("div", {
       ref: chatBottomRef
     })))));
+  }
+
+  // src/components/primitives/Stats.tsx
+  var import_react17 = __toModule(require_react());
+  function ProgressBar({ count, total, status }) {
+    let percent = `${Math.min(100, count / total * 100).toFixed(0)}%`;
+    if (status === "inprogress" && count === 0 && total === 0)
+      percent = `0%`;
+    return /* @__PURE__ */ import_react17.default.createElement("div", {
+      className: "bg-gray-300 rounded-lg flex-1 h-2 overflow-hidden border-b border-purple-600",
+      title: percent
+    }, /* @__PURE__ */ import_react17.default.createElement("div", {
+      className: "bg-purple-600 h-full",
+      style: { width: percent }
+    }));
+  }
+  function StatusIcon({ status }) {
+    return status === "done" ? /* @__PURE__ */ import_react17.default.createElement(FaCheckCircle, {
+      className: "text-green-600"
+    }) : status === "error" ? /* @__PURE__ */ import_react17.default.createElement(FaExclamationCircle, {
+      className: "text-red-600"
+    }) : /* @__PURE__ */ import_react17.default.createElement(FaSpinner, {
+      className: "animate-spin"
+    });
+  }
+  function Stats({ stats }) {
+    return /* @__PURE__ */ import_react17.default.createElement("div", {
+      className: "flex flex-row gap-6 mt-2 mx-3 text-xs justify-center items-center opacity-60 hover:opacity-100 transition-opacity"
+    }, /* @__PURE__ */ import_react17.default.createElement("div", {
+      className: "flex flex-row gap-2 justify-center items-center flex-1"
+    }, /* @__PURE__ */ import_react17.default.createElement("div", {
+      className: "bg-purple-600 rounded-md text-center px-2 py-0.5"
+    }, "Followers"), /* @__PURE__ */ import_react17.default.createElement(ProgressBar, __spreadValues({}, stats.followers)), /* @__PURE__ */ import_react17.default.createElement(StatusIcon, {
+      status: stats.followers.status
+    })), /* @__PURE__ */ import_react17.default.createElement("div", {
+      className: "flex flex-row gap-2 justify-center items-center flex-1"
+    }, /* @__PURE__ */ import_react17.default.createElement("div", {
+      className: "bg-purple-600 rounded-md text-center px-2 py-0.5"
+    }, "Subscribers"), /* @__PURE__ */ import_react17.default.createElement(ProgressBar, __spreadValues({}, stats.subs)), /* @__PURE__ */ import_react17.default.createElement(StatusIcon, {
+      status: stats.subs.status
+    })));
   }
 
   // src/components/screens/Main.tsx
@@ -34650,26 +34837,30 @@ to {
     winners,
     setWinners,
     setPastGiveaways,
-    forfeits
+    forfeits,
+    stats
   }) {
-    const messageDelay = import_react16.default.useMemo(() => {
+    const messageDelay = import_react18.default.useMemo(() => {
       const mostRecent = chatEvents[chatEvents.length - 1];
       if (!mostRecent)
-        return "0 seconds delay";
+        return "0s delay";
       return `~${formatDuration({
-        seconds: (mostRecent.receivedTs - mostRecent.tmiTs) / 1e3
-      })} delay`;
+        seconds: Number(((mostRecent.receivedTs - mostRecent.tmiTs) / 1e3).toFixed(2))
+      }).replace(" seconds", "s")} delay`;
     }, [chatEvents]);
-    return /* @__PURE__ */ import_react16.default.createElement(import_react16.default.Fragment, null, /* @__PURE__ */ import_react16.default.createElement(Winner, {
+    return /* @__PURE__ */ import_react18.default.createElement("div", {
+      className: "flex flex-col flex-1",
+      style: { height: "100vh" }
+    }, /* @__PURE__ */ import_react18.default.createElement(Winner, {
       winners,
       onClear: (idx) => setWinners((w) => removeIdx(w, idx)),
       chatClient: client,
       settings,
       discordSettings,
       channelInfo
-    }), /* @__PURE__ */ import_react16.default.createElement("div", {
+    }), /* @__PURE__ */ import_react18.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react16.default.createElement(InstantGiveaway, {
+    }, /* @__PURE__ */ import_react18.default.createElement(InstantGiveaway, {
       discordSettings,
       settings,
       channelInfo,
@@ -34677,7 +34868,7 @@ to {
       client,
       setPastGiveaways,
       forfeits
-    }), /* @__PURE__ */ import_react16.default.createElement(ChatGiveaway, {
+    }), /* @__PURE__ */ import_react18.default.createElement(ChatGiveaway, {
       discordSettings,
       settings,
       channelInfo,
@@ -34686,23 +34877,23 @@ to {
       client,
       setPastGiveaways,
       forfeits
-    })), /* @__PURE__ */ import_react16.default.createElement(SettingsComponent, {
+    })), /* @__PURE__ */ import_react18.default.createElement(SettingsComponent, {
       channelId: channelInfo.userId,
       settings,
       setSettings,
       setChatPaused,
       resetChat,
       discordSettings
-    }), settings.performanceMode && !winners.length ? /* @__PURE__ */ import_react16.default.createElement("div", {
+    }), settings.performanceMode && !winners.length ? /* @__PURE__ */ import_react18.default.createElement("div", {
       className: "h-full gap-2 flex flex-col justify-center items-center"
-    }, /* @__PURE__ */ import_react16.default.createElement("div", {
+    }, /* @__PURE__ */ import_react18.default.createElement("div", {
       className: "flex justify-center items-center gap-2 flex-row"
-    }, /* @__PURE__ */ import_react16.default.createElement("div", null, chatEvents.length, " messages"), /* @__PURE__ */ import_react16.default.createElement(ChatControls, {
+    }, /* @__PURE__ */ import_react18.default.createElement("div", null, chatEvents.length, " messages"), /* @__PURE__ */ import_react18.default.createElement(ChatControls, {
       chatEvents,
       paused: chatPaused,
       setPaused: setChatPaused,
       clear: resetChat
-    })), /* @__PURE__ */ import_react16.default.createElement("div", null, messageDelay)) : /* @__PURE__ */ import_react16.default.createElement(ChatBox, {
+    })), /* @__PURE__ */ import_react18.default.createElement("div", null, messageDelay)) : /* @__PURE__ */ import_react18.default.createElement(ChatBox, {
       messageDelay,
       chatEvents,
       winners,
@@ -34711,11 +34902,13 @@ to {
       clear: resetChat,
       settings,
       setSettings
+    }), /* @__PURE__ */ import_react18.default.createElement(Stats, {
+      stats
     }));
   }
 
   // src/components/screens/Setup.tsx
-  var import_react17 = __toModule(require_react());
+  var import_react19 = __toModule(require_react());
   function Setup({
     resetChat,
     setClient,
@@ -34723,24 +34916,24 @@ to {
     setChannel
   }) {
     const history = useHistory();
-    import_react17.default.useEffect(() => {
+    import_react19.default.useEffect(() => {
       if (channel.login) {
         history.push("/");
       }
     }, [channel.login]);
-    return /* @__PURE__ */ import_react17.default.createElement("div", {
+    return /* @__PURE__ */ import_react19.default.createElement("div", {
       className: "flex flex-col justify-center items-center h-full gap-3 -mt-10"
-    }, /* @__PURE__ */ import_react17.default.createElement("div", {
+    }, /* @__PURE__ */ import_react19.default.createElement("div", {
       className: "text-3xl"
-    }, "First Time Setup"), /* @__PURE__ */ import_react17.default.createElement("p", {
+    }, "First Time Setup"), /* @__PURE__ */ import_react19.default.createElement("p", {
       className: "max-w-md text-center opacity-70"
-    }, "Click below to open a browser and log in with your Twitch account, to get the tokens needed below."), /* @__PURE__ */ import_react17.default.createElement("button", {
+    }, "Click below to open a browser and log in with your Twitch account, to get the tokens needed below."), /* @__PURE__ */ import_react19.default.createElement("button", {
       className: "bg-purple-600 text-white py-1 px-3 rounded-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 justify-center",
       onClick: () => Neutralino.os.open("https://giveaway-o-tron.vercel.app"),
       title: "Go to Twitch"
-    }, "Authenticate with Twitch to get tokens \u2192"), /* @__PURE__ */ import_react17.default.createElement("p", {
+    }, "Authenticate with Twitch to get tokens \u2192"), /* @__PURE__ */ import_react19.default.createElement("p", {
       className: "max-w-lg text-center opacity-70 mt-4"
-    }, "Once you have the tokens, you can post them below."), /* @__PURE__ */ import_react17.default.createElement("form", {
+    }, "Once you have the tokens, you can post them below."), /* @__PURE__ */ import_react19.default.createElement("form", {
       className: "flex flex-col gap-2 justify-center items-center",
       onSubmit: async (e2) => {
         e2.preventDefault();
@@ -34758,150 +34951,172 @@ to {
         setChannel(data);
         history.push("/");
       }
-    }, /* @__PURE__ */ import_react17.default.createElement("input", {
+    }, /* @__PURE__ */ import_react19.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-md border-b border-purple-500 overflow-ellipsis",
       placeholder: "Access Token...",
       name: "accessToken",
       type: "password"
-    }), /* @__PURE__ */ import_react17.default.createElement("input", {
+    }), /* @__PURE__ */ import_react19.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-md border-b border-purple-500 overflow-ellipsis",
       placeholder: "Refresh Token...",
       name: "refreshToken",
       type: "password"
-    }), /* @__PURE__ */ import_react17.default.createElement("button", {
+    }), /* @__PURE__ */ import_react19.default.createElement("button", {
       className: "bg-purple-600 text-white py-1 px-5 rounded-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 justify-center text-xl mt-2",
       title: "Setup connection"
-    }, /* @__PURE__ */ import_react17.default.createElement(FaTwitch, null), /* @__PURE__ */ import_react17.default.createElement("span", {
+    }, /* @__PURE__ */ import_react19.default.createElement(FaTwitch, null), /* @__PURE__ */ import_react19.default.createElement("span", {
       className: "relative -top-0.5"
     }, "Finish Setup"))));
   }
 
   // src/components/screens/PastGiveaways.tsx
-  var import_react18 = __toModule(require_react());
+  var import_react20 = __toModule(require_react());
   var typeNameMap = {
     [GiveawayType.Chat]: "Active Chatter Giveaway",
     [GiveawayType.Instant]: "Viewers Instant Giveaway"
   };
   function SettingItem({ label, value: value2 }) {
-    return /* @__PURE__ */ import_react18.default.createElement("div", {
+    return /* @__PURE__ */ import_react20.default.createElement("div", {
       className: "flex flex-row justify-center items-center flex-1"
-    }, /* @__PURE__ */ import_react18.default.createElement("div", {
+    }, /* @__PURE__ */ import_react20.default.createElement("div", {
       className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md"
-    }, label), /* @__PURE__ */ import_react18.default.createElement("div", {
+    }, label), /* @__PURE__ */ import_react20.default.createElement("div", {
       className: "bg-gray-600 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1 overflow-ellipsis h-full max-w-full flex justify-center items-center"
-    }, typeof value2 === "boolean" ? value2 ? /* @__PURE__ */ import_react18.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react18.default.createElement(FaTimes, null) : value2));
+    }, typeof value2 === "boolean" ? value2 ? /* @__PURE__ */ import_react20.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react20.default.createElement(FaTimes, null) : value2));
   }
   var LIMIT_GIVEAWAY_LIST = 10;
   function PastGiveaways({
     giveaways,
     setPastGiveaways
   }) {
-    return /* @__PURE__ */ import_react18.default.createElement("div", {
+    return /* @__PURE__ */ import_react20.default.createElement("div", {
       className: "mt-4 flex flex-col gap-5 flex-1 pb-5"
-    }, /* @__PURE__ */ import_react18.default.createElement("h1", {
+    }, /* @__PURE__ */ import_react20.default.createElement("h1", {
       className: "text-3xl flex items-center"
-    }, "Last ", Math.min(giveaways.length, LIMIT_GIVEAWAY_LIST), " of ", giveaways.length, " Total Past Giveaway", giveaways.length === 1 ? "" : "s"), giveaways.slice(0, LIMIT_GIVEAWAY_LIST).map((giveaway, idx) => /* @__PURE__ */ import_react18.default.createElement("div", {
-      key: idx,
-      className: "border border-purple-600 rounded-md px-3 py-2 flex flex-col gap-2 bg-gray-700"
-    }, /* @__PURE__ */ import_react18.default.createElement("div", {
-      className: "flex flex-row gap-1 justify-between font-bold"
-    }, typeNameMap[giveaway.type], /* @__PURE__ */ import_react18.default.createElement("div", {
-      title: format(new Date(giveaway.createdAt), "PPPppp"),
-      className: "flex flex-row gap-1 justify-center items-center"
-    }, /* @__PURE__ */ import_react18.default.createElement(FaClock, {
-      className: "text-xs"
-    }), formatDistanceToNow(new Date(giveaway.createdAt), { addSuffix: true }))), /* @__PURE__ */ import_react18.default.createElement("div", {
-      className: "flex flex-row justify-center items-center flex-1"
-    }, /* @__PURE__ */ import_react18.default.createElement("div", {
-      className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md"
-    }, "Notes"), /* @__PURE__ */ import_react18.default.createElement("input", {
-      className: "bg-gray-600 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1 overflow-ellipsis h-full max-w-full flex justify-center items-center",
-      placeholder: "Notes...",
-      value: giveaway.notes || "",
-      onChange: (e2) => setPastGiveaways((p2) => {
-        const giveawayIdxToChange = p2.findIndex((i3) => i3.createdAt === giveaway.createdAt);
-        if (giveawayIdxToChange === -1)
-          return p2;
-        const clone = JSON.parse(JSON.stringify(p2));
-        clone[giveawayIdxToChange].notes = e2.target.value;
-        return clone;
-      })
-    })), /* @__PURE__ */ import_react18.default.createElement("div", null, /* @__PURE__ */ import_react18.default.createElement("div", {
-      className: "border-b border-purple-600 mb-2"
-    }, "Winners"), /* @__PURE__ */ import_react18.default.createElement("div", {
-      className: "flex flex-cols gap-2 px-2"
-    }, giveaway.winners.map((w, widx) => /* @__PURE__ */ import_react18.default.createElement("div", {
-      key: `${idx}-${widx}`,
-      className: "border border-purple-600 rounded-md flex flex-row gap-1 flex-1 items-center"
-    }, /* @__PURE__ */ import_react18.default.createElement("div", {
-      className: "bg-purple-600 text-white h-full flex justify-center items-center px-3 py-2"
-    }, w.login), /* @__PURE__ */ import_react18.default.createElement("div", {
-      className: "px-3 py-2 flex flex-row gap-3 flex-1"
-    }, /* @__PURE__ */ import_react18.default.createElement("div", {
-      className: "flex flex-row items-center gap-1"
-    }, "Sub:", " ", w.wasSubscriber ? /* @__PURE__ */ import_react18.default.createElement(FaCheck, {
-      className: "text-green-600"
-    }) : /* @__PURE__ */ import_react18.default.createElement(FaTimes, {
-      className: "text-red-600"
-    })), /* @__PURE__ */ import_react18.default.createElement("div", {
-      className: "flex flex-row items-center gap-1"
-    }, "Follower:", " ", w.wasFollower ? /* @__PURE__ */ import_react18.default.createElement(FaCheck, {
-      className: "text-green-600"
-    }) : /* @__PURE__ */ import_react18.default.createElement(FaTimes, {
-      className: "text-red-600"
-    })), /* @__PURE__ */ import_react18.default.createElement("div", {
-      className: "flex flex-row justify-center items-center flex-1"
-    }, /* @__PURE__ */ import_react18.default.createElement("div", {
-      className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md"
-    }, "Notes"), /* @__PURE__ */ import_react18.default.createElement("input", {
-      className: "bg-gray-600 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1 overflow-ellipsis h-full max-w-full flex justify-center items-center",
-      placeholder: "Notes...",
-      value: w.notes,
-      onChange: (e2) => setPastGiveaways((p2) => {
-        const giveawayIdxToChange = p2.findIndex((i3) => i3.createdAt === giveaway.createdAt);
-        if (giveawayIdxToChange === -1)
-          return p2;
-        const winnerIdxToChange = p2[giveawayIdxToChange].winners.findIndex((gw) => gw.login === w.login);
-        if (winnerIdxToChange === -1)
-          return p2;
-        const clone = JSON.parse(JSON.stringify(p2));
-        clone[giveawayIdxToChange].winners[winnerIdxToChange].notes = e2.target.value;
-        return clone;
-      })
-    }))))))), /* @__PURE__ */ import_react18.default.createElement("div", null, /* @__PURE__ */ import_react18.default.createElement("div", {
-      className: "border-b border-purple-600 mb-2"
-    }, "Settings"), /* @__PURE__ */ import_react18.default.createElement("div", {
-      className: "grid grid-cols-4 gap-2 px-2"
-    }, /* @__PURE__ */ import_react18.default.createElement(SettingItem, {
-      label: "Sub Luck",
-      value: giveaway.settings.subLuck.toString()
-    }), /* @__PURE__ */ import_react18.default.createElement(SettingItem, {
-      label: "# Winners",
-      value: giveaway.settings.numberOfWinners.toString()
-    }), /* @__PURE__ */ import_react18.default.createElement(SettingItem, {
-      label: "Followers Only",
-      value: giveaway.settings.followersOnly
-    }), /* @__PURE__ */ import_react18.default.createElement(SettingItem, {
-      label: "Send Messages",
-      value: giveaway.settings.sendMessages
-    }), /* @__PURE__ */ import_react18.default.createElement("div", {
-      className: "grid col-span-4"
-    }, /* @__PURE__ */ import_react18.default.createElement(SettingItem, {
-      label: "Chat Command",
-      value: giveaway.settings.chatCommand.toString() || "No command"
-    })), /* @__PURE__ */ import_react18.default.createElement("div", {
-      className: "grid col-span-4"
-    }, /* @__PURE__ */ import_react18.default.createElement(SettingItem, {
-      label: "Winner Message",
-      value: giveaway.settings.winnerMessage.toString()
-    })))))));
+    }, "Last ", Math.min(giveaways.length, LIMIT_GIVEAWAY_LIST), " of ", giveaways.length, " Total Past Giveaway", giveaways.length === 1 ? "" : "s"), giveaways.slice(0, LIMIT_GIVEAWAY_LIST).map((giveaway, idx) => {
+      var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j;
+      return /* @__PURE__ */ import_react20.default.createElement("div", {
+        key: idx,
+        className: "border border-purple-600 rounded-md px-3 py-2 flex flex-col gap-2 bg-gray-700"
+      }, /* @__PURE__ */ import_react20.default.createElement("div", {
+        className: "flex flex-row gap-1 justify-between font-bold"
+      }, typeNameMap[giveaway.type], /* @__PURE__ */ import_react20.default.createElement("div", {
+        title: format(new Date(giveaway.createdAt), "PPPppp"),
+        className: "flex flex-row gap-1 justify-center items-center"
+      }, /* @__PURE__ */ import_react20.default.createElement(FaClock, {
+        className: "text-xs"
+      }), formatDistanceToNow(new Date(giveaway.createdAt), { addSuffix: true }))), /* @__PURE__ */ import_react20.default.createElement("div", {
+        className: "flex flex-row justify-center items-center flex-1"
+      }, /* @__PURE__ */ import_react20.default.createElement("div", {
+        className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md"
+      }, "Notes"), /* @__PURE__ */ import_react20.default.createElement("input", {
+        className: "bg-gray-600 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1 overflow-ellipsis h-full max-w-full flex justify-center items-center",
+        placeholder: "Notes...",
+        value: giveaway.notes || "",
+        onChange: (e2) => setPastGiveaways((p2) => {
+          const giveawayIdxToChange = p2.findIndex((i3) => i3.createdAt === giveaway.createdAt);
+          if (giveawayIdxToChange === -1)
+            return p2;
+          const clone = JSON.parse(JSON.stringify(p2));
+          clone[giveawayIdxToChange].notes = e2.target.value;
+          return clone;
+        })
+      })), /* @__PURE__ */ import_react20.default.createElement("div", null, /* @__PURE__ */ import_react20.default.createElement("div", {
+        className: "border-b border-purple-600 mb-2"
+      }, "Winners"), /* @__PURE__ */ import_react20.default.createElement("div", {
+        className: "flex flex-col gap-2 px-2"
+      }, giveaway.winners.map((w, widx) => /* @__PURE__ */ import_react20.default.createElement("div", {
+        key: `${idx}-${widx}`,
+        className: "border border-purple-600 rounded-md flex flex-row gap-1 flex-1 items-center"
+      }, /* @__PURE__ */ import_react20.default.createElement("div", {
+        className: "bg-purple-600 text-white h-full flex justify-center items-center px-3 py-2"
+      }, w.login), /* @__PURE__ */ import_react20.default.createElement("div", {
+        className: "px-3 py-2 flex flex-row gap-3 flex-1"
+      }, /* @__PURE__ */ import_react20.default.createElement("div", {
+        className: "flex flex-row items-center gap-1"
+      }, "Sub:", " ", w.wasSubscriber ? /* @__PURE__ */ import_react20.default.createElement(FaCheck, {
+        className: "text-green-600"
+      }) : /* @__PURE__ */ import_react20.default.createElement(FaTimes, {
+        className: "text-red-600"
+      })), /* @__PURE__ */ import_react20.default.createElement("div", {
+        className: "flex flex-row items-center gap-1"
+      }, "Follower:", " ", w.wasFollower ? /* @__PURE__ */ import_react20.default.createElement(FaCheck, {
+        className: "text-green-600"
+      }) : /* @__PURE__ */ import_react20.default.createElement(FaTimes, {
+        className: "text-red-600"
+      })), /* @__PURE__ */ import_react20.default.createElement("div", {
+        className: "flex flex-row justify-center items-center flex-1"
+      }, /* @__PURE__ */ import_react20.default.createElement("div", {
+        className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md"
+      }, "Notes"), /* @__PURE__ */ import_react20.default.createElement("input", {
+        className: "bg-gray-600 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1 overflow-ellipsis h-full max-w-full flex justify-center items-center",
+        placeholder: "Notes...",
+        value: w.notes,
+        onChange: (e2) => setPastGiveaways((p2) => {
+          const giveawayIdxToChange = p2.findIndex((i3) => i3.createdAt === giveaway.createdAt);
+          if (giveawayIdxToChange === -1)
+            return p2;
+          const winnerIdxToChange = p2[giveawayIdxToChange].winners.findIndex((gw) => gw.login === w.login);
+          if (winnerIdxToChange === -1)
+            return p2;
+          const clone = JSON.parse(JSON.stringify(p2));
+          clone[giveawayIdxToChange].winners[winnerIdxToChange].notes = e2.target.value;
+          return clone;
+        })
+      }))))))), /* @__PURE__ */ import_react20.default.createElement("div", null, /* @__PURE__ */ import_react20.default.createElement("div", {
+        className: "border-b border-purple-600 mb-2"
+      }, "Stats"), /* @__PURE__ */ import_react20.default.createElement("div", {
+        className: "grid grid-cols-5 gap-2 px-2"
+      }, /* @__PURE__ */ import_react20.default.createElement(SettingItem, {
+        label: "Users",
+        value: (_b = (_a = giveaway.giveawayStats) == null ? void 0 : _a.users) != null ? _b : "?"
+      }), /* @__PURE__ */ import_react20.default.createElement(SettingItem, {
+        label: "Entries",
+        value: (_d = (_c = giveaway.giveawayStats) == null ? void 0 : _c.entries) != null ? _d : "?"
+      }), /* @__PURE__ */ import_react20.default.createElement(SettingItem, {
+        label: "Followers",
+        value: (_f = (_e = giveaway.giveawayStats) == null ? void 0 : _e.followers) != null ? _f : "?"
+      }), /* @__PURE__ */ import_react20.default.createElement(SettingItem, {
+        label: "Subs",
+        value: (_h = (_g = giveaway.giveawayStats) == null ? void 0 : _g.subs) != null ? _h : "?"
+      }), /* @__PURE__ */ import_react20.default.createElement(SettingItem, {
+        label: "Final Entries",
+        value: (_j = (_i = giveaway.giveawayStats) == null ? void 0 : _i.finalEntries) != null ? _j : "?"
+      }))), /* @__PURE__ */ import_react20.default.createElement("div", null, /* @__PURE__ */ import_react20.default.createElement("div", {
+        className: "border-b border-purple-600 mb-2"
+      }, "Settings"), /* @__PURE__ */ import_react20.default.createElement("div", {
+        className: "grid grid-cols-4 gap-2 px-2"
+      }, /* @__PURE__ */ import_react20.default.createElement(SettingItem, {
+        label: "Sub Luck",
+        value: giveaway.settings.subLuck.toString()
+      }), /* @__PURE__ */ import_react20.default.createElement(SettingItem, {
+        label: "# Winners",
+        value: giveaway.settings.numberOfWinners.toString()
+      }), /* @__PURE__ */ import_react20.default.createElement(SettingItem, {
+        label: "Followers Only",
+        value: giveaway.settings.followersOnly
+      }), /* @__PURE__ */ import_react20.default.createElement(SettingItem, {
+        label: "Send Messages",
+        value: giveaway.settings.sendMessages
+      }), /* @__PURE__ */ import_react20.default.createElement("div", {
+        className: "grid col-span-4"
+      }, /* @__PURE__ */ import_react20.default.createElement(SettingItem, {
+        label: "Chat Command",
+        value: giveaway.settings.chatCommand.toString() || "No command"
+      })), /* @__PURE__ */ import_react20.default.createElement("div", {
+        className: "grid col-span-4"
+      }, /* @__PURE__ */ import_react20.default.createElement(SettingItem, {
+        label: "Winner Message",
+        value: giveaway.settings.winnerMessage.toString()
+      })))));
+    }));
   }
 
   // src/components/screens/Settings.tsx
-  var React14 = __toModule(require_react());
+  var React16 = __toModule(require_react());
 
   // src/utils/updates.tsx
-  var import_react19 = __toModule(require_react());
+  var import_react21 = __toModule(require_react());
   var APP_VERSION = globalThis.NL_APP_VERSION;
   async function getLatestDifferentRelease() {
     try {
@@ -34923,13 +35138,13 @@ to {
     }
   }
   function useUpdateCheck() {
-    import_react19.default.useEffect(() => {
+    import_react21.default.useEffect(() => {
       ;
       (async () => {
         const latestRelease = await getLatestDifferentRelease();
         if (latestRelease)
           Et((t2) => {
-            return /* @__PURE__ */ import_react19.default.createElement("button", {
+            return /* @__PURE__ */ import_react21.default.createElement("button", {
               onClick: () => Neutralino.os.open(latestRelease == null ? void 0 : latestRelease.url),
               className: "underline text-purple-600"
             }, "Update ", latestRelease == null ? void 0 : latestRelease.name, " available, go to download \u2192");
@@ -34945,29 +35160,29 @@ to {
     forfeits,
     setForfeits
   }) {
-    return /* @__PURE__ */ React14.createElement("div", {
+    return /* @__PURE__ */ React16.createElement("div", {
       className: "mt-2 flex flex-col gap-3 flex-1 pb-2"
-    }, /* @__PURE__ */ React14.createElement("h1", {
+    }, /* @__PURE__ */ React16.createElement("h1", {
       className: "text-3xl -mb-1"
-    }, "Settings"), /* @__PURE__ */ React14.createElement("div", {
+    }, "Settings"), /* @__PURE__ */ React16.createElement("div", {
       className: "flex flex-col gap-2"
-    }, /* @__PURE__ */ React14.createElement("div", {
+    }, /* @__PURE__ */ React16.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ React14.createElement("div", {
+    }, /* @__PURE__ */ React16.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ React14.createElement("h2", {
+    }, /* @__PURE__ */ React16.createElement("h2", {
       className: "text-xl"
-    }, "Blocklist ", /* @__PURE__ */ React14.createElement("small", null, "(", settings.blocklist.length, ")")), /* @__PURE__ */ React14.createElement("small", {
+    }, "Blocklist ", /* @__PURE__ */ React16.createElement("small", null, "(", settings.blocklist.length, ")")), /* @__PURE__ */ React16.createElement("small", {
       className: "text-m"
-    }, "These users will be excluded from giveaways")), /* @__PURE__ */ React14.createElement("button", {
+    }, "These users will be excluded from giveaways")), /* @__PURE__ */ React16.createElement("button", {
       className: "border border-purple-600 rounded-md px-3 flex flex-row gap-1 justify-center items-center",
       onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { blocklist: (s2.blocklist || []).concat("") }))
-    }, /* @__PURE__ */ React14.createElement(FaPlus, null), " Add Item")), /* @__PURE__ */ React14.createElement("div", {
+    }, /* @__PURE__ */ React16.createElement(FaPlus, null), " Add Item")), /* @__PURE__ */ React16.createElement("div", {
       className: "grid grid-cols-4 gap-2 text-sm"
-    }, (settings.blocklist || []).map((u3, i3) => /* @__PURE__ */ React14.createElement("div", {
+    }, (settings.blocklist || []).map((u3, i3) => /* @__PURE__ */ React16.createElement("div", {
       className: "relative flex-1",
-      key: u3
-    }, /* @__PURE__ */ React14.createElement("input", {
+      key: i3
+    }, /* @__PURE__ */ React16.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-md border-b border-purple-500 w-full overflow-ellipsis",
       placeholder: "Name...",
       value: u3,
@@ -34977,121 +35192,121 @@ to {
         return __spreadProps(__spreadValues({}, s2), { blocklist: list });
       }),
       title: "Account name to block from winner giveaways"
-    }), /* @__PURE__ */ React14.createElement("button", {
+    }), /* @__PURE__ */ React16.createElement("button", {
       className: "text-red-600 absolute right-1.5 top-1.5 text-xl",
       onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { blocklist: removeIdx(s2.blocklist, i3) }))
-    }, /* @__PURE__ */ React14.createElement(FaTimes, null)))))), /* @__PURE__ */ React14.createElement("div", {
+    }, /* @__PURE__ */ React16.createElement(FaTimes, null)))))), /* @__PURE__ */ React16.createElement("div", {
       className: "flex flex-col gap-2"
-    }, /* @__PURE__ */ React14.createElement("div", {
+    }, /* @__PURE__ */ React16.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ React14.createElement("div", {
+    }, /* @__PURE__ */ React16.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ React14.createElement("h2", {
+    }, /* @__PURE__ */ React16.createElement("h2", {
       className: "text-xl"
-    }, "Performance Mode"), /* @__PURE__ */ React14.createElement("small", {
+    }, "Performance Mode"), /* @__PURE__ */ React16.createElement("small", {
       className: "text-m"
-    }, "Will hide chat when there are no winners, and disable chat scroll following"))), /* @__PURE__ */ React14.createElement("div", {
+    }, "Will hide chat when there are no winners, and disable chat scroll following"))), /* @__PURE__ */ React16.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
-    }, /* @__PURE__ */ React14.createElement("div", {
+    }, /* @__PURE__ */ React16.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",
       title: "If enabled, will send messages tagging winners in Twitch chat"
-    }, "Enabled?"), /* @__PURE__ */ React14.createElement("button", {
+    }, "Enabled?"), /* @__PURE__ */ React16.createElement("button", {
       className: "flex-1 text-2xl text-center justify-center items-center flex transition-opacity hover:opacity-60",
       onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { performanceMode: !s2.performanceMode }))
-    }, settings.performanceMode ? /* @__PURE__ */ React14.createElement(FaCheck, null) : /* @__PURE__ */ React14.createElement(FaTimes, null)))), /* @__PURE__ */ React14.createElement("div", {
+    }, settings.performanceMode ? /* @__PURE__ */ React16.createElement(FaCheck, null) : /* @__PURE__ */ React16.createElement(FaTimes, null)))), /* @__PURE__ */ React16.createElement("div", {
       className: "flex flex-col gap-2"
-    }, /* @__PURE__ */ React14.createElement("div", {
+    }, /* @__PURE__ */ React16.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ React14.createElement("div", {
+    }, /* @__PURE__ */ React16.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ React14.createElement("h2", {
+    }, /* @__PURE__ */ React16.createElement("h2", {
       className: "text-xl"
-    }, "Giveaway Forfeit Command"), /* @__PURE__ */ React14.createElement("small", {
+    }, "Giveaway Forfeit Command"), /* @__PURE__ */ React16.createElement("small", {
       className: "text-m"
-    }, "If a user types anything that matchs this command, they will forfeit winner any command, until list is cleared. No spaces."))), /* @__PURE__ */ React14.createElement("div", {
+    }, "If a user types anything that matchs this command, they will forfeit winner any command, until list is cleared. No spaces."))), /* @__PURE__ */ React16.createElement("div", {
       className: "flex flex-row gap-4"
-    }, /* @__PURE__ */ React14.createElement("div", {
+    }, /* @__PURE__ */ React16.createElement("div", {
       className: "flex flex-row justify-center items-center flex-1"
-    }, /* @__PURE__ */ React14.createElement("div", {
+    }, /* @__PURE__ */ React16.createElement("div", {
       className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md",
       title: "Filters messages to include this"
-    }, "Forfeit Command"), /* @__PURE__ */ React14.createElement("input", {
+    }, "Forfeit Command"), /* @__PURE__ */ React16.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1",
       placeholder: "Empty means no forfeits...",
       value: settings.forfeitCommand || "",
       onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { forfeitCommand: e2.target.value.trim() })),
       title: "Forfeit command..."
-    })), /* @__PURE__ */ React14.createElement("div", {
+    })), /* @__PURE__ */ React16.createElement("div", {
       className: "flex-0 bg-purple-600 px-2 py-1 rounded-md flex justify-center items-center"
-    }, "Number of forfeits: ", forfeits.length), /* @__PURE__ */ React14.createElement("button", {
+    }, "Number of forfeits: ", forfeits.length), /* @__PURE__ */ React16.createElement("button", {
       className: "flex-0 bg-red-600 px-2 py-1 rounded-md flex justify-center items-center gap-1",
       onClick: () => setForfeits([])
-    }, /* @__PURE__ */ React14.createElement(FaTimes, null), " Reset List"))), /* @__PURE__ */ React14.createElement("div", {
+    }, /* @__PURE__ */ React16.createElement(FaTimes, null), " Reset List"))), /* @__PURE__ */ React16.createElement("div", {
       className: "flex flex-col gap-2"
-    }, /* @__PURE__ */ React14.createElement("div", {
+    }, /* @__PURE__ */ React16.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ React14.createElement("div", {
+    }, /* @__PURE__ */ React16.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ React14.createElement("h2", {
+    }, /* @__PURE__ */ React16.createElement("h2", {
       className: "text-xl"
-    }, "Alert Settings"))), /* @__PURE__ */ React14.createElement("div", {
+    }, "Alert Settings"))), /* @__PURE__ */ React16.createElement("div", {
       className: "flex flex-row gap-2 justify-center items-center"
-    }, /* @__PURE__ */ React14.createElement("div", {
+    }, /* @__PURE__ */ React16.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
-    }, /* @__PURE__ */ React14.createElement("div", {
+    }, /* @__PURE__ */ React16.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",
       title: "Will clear chat, and then pause it after the time, to enable a giveaway with cut off"
-    }, "Duration"), /* @__PURE__ */ React14.createElement("div", {
+    }, "Duration"), /* @__PURE__ */ React16.createElement("div", {
       className: "px-2 flex-1 flex justify-center items-center"
-    }, /* @__PURE__ */ React14.createElement(SliderInner, {
+    }, /* @__PURE__ */ React16.createElement(SliderInner, {
       min: ONE_S,
       max: ONE_S * 30,
       value: settings.alertDuration || defaultSettings.alertDuration,
       step: ONE_S,
       onChange: (v2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { alertDuration: v2 }))
-    })), /* @__PURE__ */ React14.createElement("div", {
+    })), /* @__PURE__ */ React16.createElement("div", {
       className: "flex-1 justify-center items-center text-center flex"
-    }, formatDistanceStrict(Date.now() + (settings.alertDuration || defaultSettings.alertDuration), new Date()))), /* @__PURE__ */ React14.createElement("div", {
+    }, formatDistanceStrict(Date.now() + (settings.alertDuration || defaultSettings.alertDuration), new Date()))), /* @__PURE__ */ React16.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
-    }, /* @__PURE__ */ React14.createElement("div", {
+    }, /* @__PURE__ */ React16.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",
       title: "Will clear chat, and then pause it after the time, to enable a giveaway with cut off"
-    }, "Theme"), /* @__PURE__ */ React14.createElement("div", {
+    }, "Theme"), /* @__PURE__ */ React16.createElement("div", {
       className: "px-2 flex-1 flex justify-center items-center"
-    }, alertThemeMap[settings.alertTheme || defaultSettings.alertTheme])), /* @__PURE__ */ React14.createElement("div", {
+    }, alertThemeMap[settings.alertTheme || defaultSettings.alertTheme])), /* @__PURE__ */ React16.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
-    }, /* @__PURE__ */ React14.createElement("div", {
+    }, /* @__PURE__ */ React16.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",
       title: "If enabled, will automatically send the alert and chat message, otherwise you have to manually send them"
-    }, "Auto Announce"), /* @__PURE__ */ React14.createElement("button", {
+    }, "Auto Announce"), /* @__PURE__ */ React16.createElement("button", {
       className: "flex-1 text-2xl text-center justify-center items-center flex transition-opacity hover:opacity-60",
       onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { autoAnnounce: s2.autoAnnounce === void 0 ? false : !s2.autoAnnounce }))
-    }, settings.autoAnnounce || settings.autoAnnounce === void 0 ? /* @__PURE__ */ React14.createElement(FaCheck, null) : /* @__PURE__ */ React14.createElement(FaTimes, null))))), /* @__PURE__ */ React14.createElement("div", {
+    }, settings.autoAnnounce || settings.autoAnnounce === void 0 ? /* @__PURE__ */ React16.createElement(FaCheck, null) : /* @__PURE__ */ React16.createElement(FaTimes, null))))), /* @__PURE__ */ React16.createElement("div", {
       className: "flex-1 flex items-end gap-2"
-    }, /* @__PURE__ */ React14.createElement("div", {
+    }, /* @__PURE__ */ React16.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ React14.createElement("button", {
+    }, /* @__PURE__ */ React16.createElement("button", {
       className: "text-purple-200 opacity-80 text-xs",
       onClick: () => Neutralino.os.open(`https://github.com/maael/giveaway-o-tron/releases/v${APP_VERSION}`)
-    }, "Version: ", APP_VERSION ? `v${APP_VERSION}` : "Unknown Version")), /* @__PURE__ */ React14.createElement("button", {
+    }, "Version: ", APP_VERSION ? `v${APP_VERSION}` : "Unknown Version")), /* @__PURE__ */ React16.createElement("button", {
       className: "bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity",
       onClick: async () => {
         Neutralino.os.open(`https://giveaway-o-tron.vercel.app/api/auth/signout`);
       }
-    }, /* @__PURE__ */ React14.createElement(FaExclamationTriangle, null), " Sign Out Token Tool"), /* @__PURE__ */ React14.createElement("button", {
+    }, /* @__PURE__ */ React16.createElement(FaExclamationTriangle, null), " Sign Out Token Tool"), /* @__PURE__ */ React16.createElement("button", {
       className: "bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity",
       onClick: async () => {
         await Neutralino.storage.setData("main-channelinfo", null);
         window.location.reload();
       }
-    }, /* @__PURE__ */ React14.createElement(FaExclamationTriangle, null), " Reset Channel Info")));
+    }, /* @__PURE__ */ React16.createElement(FaExclamationTriangle, null), " Reset Channel Info")));
   }
 
   // src/components/primitives/Header.tsx
-  var import_react20 = __toModule(require_react());
+  var import_react22 = __toModule(require_react());
 
   // src/components/hooks/useCopyToClipboard.ts
-  var React15 = __toModule(require_react());
+  var React17 = __toModule(require_react());
   var useCopyToClipboard = (text, options = { resetTimeout: 1e3 }) => {
     const copyToClipboard = (str) => {
       var _a, _b, _c, _d;
@@ -35112,10 +35327,10 @@ to {
       }
       return success;
     };
-    const mounted = React15.useRef(false);
-    const resetTimer = React15.useRef();
-    const [copied, setCopied] = React15.useState(false);
-    React15.useEffect(() => {
+    const mounted = React17.useRef(false);
+    const resetTimer = React17.useRef();
+    const [copied, setCopied] = React17.useState(false);
+    React17.useEffect(() => {
       mounted.current = true;
       return () => {
         if (resetTimer.current)
@@ -35123,13 +35338,13 @@ to {
         mounted.current = false;
       };
     }, []);
-    const copy = React15.useCallback(() => {
+    const copy = React17.useCallback(() => {
       if (resetTimer.current)
         clearTimeout(resetTimer.current);
       setCopied(copyToClipboard(text));
       resetTimer.current = setTimeout(() => setCopied(false), options.resetTimeout);
     }, [text, options.resetTimeout]);
-    React15.useEffect(() => () => {
+    React17.useEffect(() => () => {
       setCopied(false);
     }, [text]);
     return [copied, copy];
@@ -35146,53 +35361,53 @@ to {
     const location2 = useLocation();
     const homeRoute = channelInfo.login ? "/" : "/setup";
     const [copiedAlertURL, copyAlertURL] = useCopyToClipboard_default(`https://giveaway-o-tron.vercel.app/alerts/gw2?channel=${channelInfo.userId}`);
-    return /* @__PURE__ */ import_react20.default.createElement("div", {
+    return /* @__PURE__ */ import_react22.default.createElement("div", {
       className: "flex flex-row justify-start gap-2"
-    }, /* @__PURE__ */ import_react20.default.createElement("div", {
+    }, /* @__PURE__ */ import_react22.default.createElement("div", {
       className: "flex-1 flex flex-row gap-2 items-center"
-    }, /* @__PURE__ */ import_react20.default.createElement("div", {
+    }, /* @__PURE__ */ import_react22.default.createElement("div", {
       className: "inline-block"
-    }, /* @__PURE__ */ import_react20.default.createElement(Link, {
+    }, /* @__PURE__ */ import_react22.default.createElement(Link, {
       to: homeRoute
-    }, /* @__PURE__ */ import_react20.default.createElement("h1", {
+    }, /* @__PURE__ */ import_react22.default.createElement("h1", {
       className: "flex flex-row gap-1 items-center text-white bg-purple-600 rounded-md px-3 py-1 transform hover:scale-105 transition-transform shadow-md"
-    }, /* @__PURE__ */ import_react20.default.createElement(FaRobot, {
+    }, /* @__PURE__ */ import_react22.default.createElement(FaRobot, {
       className: "text-2xl"
-    }), " ", /* @__PURE__ */ import_react20.default.createElement("span", {
+    }), " ", /* @__PURE__ */ import_react22.default.createElement("span", {
       className: "hidden sm:block"
-    }, location2.pathname === homeRoute ? /* @__PURE__ */ import_react20.default.createElement("span", {
+    }, location2.pathname === homeRoute ? /* @__PURE__ */ import_react22.default.createElement("span", {
       className: "relative -top-0.5 ml-1"
-    }, "Giveaway-o-tron") : /* @__PURE__ */ import_react20.default.createElement(FaAngleLeft, {
+    }, "Giveaway-o-tron") : /* @__PURE__ */ import_react22.default.createElement(FaAngleLeft, {
       className: "text-xl"
-    }))))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react20.default.createElement(Link, {
+    }))))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react22.default.createElement(Link, {
       to: "/settings"
-    }, /* @__PURE__ */ import_react20.default.createElement("div", {
+    }, /* @__PURE__ */ import_react22.default.createElement("div", {
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
       title: "Settings (blocklist etc)"
-    }, /* @__PURE__ */ import_react20.default.createElement(FaCogs, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react20.default.createElement(Link, {
+    }, /* @__PURE__ */ import_react22.default.createElement(FaCogs, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react22.default.createElement(Link, {
       to: "/discord"
-    }, /* @__PURE__ */ import_react20.default.createElement("div", {
+    }, /* @__PURE__ */ import_react22.default.createElement("div", {
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
       title: "Discord integration"
-    }, /* @__PURE__ */ import_react20.default.createElement(FaDiscord, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react20.default.createElement(Link, {
+    }, /* @__PURE__ */ import_react22.default.createElement(FaDiscord, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react22.default.createElement(Link, {
       to: "/giveaways"
-    }, /* @__PURE__ */ import_react20.default.createElement("div", {
+    }, /* @__PURE__ */ import_react22.default.createElement("div", {
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
       title: "Past giveways"
-    }, /* @__PURE__ */ import_react20.default.createElement(FaClock, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react20.default.createElement("button", {
+    }, /* @__PURE__ */ import_react22.default.createElement(FaClock, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react22.default.createElement("button", {
       title: "Get url for OBS browser source based alerts animation",
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
       onClick: () => {
         copyAlertURL();
         Et.success("Copied! Use as OBS browser source!", { position: "bottom-center" });
       }
-    }, copiedAlertURL ? /* @__PURE__ */ import_react20.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react20.default.createElement(FaMagic, null)), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react20.default.createElement("button", {
+    }, copiedAlertURL ? /* @__PURE__ */ import_react22.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react22.default.createElement(FaMagic, null)), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react22.default.createElement("button", {
       title: "Open FAQ",
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
       onClick: () => {
         Neutralino.os.open("https://giveaway-o-tron.mael.tech/guide#faq");
       }
-    }, /* @__PURE__ */ import_react20.default.createElement(FaQuestion, null))), /* @__PURE__ */ import_react20.default.createElement("form", {
+    }, /* @__PURE__ */ import_react22.default.createElement(FaQuestion, null))), /* @__PURE__ */ import_react22.default.createElement("form", {
       className: "flex flex-row flex-0",
       onSubmit: (e2) => {
         e2.preventDefault();
@@ -35204,25 +35419,25 @@ to {
           setClient(init(channelInfo));
         }
       }
-    }, /* @__PURE__ */ import_react20.default.createElement("input", {
+    }, /* @__PURE__ */ import_react22.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-l-md border-b border-l border-purple-500",
       placeholder: "Channel Name",
-      value: channelInfo.login,
+      value: channelInfo.login || "",
       disabled: true,
       title: !!client ? "Disconnect to change" : "Set channel to connect to"
-    }), /* @__PURE__ */ import_react20.default.createElement("button", {
+    }), /* @__PURE__ */ import_react22.default.createElement("button", {
       className: "bg-purple-600 text-white py-1 px-3 rounded-r-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 w-32 justify-center",
       title: "Connect to chat"
-    }, /* @__PURE__ */ import_react20.default.createElement(FaTwitch, null), " ", /* @__PURE__ */ import_react20.default.createElement("span", {
+    }, /* @__PURE__ */ import_react22.default.createElement(FaTwitch, null), " ", /* @__PURE__ */ import_react22.default.createElement("span", {
       className: "hidden sm:block"
     }, client ? "Disconnect" : "Connect"))));
   }
 
   // src/components/screens/Discord.tsx
-  var import_react23 = __toModule(require_react());
+  var import_react25 = __toModule(require_react());
 
   // src/components/primitives/Checkbox.tsx
-  var import_react21 = __toModule(require_react());
+  var import_react23 = __toModule(require_react());
   function Checkbox(_a) {
     var _b = _a, {
       value: value2,
@@ -35233,14 +35448,14 @@ to {
       "onChange",
       "name"
     ]);
-    return /* @__PURE__ */ import_react21.default.createElement("button", __spreadValues({
+    return /* @__PURE__ */ import_react23.default.createElement("button", __spreadValues({
       onClick: () => onChange((v2) => __spreadProps(__spreadValues({}, v2), { [name]: !v2[name] }))
-    }, btnProps), value2 ? /* @__PURE__ */ import_react21.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react21.default.createElement(FaTimes, null));
+    }, btnProps), value2 ? /* @__PURE__ */ import_react23.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react23.default.createElement(FaTimes, null));
   }
 
   // src/components/primitives/Input.tsx
   var import_classnames2 = __toModule(require_classnames());
-  var import_react22 = __toModule(require_react());
+  var import_react24 = __toModule(require_react());
   function Input(_a) {
     var _b = _a, {
       label,
@@ -35251,12 +35466,12 @@ to {
       "title",
       "outerClassName"
     ]);
-    return /* @__PURE__ */ import_react22.default.createElement("div", {
+    return /* @__PURE__ */ import_react24.default.createElement("div", {
       className: (0, import_classnames2.default)(outerClassName, "flex flex-row justify-center items-center flex-1")
-    }, /* @__PURE__ */ import_react22.default.createElement("div", {
+    }, /* @__PURE__ */ import_react24.default.createElement("div", {
       className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md h-full",
       title
-    }, label), /* @__PURE__ */ import_react22.default.createElement("input", __spreadValues({
+    }, label), /* @__PURE__ */ import_react24.default.createElement("input", __spreadValues({
       className: "bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1 h-full overflow-ellipsis"
     }, inputProps)));
   }
@@ -35267,152 +35482,161 @@ to {
     setSettings
   }) {
     var _a, _b, _c;
-    return /* @__PURE__ */ import_react23.default.createElement("div", {
+    return /* @__PURE__ */ import_react25.default.createElement("div", {
       className: "mt-2 flex flex-col gap-2 flex-1"
-    }, /* @__PURE__ */ import_react23.default.createElement("div", {
+    }, /* @__PURE__ */ import_react25.default.createElement("div", {
       className: "flex flex-row justify-between items-center"
-    }, /* @__PURE__ */ import_react23.default.createElement("h1", {
+    }, /* @__PURE__ */ import_react25.default.createElement("h1", {
       className: "text-3xl"
-    }, "Discord"), /* @__PURE__ */ import_react23.default.createElement("button", {
+    }, "Discord"), /* @__PURE__ */ import_react25.default.createElement("button", {
       className: "bg-purple-600 text-white py-1 px-5 rounded-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 justify-center text-xl mt-2",
       onClick: () => {
         Neutralino.os.open("https://discord.com/api/oauth2/authorize?client_id=1012331926301974558&permissions=150528&scope=bot");
       }
-    }, /* @__PURE__ */ import_react23.default.createElement(FaEnvelope, null), " Invite Bot")), /* @__PURE__ */ import_react23.default.createElement("div", {
+    }, /* @__PURE__ */ import_react25.default.createElement(FaEnvelope, null), " Invite Bot")), /* @__PURE__ */ import_react25.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react23.default.createElement(Input, {
+    }, /* @__PURE__ */ import_react25.default.createElement(Input, {
       label: "Server ID",
       placeholder: "ID...",
       value: settings.guildId || "",
       onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { guildId: e2.target.value }))
-    }), /* @__PURE__ */ import_react23.default.createElement(Input, {
+    }), /* @__PURE__ */ import_react25.default.createElement(Input, {
       label: "Channel ID",
       placeholder: "ID...",
       value: settings.channelId || "",
       onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { channelId: e2.target.value }))
-    })), /* @__PURE__ */ import_react23.default.createElement("p", {
+    })), /* @__PURE__ */ import_react25.default.createElement("p", {
       className: "text-sm opacity-90 text-center"
-    }, "After inviting the bot using the button above, find these IDs by:"), /* @__PURE__ */ import_react23.default.createElement("ol", {
+    }, "After inviting the bot using the button above, find these IDs by:"), /* @__PURE__ */ import_react25.default.createElement("ol", {
       className: "text-sm list-decimal max-w-md mx-auto opacity-90 -mt-1"
-    }, /* @__PURE__ */ import_react23.default.createElement("li", null, "In Discord, go to settings"), /* @__PURE__ */ import_react23.default.createElement("li", null, "Go to Appearance, Advanced, and enable Developer Mode"), /* @__PURE__ */ import_react23.default.createElement("li", null, "Right click on your Discord Server icon in the sidebar, and select Copy ID, and paste above"), /* @__PURE__ */ import_react23.default.createElement("li", null, "Do the same again but for a channel")), /* @__PURE__ */ import_react23.default.createElement("h1", {
+    }, /* @__PURE__ */ import_react25.default.createElement("li", null, "In Discord, go to settings"), /* @__PURE__ */ import_react25.default.createElement("li", null, "Go to Appearance, Advanced, and enable Developer Mode"), /* @__PURE__ */ import_react25.default.createElement("li", null, "Right click on your Discord Server icon in the sidebar, and select Copy ID, and paste above"), /* @__PURE__ */ import_react25.default.createElement("li", null, "Do the same again but for a channel")), /* @__PURE__ */ import_react25.default.createElement("h1", {
       className: "text-xl"
-    }, "Message Settings"), /* @__PURE__ */ import_react23.default.createElement("div", {
+    }, "Message Settings"), /* @__PURE__ */ import_react25.default.createElement("div", {
       className: "flex flex-col gap-2 text-sm"
-    }, /* @__PURE__ */ import_react23.default.createElement(Input, {
-      outerClassName: "flex-2",
+    }, /* @__PURE__ */ import_react25.default.createElement("div", {
+      className: "flex flex-row justify-center items-center gap-6"
+    }, /* @__PURE__ */ import_react25.default.createElement(Input, {
+      outerClassName: "flex-1",
       label: "Message Colour",
       placeholder: "Hex code...",
       value: settings.messageColour || "",
       onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { messageColour: e2.target.value }))
-    }), /* @__PURE__ */ import_react23.default.createElement("div", {
+    }), /* @__PURE__ */ import_react25.default.createElement(SliderOuter, {
+      label: "Giveaway Alert Min Time",
+      value: settings.giveawayMinTime || ONE_MIN,
+      renderValue: (v2) => /* @__PURE__ */ import_react25.default.createElement(import_react25.default.Fragment, null, formatDistanceStrict(Date.now() + v2, new Date())),
+      min: ONE_MIN,
+      max: ONE_MIN * 30,
+      onChange: (v2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { giveawayMinTime: v2 }))
+    })), /* @__PURE__ */ import_react25.default.createElement("div", {
       className: "flex flex-row justify-center items-center gap-2"
-    }, /* @__PURE__ */ import_react23.default.createElement("div", {
+    }, /* @__PURE__ */ import_react25.default.createElement("div", {
       className: "flex-1 bg-purple-600 px-2 py-1 text-center rounded-md"
-    }, "Giveaway Start:"), /* @__PURE__ */ import_react23.default.createElement(Input, {
+    }, "Giveaway Start:"), /* @__PURE__ */ import_react25.default.createElement(Input, {
       outerClassName: "flex-2",
       label: "Title",
       placeholder: "Title...",
       value: settings.startTitle || "",
       onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { startTitle: e2.target.value }))
-    }), /* @__PURE__ */ import_react23.default.createElement(Input, {
+    }), /* @__PURE__ */ import_react25.default.createElement(Input, {
       outerClassName: "flex-3",
       label: "Body",
       placeholder: "Body...",
       value: settings.startBody || "",
       onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { startBody: e2.target.value }))
-    }), /* @__PURE__ */ import_react23.default.createElement(Checkbox, {
+    }), /* @__PURE__ */ import_react25.default.createElement(Checkbox, {
       className: "bg-purple-600 rounded-md h-full px-2 py-1",
       value: (_a = settings.startEnabled) != null ? _a : true,
       name: "startEnabled",
       onChange: setSettings,
       title: "Enable Discord messages for starting giveaways"
-    })), /* @__PURE__ */ import_react23.default.createElement("div", {
+    })), /* @__PURE__ */ import_react25.default.createElement("div", {
       className: "flex flex-row justify-center items-center gap-2"
-    }, /* @__PURE__ */ import_react23.default.createElement("div", {
+    }, /* @__PURE__ */ import_react25.default.createElement("div", {
       className: "flex-1 bg-purple-600 px-2 py-1 text-center rounded-md"
-    }, "Giveaway End:"), /* @__PURE__ */ import_react23.default.createElement(Input, {
+    }, "Giveaway End:"), /* @__PURE__ */ import_react25.default.createElement(Input, {
       outerClassName: "flex-2",
       label: "Title",
       placeholder: "Title...",
       value: settings.endTitle || "",
       onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { endTitle: e2.target.value }))
-    }), /* @__PURE__ */ import_react23.default.createElement(Input, {
+    }), /* @__PURE__ */ import_react25.default.createElement(Input, {
       outerClassName: "flex-3",
       label: "Body",
       placeholder: "Body...",
       value: settings.endBody || "",
       onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { endBody: e2.target.value }))
-    }), /* @__PURE__ */ import_react23.default.createElement(Checkbox, {
+    }), /* @__PURE__ */ import_react25.default.createElement(Checkbox, {
       className: "bg-purple-600 rounded-md h-full px-2 py-1",
       value: (_b = settings.endEnabled) != null ? _b : true,
       name: "endEnabled",
       onChange: setSettings,
       title: "Enable Discord messages for ending giveaways"
-    })), /* @__PURE__ */ import_react23.default.createElement("div", {
+    })), /* @__PURE__ */ import_react25.default.createElement("div", {
       className: "flex flex-row justify-center items-center gap-2"
-    }, /* @__PURE__ */ import_react23.default.createElement("div", {
+    }, /* @__PURE__ */ import_react25.default.createElement("div", {
       className: "flex-1 bg-purple-600 px-2 py-1 text-center rounded-md"
-    }, "Winner:"), /* @__PURE__ */ import_react23.default.createElement(Input, {
+    }, "Winner:"), /* @__PURE__ */ import_react25.default.createElement(Input, {
       outerClassName: "flex-2",
       label: "Title",
       placeholder: "Title...",
       value: settings.winnerTitle || "",
       onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { winnerTitle: e2.target.value }))
-    }), /* @__PURE__ */ import_react23.default.createElement(Input, {
+    }), /* @__PURE__ */ import_react25.default.createElement(Input, {
       outerClassName: "flex-3",
       label: "Body",
       placeholder: "Body...",
       value: settings.winnerBody || "",
       onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { winnerBody: e2.target.value }))
-    }), /* @__PURE__ */ import_react23.default.createElement(Checkbox, {
+    }), /* @__PURE__ */ import_react25.default.createElement(Checkbox, {
       className: "bg-purple-600 rounded-md h-full px-2 py-1",
       value: (_c = settings.winnerEnabled) != null ? _c : true,
       name: "winnerEnabled",
       onChange: setSettings,
       title: "Enable Discord messages for winners"
-    })), /* @__PURE__ */ import_react23.default.createElement("p", {
+    })), /* @__PURE__ */ import_react25.default.createElement("p", {
       className: "px-2 mb-3 opacity-90 text-sm"
-    }, "You can mention roles with @rolename. Some special keywords you can include are:"), /* @__PURE__ */ import_react23.default.createElement("div", {
+    }, "You can mention roles with @rolename. Some special keywords you can include are:"), /* @__PURE__ */ import_react25.default.createElement("div", {
       className: "flex flex-col gap-2 -mt-3 text-sm"
-    }, /* @__PURE__ */ import_react23.default.createElement("div", {
+    }, /* @__PURE__ */ import_react25.default.createElement("div", {
       className: "flex flex-row gap-2 relative"
-    }, /* @__PURE__ */ import_react23.default.createElement("div", {
+    }, /* @__PURE__ */ import_react25.default.createElement("div", {
       className: "w-1/5 flex justify-end items-start"
-    }, /* @__PURE__ */ import_react23.default.createElement("em", {
+    }, /* @__PURE__ */ import_react25.default.createElement("em", {
       className: "not-italic px-3 py-1 bg-gray-700 text-purple-400 rounded-md"
-    }, "$winner")), /* @__PURE__ */ import_react23.default.createElement("p", {
+    }, "$winner")), /* @__PURE__ */ import_react25.default.createElement("p", {
       className: "flex flex-row items-center"
-    }, "Will be replaced by the winners username (title and body)")), /* @__PURE__ */ import_react23.default.createElement("div", {
+    }, "Will be replaced by the winners username (title and body)")), /* @__PURE__ */ import_react25.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react23.default.createElement("div", {
+    }, /* @__PURE__ */ import_react25.default.createElement("div", {
       className: "w-1/5 flex justify-end items-start"
-    }, /* @__PURE__ */ import_react23.default.createElement("em", {
+    }, /* @__PURE__ */ import_react25.default.createElement("em", {
       className: "not-italic px-3 py-1 bg-gray-700 text-purple-400 rounded-md"
-    }, "$prize")), /* @__PURE__ */ import_react23.default.createElement("p", {
+    }, "$prize")), /* @__PURE__ */ import_react25.default.createElement("p", {
       className: "flex flex-row items-center"
-    }, "Will be replaced by the giveaway name if there is one (title and body)")), /* @__PURE__ */ import_react23.default.createElement("div", {
+    }, "Will be replaced by the giveaway name if there is one (title and body)")), /* @__PURE__ */ import_react25.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react23.default.createElement("div", {
+    }, /* @__PURE__ */ import_react25.default.createElement("div", {
       className: "w-1/5 flex justify-end items-start"
-    }, /* @__PURE__ */ import_react23.default.createElement("em", {
+    }, /* @__PURE__ */ import_react25.default.createElement("em", {
       className: "not-italic px-3 py-1 bg-gray-700 text-purple-400 rounded-md"
-    }, "[any text]($link)")), /* @__PURE__ */ import_react23.default.createElement("p", {
+    }, "[any text]($link)")), /* @__PURE__ */ import_react25.default.createElement("p", {
       className: "flex flex-row items-center"
     }, "Will be replaced by the text between the square brackets, linking to your Twitch (body only)")))));
   }
 
   // src/App.tsx
   function App() {
-    return /* @__PURE__ */ import_react24.default.createElement(MemoryRouter, {
+    return /* @__PURE__ */ import_react26.default.createElement(MemoryRouter, {
       initialEntries: ["/setup"]
-    }, /* @__PURE__ */ import_react24.default.createElement(InnerApp, null));
+    }, /* @__PURE__ */ import_react26.default.createElement(InnerApp, null));
   }
   function InnerApp() {
     useUpdateCheck();
     const [settings, setSettings] = useStorage("settings", defaultSettings);
     const [discordSettings, setDiscordSettings] = useStorage("discord", {});
-    const [winners, setWinners] = import_react24.default.useState([]);
-    const [client, setClient] = import_react24.default.useState(null);
+    const [winners, setWinners] = import_react26.default.useState([]);
+    const [client, setClient] = import_react26.default.useState(null);
     const [channelInfo, setChannelInfo] = useStorage("channelInfo", {}, (c2) => {
       console.info("[client][app]", c2);
       if (!c2.login)
@@ -35421,7 +35645,7 @@ to {
       if (settings.autoConnect)
         setClient((cl) => cl ? cl : init(c2));
     });
-    const updateClientInfo = import_react24.default.useCallback((d3) => {
+    const updateClientInfo = import_react26.default.useCallback((d3) => {
       console.info("[auth][client][update]", d3);
       setChannelInfo(d3);
       client == null ? void 0 : client.disconnect();
@@ -35429,33 +35653,34 @@ to {
       setClient(init(d3));
     }, [client]);
     useAuthEvents(updateClientInfo);
-    import_react24.default.useEffect(() => {
+    import_react26.default.useEffect(() => {
       if (channelInfo.login) {
         if (settings.autoConnect)
           setClient((cl) => cl ? cl : init(channelInfo));
       }
     }, [channelInfo.login]);
-    const [forfeits, setForfeits] = import_react24.default.useState([]);
-    const onNewChat = import_react24.default.useCallback((chat) => {
+    const [forfeits, setForfeits] = import_react26.default.useState([]);
+    const onNewChat = import_react26.default.useCallback((chat) => {
       if (settings.forfeitCommand && chat.msg.toLowerCase().includes(settings.forfeitCommand.toLowerCase())) {
         setForfeits((f3) => f3.concat(chat.username));
       }
     }, [settings.forfeitCommand]);
-    const [chatPaused, setChatPaused] = import_react24.default.useState(false);
+    const [chatPaused, setChatPaused] = import_react26.default.useState(false);
     const [chatEvents, resetChat] = useChatEvents(chatPaused, winners, onNewChat);
-    import_react24.default.useEffect(() => {
+    import_react26.default.useEffect(() => {
       window["myApp"].setTitle(channelInfo.login, !!client);
     }, [channelInfo.login, client]);
     const [pastGiveaways, setPastGiveaways] = useStorage("past-giveaways", []);
-    return /* @__PURE__ */ import_react24.default.createElement(import_react24.default.Fragment, null, /* @__PURE__ */ import_react24.default.createElement(Header, {
+    const stats = useCacheStats();
+    return /* @__PURE__ */ import_react26.default.createElement(import_react26.default.Fragment, null, /* @__PURE__ */ import_react26.default.createElement(Header, {
       client,
       resetChat,
       setClient,
       channelInfo
-    }), /* @__PURE__ */ import_react24.default.createElement(Switch, null, /* @__PURE__ */ import_react24.default.createElement(Route, {
+    }), /* @__PURE__ */ import_react26.default.createElement(Switch, null, /* @__PURE__ */ import_react26.default.createElement(Route, {
       path: "/",
       exact: true
-    }, /* @__PURE__ */ import_react24.default.createElement(MainScreen, {
+    }, /* @__PURE__ */ import_react26.default.createElement(MainScreen, {
       client,
       chatEvents,
       discordSettings,
@@ -35469,36 +35694,37 @@ to {
       winners,
       setWinners,
       setPastGiveaways,
-      forfeits
-    })), /* @__PURE__ */ import_react24.default.createElement(Route, {
+      forfeits,
+      stats
+    })), /* @__PURE__ */ import_react26.default.createElement(Route, {
       path: "/setup",
       exact: true
-    }, /* @__PURE__ */ import_react24.default.createElement(Setup, {
+    }, /* @__PURE__ */ import_react26.default.createElement(Setup, {
       resetChat,
       setClient,
       channel: channelInfo,
       setChannel: setChannelInfo
-    })), /* @__PURE__ */ import_react24.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react26.default.createElement(Route, {
       path: "/giveaways",
       exact: true
-    }, /* @__PURE__ */ import_react24.default.createElement(PastGiveaways, {
+    }, /* @__PURE__ */ import_react26.default.createElement(PastGiveaways, {
       giveaways: pastGiveaways,
       setPastGiveaways
-    })), /* @__PURE__ */ import_react24.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react26.default.createElement(Route, {
       path: "/settings",
       exact: true
-    }, /* @__PURE__ */ import_react24.default.createElement(SettingsScreen, {
+    }, /* @__PURE__ */ import_react26.default.createElement(SettingsScreen, {
       settings,
       setSettings,
       forfeits,
       setForfeits
-    })), /* @__PURE__ */ import_react24.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react26.default.createElement(Route, {
       path: "/discord",
       exact: true
-    }, /* @__PURE__ */ import_react24.default.createElement(Discord, {
+    }, /* @__PURE__ */ import_react26.default.createElement(Discord, {
       settings: discordSettings,
       setSettings: setDiscordSettings
-    }))), /* @__PURE__ */ import_react24.default.createElement(Oe, null));
+    }))), /* @__PURE__ */ import_react26.default.createElement(Oe, null));
   }
 
   // src/index.tsx
@@ -35514,7 +35740,7 @@ to {
   Neutralino.events.on("windowClose", window["myApp"].onWindowClose);
   Neutralino.events.on("ready", () => {
     void watch();
-    import_react_dom.default.render(/* @__PURE__ */ import_react25.default.createElement(App, null), document.querySelector("#app"));
+    import_react_dom.default.render(/* @__PURE__ */ import_react27.default.createElement(App, null), document.querySelector("#app"));
   });
 })();
 /*

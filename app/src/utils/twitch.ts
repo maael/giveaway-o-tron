@@ -3,8 +3,47 @@ import { wait } from './misc'
 import toast from 'react-hot-toast'
 import { Cache, CACHE_KEY } from './twitchCaches'
 import { refreshTokenFlow } from './auth'
+import React from 'react'
 
 const BOTS = ['streamelements', 'streamlabs', 'nightbot']
+
+interface CacheEvent {
+  type: 'followers' | 'subs'
+  total: number
+  count: number
+  status: 'inprogress' | 'done' | 'error'
+}
+class CacheEvents extends EventTarget {
+  emit(data: CacheEvent) {
+    this.dispatchEvent(new CustomEvent('update', { detail: data }))
+  }
+}
+
+const cacheEmitter = new CacheEvents()
+
+export interface CacheStats {
+  followers: Omit<CacheEvent, 'type'>
+  subs: Omit<CacheEvent, 'type'>
+}
+
+export function useCacheStats() {
+  const [stats, setStats] = React.useState<CacheStats>({
+    followers: { count: 0, total: 0, status: 'inprogress' },
+    subs: { count: 0, total: 0, status: 'inprogress' },
+  })
+  React.useEffect(() => {
+    function handle(e) {
+      const data: CacheEvent = e.detail
+      console.info('[cache:event]', data)
+      setStats((s) => ({ ...s, [data.type]: { count: data.count, total: data.total, status: data.status } }))
+    }
+    cacheEmitter.addEventListener('update', handle)
+    return () => {
+      cacheEmitter.removeEventListener('update', handle)
+    }
+  }, [setStats])
+  return stats
+}
 
 async function callTwitchApi(channelInfo: ChannelInfo, path: string, isRefresh: boolean = false) {
   const res = await fetch(`https://api.twitch.tv/helix/${path}`, {
@@ -56,6 +95,7 @@ export async function getFollowers(channelInfo: ChannelInfo) {
     (i) => ({ id: i.from_id, login: i.from_login })
   )
 }
+
 let dumbSubscriberCache = new Map()
 export async function getSubs(channelInfo: ChannelInfo) {
   return genericCacher(
@@ -74,7 +114,7 @@ const initialized = {
 }
 
 async function genericCacher(
-  type: string,
+  type: 'subs' | 'followers',
   cacheKey: CACHE_KEY,
   channelInfo: ChannelInfo,
   path: string,
@@ -84,6 +124,7 @@ async function genericCacher(
   const wasInitialized = !!initialized[type]
   const shouldToast = dumbCache.size === 0 && !initialized[type]
   initialized[type] = true
+  let total = 0
   try {
     let cursor = ''
     let cache = new Cache(channelInfo.login!, cacheKey)
@@ -92,9 +133,11 @@ async function genericCacher(
       console.info(`[${type}][existing]`, existingCache.size)
       dumbCache = new Map([...existingCache])
     }
-    let percentThresholdTotal = 0
     if (shouldToast) {
-      toast.success(`Loading basic ${type} cache...`, { position: 'bottom-right' })
+      toast.success(`Loading ${type}...`, {
+        position: 'bottom-right',
+        style: { fontSize: '0.8rem', padding: '0.2rem' },
+      })
     }
     do {
       const data = await callTwitchApi(channelInfo, `${path}${channelInfo.userId}&first=100&after=${cursor}`).then(
@@ -116,7 +159,6 @@ async function genericCacher(
       const actualSize = dumbCache.size / 2
       const foundSeenPages = chunkInCachePercent > 0.5
       const rightTotalish = actualSize >= data.total
-      const isCatchingUp = foundSeenPages && !rightTotalish
       if ((foundSeenPages && !wasInitialized && rightTotalish) || (foundSeenPages && wasInitialized)) {
         console.info(`[${type}]`, '[caught-up]', { chunkInCachePercent, newItems: data.total - originalActualSize })
         break
@@ -125,31 +167,25 @@ async function genericCacher(
         throw Error('This is nonsense')
       }
       cursor = data.pagination.cursor
-      const percentThreshold = Math.floor(((actualSize / data.total) * 100) / 10)
-      const percent = ((actualSize / data.total) * 100).toFixed(0)
-      const timeEstimate = `~${(((data.total - actualSize) / 100) * 400) / 1000}s remaining`
-      if (percentThreshold !== percentThresholdTotal) {
-        percentThresholdTotal = percentThreshold
-        if (shouldToast) {
-          if (isCatchingUp) {
-            toast.success(`Basic ${type} cache catching up, was at ${percent}% done`, {
-              position: 'bottom-right',
-            })
-          } else {
-            toast.success(`Basic ${type} cache ${percent}% done, ${timeEstimate}`, {
-              position: 'bottom-right',
-            })
-          }
-        }
-      }
-      console.info(`[${type}]`, `${percent}%`, timeEstimate)
+      total = data.total
+      cacheEmitter.emit({ type, total, count: Math.floor(dumbCache.size / 2), status: 'inprogress' })
       if (cursor) await wait(100)
     } while (cursor)
-    if (shouldToast) toast.success(`Basic ${type} cache done!`, { position: 'bottom-right' })
+    if (shouldToast)
+      toast.success(`Loaded ${type}!`, {
+        position: 'bottom-right',
+        style: { fontSize: '0.8rem', padding: '0.2rem' },
+      })
+    cacheEmitter.emit({ type, total, count: Math.floor(dumbCache.size / 2), status: 'done' })
     return dumbCache
   } catch (e) {
     console.error(`[${type}]`, e)
-    if (shouldToast) toast.error(`Failed to load basic ${type} cache!`, { position: 'bottom-right' })
+    cacheEmitter.emit({ type, total, count: Math.floor(dumbCache.size / 2), status: 'error' })
+    if (shouldToast)
+      toast.error(`Failed to load ${type}!`, {
+        position: 'bottom-right',
+        style: { fontSize: '0.8rem', padding: '0.2rem' },
+      })
     return dumbCache
   }
 }

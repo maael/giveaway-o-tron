@@ -8,7 +8,15 @@ import SetupScreen from './components/screens/Setup'
 import PastGiveawaysScreen from './components/screens/PastGiveaways'
 import SettingsScreen from './components/screens/Settings'
 import Header from './components/primitives/Header'
-import { ChannelInfo, defaultSettings, DiscordSettings, GiveawayResult, Settings, useAuthEvents } from './utils'
+import {
+  ChannelInfo,
+  defaultSettings,
+  DiscordSettings,
+  GiveawayResult,
+  Settings,
+  useAuthEvents,
+  useCacheStats,
+} from './utils'
 import { WinnerUser } from './components/primitives/giveaways'
 import { useUpdateCheck } from './utils/updates'
 import Discord from './components/screens/Discord'
@@ -64,6 +72,7 @@ function InnerApp() {
     window['myApp'].setTitle(channelInfo.login, !!client)
   }, [channelInfo.login, client])
   const [pastGiveaways, setPastGiveaways] = useStorage<GiveawayResult[]>('past-giveaways', [])
+  const stats = useCacheStats()
   return (
     <>
       <Header client={client} resetChat={resetChat} setClient={setClient} channelInfo={channelInfo} />
@@ -84,6 +93,7 @@ function InnerApp() {
             setWinners={setWinners}
             setPastGiveaways={setPastGiveaways}
             forfeits={forfeits}
+            stats={stats}
           />
         </Route>
         <Route path="/setup" exact>

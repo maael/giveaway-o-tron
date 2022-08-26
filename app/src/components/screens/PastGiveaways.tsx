@@ -64,7 +64,7 @@ export default function PastGiveaways({
           </div>
           <div>
             <div className="border-b border-purple-600 mb-2">Winners</div>
-            <div className="flex flex-cols gap-2 px-2">
+            <div className="flex flex-col gap-2 px-2">
               {giveaway.winners.map((w, widx) => (
                 <div
                   key={`${idx}-${widx}`}
@@ -106,6 +106,16 @@ export default function PastGiveaways({
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+          <div>
+            <div className="border-b border-purple-600 mb-2">Stats</div>
+            <div className="grid grid-cols-5 gap-2 px-2">
+              <SettingItem label="Users" value={giveaway.giveawayStats?.users ?? '?'} />
+              <SettingItem label="Entries" value={giveaway.giveawayStats?.entries ?? '?'} />
+              <SettingItem label="Followers" value={giveaway.giveawayStats?.followers ?? '?'} />
+              <SettingItem label="Subs" value={giveaway.giveawayStats?.subs ?? '?'} />
+              <SettingItem label="Final Entries" value={giveaway.giveawayStats?.finalEntries ?? '?'} />
             </div>
           </div>
           <div>

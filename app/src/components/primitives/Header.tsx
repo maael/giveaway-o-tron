@@ -113,7 +113,7 @@ export default function Header({
         <input
           className="bg-gray-700 px-2 py-1 rounded-l-md border-b border-l border-purple-500"
           placeholder="Channel Name"
-          value={channelInfo.login}
+          value={channelInfo.login || ''}
           disabled
           title={!!client ? 'Disconnect to change' : 'Set channel to connect to'}
         />

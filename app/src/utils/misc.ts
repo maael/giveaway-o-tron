@@ -1,6 +1,8 @@
 import { ChatItem } from '~/chat'
 import { AlertTheme, Settings } from './types'
 
+export const ONE_MIN = 1000 * 60
+
 export function removeIdx<T>(ar: T[], idx: number): T[] {
   return ar.slice(0, idx).concat(ar.slice(idx + 1))
 }
@@ -60,6 +62,7 @@ export const defaultSettings: Required<Settings> = {
   autoAnnounce: true,
   giveawayName: '',
   timerBell: false,
+  timerDuration: ONE_MIN,
 }
 
 export const alertThemeMap: Record<AlertTheme, string> = {
