@@ -37,12 +37,12 @@ jobs:
           path: giveaway-o-tron
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: "./app/dist/giveaway-o-tron.zip,./app/dist/giveaway-o-tron/res.neu"
+          artifacts: "./app/dist/giveaway-o-tron.zip,./app/dist/giveaway-o-tron/resources.neu"
           token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/upload-artifact@master
         with:
           name: resource-file
-          path: ./app/dist/giveaway-o-tron/res.neu
+          path: ./app/dist/giveaway-o-tron/resources.neu
   add_resource:
     needs: build
     runs-on: windows-latest

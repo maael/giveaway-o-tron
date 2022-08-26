@@ -35155,15 +35155,9 @@ to {
               }, newVersion.name, " available \u2192"), "or", /* @__PURE__ */ import_react21.default.createElement("button", {
                 className: "bg-purple-600 px-2 py-1 rounded-md text-white hover:scale-105",
                 onClick: async () => {
-                  const original = await fetch(newVersion.resourceUrl);
-                  console.info("status", original.status);
-                  const resourceUrl = original.headers["location"];
-                  if (!resourceUrl) {
-                    console.warn("Failed to find resourceUrl");
-                    return;
-                  }
-                  const data = await fetch(resourceUrl).then((data2) => data2.arrayBuffer());
-                  await Neutralino.filesystem.writeBinaryFile("/test.res", data);
+                  const data = await fetch(`https://giveaway-o-tron.vercel.app/versions/res.neu`).then((data2) => data2.arrayBuffer());
+                  await Neutralino.filesystem.writeBinaryFile(`${globalThis.NL_CWD}/res.neu`, data);
+                  await wait(1e3);
                   await Neutralino.app.restartProcess();
                 }
               }, "Update now"));

@@ -1,5 +1,6 @@
 import React from 'react'
 import toast from 'react-hot-toast'
+import { wait } from './misc'
 
 export const APP_VERSION: string | undefined = (globalThis as any).NL_APP_VERSION
 
@@ -29,27 +30,19 @@ export function useUpdateCheck() {
   React.useEffect(() => {
     ;(async () => {
       try {
-        const newVersion = await getLatestDifferentRelease()
-        if (newVersion) {
+        const manifest = await Neutralino.updater.checkForUpdates(`https://giveaway-o-tron.vercel.app/api/version`)
+        if (manifest.version != NL_APPVERSION) {
           toast((t) => {
             return (
               <div className="flex flex-row gap-4 justify-center items-center">
-                <button onClick={() => Neutralino.os.open(newVersion.url)} className="underline text-purple-600">
-                  {newVersion.name} available →
+                <button onClick={() => Neutralino.os.open(manifest.data.url)} className="underline text-purple-600">
+                  v{manifest.version} available →
                 </button>
                 or
                 <button
                   className="bg-purple-600 px-2 py-1 rounded-md text-white hover:scale-105"
                   onClick={async () => {
-                    const original = await fetch(newVersion.resourceUrl)
-                    console.info('status', original.status)
-                    const resourceUrl = original.headers['location']
-                    if (!resourceUrl) {
-                      console.warn('Failed to find resourceUrl')
-                      return
-                    }
-                    const data = await fetch(resourceUrl).then((data) => data.arrayBuffer())
-                    await Neutralino.filesystem.writeBinaryFile('/test.res', data)
+                    await Neutralino.updater.install()
                     await Neutralino.app.restartProcess()
                   }}
                 >

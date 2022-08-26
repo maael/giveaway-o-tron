@@ -7,10 +7,10 @@ const handler: NextApiHandler = async (_req, res) => {
   const resourceUrl = data.assets.find((a) => a.name.endsWith('.neu'))?.browser_download_url
   res.json({
     version: (data.tag_name || '').replace('v', ''),
-    resource_url: resourceUrl,
+    resource_url: `https://giveaway-o-tron.vercel.app/versions/resources.neu`,
     applicationId: 'js.giveaway.otron',
     data: {
-      niceResourceUrl: resourceUrl,
+      ghResourceUrl: resourceUrl,
       url: data.html_url,
       publishedAt: data.published_at,
       body: data.body,
