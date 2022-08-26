@@ -55,9 +55,9 @@ jobs:
       - uses: actions/download-artifact@master
         with:
           name: resource-file
-          path: public/versions/res.neu
+          path: web/public/versions
       - uses: EndBug/add-and-commit@v9
         with:
-          add: public/versions
+          add: web/public/versions
           message: "chore: Update version file"
           push: origin HEAD:main
