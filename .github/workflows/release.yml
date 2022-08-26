@@ -39,3 +39,25 @@ jobs:
         with:
           artifacts: "./app/dist/giveaway-o-tron.zip,./app/dist/giveaway-o-tron/res.neu"
           token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@master
+        with:
+          name: resource-file
+          path: ./app/dist/giveaway-o-tron/res.neu
+  add_resource:
+    needs: build
+    runs-on: windows-latest
+    if: github.actor != 'dependabot[bot]'
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/download-artifact@master
+        with:
+          name: resource-file
+          path: public/versions/res.neu
+      - uses: EndBug/add-and-commit@v9
+        with:
+          add: public/versions
+          message: "chore: Update version file"
+          push: true

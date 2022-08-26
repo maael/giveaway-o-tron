@@ -35121,14 +35121,16 @@ to {
   async function getLatestDifferentRelease() {
     try {
       const currentVersion = APP_VERSION;
-      const data = await fetch(`https://api.github.com/repos/maael/giveaway-o-tron/releases/latest`).then((res) => res.json());
+      const data = await fetch(`https://giveaway-o-tron.vercel.app/api/version`).then((res) => res.json());
       const updateInfo = {
-        name: data.name,
-        url: data.html_url,
-        body: data.body
+        name: `v${data.version}`,
+        resourceUrl: data.resource_url,
+        url: data.data.url,
+        body: data.data.body
       };
       console.info("[update][latest]", updateInfo, currentVersion);
       if (updateInfo.name !== `v${currentVersion}`) {
+        console.info("[update][new]", { current: `v${currentVersion}`, new: updateInfo.name });
         return updateInfo;
       }
       return null;
@@ -35141,14 +35143,35 @@ to {
     import_react21.default.useEffect(() => {
       ;
       (async () => {
-        const latestRelease = await getLatestDifferentRelease();
-        if (latestRelease)
-          Et((t2) => {
-            return /* @__PURE__ */ import_react21.default.createElement("button", {
-              onClick: () => Neutralino.os.open(latestRelease == null ? void 0 : latestRelease.url),
-              className: "underline text-purple-600"
-            }, "Update ", latestRelease == null ? void 0 : latestRelease.name, " available, go to download \u2192");
-          });
+        try {
+          const newVersion = await getLatestDifferentRelease();
+          if (newVersion) {
+            Et((t2) => {
+              return /* @__PURE__ */ import_react21.default.createElement("div", {
+                className: "flex flex-row gap-4 justify-center items-center"
+              }, /* @__PURE__ */ import_react21.default.createElement("button", {
+                onClick: () => Neutralino.os.open(newVersion.url),
+                className: "underline text-purple-600"
+              }, newVersion.name, " available \u2192"), "or", /* @__PURE__ */ import_react21.default.createElement("button", {
+                className: "bg-purple-600 px-2 py-1 rounded-md text-white hover:scale-105",
+                onClick: async () => {
+                  const original = await fetch(newVersion.resourceUrl);
+                  console.info("status", original.status);
+                  const resourceUrl = original.headers["location"];
+                  if (!resourceUrl) {
+                    console.warn("Failed to find resourceUrl");
+                    return;
+                  }
+                  const data = await fetch(resourceUrl).then((data2) => data2.arrayBuffer());
+                  await Neutralino.filesystem.writeBinaryFile("/test.res", data);
+                  await Neutralino.app.restartProcess();
+                }
+              }, "Update now"));
+            });
+          }
+        } catch (e2) {
+          console.warn("[update][error]", e2);
+        }
       })();
     }, []);
   }
