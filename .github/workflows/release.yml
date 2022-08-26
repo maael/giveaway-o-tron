@@ -60,4 +60,4 @@ jobs:
         with:
           add: public/versions
           message: "chore: Update version file"
-          push: true
+          push: origin HEAD:main
