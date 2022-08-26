@@ -41,7 +41,7 @@ export async function sendMessage(
       channelId
     )) as ActualChannelType;
     const roles = await guild.roles.fetch();
-    const title = message.title
+    let title = message.title
       .replace("$winner", message.winner || "Someone")
       .replace("$prize", message.giveawayName || "something");
     let body = message.body
@@ -50,6 +50,7 @@ export async function sendMessage(
       .replace("$link", message.link);
     roles.forEach((r: any) => {
       if (r.name === "@everyone") return;
+      title = title.replace(`@${r.name}`, `<@&${r.id}>`);
       body = body.replace(`@${r.name}`, `<@&${r.id}>`);
     });
     await channel.send({

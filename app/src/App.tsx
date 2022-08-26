@@ -33,10 +33,16 @@ function InnerApp() {
     console.info('[client][app][startClient]')
     if (settings.autoConnect) setClient((cl) => (cl ? cl : chat(c)))
   })
-  const updateClientInfo = React.useCallback((d) => {
-    console.info('[auth][client][update]', d)
-    setChannelInfo(d)
-  }, [])
+  const updateClientInfo = React.useCallback(
+    (d) => {
+      console.info('[auth][client][update]', d)
+      setChannelInfo(d)
+      client?.disconnect()
+      client?.removeAllListeners()
+      setClient(chat(d))
+    },
+    [client]
+  )
   useAuthEvents(updateClientInfo)
   React.useEffect(() => {
     if (channelInfo.login) {

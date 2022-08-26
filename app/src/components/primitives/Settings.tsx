@@ -105,6 +105,7 @@ const Time = React.memo(function Time({
         {format(Date.now() + value, new Date())}
       </div>
       <button
+        title="If enabled will play a sound at the end of the timer"
         className="flex justify-center items-center pr-3"
         onClick={() => setSettings((s) => ({ ...s, timerBell: !s.timerBell }))}
       >
@@ -129,7 +130,7 @@ const Time = React.memo(function Time({
             discordEnabled: discordSettings.startEnabled,
           })
         }}
-        title="Will clear chat"
+        title="Warning: will clear chat"
       >
         <FaClock /> Start
       </button>

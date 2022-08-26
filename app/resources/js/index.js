@@ -34281,6 +34281,7 @@ to {
     })), /* @__PURE__ */ import_react13.default.createElement("div", {
       className: "flex-1 justify-center items-center text-center flex"
     }, formatDistanceStrict(Date.now() + value2, new Date())), /* @__PURE__ */ import_react13.default.createElement("button", {
+      title: "If enabled will play a sound at the end of the timer",
       className: "flex justify-center items-center pr-3",
       onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { timerBell: !s2.timerBell }))
     }, timerBell ? /* @__PURE__ */ import_react13.default.createElement(FaBell, null) : /* @__PURE__ */ import_react13.default.createElement(FaBellSlash, null)), /* @__PURE__ */ import_react13.default.createElement("button", {
@@ -34302,7 +34303,7 @@ to {
           discordEnabled: discordSettings.startEnabled
         });
       },
-      title: "Will clear chat"
+      title: "Warning: will clear chat"
     }, /* @__PURE__ */ import_react13.default.createElement(FaClock, null), " Start"));
   });
   function SettingsComponent({
@@ -34411,6 +34412,7 @@ to {
     forfeits
   }) {
     return /* @__PURE__ */ import_react14.default.createElement("button", {
+      title: "A giveaway that includes all viewers, regardless of if they've chatted or not",
       className: "bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-all hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700",
       onClick: async () => {
         if (!channelInfo.login)
@@ -34446,6 +34448,7 @@ to {
     forfeits
   }) {
     return /* @__PURE__ */ import_react14.default.createElement("button", {
+      title: "A giveaway that includes all viewers who have chatted, optionally with a chat command if set",
       className: "bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-transform hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700",
       onClick: async () => {
         const giveawayWinner = await getChatGiveaway(client, channelInfo, chatEvents, settings.chatCommand, settings, discordSettings, forfeits);
@@ -34943,7 +34946,7 @@ to {
     setForfeits
   }) {
     return /* @__PURE__ */ React14.createElement("div", {
-      className: "mt-2 flex flex-col gap-3 flex-1"
+      className: "mt-2 flex flex-col gap-3 flex-1 pb-2"
     }, /* @__PURE__ */ React14.createElement("h1", {
       className: "text-3xl -mb-1"
     }, "Settings"), /* @__PURE__ */ React14.createElement("div", {
@@ -34973,9 +34976,9 @@ to {
         list[i3] = e2.target.value;
         return __spreadProps(__spreadValues({}, s2), { blocklist: list });
       }),
-      title: "Chat command to enter - leave empty for none"
+      title: "Account name to block from winner giveaways"
     }), /* @__PURE__ */ React14.createElement("button", {
-      className: "text-red-600 absolute right-2 top-1.5 text-xl",
+      className: "text-red-600 absolute right-1.5 top-1.5 text-xl",
       onClick: () => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { blocklist: removeIdx(s2.blocklist, i3) }))
     }, /* @__PURE__ */ React14.createElement(FaTimes, null)))))), /* @__PURE__ */ React14.createElement("div", {
       className: "flex flex-col gap-2"
@@ -35155,11 +35158,13 @@ to {
       className: "flex flex-row gap-1 items-center text-white bg-purple-600 rounded-md px-3 py-1 transform hover:scale-105 transition-transform shadow-md"
     }, /* @__PURE__ */ import_react20.default.createElement(FaRobot, {
       className: "text-2xl"
-    }), " ", location2.pathname === homeRoute ? /* @__PURE__ */ import_react20.default.createElement("span", {
+    }), " ", /* @__PURE__ */ import_react20.default.createElement("span", {
+      className: "hidden sm:block"
+    }, location2.pathname === homeRoute ? /* @__PURE__ */ import_react20.default.createElement("span", {
       className: "relative -top-0.5 ml-1"
     }, "Giveaway-o-tron") : /* @__PURE__ */ import_react20.default.createElement(FaAngleLeft, {
       className: "text-xl"
-    })))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react20.default.createElement(Link, {
+    }))))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react20.default.createElement(Link, {
       to: "/settings"
     }, /* @__PURE__ */ import_react20.default.createElement("div", {
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
@@ -35188,7 +35193,7 @@ to {
         Neutralino.os.open("https://giveaway-o-tron.mael.tech/guide#faq");
       }
     }, /* @__PURE__ */ import_react20.default.createElement(FaQuestion, null))), /* @__PURE__ */ import_react20.default.createElement("form", {
-      className: "flex flex-row",
+      className: "flex flex-row flex-0",
       onSubmit: (e2) => {
         e2.preventDefault();
         if (client) {
@@ -35206,9 +35211,11 @@ to {
       disabled: true,
       title: !!client ? "Disconnect to change" : "Set channel to connect to"
     }), /* @__PURE__ */ import_react20.default.createElement("button", {
-      className: "bg-purple-600 text-white py-1 px-3 rounded-r-sm transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 w-32 justify-center",
+      className: "bg-purple-600 text-white py-1 px-3 rounded-r-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 w-32 justify-center",
       title: "Connect to chat"
-    }, /* @__PURE__ */ import_react20.default.createElement(FaTwitch, null), " ", client ? "Disconnect" : "Connect")));
+    }, /* @__PURE__ */ import_react20.default.createElement(FaTwitch, null), " ", /* @__PURE__ */ import_react20.default.createElement("span", {
+      className: "hidden sm:block"
+    }, client ? "Disconnect" : "Connect"))));
   }
 
   // src/components/screens/Discord.tsx
@@ -35417,7 +35424,10 @@ to {
     const updateClientInfo = import_react24.default.useCallback((d3) => {
       console.info("[auth][client][update]", d3);
       setChannelInfo(d3);
-    }, []);
+      client == null ? void 0 : client.disconnect();
+      client == null ? void 0 : client.removeAllListeners();
+      setClient(init(d3));
+    }, [client]);
     useAuthEvents(updateClientInfo);
     import_react24.default.useEffect(() => {
       if (channelInfo.login) {

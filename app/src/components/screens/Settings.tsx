@@ -17,7 +17,7 @@ export default function SettingsScreen({
   setForfeits: React.Dispatch<React.SetStateAction<string[]>>
 }) {
   return (
-    <div className="mt-2 flex flex-col gap-3 flex-1">
+    <div className="mt-2 flex flex-col gap-3 flex-1 pb-2">
       <h1 className="text-3xl -mb-1">Settings</h1>
       <div className="flex flex-col gap-2">
         <div className="flex flex-row gap-2">
@@ -48,10 +48,10 @@ export default function SettingsScreen({
                     return { ...s, blocklist: list }
                   })
                 }
-                title="Chat command to enter - leave empty for none"
+                title="Account name to block from winner giveaways"
               />
               <button
-                className="text-red-600 absolute right-2 top-1.5 text-xl"
+                className="text-red-600 absolute right-1.5 top-1.5 text-xl"
                 onClick={() => setSettings((s) => ({ ...s, blocklist: removeIdx(s.blocklist, i) }))}
               >
                 <FaTimes />

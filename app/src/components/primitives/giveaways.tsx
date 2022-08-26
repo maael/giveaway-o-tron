@@ -35,6 +35,7 @@ export function InstantGiveaway({
 }) {
   return (
     <button
+      title="A giveaway that includes all viewers, regardless of if they've chatted or not"
       className="bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-all hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700"
       onClick={async () => {
         if (!channelInfo.login) return
@@ -85,6 +86,7 @@ export function ChatGiveaway({
 }) {
   return (
     <button
+      title="A giveaway that includes all viewers who have chatted, optionally with a chat command if set"
       className="bg-purple-600 px-2 py-4 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-transform hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700"
       onClick={async () => {
         const giveawayWinner = await getChatGiveaway(

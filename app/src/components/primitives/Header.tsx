@@ -39,11 +39,13 @@ export default function Header({
           <Link to={homeRoute}>
             <h1 className="flex flex-row gap-1 items-center text-white bg-purple-600 rounded-md px-3 py-1 transform hover:scale-105 transition-transform shadow-md">
               <LogoIco className="text-2xl" />{' '}
-              {location.pathname === homeRoute ? (
-                <span className="relative -top-0.5 ml-1">Giveaway-o-tron</span>
-              ) : (
-                <LeftIco className="text-xl" />
-              )}
+              <span className="hidden sm:block">
+                {location.pathname === homeRoute ? (
+                  <span className="relative -top-0.5 ml-1">Giveaway-o-tron</span>
+                ) : (
+                  <LeftIco className="text-xl" />
+                )}
+              </span>
             </h1>
           </Link>
         </div>
@@ -96,7 +98,7 @@ export default function Header({
         )}
       </div>
       <form
-        className="flex flex-row"
+        className="flex flex-row flex-0"
         onSubmit={(e) => {
           e.preventDefault()
           if (client) {
@@ -116,10 +118,10 @@ export default function Header({
           title={!!client ? 'Disconnect to change' : 'Set channel to connect to'}
         />
         <button
-          className="bg-purple-600 text-white py-1 px-3 rounded-r-sm transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 w-32 justify-center"
+          className="bg-purple-600 text-white py-1 px-3 rounded-r-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 w-32 justify-center"
           title="Connect to chat"
         >
-          <TwitchIco /> {client ? 'Disconnect' : 'Connect'}
+          <TwitchIco /> <span className="hidden sm:block">{client ? 'Disconnect' : 'Connect'}</span>
         </button>
       </form>
     </div>
