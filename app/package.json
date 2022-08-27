@@ -1,7 +1,7 @@
 {
   "name": "giveaway-o-tron",
   "version": "1.0.0",
-  "description": "The simplest template for a Neutralinojs app. It's possible to use your favorite frontend framework using the following steps.",
+  "description": "Windows program and a website to allow Twitch giveaways with multiple options.",
   "main": "index.js",
   "scripts": {
     "build-js": "esbuild src/index.jsx --bundle --target=chrome60,firefox60,safari11,edge18 --outfile=resources/js/index.js",
