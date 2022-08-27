@@ -7,6 +7,7 @@
     "build-js": "esbuild src/index.jsx --bundle --target=chrome60,firefox60,safari11,edge18 --outfile=resources/js/index.js",
     "build-css": "postcss src/styles.css -o resources/styles.css",
     "watch-src": "esbuild src/index.jsx --bundle --target=chrome60,firefox60,safari11,edge18 --outfile=resources/js/index.js --watch",
+    "neu-update": "neu update",
     "run": "neu run",
     "watch-css": "postcss src/styles.css -o resources/styles.css -w",
     "dev": "run-p run watch-src watch-css",
@@ -33,7 +34,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@neutralinojs/neu": "^7.1.0",
+    "@neutralinojs/neu": "^9.3.1",
     "@types/react": "^17.0.34",
     "@types/react-router-dom": "^5.3.2",
     "@types/tmi.js": "^1.8.0",
