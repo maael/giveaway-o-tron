@@ -139,3 +139,4 @@ dist
 
 collector/app.js
 temp
+.tmp

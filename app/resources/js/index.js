@@ -35118,46 +35118,23 @@ to {
   // src/utils/updates.tsx
   var import_react21 = __toModule(require_react());
   var APP_VERSION = globalThis.NL_APP_VERSION;
-  async function getLatestDifferentRelease() {
-    try {
-      const currentVersion = APP_VERSION;
-      const data = await fetch(`https://giveaway-o-tron.vercel.app/api/version`).then((res) => res.json());
-      const updateInfo = {
-        name: `v${data.version}`,
-        resourceUrl: data.resource_url,
-        url: data.data.url,
-        body: data.data.body
-      };
-      console.info("[update][latest]", updateInfo, currentVersion);
-      if (updateInfo.name !== `v${currentVersion}`) {
-        console.info("[update][new]", { current: `v${currentVersion}`, new: updateInfo.name });
-        return updateInfo;
-      }
-      return null;
-    } catch (e2) {
-      console.error("[updates]", e2.message);
-      return null;
-    }
-  }
   function useUpdateCheck() {
     import_react21.default.useEffect(() => {
       ;
       (async () => {
         try {
-          const newVersion = await getLatestDifferentRelease();
-          if (newVersion) {
+          const manifest = await Neutralino.updater.checkForUpdates(`https://giveaway-o-tron.vercel.app/api/version`);
+          if (manifest.version != NL_APPVERSION) {
             Et((t2) => {
               return /* @__PURE__ */ import_react21.default.createElement("div", {
                 className: "flex flex-row gap-4 justify-center items-center"
               }, /* @__PURE__ */ import_react21.default.createElement("button", {
-                onClick: () => Neutralino.os.open(newVersion.url),
+                onClick: () => Neutralino.os.open(manifest.data.url),
                 className: "underline text-purple-600"
-              }, newVersion.name, " available \u2192"), "or", /* @__PURE__ */ import_react21.default.createElement("button", {
+              }, "v", manifest.version, " available \u2192"), "or", /* @__PURE__ */ import_react21.default.createElement("button", {
                 className: "bg-purple-600 px-2 py-1 rounded-md text-white hover:scale-105",
                 onClick: async () => {
-                  const data = await fetch(`https://giveaway-o-tron.vercel.app/versions/res.neu`).then((data2) => data2.arrayBuffer());
-                  await Neutralino.filesystem.writeBinaryFile(`${globalThis.NL_CWD}/res.neu`, data);
-                  await wait(1e3);
+                  await Neutralino.updater.install();
                   await Neutralino.app.restartProcess();
                 }
               }, "Update now"));

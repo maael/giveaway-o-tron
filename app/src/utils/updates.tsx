@@ -54,6 +54,10 @@ export function useUpdateCheck() {
         }
       } catch (e) {
         console.warn('[update][error]', e)
+        toast.error('Failed to check for update', {
+          position: 'bottom-center',
+          style: { fontSize: '1rem', padding: '0.2rem' },
+        })
       }
     })()
   }, [])
