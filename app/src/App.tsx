@@ -19,11 +19,12 @@ import {
 } from './utils'
 import { WinnerUser } from './components/primitives/giveaways'
 import { useUpdateCheck } from './utils/updates'
-import Discord from './components/screens/Discord'
+import DiscordScreen from './components/screens/Discord'
+import ObsScreen from './components/screens/Obs'
 
 export default function App() {
   return (
-    <Router initialEntries={['/setup']}>
+    <Router initialEntries={['/obs']}>
       <InnerApp />
     </Router>
   )
@@ -106,7 +107,10 @@ function InnerApp() {
           <SettingsScreen settings={settings} setSettings={setSettings} forfeits={forfeits} setForfeits={setForfeits} />
         </Route>
         <Route path="/discord" exact>
-          <Discord settings={discordSettings} setSettings={setDiscordSettings} />
+          <DiscordScreen settings={discordSettings} setSettings={setDiscordSettings} />
+        </Route>
+        <Route path="/obs" exact>
+          <ObsScreen channelInfo={channelInfo} settings={settings} setSettings={setSettings} />
         </Route>
       </Switch>
       <Toaster />

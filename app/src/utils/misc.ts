@@ -67,7 +67,14 @@ export const defaultSettings: Required<Settings> = {
 
 export const alertThemeMap: Record<AlertTheme, string> = {
   [AlertTheme.GW2]: 'Guild Wars 2',
+  [AlertTheme.Custom]: 'Custom',
 }
+
+export const alertOptions = Object.entries(alertThemeMap)
+  .map(([k, v]) => {
+    return { value: k, label: v }
+  })
+  .filter((i) => Boolean(i.label)) as { value: AlertTheme; label: string }[]
 
 export function getDiscordColour(discordColour?: string) {
   const colour = Number(`0x${discordColour?.replace('#', '')}`)

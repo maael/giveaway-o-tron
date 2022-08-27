@@ -12,7 +12,7 @@ export interface Settings {
   performanceMode?: boolean
   forfeitCommand?: string
   alertDuration?: number
-  alertTheme?: AlertTheme.GW2
+  alertTheme?: AlertTheme
   autoAnnounce?: boolean
   timerBell?: boolean
   giveawayName?: string
@@ -37,6 +37,7 @@ export interface DiscordSettings {
 
 export enum AlertTheme {
   GW2 = 'gw2',
+  Custom = 'custom',
 }
 
 export type ChannelInfo = Partial<{

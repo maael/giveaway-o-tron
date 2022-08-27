@@ -4,17 +4,14 @@ import {
   FaTwitch as TwitchIco,
   FaAngleLeft as LeftIco,
   FaCogs,
-  FaMagic,
-  FaCheck,
   FaClock,
   FaQuestion,
   FaDiscord,
 } from 'react-icons/fa'
+import { SiObsstudio } from 'react-icons/si'
 import { Link, useLocation } from 'react-router-dom'
-import toast from 'react-hot-toast'
 import { ChannelInfo } from '~/utils'
 import chat from '../../chat'
-import useCopyToClipboard from '../hooks/useCopyToClipboard'
 
 export default function Header({
   client,
@@ -29,9 +26,6 @@ export default function Header({
 }) {
   const location = useLocation()
   const homeRoute = channelInfo.login ? '/' : '/setup'
-  const [copiedAlertURL, copyAlertURL] = useCopyToClipboard(
-    `https://giveaway-o-tron.vercel.app/alerts/gw2?channel=${channelInfo.userId}`
-  )
   return (
     <div className="flex flex-row justify-start gap-2">
       <div className="flex-1 flex flex-row gap-2 items-center">
@@ -74,16 +68,11 @@ export default function Header({
           </Link>
         )}
         {location.pathname === '/setup' ? null : (
-          <button
-            title="Get url for OBS browser source based alerts animation"
-            className="bg-purple-600 p-2 flex justify-center items-center rounded-md"
-            onClick={() => {
-              copyAlertURL()
-              toast.success('Copied! Use as OBS browser source!', { position: 'bottom-center' })
-            }}
-          >
-            {copiedAlertURL ? <FaCheck /> : <FaMagic />}
-          </button>
+          <Link to="/alerts">
+            <div className="bg-purple-600 p-2 flex justify-center items-center rounded-md" title="Past giveways">
+              <SiObsstudio />
+            </div>
+          </Link>
         )}
         {location.pathname === '/setup' ? null : (
           <button
