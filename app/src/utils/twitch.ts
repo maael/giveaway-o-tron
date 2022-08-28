@@ -4,6 +4,8 @@ import toast from 'react-hot-toast'
 import { Cache, CACHE_KEY } from './twitchCaches'
 import { refreshTokenFlow } from './auth'
 import React from 'react'
+import format from 'date-fns/format'
+import useStorage from '~/components/hooks/useStorage'
 
 const BOTS = ['streamelements', 'streamlabs', 'nightbot']
 
@@ -12,6 +14,7 @@ interface CacheEvent {
   total: number
   count: number
   status: 'inprogress' | 'done' | 'error'
+  lastUpdated: Date | null
 }
 class CacheEvents extends EventTarget {
   emit(data: CacheEvent) {
@@ -28,14 +31,22 @@ export interface CacheStats {
 
 export function useCacheStats() {
   const [stats, setStats] = React.useState<CacheStats>({
-    followers: { count: 0, total: 0, status: 'inprogress' },
-    subs: { count: 0, total: 0, status: 'inprogress' },
+    followers: { count: 0, total: 0, status: 'inprogress', lastUpdated: null },
+    subs: { count: 0, total: 0, status: 'inprogress', lastUpdated: null },
   })
   React.useEffect(() => {
     function handle(e) {
       const data: CacheEvent = e.detail
       console.info('[cache:event]', data)
-      setStats((s) => ({ ...s, [data.type]: { count: data.count, total: data.total, status: data.status } }))
+      setStats((s) => ({
+        ...s,
+        [data.type]: {
+          count: data.count,
+          total: data.total,
+          status: data.status,
+          lastUpdated: data.status !== 'done' ? s[data.type].lastUpdated : data.lastUpdated,
+        },
+      }))
     }
     cacheEmitter.addEventListener('update', handle)
     return () => {
@@ -43,6 +54,51 @@ export function useCacheStats() {
     }
   }, [setStats])
   return stats
+}
+
+interface CacheHistoryItem {
+  count: number
+  time: string
+  fullTime: string
+  name: string
+}
+export interface CacheHistory {
+  followers: CacheHistoryItem[]
+  subs: CacheHistoryItem[]
+}
+export function useCacheHistory(stats: CacheStats): CacheHistory {
+  const [followerHistory, setFollowerHistory] = useStorage<
+    { count: number; time: string; fullTime: string; name: string }[]
+  >('followershistory', [])
+  const [subsHistory, setSubsHistory] = useStorage<{ count: number; time: string; fullTime: string; name: string }[]>(
+    'subshistory',
+    []
+  )
+  React.useEffect(() => {
+    if (!stats.followers.lastUpdated) return
+    const ts = new Date()
+    setFollowerHistory((h) =>
+      h.concat({
+        count: stats.followers.count || 0,
+        time: format(ts, 'hh:mm'),
+        fullTime: format(ts, 'dd/MM hh:mm'),
+        name: ts.toISOString(),
+      })
+    )
+  }, [stats.followers.lastUpdated])
+  React.useEffect(() => {
+    if (!stats.subs.lastUpdated) return
+    const ts = new Date()
+    setSubsHistory((h) =>
+      h.concat({
+        count: stats.subs.count || 0,
+        time: format(ts, 'hh:mm'),
+        fullTime: format(ts, 'dd/MM hh:mm'),
+        name: ts.toISOString(),
+      })
+    )
+  }, [stats.subs.lastUpdated])
+  return { followers: followerHistory, subs: subsHistory }
 }
 
 async function callTwitchApi(channelInfo: ChannelInfo, path: string, isRefresh: boolean = false) {
@@ -168,7 +224,13 @@ async function genericCacher(
       }
       cursor = data.pagination.cursor
       total = data.total
-      cacheEmitter.emit({ type, total, count: Math.floor(dumbCache.size / 2), status: 'inprogress' })
+      cacheEmitter.emit({
+        type,
+        total,
+        count: Math.floor(dumbCache.size / 2),
+        status: 'inprogress',
+        lastUpdated: new Date(),
+      })
       if (cursor) await wait(100)
     } while (cursor)
     if (shouldToast)
@@ -176,11 +238,11 @@ async function genericCacher(
         position: 'bottom-right',
         style: { fontSize: '0.8rem', padding: '0.2rem' },
       })
-    cacheEmitter.emit({ type, total, count: Math.floor(dumbCache.size / 2), status: 'done' })
+    cacheEmitter.emit({ type, total, count: Math.floor(dumbCache.size / 2), status: 'done', lastUpdated: new Date() })
     return dumbCache
   } catch (e) {
     console.error(`[${type}]`, e)
-    cacheEmitter.emit({ type, total, count: Math.floor(dumbCache.size / 2), status: 'error' })
+    cacheEmitter.emit({ type, total, count: Math.floor(dumbCache.size / 2), status: 'error', lastUpdated: new Date() })
     if (shouldToast)
       toast.error(`Failed to load ${type}!`, {
         position: 'bottom-right',

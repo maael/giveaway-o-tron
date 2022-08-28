@@ -15,6 +15,7 @@ import {
   GiveawayResult,
   Settings,
   useAuthEvents,
+  useCacheHistory,
   useCacheStats,
 } from './utils'
 import { WinnerUser } from './components/primitives/giveaways'
@@ -74,6 +75,7 @@ function InnerApp() {
   }, [channelInfo.login, client])
   const [pastGiveaways, setPastGiveaways] = useStorage<GiveawayResult[]>('past-giveaways', [])
   const stats = useCacheStats()
+  const cacheHistory = useCacheHistory(stats)
   return (
     <>
       <Header client={client} resetChat={resetChat} setClient={setClient} channelInfo={channelInfo} />
@@ -95,6 +97,7 @@ function InnerApp() {
             setPastGiveaways={setPastGiveaways}
             forfeits={forfeits}
             stats={stats}
+            cacheHistory={cacheHistory}
           />
         </Route>
         <Route path="/setup" exact>

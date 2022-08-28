@@ -54,6 +54,6 @@ async function startPollingData(channelInfo: ChannelInfo, first: boolean = false
     duration: 3000,
   })
   console.info('[poll][done]')
-  await wait(60_000 * 5)
+  await wait(60_000 * 3)
   await startPollingData(channelInfo)
 }

@@ -1,6 +1,14 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import { ChatItem } from '../../chat'
-import { Settings as TSettings, removeIdx, ChannelInfo, GiveawayResult, DiscordSettings, CacheStats } from '../../utils'
+import {
+  Settings as TSettings,
+  removeIdx,
+  ChannelInfo,
+  GiveawayResult,
+  DiscordSettings,
+  CacheStats,
+  CacheHistory,
+} from '../../utils'
 import chat from '../../chat'
 import Settings from '../primitives/Settings'
 import { Winner, InstantGiveaway, ChatGiveaway, WinnerUser } from '../primitives/giveaways'
@@ -23,6 +31,7 @@ export default function MainScreen({
   setPastGiveaways,
   forfeits,
   stats,
+  cacheHistory,
 }: {
   client: ReturnType<typeof chat> | null
   chatEvents: ChatItem[]
@@ -39,6 +48,7 @@ export default function MainScreen({
   setPastGiveaways: Dispatch<SetStateAction<GiveawayResult[]>>
   forfeits: string[]
   stats: CacheStats
+  cacheHistory: CacheHistory
 }) {
   const messageDelay = React.useMemo(() => {
     const mostRecent = chatEvents[chatEvents.length - 1]
@@ -87,7 +97,7 @@ export default function MainScreen({
         discordSettings={discordSettings}
       />
       {settings.performanceMode && !winners.length ? (
-        <div className="h-full gap-2 flex flex-col justify-center items-center">
+        <div className="h-full flex-1 gap-2 flex flex-col justify-center items-center">
           <div className="flex justify-center items-center gap-2 flex-row">
             <div>{chatEvents.length} messages</div>
             <ChatControls chatEvents={chatEvents} paused={chatPaused} setPaused={setChatPaused} clear={resetChat} />
@@ -106,7 +116,7 @@ export default function MainScreen({
           setSettings={setSettings}
         />
       )}
-      <Stats stats={stats} />
+      <Stats stats={stats} cacheHistory={cacheHistory} />
     </div>
   )
 }
