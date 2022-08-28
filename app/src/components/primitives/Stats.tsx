@@ -3,7 +3,9 @@ import { FaCheckCircle, FaExclamationCircle, FaSpinner } from 'react-icons/fa'
 import { CacheStats } from '~/utils'
 
 function ProgressBar({ count, total, status }: CacheStats['followers']) {
-  let percent = `${Math.min(100, (count / total) * 100).toFixed(0)}%`
+  let percent = `${
+    count === 0 && total === 0 && status === 'done' ? 100 : Math.min(100, (count / total) * 100).toFixed(0)
+  }%`
   if (status === 'inprogress' && count === 0 && total === 0) percent = `0%`
   return (
     <div className="bg-gray-300 rounded-lg flex-1 h-2 overflow-hidden border-b border-purple-600" title={percent}>

@@ -33165,7 +33165,8 @@ to {
     autoAnnounce: true,
     giveawayName: "",
     timerBell: false,
-    timerDuration: ONE_MIN
+    timerDuration: ONE_MIN,
+    alertCustomImageUrl: ""
   };
   var alertThemeMap = {
     [AlertTheme.GW2]: "Guild Wars 2",
@@ -35830,6 +35831,7 @@ to {
       login: channelInfo.login,
       alertDuration: settings.alertDuration,
       alertTheme: settings.alertTheme,
+      alertCustomImageUrl: settings.alertCustomImageUrl,
       discordGuildId: discordSettings.guildId,
       discordChannelId: discordSettings.channelId,
       discordColour: colour,
@@ -36594,6 +36596,8 @@ to {
     });
   });
   var Time = import_react14.default.memo(function Time2({
+    alertTheme,
+    alertCustomImageUrl,
     setChatPaused,
     resetChat,
     chatCommand,
@@ -36617,7 +36621,9 @@ to {
         discordColour: getDiscordColour(discordSettings.messageColour),
         discordTitle: discordSettings.endTitle,
         discordBody: discordSettings.endBody,
-        discordEnabled: disabledDueToTimer ? false : discordSettings.endEnabled
+        discordEnabled: disabledDueToTimer ? false : discordSettings.endEnabled,
+        alertTheme,
+        alertCustomImageUrl
       });
       setChatPaused(true);
       if (timerBell)
@@ -36671,7 +36677,9 @@ to {
           discordColour: getDiscordColour(discordSettings.messageColour),
           discordTitle: discordSettings.startTitle,
           discordBody: discordSettings.startBody,
-          discordEnabled: disabledDueToTimer ? false : discordSettings.startEnabled
+          discordEnabled: disabledDueToTimer ? false : discordSettings.startEnabled,
+          alertTheme,
+          alertCustomImageUrl
         });
       },
       title: "Warning: will clear chat"
@@ -36737,7 +36745,9 @@ to {
       timerBell: settings.timerBell,
       setSettings,
       discordSettings,
-      duration: settings.timerDuration
+      duration: settings.timerDuration,
+      alertTheme: settings.alertTheme,
+      alertCustomImageUrl: settings.alertCustomImageUrl
     })), /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "flex flex-row gap-2 mt-2 text-sm"
     }, /* @__PURE__ */ import_react14.default.createElement(SliderOuter, {
@@ -37047,7 +37057,7 @@ to {
   // src/components/primitives/Stats.tsx
   var import_react17 = __toModule(require_react());
   function ProgressBar({ count, total, status }) {
-    let percent = `${Math.min(100, count / total * 100).toFixed(0)}%`;
+    let percent = `${count === 0 && total === 0 && status === "done" ? 100 : Math.min(100, count / total * 100).toFixed(0)}%`;
     if (status === "inprogress" && count === 0 && total === 0)
       percent = `0%`;
     return /* @__PURE__ */ import_react17.default.createElement("div", {
@@ -41518,7 +41528,7 @@ to {
   }) {
     const [copiedAlertURL, copyAlertURL] = useCopyToClipboard_default(`https://giveaway-o-tron.vercel.app/alerts/gw2?channel=${channelInfo.userId}`);
     return /* @__PURE__ */ import_react32.default.createElement("div", {
-      className: "mt-2 flex flex-col gap-3 flex-1 pb-2"
+      className: "mt-2 flex flex-col gap-3 flex-1 pb-2 max-h-full"
     }, /* @__PURE__ */ import_react32.default.createElement("h1", {
       className: "text-3xl -mb-1"
     }, "OBS Settings"), /* @__PURE__ */ import_react32.default.createElement("div", {
@@ -41599,7 +41609,7 @@ to {
       },
       value: alertOptions.find((i3) => (settings.alertTheme || defaultSettings.alertTheme) === i3.value),
       options: alertOptions
-    })))), /* @__PURE__ */ import_react32.default.createElement("div", {
+    })))), settings.alertTheme === AlertTheme.Custom ? /* @__PURE__ */ import_react32.default.createElement("div", {
       className: "flex flex-col gap-2"
     }, /* @__PURE__ */ import_react32.default.createElement("div", {
       className: "flex flex-row gap-2"
@@ -41607,9 +41617,57 @@ to {
       className: "flex-1"
     }, /* @__PURE__ */ import_react32.default.createElement("h2", {
       className: "text-xl"
+    }, "Custom Theme Settings"))), /* @__PURE__ */ import_react32.default.createElement(Input, {
+      value: settings.alertCustomImageUrl,
+      label: "Image URL",
+      placeholder: "URL...",
+      onChange: (e2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { alertCustomImageUrl: e2.target.value.trim() }))
+    })) : null, /* @__PURE__ */ import_react32.default.createElement("div", {
+      className: "flex flex-col gap-2 flex-1"
+    }, /* @__PURE__ */ import_react32.default.createElement("div", {
+      className: "flex flex-row gap-2"
+    }, /* @__PURE__ */ import_react32.default.createElement("div", {
+      className: "flex-1"
+    }, /* @__PURE__ */ import_react32.default.createElement("h2", {
+      className: "text-xl"
     }, "Preview"))), /* @__PURE__ */ import_react32.default.createElement("div", {
-      className: "opacity-80"
-    }, "Coming soon")));
+      className: "flex-1"
+    }, /* @__PURE__ */ import_react32.default.createElement("div", {
+      className: "bg-gray-600 rounded-md h-full w-full flex py-2 relative"
+    }, settings.alertTheme === AlertTheme.Custom ? /* @__PURE__ */ import_react32.default.createElement(CustomPreview, {
+      imageUrl: settings.alertCustomImageUrl
+    }) : /* @__PURE__ */ import_react32.default.createElement(GW2Preview, null)))));
+  }
+  function CustomPreview({ imageUrl }) {
+    return /* @__PURE__ */ import_react32.default.createElement("div", {
+      className: "flex-1 flex flex-col justify-center items-center gap-2 text-center"
+    }, imageUrl ? /* @__PURE__ */ import_react32.default.createElement("div", {
+      className: "flex-1 flex justify-center items-center relative w-full overflow-hidden",
+      style: {
+        backgroundImage: `url(${imageUrl})`,
+        backgroundSize: "contain",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center"
+      }
+    }) : null, /* @__PURE__ */ import_react32.default.createElement("div", {
+      className: "flex-0 flex justify-center items-center text-2xl uppercase"
+    }, "@name won!"));
+  }
+  function GW2Preview() {
+    return /* @__PURE__ */ import_react32.default.createElement("div", {
+      className: "relative h-full w-full"
+    }, /* @__PURE__ */ import_react32.default.createElement("div", {
+      className: "flex flex-1 flex-col justify-center items-center bg-transparent animate-wiggle absolute inset-0",
+      style: { scale: "50%" }
+    }, /* @__PURE__ */ import_react32.default.createElement("img", {
+      src: "https://giveaway-o-tron.vercel.app/images/chest-notification.png"
+    }), /* @__PURE__ */ import_react32.default.createElement("div", {
+      className: "text-white text-4xl uppercasetext-bold left-0 right-0 text-center absolute",
+      style: { top: "48%" }
+    }, "Giveaway chest!"), /* @__PURE__ */ import_react32.default.createElement("div", {
+      className: "text-white text-3xl uppercase px-4 py-2 text-bold text-center absolute break-all",
+      style: { top: "75%", left: 50, right: 50 }
+    }, "@name won!")));
   }
 
   // src/App.tsx

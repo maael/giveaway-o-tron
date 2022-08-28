@@ -13,6 +13,7 @@ export interface Settings {
   forfeitCommand?: string
   alertDuration?: number
   alertTheme?: AlertTheme
+  alertCustomImageUrl?: string
   autoAnnounce?: boolean
   timerBell?: boolean
   giveawayName?: string

@@ -48,6 +48,8 @@ const StableCountdown = React.memo(function StableCountdown({
 })
 
 const Time = React.memo(function Time({
+  alertTheme,
+  alertCustomImageUrl,
   setChatPaused,
   resetChat,
   chatCommand,
@@ -57,6 +59,8 @@ const Time = React.memo(function Time({
   discordSettings,
   duration,
 }: {
+  alertTheme: Props['settings']['alertTheme']
+  alertCustomImageUrl: Props['settings']['alertCustomImageUrl']
   chatCommand: Props['settings']['chatCommand']
   timerBell: Props['settings']['timerBell']
   duration: Props['settings']['timerDuration']
@@ -77,6 +81,8 @@ const Time = React.memo(function Time({
       discordTitle: discordSettings.endTitle,
       discordBody: discordSettings.endBody,
       discordEnabled: disabledDueToTimer ? false : discordSettings.endEnabled,
+      alertTheme,
+      alertCustomImageUrl,
     })
     setChatPaused(true)
     if (timerBell) bell.play()
@@ -139,6 +145,8 @@ const Time = React.memo(function Time({
             discordTitle: discordSettings.startTitle,
             discordBody: discordSettings.startBody,
             discordEnabled: disabledDueToTimer ? false : discordSettings.startEnabled,
+            alertTheme,
+            alertCustomImageUrl,
           })
         }}
         title="Warning: will clear chat"
@@ -230,6 +238,8 @@ export default function SettingsComponent({
           setSettings={setSettings}
           discordSettings={discordSettings}
           duration={settings.timerDuration}
+          alertTheme={settings.alertTheme}
+          alertCustomImageUrl={settings.alertCustomImageUrl}
         />
       </div>
       <div className="flex flex-row gap-2 mt-2 text-sm">

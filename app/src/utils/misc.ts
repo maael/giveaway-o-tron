@@ -63,6 +63,7 @@ export const defaultSettings: Required<Settings> = {
   giveawayName: '',
   timerBell: false,
   timerDuration: ONE_MIN,
+  alertCustomImageUrl: '',
 }
 
 export const alertThemeMap: Record<AlertTheme, string> = {

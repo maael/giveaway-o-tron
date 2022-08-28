@@ -223,6 +223,7 @@ export function announceWinner({
     login: channelInfo.login,
     alertDuration: settings.alertDuration,
     alertTheme: settings.alertTheme,
+    alertCustomImageUrl: settings.alertCustomImageUrl,
     discordGuildId: discordSettings.guildId,
     discordChannelId: discordSettings.channelId,
     discordColour: colour,
