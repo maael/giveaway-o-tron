@@ -39,7 +39,13 @@ export default function GW2Alerts() {
           imageUrl: e.alertCustomImageUrl,
         })
       } else if (e.type === 'timer-end') {
-        setStatus({ status: 'ended', ts: e.ts, theme: e.alertTheme, imageUrl: e.alertCustomImageUrl })
+        setStatus({
+          status: 'ended',
+          ts: e.ts,
+          followersOnly: !!e.followersOnly,
+          theme: e.alertTheme,
+          imageUrl: e.alertCustomImageUrl,
+        })
       } else if (e.type === 'timer-cancel') {
         setStatus({})
       }
@@ -64,8 +70,8 @@ export default function GW2Alerts() {
   const props = {
     title:
       status.status === 'start'
-        ? `${status.followersOnly ? 'Followers' : 'A'} giveaway open`
-        : status === 'ended'
+        ? `${status.followersOnly ? 'Followers g' : 'G'}iveaway open`
+        : status.status === 'ended'
         ? 'The giveaway is closed'
         : null,
     body:
@@ -77,7 +83,7 @@ export default function GW2Alerts() {
                 : `including ${status.command}`
             } for a chance to win!`
           : "Make sure to send a message in chat, there's no command!"
-        : status === 'ended'
+        : status.status === 'ended'
         ? 'Good luck!'
         : null,
     status: status.status,
@@ -85,6 +91,7 @@ export default function GW2Alerts() {
     followersOnly: status.followersOnly,
     imageUrl: status.imageUrl,
   }
+  console.info('[props]', props)
   return status.status ? (
     <div className="w-full h-full">
       {status.theme === 'gw2' ? <Gw2Status {...props} /> : <CustomStatus {...props} />}
