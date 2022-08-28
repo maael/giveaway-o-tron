@@ -37519,31 +37519,9 @@ to {
       className: "flex-1"
     }, /* @__PURE__ */ React16.createElement("h2", {
       className: "text-xl"
-    }, "Alert Settings"))), /* @__PURE__ */ React16.createElement("div", {
+    }, "Alert/Message Settings"))), /* @__PURE__ */ React16.createElement("div", {
       className: "flex flex-row gap-2 justify-center items-center"
     }, /* @__PURE__ */ React16.createElement("div", {
-      className: "flex-1 border border-purple-600 rounded-md flex relative"
-    }, /* @__PURE__ */ React16.createElement("div", {
-      className: "bg-purple-600 px-2 py-1 flex-0",
-      title: "Will clear chat, and then pause it after the time, to enable a giveaway with cut off"
-    }, "Duration"), /* @__PURE__ */ React16.createElement("div", {
-      className: "px-2 flex-1 flex justify-center items-center"
-    }, /* @__PURE__ */ React16.createElement(SliderInner, {
-      min: ONE_S,
-      max: ONE_S * 30,
-      value: settings.alertDuration || defaultSettings.alertDuration,
-      step: ONE_S,
-      onChange: (v2) => setSettings((s2) => __spreadProps(__spreadValues({}, s2), { alertDuration: v2 }))
-    })), /* @__PURE__ */ React16.createElement("div", {
-      className: "flex-1 justify-center items-center text-center flex"
-    }, formatDistanceStrict(Date.now() + (settings.alertDuration || defaultSettings.alertDuration), new Date()))), /* @__PURE__ */ React16.createElement("div", {
-      className: "flex-1 border border-purple-600 rounded-md flex relative"
-    }, /* @__PURE__ */ React16.createElement("div", {
-      className: "bg-purple-600 px-2 py-1 flex-0",
-      title: "Will clear chat, and then pause it after the time, to enable a giveaway with cut off"
-    }, "Theme"), /* @__PURE__ */ React16.createElement("div", {
-      className: "px-2 flex-1 flex justify-center items-center"
-    }, alertThemeMap[settings.alertTheme || defaultSettings.alertTheme])), /* @__PURE__ */ React16.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
     }, /* @__PURE__ */ React16.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",

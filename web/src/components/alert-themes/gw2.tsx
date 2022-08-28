@@ -14,6 +14,41 @@ const canvasStyles = {
   left: 0,
 } as const
 
+function Gw2Alert({ winner, visible }: { winner: string; visible: boolean }) {
+  console.info('render')
+  return (
+    <div
+      className={`flex flex-col justify-center items-center bg-transparent relative fill-mode-both ${
+        visible ? 'animate-wiggle' : 'animate-out fade-out'
+      }`}
+    >
+      <img src="/images/chest-notification.png" />
+      <div className="text-white text-4xl uppercasetext-bold left-0 right-0 text-center absolute" style={{ top: 230 }}>
+        Giveaway chest!
+      </div>
+      <div
+        className="text-white text-3xl uppercase px-4 py-2 text-bold text-center absolute break-all"
+        style={{ top: 300, left: 50, right: 50 }}
+      >
+        {winner} won!
+      </div>
+    </div>
+  )
+}
+
+function CustomAlert({ winner, imageUrl, visible }: { imageUrl?: string; winner: string; visible: boolean }) {
+  return (
+    <div
+      className={`flex flex-col justify-center items-center bg-transparent relative fill-mode-both ${
+        visible ? 'animate-in fade-in' : 'animate-out fade-out'
+      }`}
+    >
+      <img src={imageUrl} />
+      <div className="text-4xl mt-3 uppercase">{winner} won!</div>
+    </div>
+  )
+}
+
 export default function GW2Alerts() {
   const router = useRouter()
   const channel = router.query.channel
@@ -35,7 +70,7 @@ export default function GW2Alerts() {
   }, [])
 
   const fire = React.useCallback(() => {
-    makeShot(0.2, {
+    makeShot(1, {
       spread: 80,
       decay: 0.9,
       scalar: 0.8,
@@ -44,30 +79,25 @@ export default function GW2Alerts() {
     })
   }, [makeShot])
   const handleEvent = React.useCallback(
-    (e: { winner: string; channelId: number; alertDuration: number; alertTheme: string; type?: string }) => {
+    (e: {
+      winner: string
+      channelId: number
+      alertDuration: number
+      alertTheme: string
+      type?: string
+      alertCustomImageUrl?: string
+    }) => {
       console.info('[event]', e)
       if (!channel || !e.channelId || (e.channelId || '').toString() !== (channel?.toString() || '')) return
       if (!e.type || e.type === 'winner') {
         toast.remove()
+        if (e.alertTheme !== 'custom') fire()
         toast.custom(
           (t) => {
-            if (t.visible) fire()
-            return (
-              <div className="flex flex-col justify-center items-center bg-transparent animate-wiggle relative">
-                <img src="/images/chest-notification.png" />
-                <div
-                  className="text-white text-4xl uppercasetext-bold left-0 right-0 text-center absolute"
-                  style={{ top: 230 }}
-                >
-                  Giveaway chest!
-                </div>
-                <div
-                  className="text-white text-3xl uppercase px-4 py-2 text-bold text-center absolute break-all"
-                  style={{ top: 300, left: 50, right: 50 }}
-                >
-                  {e.winner} won!
-                </div>
-              </div>
+            return e.alertTheme === 'custom' ? (
+              <CustomAlert winner={e.winner} imageUrl={e.alertCustomImageUrl} visible={t.visible} />
+            ) : (
+              <Gw2Alert winner={e.winner} visible={t.visible} />
             )
           },
           { duration: e.alertDuration || 4000 }
