@@ -37613,7 +37613,7 @@ to {
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
       title: "Past giveways"
     }, /* @__PURE__ */ import_react22.default.createElement(FaClock, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react22.default.createElement(Link, {
-      to: "/alerts"
+      to: "/obs"
     }, /* @__PURE__ */ import_react22.default.createElement("div", {
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
       title: "Past giveways"
@@ -41615,7 +41615,7 @@ to {
   // src/App.tsx
   function App() {
     return /* @__PURE__ */ import_react33.default.createElement(MemoryRouter, {
-      initialEntries: ["/obs"]
+      initialEntries: ["/setup"]
     }, /* @__PURE__ */ import_react33.default.createElement(InnerApp, null));
   }
   function InnerApp() {

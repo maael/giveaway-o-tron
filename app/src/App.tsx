@@ -24,7 +24,7 @@ import ObsScreen from './components/screens/Obs'
 
 export default function App() {
   return (
-    <Router initialEntries={['/obs']}>
+    <Router initialEntries={['/setup']}>
       <InnerApp />
     </Router>
   )

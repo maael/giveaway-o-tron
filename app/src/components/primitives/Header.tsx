@@ -68,7 +68,7 @@ export default function Header({
           </Link>
         )}
         {location.pathname === '/setup' ? null : (
-          <Link to="/alerts">
+          <Link to="/obs">
             <div className="bg-purple-600 p-2 flex justify-center items-center rounded-md" title="Past giveways">
               <SiObsstudio />
             </div>
