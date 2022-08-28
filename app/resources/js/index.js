@@ -41551,11 +41551,15 @@ to {
       identity: {
         username: channelInfo.login,
         password: `oauth:${channelInfo.token}`
+      },
+      options: {
+        updateEmotesetsTimer: 0,
+        skipUpdatingEmotesets: true
       }
     };
     const client = new import_tmi.default.client(opts);
-    client.disconnect();
-    console.info(opts);
+    if (client.lastJoined)
+      client.disconnect();
     function onMessageHandler(target, context2, msg, self2) {
       if (self2) {
         return;

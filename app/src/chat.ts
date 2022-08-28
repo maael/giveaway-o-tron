@@ -58,20 +58,22 @@ export function useChatEvents(
 
 export default function init(channelInfo: ChannelInfo) {
   // Define configuration options
-  const opts = {
+  const opts: tmi.Options = {
     channels: [channelInfo.login!],
     identity: {
       username: channelInfo.login,
       password: `oauth:${channelInfo.token}`,
+    },
+    options: {
+      updateEmotesetsTimer: 0,
+      skipUpdatingEmotesets: true,
     },
   }
 
   // Create a client with our options
   const client = new tmi.client(opts)
 
-  client.disconnect()
-
-  console.info(opts)
+  if ((client as any).lastJoined) client.disconnect()
 
   // Called every time a message comes in
   function onMessageHandler(target, context, msg, self) {
