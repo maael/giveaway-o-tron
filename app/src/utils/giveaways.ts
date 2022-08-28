@@ -229,7 +229,11 @@ export function announceWinner({
     discordColour: colour,
     discordTitle: discordSettings.winnerTitle,
     discordBody: discordSettings.winnerBody,
-    discordEnabled: discordTimerNotAllowed ? false : discordSettings.winnerEnabled,
+    discordEnabled: discordTimerNotAllowed
+      ? false
+      : discordSettings.winnerEnabled === undefined
+      ? true
+      : discordSettings.winnerEnabled,
     giveawayName: '',
   }
   console.info('[relay][event]', eventData)

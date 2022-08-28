@@ -1,5 +1,5 @@
 import { ChatItem } from '~/chat'
-import { AlertTheme, Settings } from './types'
+import { AlertTheme, Settings, DiscordSettings } from './types'
 
 export const ONE_MIN = 1000 * 60
 
@@ -64,6 +64,22 @@ export const defaultSettings: Required<Settings> = {
   timerBell: false,
   timerDuration: ONE_MIN,
   alertCustomImageUrl: '',
+}
+
+export const defaultDiscordSettings: Required<DiscordSettings> = {
+  guildId: '',
+  channelId: '',
+  messageColour: '',
+  startTitle: '',
+  startBody: '',
+  startEnabled: true,
+  endTitle: '',
+  endBody: '',
+  endEnabled: true,
+  winnerTitle: '',
+  winnerBody: '',
+  winnerEnabled: true,
+  giveawayMinTime: ONE_MIN,
 }
 
 export const alertThemeMap: Record<AlertTheme, string> = {

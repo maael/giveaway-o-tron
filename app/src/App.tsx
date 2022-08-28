@@ -10,6 +10,7 @@ import SettingsScreen from './components/screens/Settings'
 import Header from './components/primitives/Header'
 import {
   ChannelInfo,
+  defaultDiscordSettings,
   defaultSettings,
   DiscordSettings,
   GiveawayResult,
@@ -34,7 +35,7 @@ export default function App() {
 function InnerApp() {
   useUpdateCheck()
   const [settings, setSettings] = useStorage<Settings>('settings', defaultSettings)
-  const [discordSettings, setDiscordSettings] = useStorage<DiscordSettings>('discord', {})
+  const [discordSettings, setDiscordSettings] = useStorage<DiscordSettings>('discord', defaultDiscordSettings)
   const [winners, setWinners] = React.useState<WinnerUser[]>([])
   const [client, setClient] = React.useState<ReturnType<typeof chat> | null>(null)
   const [channelInfo, setChannelInfo] = useStorage<ChannelInfo>('channelInfo', {}, (c) => {

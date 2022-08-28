@@ -82,7 +82,11 @@ const Time = React.memo(function Time({
       discordColour: getDiscordColour(discordSettings.messageColour),
       discordTitle: discordSettings.endTitle,
       discordBody: discordSettings.endBody,
-      discordEnabled: disabledDueToTimer ? false : discordSettings.endEnabled,
+      discordEnabled: disabledDueToTimer
+        ? false
+        : discordSettings.endEnabled === undefined
+        ? true
+        : discordSettings.endEnabled,
       alertTheme,
       alertCustomImageUrl,
       followersOnly,
@@ -147,7 +151,11 @@ const Time = React.memo(function Time({
             discordColour: getDiscordColour(discordSettings.messageColour),
             discordTitle: discordSettings.startTitle,
             discordBody: discordSettings.startBody,
-            discordEnabled: disabledDueToTimer ? false : discordSettings.startEnabled,
+            discordEnabled: disabledDueToTimer
+              ? false
+              : discordSettings.startEnabled === undefined
+              ? true
+              : discordSettings.startEnabled,
             alertTheme,
             alertCustomImageUrl,
             followersOnly,

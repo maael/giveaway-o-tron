@@ -41717,6 +41717,21 @@ to {
     timerDuration: ONE_MIN,
     alertCustomImageUrl: ""
   };
+  var defaultDiscordSettings = {
+    guildId: "",
+    channelId: "",
+    messageColour: "",
+    startTitle: "",
+    startBody: "",
+    startEnabled: true,
+    endTitle: "",
+    endBody: "",
+    endEnabled: true,
+    winnerTitle: "",
+    winnerBody: "",
+    winnerEnabled: true,
+    giveawayMinTime: ONE_MIN
+  };
   var alertThemeMap = {
     [AlertTheme.GW2]: "Guild Wars 2",
     [AlertTheme.Custom]: "Custom"
@@ -44426,7 +44441,7 @@ to {
       discordColour: colour,
       discordTitle: discordSettings.winnerTitle,
       discordBody: discordSettings.winnerBody,
-      discordEnabled: discordTimerNotAllowed ? false : discordSettings.winnerEnabled,
+      discordEnabled: discordTimerNotAllowed ? false : discordSettings.winnerEnabled === void 0 ? true : discordSettings.winnerEnabled,
       giveawayName: ""
     };
     console.info("[relay][event]", eventData);
@@ -45217,7 +45232,7 @@ to {
         discordColour: getDiscordColour(discordSettings.messageColour),
         discordTitle: discordSettings.endTitle,
         discordBody: discordSettings.endBody,
-        discordEnabled: disabledDueToTimer ? false : discordSettings.endEnabled,
+        discordEnabled: disabledDueToTimer ? false : discordSettings.endEnabled === void 0 ? true : discordSettings.endEnabled,
         alertTheme,
         alertCustomImageUrl,
         followersOnly
@@ -45274,7 +45289,7 @@ to {
           discordColour: getDiscordColour(discordSettings.messageColour),
           discordTitle: discordSettings.startTitle,
           discordBody: discordSettings.startBody,
-          discordEnabled: disabledDueToTimer ? false : discordSettings.startEnabled,
+          discordEnabled: disabledDueToTimer ? false : discordSettings.startEnabled === void 0 ? true : discordSettings.startEnabled,
           alertTheme,
           alertCustomImageUrl,
           followersOnly
@@ -66646,7 +66661,7 @@ to {
   function InnerApp() {
     useUpdateCheck();
     const [settings, setSettings] = useStorage("settings", defaultSettings);
-    const [discordSettings, setDiscordSettings] = useStorage("discord", {});
+    const [discordSettings, setDiscordSettings] = useStorage("discord", defaultDiscordSettings);
     const [winners, setWinners] = import_react62.default.useState([]);
     const [client, setClient] = import_react62.default.useState(null);
     const [channelInfo, setChannelInfo] = useStorage("channelInfo", {}, (c3) => {
