@@ -19,6 +19,9 @@ export default function Obs({
   const [copiedAlertURL, copyAlertURL] = useCopyToClipboard(
     `https://giveaway-o-tron.vercel.app/alerts/gw2?channel=${channelInfo.userId}`
   )
+  const [copiedStatusURL, copyStatusURL] = useCopyToClipboard(
+    `https://giveaway-o-tron.vercel.app/alerts/status?channel=${channelInfo.userId}`
+  )
   return (
     <div className="mt-2 flex flex-col gap-3 flex-1 pb-2 max-h-full">
       <h1 className="text-3xl -mb-1">OBS Settings</h1>
@@ -33,16 +36,23 @@ export default function Obs({
             </>
           ) : (
             <>
-              <FaTrophy /> Copy Winner Alert Source URL{' '}
+              <FaTrophy /> Copy Winner Alert Source URL
             </>
           )}
         </button>
         <button
-          disabled
-          title="Coming soon"
-          className="bg-purple-600 px-2 py-1 flex-1 rounded-md transition-transform hover:scale-110 flex flex-row gap-1 justify-center items-center opacity-50"
+          className="bg-purple-600 px-2 py-1 flex-1 rounded-md transition-transform hover:scale-110 flex flex-row gap-1 justify-center items-center"
+          onClick={() => copyStatusURL()}
         >
-          <FaTrophy /> Copy Giveaway Status Alert Source URL
+          {copiedStatusURL ? (
+            <>
+              <FaCheck /> Copied
+            </>
+          ) : (
+            <>
+              <FaTrophy /> Copy Giveaway Status Alert Source URL
+            </>
+          )}
         </button>
       </div>
       <div className="flex flex-col gap-2">

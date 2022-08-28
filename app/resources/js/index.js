@@ -36598,6 +36598,7 @@ to {
   var Time = import_react14.default.memo(function Time2({
     alertTheme,
     alertCustomImageUrl,
+    followersOnly,
     setChatPaused,
     resetChat,
     chatCommand,
@@ -36623,7 +36624,8 @@ to {
         discordBody: discordSettings.endBody,
         discordEnabled: disabledDueToTimer ? false : discordSettings.endEnabled,
         alertTheme,
-        alertCustomImageUrl
+        alertCustomImageUrl,
+        followersOnly
       });
       setChatPaused(true);
       if (timerBell)
@@ -36679,7 +36681,8 @@ to {
           discordBody: discordSettings.startBody,
           discordEnabled: disabledDueToTimer ? false : discordSettings.startEnabled,
           alertTheme,
-          alertCustomImageUrl
+          alertCustomImageUrl,
+          followersOnly
         });
       },
       title: "Warning: will clear chat"
@@ -36747,7 +36750,8 @@ to {
       discordSettings,
       duration: settings.timerDuration,
       alertTheme: settings.alertTheme,
-      alertCustomImageUrl: settings.alertCustomImageUrl
+      alertCustomImageUrl: settings.alertCustomImageUrl,
+      followersOnly: settings.followersOnly
     })), /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "flex flex-row gap-2 mt-2 text-sm"
     }, /* @__PURE__ */ import_react14.default.createElement(SliderOuter, {
@@ -41505,6 +41509,7 @@ to {
     setSettings
   }) {
     const [copiedAlertURL, copyAlertURL] = useCopyToClipboard_default(`https://giveaway-o-tron.vercel.app/alerts/gw2?channel=${channelInfo.userId}`);
+    const [copiedStatusURL, copyStatusURL] = useCopyToClipboard_default(`https://giveaway-o-tron.vercel.app/alerts/status?channel=${channelInfo.userId}`);
     return /* @__PURE__ */ import_react32.default.createElement("div", {
       className: "mt-2 flex flex-col gap-3 flex-1 pb-2 max-h-full"
     }, /* @__PURE__ */ import_react32.default.createElement("h1", {
@@ -41514,11 +41519,10 @@ to {
     }, /* @__PURE__ */ import_react32.default.createElement("button", {
       className: "bg-purple-600 px-2 py-1 flex-1 rounded-md transition-transform hover:scale-110 flex flex-row gap-1 justify-center items-center",
       onClick: () => copyAlertURL()
-    }, copiedAlertURL ? /* @__PURE__ */ import_react32.default.createElement(import_react32.default.Fragment, null, /* @__PURE__ */ import_react32.default.createElement(FaCheck, null), " Copied") : /* @__PURE__ */ import_react32.default.createElement(import_react32.default.Fragment, null, /* @__PURE__ */ import_react32.default.createElement(FaTrophy, null), " Copy Winner Alert Source URL", " ")), /* @__PURE__ */ import_react32.default.createElement("button", {
-      disabled: true,
-      title: "Coming soon",
-      className: "bg-purple-600 px-2 py-1 flex-1 rounded-md transition-transform hover:scale-110 flex flex-row gap-1 justify-center items-center opacity-50"
-    }, /* @__PURE__ */ import_react32.default.createElement(FaTrophy, null), " Copy Giveaway Status Alert Source URL")), /* @__PURE__ */ import_react32.default.createElement("div", {
+    }, copiedAlertURL ? /* @__PURE__ */ import_react32.default.createElement(import_react32.default.Fragment, null, /* @__PURE__ */ import_react32.default.createElement(FaCheck, null), " Copied") : /* @__PURE__ */ import_react32.default.createElement(import_react32.default.Fragment, null, /* @__PURE__ */ import_react32.default.createElement(FaTrophy, null), " Copy Winner Alert Source URL")), /* @__PURE__ */ import_react32.default.createElement("button", {
+      className: "bg-purple-600 px-2 py-1 flex-1 rounded-md transition-transform hover:scale-110 flex flex-row gap-1 justify-center items-center",
+      onClick: () => copyStatusURL()
+    }, copiedStatusURL ? /* @__PURE__ */ import_react32.default.createElement(import_react32.default.Fragment, null, /* @__PURE__ */ import_react32.default.createElement(FaCheck, null), " Copied") : /* @__PURE__ */ import_react32.default.createElement(import_react32.default.Fragment, null, /* @__PURE__ */ import_react32.default.createElement(FaTrophy, null), " Copy Giveaway Status Alert Source URL"))), /* @__PURE__ */ import_react32.default.createElement("div", {
       className: "flex flex-col gap-2"
     }, /* @__PURE__ */ import_react32.default.createElement("div", {
       className: "flex flex-row gap-2"

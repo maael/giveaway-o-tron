@@ -11,6 +11,7 @@ module.exports = {
       },
       animation: {
         wiggle: 'wiggle 1.5s ease-in-out infinite',
+        slowwiggle: 'wiggle 6s ease-in-out infinite',
       },
     },
   },
