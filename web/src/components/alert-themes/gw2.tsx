@@ -15,7 +15,6 @@ const canvasStyles = {
 } as const
 
 function Gw2Alert({ winner, visible }: { winner: string; visible: boolean }) {
-  console.info('render')
   return (
     <div
       className={`flex flex-col justify-center items-center bg-transparent relative fill-mode-both ${
@@ -44,7 +43,7 @@ function CustomAlert({ winner, imageUrl, visible }: { imageUrl?: string; winner:
       }`}
     >
       <img src={imageUrl} />
-      <div className="text-4xl mt-3 uppercase">{winner} won!</div>
+      <div className="text-4xl mt-5 uppercase text-white font-bold">{winner} won!</div>
     </div>
   )
 }
