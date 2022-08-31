@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react'
-import { FaBell, FaBellSlash, FaCheck, FaClock, FaTimes } from 'react-icons/fa'
+import { FaAngleDown, FaAngleUp, FaBell, FaBellSlash, FaCheck, FaClock, FaTimes } from 'react-icons/fa'
 import Countdown, { zeroPad } from 'react-countdown'
 import toast from 'react-hot-toast'
 import format from 'date-fns/formatDistanceStrict'
@@ -169,6 +169,51 @@ const Time = React.memo(function Time({
   )
 })
 
+function ChatCommandPicker({ setSettings }: Pick<Props, 'setSettings'>) {
+  const [open, setOpen] = React.useState(false)
+  return (
+    <div className="relative bg-purple-600 rounded-r-md text-sm h-full flex items-center justify-center  cursor-pointer select-none">
+      <button className="w-full h-full px-2 py-1" onClick={() => setOpen((o) => !o)}>
+        {open ? <FaAngleUp /> : <FaAngleDown />}
+      </button>
+      {open ? (
+        <div className="absolute top-9 right-1 z-50 bg-gray-700 border border-purple-600 w-44 rounded-md text-center shadow-lg">
+          <div
+            className="hover:bg-purple-600 px-2"
+            onClick={() => {
+              setSettings((s) => ({ ...s, chatCommand: '$gw2_account$' }))
+              setOpen(false)
+            }}
+            title="Counts messages with Guild Wars 2 Account names like XXX.1234 as entries"
+          >
+            GW2 Account Name
+          </div>
+          <div
+            className="hover:bg-purple-600 px-2"
+            onClick={() => {
+              setSettings((s) => ({ ...s, chatCommand: '$steam_friend$' }))
+              setOpen(false)
+            }}
+            title="Counts messages with Steam Friend codes like 12345678 as entries"
+          >
+            Steam Friend Code
+          </div>
+          <div
+            className="hover:bg-purple-600 px-2"
+            onClick={() => {
+              setSettings((s) => ({ ...s, chatCommand: '$gw2_or_steam$' }))
+              setOpen(false)
+            }}
+            title="Counts messages that include either a GW2 Account or Steam Friend Code as entries"
+          >
+            GW2 or Steam
+          </div>
+        </div>
+      ) : null}
+    </div>
+  )
+}
+
 export default function SettingsComponent({
   channelId,
   settings,
@@ -188,7 +233,7 @@ export default function SettingsComponent({
             Winner Message
           </div>
           <input
-            className="bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1"
+            className="bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-600 flex-1"
             placeholder="Winner Message..."
             value={settings.winnerMessage}
             onChange={(e) => setSettings((s) => ({ ...s, winnerMessage: e.target.value }))}
@@ -200,12 +245,13 @@ export default function SettingsComponent({
             Chat Command
           </div>
           <input
-            className="bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1"
+            className="bg-gray-700 px-2 py-1 border-b border-purple-600 flex-1"
             placeholder="Empty means any message..."
             value={settings.chatCommand}
             onChange={(e) => setSettings((s) => ({ ...s, chatCommand: e.target.value.trim() }))}
             title="Chat command to enter - leave empty for none"
           />
+          <ChatCommandPicker setSettings={setSettings} />
         </div>
       </div>
       <div className="flex flex-row gap-2 mt-2 text-sm">

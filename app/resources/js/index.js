@@ -41681,7 +41681,9 @@ to {
     return items[Math.floor(Math.random() * items.length)];
   }
   var specialCommands = {
-    $gw2_account$: /(^|\s)\w+\.\d{4}($|\s)/
+    $gw2_account$: /(^|\s)\w+\.\d{4}($|\s)/,
+    $steam_friend$: /(^|\s)\d{8}($|\s)/,
+    $gw2_or_steam$: /(^|\s)\w+\.\d{4}($|\s)|(^|\s)\d{8}($|\s)/
   };
   function handleChatCommand(chatItem, command) {
     const translatedCommand = specialCommands[command] || command;
@@ -45302,6 +45304,38 @@ to {
       title: "Warning: will clear chat"
     }, /* @__PURE__ */ import_react14.default.createElement(FaClock, null), " Start"));
   });
+  function ChatCommandPicker({ setSettings }) {
+    const [open, setOpen] = import_react14.default.useState(false);
+    return /* @__PURE__ */ import_react14.default.createElement("div", {
+      className: "relative bg-purple-600 rounded-r-md text-sm h-full flex items-center justify-center  cursor-pointer select-none"
+    }, /* @__PURE__ */ import_react14.default.createElement("button", {
+      className: "w-full h-full px-2 py-1",
+      onClick: () => setOpen((o2) => !o2)
+    }, open ? /* @__PURE__ */ import_react14.default.createElement(FaAngleUp, null) : /* @__PURE__ */ import_react14.default.createElement(FaAngleDown, null)), open ? /* @__PURE__ */ import_react14.default.createElement("div", {
+      className: "absolute top-9 right-1 z-50 bg-gray-700 border border-purple-600 w-44 rounded-md text-center shadow-lg"
+    }, /* @__PURE__ */ import_react14.default.createElement("div", {
+      className: "hover:bg-purple-600 px-2",
+      onClick: () => {
+        setSettings((s3) => __spreadProps(__spreadValues({}, s3), { chatCommand: "$gw2_account$" }));
+        setOpen(false);
+      },
+      title: "Counts messages with Guild Wars 2 Account names like XXX.1234 as entries"
+    }, "GW2 Account Name"), /* @__PURE__ */ import_react14.default.createElement("div", {
+      className: "hover:bg-purple-600 px-2",
+      onClick: () => {
+        setSettings((s3) => __spreadProps(__spreadValues({}, s3), { chatCommand: "$steam_friend$" }));
+        setOpen(false);
+      },
+      title: "Counts messages with Steam Friend codes like 12345678 as entries"
+    }, "Steam Friend Code"), /* @__PURE__ */ import_react14.default.createElement("div", {
+      className: "hover:bg-purple-600 px-2",
+      onClick: () => {
+        setSettings((s3) => __spreadProps(__spreadValues({}, s3), { chatCommand: "$gw2_or_steam$" }));
+        setOpen(false);
+      },
+      title: "Counts messages that include either a GW2 Account or Steam Friend Code as entries"
+    }, "GW2 or Steam")) : null);
+  }
   function SettingsComponent({
     channelId,
     settings,
@@ -45318,7 +45352,7 @@ to {
       className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md",
       title: "This will be sent to chat by your account to tell winners, if Send Message is enabled below"
     }, "Winner Message"), /* @__PURE__ */ import_react14.default.createElement("input", {
-      className: "bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1",
+      className: "bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-600 flex-1",
       placeholder: "Winner Message...",
       value: settings.winnerMessage,
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { winnerMessage: e3.target.value })),
@@ -45329,11 +45363,13 @@ to {
       className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md",
       title: "Filters messages to include this"
     }, "Chat Command"), /* @__PURE__ */ import_react14.default.createElement("input", {
-      className: "bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1",
+      className: "bg-gray-700 px-2 py-1 border-b border-purple-600 flex-1",
       placeholder: "Empty means any message...",
       value: settings.chatCommand,
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { chatCommand: e3.target.value.trim() })),
       title: "Chat command to enter - leave empty for none"
+    }), /* @__PURE__ */ import_react14.default.createElement(ChatCommandPicker, {
+      setSettings
     }))), /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "flex flex-row gap-2 mt-2 text-sm"
     }, /* @__PURE__ */ import_react14.default.createElement("div", {
