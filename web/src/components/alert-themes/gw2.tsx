@@ -29,7 +29,7 @@ function Gw2Alert({ winner, visible }: { winner: string; visible: boolean }) {
       <div>
         <div
           className="text-white uppercase px-4 py-2 text-bold text-center absolute mx-auto items-center-important"
-          style={{ top: 290, left: 50, right: 50, width: 450, height: 50 }}
+          style={{ top: 292, left: 50, right: 50, width: 450, height: 50 }}
         >
           <AutoTextSize maxFontSizePx={50}>
             <p className="mx-auto my-auto">{winner}</p>
@@ -37,7 +37,7 @@ function Gw2Alert({ winner, visible }: { winner: string; visible: boolean }) {
         </div>
         <div
           className="text-white text-4xl uppercase px-4 py-2 text-bold text-center absolute mx-auto"
-          style={{ top: 345, left: 50, right: 50, width: 450, height: 50 }}
+          style={{ top: 340, left: 50, right: 50, width: 450, height: 50 }}
         >
           won!
         </div>
