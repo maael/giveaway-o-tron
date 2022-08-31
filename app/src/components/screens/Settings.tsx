@@ -1,8 +1,8 @@
 import format from 'date-fns/formatDistanceStrict'
 import * as React from 'react'
-import { FaCheck, FaExclamationTriangle, FaPlus, FaTimes } from 'react-icons/fa'
+import { FaCheck, FaDownload, FaExclamationTriangle, FaPlus, FaTimes } from 'react-icons/fa'
 import { alertThemeMap, defaultSettings, removeIdx, Settings } from '~/utils'
-import { APP_VERSION } from '~/utils/updates'
+import { APP_VERSION, checkForUpdate } from '~/utils/updates'
 import { ONE_S, SliderInner } from '../primitives/Slider'
 
 export default function SettingsScreen({
@@ -155,7 +155,15 @@ export default function SettingsScreen({
           </button>
         </div>
         <button
-          className="bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity"
+          className="bg-purple-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity text-xs"
+          onClick={async () => {
+            await checkForUpdate()
+          }}
+        >
+          <FaDownload /> Check for update
+        </button>
+        <button
+          className="bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity text-xs"
           onClick={async () => {
             Neutralino.os.open(`https://giveaway-o-tron.vercel.app/api/auth/signout`)
           }}
@@ -163,7 +171,7 @@ export default function SettingsScreen({
           <FaExclamationTriangle /> Sign Out Token Tool
         </button>
         <button
-          className="bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity"
+          className="bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity text-xs"
           onClick={async () => {
             await Neutralino.storage.setData('main-channelinfo', null)
             window.location.reload()

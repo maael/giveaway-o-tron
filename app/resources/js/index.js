@@ -44581,6 +44581,9 @@ to {
   function FaDice(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 640 512" }, "child": [{ "tag": "path", "attr": { "d": "M592 192H473.26c12.69 29.59 7.12 65.2-17 89.32L320 417.58V464c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48V240c0-26.51-21.49-48-48-48zM480 376c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm-46.37-186.7L258.7 14.37c-19.16-19.16-50.23-19.16-69.39 0L14.37 189.3c-19.16 19.16-19.16 50.23 0 69.39L189.3 433.63c19.16 19.16 50.23 19.16 69.39 0L433.63 258.7c19.16-19.17 19.16-50.24 0-69.4zM96 248c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm128 128c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm0-128c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm0-128c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24zm128 128c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24z" } }] })(props);
   }
+  function FaDownload(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z" } }] })(props);
+  }
   function FaEnvelope(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z" } }] })(props);
   }
@@ -62434,36 +62437,43 @@ to {
   // src/utils/updates.tsx
   var import_react50 = __toModule(require_react());
   var APP_VERSION = globalThis.NL_APP_VERSION;
+  async function checkForUpdate() {
+    try {
+      const manifest = await Neutralino.updater.checkForUpdates(`https://giveaway-o-tron.vercel.app/api/version`);
+      if (manifest.version != NL_APPVERSION) {
+        console.info("[update]", { from: NL_APPVERSION, to: manifest.version });
+        Et((t2) => {
+          return /* @__PURE__ */ import_react50.default.createElement("div", {
+            className: "flex flex-row gap-4 justify-center items-center"
+          }, /* @__PURE__ */ import_react50.default.createElement("button", {
+            onClick: () => Neutralino.os.open(manifest.data.url),
+            className: "underline text-purple-600"
+          }, "v", manifest.version, " available \u2192"), "or", /* @__PURE__ */ import_react50.default.createElement("button", {
+            className: "bg-purple-600 px-2 py-1 rounded-md text-white hover:scale-105",
+            onClick: async () => {
+              Et("The app will now install the update and try to reopen, you may need to reopen it manually", {
+                position: "bottom-center",
+                style: { textAlign: "center" }
+              });
+              await Promise.all([Neutralino.updater.install(), wait(5e3)]);
+              await Neutralino.app.restartProcess();
+            }
+          }, "Update now"));
+        });
+      } else {
+        console.info("[update]", "No update required");
+      }
+    } catch (e3) {
+      console.warn("[update][error]", e3);
+      Et.error("Failed to check for update", {
+        position: "bottom-center",
+        style: { fontSize: "1rem", padding: "0.2rem" }
+      });
+    }
+  }
   function useUpdateCheck() {
     import_react50.default.useEffect(() => {
-      ;
-      (async () => {
-        try {
-          const manifest = await Neutralino.updater.checkForUpdates(`https://giveaway-o-tron.vercel.app/api/version`);
-          if (manifest.version != NL_APPVERSION) {
-            Et((t2) => {
-              return /* @__PURE__ */ import_react50.default.createElement("div", {
-                className: "flex flex-row gap-4 justify-center items-center"
-              }, /* @__PURE__ */ import_react50.default.createElement("button", {
-                onClick: () => Neutralino.os.open(manifest.data.url),
-                className: "underline text-purple-600"
-              }, "v", manifest.version, " available \u2192"), "or", /* @__PURE__ */ import_react50.default.createElement("button", {
-                className: "bg-purple-600 px-2 py-1 rounded-md text-white hover:scale-105",
-                onClick: async () => {
-                  await Neutralino.updater.install();
-                  await Neutralino.app.restartProcess();
-                }
-              }, "Update now"));
-            });
-          }
-        } catch (e3) {
-          console.warn("[update][error]", e3);
-          Et.error("Failed to check for update", {
-            position: "bottom-center",
-            style: { fontSize: "1rem", padding: "0.2rem" }
-          });
-        }
-      })();
+      void checkForUpdate();
     }, []);
   }
 
@@ -62581,12 +62591,17 @@ to {
       className: "text-purple-200 opacity-80 text-xs",
       onClick: () => Neutralino.os.open(`https://github.com/maael/giveaway-o-tron/releases/v${APP_VERSION}`)
     }, "Version: ", APP_VERSION ? `v${APP_VERSION}` : "Unknown Version")), /* @__PURE__ */ React43.createElement("button", {
-      className: "bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity",
+      className: "bg-purple-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity text-xs",
+      onClick: async () => {
+        await checkForUpdate();
+      }
+    }, /* @__PURE__ */ React43.createElement(FaDownload, null), " Check for update"), /* @__PURE__ */ React43.createElement("button", {
+      className: "bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity text-xs",
       onClick: async () => {
         Neutralino.os.open(`https://giveaway-o-tron.vercel.app/api/auth/signout`);
       }
     }, /* @__PURE__ */ React43.createElement(FaExclamationTriangle, null), " Sign Out Token Tool"), /* @__PURE__ */ React43.createElement("button", {
-      className: "bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity",
+      className: "bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity text-xs",
       onClick: async () => {
         await Neutralino.storage.setData("main-channelinfo", null);
         window.location.reload();
