@@ -688,6 +688,11 @@ astral-regex@^2.0.0:
   resolved "https://registry.yarnpkg.com/astral-regex/-/astral-regex-2.0.0.tgz#483143c567aeed4785759c0865786dc77d7d2e31"
   integrity sha512-Z7tMw1ytTXt5jqMcOP+OQteU1VuNK9Y02uuJtKQ1Sv69jXQKKg5cibLwGJow8yzZP+eAc18EmLGPal0bp36rvQ==
 
+auto-text-size@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/auto-text-size/-/auto-text-size-0.1.2.tgz#b352e265f3671f31408d010bcb1a3b3d9131fd4b"
+  integrity sha512-tPiBznhp0LyYF6KfFzn4lkSQgm3CAx3IeO+OrY2Zp9BCKa0lTm/IWXpBcVs3ht/K2btxkwzA723xGOfySYSCmw==
+
 autoprefixer@^10.4.4:
   version "10.4.4"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-10.4.4.tgz#3e85a245b32da876a893d3ac2ea19f01e7ea5a1e"

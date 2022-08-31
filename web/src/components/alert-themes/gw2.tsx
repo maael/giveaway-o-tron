@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { io } from 'socket.io-client'
 import toast, { Toaster } from 'react-hot-toast'
 import ReactCanvasConfetti from 'react-canvas-confetti'
+import { AutoTextSize } from 'auto-text-size'
 
 const canvasStyles = {
   position: 'fixed',
@@ -25,11 +26,21 @@ function Gw2Alert({ winner, visible }: { winner: string; visible: boolean }) {
       <div className="text-white text-4xl uppercasetext-bold left-0 right-0 text-center absolute" style={{ top: 230 }}>
         Giveaway chest!
       </div>
-      <div
-        className="text-white text-3xl uppercase px-4 py-2 text-bold text-center absolute break-all"
-        style={{ top: 300, left: 50, right: 50 }}
-      >
-        {winner} won!
+      <div>
+        <div
+          className="text-white uppercase px-4 py-2 text-bold text-center absolute mx-auto items-center-important"
+          style={{ top: 290, left: 50, right: 50, width: 450, height: 50 }}
+        >
+          <AutoTextSize maxFontSizePx={50}>
+            <p className="mx-auto my-auto">{winner}</p>
+          </AutoTextSize>
+        </div>
+        <div
+          className="text-white text-4xl uppercase px-4 py-2 text-bold text-center absolute mx-auto"
+          style={{ top: 345, left: 50, right: 50, width: 450, height: 50 }}
+        >
+          won!
+        </div>
       </div>
     </div>
   )

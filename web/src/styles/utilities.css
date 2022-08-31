@@ -2,3 +2,8 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.items-center-important {
+  align-items: center !important;
+  justify-content: center !important;
+}
