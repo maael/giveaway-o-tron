@@ -5,6 +5,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'mdx.css';
+
 html,
 body,
 body > div:first-child,

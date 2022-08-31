@@ -26,6 +26,7 @@
   "dependencies": {
     "fathom-client": "^3.4.1",
     "next": "^12.1.5",
+    "next-mdx-remote": "^4.1.0",
     "next-seo": "^5.4.0",
     "react": "^18.0.0",
     "react-canvas-confetti": "^1.3.0",
@@ -34,6 +35,8 @@
     "react-icons": "^4.4.0",
     "react-twitch-embed-video": "^3.0.2",
     "react-twitter-embed": "^4.0.4",
+    "rehype-autolink-headings": "^6.1.1",
+    "rehype-slug": "^5.0.1",
     "tailwindcss-animate": "^1.0.5"
   },
   "devDependencies": {
