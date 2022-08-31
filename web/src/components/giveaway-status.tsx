@@ -3,6 +3,12 @@ import * as React from 'react'
 import { useRouter } from 'next/router'
 import { io } from 'socket.io-client'
 
+const SPECIAL_COMMAND_TEXT = {
+  $gw2_account$: 'with your Guild Wars 2 account name XXXX.1234',
+  $steam_friend$: 'with your 8 digit Steam friend code',
+  $gw2_or_steam$: 'with either your GW2 account name or Steam friend code',
+}
+
 export default function GW2Alerts() {
   const router = useRouter()
   const channel = router.query.channel
@@ -77,11 +83,7 @@ export default function GW2Alerts() {
     body:
       status.status === 'start'
         ? status.command
-          ? `Message ${
-              status.command === '$gw2_account$'
-                ? 'with your Guild Wars 2 account name XXXX.1234'
-                : `including ${status.command}`
-            } for a chance to win!`
+          ? `Message ${SPECIAL_COMMAND_TEXT[status.command] || `including ${status.command}`} for a chance to win!`
           : "Make sure to send a message in chat, there's no command!"
         : status.status === 'ended'
         ? 'Good luck!'
@@ -126,7 +128,7 @@ function Gw2Status({ status, title, body, command, followersOnly }: StatusProps)
       </div>
       <div
         className={`text-white uppercase px-4 py-2 text-bold text-center absolute ${
-          command !== '$gw2_account$' ? 'text-2xl' : 'text-xl'
+          command && Object.keys(SPECIAL_COMMAND_TEXT).includes(command) ? 'text-xl' : 'text-2xl'
         }`}
         style={{ top: 284, width: 360 }}
       >

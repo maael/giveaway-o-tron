@@ -63,13 +63,38 @@ export default function Guide({ fathom }) {
           <div className="flex flex-col gap-1">
             <div className="flex flex-col items-start">
               <em className="text-purple-600 font-bold bg-gray-900 px-2 py-1 rounded-md not-italic text-xl">
-                $gw_account$
+                $gw2_account$
               </em>
             </div>
             <div>
               This will require viewer to put in their Guild Wars 2 account names in the format matching{' '}
               <em className="text-purple-600 font-bold bg-gray-900 px-2 py-1 rounded-md not-italic">Test.1234</em> - it
               handles names with spaces too
+            </div>
+          </div>
+          <div className="flex flex-col gap-1">
+            <div className="flex flex-col items-start">
+              <em className="text-purple-600 font-bold bg-gray-900 px-2 py-1 rounded-md not-italic text-xl">
+                $steam_friend$
+              </em>
+            </div>
+            <div>
+              This will require viewer to put in their 8-digit Steam Friend Code in the format matching{' '}
+              <em className="text-purple-600 font-bold bg-gray-900 px-2 py-1 rounded-md not-italic">12345678</em>
+            </div>
+          </div>
+          <div className="flex flex-col gap-1">
+            <div className="flex flex-col items-start">
+              <em className="text-purple-600 font-bold bg-gray-900 px-2 py-1 rounded-md not-italic text-xl">
+                $gw2_or_steam$
+              </em>
+            </div>
+            <div>
+              This will match either the{' '}
+              <em className="text-purple-600 font-bold bg-gray-900 px-2 py-1 rounded-md not-italic">$gw2_account$</em>{' '}
+              or{' '}
+              <em className="text-purple-600 font-bold bg-gray-900 px-2 py-1 rounded-md not-italic">$steam_friend$</em>{' '}
+              chat commands above
             </div>
           </div>
         </div>
