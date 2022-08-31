@@ -80,7 +80,7 @@ export default function GW2Alerts() {
   }, [])
 
   const fire = React.useCallback(() => {
-    makeShot(1, {
+    makeShot(0.8, {
       spread: 80,
       decay: 0.9,
       scalar: 0.8,
