@@ -14,7 +14,7 @@ export default function Header({ fathom }: { fathom: typeof Fathom }) {
       <div className="flex flex-row gap-2">
         <a
           className="button"
-          href="https://github.com/maael/giveaway-o-tron/releases/latest"
+          href="https://github.com/maael/giveaway-o-tron/releases/latest/download/giveaway-o-tron.zip"
           onClick={() => fathom.trackGoal('YTV1LXUB', 0)}
         >
           <FaDownload /> Download
