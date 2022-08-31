@@ -59,7 +59,7 @@ export default function Guide({ fathom }) {
         <p className="opacity-80 text-center max-w-xl -mt-6">
           Put these directly as they appear here into the chat command setting field, including any $ symbols etc.
         </p>
-        <div className="text-left flex flex-col gap-2 list-disc max-w-2xl mx-auto px-2 -mt-4">
+        <div className="text-left flex flex-col gap-4 list-disc max-w-2xl mx-auto px-2 -mt-4">
           <div className="flex flex-col gap-1">
             <div className="flex flex-col items-start">
               <em className="text-purple-600 font-bold bg-gray-900 px-2 py-1 rounded-md not-italic text-xl">
