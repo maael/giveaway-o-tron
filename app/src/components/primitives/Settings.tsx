@@ -145,6 +145,7 @@ const Time = React.memo(function Time({
             type: 'timer-start',
             channelId,
             ts: new Date().toISOString(),
+            duration,
             chatCommand,
             discordGuildId: discordSettings.guildId,
             discordChannelId: discordSettings.channelId,

@@ -2,12 +2,32 @@
 import * as React from 'react'
 import { useRouter } from 'next/router'
 import { io } from 'socket.io-client'
+import Countdown, { zeroPad } from 'react-countdown'
 
 const SPECIAL_COMMAND_TEXT = {
   $gw2_account$: 'with your Guild Wars 2 account name XXXX.1234',
   $steam_friend$: 'with your 8 digit Steam friend code',
   $gw2_or_steam$: 'with either your GW2 account name or Steam friend code',
 }
+
+const countDownRenderer = ({ hours, minutes, seconds, completed }) => {
+  if (completed) {
+    // Render a complete state
+    return <div className="animate-pulse">Giveaway closed!</div>
+  } else {
+    // Render a countdown
+    return (
+      <span>
+        {zeroPad(hours, 2)} : {zeroPad(minutes, 2)} : {zeroPad(seconds, 2)}
+      </span>
+    )
+  }
+}
+
+const StableCountdown = React.memo(function StableCountdown({ value }: { value: number }) {
+  console.info({ value })
+  return <Countdown renderer={countDownRenderer} date={value + 10000} />
+})
 
 export default function GW2Alerts() {
   const router = useRouter()
@@ -16,7 +36,7 @@ export default function GW2Alerts() {
   const [status, setStatus] = React.useState<{
     status?: string
     command?: string
-    ts?: string
+    goalTs?: number
     followersOnly?: boolean
     theme?: string
     imageUrl?: string
@@ -29,7 +49,8 @@ export default function GW2Alerts() {
       alertTheme: string
       type?: string
       chatCommand?: string
-      ts?: string
+      ts?: number
+      duration?: number
       followersOnly?: string
       alertCustomImageUrl?: string
     }) => {
@@ -39,7 +60,7 @@ export default function GW2Alerts() {
         setStatus({
           status: 'start',
           command: e.chatCommand,
-          ts: e.ts,
+          goalTs: e.ts && e.duration ? Number(new Date(e.ts)) + e.duration : undefined,
           followersOnly: !!e.followersOnly,
           theme: e.alertTheme,
           imageUrl: e.alertCustomImageUrl,
@@ -47,7 +68,6 @@ export default function GW2Alerts() {
       } else if (e.type === 'timer-end') {
         setStatus({
           status: 'ended',
-          ts: e.ts,
           followersOnly: !!e.followersOnly,
           theme: e.alertTheme,
           imageUrl: e.alertCustomImageUrl,
@@ -92,6 +112,7 @@ export default function GW2Alerts() {
     command: status.command,
     followersOnly: status.followersOnly,
     imageUrl: status.imageUrl,
+    goalTs: status.goalTs,
   }
   console.info('[props]', props)
   return status.status ? (
@@ -108,9 +129,10 @@ interface StatusProps {
   command?: string
   followersOnly?: boolean
   imageUrl?: string
+  goalTs?: number
 }
 
-function Gw2Status({ status, title, body, command, followersOnly }: StatusProps) {
+function Gw2Status({ status, title, goalTs, body, command, followersOnly }: StatusProps) {
   return (
     <div
       className={`flex flex-col justify-center items-center bg-transparent relative fill-mode-both ${
@@ -120,12 +142,22 @@ function Gw2Status({ status, title, body, command, followersOnly }: StatusProps)
       <img src="/images/chest-notification.png" />
       <div
         className={`text-white uppercasetext-bold left-2 right-2 text-center absolute uppercase ${
-          followersOnly ? 'text-2xl' : 'text-3xl'
+          goalTs ? 'text-2xl' : followersOnly ? 'text-2xl' : 'text-3xl'
         }`}
-        style={{ top: 235 }}
+        style={{ top: goalTs ? 225 : 235 }}
       >
         {title}
       </div>
+      {goalTs ? (
+        <div
+          className={`text-white uppercasetext-bold left-2 right-2 text-center absolute uppercase ${
+            followersOnly ? 'text-xl' : 'text-xl'
+          }`}
+          style={{ top: 252 }}
+        >
+          <StableCountdown value={Number(goalTs)} />
+        </div>
+      ) : null}
       <div
         className={`text-white uppercase px-4 py-2 text-bold text-center absolute ${
           command && Object.keys(SPECIAL_COMMAND_TEXT).includes(command) ? 'text-xl' : 'text-2xl'
