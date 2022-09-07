@@ -44264,7 +44264,18 @@ to {
   });
 
   // src/utils/relay.ts
-  var socket = lookup2("wss://giveaway-o-tron-relay.onrender.com");
+  var socket = lookup2("wss://giveaway-o-tron-relay.onrender.com", {
+    transports: ["websocket", "polling"]
+  });
+  socket.on("connect", function() {
+    console.info("[relay][connect]");
+  });
+  socket.on("connect_error", function(e3) {
+    console.info("[relay][connect_error]", e3);
+  });
+  socket.on("disconnect", function(e3) {
+    console.info("[relay][disconnect]", e3);
+  });
   var relay_default = socket;
 
   // src/utils/giveaways.ts
@@ -45292,6 +45303,7 @@ to {
           type: "timer-start",
           channelId,
           ts: new Date().toISOString(),
+          duration,
           chatCommand,
           discordGuildId: discordSettings.guildId,
           discordChannelId: discordSettings.channelId,

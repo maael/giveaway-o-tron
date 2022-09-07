@@ -26,7 +26,7 @@ const countDownRenderer = ({ hours, minutes, seconds, completed }) => {
 
 const StableCountdown = React.memo(function StableCountdown({ value }: { value: number }) {
   console.info({ value })
-  return <Countdown renderer={countDownRenderer} date={value + 10000} />
+  return <Countdown renderer={countDownRenderer} date={value} />
 })
 
 export default function GW2Alerts() {
@@ -79,6 +79,7 @@ export default function GW2Alerts() {
     [channel]
   )
   React.useEffect(() => {
+    if (!channel) return
     const socket = io(`wss://giveaway-o-tron-relay.onrender.com`, {
       query: { channel },
       transports: ['websocket', 'polling'],
@@ -87,9 +88,18 @@ export default function GW2Alerts() {
     socket.connect()
 
     socket.on('connect', () => {
-      console.log('[id]', socket.id) // "G5p5..."
-      socket.on('event', handleEvent)
+      console.log('[id]', socket.id)
     })
+
+    socket.on('connect_error', () => {
+      console.log('[connect_error]', socket.id)
+    })
+
+    socket.on('disconnect', () => {
+      console.log('[disconnect]', socket.id)
+    })
+
+    socket.on('event', handleEvent)
 
     return () => {
       socket.disconnect()
