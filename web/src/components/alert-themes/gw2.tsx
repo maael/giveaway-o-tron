@@ -117,7 +117,10 @@ export default function GW2Alerts() {
     [fire, channel]
   )
   React.useEffect(() => {
-    const socket = io(`wss://giveaway-o-tron-relay.onrender.com`, { query: { channel } })
+    const socket = io(`wss://giveaway-o-tron-relay.onrender.com`, {
+      query: { channel },
+      transports: ['websocket', 'polling'],
+    })
 
     socket.connect()
 

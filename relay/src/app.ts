@@ -12,6 +12,7 @@ const io = new Server(server, {
     origin: true,
     methods: ["GET"],
   },
+  transports: ["websocket", "polling"],
 });
 
 interface WinnerMessage {
