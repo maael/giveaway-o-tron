@@ -14,6 +14,7 @@ import {
   defaultSettings,
   DiscordSettings,
   GiveawayResult,
+  handleChatCommand,
   Settings,
   useAuthEvents,
   useCacheHistory,
@@ -23,6 +24,7 @@ import { WinnerUser } from './components/primitives/giveaways'
 import { useUpdateCheck } from './utils/updates'
 import DiscordScreen from './components/screens/Discord'
 import ObsScreen from './components/screens/Obs'
+import relay from './utils/relay'
 
 export default function App() {
   return (
@@ -34,6 +36,7 @@ export default function App() {
 
 function InnerApp() {
   useUpdateCheck()
+  const [timerActive, setTimerActive] = React.useState(false)
   const [settings, setSettings] = useStorage<Settings>('settings', defaultSettings)
   const [discordSettings, setDiscordSettings] = useStorage<DiscordSettings>('discord', defaultDiscordSettings)
   const [winners, setWinners] = React.useState<WinnerUser[]>([])
@@ -61,15 +64,29 @@ function InnerApp() {
     }
   }, [channelInfo.login])
   const [forfeits, setForfeits] = React.useState<string[]>([])
+  const [chatPaused, setChatPaused] = React.useState(false)
   const onNewChat = React.useCallback(
     (chat: ChatItem) => {
       if (settings.forfeitCommand && chat.msg.toLowerCase().includes(settings.forfeitCommand.toLowerCase())) {
         setForfeits((f) => f.concat(chat.username))
       }
+      if (timerActive && !chatPaused) {
+        const isMatch = handleChatCommand(chat, settings.chatCommand)
+        if (isMatch) {
+          const entryEvent = {
+            type: 'entry',
+            channelId: channelInfo.userId,
+            login: channelInfo.login,
+            username: chat.username,
+            color: chat.color,
+            displayName: chat.displayName,
+          }
+          relay.emit('event', entryEvent)
+        }
+      }
     },
-    [settings.forfeitCommand]
+    [settings.forfeitCommand, settings.chatCommand, timerActive, chatPaused, channelInfo.userId, channelInfo.login]
   )
-  const [chatPaused, setChatPaused] = React.useState(false)
   const [chatEvents, resetChat] = useChatEvents(chatPaused, winners, onNewChat)
   React.useEffect(() => {
     window['myApp'].setTitle(channelInfo.login, !!client)
@@ -83,6 +100,8 @@ function InnerApp() {
       <Switch>
         <Route path="/" exact>
           <MainScreen
+            timerActive={timerActive}
+            setTimerActive={setTimerActive}
             client={client}
             chatEvents={chatEvents}
             discordSettings={discordSettings}

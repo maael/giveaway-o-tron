@@ -57,8 +57,6 @@ export async function getChatGiveaway(
   const forfeitSet = new Set([...forfeits])
   const giveawayUserStats = prepareStats()
   console.info('[giveaway][chat][start]')
-  let subCount = 0
-  let subEntries = 0
   const nonblockedChatItems = chatItems.filter(
     (u) =>
       !settings.blocklist.map((b) => b.trim()).includes(u.displayName) &&
@@ -92,8 +90,6 @@ export async function getChatGiveaway(
   giveawayUserStats.subs = users.filter((u) => u.isSubscriber).length
   users = users.flatMap((c) => {
     if (c.isSubscriber) {
-      subCount += 1
-      subEntries += settings.subLuck
       return Array.from({ length: settings.subLuck }, () => c)
     }
     return c

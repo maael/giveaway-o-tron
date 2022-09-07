@@ -35,6 +35,8 @@ interface Props {
   resetChat: () => void
   channelId?: string
   discordSettings: DiscordSettings
+  timerActive: Boolean
+  setTimerActive: Dispatch<SetStateAction<Boolean>>
 }
 
 const StableCountdown = React.memo(function StableCountdown({
@@ -59,6 +61,8 @@ const Time = React.memo(function Time({
   setSettings,
   discordSettings,
   duration,
+  timerActive,
+  setTimerActive,
 }: {
   followersOnly: Props['settings']['followersOnly']
   alertTheme: Props['settings']['alertTheme']
@@ -66,9 +70,10 @@ const Time = React.memo(function Time({
   chatCommand: Props['settings']['chatCommand']
   timerBell: Props['settings']['timerBell']
   duration: Props['settings']['timerDuration']
-  setSettings: Props['setSettings']
-} & Pick<Props, 'channelId' | 'setChatPaused' | 'resetChat' | 'discordSettings'>) {
-  const [active, setActive] = React.useState(false)
+} & Pick<
+  Props,
+  'channelId' | 'setChatPaused' | 'resetChat' | 'discordSettings' | 'setSettings' | 'setTimerActive' | 'timerActive'
+>) {
   const value = duration || ONE_MIN
   const onComplete = React.useCallback(() => {
     toast.success('Timer finished! Chat paused, do a giveaway...', { position: 'bottom-center' })
@@ -94,13 +99,13 @@ const Time = React.memo(function Time({
     setChatPaused(true)
     if (timerBell) bell.play()
   }, [channelId, timerBell, discordSettings, duration])
-  return active ? (
+  return timerActive ? (
     <div className="flex-1 border border-purple-600 rounded-md flex justify-center items-center text-center relative">
       <StableCountdown value={value} onComplete={onComplete} />
       <FaTimes
         className="absolute right-3 top-2 text-red-500 select-none cursor-pointer"
         onClick={() => {
-          setActive(false)
+          setTimerActive(false)
           relay.emit('event', { type: 'timer-cancel', channelId })
         }}
         title="Cancel the timer"
@@ -138,7 +143,7 @@ const Time = React.memo(function Time({
         onClick={() => {
           resetChat()
           setChatPaused(false)
-          setActive(true)
+          setTimerActive(true)
           const disabledDueToTimer =
             duration && discordSettings.giveawayMinTime && duration < discordSettings.giveawayMinTime
           relay.emit('event', {
@@ -221,6 +226,8 @@ export default function SettingsComponent({
   setChatPaused,
   resetChat,
   discordSettings,
+  timerActive,
+  setTimerActive,
 }: Props) {
   return (
     <>
@@ -299,6 +306,8 @@ export default function SettingsComponent({
           alertTheme={settings.alertTheme}
           alertCustomImageUrl={settings.alertCustomImageUrl}
           followersOnly={settings.followersOnly}
+          timerActive={timerActive}
+          setTimerActive={setTimerActive}
         />
       </div>
       <div className="flex flex-row gap-2 mt-2 text-sm">

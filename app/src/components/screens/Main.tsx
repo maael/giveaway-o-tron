@@ -32,6 +32,8 @@ export default function MainScreen({
   forfeits,
   stats,
   cacheHistory,
+  timerActive,
+  setTimerActive,
 }: {
   client: ReturnType<typeof chat> | null
   chatEvents: ChatItem[]
@@ -49,6 +51,8 @@ export default function MainScreen({
   forfeits: string[]
   stats: CacheStats
   cacheHistory: CacheHistory
+  timerActive: Boolean
+  setTimerActive: Dispatch<SetStateAction<Boolean>>
 }) {
   const messageDelay = React.useMemo(() => {
     const mostRecent = chatEvents[chatEvents.length - 1]
@@ -95,6 +99,8 @@ export default function MainScreen({
         setChatPaused={setChatPaused}
         resetChat={resetChat}
         discordSettings={discordSettings}
+        timerActive={timerActive}
+        setTimerActive={setTimerActive}
       />
       {settings.performanceMode && !winners.length ? (
         <div className="h-full flex-1 gap-2 flex flex-col justify-center items-center">

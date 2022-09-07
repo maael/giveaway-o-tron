@@ -44303,8 +44303,6 @@ to {
     const forfeitSet = new Set([...forfeits]);
     const giveawayUserStats = prepareStats();
     console.info("[giveaway][chat][start]");
-    let subCount = 0;
-    let subEntries = 0;
     const nonblockedChatItems = chatItems.filter((u3) => !settings.blocklist.map((b2) => b2.trim()).includes(u3.displayName) && !settings.blocklist.map((b2) => b2.trim()).includes(u3.username));
     const chatCommandEvents = nonblockedChatItems.filter((c3) => handleChatCommand(c3, chatCommand));
     giveawayUserStats.entries = chatCommandEvents.length;
@@ -44334,8 +44332,6 @@ to {
     giveawayUserStats.subs = users.filter((u3) => u3.isSubscriber).length;
     users = users.flatMap((c3) => {
       if (c3.isSubscriber) {
-        subCount += 1;
-        subEntries += settings.subLuck;
         return Array.from({ length: settings.subLuck }, () => c3);
       }
       return c3;
@@ -45225,9 +45221,10 @@ to {
     timerBell,
     setSettings,
     discordSettings,
-    duration
+    duration,
+    timerActive,
+    setTimerActive
   }) {
-    const [active, setActive] = import_react14.default.useState(false);
     const value2 = duration || ONE_MIN2;
     const onComplete = import_react14.default.useCallback(() => {
       Et.success("Timer finished! Chat paused, do a giveaway...", { position: "bottom-center" });
@@ -45250,7 +45247,7 @@ to {
       if (timerBell)
         bell.play();
     }, [channelId, timerBell, discordSettings, duration]);
-    return active ? /* @__PURE__ */ import_react14.default.createElement("div", {
+    return timerActive ? /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex justify-center items-center text-center relative"
     }, /* @__PURE__ */ import_react14.default.createElement(StableCountdown, {
       value: value2,
@@ -45258,7 +45255,7 @@ to {
     }), /* @__PURE__ */ import_react14.default.createElement(FaTimes, {
       className: "absolute right-3 top-2 text-red-500 select-none cursor-pointer",
       onClick: () => {
-        setActive(false);
+        setTimerActive(false);
         relay_default.emit("event", { type: "timer-cancel", channelId });
       },
       title: "Cancel the timer"
@@ -45286,7 +45283,7 @@ to {
       onClick: () => {
         resetChat();
         setChatPaused(false);
-        setActive(true);
+        setTimerActive(true);
         const disabledDueToTimer = duration && discordSettings.giveawayMinTime && duration < discordSettings.giveawayMinTime;
         relay_default.emit("event", {
           type: "timer-start",
@@ -45345,7 +45342,9 @@ to {
     setSettings,
     setChatPaused,
     resetChat,
-    discordSettings
+    discordSettings,
+    timerActive,
+    setTimerActive
   }) {
     return /* @__PURE__ */ import_react14.default.createElement(import_react14.default.Fragment, null, /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "flex flex-row gap-2 mt-2"
@@ -45404,7 +45403,9 @@ to {
       duration: settings.timerDuration,
       alertTheme: settings.alertTheme,
       alertCustomImageUrl: settings.alertCustomImageUrl,
-      followersOnly: settings.followersOnly
+      followersOnly: settings.followersOnly,
+      timerActive,
+      setTimerActive
     })), /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "flex flex-row gap-2 mt-2 text-sm"
     }, /* @__PURE__ */ import_react14.default.createElement(SliderOuter, {
@@ -62156,7 +62157,9 @@ to {
     setPastGiveaways,
     forfeits,
     stats,
-    cacheHistory
+    cacheHistory,
+    timerActive,
+    setTimerActive
   }) {
     const messageDelay = import_react47.default.useMemo(() => {
       const mostRecent = chatEvents[chatEvents.length - 1];
@@ -62201,7 +62204,9 @@ to {
       setSettings,
       setChatPaused,
       resetChat,
-      discordSettings
+      discordSettings,
+      timerActive,
+      setTimerActive
     }), settings.performanceMode && !winners.length ? /* @__PURE__ */ import_react47.default.createElement("div", {
       className: "h-full flex-1 gap-2 flex flex-col justify-center items-center"
     }, /* @__PURE__ */ import_react47.default.createElement("div", {
@@ -66715,6 +66720,7 @@ to {
   }
   function InnerApp() {
     useUpdateCheck();
+    const [timerActive, setTimerActive] = import_react62.default.useState(false);
     const [settings, setSettings] = useStorage("settings", defaultSettings);
     const [discordSettings, setDiscordSettings] = useStorage("discord", defaultDiscordSettings);
     const [winners, setWinners] = import_react62.default.useState([]);
@@ -66742,12 +66748,26 @@ to {
       }
     }, [channelInfo.login]);
     const [forfeits, setForfeits] = import_react62.default.useState([]);
+    const [chatPaused, setChatPaused] = import_react62.default.useState(false);
     const onNewChat = import_react62.default.useCallback((chat) => {
       if (settings.forfeitCommand && chat.msg.toLowerCase().includes(settings.forfeitCommand.toLowerCase())) {
         setForfeits((f3) => f3.concat(chat.username));
       }
-    }, [settings.forfeitCommand]);
-    const [chatPaused, setChatPaused] = import_react62.default.useState(false);
+      if (timerActive && !chatPaused) {
+        const isMatch = handleChatCommand(chat, settings.chatCommand);
+        if (isMatch) {
+          const entryEvent = {
+            type: "entry",
+            channelId: channelInfo.userId,
+            login: channelInfo.login,
+            username: chat.username,
+            color: chat.color,
+            displayName: chat.displayName
+          };
+          relay_default.emit("event", entryEvent);
+        }
+      }
+    }, [settings.forfeitCommand, settings.chatCommand, timerActive, chatPaused, channelInfo.userId, channelInfo.login]);
     const [chatEvents, resetChat] = useChatEvents(chatPaused, winners, onNewChat);
     import_react62.default.useEffect(() => {
       window["myApp"].setTitle(channelInfo.login, !!client);
@@ -66764,6 +66784,8 @@ to {
       path: "/",
       exact: true
     }, /* @__PURE__ */ import_react62.default.createElement(MainScreen, {
+      timerActive,
+      setTimerActive,
       client,
       chatEvents,
       discordSettings,
