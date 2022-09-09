@@ -25,7 +25,6 @@ const countDownRenderer = ({ hours, minutes, seconds, completed }) => {
 }
 
 const StableCountdown = React.memo(function StableCountdown({ value }: { value: number }) {
-  console.info({ value })
   return <Countdown renderer={countDownRenderer} date={value} />
 })
 
@@ -102,6 +101,7 @@ export default function GW2Alerts() {
     socket.on('event', handleEvent)
 
     return () => {
+      console.info('[hook][disconnect]')
       socket.disconnect()
     }
   }, [handleEvent, channel])

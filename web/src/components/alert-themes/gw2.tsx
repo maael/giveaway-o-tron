@@ -140,6 +140,7 @@ export default function GW2Alerts() {
     socket.on('event', handleEvent)
 
     return () => {
+      console.info('[hook][disconnect]')
       socket.disconnect()
     }
   }, [handleEvent, channel])
