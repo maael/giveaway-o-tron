@@ -144,6 +144,9 @@ export default function GW2Alerts() {
       socket.disconnect()
     }
   }, [handleEvent, channel])
+  React.useEffect(() => {
+    new Image().src = '/images/chest-notification.png'
+  }, [])
   return (
     <div className="w-full h-full">
       <Toaster />

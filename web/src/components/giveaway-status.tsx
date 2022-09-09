@@ -128,6 +128,9 @@ export default function GW2Alerts() {
     goalTs: status.goalTs,
   }
   console.info('[props]', props)
+  React.useEffect(() => {
+    new Image().src = '/images/chest-notification.png'
+  }, [])
   return status.status ? (
     <div className="w-full h-full">
       {status.theme === 'gw2' ? <Gw2Status {...props} /> : <CustomStatus {...props} />}
