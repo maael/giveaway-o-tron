@@ -1,5 +1,6 @@
 import React from 'react'
 import toast from 'react-hot-toast'
+import * as Sentry from '@sentry/react'
 import { wait } from './misc'
 
 export const APP_VERSION: string | undefined = (globalThis as any).NL_APP_VERSION
@@ -59,6 +60,7 @@ export async function checkForUpdate() {
     }
   } catch (e) {
     console.warn('[update][error]', e)
+    Sentry.captureException(e)
     toast.error('Failed to check for update', {
       position: 'bottom-center',
       style: { fontSize: '1rem', padding: '0.2rem' },

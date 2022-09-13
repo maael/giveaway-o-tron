@@ -1,6 +1,7 @@
 import React from 'react'
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
+import * as Sentry from '@sentry/react'
 import chat, { ChatItem, useChatEvents } from './chat'
 import useStorage from './components/hooks/useStorage'
 import MainScreen from './components/screens/Main'
@@ -56,6 +57,7 @@ function InnerApp() {
   )
   useAuthEvents(updateClientInfo)
   React.useEffect(() => {
+    Sentry.setUser({ username: channelInfo.login })
     if (channelInfo.login) {
       if (settings.autoConnect) setClient((cl) => (cl ? cl : chat(channelInfo)))
     }

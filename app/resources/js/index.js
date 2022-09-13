@@ -50,21 +50,21 @@
     for (var name in all)
       __defProp(target, name, { get: all[name], enumerable: true });
   };
-  var __reExport = (target, module, desc) => {
-    if (module && typeof module === "object" || typeof module === "function") {
-      for (let key of __getOwnPropNames(module))
+  var __reExport = (target, module2, desc) => {
+    if (module2 && typeof module2 === "object" || typeof module2 === "function") {
+      for (let key of __getOwnPropNames(module2))
         if (!__hasOwnProp.call(target, key) && key !== "default")
-          __defProp(target, key, { get: () => module[key], enumerable: !(desc = __getOwnPropDesc(module, key)) || desc.enumerable });
+          __defProp(target, key, { get: () => module2[key], enumerable: !(desc = __getOwnPropDesc(module2, key)) || desc.enumerable });
     }
     return target;
   };
-  var __toModule = (module) => {
-    return __reExport(__markAsModule(__defProp(module != null ? __create(__getProtoOf(module)) : {}, "default", module && module.__esModule && "default" in module ? { get: () => module.default, enumerable: true } : { value: module, enumerable: true })), module);
+  var __toModule = (module2) => {
+    return __reExport(__markAsModule(__defProp(module2 != null ? __create(__getProtoOf(module2)) : {}, "default", module2 && module2.__esModule && "default" in module2 ? { get: () => module2.default, enumerable: true } : { value: module2, enumerable: true })), module2);
   };
 
   // node_modules/object-assign/index.js
   var require_object_assign = __commonJS({
-    "node_modules/object-assign/index.js"(exports, module) {
+    "node_modules/object-assign/index.js"(exports, module2) {
       "use strict";
       var getOwnPropertySymbols = Object.getOwnPropertySymbols;
       var hasOwnProperty2 = Object.prototype.hasOwnProperty;
@@ -107,7 +107,7 @@
           return false;
         }
       }
-      module.exports = shouldUseNative() ? Object.assign : function(target, source) {
+      module2.exports = shouldUseNative() ? Object.assign : function(target, source) {
         var from;
         var to = toObject(target);
         var symbols;
@@ -418,9 +418,9 @@
                 case REACT_LAZY_TYPE: {
                   var lazyComponent = type;
                   var payload = lazyComponent._payload;
-                  var init2 = lazyComponent._init;
+                  var init4 = lazyComponent._init;
                   try {
-                    return getComponentName(init2(payload));
+                    return getComponentName(init4(payload));
                   } catch (x3) {
                     return null;
                   }
@@ -1089,9 +1089,9 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
-          function useReducer(reducer, initialArg, init2) {
+          function useReducer(reducer, initialArg, init4) {
             var dispatcher = resolveDispatcher();
-            return dispatcher.useReducer(reducer, initialArg, init2);
+            return dispatcher.useReducer(reducer, initialArg, init4);
           }
           function useRef5(initialValue) {
             var dispatcher = resolveDispatcher();
@@ -1275,9 +1275,9 @@
                 }
                 fn();
               }
-            } catch (sample) {
-              if (sample && control && typeof sample.stack === "string") {
-                var sampleLines = sample.stack.split("\n");
+            } catch (sample2) {
+              if (sample2 && control && typeof sample2.stack === "string") {
+                var sampleLines = sample2.stack.split("\n");
                 var controlLines = control.stack.split("\n");
                 var s3 = sampleLines.length - 1;
                 var c3 = controlLines.length - 1;
@@ -1360,9 +1360,9 @@
                 case REACT_LAZY_TYPE: {
                   var lazyComponent = type;
                   var payload = lazyComponent._payload;
-                  var init2 = lazyComponent._init;
+                  var init4 = lazyComponent._init;
                   try {
-                    return describeUnknownElementTypeFrameInDEV(init2(payload), source, ownerFn);
+                    return describeUnknownElementTypeFrameInDEV(init4(payload), source, ownerFn);
                   } catch (x3) {
                   }
                 }
@@ -1682,12 +1682,12 @@
 
   // node_modules/react/index.js
   var require_react = __commonJS({
-    "node_modules/react/index.js"(exports, module) {
+    "node_modules/react/index.js"(exports, module2) {
       "use strict";
       if (false) {
-        module.exports = null;
+        module2.exports = null;
       } else {
-        module.exports = require_react_development();
+        module2.exports = require_react_development();
       }
     }
   });
@@ -2170,12 +2170,12 @@
 
   // node_modules/scheduler/index.js
   var require_scheduler = __commonJS({
-    "node_modules/scheduler/index.js"(exports, module) {
+    "node_modules/scheduler/index.js"(exports, module2) {
       "use strict";
       if (false) {
-        module.exports = null;
+        module2.exports = null;
       } else {
-        module.exports = require_scheduler_development();
+        module2.exports = require_scheduler_development();
       }
     }
   });
@@ -2464,12 +2464,12 @@
 
   // node_modules/scheduler/tracing.js
   var require_tracing = __commonJS({
-    "node_modules/scheduler/tracing.js"(exports, module) {
+    "node_modules/scheduler/tracing.js"(exports, module2) {
       "use strict";
       if (false) {
-        module.exports = null;
+        module2.exports = null;
       } else {
-        module.exports = require_scheduler_tracing_development();
+        module2.exports = require_scheduler_tracing_development();
       }
     }
   });
@@ -3197,9 +3197,9 @@
                 }
                 fn();
               }
-            } catch (sample) {
-              if (sample && control && typeof sample.stack === "string") {
-                var sampleLines = sample.stack.split("\n");
+            } catch (sample2) {
+              if (sample2 && control && typeof sample2.stack === "string") {
+                var sampleLines = sample2.stack.split("\n");
                 var controlLines = control.stack.split("\n");
                 var s3 = sampleLines.length - 1;
                 var c3 = controlLines.length - 1;
@@ -3287,9 +3287,9 @@
                 case REACT_LAZY_TYPE: {
                   var lazyComponent = type;
                   var payload = lazyComponent._payload;
-                  var init2 = lazyComponent._init;
+                  var init4 = lazyComponent._init;
                   try {
-                    return describeUnknownElementTypeFrameInDEV(init2(payload), source, ownerFn);
+                    return describeUnknownElementTypeFrameInDEV(init4(payload), source, ownerFn);
                   } catch (x3) {
                   }
                 }
@@ -3389,9 +3389,9 @@
                 case REACT_LAZY_TYPE: {
                   var lazyComponent = type;
                   var payload = lazyComponent._payload;
-                  var init2 = lazyComponent._init;
+                  var init4 = lazyComponent._init;
                   try {
-                    return getComponentName(init2(payload));
+                    return getComponentName(init4(payload));
                   } catch (x3) {
                     return null;
                   }
@@ -6853,9 +6853,9 @@
                 if (!Interface.hasOwnProperty(_propName)) {
                   continue;
                 }
-                var normalize2 = Interface[_propName];
-                if (normalize2) {
-                  this[_propName] = normalize2(nativeEvent);
+                var normalize3 = Interface[_propName];
+                if (normalize3) {
+                  this[_propName] = normalize3(nativeEvent);
                 } else {
                   this[_propName] = nativeEvent[_propName];
                 }
@@ -12887,11 +12887,11 @@
           function basicStateReducer(state, action) {
             return typeof action === "function" ? action(state) : action;
           }
-          function mountReducer(reducer, initialArg, init2) {
+          function mountReducer(reducer, initialArg, init4) {
             var hook = mountWorkInProgressHook();
             var initialState;
-            if (init2 !== void 0) {
-              initialState = init2(initialArg);
+            if (init4 !== void 0) {
+              initialState = init4(initialArg);
             } else {
               initialState = initialArg;
             }
@@ -12905,7 +12905,7 @@
             var dispatch = queue.dispatch = dispatchAction.bind(null, currentlyRenderingFiber$1, queue);
             return [hook.memoizedState, dispatch];
           }
-          function updateReducer(reducer, initialArg, init2) {
+          function updateReducer(reducer, initialArg, init4) {
             var hook = updateWorkInProgressHook();
             var queue = hook.queue;
             if (!(queue !== null)) {
@@ -12993,7 +12993,7 @@
             var dispatch = queue.dispatch;
             return [hook.memoizedState, dispatch];
           }
-          function rerenderReducer(reducer, initialArg, init2) {
+          function rerenderReducer(reducer, initialArg, init4) {
             var hook = updateWorkInProgressHook();
             var queue = hook.queue;
             if (!(queue !== null)) {
@@ -13622,13 +13622,13 @@
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useReducer: function(reducer, initialArg, init2) {
+              useReducer: function(reducer, initialArg, init4) {
                 currentHookNameInDev = "useReducer";
                 mountHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
                 try {
-                  return mountReducer(reducer, initialArg, init2);
+                  return mountReducer(reducer, initialArg, init4);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -13716,13 +13716,13 @@
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useReducer: function(reducer, initialArg, init2) {
+              useReducer: function(reducer, initialArg, init4) {
                 currentHookNameInDev = "useReducer";
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
                 try {
-                  return mountReducer(reducer, initialArg, init2);
+                  return mountReducer(reducer, initialArg, init4);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -13810,13 +13810,13 @@
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useReducer: function(reducer, initialArg, init2) {
+              useReducer: function(reducer, initialArg, init4) {
                 currentHookNameInDev = "useReducer";
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
                 try {
-                  return updateReducer(reducer, initialArg, init2);
+                  return updateReducer(reducer, initialArg, init4);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -13904,13 +13904,13 @@
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useReducer: function(reducer, initialArg, init2) {
+              useReducer: function(reducer, initialArg, init4) {
                 currentHookNameInDev = "useReducer";
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnRerenderInDEV;
                 try {
-                  return rerenderReducer(reducer, initialArg, init2);
+                  return rerenderReducer(reducer, initialArg, init4);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -14005,14 +14005,14 @@
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useReducer: function(reducer, initialArg, init2) {
+              useReducer: function(reducer, initialArg, init4) {
                 currentHookNameInDev = "useReducer";
                 warnInvalidHookAccess();
                 mountHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
                 try {
-                  return mountReducer(reducer, initialArg, init2);
+                  return mountReducer(reducer, initialArg, init4);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -14114,14 +14114,14 @@
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useReducer: function(reducer, initialArg, init2) {
+              useReducer: function(reducer, initialArg, init4) {
                 currentHookNameInDev = "useReducer";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
                 try {
-                  return updateReducer(reducer, initialArg, init2);
+                  return updateReducer(reducer, initialArg, init4);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -14223,14 +14223,14 @@
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useReducer: function(reducer, initialArg, init2) {
+              useReducer: function(reducer, initialArg, init4) {
                 currentHookNameInDev = "useReducer";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
                 try {
-                  return rerenderReducer(reducer, initialArg, init2);
+                  return rerenderReducer(reducer, initialArg, init4);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -14444,9 +14444,9 @@
                 if (outerMemoType.$$typeof === REACT_LAZY_TYPE) {
                   var lazyComponent = outerMemoType;
                   var payload = lazyComponent._payload;
-                  var init2 = lazyComponent._init;
+                  var init4 = lazyComponent._init;
                   try {
-                    outerMemoType = init2(payload);
+                    outerMemoType = init4(payload);
                   } catch (x3) {
                     outerMemoType = null;
                   }
@@ -14764,8 +14764,8 @@
             var props = workInProgress2.pendingProps;
             var lazyComponent = elementType;
             var payload = lazyComponent._payload;
-            var init2 = lazyComponent._init;
-            var Component11 = init2(payload);
+            var init4 = lazyComponent._init;
+            var Component11 = init4(payload);
             workInProgress2.type = Component11;
             var resolvedTag = workInProgress2.tag = resolveLazyComponentTag(Component11);
             var resolvedProps = resolveDefaultProps(Component11, props);
@@ -20449,13 +20449,13 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
 
   // node_modules/react-dom/index.js
   var require_react_dom = __commonJS({
-    "node_modules/react-dom/index.js"(exports, module) {
+    "node_modules/react-dom/index.js"(exports, module2) {
       "use strict";
       if (false) {
         checkDCE();
-        module.exports = null;
+        module2.exports = null;
       } else {
-        module.exports = require_react_dom_development();
+        module2.exports = require_react_dom_development();
       }
     }
   });
@@ -20554,7 +20554,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           function isContextProvider(object) {
             return typeOf(object) === REACT_PROVIDER_TYPE;
           }
-          function isElement(object) {
+          function isElement2(object) {
             return typeof object === "object" && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
           }
           function isForwardRef(object) {
@@ -20598,7 +20598,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           exports.isConcurrentMode = isConcurrentMode;
           exports.isContextConsumer = isContextConsumer;
           exports.isContextProvider = isContextProvider;
-          exports.isElement = isElement;
+          exports.isElement = isElement2;
           exports.isForwardRef = isForwardRef;
           exports.isFragment = isFragment2;
           exports.isLazy = isLazy;
@@ -20616,28 +20616,116 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
 
   // node_modules/react-is/index.js
   var require_react_is = __commonJS({
-    "node_modules/react-is/index.js"(exports, module) {
+    "node_modules/react-is/index.js"(exports, module2) {
       "use strict";
       if (false) {
-        module.exports = null;
+        module2.exports = null;
       } else {
-        module.exports = require_react_is_development();
+        module2.exports = require_react_is_development();
       }
+    }
+  });
+
+  // node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js
+  var require_hoist_non_react_statics_cjs = __commonJS({
+    "node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js"(exports, module2) {
+      "use strict";
+      var reactIs = require_react_is();
+      var REACT_STATICS = {
+        childContextTypes: true,
+        contextType: true,
+        contextTypes: true,
+        defaultProps: true,
+        displayName: true,
+        getDefaultProps: true,
+        getDerivedStateFromError: true,
+        getDerivedStateFromProps: true,
+        mixins: true,
+        propTypes: true,
+        type: true
+      };
+      var KNOWN_STATICS = {
+        name: true,
+        length: true,
+        prototype: true,
+        caller: true,
+        callee: true,
+        arguments: true,
+        arity: true
+      };
+      var FORWARD_REF_STATICS = {
+        "$$typeof": true,
+        render: true,
+        defaultProps: true,
+        displayName: true,
+        propTypes: true
+      };
+      var MEMO_STATICS = {
+        "$$typeof": true,
+        compare: true,
+        defaultProps: true,
+        displayName: true,
+        propTypes: true,
+        type: true
+      };
+      var TYPE_STATICS = {};
+      TYPE_STATICS[reactIs.ForwardRef] = FORWARD_REF_STATICS;
+      TYPE_STATICS[reactIs.Memo] = MEMO_STATICS;
+      function getStatics(component) {
+        if (reactIs.isMemo(component)) {
+          return MEMO_STATICS;
+        }
+        return TYPE_STATICS[component["$$typeof"]] || REACT_STATICS;
+      }
+      var defineProperty = Object.defineProperty;
+      var getOwnPropertyNames = Object.getOwnPropertyNames;
+      var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+      var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+      var getPrototypeOf = Object.getPrototypeOf;
+      var objectPrototype = Object.prototype;
+      function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
+        if (typeof sourceComponent !== "string") {
+          if (objectPrototype) {
+            var inheritedComponent = getPrototypeOf(sourceComponent);
+            if (inheritedComponent && inheritedComponent !== objectPrototype) {
+              hoistNonReactStatics(targetComponent, inheritedComponent, blacklist);
+            }
+          }
+          var keys = getOwnPropertyNames(sourceComponent);
+          if (getOwnPropertySymbols) {
+            keys = keys.concat(getOwnPropertySymbols(sourceComponent));
+          }
+          var targetStatics = getStatics(targetComponent);
+          var sourceStatics = getStatics(sourceComponent);
+          for (var i3 = 0; i3 < keys.length; ++i3) {
+            var key = keys[i3];
+            if (!KNOWN_STATICS[key] && !(blacklist && blacklist[key]) && !(sourceStatics && sourceStatics[key]) && !(targetStatics && targetStatics[key])) {
+              var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
+              try {
+                defineProperty(targetComponent, key, descriptor);
+              } catch (e3) {
+              }
+            }
+          }
+        }
+        return targetComponent;
+      }
+      module2.exports = hoistNonReactStatics;
     }
   });
 
   // node_modules/prop-types/lib/ReactPropTypesSecret.js
   var require_ReactPropTypesSecret = __commonJS({
-    "node_modules/prop-types/lib/ReactPropTypesSecret.js"(exports, module) {
+    "node_modules/prop-types/lib/ReactPropTypesSecret.js"(exports, module2) {
       "use strict";
       var ReactPropTypesSecret = "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED";
-      module.exports = ReactPropTypesSecret;
+      module2.exports = ReactPropTypesSecret;
     }
   });
 
   // node_modules/prop-types/checkPropTypes.js
   var require_checkPropTypes = __commonJS({
-    "node_modules/prop-types/checkPropTypes.js"(exports, module) {
+    "node_modules/prop-types/checkPropTypes.js"(exports, module2) {
       "use strict";
       var printWarning = function() {
       };
@@ -20691,13 +20779,13 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           loggedTypeFailures = {};
         }
       };
-      module.exports = checkPropTypes;
+      module2.exports = checkPropTypes;
     }
   });
 
   // node_modules/prop-types/factoryWithTypeCheckers.js
   var require_factoryWithTypeCheckers = __commonJS({
-    "node_modules/prop-types/factoryWithTypeCheckers.js"(exports, module) {
+    "node_modules/prop-types/factoryWithTypeCheckers.js"(exports, module2) {
       "use strict";
       var ReactIs = require_react_is();
       var assign2 = require_object_assign();
@@ -20721,7 +20809,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       function emptyFunctionThatReturnsNull() {
         return null;
       }
-      module.exports = function(isValidElement5, throwOnDirectAccess) {
+      module2.exports = function(isValidElement5, throwOnDirectAccess) {
         var ITERATOR_SYMBOL = typeof Symbol === "function" && Symbol.iterator;
         var FAUX_ITERATOR_SYMBOL = "@@iterator";
         function getIteratorFn(maybeIterable) {
@@ -21110,13 +21198,13 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
 
   // node_modules/prop-types/index.js
   var require_prop_types = __commonJS({
-    "node_modules/prop-types/index.js"(exports, module) {
+    "node_modules/prop-types/index.js"(exports, module2) {
       if (true) {
         ReactIs = require_react_is();
         throwOnDirectAccess = true;
-        module.exports = require_factoryWithTypeCheckers()(ReactIs.isElement, throwOnDirectAccess);
+        module2.exports = require_factoryWithTypeCheckers()(ReactIs.isElement, throwOnDirectAccess);
       } else {
-        module.exports = null();
+        module2.exports = null();
       }
       var ReactIs;
       var throwOnDirectAccess;
@@ -21125,8 +21213,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
 
   // node_modules/path-to-regexp/node_modules/isarray/index.js
   var require_isarray = __commonJS({
-    "node_modules/path-to-regexp/node_modules/isarray/index.js"(exports, module) {
-      module.exports = Array.isArray || function(arr) {
+    "node_modules/path-to-regexp/node_modules/isarray/index.js"(exports, module2) {
+      module2.exports = Array.isArray || function(arr) {
         return Object.prototype.toString.call(arr) == "[object Array]";
       };
     }
@@ -21134,13 +21222,13 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
 
   // node_modules/path-to-regexp/index.js
   var require_path_to_regexp = __commonJS({
-    "node_modules/path-to-regexp/index.js"(exports, module) {
+    "node_modules/path-to-regexp/index.js"(exports, module2) {
       var isarray = require_isarray();
-      module.exports = pathToRegexp2;
-      module.exports.parse = parse2;
-      module.exports.compile = compile;
-      module.exports.tokensToFunction = tokensToFunction;
-      module.exports.tokensToRegExp = tokensToRegExp;
+      module2.exports = pathToRegexp2;
+      module2.exports.parse = parse2;
+      module2.exports.compile = compile;
+      module2.exports.tokensToFunction = tokensToFunction;
+      module2.exports.tokensToRegExp = tokensToRegExp;
       var PATH_REGEXP = new RegExp([
         "(\\\\.)",
         "([\\/.])?(?:(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?|(\\*))"
@@ -21372,94 +21460,6 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     }
   });
 
-  // node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js
-  var require_hoist_non_react_statics_cjs = __commonJS({
-    "node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js"(exports, module) {
-      "use strict";
-      var reactIs = require_react_is();
-      var REACT_STATICS = {
-        childContextTypes: true,
-        contextType: true,
-        contextTypes: true,
-        defaultProps: true,
-        displayName: true,
-        getDefaultProps: true,
-        getDerivedStateFromError: true,
-        getDerivedStateFromProps: true,
-        mixins: true,
-        propTypes: true,
-        type: true
-      };
-      var KNOWN_STATICS = {
-        name: true,
-        length: true,
-        prototype: true,
-        caller: true,
-        callee: true,
-        arguments: true,
-        arity: true
-      };
-      var FORWARD_REF_STATICS = {
-        "$$typeof": true,
-        render: true,
-        defaultProps: true,
-        displayName: true,
-        propTypes: true
-      };
-      var MEMO_STATICS = {
-        "$$typeof": true,
-        compare: true,
-        defaultProps: true,
-        displayName: true,
-        propTypes: true,
-        type: true
-      };
-      var TYPE_STATICS = {};
-      TYPE_STATICS[reactIs.ForwardRef] = FORWARD_REF_STATICS;
-      TYPE_STATICS[reactIs.Memo] = MEMO_STATICS;
-      function getStatics(component) {
-        if (reactIs.isMemo(component)) {
-          return MEMO_STATICS;
-        }
-        return TYPE_STATICS[component["$$typeof"]] || REACT_STATICS;
-      }
-      var defineProperty = Object.defineProperty;
-      var getOwnPropertyNames = Object.getOwnPropertyNames;
-      var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-      var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
-      var getPrototypeOf = Object.getPrototypeOf;
-      var objectPrototype = Object.prototype;
-      function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
-        if (typeof sourceComponent !== "string") {
-          if (objectPrototype) {
-            var inheritedComponent = getPrototypeOf(sourceComponent);
-            if (inheritedComponent && inheritedComponent !== objectPrototype) {
-              hoistNonReactStatics(targetComponent, inheritedComponent, blacklist);
-            }
-          }
-          var keys = getOwnPropertyNames(sourceComponent);
-          if (getOwnPropertySymbols) {
-            keys = keys.concat(getOwnPropertySymbols(sourceComponent));
-          }
-          var targetStatics = getStatics(targetComponent);
-          var sourceStatics = getStatics(sourceComponent);
-          for (var i3 = 0; i3 < keys.length; ++i3) {
-            var key = keys[i3];
-            if (!KNOWN_STATICS[key] && !(blacklist && blacklist[key]) && !(sourceStatics && sourceStatics[key]) && !(targetStatics && targetStatics[key])) {
-              var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
-              try {
-                defineProperty(targetComponent, key, descriptor);
-              } catch (e3) {
-              }
-            }
-          }
-        }
-        return targetComponent;
-      }
-      module.exports = hoistNonReactStatics;
-    }
-  });
-
   // (disabled):node_modules/ws/index.js
   var require_ws = __commonJS({
     "(disabled):node_modules/ws/index.js"() {
@@ -21474,7 +21474,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
 
   // node_modules/tmi.js/lib/utils.js
   var require_utils = __commonJS({
-    "node_modules/tmi.js/lib/utils.js"(exports, module) {
+    "node_modules/tmi.js/lib/utils.js"(exports, module2) {
       var actionMessageRegex = /^\u0001ACTION ([^\u0001]+)\u0001$/;
       var justinFanRegex = /^(justinfan)(\d+$)/;
       var unescapeIRCRegex = /\\([sn:r\\])/g;
@@ -21483,7 +21483,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       var ircUnescapedChars = { " ": "s", "\n": "n", ";": ":", "\r": "r" };
       var urlRegex = new RegExp("^(?:(?:https?|ftp)://)(?:\\S+(?::\\S*)?@)?(?:(?!(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))\\.?)(?::\\d{2,5})?(?:[/?#]\\S*)?$", "i");
       var regexEmoteRegex = /[|\\^$*+?:#]/;
-      var _2 = module.exports = {
+      var _2 = module2.exports = {
         get: (a3, b2) => typeof a3 === "undefined" ? b2 : a3,
         hasOwn: (obj, key) => ({}).hasOwnProperty.call(obj, key),
         promiseDelay: (time2) => new Promise((resolve) => setTimeout(resolve, time2)),
@@ -21581,10 +21581,10 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
 
   // node_modules/tmi.js/lib/api.js
   var require_api = __commonJS({
-    "node_modules/tmi.js/lib/api.js"(exports, module) {
+    "node_modules/tmi.js/lib/api.js"(exports, module2) {
       var fetch2 = require_browser();
       var _2 = require_utils();
-      module.exports = function api(options2, callback) {
+      module2.exports = function api(options2, callback) {
         let url2 = options2.url !== void 0 ? options2.url : options2.uri;
         if (!_2.isURL(url2)) {
           url2 = `https://api.twitch.tv/kraken${url2[0] === "/" ? url2 : `/${url2}`}`;
@@ -21634,7 +21634,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
 
   // node_modules/tmi.js/lib/commands.js
   var require_commands = __commonJS({
-    "node_modules/tmi.js/lib/commands.js"(exports, module) {
+    "node_modules/tmi.js/lib/commands.js"(exports, module2) {
       var _2 = require_utils();
       function followersonly(channel, minutes2) {
         channel = _2.channel(channel);
@@ -21722,7 +21722,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           });
         });
       }
-      module.exports = {
+      module2.exports = {
         action(channel, message) {
           channel = _2.channel(channel);
           message = `ACTION ${message}`;
@@ -22091,12 +22091,12 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
 
   // node_modules/tmi.js/lib/events.js
   var require_events = __commonJS({
-    "node_modules/tmi.js/lib/events.js"(exports, module) {
+    "node_modules/tmi.js/lib/events.js"(exports, module2) {
       function EventEmitter2() {
         this._events = this._events || {};
         this._maxListeners = this._maxListeners || void 0;
       }
-      module.exports = EventEmitter2;
+      module2.exports = EventEmitter2;
       EventEmitter2.EventEmitter = EventEmitter2;
       EventEmitter2.prototype._events = void 0;
       EventEmitter2.prototype._maxListeners = void 0;
@@ -22343,7 +22343,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
 
   // node_modules/tmi.js/lib/logger.js
   var require_logger = __commonJS({
-    "node_modules/tmi.js/lib/logger.js"(exports, module) {
+    "node_modules/tmi.js/lib/logger.js"(exports, module2) {
       var _2 = require_utils();
       var currentLevel = "info";
       var levels = { "trace": 0, "debug": 1, "info": 2, "warn": 3, "error": 4, "fatal": 5 };
@@ -22354,7 +22354,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           }
         };
       }
-      module.exports = {
+      module2.exports = {
         setLevel(level) {
           currentLevel = level;
         },
@@ -22370,7 +22370,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
 
   // node_modules/tmi.js/lib/parser.js
   var require_parser = __commonJS({
-    "node_modules/tmi.js/lib/parser.js"(exports, module) {
+    "node_modules/tmi.js/lib/parser.js"(exports, module2) {
       var _2 = require_utils();
       var nonspaceRegex = /\S+/g;
       function parseComplexTag(tags, tagKey, splA = ",", splB = "/", splC) {
@@ -22398,7 +22398,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         }
         return tags;
       }
-      module.exports = {
+      module2.exports = {
         badges: (tags) => parseComplexTag(tags, "badges"),
         badgeInfo: (tags) => parseComplexTag(tags, "badge-info"),
         emotes: (tags) => parseComplexTag(tags, "emotes", "/", ":", ","),
@@ -22517,7 +22517,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
 
   // node_modules/tmi.js/lib/timer.js
   var require_timer = __commonJS({
-    "node_modules/tmi.js/lib/timer.js"(exports, module) {
+    "node_modules/tmi.js/lib/timer.js"(exports, module2) {
       var Queue = class {
         constructor(defaultDelay) {
           this.queue = [];
@@ -22541,20 +22541,20 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           }
         }
       };
-      module.exports = Queue;
+      module2.exports = Queue;
     }
   });
 
   // node_modules/tmi.js/lib/client.js
   var require_client = __commonJS({
-    "node_modules/tmi.js/lib/client.js"(exports, module) {
+    "node_modules/tmi.js/lib/client.js"(exports, module2) {
       var _global = typeof global !== "undefined" ? global : typeof window !== "undefined" ? window : {};
       var _WebSocket = _global.WebSocket || require_ws();
       var _fetch = _global.fetch || require_browser();
       var api = require_api();
       var commands = require_commands();
       var EventEmitter2 = require_events().EventEmitter;
-      var logger = require_logger();
+      var logger2 = require_logger();
       var parse2 = require_parser();
       var Queue = require_timer();
       var _2 = require_utils();
@@ -22602,9 +22602,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         if (this.opts.options.debug) {
           level = "info";
         }
-        this.log = this.opts.logger || logger;
+        this.log = this.opts.logger || logger2;
         try {
-          logger.setLevel(level);
+          logger2.setLevel(level);
         } catch (err) {
         }
         this.opts.channels.forEach((part, index2, theArray) => theArray[index2] = _2.channel(part));
@@ -23688,8 +23688,8 @@ ${JSON.stringify(message, null, 4)}`);
         });
       };
       client.prototype.off = client.prototype.removeListener;
-      if (typeof module !== "undefined" && module.exports) {
-        module.exports = client;
+      if (typeof module2 !== "undefined" && module2.exports) {
+        module2.exports = client;
       }
       if (typeof window !== "undefined") {
         window.tmi = {
@@ -23702,9 +23702,9 @@ ${JSON.stringify(message, null, 4)}`);
 
   // node_modules/tmi.js/index.js
   var require_tmi = __commonJS({
-    "node_modules/tmi.js/index.js"(exports, module) {
+    "node_modules/tmi.js/index.js"(exports, module2) {
       var client = require_client();
-      module.exports = {
+      module2.exports = {
         client,
         Client: client
       };
@@ -26591,7 +26591,7 @@ ${JSON.stringify(message, null, 4)}`);
 
   // node_modules/classnames/index.js
   var require_classnames = __commonJS({
-    "node_modules/classnames/index.js"(exports, module) {
+    "node_modules/classnames/index.js"(exports, module2) {
       (function() {
         "use strict";
         var hasOwn = {}.hasOwnProperty;
@@ -26625,9 +26625,9 @@ ${JSON.stringify(message, null, 4)}`);
           }
           return classes.join(" ");
         }
-        if (typeof module !== "undefined" && module.exports) {
+        if (typeof module2 !== "undefined" && module2.exports) {
           classNames23.default = classNames23;
-          module.exports = classNames23;
+          module2.exports = classNames23;
         } else if (typeof define === "function" && typeof define.amd === "object" && define.amd) {
           define("classnames", [], function() {
             return classNames23;
@@ -26641,45 +26641,45 @@ ${JSON.stringify(message, null, 4)}`);
 
   // node_modules/lodash/isObject.js
   var require_isObject = __commonJS({
-    "node_modules/lodash/isObject.js"(exports, module) {
+    "node_modules/lodash/isObject.js"(exports, module2) {
       function isObject2(value2) {
         var type = typeof value2;
         return value2 != null && (type == "object" || type == "function");
       }
-      module.exports = isObject2;
+      module2.exports = isObject2;
     }
   });
 
   // node_modules/lodash/_freeGlobal.js
   var require_freeGlobal = __commonJS({
-    "node_modules/lodash/_freeGlobal.js"(exports, module) {
+    "node_modules/lodash/_freeGlobal.js"(exports, module2) {
       var freeGlobal2 = typeof global == "object" && global && global.Object === Object && global;
-      module.exports = freeGlobal2;
+      module2.exports = freeGlobal2;
     }
   });
 
   // node_modules/lodash/_root.js
   var require_root = __commonJS({
-    "node_modules/lodash/_root.js"(exports, module) {
+    "node_modules/lodash/_root.js"(exports, module2) {
       var freeGlobal2 = require_freeGlobal();
       var freeSelf2 = typeof self == "object" && self && self.Object === Object && self;
       var root2 = freeGlobal2 || freeSelf2 || Function("return this")();
-      module.exports = root2;
+      module2.exports = root2;
     }
   });
 
   // node_modules/lodash/_Symbol.js
   var require_Symbol = __commonJS({
-    "node_modules/lodash/_Symbol.js"(exports, module) {
+    "node_modules/lodash/_Symbol.js"(exports, module2) {
       var root2 = require_root();
       var Symbol4 = root2.Symbol;
-      module.exports = Symbol4;
+      module2.exports = Symbol4;
     }
   });
 
   // node_modules/lodash/_getRawTag.js
   var require_getRawTag = __commonJS({
-    "node_modules/lodash/_getRawTag.js"(exports, module) {
+    "node_modules/lodash/_getRawTag.js"(exports, module2) {
       var Symbol4 = require_Symbol();
       var objectProto2 = Object.prototype;
       var hasOwnProperty2 = objectProto2.hasOwnProperty;
@@ -26702,28 +26702,28 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return result;
       }
-      module.exports = getRawTag2;
+      module2.exports = getRawTag2;
     }
   });
 
   // node_modules/lodash/_objectToString.js
   var require_objectToString = __commonJS({
-    "node_modules/lodash/_objectToString.js"(exports, module) {
+    "node_modules/lodash/_objectToString.js"(exports, module2) {
       var objectProto2 = Object.prototype;
       var nativeObjectToString2 = objectProto2.toString;
-      function objectToString2(value2) {
+      function objectToString3(value2) {
         return nativeObjectToString2.call(value2);
       }
-      module.exports = objectToString2;
+      module2.exports = objectToString3;
     }
   });
 
   // node_modules/lodash/_baseGetTag.js
   var require_baseGetTag = __commonJS({
-    "node_modules/lodash/_baseGetTag.js"(exports, module) {
+    "node_modules/lodash/_baseGetTag.js"(exports, module2) {
       var Symbol4 = require_Symbol();
       var getRawTag2 = require_getRawTag();
-      var objectToString2 = require_objectToString();
+      var objectToString3 = require_objectToString();
       var nullTag2 = "[object Null]";
       var undefinedTag2 = "[object Undefined]";
       var symToStringTag2 = Symbol4 ? Symbol4.toStringTag : void 0;
@@ -26731,15 +26731,15 @@ ${JSON.stringify(message, null, 4)}`);
         if (value2 == null) {
           return value2 === void 0 ? undefinedTag2 : nullTag2;
         }
-        return symToStringTag2 && symToStringTag2 in Object(value2) ? getRawTag2(value2) : objectToString2(value2);
+        return symToStringTag2 && symToStringTag2 in Object(value2) ? getRawTag2(value2) : objectToString3(value2);
       }
-      module.exports = baseGetTag2;
+      module2.exports = baseGetTag2;
     }
   });
 
   // node_modules/lodash/isFunction.js
   var require_isFunction = __commonJS({
-    "node_modules/lodash/isFunction.js"(exports, module) {
+    "node_modules/lodash/isFunction.js"(exports, module2) {
       var baseGetTag2 = require_baseGetTag();
       var isObject2 = require_isObject();
       var asyncTag = "[object AsyncFunction]";
@@ -26753,34 +26753,34 @@ ${JSON.stringify(message, null, 4)}`);
         var tag = baseGetTag2(value2);
         return tag == funcTag || tag == genTag || tag == asyncTag || tag == proxyTag;
       }
-      module.exports = isFunction2;
+      module2.exports = isFunction2;
     }
   });
 
   // node_modules/lodash/_listCacheClear.js
   var require_listCacheClear = __commonJS({
-    "node_modules/lodash/_listCacheClear.js"(exports, module) {
+    "node_modules/lodash/_listCacheClear.js"(exports, module2) {
       function listCacheClear() {
         this.__data__ = [];
         this.size = 0;
       }
-      module.exports = listCacheClear;
+      module2.exports = listCacheClear;
     }
   });
 
   // node_modules/lodash/eq.js
   var require_eq = __commonJS({
-    "node_modules/lodash/eq.js"(exports, module) {
+    "node_modules/lodash/eq.js"(exports, module2) {
       function eq(value2, other) {
         return value2 === other || value2 !== value2 && other !== other;
       }
-      module.exports = eq;
+      module2.exports = eq;
     }
   });
 
   // node_modules/lodash/_assocIndexOf.js
   var require_assocIndexOf = __commonJS({
-    "node_modules/lodash/_assocIndexOf.js"(exports, module) {
+    "node_modules/lodash/_assocIndexOf.js"(exports, module2) {
       var eq = require_eq();
       function assocIndexOf(array, key) {
         var length2 = array.length;
@@ -26791,13 +26791,13 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return -1;
       }
-      module.exports = assocIndexOf;
+      module2.exports = assocIndexOf;
     }
   });
 
   // node_modules/lodash/_listCacheDelete.js
   var require_listCacheDelete = __commonJS({
-    "node_modules/lodash/_listCacheDelete.js"(exports, module) {
+    "node_modules/lodash/_listCacheDelete.js"(exports, module2) {
       var assocIndexOf = require_assocIndexOf();
       var arrayProto = Array.prototype;
       var splice = arrayProto.splice;
@@ -26815,36 +26815,36 @@ ${JSON.stringify(message, null, 4)}`);
         --this.size;
         return true;
       }
-      module.exports = listCacheDelete;
+      module2.exports = listCacheDelete;
     }
   });
 
   // node_modules/lodash/_listCacheGet.js
   var require_listCacheGet = __commonJS({
-    "node_modules/lodash/_listCacheGet.js"(exports, module) {
+    "node_modules/lodash/_listCacheGet.js"(exports, module2) {
       var assocIndexOf = require_assocIndexOf();
       function listCacheGet(key) {
         var data = this.__data__, index2 = assocIndexOf(data, key);
         return index2 < 0 ? void 0 : data[index2][1];
       }
-      module.exports = listCacheGet;
+      module2.exports = listCacheGet;
     }
   });
 
   // node_modules/lodash/_listCacheHas.js
   var require_listCacheHas = __commonJS({
-    "node_modules/lodash/_listCacheHas.js"(exports, module) {
+    "node_modules/lodash/_listCacheHas.js"(exports, module2) {
       var assocIndexOf = require_assocIndexOf();
       function listCacheHas(key) {
         return assocIndexOf(this.__data__, key) > -1;
       }
-      module.exports = listCacheHas;
+      module2.exports = listCacheHas;
     }
   });
 
   // node_modules/lodash/_listCacheSet.js
   var require_listCacheSet = __commonJS({
-    "node_modules/lodash/_listCacheSet.js"(exports, module) {
+    "node_modules/lodash/_listCacheSet.js"(exports, module2) {
       var assocIndexOf = require_assocIndexOf();
       function listCacheSet(key, value2) {
         var data = this.__data__, index2 = assocIndexOf(data, key);
@@ -26856,13 +26856,13 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return this;
       }
-      module.exports = listCacheSet;
+      module2.exports = listCacheSet;
     }
   });
 
   // node_modules/lodash/_ListCache.js
   var require_ListCache = __commonJS({
-    "node_modules/lodash/_ListCache.js"(exports, module) {
+    "node_modules/lodash/_ListCache.js"(exports, module2) {
       var listCacheClear = require_listCacheClear();
       var listCacheDelete = require_listCacheDelete();
       var listCacheGet = require_listCacheGet();
@@ -26881,66 +26881,66 @@ ${JSON.stringify(message, null, 4)}`);
       ListCache.prototype.get = listCacheGet;
       ListCache.prototype.has = listCacheHas;
       ListCache.prototype.set = listCacheSet;
-      module.exports = ListCache;
+      module2.exports = ListCache;
     }
   });
 
   // node_modules/lodash/_stackClear.js
   var require_stackClear = __commonJS({
-    "node_modules/lodash/_stackClear.js"(exports, module) {
+    "node_modules/lodash/_stackClear.js"(exports, module2) {
       var ListCache = require_ListCache();
       function stackClear() {
         this.__data__ = new ListCache();
         this.size = 0;
       }
-      module.exports = stackClear;
+      module2.exports = stackClear;
     }
   });
 
   // node_modules/lodash/_stackDelete.js
   var require_stackDelete = __commonJS({
-    "node_modules/lodash/_stackDelete.js"(exports, module) {
+    "node_modules/lodash/_stackDelete.js"(exports, module2) {
       function stackDelete(key) {
         var data = this.__data__, result = data["delete"](key);
         this.size = data.size;
         return result;
       }
-      module.exports = stackDelete;
+      module2.exports = stackDelete;
     }
   });
 
   // node_modules/lodash/_stackGet.js
   var require_stackGet = __commonJS({
-    "node_modules/lodash/_stackGet.js"(exports, module) {
+    "node_modules/lodash/_stackGet.js"(exports, module2) {
       function stackGet(key) {
         return this.__data__.get(key);
       }
-      module.exports = stackGet;
+      module2.exports = stackGet;
     }
   });
 
   // node_modules/lodash/_stackHas.js
   var require_stackHas = __commonJS({
-    "node_modules/lodash/_stackHas.js"(exports, module) {
+    "node_modules/lodash/_stackHas.js"(exports, module2) {
       function stackHas(key) {
         return this.__data__.has(key);
       }
-      module.exports = stackHas;
+      module2.exports = stackHas;
     }
   });
 
   // node_modules/lodash/_coreJsData.js
   var require_coreJsData = __commonJS({
-    "node_modules/lodash/_coreJsData.js"(exports, module) {
+    "node_modules/lodash/_coreJsData.js"(exports, module2) {
       var root2 = require_root();
       var coreJsData = root2["__core-js_shared__"];
-      module.exports = coreJsData;
+      module2.exports = coreJsData;
     }
   });
 
   // node_modules/lodash/_isMasked.js
   var require_isMasked = __commonJS({
-    "node_modules/lodash/_isMasked.js"(exports, module) {
+    "node_modules/lodash/_isMasked.js"(exports, module2) {
       var coreJsData = require_coreJsData();
       var maskSrcKey = function() {
         var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || "");
@@ -26949,13 +26949,13 @@ ${JSON.stringify(message, null, 4)}`);
       function isMasked(func2) {
         return !!maskSrcKey && maskSrcKey in func2;
       }
-      module.exports = isMasked;
+      module2.exports = isMasked;
     }
   });
 
   // node_modules/lodash/_toSource.js
   var require_toSource = __commonJS({
-    "node_modules/lodash/_toSource.js"(exports, module) {
+    "node_modules/lodash/_toSource.js"(exports, module2) {
       var funcProto = Function.prototype;
       var funcToString = funcProto.toString;
       function toSource(func2) {
@@ -26971,13 +26971,13 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return "";
       }
-      module.exports = toSource;
+      module2.exports = toSource;
     }
   });
 
   // node_modules/lodash/_baseIsNative.js
   var require_baseIsNative = __commonJS({
-    "node_modules/lodash/_baseIsNative.js"(exports, module) {
+    "node_modules/lodash/_baseIsNative.js"(exports, module2) {
       var isFunction2 = require_isFunction();
       var isMasked = require_isMasked();
       var isObject2 = require_isObject();
@@ -26996,79 +26996,79 @@ ${JSON.stringify(message, null, 4)}`);
         var pattern = isFunction2(value2) ? reIsNative : reIsHostCtor;
         return pattern.test(toSource(value2));
       }
-      module.exports = baseIsNative;
+      module2.exports = baseIsNative;
     }
   });
 
   // node_modules/lodash/_getValue.js
   var require_getValue = __commonJS({
-    "node_modules/lodash/_getValue.js"(exports, module) {
+    "node_modules/lodash/_getValue.js"(exports, module2) {
       function getValue(object, key) {
         return object == null ? void 0 : object[key];
       }
-      module.exports = getValue;
+      module2.exports = getValue;
     }
   });
 
   // node_modules/lodash/_getNative.js
   var require_getNative = __commonJS({
-    "node_modules/lodash/_getNative.js"(exports, module) {
+    "node_modules/lodash/_getNative.js"(exports, module2) {
       var baseIsNative = require_baseIsNative();
       var getValue = require_getValue();
       function getNative(object, key) {
         var value2 = getValue(object, key);
         return baseIsNative(value2) ? value2 : void 0;
       }
-      module.exports = getNative;
+      module2.exports = getNative;
     }
   });
 
   // node_modules/lodash/_Map.js
   var require_Map = __commonJS({
-    "node_modules/lodash/_Map.js"(exports, module) {
+    "node_modules/lodash/_Map.js"(exports, module2) {
       var getNative = require_getNative();
       var root2 = require_root();
       var Map2 = getNative(root2, "Map");
-      module.exports = Map2;
+      module2.exports = Map2;
     }
   });
 
   // node_modules/lodash/_nativeCreate.js
   var require_nativeCreate = __commonJS({
-    "node_modules/lodash/_nativeCreate.js"(exports, module) {
+    "node_modules/lodash/_nativeCreate.js"(exports, module2) {
       var getNative = require_getNative();
       var nativeCreate = getNative(Object, "create");
-      module.exports = nativeCreate;
+      module2.exports = nativeCreate;
     }
   });
 
   // node_modules/lodash/_hashClear.js
   var require_hashClear = __commonJS({
-    "node_modules/lodash/_hashClear.js"(exports, module) {
+    "node_modules/lodash/_hashClear.js"(exports, module2) {
       var nativeCreate = require_nativeCreate();
       function hashClear() {
         this.__data__ = nativeCreate ? nativeCreate(null) : {};
         this.size = 0;
       }
-      module.exports = hashClear;
+      module2.exports = hashClear;
     }
   });
 
   // node_modules/lodash/_hashDelete.js
   var require_hashDelete = __commonJS({
-    "node_modules/lodash/_hashDelete.js"(exports, module) {
+    "node_modules/lodash/_hashDelete.js"(exports, module2) {
       function hashDelete(key) {
         var result = this.has(key) && delete this.__data__[key];
         this.size -= result ? 1 : 0;
         return result;
       }
-      module.exports = hashDelete;
+      module2.exports = hashDelete;
     }
   });
 
   // node_modules/lodash/_hashGet.js
   var require_hashGet = __commonJS({
-    "node_modules/lodash/_hashGet.js"(exports, module) {
+    "node_modules/lodash/_hashGet.js"(exports, module2) {
       var nativeCreate = require_nativeCreate();
       var HASH_UNDEFINED = "__lodash_hash_undefined__";
       var objectProto2 = Object.prototype;
@@ -27081,13 +27081,13 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return hasOwnProperty2.call(data, key) ? data[key] : void 0;
       }
-      module.exports = hashGet;
+      module2.exports = hashGet;
     }
   });
 
   // node_modules/lodash/_hashHas.js
   var require_hashHas = __commonJS({
-    "node_modules/lodash/_hashHas.js"(exports, module) {
+    "node_modules/lodash/_hashHas.js"(exports, module2) {
       var nativeCreate = require_nativeCreate();
       var objectProto2 = Object.prototype;
       var hasOwnProperty2 = objectProto2.hasOwnProperty;
@@ -27095,13 +27095,13 @@ ${JSON.stringify(message, null, 4)}`);
         var data = this.__data__;
         return nativeCreate ? data[key] !== void 0 : hasOwnProperty2.call(data, key);
       }
-      module.exports = hashHas;
+      module2.exports = hashHas;
     }
   });
 
   // node_modules/lodash/_hashSet.js
   var require_hashSet = __commonJS({
-    "node_modules/lodash/_hashSet.js"(exports, module) {
+    "node_modules/lodash/_hashSet.js"(exports, module2) {
       var nativeCreate = require_nativeCreate();
       var HASH_UNDEFINED = "__lodash_hash_undefined__";
       function hashSet(key, value2) {
@@ -27110,13 +27110,13 @@ ${JSON.stringify(message, null, 4)}`);
         data[key] = nativeCreate && value2 === void 0 ? HASH_UNDEFINED : value2;
         return this;
       }
-      module.exports = hashSet;
+      module2.exports = hashSet;
     }
   });
 
   // node_modules/lodash/_Hash.js
   var require_Hash = __commonJS({
-    "node_modules/lodash/_Hash.js"(exports, module) {
+    "node_modules/lodash/_Hash.js"(exports, module2) {
       var hashClear = require_hashClear();
       var hashDelete = require_hashDelete();
       var hashGet = require_hashGet();
@@ -27135,13 +27135,13 @@ ${JSON.stringify(message, null, 4)}`);
       Hash.prototype.get = hashGet;
       Hash.prototype.has = hashHas;
       Hash.prototype.set = hashSet;
-      module.exports = Hash;
+      module2.exports = Hash;
     }
   });
 
   // node_modules/lodash/_mapCacheClear.js
   var require_mapCacheClear = __commonJS({
-    "node_modules/lodash/_mapCacheClear.js"(exports, module) {
+    "node_modules/lodash/_mapCacheClear.js"(exports, module2) {
       var Hash = require_Hash();
       var ListCache = require_ListCache();
       var Map2 = require_Map();
@@ -27153,71 +27153,71 @@ ${JSON.stringify(message, null, 4)}`);
           "string": new Hash()
         };
       }
-      module.exports = mapCacheClear;
+      module2.exports = mapCacheClear;
     }
   });
 
   // node_modules/lodash/_isKeyable.js
   var require_isKeyable = __commonJS({
-    "node_modules/lodash/_isKeyable.js"(exports, module) {
+    "node_modules/lodash/_isKeyable.js"(exports, module2) {
       function isKeyable(value2) {
         var type = typeof value2;
         return type == "string" || type == "number" || type == "symbol" || type == "boolean" ? value2 !== "__proto__" : value2 === null;
       }
-      module.exports = isKeyable;
+      module2.exports = isKeyable;
     }
   });
 
   // node_modules/lodash/_getMapData.js
   var require_getMapData = __commonJS({
-    "node_modules/lodash/_getMapData.js"(exports, module) {
+    "node_modules/lodash/_getMapData.js"(exports, module2) {
       var isKeyable = require_isKeyable();
       function getMapData(map4, key) {
         var data = map4.__data__;
         return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
       }
-      module.exports = getMapData;
+      module2.exports = getMapData;
     }
   });
 
   // node_modules/lodash/_mapCacheDelete.js
   var require_mapCacheDelete = __commonJS({
-    "node_modules/lodash/_mapCacheDelete.js"(exports, module) {
+    "node_modules/lodash/_mapCacheDelete.js"(exports, module2) {
       var getMapData = require_getMapData();
       function mapCacheDelete(key) {
         var result = getMapData(this, key)["delete"](key);
         this.size -= result ? 1 : 0;
         return result;
       }
-      module.exports = mapCacheDelete;
+      module2.exports = mapCacheDelete;
     }
   });
 
   // node_modules/lodash/_mapCacheGet.js
   var require_mapCacheGet = __commonJS({
-    "node_modules/lodash/_mapCacheGet.js"(exports, module) {
+    "node_modules/lodash/_mapCacheGet.js"(exports, module2) {
       var getMapData = require_getMapData();
       function mapCacheGet(key) {
         return getMapData(this, key).get(key);
       }
-      module.exports = mapCacheGet;
+      module2.exports = mapCacheGet;
     }
   });
 
   // node_modules/lodash/_mapCacheHas.js
   var require_mapCacheHas = __commonJS({
-    "node_modules/lodash/_mapCacheHas.js"(exports, module) {
+    "node_modules/lodash/_mapCacheHas.js"(exports, module2) {
       var getMapData = require_getMapData();
       function mapCacheHas(key) {
         return getMapData(this, key).has(key);
       }
-      module.exports = mapCacheHas;
+      module2.exports = mapCacheHas;
     }
   });
 
   // node_modules/lodash/_mapCacheSet.js
   var require_mapCacheSet = __commonJS({
-    "node_modules/lodash/_mapCacheSet.js"(exports, module) {
+    "node_modules/lodash/_mapCacheSet.js"(exports, module2) {
       var getMapData = require_getMapData();
       function mapCacheSet(key, value2) {
         var data = getMapData(this, key), size = data.size;
@@ -27225,13 +27225,13 @@ ${JSON.stringify(message, null, 4)}`);
         this.size += data.size == size ? 0 : 1;
         return this;
       }
-      module.exports = mapCacheSet;
+      module2.exports = mapCacheSet;
     }
   });
 
   // node_modules/lodash/_MapCache.js
   var require_MapCache = __commonJS({
-    "node_modules/lodash/_MapCache.js"(exports, module) {
+    "node_modules/lodash/_MapCache.js"(exports, module2) {
       var mapCacheClear = require_mapCacheClear();
       var mapCacheDelete = require_mapCacheDelete();
       var mapCacheGet = require_mapCacheGet();
@@ -27250,13 +27250,13 @@ ${JSON.stringify(message, null, 4)}`);
       MapCache.prototype.get = mapCacheGet;
       MapCache.prototype.has = mapCacheHas;
       MapCache.prototype.set = mapCacheSet;
-      module.exports = MapCache;
+      module2.exports = MapCache;
     }
   });
 
   // node_modules/lodash/_stackSet.js
   var require_stackSet = __commonJS({
-    "node_modules/lodash/_stackSet.js"(exports, module) {
+    "node_modules/lodash/_stackSet.js"(exports, module2) {
       var ListCache = require_ListCache();
       var Map2 = require_Map();
       var MapCache = require_MapCache();
@@ -27276,13 +27276,13 @@ ${JSON.stringify(message, null, 4)}`);
         this.size = data.size;
         return this;
       }
-      module.exports = stackSet;
+      module2.exports = stackSet;
     }
   });
 
   // node_modules/lodash/_Stack.js
   var require_Stack = __commonJS({
-    "node_modules/lodash/_Stack.js"(exports, module) {
+    "node_modules/lodash/_Stack.js"(exports, module2) {
       var ListCache = require_ListCache();
       var stackClear = require_stackClear();
       var stackDelete = require_stackDelete();
@@ -27298,35 +27298,35 @@ ${JSON.stringify(message, null, 4)}`);
       Stack.prototype.get = stackGet;
       Stack.prototype.has = stackHas;
       Stack.prototype.set = stackSet;
-      module.exports = Stack;
+      module2.exports = Stack;
     }
   });
 
   // node_modules/lodash/_setCacheAdd.js
   var require_setCacheAdd = __commonJS({
-    "node_modules/lodash/_setCacheAdd.js"(exports, module) {
+    "node_modules/lodash/_setCacheAdd.js"(exports, module2) {
       var HASH_UNDEFINED = "__lodash_hash_undefined__";
       function setCacheAdd(value2) {
         this.__data__.set(value2, HASH_UNDEFINED);
         return this;
       }
-      module.exports = setCacheAdd;
+      module2.exports = setCacheAdd;
     }
   });
 
   // node_modules/lodash/_setCacheHas.js
   var require_setCacheHas = __commonJS({
-    "node_modules/lodash/_setCacheHas.js"(exports, module) {
+    "node_modules/lodash/_setCacheHas.js"(exports, module2) {
       function setCacheHas(value2) {
         return this.__data__.has(value2);
       }
-      module.exports = setCacheHas;
+      module2.exports = setCacheHas;
     }
   });
 
   // node_modules/lodash/_SetCache.js
   var require_SetCache = __commonJS({
-    "node_modules/lodash/_SetCache.js"(exports, module) {
+    "node_modules/lodash/_SetCache.js"(exports, module2) {
       var MapCache = require_MapCache();
       var setCacheAdd = require_setCacheAdd();
       var setCacheHas = require_setCacheHas();
@@ -27339,13 +27339,13 @@ ${JSON.stringify(message, null, 4)}`);
       }
       SetCache.prototype.add = SetCache.prototype.push = setCacheAdd;
       SetCache.prototype.has = setCacheHas;
-      module.exports = SetCache;
+      module2.exports = SetCache;
     }
   });
 
   // node_modules/lodash/_arraySome.js
   var require_arraySome = __commonJS({
-    "node_modules/lodash/_arraySome.js"(exports, module) {
+    "node_modules/lodash/_arraySome.js"(exports, module2) {
       function arraySome(array, predicate) {
         var index2 = -1, length2 = array == null ? 0 : array.length;
         while (++index2 < length2) {
@@ -27355,23 +27355,23 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return false;
       }
-      module.exports = arraySome;
+      module2.exports = arraySome;
     }
   });
 
   // node_modules/lodash/_cacheHas.js
   var require_cacheHas = __commonJS({
-    "node_modules/lodash/_cacheHas.js"(exports, module) {
+    "node_modules/lodash/_cacheHas.js"(exports, module2) {
       function cacheHas(cache3, key) {
         return cache3.has(key);
       }
-      module.exports = cacheHas;
+      module2.exports = cacheHas;
     }
   });
 
   // node_modules/lodash/_equalArrays.js
   var require_equalArrays = __commonJS({
-    "node_modules/lodash/_equalArrays.js"(exports, module) {
+    "node_modules/lodash/_equalArrays.js"(exports, module2) {
       var SetCache = require_SetCache();
       var arraySome = require_arraySome();
       var cacheHas = require_cacheHas();
@@ -27420,22 +27420,22 @@ ${JSON.stringify(message, null, 4)}`);
         stack["delete"](other);
         return result;
       }
-      module.exports = equalArrays;
+      module2.exports = equalArrays;
     }
   });
 
   // node_modules/lodash/_Uint8Array.js
   var require_Uint8Array = __commonJS({
-    "node_modules/lodash/_Uint8Array.js"(exports, module) {
+    "node_modules/lodash/_Uint8Array.js"(exports, module2) {
       var root2 = require_root();
       var Uint8Array2 = root2.Uint8Array;
-      module.exports = Uint8Array2;
+      module2.exports = Uint8Array2;
     }
   });
 
   // node_modules/lodash/_mapToArray.js
   var require_mapToArray = __commonJS({
-    "node_modules/lodash/_mapToArray.js"(exports, module) {
+    "node_modules/lodash/_mapToArray.js"(exports, module2) {
       function mapToArray(map4) {
         var index2 = -1, result = Array(map4.size);
         map4.forEach(function(value2, key) {
@@ -27443,13 +27443,13 @@ ${JSON.stringify(message, null, 4)}`);
         });
         return result;
       }
-      module.exports = mapToArray;
+      module2.exports = mapToArray;
     }
   });
 
   // node_modules/lodash/_setToArray.js
   var require_setToArray = __commonJS({
-    "node_modules/lodash/_setToArray.js"(exports, module) {
+    "node_modules/lodash/_setToArray.js"(exports, module2) {
       function setToArray(set2) {
         var index2 = -1, result = Array(set2.size);
         set2.forEach(function(value2) {
@@ -27457,13 +27457,13 @@ ${JSON.stringify(message, null, 4)}`);
         });
         return result;
       }
-      module.exports = setToArray;
+      module2.exports = setToArray;
     }
   });
 
   // node_modules/lodash/_equalByTag.js
   var require_equalByTag = __commonJS({
-    "node_modules/lodash/_equalByTag.js"(exports, module) {
+    "node_modules/lodash/_equalByTag.js"(exports, module2) {
       var Symbol4 = require_Symbol();
       var Uint8Array2 = require_Uint8Array();
       var eq = require_eq();
@@ -27478,7 +27478,7 @@ ${JSON.stringify(message, null, 4)}`);
       var mapTag = "[object Map]";
       var numberTag = "[object Number]";
       var regexpTag = "[object RegExp]";
-      var setTag = "[object Set]";
+      var setTag2 = "[object Set]";
       var stringTag = "[object String]";
       var symbolTag2 = "[object Symbol]";
       var arrayBufferTag = "[object ArrayBuffer]";
@@ -27509,7 +27509,7 @@ ${JSON.stringify(message, null, 4)}`);
             return object == other + "";
           case mapTag:
             var convert = mapToArray;
-          case setTag:
+          case setTag2:
             var isPartial = bitmask & COMPARE_PARTIAL_FLAG;
             convert || (convert = setToArray);
             if (object.size != other.size && !isPartial) {
@@ -27531,13 +27531,13 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return false;
       }
-      module.exports = equalByTag;
+      module2.exports = equalByTag;
     }
   });
 
   // node_modules/lodash/_arrayPush.js
   var require_arrayPush = __commonJS({
-    "node_modules/lodash/_arrayPush.js"(exports, module) {
+    "node_modules/lodash/_arrayPush.js"(exports, module2) {
       function arrayPush(array, values) {
         var index2 = -1, length2 = values.length, offset = array.length;
         while (++index2 < length2) {
@@ -27545,34 +27545,34 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return array;
       }
-      module.exports = arrayPush;
+      module2.exports = arrayPush;
     }
   });
 
   // node_modules/lodash/isArray.js
   var require_isArray = __commonJS({
-    "node_modules/lodash/isArray.js"(exports, module) {
+    "node_modules/lodash/isArray.js"(exports, module2) {
       var isArray2 = Array.isArray;
-      module.exports = isArray2;
+      module2.exports = isArray2;
     }
   });
 
   // node_modules/lodash/_baseGetAllKeys.js
   var require_baseGetAllKeys = __commonJS({
-    "node_modules/lodash/_baseGetAllKeys.js"(exports, module) {
+    "node_modules/lodash/_baseGetAllKeys.js"(exports, module2) {
       var arrayPush = require_arrayPush();
       var isArray2 = require_isArray();
       function baseGetAllKeys(object, keysFunc, symbolsFunc) {
         var result = keysFunc(object);
         return isArray2(object) ? result : arrayPush(result, symbolsFunc(object));
       }
-      module.exports = baseGetAllKeys;
+      module2.exports = baseGetAllKeys;
     }
   });
 
   // node_modules/lodash/_arrayFilter.js
   var require_arrayFilter = __commonJS({
-    "node_modules/lodash/_arrayFilter.js"(exports, module) {
+    "node_modules/lodash/_arrayFilter.js"(exports, module2) {
       function arrayFilter(array, predicate) {
         var index2 = -1, length2 = array == null ? 0 : array.length, resIndex = 0, result = [];
         while (++index2 < length2) {
@@ -27583,23 +27583,23 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return result;
       }
-      module.exports = arrayFilter;
+      module2.exports = arrayFilter;
     }
   });
 
   // node_modules/lodash/stubArray.js
   var require_stubArray = __commonJS({
-    "node_modules/lodash/stubArray.js"(exports, module) {
+    "node_modules/lodash/stubArray.js"(exports, module2) {
       function stubArray() {
         return [];
       }
-      module.exports = stubArray;
+      module2.exports = stubArray;
     }
   });
 
   // node_modules/lodash/_getSymbols.js
   var require_getSymbols = __commonJS({
-    "node_modules/lodash/_getSymbols.js"(exports, module) {
+    "node_modules/lodash/_getSymbols.js"(exports, module2) {
       var arrayFilter = require_arrayFilter();
       var stubArray = require_stubArray();
       var objectProto2 = Object.prototype;
@@ -27614,13 +27614,13 @@ ${JSON.stringify(message, null, 4)}`);
           return propertyIsEnumerable.call(object, symbol);
         });
       };
-      module.exports = getSymbols;
+      module2.exports = getSymbols;
     }
   });
 
   // node_modules/lodash/_baseTimes.js
   var require_baseTimes = __commonJS({
-    "node_modules/lodash/_baseTimes.js"(exports, module) {
+    "node_modules/lodash/_baseTimes.js"(exports, module2) {
       function baseTimes(n3, iteratee) {
         var index2 = -1, result = Array(n3);
         while (++index2 < n3) {
@@ -27628,36 +27628,36 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return result;
       }
-      module.exports = baseTimes;
+      module2.exports = baseTimes;
     }
   });
 
   // node_modules/lodash/isObjectLike.js
   var require_isObjectLike = __commonJS({
-    "node_modules/lodash/isObjectLike.js"(exports, module) {
+    "node_modules/lodash/isObjectLike.js"(exports, module2) {
       function isObjectLike2(value2) {
         return value2 != null && typeof value2 == "object";
       }
-      module.exports = isObjectLike2;
+      module2.exports = isObjectLike2;
     }
   });
 
   // node_modules/lodash/_baseIsArguments.js
   var require_baseIsArguments = __commonJS({
-    "node_modules/lodash/_baseIsArguments.js"(exports, module) {
+    "node_modules/lodash/_baseIsArguments.js"(exports, module2) {
       var baseGetTag2 = require_baseGetTag();
       var isObjectLike2 = require_isObjectLike();
       var argsTag = "[object Arguments]";
       function baseIsArguments(value2) {
         return isObjectLike2(value2) && baseGetTag2(value2) == argsTag;
       }
-      module.exports = baseIsArguments;
+      module2.exports = baseIsArguments;
     }
   });
 
   // node_modules/lodash/isArguments.js
   var require_isArguments = __commonJS({
-    "node_modules/lodash/isArguments.js"(exports, module) {
+    "node_modules/lodash/isArguments.js"(exports, module2) {
       var baseIsArguments = require_baseIsArguments();
       var isObjectLike2 = require_isObjectLike();
       var objectProto2 = Object.prototype;
@@ -27668,38 +27668,38 @@ ${JSON.stringify(message, null, 4)}`);
       }()) ? baseIsArguments : function(value2) {
         return isObjectLike2(value2) && hasOwnProperty2.call(value2, "callee") && !propertyIsEnumerable.call(value2, "callee");
       };
-      module.exports = isArguments;
+      module2.exports = isArguments;
     }
   });
 
   // node_modules/lodash/stubFalse.js
   var require_stubFalse = __commonJS({
-    "node_modules/lodash/stubFalse.js"(exports, module) {
+    "node_modules/lodash/stubFalse.js"(exports, module2) {
       function stubFalse() {
         return false;
       }
-      module.exports = stubFalse;
+      module2.exports = stubFalse;
     }
   });
 
   // node_modules/lodash/isBuffer.js
   var require_isBuffer = __commonJS({
-    "node_modules/lodash/isBuffer.js"(exports, module) {
+    "node_modules/lodash/isBuffer.js"(exports, module2) {
       var root2 = require_root();
       var stubFalse = require_stubFalse();
       var freeExports = typeof exports == "object" && exports && !exports.nodeType && exports;
-      var freeModule = freeExports && typeof module == "object" && module && !module.nodeType && module;
+      var freeModule = freeExports && typeof module2 == "object" && module2 && !module2.nodeType && module2;
       var moduleExports = freeModule && freeModule.exports === freeExports;
       var Buffer2 = moduleExports ? root2.Buffer : void 0;
       var nativeIsBuffer = Buffer2 ? Buffer2.isBuffer : void 0;
       var isBuffer = nativeIsBuffer || stubFalse;
-      module.exports = isBuffer;
+      module2.exports = isBuffer;
     }
   });
 
   // node_modules/lodash/_isIndex.js
   var require_isIndex = __commonJS({
-    "node_modules/lodash/_isIndex.js"(exports, module) {
+    "node_modules/lodash/_isIndex.js"(exports, module2) {
       var MAX_SAFE_INTEGER = 9007199254740991;
       var reIsUint = /^(?:0|[1-9]\d*)$/;
       function isIndex(value2, length2) {
@@ -27707,24 +27707,24 @@ ${JSON.stringify(message, null, 4)}`);
         length2 = length2 == null ? MAX_SAFE_INTEGER : length2;
         return !!length2 && (type == "number" || type != "symbol" && reIsUint.test(value2)) && (value2 > -1 && value2 % 1 == 0 && value2 < length2);
       }
-      module.exports = isIndex;
+      module2.exports = isIndex;
     }
   });
 
   // node_modules/lodash/isLength.js
   var require_isLength = __commonJS({
-    "node_modules/lodash/isLength.js"(exports, module) {
+    "node_modules/lodash/isLength.js"(exports, module2) {
       var MAX_SAFE_INTEGER = 9007199254740991;
       function isLength(value2) {
         return typeof value2 == "number" && value2 > -1 && value2 % 1 == 0 && value2 <= MAX_SAFE_INTEGER;
       }
-      module.exports = isLength;
+      module2.exports = isLength;
     }
   });
 
   // node_modules/lodash/_baseIsTypedArray.js
   var require_baseIsTypedArray = __commonJS({
-    "node_modules/lodash/_baseIsTypedArray.js"(exports, module) {
+    "node_modules/lodash/_baseIsTypedArray.js"(exports, module2) {
       var baseGetTag2 = require_baseGetTag();
       var isLength = require_isLength();
       var isObjectLike2 = require_isObjectLike();
@@ -27738,7 +27738,7 @@ ${JSON.stringify(message, null, 4)}`);
       var numberTag = "[object Number]";
       var objectTag = "[object Object]";
       var regexpTag = "[object RegExp]";
-      var setTag = "[object Set]";
+      var setTag2 = "[object Set]";
       var stringTag = "[object String]";
       var weakMapTag = "[object WeakMap]";
       var arrayBufferTag = "[object ArrayBuffer]";
@@ -27754,32 +27754,32 @@ ${JSON.stringify(message, null, 4)}`);
       var uint32Tag = "[object Uint32Array]";
       var typedArrayTags = {};
       typedArrayTags[float32Tag] = typedArrayTags[float64Tag] = typedArrayTags[int8Tag] = typedArrayTags[int16Tag] = typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] = typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] = typedArrayTags[uint32Tag] = true;
-      typedArrayTags[argsTag] = typedArrayTags[arrayTag] = typedArrayTags[arrayBufferTag] = typedArrayTags[boolTag] = typedArrayTags[dataViewTag] = typedArrayTags[dateTag] = typedArrayTags[errorTag] = typedArrayTags[funcTag] = typedArrayTags[mapTag] = typedArrayTags[numberTag] = typedArrayTags[objectTag] = typedArrayTags[regexpTag] = typedArrayTags[setTag] = typedArrayTags[stringTag] = typedArrayTags[weakMapTag] = false;
+      typedArrayTags[argsTag] = typedArrayTags[arrayTag] = typedArrayTags[arrayBufferTag] = typedArrayTags[boolTag] = typedArrayTags[dataViewTag] = typedArrayTags[dateTag] = typedArrayTags[errorTag] = typedArrayTags[funcTag] = typedArrayTags[mapTag] = typedArrayTags[numberTag] = typedArrayTags[objectTag] = typedArrayTags[regexpTag] = typedArrayTags[setTag2] = typedArrayTags[stringTag] = typedArrayTags[weakMapTag] = false;
       function baseIsTypedArray(value2) {
         return isObjectLike2(value2) && isLength(value2.length) && !!typedArrayTags[baseGetTag2(value2)];
       }
-      module.exports = baseIsTypedArray;
+      module2.exports = baseIsTypedArray;
     }
   });
 
   // node_modules/lodash/_baseUnary.js
   var require_baseUnary = __commonJS({
-    "node_modules/lodash/_baseUnary.js"(exports, module) {
+    "node_modules/lodash/_baseUnary.js"(exports, module2) {
       function baseUnary(func2) {
         return function(value2) {
           return func2(value2);
         };
       }
-      module.exports = baseUnary;
+      module2.exports = baseUnary;
     }
   });
 
   // node_modules/lodash/_nodeUtil.js
   var require_nodeUtil = __commonJS({
-    "node_modules/lodash/_nodeUtil.js"(exports, module) {
+    "node_modules/lodash/_nodeUtil.js"(exports, module2) {
       var freeGlobal2 = require_freeGlobal();
       var freeExports = typeof exports == "object" && exports && !exports.nodeType && exports;
-      var freeModule = freeExports && typeof module == "object" && module && !module.nodeType && module;
+      var freeModule = freeExports && typeof module2 == "object" && module2 && !module2.nodeType && module2;
       var moduleExports = freeModule && freeModule.exports === freeExports;
       var freeProcess = moduleExports && freeGlobal2.process;
       var nodeUtil = function() {
@@ -27792,25 +27792,25 @@ ${JSON.stringify(message, null, 4)}`);
         } catch (e3) {
         }
       }();
-      module.exports = nodeUtil;
+      module2.exports = nodeUtil;
     }
   });
 
   // node_modules/lodash/isTypedArray.js
   var require_isTypedArray = __commonJS({
-    "node_modules/lodash/isTypedArray.js"(exports, module) {
+    "node_modules/lodash/isTypedArray.js"(exports, module2) {
       var baseIsTypedArray = require_baseIsTypedArray();
       var baseUnary = require_baseUnary();
       var nodeUtil = require_nodeUtil();
       var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
       var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
-      module.exports = isTypedArray;
+      module2.exports = isTypedArray;
     }
   });
 
   // node_modules/lodash/_arrayLikeKeys.js
   var require_arrayLikeKeys = __commonJS({
-    "node_modules/lodash/_arrayLikeKeys.js"(exports, module) {
+    "node_modules/lodash/_arrayLikeKeys.js"(exports, module2) {
       var baseTimes = require_baseTimes();
       var isArguments = require_isArguments();
       var isArray2 = require_isArray();
@@ -27828,46 +27828,46 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return result;
       }
-      module.exports = arrayLikeKeys;
+      module2.exports = arrayLikeKeys;
     }
   });
 
   // node_modules/lodash/_isPrototype.js
   var require_isPrototype = __commonJS({
-    "node_modules/lodash/_isPrototype.js"(exports, module) {
+    "node_modules/lodash/_isPrototype.js"(exports, module2) {
       var objectProto2 = Object.prototype;
       function isPrototype(value2) {
         var Ctor = value2 && value2.constructor, proto = typeof Ctor == "function" && Ctor.prototype || objectProto2;
         return value2 === proto;
       }
-      module.exports = isPrototype;
+      module2.exports = isPrototype;
     }
   });
 
   // node_modules/lodash/_overArg.js
   var require_overArg = __commonJS({
-    "node_modules/lodash/_overArg.js"(exports, module) {
+    "node_modules/lodash/_overArg.js"(exports, module2) {
       function overArg(func2, transform) {
         return function(arg) {
           return func2(transform(arg));
         };
       }
-      module.exports = overArg;
+      module2.exports = overArg;
     }
   });
 
   // node_modules/lodash/_nativeKeys.js
   var require_nativeKeys = __commonJS({
-    "node_modules/lodash/_nativeKeys.js"(exports, module) {
+    "node_modules/lodash/_nativeKeys.js"(exports, module2) {
       var overArg = require_overArg();
       var nativeKeys = overArg(Object.keys, Object);
-      module.exports = nativeKeys;
+      module2.exports = nativeKeys;
     }
   });
 
   // node_modules/lodash/_baseKeys.js
   var require_baseKeys = __commonJS({
-    "node_modules/lodash/_baseKeys.js"(exports, module) {
+    "node_modules/lodash/_baseKeys.js"(exports, module2) {
       var isPrototype = require_isPrototype();
       var nativeKeys = require_nativeKeys();
       var objectProto2 = Object.prototype;
@@ -27884,51 +27884,51 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return result;
       }
-      module.exports = baseKeys;
+      module2.exports = baseKeys;
     }
   });
 
   // node_modules/lodash/isArrayLike.js
   var require_isArrayLike = __commonJS({
-    "node_modules/lodash/isArrayLike.js"(exports, module) {
+    "node_modules/lodash/isArrayLike.js"(exports, module2) {
       var isFunction2 = require_isFunction();
       var isLength = require_isLength();
       function isArrayLike(value2) {
         return value2 != null && isLength(value2.length) && !isFunction2(value2);
       }
-      module.exports = isArrayLike;
+      module2.exports = isArrayLike;
     }
   });
 
   // node_modules/lodash/keys.js
   var require_keys = __commonJS({
-    "node_modules/lodash/keys.js"(exports, module) {
+    "node_modules/lodash/keys.js"(exports, module2) {
       var arrayLikeKeys = require_arrayLikeKeys();
       var baseKeys = require_baseKeys();
       var isArrayLike = require_isArrayLike();
       function keys(object) {
         return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
       }
-      module.exports = keys;
+      module2.exports = keys;
     }
   });
 
   // node_modules/lodash/_getAllKeys.js
   var require_getAllKeys = __commonJS({
-    "node_modules/lodash/_getAllKeys.js"(exports, module) {
+    "node_modules/lodash/_getAllKeys.js"(exports, module2) {
       var baseGetAllKeys = require_baseGetAllKeys();
       var getSymbols = require_getSymbols();
       var keys = require_keys();
       function getAllKeys(object) {
         return baseGetAllKeys(object, keys, getSymbols);
       }
-      module.exports = getAllKeys;
+      module2.exports = getAllKeys;
     }
   });
 
   // node_modules/lodash/_equalObjects.js
   var require_equalObjects = __commonJS({
-    "node_modules/lodash/_equalObjects.js"(exports, module) {
+    "node_modules/lodash/_equalObjects.js"(exports, module2) {
       var getAllKeys = require_getAllKeys();
       var COMPARE_PARTIAL_FLAG = 1;
       var objectProto2 = Object.prototype;
@@ -27976,53 +27976,53 @@ ${JSON.stringify(message, null, 4)}`);
         stack["delete"](other);
         return result;
       }
-      module.exports = equalObjects;
+      module2.exports = equalObjects;
     }
   });
 
   // node_modules/lodash/_DataView.js
   var require_DataView = __commonJS({
-    "node_modules/lodash/_DataView.js"(exports, module) {
+    "node_modules/lodash/_DataView.js"(exports, module2) {
       var getNative = require_getNative();
       var root2 = require_root();
       var DataView2 = getNative(root2, "DataView");
-      module.exports = DataView2;
+      module2.exports = DataView2;
     }
   });
 
   // node_modules/lodash/_Promise.js
   var require_Promise = __commonJS({
-    "node_modules/lodash/_Promise.js"(exports, module) {
+    "node_modules/lodash/_Promise.js"(exports, module2) {
       var getNative = require_getNative();
       var root2 = require_root();
       var Promise2 = getNative(root2, "Promise");
-      module.exports = Promise2;
+      module2.exports = Promise2;
     }
   });
 
   // node_modules/lodash/_Set.js
   var require_Set = __commonJS({
-    "node_modules/lodash/_Set.js"(exports, module) {
+    "node_modules/lodash/_Set.js"(exports, module2) {
       var getNative = require_getNative();
       var root2 = require_root();
       var Set2 = getNative(root2, "Set");
-      module.exports = Set2;
+      module2.exports = Set2;
     }
   });
 
   // node_modules/lodash/_WeakMap.js
   var require_WeakMap = __commonJS({
-    "node_modules/lodash/_WeakMap.js"(exports, module) {
+    "node_modules/lodash/_WeakMap.js"(exports, module2) {
       var getNative = require_getNative();
       var root2 = require_root();
       var WeakMap2 = getNative(root2, "WeakMap");
-      module.exports = WeakMap2;
+      module2.exports = WeakMap2;
     }
   });
 
   // node_modules/lodash/_getTag.js
   var require_getTag = __commonJS({
-    "node_modules/lodash/_getTag.js"(exports, module) {
+    "node_modules/lodash/_getTag.js"(exports, module2) {
       var DataView2 = require_DataView();
       var Map2 = require_Map();
       var Promise2 = require_Promise();
@@ -28033,7 +28033,7 @@ ${JSON.stringify(message, null, 4)}`);
       var mapTag = "[object Map]";
       var objectTag = "[object Object]";
       var promiseTag = "[object Promise]";
-      var setTag = "[object Set]";
+      var setTag2 = "[object Set]";
       var weakMapTag = "[object WeakMap]";
       var dataViewTag = "[object DataView]";
       var dataViewCtorString = toSource(DataView2);
@@ -28042,7 +28042,7 @@ ${JSON.stringify(message, null, 4)}`);
       var setCtorString = toSource(Set2);
       var weakMapCtorString = toSource(WeakMap2);
       var getTag = baseGetTag2;
-      if (DataView2 && getTag(new DataView2(new ArrayBuffer(1))) != dataViewTag || Map2 && getTag(new Map2()) != mapTag || Promise2 && getTag(Promise2.resolve()) != promiseTag || Set2 && getTag(new Set2()) != setTag || WeakMap2 && getTag(new WeakMap2()) != weakMapTag) {
+      if (DataView2 && getTag(new DataView2(new ArrayBuffer(1))) != dataViewTag || Map2 && getTag(new Map2()) != mapTag || Promise2 && getTag(Promise2.resolve()) != promiseTag || Set2 && getTag(new Set2()) != setTag2 || WeakMap2 && getTag(new WeakMap2()) != weakMapTag) {
         getTag = function(value2) {
           var result = baseGetTag2(value2), Ctor = result == objectTag ? value2.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : "";
           if (ctorString) {
@@ -28054,7 +28054,7 @@ ${JSON.stringify(message, null, 4)}`);
               case promiseCtorString:
                 return promiseTag;
               case setCtorString:
-                return setTag;
+                return setTag2;
               case weakMapCtorString:
                 return weakMapTag;
             }
@@ -28062,13 +28062,13 @@ ${JSON.stringify(message, null, 4)}`);
           return result;
         };
       }
-      module.exports = getTag;
+      module2.exports = getTag;
     }
   });
 
   // node_modules/lodash/_baseIsEqualDeep.js
   var require_baseIsEqualDeep = __commonJS({
-    "node_modules/lodash/_baseIsEqualDeep.js"(exports, module) {
+    "node_modules/lodash/_baseIsEqualDeep.js"(exports, module2) {
       var Stack = require_Stack();
       var equalArrays = require_equalArrays();
       var equalByTag = require_equalByTag();
@@ -28113,13 +28113,13 @@ ${JSON.stringify(message, null, 4)}`);
         stack || (stack = new Stack());
         return equalObjects(object, other, bitmask, customizer, equalFunc, stack);
       }
-      module.exports = baseIsEqualDeep;
+      module2.exports = baseIsEqualDeep;
     }
   });
 
   // node_modules/lodash/_baseIsEqual.js
   var require_baseIsEqual = __commonJS({
-    "node_modules/lodash/_baseIsEqual.js"(exports, module) {
+    "node_modules/lodash/_baseIsEqual.js"(exports, module2) {
       var baseIsEqualDeep = require_baseIsEqualDeep();
       var isObjectLike2 = require_isObjectLike();
       function baseIsEqual(value2, other, bitmask, customizer, stack) {
@@ -28131,13 +28131,13 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return baseIsEqualDeep(value2, other, bitmask, customizer, baseIsEqual, stack);
       }
-      module.exports = baseIsEqual;
+      module2.exports = baseIsEqual;
     }
   });
 
   // node_modules/lodash/_baseIsMatch.js
   var require_baseIsMatch = __commonJS({
-    "node_modules/lodash/_baseIsMatch.js"(exports, module) {
+    "node_modules/lodash/_baseIsMatch.js"(exports, module2) {
       var Stack = require_Stack();
       var baseIsEqual = require_baseIsEqual();
       var COMPARE_PARTIAL_FLAG = 1;
@@ -28173,24 +28173,24 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return true;
       }
-      module.exports = baseIsMatch;
+      module2.exports = baseIsMatch;
     }
   });
 
   // node_modules/lodash/_isStrictComparable.js
   var require_isStrictComparable = __commonJS({
-    "node_modules/lodash/_isStrictComparable.js"(exports, module) {
+    "node_modules/lodash/_isStrictComparable.js"(exports, module2) {
       var isObject2 = require_isObject();
       function isStrictComparable(value2) {
         return value2 === value2 && !isObject2(value2);
       }
-      module.exports = isStrictComparable;
+      module2.exports = isStrictComparable;
     }
   });
 
   // node_modules/lodash/_getMatchData.js
   var require_getMatchData = __commonJS({
-    "node_modules/lodash/_getMatchData.js"(exports, module) {
+    "node_modules/lodash/_getMatchData.js"(exports, module2) {
       var isStrictComparable = require_isStrictComparable();
       var keys = require_keys();
       function getMatchData(object) {
@@ -28201,13 +28201,13 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return result;
       }
-      module.exports = getMatchData;
+      module2.exports = getMatchData;
     }
   });
 
   // node_modules/lodash/_matchesStrictComparable.js
   var require_matchesStrictComparable = __commonJS({
-    "node_modules/lodash/_matchesStrictComparable.js"(exports, module) {
+    "node_modules/lodash/_matchesStrictComparable.js"(exports, module2) {
       function matchesStrictComparable(key, srcValue) {
         return function(object) {
           if (object == null) {
@@ -28216,13 +28216,13 @@ ${JSON.stringify(message, null, 4)}`);
           return object[key] === srcValue && (srcValue !== void 0 || key in Object(object));
         };
       }
-      module.exports = matchesStrictComparable;
+      module2.exports = matchesStrictComparable;
     }
   });
 
   // node_modules/lodash/_baseMatches.js
   var require_baseMatches = __commonJS({
-    "node_modules/lodash/_baseMatches.js"(exports, module) {
+    "node_modules/lodash/_baseMatches.js"(exports, module2) {
       var baseIsMatch = require_baseIsMatch();
       var getMatchData = require_getMatchData();
       var matchesStrictComparable = require_matchesStrictComparable();
@@ -28235,26 +28235,26 @@ ${JSON.stringify(message, null, 4)}`);
           return object === source || baseIsMatch(object, source, matchData);
         };
       }
-      module.exports = baseMatches;
+      module2.exports = baseMatches;
     }
   });
 
   // node_modules/lodash/isSymbol.js
   var require_isSymbol = __commonJS({
-    "node_modules/lodash/isSymbol.js"(exports, module) {
+    "node_modules/lodash/isSymbol.js"(exports, module2) {
       var baseGetTag2 = require_baseGetTag();
       var isObjectLike2 = require_isObjectLike();
       var symbolTag2 = "[object Symbol]";
       function isSymbol2(value2) {
         return typeof value2 == "symbol" || isObjectLike2(value2) && baseGetTag2(value2) == symbolTag2;
       }
-      module.exports = isSymbol2;
+      module2.exports = isSymbol2;
     }
   });
 
   // node_modules/lodash/_isKey.js
   var require_isKey = __commonJS({
-    "node_modules/lodash/_isKey.js"(exports, module) {
+    "node_modules/lodash/_isKey.js"(exports, module2) {
       var isArray2 = require_isArray();
       var isSymbol2 = require_isSymbol();
       var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/;
@@ -28269,13 +28269,13 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return reIsPlainProp.test(value2) || !reIsDeepProp.test(value2) || object != null && value2 in Object(object);
       }
-      module.exports = isKey;
+      module2.exports = isKey;
     }
   });
 
   // node_modules/lodash/memoize.js
   var require_memoize = __commonJS({
-    "node_modules/lodash/memoize.js"(exports, module) {
+    "node_modules/lodash/memoize.js"(exports, module2) {
       var MapCache = require_MapCache();
       var FUNC_ERROR_TEXT2 = "Expected a function";
       function memoize3(func2, resolver) {
@@ -28295,13 +28295,13 @@ ${JSON.stringify(message, null, 4)}`);
         return memoized;
       }
       memoize3.Cache = MapCache;
-      module.exports = memoize3;
+      module2.exports = memoize3;
     }
   });
 
   // node_modules/lodash/_memoizeCapped.js
   var require_memoizeCapped = __commonJS({
-    "node_modules/lodash/_memoizeCapped.js"(exports, module) {
+    "node_modules/lodash/_memoizeCapped.js"(exports, module2) {
       var memoize3 = require_memoize();
       var MAX_MEMOIZE_SIZE = 500;
       function memoizeCapped(func2) {
@@ -28314,13 +28314,13 @@ ${JSON.stringify(message, null, 4)}`);
         var cache3 = result.cache;
         return result;
       }
-      module.exports = memoizeCapped;
+      module2.exports = memoizeCapped;
     }
   });
 
   // node_modules/lodash/_stringToPath.js
   var require_stringToPath = __commonJS({
-    "node_modules/lodash/_stringToPath.js"(exports, module) {
+    "node_modules/lodash/_stringToPath.js"(exports, module2) {
       var memoizeCapped = require_memoizeCapped();
       var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
       var reEscapeChar = /\\(\\)?/g;
@@ -28334,13 +28334,13 @@ ${JSON.stringify(message, null, 4)}`);
         });
         return result;
       });
-      module.exports = stringToPath;
+      module2.exports = stringToPath;
     }
   });
 
   // node_modules/lodash/_arrayMap.js
   var require_arrayMap = __commonJS({
-    "node_modules/lodash/_arrayMap.js"(exports, module) {
+    "node_modules/lodash/_arrayMap.js"(exports, module2) {
       function arrayMap(array, iteratee) {
         var index2 = -1, length2 = array == null ? 0 : array.length, result = Array(length2);
         while (++index2 < length2) {
@@ -28348,13 +28348,13 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return result;
       }
-      module.exports = arrayMap;
+      module2.exports = arrayMap;
     }
   });
 
   // node_modules/lodash/_baseToString.js
   var require_baseToString = __commonJS({
-    "node_modules/lodash/_baseToString.js"(exports, module) {
+    "node_modules/lodash/_baseToString.js"(exports, module2) {
       var Symbol4 = require_Symbol();
       var arrayMap = require_arrayMap();
       var isArray2 = require_isArray();
@@ -28375,24 +28375,24 @@ ${JSON.stringify(message, null, 4)}`);
         var result = value2 + "";
         return result == "0" && 1 / value2 == -INFINITY ? "-0" : result;
       }
-      module.exports = baseToString;
+      module2.exports = baseToString;
     }
   });
 
   // node_modules/lodash/toString.js
   var require_toString = __commonJS({
-    "node_modules/lodash/toString.js"(exports, module) {
+    "node_modules/lodash/toString.js"(exports, module2) {
       var baseToString = require_baseToString();
       function toString2(value2) {
         return value2 == null ? "" : baseToString(value2);
       }
-      module.exports = toString2;
+      module2.exports = toString2;
     }
   });
 
   // node_modules/lodash/_castPath.js
   var require_castPath = __commonJS({
-    "node_modules/lodash/_castPath.js"(exports, module) {
+    "node_modules/lodash/_castPath.js"(exports, module2) {
       var isArray2 = require_isArray();
       var isKey = require_isKey();
       var stringToPath = require_stringToPath();
@@ -28403,13 +28403,13 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return isKey(value2, object) ? [value2] : stringToPath(toString2(value2));
       }
-      module.exports = castPath;
+      module2.exports = castPath;
     }
   });
 
   // node_modules/lodash/_toKey.js
   var require_toKey = __commonJS({
-    "node_modules/lodash/_toKey.js"(exports, module) {
+    "node_modules/lodash/_toKey.js"(exports, module2) {
       var isSymbol2 = require_isSymbol();
       var INFINITY = 1 / 0;
       function toKey(value2) {
@@ -28419,13 +28419,13 @@ ${JSON.stringify(message, null, 4)}`);
         var result = value2 + "";
         return result == "0" && 1 / value2 == -INFINITY ? "-0" : result;
       }
-      module.exports = toKey;
+      module2.exports = toKey;
     }
   });
 
   // node_modules/lodash/_baseGet.js
   var require_baseGet = __commonJS({
-    "node_modules/lodash/_baseGet.js"(exports, module) {
+    "node_modules/lodash/_baseGet.js"(exports, module2) {
       var castPath = require_castPath();
       var toKey = require_toKey();
       function baseGet(object, path2) {
@@ -28436,35 +28436,35 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return index2 && index2 == length2 ? object : void 0;
       }
-      module.exports = baseGet;
+      module2.exports = baseGet;
     }
   });
 
   // node_modules/lodash/get.js
   var require_get = __commonJS({
-    "node_modules/lodash/get.js"(exports, module) {
+    "node_modules/lodash/get.js"(exports, module2) {
       var baseGet = require_baseGet();
       function get2(object, path2, defaultValue) {
         var result = object == null ? void 0 : baseGet(object, path2);
         return result === void 0 ? defaultValue : result;
       }
-      module.exports = get2;
+      module2.exports = get2;
     }
   });
 
   // node_modules/lodash/_baseHasIn.js
   var require_baseHasIn = __commonJS({
-    "node_modules/lodash/_baseHasIn.js"(exports, module) {
+    "node_modules/lodash/_baseHasIn.js"(exports, module2) {
       function baseHasIn(object, key) {
         return object != null && key in Object(object);
       }
-      module.exports = baseHasIn;
+      module2.exports = baseHasIn;
     }
   });
 
   // node_modules/lodash/_hasPath.js
   var require_hasPath = __commonJS({
-    "node_modules/lodash/_hasPath.js"(exports, module) {
+    "node_modules/lodash/_hasPath.js"(exports, module2) {
       var castPath = require_castPath();
       var isArguments = require_isArguments();
       var isArray2 = require_isArray();
@@ -28487,25 +28487,25 @@ ${JSON.stringify(message, null, 4)}`);
         length2 = object == null ? 0 : object.length;
         return !!length2 && isLength(length2) && isIndex(key, length2) && (isArray2(object) || isArguments(object));
       }
-      module.exports = hasPath;
+      module2.exports = hasPath;
     }
   });
 
   // node_modules/lodash/hasIn.js
   var require_hasIn = __commonJS({
-    "node_modules/lodash/hasIn.js"(exports, module) {
+    "node_modules/lodash/hasIn.js"(exports, module2) {
       var baseHasIn = require_baseHasIn();
       var hasPath = require_hasPath();
       function hasIn(object, path2) {
         return object != null && hasPath(object, path2, baseHasIn);
       }
-      module.exports = hasIn;
+      module2.exports = hasIn;
     }
   });
 
   // node_modules/lodash/_baseMatchesProperty.js
   var require_baseMatchesProperty = __commonJS({
-    "node_modules/lodash/_baseMatchesProperty.js"(exports, module) {
+    "node_modules/lodash/_baseMatchesProperty.js"(exports, module2) {
       var baseIsEqual = require_baseIsEqual();
       var get2 = require_get();
       var hasIn = require_hasIn();
@@ -28524,48 +28524,48 @@ ${JSON.stringify(message, null, 4)}`);
           return objValue === void 0 && objValue === srcValue ? hasIn(object, path2) : baseIsEqual(srcValue, objValue, COMPARE_PARTIAL_FLAG | COMPARE_UNORDERED_FLAG);
         };
       }
-      module.exports = baseMatchesProperty;
+      module2.exports = baseMatchesProperty;
     }
   });
 
   // node_modules/lodash/identity.js
   var require_identity = __commonJS({
-    "node_modules/lodash/identity.js"(exports, module) {
+    "node_modules/lodash/identity.js"(exports, module2) {
       function identity7(value2) {
         return value2;
       }
-      module.exports = identity7;
+      module2.exports = identity7;
     }
   });
 
   // node_modules/lodash/_baseProperty.js
   var require_baseProperty = __commonJS({
-    "node_modules/lodash/_baseProperty.js"(exports, module) {
+    "node_modules/lodash/_baseProperty.js"(exports, module2) {
       function baseProperty(key) {
         return function(object) {
           return object == null ? void 0 : object[key];
         };
       }
-      module.exports = baseProperty;
+      module2.exports = baseProperty;
     }
   });
 
   // node_modules/lodash/_basePropertyDeep.js
   var require_basePropertyDeep = __commonJS({
-    "node_modules/lodash/_basePropertyDeep.js"(exports, module) {
+    "node_modules/lodash/_basePropertyDeep.js"(exports, module2) {
       var baseGet = require_baseGet();
       function basePropertyDeep(path2) {
         return function(object) {
           return baseGet(object, path2);
         };
       }
-      module.exports = basePropertyDeep;
+      module2.exports = basePropertyDeep;
     }
   });
 
   // node_modules/lodash/property.js
   var require_property = __commonJS({
-    "node_modules/lodash/property.js"(exports, module) {
+    "node_modules/lodash/property.js"(exports, module2) {
       var baseProperty = require_baseProperty();
       var basePropertyDeep = require_basePropertyDeep();
       var isKey = require_isKey();
@@ -28573,13 +28573,13 @@ ${JSON.stringify(message, null, 4)}`);
       function property(path2) {
         return isKey(path2) ? baseProperty(toKey(path2)) : basePropertyDeep(path2);
       }
-      module.exports = property;
+      module2.exports = property;
     }
   });
 
   // node_modules/lodash/_baseIteratee.js
   var require_baseIteratee = __commonJS({
-    "node_modules/lodash/_baseIteratee.js"(exports, module) {
+    "node_modules/lodash/_baseIteratee.js"(exports, module2) {
       var baseMatches = require_baseMatches();
       var baseMatchesProperty = require_baseMatchesProperty();
       var identity7 = require_identity();
@@ -28597,13 +28597,13 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return property(value2);
       }
-      module.exports = baseIteratee;
+      module2.exports = baseIteratee;
     }
   });
 
   // node_modules/lodash/_baseFindIndex.js
   var require_baseFindIndex = __commonJS({
-    "node_modules/lodash/_baseFindIndex.js"(exports, module) {
+    "node_modules/lodash/_baseFindIndex.js"(exports, module2) {
       function baseFindIndex(array, predicate, fromIndex, fromRight) {
         var length2 = array.length, index2 = fromIndex + (fromRight ? 1 : -1);
         while (fromRight ? index2-- : ++index2 < length2) {
@@ -28613,23 +28613,23 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return -1;
       }
-      module.exports = baseFindIndex;
+      module2.exports = baseFindIndex;
     }
   });
 
   // node_modules/lodash/_baseIsNaN.js
   var require_baseIsNaN = __commonJS({
-    "node_modules/lodash/_baseIsNaN.js"(exports, module) {
+    "node_modules/lodash/_baseIsNaN.js"(exports, module2) {
       function baseIsNaN(value2) {
         return value2 !== value2;
       }
-      module.exports = baseIsNaN;
+      module2.exports = baseIsNaN;
     }
   });
 
   // node_modules/lodash/_strictIndexOf.js
   var require_strictIndexOf = __commonJS({
-    "node_modules/lodash/_strictIndexOf.js"(exports, module) {
+    "node_modules/lodash/_strictIndexOf.js"(exports, module2) {
       function strictIndexOf(array, value2, fromIndex) {
         var index2 = fromIndex - 1, length2 = array.length;
         while (++index2 < length2) {
@@ -28639,38 +28639,38 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return -1;
       }
-      module.exports = strictIndexOf;
+      module2.exports = strictIndexOf;
     }
   });
 
   // node_modules/lodash/_baseIndexOf.js
   var require_baseIndexOf = __commonJS({
-    "node_modules/lodash/_baseIndexOf.js"(exports, module) {
+    "node_modules/lodash/_baseIndexOf.js"(exports, module2) {
       var baseFindIndex = require_baseFindIndex();
       var baseIsNaN = require_baseIsNaN();
       var strictIndexOf = require_strictIndexOf();
       function baseIndexOf(array, value2, fromIndex) {
         return value2 === value2 ? strictIndexOf(array, value2, fromIndex) : baseFindIndex(array, baseIsNaN, fromIndex);
       }
-      module.exports = baseIndexOf;
+      module2.exports = baseIndexOf;
     }
   });
 
   // node_modules/lodash/_arrayIncludes.js
   var require_arrayIncludes = __commonJS({
-    "node_modules/lodash/_arrayIncludes.js"(exports, module) {
+    "node_modules/lodash/_arrayIncludes.js"(exports, module2) {
       var baseIndexOf = require_baseIndexOf();
       function arrayIncludes(array, value2) {
         var length2 = array == null ? 0 : array.length;
         return !!length2 && baseIndexOf(array, value2, 0) > -1;
       }
-      module.exports = arrayIncludes;
+      module2.exports = arrayIncludes;
     }
   });
 
   // node_modules/lodash/_arrayIncludesWith.js
   var require_arrayIncludesWith = __commonJS({
-    "node_modules/lodash/_arrayIncludesWith.js"(exports, module) {
+    "node_modules/lodash/_arrayIncludesWith.js"(exports, module2) {
       function arrayIncludesWith(array, value2, comparator) {
         var index2 = -1, length2 = array == null ? 0 : array.length;
         while (++index2 < length2) {
@@ -28680,22 +28680,22 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return false;
       }
-      module.exports = arrayIncludesWith;
+      module2.exports = arrayIncludesWith;
     }
   });
 
   // node_modules/lodash/noop.js
   var require_noop = __commonJS({
-    "node_modules/lodash/noop.js"(exports, module) {
+    "node_modules/lodash/noop.js"(exports, module2) {
       function noop4() {
       }
-      module.exports = noop4;
+      module2.exports = noop4;
     }
   });
 
   // node_modules/lodash/_createSet.js
   var require_createSet = __commonJS({
-    "node_modules/lodash/_createSet.js"(exports, module) {
+    "node_modules/lodash/_createSet.js"(exports, module2) {
       var Set2 = require_Set();
       var noop4 = require_noop();
       var setToArray = require_setToArray();
@@ -28703,13 +28703,13 @@ ${JSON.stringify(message, null, 4)}`);
       var createSet = !(Set2 && 1 / setToArray(new Set2([, -0]))[1] == INFINITY) ? noop4 : function(values) {
         return new Set2(values);
       };
-      module.exports = createSet;
+      module2.exports = createSet;
     }
   });
 
   // node_modules/lodash/_baseUniq.js
   var require_baseUniq = __commonJS({
-    "node_modules/lodash/_baseUniq.js"(exports, module) {
+    "node_modules/lodash/_baseUniq.js"(exports, module2) {
       var SetCache = require_SetCache();
       var arrayIncludes = require_arrayIncludes();
       var arrayIncludesWith = require_arrayIncludesWith();
@@ -28757,25 +28757,25 @@ ${JSON.stringify(message, null, 4)}`);
           }
         return result;
       }
-      module.exports = baseUniq;
+      module2.exports = baseUniq;
     }
   });
 
   // node_modules/lodash/uniqBy.js
   var require_uniqBy = __commonJS({
-    "node_modules/lodash/uniqBy.js"(exports, module) {
+    "node_modules/lodash/uniqBy.js"(exports, module2) {
       var baseIteratee = require_baseIteratee();
       var baseUniq = require_baseUniq();
       function uniqBy(array, iteratee) {
         return array && array.length ? baseUniq(array, baseIteratee(iteratee, 2)) : [];
       }
-      module.exports = uniqBy;
+      module2.exports = uniqBy;
     }
   });
 
   // node_modules/lodash/_baseSlice.js
   var require_baseSlice = __commonJS({
-    "node_modules/lodash/_baseSlice.js"(exports, module) {
+    "node_modules/lodash/_baseSlice.js"(exports, module2) {
       function baseSlice(array, start, end) {
         var index2 = -1, length2 = array.length;
         if (start < 0) {
@@ -28793,26 +28793,26 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return result;
       }
-      module.exports = baseSlice;
+      module2.exports = baseSlice;
     }
   });
 
   // node_modules/lodash/_castSlice.js
   var require_castSlice = __commonJS({
-    "node_modules/lodash/_castSlice.js"(exports, module) {
+    "node_modules/lodash/_castSlice.js"(exports, module2) {
       var baseSlice = require_baseSlice();
       function castSlice(array, start, end) {
         var length2 = array.length;
         end = end === void 0 ? length2 : end;
         return !start && end >= length2 ? array : baseSlice(array, start, end);
       }
-      module.exports = castSlice;
+      module2.exports = castSlice;
     }
   });
 
   // node_modules/lodash/_hasUnicode.js
   var require_hasUnicode = __commonJS({
-    "node_modules/lodash/_hasUnicode.js"(exports, module) {
+    "node_modules/lodash/_hasUnicode.js"(exports, module2) {
       var rsAstralRange = "\\ud800-\\udfff";
       var rsComboMarksRange = "\\u0300-\\u036f";
       var reComboHalfMarksRange = "\\ufe20-\\ufe2f";
@@ -28824,23 +28824,23 @@ ${JSON.stringify(message, null, 4)}`);
       function hasUnicode(string2) {
         return reHasUnicode.test(string2);
       }
-      module.exports = hasUnicode;
+      module2.exports = hasUnicode;
     }
   });
 
   // node_modules/lodash/_asciiToArray.js
   var require_asciiToArray = __commonJS({
-    "node_modules/lodash/_asciiToArray.js"(exports, module) {
+    "node_modules/lodash/_asciiToArray.js"(exports, module2) {
       function asciiToArray(string2) {
         return string2.split("");
       }
-      module.exports = asciiToArray;
+      module2.exports = asciiToArray;
     }
   });
 
   // node_modules/lodash/_unicodeToArray.js
   var require_unicodeToArray = __commonJS({
-    "node_modules/lodash/_unicodeToArray.js"(exports, module) {
+    "node_modules/lodash/_unicodeToArray.js"(exports, module2) {
       var rsAstralRange = "\\ud800-\\udfff";
       var rsComboMarksRange = "\\u0300-\\u036f";
       var reComboHalfMarksRange = "\\ufe20-\\ufe2f";
@@ -28864,26 +28864,26 @@ ${JSON.stringify(message, null, 4)}`);
       function unicodeToArray(string2) {
         return string2.match(reUnicode) || [];
       }
-      module.exports = unicodeToArray;
+      module2.exports = unicodeToArray;
     }
   });
 
   // node_modules/lodash/_stringToArray.js
   var require_stringToArray = __commonJS({
-    "node_modules/lodash/_stringToArray.js"(exports, module) {
+    "node_modules/lodash/_stringToArray.js"(exports, module2) {
       var asciiToArray = require_asciiToArray();
       var hasUnicode = require_hasUnicode();
       var unicodeToArray = require_unicodeToArray();
       function stringToArray(string2) {
         return hasUnicode(string2) ? unicodeToArray(string2) : asciiToArray(string2);
       }
-      module.exports = stringToArray;
+      module2.exports = stringToArray;
     }
   });
 
   // node_modules/lodash/_createCaseFirst.js
   var require_createCaseFirst = __commonJS({
-    "node_modules/lodash/_createCaseFirst.js"(exports, module) {
+    "node_modules/lodash/_createCaseFirst.js"(exports, module2) {
       var castSlice = require_castSlice();
       var hasUnicode = require_hasUnicode();
       var stringToArray = require_stringToArray();
@@ -28897,72 +28897,72 @@ ${JSON.stringify(message, null, 4)}`);
           return chr[methodName]() + trailing;
         };
       }
-      module.exports = createCaseFirst;
+      module2.exports = createCaseFirst;
     }
   });
 
   // node_modules/lodash/upperFirst.js
   var require_upperFirst = __commonJS({
-    "node_modules/lodash/upperFirst.js"(exports, module) {
+    "node_modules/lodash/upperFirst.js"(exports, module2) {
       var createCaseFirst = require_createCaseFirst();
       var upperFirst = createCaseFirst("toUpperCase");
-      module.exports = upperFirst;
+      module2.exports = upperFirst;
     }
   });
 
   // node_modules/lodash/isNumber.js
   var require_isNumber = __commonJS({
-    "node_modules/lodash/isNumber.js"(exports, module) {
+    "node_modules/lodash/isNumber.js"(exports, module2) {
       var baseGetTag2 = require_baseGetTag();
       var isObjectLike2 = require_isObjectLike();
       var numberTag = "[object Number]";
       function isNumber3(value2) {
         return typeof value2 == "number" || isObjectLike2(value2) && baseGetTag2(value2) == numberTag;
       }
-      module.exports = isNumber3;
+      module2.exports = isNumber3;
     }
   });
 
   // node_modules/lodash/isNaN.js
   var require_isNaN = __commonJS({
-    "node_modules/lodash/isNaN.js"(exports, module) {
+    "node_modules/lodash/isNaN.js"(exports, module2) {
       var isNumber3 = require_isNumber();
-      function isNaN2(value2) {
+      function isNaN3(value2) {
         return isNumber3(value2) && value2 != +value2;
       }
-      module.exports = isNaN2;
+      module2.exports = isNaN3;
     }
   });
 
   // node_modules/lodash/isString.js
   var require_isString = __commonJS({
-    "node_modules/lodash/isString.js"(exports, module) {
+    "node_modules/lodash/isString.js"(exports, module2) {
       var baseGetTag2 = require_baseGetTag();
       var isArray2 = require_isArray();
       var isObjectLike2 = require_isObjectLike();
       var stringTag = "[object String]";
-      function isString(value2) {
+      function isString2(value2) {
         return typeof value2 == "string" || !isArray2(value2) && isObjectLike2(value2) && baseGetTag2(value2) == stringTag;
       }
-      module.exports = isString;
+      module2.exports = isString2;
     }
   });
 
   // node_modules/lodash/isNil.js
   var require_isNil = __commonJS({
-    "node_modules/lodash/isNil.js"(exports, module) {
+    "node_modules/lodash/isNil.js"(exports, module2) {
       function isNil(value2) {
         return value2 == null;
       }
-      module.exports = isNil;
+      module2.exports = isNil;
     }
   });
 
   // node_modules/fast-equals/dist/fast-equals.js
   var require_fast_equals = __commonJS({
-    "node_modules/fast-equals/dist/fast-equals.js"(exports, module) {
-      (function(global2, factory) {
-        typeof exports === "object" && typeof module !== "undefined" ? factory(exports) : typeof define === "function" && define.amd ? define(["exports"], factory) : (global2 = typeof globalThis !== "undefined" ? globalThis : global2 || self, factory(global2["fast-equals"] = {}));
+    "node_modules/fast-equals/dist/fast-equals.js"(exports, module2) {
+      (function(global9, factory) {
+        typeof exports === "object" && typeof module2 !== "undefined" ? factory(exports) : typeof define === "function" && define.amd ? define(["exports"], factory) : (global9 = typeof globalThis !== "undefined" ? globalThis : global9 || self, factory(global9["fast-equals"] = {}));
       })(exports, function(exports2) {
         "use strict";
         var HAS_WEAKSET_SUPPORT = typeof WeakSet === "function";
@@ -28970,7 +28970,7 @@ ${JSON.stringify(message, null, 4)}`);
         function sameValueZeroEqual(a3, b2) {
           return a3 === b2 || a3 !== a3 && b2 !== b2;
         }
-        function isPlainObject(value2) {
+        function isPlainObject2(value2) {
           return value2.constructor === Object || value2.constructor == null;
         }
         function isPromiseLike(value2) {
@@ -29120,7 +29120,7 @@ ${JSON.stringify(message, null, 4)}`);
               return true;
             }
             if (a3 && b2 && typeof a3 === "object" && typeof b2 === "object") {
-              if (isPlainObject(a3) && isPlainObject(b2)) {
+              if (isPlainObject2(a3) && isPlainObject2(b2)) {
                 return areObjectsEqual(a3, b2, isEqual2, meta);
               }
               var aShape = Array.isArray(a3);
@@ -29180,19 +29180,19 @@ ${JSON.stringify(message, null, 4)}`);
 
   // node_modules/@babel/runtime/helpers/interopRequireDefault.js
   var require_interopRequireDefault = __commonJS({
-    "node_modules/@babel/runtime/helpers/interopRequireDefault.js"(exports, module) {
+    "node_modules/@babel/runtime/helpers/interopRequireDefault.js"(exports, module2) {
       function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
           "default": obj
         };
       }
-      module.exports = _interopRequireDefault, module.exports.__esModule = true, module.exports["default"] = module.exports;
+      module2.exports = _interopRequireDefault, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
     }
   });
 
   // node_modules/react-smooth/node_modules/dom-helpers/class/hasClass.js
   var require_hasClass = __commonJS({
-    "node_modules/react-smooth/node_modules/dom-helpers/class/hasClass.js"(exports, module) {
+    "node_modules/react-smooth/node_modules/dom-helpers/class/hasClass.js"(exports, module2) {
       "use strict";
       exports.__esModule = true;
       exports.default = hasClass;
@@ -29202,13 +29202,13 @@ ${JSON.stringify(message, null, 4)}`);
         else
           return (" " + (element2.className.baseVal || element2.className) + " ").indexOf(" " + className + " ") !== -1;
       }
-      module.exports = exports["default"];
+      module2.exports = exports["default"];
     }
   });
 
   // node_modules/react-smooth/node_modules/dom-helpers/class/addClass.js
   var require_addClass = __commonJS({
-    "node_modules/react-smooth/node_modules/dom-helpers/class/addClass.js"(exports, module) {
+    "node_modules/react-smooth/node_modules/dom-helpers/class/addClass.js"(exports, module2) {
       "use strict";
       var _interopRequireDefault = require_interopRequireDefault();
       exports.__esModule = true;
@@ -29223,18 +29223,18 @@ ${JSON.stringify(message, null, 4)}`);
           else
             element2.setAttribute("class", (element2.className && element2.className.baseVal || "") + " " + className);
       }
-      module.exports = exports["default"];
+      module2.exports = exports["default"];
     }
   });
 
   // node_modules/react-smooth/node_modules/dom-helpers/class/removeClass.js
   var require_removeClass = __commonJS({
-    "node_modules/react-smooth/node_modules/dom-helpers/class/removeClass.js"(exports, module) {
+    "node_modules/react-smooth/node_modules/dom-helpers/class/removeClass.js"(exports, module2) {
       "use strict";
       function replaceClassName(origClass, classToRemove) {
         return origClass.replace(new RegExp("(^|\\s)" + classToRemove + "(?:\\s|$)", "g"), "$1").replace(/\s+/g, " ").replace(/^\s*|\s*$/g, "");
       }
-      module.exports = function removeClass(element2, className) {
+      module2.exports = function removeClass(element2, className) {
         if (element2.classList)
           element2.classList.remove(className);
         else if (typeof element2.className === "string")
@@ -29707,7 +29707,7 @@ ${JSON.stringify(message, null, 4)}`);
 
   // node_modules/react-smooth/node_modules/react-transition-group/CSSTransition.js
   var require_CSSTransition = __commonJS({
-    "node_modules/react-smooth/node_modules/react-transition-group/CSSTransition.js"(exports, module) {
+    "node_modules/react-smooth/node_modules/react-transition-group/CSSTransition.js"(exports, module2) {
       "use strict";
       exports.__esModule = true;
       exports.default = void 0;
@@ -29883,7 +29883,7 @@ ${JSON.stringify(message, null, 4)}`);
       }) : {};
       var _default = CSSTransition;
       exports.default = _default;
-      module.exports = exports["default"];
+      module2.exports = exports["default"];
     }
   });
 
@@ -29996,7 +29996,7 @@ ${JSON.stringify(message, null, 4)}`);
 
   // node_modules/react-smooth/node_modules/react-transition-group/TransitionGroup.js
   var require_TransitionGroup = __commonJS({
-    "node_modules/react-smooth/node_modules/react-transition-group/TransitionGroup.js"(exports, module) {
+    "node_modules/react-smooth/node_modules/react-transition-group/TransitionGroup.js"(exports, module2) {
       "use strict";
       exports.__esModule = true;
       exports.default = void 0;
@@ -30135,13 +30135,13 @@ ${JSON.stringify(message, null, 4)}`);
       TransitionGroup2.defaultProps = defaultProps3;
       var _default = (0, _reactLifecyclesCompat.polyfill)(TransitionGroup2);
       exports.default = _default;
-      module.exports = exports["default"];
+      module2.exports = exports["default"];
     }
   });
 
   // node_modules/react-smooth/node_modules/react-transition-group/ReplaceTransition.js
   var require_ReplaceTransition = __commonJS({
-    "node_modules/react-smooth/node_modules/react-transition-group/ReplaceTransition.js"(exports, module) {
+    "node_modules/react-smooth/node_modules/react-transition-group/ReplaceTransition.js"(exports, module2) {
       "use strict";
       exports.__esModule = true;
       exports.default = void 0;
@@ -30260,13 +30260,13 @@ ${JSON.stringify(message, null, 4)}`);
       } : {};
       var _default = ReplaceTransition;
       exports.default = _default;
-      module.exports = exports["default"];
+      module2.exports = exports["default"];
     }
   });
 
   // node_modules/react-smooth/node_modules/react-transition-group/index.js
   var require_react_transition_group = __commonJS({
-    "node_modules/react-smooth/node_modules/react-transition-group/index.js"(exports, module) {
+    "node_modules/react-smooth/node_modules/react-transition-group/index.js"(exports, module2) {
       "use strict";
       var _CSSTransition = _interopRequireDefault(require_CSSTransition());
       var _ReplaceTransition = _interopRequireDefault(require_ReplaceTransition());
@@ -30275,7 +30275,7 @@ ${JSON.stringify(message, null, 4)}`);
       function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : { default: obj };
       }
-      module.exports = {
+      module2.exports = {
         Transition: _Transition.default,
         TransitionGroup: _TransitionGroup.default,
         ReplaceTransition: _ReplaceTransition.default,
@@ -30286,7 +30286,7 @@ ${JSON.stringify(message, null, 4)}`);
 
   // node_modules/lodash/_isFlattenable.js
   var require_isFlattenable = __commonJS({
-    "node_modules/lodash/_isFlattenable.js"(exports, module) {
+    "node_modules/lodash/_isFlattenable.js"(exports, module2) {
       var Symbol4 = require_Symbol();
       var isArguments = require_isArguments();
       var isArray2 = require_isArray();
@@ -30294,13 +30294,13 @@ ${JSON.stringify(message, null, 4)}`);
       function isFlattenable(value2) {
         return isArray2(value2) || isArguments(value2) || !!(spreadableSymbol && value2 && value2[spreadableSymbol]);
       }
-      module.exports = isFlattenable;
+      module2.exports = isFlattenable;
     }
   });
 
   // node_modules/lodash/_baseFlatten.js
   var require_baseFlatten = __commonJS({
-    "node_modules/lodash/_baseFlatten.js"(exports, module) {
+    "node_modules/lodash/_baseFlatten.js"(exports, module2) {
       var arrayPush = require_arrayPush();
       var isFlattenable = require_isFlattenable();
       function baseFlatten(array, depth, predicate, isStrict, result) {
@@ -30321,13 +30321,13 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return result;
       }
-      module.exports = baseFlatten;
+      module2.exports = baseFlatten;
     }
   });
 
   // node_modules/lodash/_createBaseFor.js
   var require_createBaseFor = __commonJS({
-    "node_modules/lodash/_createBaseFor.js"(exports, module) {
+    "node_modules/lodash/_createBaseFor.js"(exports, module2) {
       function createBaseFor(fromRight) {
         return function(object, iteratee, keysFunc) {
           var index2 = -1, iterable = Object(object), props = keysFunc(object), length2 = props.length;
@@ -30340,34 +30340,34 @@ ${JSON.stringify(message, null, 4)}`);
           return object;
         };
       }
-      module.exports = createBaseFor;
+      module2.exports = createBaseFor;
     }
   });
 
   // node_modules/lodash/_baseFor.js
   var require_baseFor = __commonJS({
-    "node_modules/lodash/_baseFor.js"(exports, module) {
+    "node_modules/lodash/_baseFor.js"(exports, module2) {
       var createBaseFor = require_createBaseFor();
       var baseFor = createBaseFor();
-      module.exports = baseFor;
+      module2.exports = baseFor;
     }
   });
 
   // node_modules/lodash/_baseForOwn.js
   var require_baseForOwn = __commonJS({
-    "node_modules/lodash/_baseForOwn.js"(exports, module) {
+    "node_modules/lodash/_baseForOwn.js"(exports, module2) {
       var baseFor = require_baseFor();
       var keys = require_keys();
       function baseForOwn(object, iteratee) {
         return object && baseFor(object, iteratee, keys);
       }
-      module.exports = baseForOwn;
+      module2.exports = baseForOwn;
     }
   });
 
   // node_modules/lodash/_createBaseEach.js
   var require_createBaseEach = __commonJS({
-    "node_modules/lodash/_createBaseEach.js"(exports, module) {
+    "node_modules/lodash/_createBaseEach.js"(exports, module2) {
       var isArrayLike = require_isArrayLike();
       function createBaseEach(eachFunc, fromRight) {
         return function(collection, iteratee) {
@@ -30386,23 +30386,23 @@ ${JSON.stringify(message, null, 4)}`);
           return collection;
         };
       }
-      module.exports = createBaseEach;
+      module2.exports = createBaseEach;
     }
   });
 
   // node_modules/lodash/_baseEach.js
   var require_baseEach = __commonJS({
-    "node_modules/lodash/_baseEach.js"(exports, module) {
+    "node_modules/lodash/_baseEach.js"(exports, module2) {
       var baseForOwn = require_baseForOwn();
       var createBaseEach = require_createBaseEach();
       var baseEach = createBaseEach(baseForOwn);
-      module.exports = baseEach;
+      module2.exports = baseEach;
     }
   });
 
   // node_modules/lodash/_baseMap.js
   var require_baseMap = __commonJS({
-    "node_modules/lodash/_baseMap.js"(exports, module) {
+    "node_modules/lodash/_baseMap.js"(exports, module2) {
       var baseEach = require_baseEach();
       var isArrayLike = require_isArrayLike();
       function baseMap(collection, iteratee) {
@@ -30412,13 +30412,13 @@ ${JSON.stringify(message, null, 4)}`);
         });
         return result;
       }
-      module.exports = baseMap;
+      module2.exports = baseMap;
     }
   });
 
   // node_modules/lodash/_baseSortBy.js
   var require_baseSortBy = __commonJS({
-    "node_modules/lodash/_baseSortBy.js"(exports, module) {
+    "node_modules/lodash/_baseSortBy.js"(exports, module2) {
       function baseSortBy(array, comparer) {
         var length2 = array.length;
         array.sort(comparer);
@@ -30427,13 +30427,13 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return array;
       }
-      module.exports = baseSortBy;
+      module2.exports = baseSortBy;
     }
   });
 
   // node_modules/lodash/_compareAscending.js
   var require_compareAscending = __commonJS({
-    "node_modules/lodash/_compareAscending.js"(exports, module) {
+    "node_modules/lodash/_compareAscending.js"(exports, module2) {
       var isSymbol2 = require_isSymbol();
       function compareAscending(value2, other) {
         if (value2 !== other) {
@@ -30448,13 +30448,13 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return 0;
       }
-      module.exports = compareAscending;
+      module2.exports = compareAscending;
     }
   });
 
   // node_modules/lodash/_compareMultiple.js
   var require_compareMultiple = __commonJS({
-    "node_modules/lodash/_compareMultiple.js"(exports, module) {
+    "node_modules/lodash/_compareMultiple.js"(exports, module2) {
       var compareAscending = require_compareAscending();
       function compareMultiple(object, other, orders) {
         var index2 = -1, objCriteria = object.criteria, othCriteria = other.criteria, length2 = objCriteria.length, ordersLength = orders.length;
@@ -30470,13 +30470,13 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return object.index - other.index;
       }
-      module.exports = compareMultiple;
+      module2.exports = compareMultiple;
     }
   });
 
   // node_modules/lodash/_baseOrderBy.js
   var require_baseOrderBy = __commonJS({
-    "node_modules/lodash/_baseOrderBy.js"(exports, module) {
+    "node_modules/lodash/_baseOrderBy.js"(exports, module2) {
       var arrayMap = require_arrayMap();
       var baseGet = require_baseGet();
       var baseIteratee = require_baseIteratee();
@@ -30511,13 +30511,13 @@ ${JSON.stringify(message, null, 4)}`);
           return compareMultiple(object, other, orders);
         });
       }
-      module.exports = baseOrderBy;
+      module2.exports = baseOrderBy;
     }
   });
 
   // node_modules/lodash/_apply.js
   var require_apply = __commonJS({
-    "node_modules/lodash/_apply.js"(exports, module) {
+    "node_modules/lodash/_apply.js"(exports, module2) {
       function apply(func2, thisArg, args) {
         switch (args.length) {
           case 0:
@@ -30531,13 +30531,13 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return func2.apply(thisArg, args);
       }
-      module.exports = apply;
+      module2.exports = apply;
     }
   });
 
   // node_modules/lodash/_overRest.js
   var require_overRest = __commonJS({
-    "node_modules/lodash/_overRest.js"(exports, module) {
+    "node_modules/lodash/_overRest.js"(exports, module2) {
       var apply = require_apply();
       var nativeMax2 = Math.max;
       function overRest(func2, start, transform) {
@@ -30556,25 +30556,25 @@ ${JSON.stringify(message, null, 4)}`);
           return apply(func2, this, otherArgs);
         };
       }
-      module.exports = overRest;
+      module2.exports = overRest;
     }
   });
 
   // node_modules/lodash/constant.js
   var require_constant = __commonJS({
-    "node_modules/lodash/constant.js"(exports, module) {
+    "node_modules/lodash/constant.js"(exports, module2) {
       function constant(value2) {
         return function() {
           return value2;
         };
       }
-      module.exports = constant;
+      module2.exports = constant;
     }
   });
 
   // node_modules/lodash/_defineProperty.js
   var require_defineProperty = __commonJS({
-    "node_modules/lodash/_defineProperty.js"(exports, module) {
+    "node_modules/lodash/_defineProperty.js"(exports, module2) {
       var getNative = require_getNative();
       var defineProperty = function() {
         try {
@@ -30584,13 +30584,13 @@ ${JSON.stringify(message, null, 4)}`);
         } catch (e3) {
         }
       }();
-      module.exports = defineProperty;
+      module2.exports = defineProperty;
     }
   });
 
   // node_modules/lodash/_baseSetToString.js
   var require_baseSetToString = __commonJS({
-    "node_modules/lodash/_baseSetToString.js"(exports, module) {
+    "node_modules/lodash/_baseSetToString.js"(exports, module2) {
       var constant = require_constant();
       var defineProperty = require_defineProperty();
       var identity7 = require_identity();
@@ -30602,13 +30602,13 @@ ${JSON.stringify(message, null, 4)}`);
           "writable": true
         });
       };
-      module.exports = baseSetToString;
+      module2.exports = baseSetToString;
     }
   });
 
   // node_modules/lodash/_shortOut.js
   var require_shortOut = __commonJS({
-    "node_modules/lodash/_shortOut.js"(exports, module) {
+    "node_modules/lodash/_shortOut.js"(exports, module2) {
       var HOT_COUNT = 800;
       var HOT_SPAN = 16;
       var nativeNow = Date.now;
@@ -30627,36 +30627,36 @@ ${JSON.stringify(message, null, 4)}`);
           return func2.apply(void 0, arguments);
         };
       }
-      module.exports = shortOut;
+      module2.exports = shortOut;
     }
   });
 
   // node_modules/lodash/_setToString.js
   var require_setToString = __commonJS({
-    "node_modules/lodash/_setToString.js"(exports, module) {
+    "node_modules/lodash/_setToString.js"(exports, module2) {
       var baseSetToString = require_baseSetToString();
       var shortOut = require_shortOut();
       var setToString = shortOut(baseSetToString);
-      module.exports = setToString;
+      module2.exports = setToString;
     }
   });
 
   // node_modules/lodash/_baseRest.js
   var require_baseRest = __commonJS({
-    "node_modules/lodash/_baseRest.js"(exports, module) {
+    "node_modules/lodash/_baseRest.js"(exports, module2) {
       var identity7 = require_identity();
       var overRest = require_overRest();
       var setToString = require_setToString();
       function baseRest(func2, start) {
         return setToString(overRest(func2, start, identity7), func2 + "");
       }
-      module.exports = baseRest;
+      module2.exports = baseRest;
     }
   });
 
   // node_modules/lodash/_isIterateeCall.js
   var require_isIterateeCall = __commonJS({
-    "node_modules/lodash/_isIterateeCall.js"(exports, module) {
+    "node_modules/lodash/_isIterateeCall.js"(exports, module2) {
       var eq = require_eq();
       var isArrayLike = require_isArrayLike();
       var isIndex = require_isIndex();
@@ -30671,13 +30671,13 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return false;
       }
-      module.exports = isIterateeCall;
+      module2.exports = isIterateeCall;
     }
   });
 
   // node_modules/lodash/sortBy.js
   var require_sortBy = __commonJS({
-    "node_modules/lodash/sortBy.js"(exports, module) {
+    "node_modules/lodash/sortBy.js"(exports, module2) {
       var baseFlatten = require_baseFlatten();
       var baseOrderBy = require_baseOrderBy();
       var baseRest = require_baseRest();
@@ -30694,24 +30694,24 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return baseOrderBy(collection, baseFlatten(iteratees, 1), []);
       });
-      module.exports = sortBy;
+      module2.exports = sortBy;
     }
   });
 
   // node_modules/lodash/now.js
   var require_now = __commonJS({
-    "node_modules/lodash/now.js"(exports, module) {
+    "node_modules/lodash/now.js"(exports, module2) {
       var root2 = require_root();
       var now2 = function() {
         return root2.Date.now();
       };
-      module.exports = now2;
+      module2.exports = now2;
     }
   });
 
   // node_modules/lodash/_trimmedEndIndex.js
   var require_trimmedEndIndex = __commonJS({
-    "node_modules/lodash/_trimmedEndIndex.js"(exports, module) {
+    "node_modules/lodash/_trimmedEndIndex.js"(exports, module2) {
       var reWhitespace2 = /\s/;
       function trimmedEndIndex2(string2) {
         var index2 = string2.length;
@@ -30719,25 +30719,25 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return index2;
       }
-      module.exports = trimmedEndIndex2;
+      module2.exports = trimmedEndIndex2;
     }
   });
 
   // node_modules/lodash/_baseTrim.js
   var require_baseTrim = __commonJS({
-    "node_modules/lodash/_baseTrim.js"(exports, module) {
+    "node_modules/lodash/_baseTrim.js"(exports, module2) {
       var trimmedEndIndex2 = require_trimmedEndIndex();
       var reTrimStart2 = /^\s+/;
       function baseTrim2(string2) {
         return string2 ? string2.slice(0, trimmedEndIndex2(string2) + 1).replace(reTrimStart2, "") : string2;
       }
-      module.exports = baseTrim2;
+      module2.exports = baseTrim2;
     }
   });
 
   // node_modules/lodash/toNumber.js
   var require_toNumber = __commonJS({
-    "node_modules/lodash/toNumber.js"(exports, module) {
+    "node_modules/lodash/toNumber.js"(exports, module2) {
       var baseTrim2 = require_baseTrim();
       var isObject2 = require_isObject();
       var isSymbol2 = require_isSymbol();
@@ -30764,13 +30764,13 @@ ${JSON.stringify(message, null, 4)}`);
         var isBinary2 = reIsBinary2.test(value2);
         return isBinary2 || reIsOctal2.test(value2) ? freeParseInt2(value2.slice(2), isBinary2 ? 2 : 8) : reIsBadHex2.test(value2) ? NAN2 : +value2;
       }
-      module.exports = toNumber2;
+      module2.exports = toNumber2;
     }
   });
 
   // node_modules/lodash/debounce.js
   var require_debounce = __commonJS({
-    "node_modules/lodash/debounce.js"(exports, module) {
+    "node_modules/lodash/debounce.js"(exports, module2) {
       var isObject2 = require_isObject();
       var now2 = require_now();
       var toNumber2 = require_toNumber();
@@ -30831,7 +30831,7 @@ ${JSON.stringify(message, null, 4)}`);
           lastInvokeTime = 0;
           lastArgs = lastCallTime = lastThis = timerId = void 0;
         }
-        function flush() {
+        function flush2() {
           return timerId === void 0 ? result : trailingEdge(now2());
         }
         function debounced() {
@@ -30855,16 +30855,16 @@ ${JSON.stringify(message, null, 4)}`);
           return result;
         }
         debounced.cancel = cancel;
-        debounced.flush = flush;
+        debounced.flush = flush2;
         return debounced;
       }
-      module.exports = debounce2;
+      module2.exports = debounce2;
     }
   });
 
   // node_modules/reduce-css-calc/node_modules/postcss-value-parser/lib/parse.js
   var require_parse = __commonJS({
-    "node_modules/reduce-css-calc/node_modules/postcss-value-parser/lib/parse.js"(exports, module) {
+    "node_modules/reduce-css-calc/node_modules/postcss-value-parser/lib/parse.js"(exports, module2) {
       var openParentheses = "(".charCodeAt(0);
       var closeParentheses = ")".charCodeAt(0);
       var singleQuote = "'".charCodeAt(0);
@@ -30874,7 +30874,7 @@ ${JSON.stringify(message, null, 4)}`);
       var comma = ",".charCodeAt(0);
       var colon = ":".charCodeAt(0);
       var star = "*".charCodeAt(0);
-      module.exports = function(input) {
+      module2.exports = function(input) {
         var tokens = [];
         var value2 = input;
         var next, quote, prev2, token, escape, escapePos, whitespacePos;
@@ -31072,8 +31072,8 @@ ${JSON.stringify(message, null, 4)}`);
 
   // node_modules/reduce-css-calc/node_modules/postcss-value-parser/lib/walk.js
   var require_walk = __commonJS({
-    "node_modules/reduce-css-calc/node_modules/postcss-value-parser/lib/walk.js"(exports, module) {
-      module.exports = function walk(nodes, cb, bubble) {
+    "node_modules/reduce-css-calc/node_modules/postcss-value-parser/lib/walk.js"(exports, module2) {
+      module2.exports = function walk(nodes, cb, bubble) {
         var i3, max2, node, result;
         for (i3 = 0, max2 = nodes.length; i3 < max2; i3 += 1) {
           node = nodes[i3];
@@ -31093,7 +31093,7 @@ ${JSON.stringify(message, null, 4)}`);
 
   // node_modules/reduce-css-calc/node_modules/postcss-value-parser/lib/stringify.js
   var require_stringify = __commonJS({
-    "node_modules/reduce-css-calc/node_modules/postcss-value-parser/lib/stringify.js"(exports, module) {
+    "node_modules/reduce-css-calc/node_modules/postcss-value-parser/lib/stringify.js"(exports, module2) {
       function stringifyNode(node, custom) {
         var type = node.type;
         var value2 = node.value;
@@ -31130,19 +31130,19 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return stringifyNode(nodes, custom);
       }
-      module.exports = stringify;
+      module2.exports = stringify;
     }
   });
 
   // node_modules/reduce-css-calc/node_modules/postcss-value-parser/lib/unit.js
   var require_unit = __commonJS({
-    "node_modules/reduce-css-calc/node_modules/postcss-value-parser/lib/unit.js"(exports, module) {
+    "node_modules/reduce-css-calc/node_modules/postcss-value-parser/lib/unit.js"(exports, module2) {
       var minus = "-".charCodeAt(0);
       var plus = "+".charCodeAt(0);
       var dot = ".".charCodeAt(0);
       var exp = "e".charCodeAt(0);
       var EXP = "E".charCodeAt(0);
-      module.exports = function(value2) {
+      module2.exports = function(value2) {
         var pos = 0;
         var length2 = value2.length;
         var dotted = false;
@@ -31184,7 +31184,7 @@ ${JSON.stringify(message, null, 4)}`);
 
   // node_modules/reduce-css-calc/node_modules/postcss-value-parser/lib/index.js
   var require_lib2 = __commonJS({
-    "node_modules/reduce-css-calc/node_modules/postcss-value-parser/lib/index.js"(exports, module) {
+    "node_modules/reduce-css-calc/node_modules/postcss-value-parser/lib/index.js"(exports, module2) {
       var parse2 = require_parse();
       var walk = require_walk();
       var stringify = require_stringify();
@@ -31205,7 +31205,7 @@ ${JSON.stringify(message, null, 4)}`);
       ValueParser.unit = require_unit();
       ValueParser.walk = walk;
       ValueParser.stringify = stringify;
-      module.exports = ValueParser;
+      module2.exports = ValueParser;
     }
   });
 
@@ -33047,7 +33047,7 @@ ${JSON.stringify(message, null, 4)}`);
 
   // node_modules/css-unit-converter/index.js
   var require_css_unit_converter = __commonJS({
-    "node_modules/css-unit-converter/index.js"(exports, module) {
+    "node_modules/css-unit-converter/index.js"(exports, module2) {
       var conversions = {
         "px": {
           "px": 1,
@@ -33153,7 +33153,7 @@ ${JSON.stringify(message, null, 4)}`);
           "dppx": 1
         }
       };
-      module.exports = function(value2, sourceUnit, targetUnit, precision) {
+      module2.exports = function(value2, sourceUnit, targetUnit, precision) {
         if (!conversions.hasOwnProperty(targetUnit))
           throw new Error("Cannot convert to " + targetUnit);
         if (!conversions[targetUnit].hasOwnProperty(sourceUnit))
@@ -33170,7 +33170,7 @@ ${JSON.stringify(message, null, 4)}`);
 
   // node_modules/reduce-css-calc/dist/lib/convert.js
   var require_convert = __commonJS({
-    "node_modules/reduce-css-calc/dist/lib/convert.js"(exports, module) {
+    "node_modules/reduce-css-calc/dist/lib/convert.js"(exports, module2) {
       "use strict";
       Object.defineProperty(exports, "__esModule", {
         value: true
@@ -33203,7 +33203,7 @@ ${JSON.stringify(message, null, 4)}`);
         return { left, right };
       }
       exports.default = convertNodes;
-      module.exports = exports["default"];
+      module2.exports = exports["default"];
     }
   });
 
@@ -33420,7 +33420,7 @@ ${JSON.stringify(message, null, 4)}`);
 
   // node_modules/reduce-css-calc/dist/lib/stringifier.js
   var require_stringifier = __commonJS({
-    "node_modules/reduce-css-calc/dist/lib/stringifier.js"(exports, module) {
+    "node_modules/reduce-css-calc/dist/lib/stringifier.js"(exports, module2) {
       "use strict";
       Object.defineProperty(exports, "__esModule", {
         value: true
@@ -33482,13 +33482,13 @@ ${JSON.stringify(message, null, 4)}`);
             return round(node.value, prec) + node.unit;
         }
       }
-      module.exports = exports["default"];
+      module2.exports = exports["default"];
     }
   });
 
   // node_modules/reduce-css-calc/dist/index.js
   var require_dist = __commonJS({
-    "node_modules/reduce-css-calc/dist/index.js"(exports, module) {
+    "node_modules/reduce-css-calc/dist/index.js"(exports, module2) {
       "use strict";
       Object.defineProperty(exports, "__esModule", {
         value: true
@@ -33518,24 +33518,24 @@ ${JSON.stringify(message, null, 4)}`);
           node.value = (0, _stringifier2.default)(node.value, reducedAst, precision);
         }, true).toString();
       };
-      module.exports = exports["default"];
+      module2.exports = exports["default"];
     }
   });
 
   // node_modules/lodash/isEqual.js
   var require_isEqual = __commonJS({
-    "node_modules/lodash/isEqual.js"(exports, module) {
+    "node_modules/lodash/isEqual.js"(exports, module2) {
       var baseIsEqual = require_baseIsEqual();
       function isEqual2(value2, other) {
         return baseIsEqual(value2, other);
       }
-      module.exports = isEqual2;
+      module2.exports = isEqual2;
     }
   });
 
   // node_modules/lodash/_baseExtremum.js
   var require_baseExtremum = __commonJS({
-    "node_modules/lodash/_baseExtremum.js"(exports, module) {
+    "node_modules/lodash/_baseExtremum.js"(exports, module2) {
       var isSymbol2 = require_isSymbol();
       function baseExtremum(array, iteratee, comparator) {
         var index2 = -1, length2 = array.length;
@@ -33547,59 +33547,59 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return result;
       }
-      module.exports = baseExtremum;
+      module2.exports = baseExtremum;
     }
   });
 
   // node_modules/lodash/_baseGt.js
   var require_baseGt = __commonJS({
-    "node_modules/lodash/_baseGt.js"(exports, module) {
+    "node_modules/lodash/_baseGt.js"(exports, module2) {
       function baseGt(value2, other) {
         return value2 > other;
       }
-      module.exports = baseGt;
+      module2.exports = baseGt;
     }
   });
 
   // node_modules/lodash/max.js
   var require_max = __commonJS({
-    "node_modules/lodash/max.js"(exports, module) {
+    "node_modules/lodash/max.js"(exports, module2) {
       var baseExtremum = require_baseExtremum();
       var baseGt = require_baseGt();
       var identity7 = require_identity();
       function max2(array) {
         return array && array.length ? baseExtremum(array, identity7, baseGt) : void 0;
       }
-      module.exports = max2;
+      module2.exports = max2;
     }
   });
 
   // node_modules/lodash/_baseLt.js
   var require_baseLt = __commonJS({
-    "node_modules/lodash/_baseLt.js"(exports, module) {
+    "node_modules/lodash/_baseLt.js"(exports, module2) {
       function baseLt(value2, other) {
         return value2 < other;
       }
-      module.exports = baseLt;
+      module2.exports = baseLt;
     }
   });
 
   // node_modules/lodash/min.js
   var require_min = __commonJS({
-    "node_modules/lodash/min.js"(exports, module) {
+    "node_modules/lodash/min.js"(exports, module2) {
       var baseExtremum = require_baseExtremum();
       var baseLt = require_baseLt();
       var identity7 = require_identity();
       function min2(array) {
         return array && array.length ? baseExtremum(array, identity7, baseLt) : void 0;
       }
-      module.exports = min2;
+      module2.exports = min2;
     }
   });
 
   // node_modules/lodash/map.js
   var require_map = __commonJS({
-    "node_modules/lodash/map.js"(exports, module) {
+    "node_modules/lodash/map.js"(exports, module2) {
       var arrayMap = require_arrayMap();
       var baseIteratee = require_baseIteratee();
       var baseMap = require_baseMap();
@@ -33608,25 +33608,25 @@ ${JSON.stringify(message, null, 4)}`);
         var func2 = isArray2(collection) ? arrayMap : baseMap;
         return func2(collection, baseIteratee(iteratee, 3));
       }
-      module.exports = map4;
+      module2.exports = map4;
     }
   });
 
   // node_modules/lodash/flatMap.js
   var require_flatMap = __commonJS({
-    "node_modules/lodash/flatMap.js"(exports, module) {
+    "node_modules/lodash/flatMap.js"(exports, module2) {
       var baseFlatten = require_baseFlatten();
       var map4 = require_map();
       function flatMap(collection, iteratee) {
         return baseFlatten(map4(collection, iteratee), 1);
       }
-      module.exports = flatMap;
+      module2.exports = flatMap;
     }
   });
 
   // node_modules/decimal.js-light/decimal.js
   var require_decimal = __commonJS({
-    "node_modules/decimal.js-light/decimal.js"(exports, module) {
+    "node_modules/decimal.js-light/decimal.js"(exports, module2) {
       (function(globalScope) {
         "use strict";
         var MAX_DIGITS = 1e9, Decimal3 = {
@@ -33932,13 +33932,13 @@ ${JSON.stringify(message, null, 4)}`);
             for (; ; ) {
               if (k3 % 2) {
                 r = r.times(x3);
-                truncate(r.d, e3);
+                truncate2(r.d, e3);
               }
               k3 = mathfloor(k3 / 2);
               if (k3 === 0)
                 break;
               x3 = x3.times(x3);
-              truncate(x3.d, e3);
+              truncate2(x3.d, e3);
             }
             external = true;
             return y2.s < 0 ? new Ctor(ONE).div(r) : round(r, pr);
@@ -34555,7 +34555,7 @@ ${JSON.stringify(message, null, 4)}`);
           }
           return x3.s < 0 ? "-" + str : str;
         }
-        function truncate(arr, len) {
+        function truncate2(arr, len) {
           if (arr.length > len) {
             arr.length = len;
             return true;
@@ -34673,8 +34673,8 @@ ${JSON.stringify(message, null, 4)}`);
           define(function() {
             return Decimal3;
           });
-        } else if (typeof module != "undefined" && module.exports) {
-          module.exports = Decimal3;
+        } else if (typeof module2 != "undefined" && module2.exports) {
+          module2.exports = Decimal3;
         } else {
           if (!globalScope) {
             globalScope = typeof self != "undefined" && self && self.self == self ? self : Function("return this")();
@@ -34687,18 +34687,18 @@ ${JSON.stringify(message, null, 4)}`);
 
   // node_modules/lodash/last.js
   var require_last = __commonJS({
-    "node_modules/lodash/last.js"(exports, module) {
+    "node_modules/lodash/last.js"(exports, module2) {
       function last(array) {
         var length2 = array == null ? 0 : array.length;
         return length2 ? array[length2 - 1] : void 0;
       }
-      module.exports = last;
+      module2.exports = last;
     }
   });
 
   // node_modules/lodash/_baseRange.js
   var require_baseRange = __commonJS({
-    "node_modules/lodash/_baseRange.js"(exports, module) {
+    "node_modules/lodash/_baseRange.js"(exports, module2) {
       var nativeCeil = Math.ceil;
       var nativeMax2 = Math.max;
       function baseRange(start, end, step, fromRight) {
@@ -34709,13 +34709,13 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return result;
       }
-      module.exports = baseRange;
+      module2.exports = baseRange;
     }
   });
 
   // node_modules/lodash/toFinite.js
   var require_toFinite = __commonJS({
-    "node_modules/lodash/toFinite.js"(exports, module) {
+    "node_modules/lodash/toFinite.js"(exports, module2) {
       var toNumber2 = require_toNumber();
       var INFINITY = 1 / 0;
       var MAX_INTEGER = 17976931348623157e292;
@@ -34730,13 +34730,13 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return value2 === value2 ? value2 : 0;
       }
-      module.exports = toFinite;
+      module2.exports = toFinite;
     }
   });
 
   // node_modules/lodash/_createRange.js
   var require_createRange = __commonJS({
-    "node_modules/lodash/_createRange.js"(exports, module) {
+    "node_modules/lodash/_createRange.js"(exports, module2) {
       var baseRange = require_baseRange();
       var isIterateeCall = require_isIterateeCall();
       var toFinite = require_toFinite();
@@ -34756,22 +34756,22 @@ ${JSON.stringify(message, null, 4)}`);
           return baseRange(start, end, step, fromRight);
         };
       }
-      module.exports = createRange;
+      module2.exports = createRange;
     }
   });
 
   // node_modules/lodash/range.js
   var require_range = __commonJS({
-    "node_modules/lodash/range.js"(exports, module) {
+    "node_modules/lodash/range.js"(exports, module2) {
       var createRange = require_createRange();
       var range4 = createRange();
-      module.exports = range4;
+      module2.exports = range4;
     }
   });
 
   // node_modules/lodash/_baseSome.js
   var require_baseSome = __commonJS({
-    "node_modules/lodash/_baseSome.js"(exports, module) {
+    "node_modules/lodash/_baseSome.js"(exports, module2) {
       var baseEach = require_baseEach();
       function baseSome(collection, predicate) {
         var result;
@@ -34781,13 +34781,13 @@ ${JSON.stringify(message, null, 4)}`);
         });
         return !!result;
       }
-      module.exports = baseSome;
+      module2.exports = baseSome;
     }
   });
 
   // node_modules/lodash/some.js
   var require_some = __commonJS({
-    "node_modules/lodash/some.js"(exports, module) {
+    "node_modules/lodash/some.js"(exports, module2) {
       var arraySome = require_arraySome();
       var baseIteratee = require_baseIteratee();
       var baseSome = require_baseSome();
@@ -34800,13 +34800,13 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return func2(collection, baseIteratee(predicate, 3));
       }
-      module.exports = some;
+      module2.exports = some;
     }
   });
 
   // node_modules/lodash/_arrayEvery.js
   var require_arrayEvery = __commonJS({
-    "node_modules/lodash/_arrayEvery.js"(exports, module) {
+    "node_modules/lodash/_arrayEvery.js"(exports, module2) {
       function arrayEvery(array, predicate) {
         var index2 = -1, length2 = array == null ? 0 : array.length;
         while (++index2 < length2) {
@@ -34816,13 +34816,13 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return true;
       }
-      module.exports = arrayEvery;
+      module2.exports = arrayEvery;
     }
   });
 
   // node_modules/lodash/_baseEvery.js
   var require_baseEvery = __commonJS({
-    "node_modules/lodash/_baseEvery.js"(exports, module) {
+    "node_modules/lodash/_baseEvery.js"(exports, module2) {
       var baseEach = require_baseEach();
       function baseEvery(collection, predicate) {
         var result = true;
@@ -34832,13 +34832,13 @@ ${JSON.stringify(message, null, 4)}`);
         });
         return result;
       }
-      module.exports = baseEvery;
+      module2.exports = baseEvery;
     }
   });
 
   // node_modules/lodash/every.js
   var require_every = __commonJS({
-    "node_modules/lodash/every.js"(exports, module) {
+    "node_modules/lodash/every.js"(exports, module2) {
       var arrayEvery = require_arrayEvery();
       var baseEvery = require_baseEvery();
       var baseIteratee = require_baseIteratee();
@@ -34851,13 +34851,13 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return func2(collection, baseIteratee(predicate, 3));
       }
-      module.exports = every;
+      module2.exports = every;
     }
   });
 
   // node_modules/lodash/_baseAssignValue.js
   var require_baseAssignValue = __commonJS({
-    "node_modules/lodash/_baseAssignValue.js"(exports, module) {
+    "node_modules/lodash/_baseAssignValue.js"(exports, module2) {
       var defineProperty = require_defineProperty();
       function baseAssignValue(object, key, value2) {
         if (key == "__proto__" && defineProperty) {
@@ -34871,13 +34871,13 @@ ${JSON.stringify(message, null, 4)}`);
           object[key] = value2;
         }
       }
-      module.exports = baseAssignValue;
+      module2.exports = baseAssignValue;
     }
   });
 
   // node_modules/lodash/mapValues.js
   var require_mapValues = __commonJS({
-    "node_modules/lodash/mapValues.js"(exports, module) {
+    "node_modules/lodash/mapValues.js"(exports, module2) {
       var baseAssignValue = require_baseAssignValue();
       var baseForOwn = require_baseForOwn();
       var baseIteratee = require_baseIteratee();
@@ -34889,13 +34889,13 @@ ${JSON.stringify(message, null, 4)}`);
         });
         return result;
       }
-      module.exports = mapValues;
+      module2.exports = mapValues;
     }
   });
 
   // node_modules/lodash/_createFind.js
   var require_createFind = __commonJS({
-    "node_modules/lodash/_createFind.js"(exports, module) {
+    "node_modules/lodash/_createFind.js"(exports, module2) {
       var baseIteratee = require_baseIteratee();
       var isArrayLike = require_isArrayLike();
       var keys = require_keys();
@@ -34913,25 +34913,25 @@ ${JSON.stringify(message, null, 4)}`);
           return index2 > -1 ? iterable[iteratee ? collection[index2] : index2] : void 0;
         };
       }
-      module.exports = createFind;
+      module2.exports = createFind;
     }
   });
 
   // node_modules/lodash/toInteger.js
   var require_toInteger = __commonJS({
-    "node_modules/lodash/toInteger.js"(exports, module) {
+    "node_modules/lodash/toInteger.js"(exports, module2) {
       var toFinite = require_toFinite();
       function toInteger2(value2) {
         var result = toFinite(value2), remainder = result % 1;
         return result === result ? remainder ? result - remainder : result : 0;
       }
-      module.exports = toInteger2;
+      module2.exports = toInteger2;
     }
   });
 
   // node_modules/lodash/findIndex.js
   var require_findIndex = __commonJS({
-    "node_modules/lodash/findIndex.js"(exports, module) {
+    "node_modules/lodash/findIndex.js"(exports, module2) {
       var baseFindIndex = require_baseFindIndex();
       var baseIteratee = require_baseIteratee();
       var toInteger2 = require_toInteger();
@@ -34947,23 +34947,23 @@ ${JSON.stringify(message, null, 4)}`);
         }
         return baseFindIndex(array, baseIteratee(predicate, 3), index2);
       }
-      module.exports = findIndex2;
+      module2.exports = findIndex2;
     }
   });
 
   // node_modules/lodash/find.js
   var require_find = __commonJS({
-    "node_modules/lodash/find.js"(exports, module) {
+    "node_modules/lodash/find.js"(exports, module2) {
       var createFind = require_createFind();
       var findIndex2 = require_findIndex();
       var find = createFind(findIndex2);
-      module.exports = find;
+      module2.exports = find;
     }
   });
 
   // node_modules/lodash/throttle.js
   var require_throttle = __commonJS({
-    "node_modules/lodash/throttle.js"(exports, module) {
+    "node_modules/lodash/throttle.js"(exports, module2) {
       var debounce2 = require_debounce();
       var isObject2 = require_isObject();
       var FUNC_ERROR_TEXT2 = "Expected a function";
@@ -34982,26 +34982,26 @@ ${JSON.stringify(message, null, 4)}`);
           "trailing": trailing
         });
       }
-      module.exports = throttle2;
+      module2.exports = throttle2;
     }
   });
 
   // node_modules/lodash/isBoolean.js
   var require_isBoolean = __commonJS({
-    "node_modules/lodash/isBoolean.js"(exports, module) {
+    "node_modules/lodash/isBoolean.js"(exports, module2) {
       var baseGetTag2 = require_baseGetTag();
       var isObjectLike2 = require_isObjectLike();
       var boolTag = "[object Boolean]";
       function isBoolean(value2) {
         return value2 === true || value2 === false || isObjectLike2(value2) && baseGetTag2(value2) == boolTag;
       }
-      module.exports = isBoolean;
+      module2.exports = isBoolean;
     }
   });
 
   // node_modules/eventemitter3/index.js
   var require_eventemitter3 = __commonJS({
-    "node_modules/eventemitter3/index.js"(exports, module) {
+    "node_modules/eventemitter3/index.js"(exports, module2) {
       "use strict";
       var has = Object.prototype.hasOwnProperty;
       var prefix2 = "~";
@@ -35054,13 +35054,13 @@ ${JSON.stringify(message, null, 4)}`);
         return names;
       };
       EventEmitter2.prototype.listeners = function listeners(event) {
-        var evt = prefix2 ? prefix2 + event : event, handlers = this._events[evt];
-        if (!handlers)
+        var evt = prefix2 ? prefix2 + event : event, handlers2 = this._events[evt];
+        if (!handlers2)
           return [];
-        if (handlers.fn)
-          return [handlers.fn];
-        for (var i3 = 0, l2 = handlers.length, ee2 = new Array(l2); i3 < l2; i3++) {
-          ee2[i3] = handlers[i3].fn;
+        if (handlers2.fn)
+          return [handlers2.fn];
+        for (var i3 = 0, l2 = handlers2.length, ee2 = new Array(l2); i3 < l2; i3++) {
+          ee2[i3] = handlers2[i3].fn;
         }
         return ee2;
       };
@@ -35175,8 +35175,8 @@ ${JSON.stringify(message, null, 4)}`);
       EventEmitter2.prototype.addListener = EventEmitter2.prototype.on;
       EventEmitter2.prefixed = prefix2;
       EventEmitter2.EventEmitter = EventEmitter2;
-      if (typeof module !== "undefined") {
-        module.exports = EventEmitter2;
+      if (typeof module2 !== "undefined") {
+        module2.exports = EventEmitter2;
       }
     }
   });
@@ -35265,7 +35265,7 @@ ${JSON.stringify(message, null, 4)}`);
           }
           this.ctr++;
         };
-        _proto.flush = function flush() {
+        _proto.flush = function flush2() {
           this.tags.forEach(function(tag) {
             return tag.parentNode && tag.parentNode.removeChild(tag);
           });
@@ -35283,21 +35283,21 @@ ${JSON.stringify(message, null, 4)}`);
 
   // node_modules/@emotion/sheet/dist/emotion-sheet.cjs.js
   var require_emotion_sheet_cjs = __commonJS({
-    "node_modules/@emotion/sheet/dist/emotion-sheet.cjs.js"(exports, module) {
+    "node_modules/@emotion/sheet/dist/emotion-sheet.cjs.js"(exports, module2) {
       "use strict";
       if (false) {
-        module.exports = null;
+        module2.exports = null;
       } else {
-        module.exports = require_emotion_sheet_cjs_dev();
+        module2.exports = require_emotion_sheet_cjs_dev();
       }
     }
   });
 
   // node_modules/stylis/dist/umd/stylis.js
   var require_stylis = __commonJS({
-    "node_modules/stylis/dist/umd/stylis.js"(exports, module) {
+    "node_modules/stylis/dist/umd/stylis.js"(exports, module2) {
       (function(e3, r) {
-        typeof exports === "object" && typeof module !== "undefined" ? r(exports) : typeof define === "function" && define.amd ? define(["exports"], r) : (e3 = e3 || self, r(e3.stylis = {}));
+        typeof exports === "object" && typeof module2 !== "undefined" ? r(exports) : typeof define === "function" && define.amd ? define(["exports"], r) : (e3 = e3 || self, r(e3.stylis = {}));
       })(exports, function(e3) {
         "use strict";
         var r = "-ms-";
@@ -35924,12 +35924,12 @@ ${JSON.stringify(message, null, 4)}`);
 
   // node_modules/@emotion/weak-memoize/dist/emotion-weak-memoize.cjs.js
   var require_emotion_weak_memoize_cjs = __commonJS({
-    "node_modules/@emotion/weak-memoize/dist/emotion-weak-memoize.cjs.js"(exports, module) {
+    "node_modules/@emotion/weak-memoize/dist/emotion-weak-memoize.cjs.js"(exports, module2) {
       "use strict";
       if (false) {
-        module.exports = null;
+        module2.exports = null;
       } else {
-        module.exports = require_emotion_weak_memoize_cjs_dev();
+        module2.exports = require_emotion_weak_memoize_cjs_dev();
       }
     }
   });
@@ -35953,12 +35953,12 @@ ${JSON.stringify(message, null, 4)}`);
 
   // node_modules/@emotion/memoize/dist/emotion-memoize.cjs.js
   var require_emotion_memoize_cjs = __commonJS({
-    "node_modules/@emotion/memoize/dist/emotion-memoize.cjs.js"(exports, module) {
+    "node_modules/@emotion/memoize/dist/emotion-memoize.cjs.js"(exports, module2) {
       "use strict";
       if (false) {
-        module.exports = null;
+        module2.exports = null;
       } else {
-        module.exports = require_emotion_memoize_cjs_dev();
+        module2.exports = require_emotion_memoize_cjs_dev();
       }
     }
   });
@@ -36262,21 +36262,21 @@ ${JSON.stringify(message, null, 4)}`);
 
   // node_modules/@emotion/cache/dist/emotion-cache.cjs.js
   var require_emotion_cache_cjs = __commonJS({
-    "node_modules/@emotion/cache/dist/emotion-cache.cjs.js"(exports, module) {
+    "node_modules/@emotion/cache/dist/emotion-cache.cjs.js"(exports, module2) {
       "use strict";
       if (false) {
-        module.exports = null;
+        module2.exports = null;
       } else {
-        module.exports = require_emotion_cache_cjs_dev();
+        module2.exports = require_emotion_cache_cjs_dev();
       }
     }
   });
 
   // node_modules/@babel/runtime/helpers/extends.js
   var require_extends = __commonJS({
-    "node_modules/@babel/runtime/helpers/extends.js"(exports, module) {
+    "node_modules/@babel/runtime/helpers/extends.js"(exports, module2) {
       function _extends23() {
-        module.exports = _extends23 = Object.assign ? Object.assign.bind() : function(target) {
+        module2.exports = _extends23 = Object.assign ? Object.assign.bind() : function(target) {
           for (var i3 = 1; i3 < arguments.length; i3++) {
             var source = arguments[i3];
             for (var key in source) {
@@ -36286,10 +36286,10 @@ ${JSON.stringify(message, null, 4)}`);
             }
           }
           return target;
-        }, module.exports.__esModule = true, module.exports["default"] = module.exports;
+        }, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
         return _extends23.apply(this, arguments);
       }
-      module.exports = _extends23, module.exports.__esModule = true, module.exports["default"] = module.exports;
+      module2.exports = _extends23, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
     }
   });
 
@@ -36359,12 +36359,12 @@ ${JSON.stringify(message, null, 4)}`);
 
   // node_modules/@emotion/utils/dist/emotion-utils.cjs.js
   var require_emotion_utils_cjs = __commonJS({
-    "node_modules/@emotion/utils/dist/emotion-utils.cjs.js"(exports, module) {
+    "node_modules/@emotion/utils/dist/emotion-utils.cjs.js"(exports, module2) {
       "use strict";
       if (false) {
-        module.exports = null;
+        module2.exports = null;
       } else {
-        module.exports = require_emotion_utils_cjs_dev();
+        module2.exports = require_emotion_utils_cjs_dev();
       }
     }
   });
@@ -36402,12 +36402,12 @@ ${JSON.stringify(message, null, 4)}`);
 
   // node_modules/@emotion/hash/dist/emotion-hash.cjs.js
   var require_emotion_hash_cjs = __commonJS({
-    "node_modules/@emotion/hash/dist/emotion-hash.cjs.js"(exports, module) {
+    "node_modules/@emotion/hash/dist/emotion-hash.cjs.js"(exports, module2) {
       "use strict";
       if (false) {
-        module.exports = null;
+        module2.exports = null;
       } else {
-        module.exports = require_emotion_hash_cjs_dev();
+        module2.exports = require_emotion_hash_cjs_dev();
       }
     }
   });
@@ -36470,12 +36470,12 @@ ${JSON.stringify(message, null, 4)}`);
 
   // node_modules/@emotion/unitless/dist/emotion-unitless.cjs.js
   var require_emotion_unitless_cjs = __commonJS({
-    "node_modules/@emotion/unitless/dist/emotion-unitless.cjs.js"(exports, module) {
+    "node_modules/@emotion/unitless/dist/emotion-unitless.cjs.js"(exports, module2) {
       "use strict";
       if (false) {
-        module.exports = null;
+        module2.exports = null;
       } else {
-        module.exports = require_emotion_unitless_cjs_dev();
+        module2.exports = require_emotion_unitless_cjs_dev();
       }
     }
   });
@@ -36750,12 +36750,12 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
 
   // node_modules/@emotion/serialize/dist/emotion-serialize.cjs.js
   var require_emotion_serialize_cjs = __commonJS({
-    "node_modules/@emotion/serialize/dist/emotion-serialize.cjs.js"(exports, module) {
+    "node_modules/@emotion/serialize/dist/emotion-serialize.cjs.js"(exports, module2) {
       "use strict";
       if (false) {
-        module.exports = null;
+        module2.exports = null;
       } else {
-        module.exports = require_emotion_serialize_cjs_dev();
+        module2.exports = require_emotion_serialize_cjs_dev();
       }
     }
   });
@@ -37428,12 +37428,12 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
 
   // node_modules/@emotion/react/dist/emotion-react.cjs.js
   var require_emotion_react_cjs = __commonJS({
-    "node_modules/@emotion/react/dist/emotion-react.cjs.js"(exports, module) {
+    "node_modules/@emotion/react/dist/emotion-react.cjs.js"(exports, module2) {
       "use strict";
       if (false) {
-        module.exports = null;
+        module2.exports = null;
       } else {
-        module.exports = require_emotion_react_cjs_dev();
+        module2.exports = require_emotion_react_cjs_dev();
       }
     }
   });
@@ -37441,6 +37441,5934 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   // src/index.tsx
   var import_react63 = __toModule(require_react());
   var import_react_dom4 = __toModule(require_react_dom());
+
+  // node_modules/@sentry/utils/esm/env.js
+  function isBrowserBundle() {
+    return typeof __SENTRY_BROWSER_BUNDLE__ !== "undefined" && !!__SENTRY_BROWSER_BUNDLE__;
+  }
+
+  // node_modules/@sentry/utils/esm/node.js
+  function isNodeEnv() {
+    return !isBrowserBundle() && Object.prototype.toString.call(typeof process !== "undefined" ? process : 0) === "[object process]";
+  }
+  function dynamicRequire(mod, request) {
+    return mod.require(request);
+  }
+  function loadModule(moduleName) {
+    let mod;
+    try {
+      mod = dynamicRequire(module, moduleName);
+    } catch (e3) {
+    }
+    try {
+      const { cwd } = dynamicRequire(module, "process");
+      mod = dynamicRequire(module, `${cwd()}/node_modules/${moduleName}`);
+    } catch (e3) {
+    }
+    return mod;
+  }
+
+  // node_modules/@sentry/utils/esm/global.js
+  var fallbackGlobalObject = {};
+  function getGlobalObject() {
+    return isNodeEnv() ? global : typeof window !== "undefined" ? window : typeof self !== "undefined" ? self : fallbackGlobalObject;
+  }
+  function getGlobalSingleton(name, creator, obj) {
+    var global9 = obj || getGlobalObject();
+    var __SENTRY__ = global9.__SENTRY__ = global9.__SENTRY__ || {};
+    var singleton = __SENTRY__[name] || (__SENTRY__[name] = creator());
+    return singleton;
+  }
+
+  // node_modules/@sentry/utils/esm/is.js
+  var objectToString = Object.prototype.toString;
+  function isError(wat) {
+    switch (objectToString.call(wat)) {
+      case "[object Error]":
+      case "[object Exception]":
+      case "[object DOMException]":
+        return true;
+      default:
+        return isInstanceOf(wat, Error);
+    }
+  }
+  function isBuiltin(wat, className) {
+    return objectToString.call(wat) === `[object ${className}]`;
+  }
+  function isErrorEvent(wat) {
+    return isBuiltin(wat, "ErrorEvent");
+  }
+  function isDOMError(wat) {
+    return isBuiltin(wat, "DOMError");
+  }
+  function isDOMException(wat) {
+    return isBuiltin(wat, "DOMException");
+  }
+  function isString(wat) {
+    return isBuiltin(wat, "String");
+  }
+  function isPrimitive(wat) {
+    return wat === null || typeof wat !== "object" && typeof wat !== "function";
+  }
+  function isPlainObject(wat) {
+    return isBuiltin(wat, "Object");
+  }
+  function isEvent(wat) {
+    return typeof Event !== "undefined" && isInstanceOf(wat, Event);
+  }
+  function isElement(wat) {
+    return typeof Element !== "undefined" && isInstanceOf(wat, Element);
+  }
+  function isRegExp(wat) {
+    return isBuiltin(wat, "RegExp");
+  }
+  function isThenable(wat) {
+    return Boolean(wat && wat.then && typeof wat.then === "function");
+  }
+  function isSyntheticEvent(wat) {
+    return isPlainObject(wat) && "nativeEvent" in wat && "preventDefault" in wat && "stopPropagation" in wat;
+  }
+  function isNaN2(wat) {
+    return typeof wat === "number" && wat !== wat;
+  }
+  function isInstanceOf(wat, base) {
+    try {
+      return wat instanceof base;
+    } catch (_e) {
+      return false;
+    }
+  }
+
+  // node_modules/@sentry/utils/esm/browser.js
+  function htmlTreeAsString(elem, keyAttrs) {
+    try {
+      let currentElem = elem;
+      var MAX_TRAVERSE_HEIGHT = 5;
+      var MAX_OUTPUT_LEN = 80;
+      var out = [];
+      let height = 0;
+      let len = 0;
+      var separator = " > ";
+      var sepLength = separator.length;
+      let nextStr;
+      while (currentElem && height++ < MAX_TRAVERSE_HEIGHT) {
+        nextStr = _htmlElementAsString(currentElem, keyAttrs);
+        if (nextStr === "html" || height > 1 && len + out.length * sepLength + nextStr.length >= MAX_OUTPUT_LEN) {
+          break;
+        }
+        out.push(nextStr);
+        len += nextStr.length;
+        currentElem = currentElem.parentNode;
+      }
+      return out.reverse().join(separator);
+    } catch (_oO) {
+      return "<unknown>";
+    }
+  }
+  function _htmlElementAsString(el, keyAttrs) {
+    var elem = el;
+    var out = [];
+    let className;
+    let classes;
+    let key;
+    let attr;
+    let i3;
+    if (!elem || !elem.tagName) {
+      return "";
+    }
+    out.push(elem.tagName.toLowerCase());
+    var keyAttrPairs = keyAttrs && keyAttrs.length ? keyAttrs.filter((keyAttr) => elem.getAttribute(keyAttr)).map((keyAttr) => [keyAttr, elem.getAttribute(keyAttr)]) : null;
+    if (keyAttrPairs && keyAttrPairs.length) {
+      keyAttrPairs.forEach((keyAttrPair) => {
+        out.push(`[${keyAttrPair[0]}="${keyAttrPair[1]}"]`);
+      });
+    } else {
+      if (elem.id) {
+        out.push(`#${elem.id}`);
+      }
+      className = elem.className;
+      if (className && isString(className)) {
+        classes = className.split(/\s+/);
+        for (i3 = 0; i3 < classes.length; i3++) {
+          out.push(`.${classes[i3]}`);
+        }
+      }
+    }
+    var allowedAttrs = ["type", "name", "title", "alt"];
+    for (i3 = 0; i3 < allowedAttrs.length; i3++) {
+      key = allowedAttrs[i3];
+      attr = elem.getAttribute(key);
+      if (attr) {
+        out.push(`[${key}="${attr}"]`);
+      }
+    }
+    return out.join("");
+  }
+  function getLocationHref() {
+    var global9 = getGlobalObject();
+    try {
+      return global9.document.location.href;
+    } catch (oO) {
+      return "";
+    }
+  }
+  function getDomElement(selector) {
+    var global9 = getGlobalObject();
+    if (global9.document && global9.document.querySelector) {
+      return global9.document.querySelector(selector);
+    }
+    return null;
+  }
+
+  // node_modules/@sentry/utils/esm/error.js
+  var SentryError = class extends Error {
+    constructor(message, logLevel = "warn") {
+      super(message);
+      this.message = message;
+      ;
+      this.name = new.target.prototype.constructor.name;
+      Object.setPrototypeOf(this, new.target.prototype);
+      this.logLevel = logLevel;
+    }
+  };
+
+  // node_modules/@sentry/utils/esm/dsn.js
+  var DSN_REGEX = /^(?:(\w+):)\/\/(?:(\w+)(?::(\w+))?@)([\w.-]+)(?::(\d+))?\/(.+)/;
+  function isValidProtocol(protocol4) {
+    return protocol4 === "http" || protocol4 === "https";
+  }
+  function dsnToString(dsn, withPassword = false) {
+    const { host, path: path2, pass, port, projectId, protocol: protocol4, publicKey } = dsn;
+    return `${protocol4}://${publicKey}${withPassword && pass ? `:${pass}` : ""}@${host}${port ? `:${port}` : ""}/${path2 ? `${path2}/` : path2}${projectId}`;
+  }
+  function dsnFromString(str) {
+    var match2 = DSN_REGEX.exec(str);
+    if (!match2) {
+      throw new SentryError(`Invalid Sentry Dsn: ${str}`);
+    }
+    const [protocol4, publicKey, pass = "", host, port = "", lastPath] = match2.slice(1);
+    let path2 = "";
+    let projectId = lastPath;
+    var split = projectId.split("/");
+    if (split.length > 1) {
+      path2 = split.slice(0, -1).join("/");
+      projectId = split.pop();
+    }
+    if (projectId) {
+      var projectMatch = projectId.match(/^\d+/);
+      if (projectMatch) {
+        projectId = projectMatch[0];
+      }
+    }
+    return dsnFromComponents({ host, pass, path: path2, projectId, port, protocol: protocol4, publicKey });
+  }
+  function dsnFromComponents(components2) {
+    return {
+      protocol: components2.protocol,
+      publicKey: components2.publicKey || "",
+      pass: components2.pass || "",
+      host: components2.host,
+      port: components2.port || "",
+      path: components2.path || "",
+      projectId: components2.projectId
+    };
+  }
+  function validateDsn(dsn) {
+    if (!(typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__)) {
+      return;
+    }
+    const { port, projectId, protocol: protocol4 } = dsn;
+    var requiredComponents = ["protocol", "publicKey", "host", "projectId"];
+    requiredComponents.forEach((component) => {
+      if (!dsn[component]) {
+        throw new SentryError(`Invalid Sentry Dsn: ${component} missing`);
+      }
+    });
+    if (!projectId.match(/^\d+$/)) {
+      throw new SentryError(`Invalid Sentry Dsn: Invalid projectId ${projectId}`);
+    }
+    if (!isValidProtocol(protocol4)) {
+      throw new SentryError(`Invalid Sentry Dsn: Invalid protocol ${protocol4}`);
+    }
+    if (port && isNaN(parseInt(port, 10))) {
+      throw new SentryError(`Invalid Sentry Dsn: Invalid port ${port}`);
+    }
+    return true;
+  }
+  function makeDsn(from) {
+    var components2 = typeof from === "string" ? dsnFromString(from) : dsnFromComponents(from);
+    validateDsn(components2);
+    return components2;
+  }
+
+  // node_modules/@sentry/utils/esm/logger.js
+  var global2 = getGlobalObject();
+  var PREFIX = "Sentry Logger ";
+  var CONSOLE_LEVELS = ["debug", "info", "warn", "error", "log", "assert", "trace"];
+  function consoleSandbox(callback) {
+    var global9 = getGlobalObject();
+    if (!("console" in global9)) {
+      return callback();
+    }
+    var originalConsole = global9.console;
+    var wrappedLevels = {};
+    CONSOLE_LEVELS.forEach((level) => {
+      var originalWrappedFunc = originalConsole[level] && originalConsole[level].__sentry_original__;
+      if (level in global9.console && originalWrappedFunc) {
+        wrappedLevels[level] = originalConsole[level];
+        originalConsole[level] = originalWrappedFunc;
+      }
+    });
+    try {
+      return callback();
+    } finally {
+      Object.keys(wrappedLevels).forEach((level) => {
+        originalConsole[level] = wrappedLevels[level];
+      });
+    }
+  }
+  function makeLogger() {
+    let enabled = false;
+    var logger2 = {
+      enable: () => {
+        enabled = true;
+      },
+      disable: () => {
+        enabled = false;
+      }
+    };
+    if (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) {
+      CONSOLE_LEVELS.forEach((name) => {
+        logger2[name] = (...args) => {
+          if (enabled) {
+            consoleSandbox(() => {
+              global2.console[name](`${PREFIX}[${name}]:`, ...args);
+            });
+          }
+        };
+      });
+    } else {
+      CONSOLE_LEVELS.forEach((name) => {
+        logger2[name] = () => void 0;
+      });
+    }
+    return logger2;
+  }
+  var logger;
+  if (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) {
+    logger = getGlobalSingleton("logger", makeLogger);
+  } else {
+    logger = makeLogger();
+  }
+
+  // node_modules/@sentry/utils/esm/string.js
+  function truncate(str, max2 = 0) {
+    if (typeof str !== "string" || max2 === 0) {
+      return str;
+    }
+    return str.length <= max2 ? str : `${str.substr(0, max2)}...`;
+  }
+  function safeJoin(input, delimiter) {
+    if (!Array.isArray(input)) {
+      return "";
+    }
+    var output = [];
+    for (let i3 = 0; i3 < input.length; i3++) {
+      var value2 = input[i3];
+      try {
+        output.push(String(value2));
+      } catch (e3) {
+        output.push("[value cannot be serialized]");
+      }
+    }
+    return output.join(delimiter);
+  }
+  function isMatchingPattern(value2, pattern) {
+    if (!isString(value2)) {
+      return false;
+    }
+    if (isRegExp(pattern)) {
+      return pattern.test(value2);
+    }
+    if (typeof pattern === "string") {
+      return value2.indexOf(pattern) !== -1;
+    }
+    return false;
+  }
+
+  // node_modules/@sentry/utils/esm/object.js
+  function fill(source, name, replacementFactory) {
+    if (!(name in source)) {
+      return;
+    }
+    var original = source[name];
+    var wrapped = replacementFactory(original);
+    if (typeof wrapped === "function") {
+      try {
+        markFunctionWrapped(wrapped, original);
+      } catch (_Oo) {
+      }
+    }
+    source[name] = wrapped;
+  }
+  function addNonEnumerableProperty(obj, name, value2) {
+    Object.defineProperty(obj, name, {
+      value: value2,
+      writable: true,
+      configurable: true
+    });
+  }
+  function markFunctionWrapped(wrapped, original) {
+    var proto = original.prototype || {};
+    wrapped.prototype = original.prototype = proto;
+    addNonEnumerableProperty(wrapped, "__sentry_original__", original);
+  }
+  function getOriginalFunction(func2) {
+    return func2.__sentry_original__;
+  }
+  function urlEncode(object) {
+    return Object.keys(object).map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(object[key])}`).join("&");
+  }
+  function convertToPlainObject(value2) {
+    if (isError(value2)) {
+      return __spreadValues({
+        message: value2.message,
+        name: value2.name,
+        stack: value2.stack
+      }, getOwnProperties(value2));
+    } else if (isEvent(value2)) {
+      var newObj = __spreadValues({
+        type: value2.type,
+        target: serializeEventTarget(value2.target),
+        currentTarget: serializeEventTarget(value2.currentTarget)
+      }, getOwnProperties(value2));
+      if (typeof CustomEvent !== "undefined" && isInstanceOf(value2, CustomEvent)) {
+        newObj.detail = value2.detail;
+      }
+      return newObj;
+    } else {
+      return value2;
+    }
+  }
+  function serializeEventTarget(target) {
+    try {
+      return isElement(target) ? htmlTreeAsString(target) : Object.prototype.toString.call(target);
+    } catch (_oO) {
+      return "<unknown>";
+    }
+  }
+  function getOwnProperties(obj) {
+    if (typeof obj === "object" && obj !== null) {
+      var extractedProps = {};
+      for (var property in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, property)) {
+          extractedProps[property] = obj[property];
+        }
+      }
+      return extractedProps;
+    } else {
+      return {};
+    }
+  }
+  function extractExceptionKeysForMessage(exception, maxLength = 40) {
+    var keys = Object.keys(convertToPlainObject(exception));
+    keys.sort();
+    if (!keys.length) {
+      return "[object has no keys]";
+    }
+    if (keys[0].length >= maxLength) {
+      return truncate(keys[0], maxLength);
+    }
+    for (let includedKeys = keys.length; includedKeys > 0; includedKeys--) {
+      var serialized = keys.slice(0, includedKeys).join(", ");
+      if (serialized.length > maxLength) {
+        continue;
+      }
+      if (includedKeys === keys.length) {
+        return serialized;
+      }
+      return truncate(serialized, maxLength);
+    }
+    return "";
+  }
+  function dropUndefinedKeys(inputValue) {
+    var memoizationMap = new Map();
+    return _dropUndefinedKeys(inputValue, memoizationMap);
+  }
+  function _dropUndefinedKeys(inputValue, memoizationMap) {
+    if (isPlainObject(inputValue)) {
+      var memoVal = memoizationMap.get(inputValue);
+      if (memoVal !== void 0) {
+        return memoVal;
+      }
+      var returnValue = {};
+      memoizationMap.set(inputValue, returnValue);
+      for (var key of Object.keys(inputValue)) {
+        if (typeof inputValue[key] !== "undefined") {
+          returnValue[key] = _dropUndefinedKeys(inputValue[key], memoizationMap);
+        }
+      }
+      return returnValue;
+    }
+    if (Array.isArray(inputValue)) {
+      var memoVal = memoizationMap.get(inputValue);
+      if (memoVal !== void 0) {
+        return memoVal;
+      }
+      var returnValue = [];
+      memoizationMap.set(inputValue, returnValue);
+      inputValue.forEach((item) => {
+        returnValue.push(_dropUndefinedKeys(item, memoizationMap));
+      });
+      return returnValue;
+    }
+    return inputValue;
+  }
+
+  // node_modules/@sentry/utils/esm/buildPolyfills/_nullishCoalesce.js
+  function _nullishCoalesce(lhs, rhsFn) {
+    return lhs != null ? lhs : rhsFn();
+  }
+
+  // node_modules/@sentry/utils/esm/buildPolyfills/_optionalChain.js
+  function _optionalChain(ops) {
+    let lastAccessLHS = void 0;
+    let value2 = ops[0];
+    let i3 = 1;
+    while (i3 < ops.length) {
+      var op = ops[i3];
+      var fn = ops[i3 + 1];
+      i3 += 2;
+      if ((op === "optionalAccess" || op === "optionalCall") && value2 == null) {
+        return;
+      }
+      if (op === "access" || op === "optionalAccess") {
+        lastAccessLHS = value2;
+        value2 = fn(value2);
+      } else if (op === "call" || op === "optionalCall") {
+        value2 = fn((...args) => value2.call(lastAccessLHS, ...args));
+        lastAccessLHS = void 0;
+      }
+    }
+    return value2;
+  }
+
+  // node_modules/@sentry/utils/esm/stacktrace.js
+  var STACKTRACE_LIMIT = 50;
+  function createStackParser(...parsers) {
+    var sortedParsers = parsers.sort((a3, b2) => a3[0] - b2[0]).map((p2) => p2[1]);
+    return (stack, skipFirst = 0) => {
+      var frames = [];
+      for (var line of stack.split("\n").slice(skipFirst)) {
+        var cleanedLine = line.replace(/\(error: (.*)\)/, "$1");
+        for (var parser of sortedParsers) {
+          var frame = parser(cleanedLine);
+          if (frame) {
+            frames.push(frame);
+            break;
+          }
+        }
+      }
+      return stripSentryFramesAndReverse(frames);
+    };
+  }
+  function stackParserFromStackParserOptions(stackParser) {
+    if (Array.isArray(stackParser)) {
+      return createStackParser(...stackParser);
+    }
+    return stackParser;
+  }
+  function stripSentryFramesAndReverse(stack) {
+    if (!stack.length) {
+      return [];
+    }
+    let localStack = stack;
+    var firstFrameFunction = localStack[0].function || "";
+    var lastFrameFunction = localStack[localStack.length - 1].function || "";
+    if (firstFrameFunction.indexOf("captureMessage") !== -1 || firstFrameFunction.indexOf("captureException") !== -1) {
+      localStack = localStack.slice(1);
+    }
+    if (lastFrameFunction.indexOf("sentryWrapped") !== -1) {
+      localStack = localStack.slice(0, -1);
+    }
+    return localStack.slice(0, STACKTRACE_LIMIT).map((frame) => __spreadProps(__spreadValues({}, frame), {
+      filename: frame.filename || localStack[0].filename,
+      function: frame.function || "?"
+    })).reverse();
+  }
+  var defaultFunctionName = "<anonymous>";
+  function getFunctionName(fn) {
+    try {
+      if (!fn || typeof fn !== "function") {
+        return defaultFunctionName;
+      }
+      return fn.name || defaultFunctionName;
+    } catch (e3) {
+      return defaultFunctionName;
+    }
+  }
+
+  // node_modules/@sentry/utils/esm/supports.js
+  function supportsFetch() {
+    if (!("fetch" in getGlobalObject())) {
+      return false;
+    }
+    try {
+      new Headers();
+      new Request("http://www.example.com");
+      new Response();
+      return true;
+    } catch (e3) {
+      return false;
+    }
+  }
+  function isNativeFetch(func2) {
+    return func2 && /^function fetch\(\)\s+\{\s+\[native code\]\s+\}$/.test(func2.toString());
+  }
+  function supportsNativeFetch() {
+    if (!supportsFetch()) {
+      return false;
+    }
+    var global9 = getGlobalObject();
+    if (isNativeFetch(global9.fetch)) {
+      return true;
+    }
+    let result = false;
+    var doc = global9.document;
+    if (doc && typeof doc.createElement === "function") {
+      try {
+        var sandbox = doc.createElement("iframe");
+        sandbox.hidden = true;
+        doc.head.appendChild(sandbox);
+        if (sandbox.contentWindow && sandbox.contentWindow.fetch) {
+          result = isNativeFetch(sandbox.contentWindow.fetch);
+        }
+        doc.head.removeChild(sandbox);
+      } catch (err) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn("Could not create sandbox iframe for pure fetch check, bailing to window.fetch: ", err);
+      }
+    }
+    return result;
+  }
+  function supportsHistory() {
+    var global9 = getGlobalObject();
+    var chrome2 = global9.chrome;
+    var isChromePackagedApp = chrome2 && chrome2.app && chrome2.app.runtime;
+    var hasHistoryApi = "history" in global9 && !!global9.history.pushState && !!global9.history.replaceState;
+    return !isChromePackagedApp && hasHistoryApi;
+  }
+
+  // node_modules/@sentry/utils/esm/instrument.js
+  var global3 = getGlobalObject();
+  var handlers = {};
+  var instrumented = {};
+  function instrument(type) {
+    if (instrumented[type]) {
+      return;
+    }
+    instrumented[type] = true;
+    switch (type) {
+      case "console":
+        instrumentConsole();
+        break;
+      case "dom":
+        instrumentDOM();
+        break;
+      case "xhr":
+        instrumentXHR();
+        break;
+      case "fetch":
+        instrumentFetch();
+        break;
+      case "history":
+        instrumentHistory();
+        break;
+      case "error":
+        instrumentError();
+        break;
+      case "unhandledrejection":
+        instrumentUnhandledRejection();
+        break;
+      default:
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn("unknown instrumentation type:", type);
+        return;
+    }
+  }
+  function addInstrumentationHandler(type, callback) {
+    handlers[type] = handlers[type] || [];
+    handlers[type].push(callback);
+    instrument(type);
+  }
+  function triggerHandlers(type, data) {
+    if (!type || !handlers[type]) {
+      return;
+    }
+    for (var handler of handlers[type] || []) {
+      try {
+        handler(data);
+      } catch (e3) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.error(`Error while triggering instrumentation handler.
+Type: ${type}
+Name: ${getFunctionName(handler)}
+Error:`, e3);
+      }
+    }
+  }
+  function instrumentConsole() {
+    if (!("console" in global3)) {
+      return;
+    }
+    CONSOLE_LEVELS.forEach(function(level) {
+      if (!(level in global3.console)) {
+        return;
+      }
+      fill(global3.console, level, function(originalConsoleMethod) {
+        return function(...args) {
+          triggerHandlers("console", { args, level });
+          if (originalConsoleMethod) {
+            originalConsoleMethod.apply(global3.console, args);
+          }
+        };
+      });
+    });
+  }
+  function instrumentFetch() {
+    if (!supportsNativeFetch()) {
+      return;
+    }
+    fill(global3, "fetch", function(originalFetch) {
+      return function(...args) {
+        var handlerData = {
+          args,
+          fetchData: {
+            method: getFetchMethod(args),
+            url: getFetchUrl(args)
+          },
+          startTimestamp: Date.now()
+        };
+        triggerHandlers("fetch", __spreadValues({}, handlerData));
+        return originalFetch.apply(global3, args).then((response) => {
+          triggerHandlers("fetch", __spreadProps(__spreadValues({}, handlerData), {
+            endTimestamp: Date.now(),
+            response
+          }));
+          return response;
+        }, (error) => {
+          triggerHandlers("fetch", __spreadProps(__spreadValues({}, handlerData), {
+            endTimestamp: Date.now(),
+            error
+          }));
+          throw error;
+        });
+      };
+    });
+  }
+  function getFetchMethod(fetchArgs = []) {
+    if ("Request" in global3 && isInstanceOf(fetchArgs[0], Request) && fetchArgs[0].method) {
+      return String(fetchArgs[0].method).toUpperCase();
+    }
+    if (fetchArgs[1] && fetchArgs[1].method) {
+      return String(fetchArgs[1].method).toUpperCase();
+    }
+    return "GET";
+  }
+  function getFetchUrl(fetchArgs = []) {
+    if (typeof fetchArgs[0] === "string") {
+      return fetchArgs[0];
+    }
+    if ("Request" in global3 && isInstanceOf(fetchArgs[0], Request)) {
+      return fetchArgs[0].url;
+    }
+    return String(fetchArgs[0]);
+  }
+  function instrumentXHR() {
+    if (!("XMLHttpRequest" in global3)) {
+      return;
+    }
+    var xhrproto = XMLHttpRequest.prototype;
+    fill(xhrproto, "open", function(originalOpen) {
+      return function(...args) {
+        var xhr = this;
+        var url2 = args[1];
+        var xhrInfo = xhr.__sentry_xhr__ = {
+          method: isString(args[0]) ? args[0].toUpperCase() : args[0],
+          url: args[1]
+        };
+        if (isString(url2) && xhrInfo.method === "POST" && url2.match(/sentry_key/)) {
+          xhr.__sentry_own_request__ = true;
+        }
+        var onreadystatechangeHandler = function() {
+          if (xhr.readyState === 4) {
+            try {
+              xhrInfo.status_code = xhr.status;
+            } catch (e3) {
+            }
+            triggerHandlers("xhr", {
+              args,
+              endTimestamp: Date.now(),
+              startTimestamp: Date.now(),
+              xhr
+            });
+          }
+        };
+        if ("onreadystatechange" in xhr && typeof xhr.onreadystatechange === "function") {
+          fill(xhr, "onreadystatechange", function(original) {
+            return function(...readyStateArgs) {
+              onreadystatechangeHandler();
+              return original.apply(xhr, readyStateArgs);
+            };
+          });
+        } else {
+          xhr.addEventListener("readystatechange", onreadystatechangeHandler);
+        }
+        return originalOpen.apply(xhr, args);
+      };
+    });
+    fill(xhrproto, "send", function(originalSend) {
+      return function(...args) {
+        if (this.__sentry_xhr__ && args[0] !== void 0) {
+          this.__sentry_xhr__.body = args[0];
+        }
+        triggerHandlers("xhr", {
+          args,
+          startTimestamp: Date.now(),
+          xhr: this
+        });
+        return originalSend.apply(this, args);
+      };
+    });
+  }
+  var lastHref;
+  function instrumentHistory() {
+    if (!supportsHistory()) {
+      return;
+    }
+    var oldOnPopState = global3.onpopstate;
+    global3.onpopstate = function(...args) {
+      var to = global3.location.href;
+      var from = lastHref;
+      lastHref = to;
+      triggerHandlers("history", {
+        from,
+        to
+      });
+      if (oldOnPopState) {
+        try {
+          return oldOnPopState.apply(this, args);
+        } catch (_oO) {
+        }
+      }
+    };
+    function historyReplacementFunction(originalHistoryFunction) {
+      return function(...args) {
+        var url2 = args.length > 2 ? args[2] : void 0;
+        if (url2) {
+          var from = lastHref;
+          var to = String(url2);
+          lastHref = to;
+          triggerHandlers("history", {
+            from,
+            to
+          });
+        }
+        return originalHistoryFunction.apply(this, args);
+      };
+    }
+    fill(global3.history, "pushState", historyReplacementFunction);
+    fill(global3.history, "replaceState", historyReplacementFunction);
+  }
+  var debounceDuration = 1e3;
+  var debounceTimerID;
+  var lastCapturedEvent;
+  function shouldShortcircuitPreviousDebounce(previous, current) {
+    if (!previous) {
+      return true;
+    }
+    if (previous.type !== current.type) {
+      return true;
+    }
+    try {
+      if (previous.target !== current.target) {
+        return true;
+      }
+    } catch (e3) {
+    }
+    return false;
+  }
+  function shouldSkipDOMEvent(event) {
+    if (event.type !== "keypress") {
+      return false;
+    }
+    try {
+      var target = event.target;
+      if (!target || !target.tagName) {
+        return true;
+      }
+      if (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable) {
+        return false;
+      }
+    } catch (e3) {
+    }
+    return true;
+  }
+  function makeDOMEventHandler(handler, globalListener = false) {
+    return (event) => {
+      if (!event || lastCapturedEvent === event) {
+        return;
+      }
+      if (shouldSkipDOMEvent(event)) {
+        return;
+      }
+      var name = event.type === "keypress" ? "input" : event.type;
+      if (debounceTimerID === void 0) {
+        handler({
+          event,
+          name,
+          global: globalListener
+        });
+        lastCapturedEvent = event;
+      } else if (shouldShortcircuitPreviousDebounce(lastCapturedEvent, event)) {
+        handler({
+          event,
+          name,
+          global: globalListener
+        });
+        lastCapturedEvent = event;
+      }
+      clearTimeout(debounceTimerID);
+      debounceTimerID = global3.setTimeout(() => {
+        debounceTimerID = void 0;
+      }, debounceDuration);
+    };
+  }
+  function instrumentDOM() {
+    if (!("document" in global3)) {
+      return;
+    }
+    var triggerDOMHandler = triggerHandlers.bind(null, "dom");
+    var globalDOMEventHandler = makeDOMEventHandler(triggerDOMHandler, true);
+    global3.document.addEventListener("click", globalDOMEventHandler, false);
+    global3.document.addEventListener("keypress", globalDOMEventHandler, false);
+    ["EventTarget", "Node"].forEach((target) => {
+      var proto = global3[target] && global3[target].prototype;
+      if (!proto || !proto.hasOwnProperty || !proto.hasOwnProperty("addEventListener")) {
+        return;
+      }
+      fill(proto, "addEventListener", function(originalAddEventListener) {
+        return function(type, listener, options2) {
+          if (type === "click" || type == "keypress") {
+            try {
+              var el = this;
+              var handlers2 = el.__sentry_instrumentation_handlers__ = el.__sentry_instrumentation_handlers__ || {};
+              var handlerForType = handlers2[type] = handlers2[type] || { refCount: 0 };
+              if (!handlerForType.handler) {
+                var handler = makeDOMEventHandler(triggerDOMHandler);
+                handlerForType.handler = handler;
+                originalAddEventListener.call(this, type, handler, options2);
+              }
+              handlerForType.refCount += 1;
+            } catch (e3) {
+            }
+          }
+          return originalAddEventListener.call(this, type, listener, options2);
+        };
+      });
+      fill(proto, "removeEventListener", function(originalRemoveEventListener) {
+        return function(type, listener, options2) {
+          if (type === "click" || type == "keypress") {
+            try {
+              var el = this;
+              var handlers2 = el.__sentry_instrumentation_handlers__ || {};
+              var handlerForType = handlers2[type];
+              if (handlerForType) {
+                handlerForType.refCount -= 1;
+                if (handlerForType.refCount <= 0) {
+                  originalRemoveEventListener.call(this, type, handlerForType.handler, options2);
+                  handlerForType.handler = void 0;
+                  delete handlers2[type];
+                }
+                if (Object.keys(handlers2).length === 0) {
+                  delete el.__sentry_instrumentation_handlers__;
+                }
+              }
+            } catch (e3) {
+            }
+          }
+          return originalRemoveEventListener.call(this, type, listener, options2);
+        };
+      });
+    });
+  }
+  var _oldOnErrorHandler = null;
+  function instrumentError() {
+    _oldOnErrorHandler = global3.onerror;
+    global3.onerror = function(msg, url2, line, column, error) {
+      triggerHandlers("error", {
+        column,
+        error,
+        line,
+        msg,
+        url: url2
+      });
+      if (_oldOnErrorHandler) {
+        return _oldOnErrorHandler.apply(this, arguments);
+      }
+      return false;
+    };
+  }
+  var _oldOnUnhandledRejectionHandler = null;
+  function instrumentUnhandledRejection() {
+    _oldOnUnhandledRejectionHandler = global3.onunhandledrejection;
+    global3.onunhandledrejection = function(e3) {
+      triggerHandlers("unhandledrejection", e3);
+      if (_oldOnUnhandledRejectionHandler) {
+        return _oldOnUnhandledRejectionHandler.apply(this, arguments);
+      }
+      return true;
+    };
+  }
+
+  // node_modules/@sentry/utils/esm/memo.js
+  function memoBuilder() {
+    var hasWeakSet = typeof WeakSet === "function";
+    var inner = hasWeakSet ? new WeakSet() : [];
+    function memoize3(obj) {
+      if (hasWeakSet) {
+        if (inner.has(obj)) {
+          return true;
+        }
+        inner.add(obj);
+        return false;
+      }
+      for (let i3 = 0; i3 < inner.length; i3++) {
+        var value2 = inner[i3];
+        if (value2 === obj) {
+          return true;
+        }
+      }
+      inner.push(obj);
+      return false;
+    }
+    function unmemoize(obj) {
+      if (hasWeakSet) {
+        inner.delete(obj);
+      } else {
+        for (let i3 = 0; i3 < inner.length; i3++) {
+          if (inner[i3] === obj) {
+            inner.splice(i3, 1);
+            break;
+          }
+        }
+      }
+    }
+    return [memoize3, unmemoize];
+  }
+
+  // node_modules/@sentry/utils/esm/misc.js
+  function uuid4() {
+    var global9 = getGlobalObject();
+    var crypto = global9.crypto || global9.msCrypto;
+    if (crypto && crypto.randomUUID) {
+      return crypto.randomUUID().replace(/-/g, "");
+    }
+    var getRandomByte = crypto && crypto.getRandomValues ? () => crypto.getRandomValues(new Uint8Array(1))[0] : () => Math.random() * 16;
+    return ([1e7] + 1e3 + 4e3 + 8e3 + 1e11).replace(/[018]/g, (c3) => (c3 ^ (getRandomByte() & 15) >> c3 / 4).toString(16));
+  }
+  function getFirstException(event) {
+    return event.exception && event.exception.values ? event.exception.values[0] : void 0;
+  }
+  function getEventDescription(event) {
+    const { message, event_id: eventId } = event;
+    if (message) {
+      return message;
+    }
+    var firstException = getFirstException(event);
+    if (firstException) {
+      if (firstException.type && firstException.value) {
+        return `${firstException.type}: ${firstException.value}`;
+      }
+      return firstException.type || firstException.value || eventId || "<unknown>";
+    }
+    return eventId || "<unknown>";
+  }
+  function addExceptionTypeValue(event, value2, type) {
+    var exception = event.exception = event.exception || {};
+    var values = exception.values = exception.values || [];
+    var firstException = values[0] = values[0] || {};
+    if (!firstException.value) {
+      firstException.value = value2 || "";
+    }
+    if (!firstException.type) {
+      firstException.type = type || "Error";
+    }
+  }
+  function addExceptionMechanism(event, newMechanism) {
+    var firstException = getFirstException(event);
+    if (!firstException) {
+      return;
+    }
+    var defaultMechanism = { type: "generic", handled: true };
+    var currentMechanism = firstException.mechanism;
+    firstException.mechanism = __spreadValues(__spreadValues(__spreadValues({}, defaultMechanism), currentMechanism), newMechanism);
+    if (newMechanism && "data" in newMechanism) {
+      var mergedData = __spreadValues(__spreadValues({}, currentMechanism && currentMechanism.data), newMechanism.data);
+      firstException.mechanism.data = mergedData;
+    }
+  }
+  function checkOrSetAlreadyCaught(exception) {
+    if (exception && exception.__sentry_captured__) {
+      return true;
+    }
+    try {
+      addNonEnumerableProperty(exception, "__sentry_captured__", true);
+    } catch (err) {
+    }
+    return false;
+  }
+  function arrayify(maybeArray) {
+    return Array.isArray(maybeArray) ? maybeArray : [maybeArray];
+  }
+
+  // node_modules/@sentry/utils/esm/normalize.js
+  function normalize(input, depth = Infinity, maxProperties = Infinity) {
+    try {
+      return visit("", input, depth, maxProperties);
+    } catch (err) {
+      return { ERROR: `**non-serializable** (${err})` };
+    }
+  }
+  function normalizeToSize(object, depth = 3, maxSize = 100 * 1024) {
+    var normalized = normalize(object, depth);
+    if (jsonSize(normalized) > maxSize) {
+      return normalizeToSize(object, depth - 1, maxSize);
+    }
+    return normalized;
+  }
+  function visit(key, value2, depth = Infinity, maxProperties = Infinity, memo2 = memoBuilder()) {
+    const [memoize3, unmemoize] = memo2;
+    if (value2 === null || ["number", "boolean", "string"].includes(typeof value2) && !isNaN2(value2)) {
+      return value2;
+    }
+    var stringified = stringifyValue(key, value2);
+    if (!stringified.startsWith("[object ")) {
+      return stringified;
+    }
+    if (value2["__sentry_skip_normalization__"]) {
+      return value2;
+    }
+    if (depth === 0) {
+      return stringified.replace("object ", "");
+    }
+    if (memoize3(value2)) {
+      return "[Circular ~]";
+    }
+    var valueWithToJSON = value2;
+    if (valueWithToJSON && typeof valueWithToJSON.toJSON === "function") {
+      try {
+        var jsonValue = valueWithToJSON.toJSON();
+        return visit("", jsonValue, depth - 1, maxProperties, memo2);
+      } catch (err) {
+      }
+    }
+    var normalized = Array.isArray(value2) ? [] : {};
+    let numAdded = 0;
+    var visitable = convertToPlainObject(value2);
+    for (var visitKey in visitable) {
+      if (!Object.prototype.hasOwnProperty.call(visitable, visitKey)) {
+        continue;
+      }
+      if (numAdded >= maxProperties) {
+        normalized[visitKey] = "[MaxProperties ~]";
+        break;
+      }
+      var visitValue = visitable[visitKey];
+      normalized[visitKey] = visit(visitKey, visitValue, depth - 1, maxProperties, memo2);
+      numAdded += 1;
+    }
+    unmemoize(value2);
+    return normalized;
+  }
+  function stringifyValue(key, value2) {
+    try {
+      if (key === "domain" && value2 && typeof value2 === "object" && value2._events) {
+        return "[Domain]";
+      }
+      if (key === "domainEmitter") {
+        return "[DomainEmitter]";
+      }
+      if (typeof global !== "undefined" && value2 === global) {
+        return "[Global]";
+      }
+      if (typeof window !== "undefined" && value2 === window) {
+        return "[Window]";
+      }
+      if (typeof document !== "undefined" && value2 === document) {
+        return "[Document]";
+      }
+      if (isSyntheticEvent(value2)) {
+        return "[SyntheticEvent]";
+      }
+      if (typeof value2 === "number" && value2 !== value2) {
+        return "[NaN]";
+      }
+      if (value2 === void 0) {
+        return "[undefined]";
+      }
+      if (typeof value2 === "function") {
+        return `[Function: ${getFunctionName(value2)}]`;
+      }
+      if (typeof value2 === "symbol") {
+        return `[${String(value2)}]`;
+      }
+      if (typeof value2 === "bigint") {
+        return `[BigInt: ${String(value2)}]`;
+      }
+      return `[object ${Object.getPrototypeOf(value2).constructor.name}]`;
+    } catch (err) {
+      return `**non-serializable** (${err})`;
+    }
+  }
+  function utf8Length(value2) {
+    return ~-encodeURI(value2).split(/%..|./).length;
+  }
+  function jsonSize(value2) {
+    return utf8Length(JSON.stringify(value2));
+  }
+
+  // node_modules/@sentry/utils/esm/syncpromise.js
+  var States;
+  (function(States2) {
+    var PENDING = 0;
+    States2[States2["PENDING"] = PENDING] = "PENDING";
+    var RESOLVED = 1;
+    States2[States2["RESOLVED"] = RESOLVED] = "RESOLVED";
+    var REJECTED = 2;
+    States2[States2["REJECTED"] = REJECTED] = "REJECTED";
+  })(States || (States = {}));
+  function resolvedSyncPromise(value2) {
+    return new SyncPromise((resolve) => {
+      resolve(value2);
+    });
+  }
+  function rejectedSyncPromise(reason) {
+    return new SyncPromise((_2, reject) => {
+      reject(reason);
+    });
+  }
+  var SyncPromise = class {
+    __init() {
+      this._state = States.PENDING;
+    }
+    __init2() {
+      this._handlers = [];
+    }
+    constructor(executor) {
+      ;
+      SyncPromise.prototype.__init.call(this);
+      SyncPromise.prototype.__init2.call(this);
+      SyncPromise.prototype.__init3.call(this);
+      SyncPromise.prototype.__init4.call(this);
+      SyncPromise.prototype.__init5.call(this);
+      SyncPromise.prototype.__init6.call(this);
+      try {
+        executor(this._resolve, this._reject);
+      } catch (e3) {
+        this._reject(e3);
+      }
+    }
+    then(onfulfilled, onrejected) {
+      return new SyncPromise((resolve, reject) => {
+        this._handlers.push([
+          false,
+          (result) => {
+            if (!onfulfilled) {
+              resolve(result);
+            } else {
+              try {
+                resolve(onfulfilled(result));
+              } catch (e3) {
+                reject(e3);
+              }
+            }
+          },
+          (reason) => {
+            if (!onrejected) {
+              reject(reason);
+            } else {
+              try {
+                resolve(onrejected(reason));
+              } catch (e3) {
+                reject(e3);
+              }
+            }
+          }
+        ]);
+        this._executeHandlers();
+      });
+    }
+    catch(onrejected) {
+      return this.then((val) => val, onrejected);
+    }
+    finally(onfinally) {
+      return new SyncPromise((resolve, reject) => {
+        let val;
+        let isRejected;
+        return this.then((value2) => {
+          isRejected = false;
+          val = value2;
+          if (onfinally) {
+            onfinally();
+          }
+        }, (reason) => {
+          isRejected = true;
+          val = reason;
+          if (onfinally) {
+            onfinally();
+          }
+        }).then(() => {
+          if (isRejected) {
+            reject(val);
+            return;
+          }
+          resolve(val);
+        });
+      });
+    }
+    __init3() {
+      this._resolve = (value2) => {
+        this._setResult(States.RESOLVED, value2);
+      };
+    }
+    __init4() {
+      this._reject = (reason) => {
+        this._setResult(States.REJECTED, reason);
+      };
+    }
+    __init5() {
+      this._setResult = (state, value2) => {
+        if (this._state !== States.PENDING) {
+          return;
+        }
+        if (isThenable(value2)) {
+          void value2.then(this._resolve, this._reject);
+          return;
+        }
+        this._state = state;
+        this._value = value2;
+        this._executeHandlers();
+      };
+    }
+    __init6() {
+      this._executeHandlers = () => {
+        if (this._state === States.PENDING) {
+          return;
+        }
+        var cachedHandlers = this._handlers.slice();
+        this._handlers = [];
+        cachedHandlers.forEach((handler) => {
+          if (handler[0]) {
+            return;
+          }
+          if (this._state === States.RESOLVED) {
+            handler[1](this._value);
+          }
+          if (this._state === States.REJECTED) {
+            handler[2](this._value);
+          }
+          handler[0] = true;
+        });
+      };
+    }
+  };
+
+  // node_modules/@sentry/utils/esm/promisebuffer.js
+  function makePromiseBuffer(limit) {
+    var buffer = [];
+    function isReady() {
+      return limit === void 0 || buffer.length < limit;
+    }
+    function remove(task) {
+      return buffer.splice(buffer.indexOf(task), 1)[0];
+    }
+    function add(taskProducer) {
+      if (!isReady()) {
+        return rejectedSyncPromise(new SentryError("Not adding Promise because buffer limit was reached."));
+      }
+      var task = taskProducer();
+      if (buffer.indexOf(task) === -1) {
+        buffer.push(task);
+      }
+      void task.then(() => remove(task)).then(null, () => remove(task).then(null, () => {
+      }));
+      return task;
+    }
+    function drain(timeout) {
+      return new SyncPromise((resolve, reject) => {
+        let counter = buffer.length;
+        if (!counter) {
+          return resolve(true);
+        }
+        var capturedSetTimeout = setTimeout(() => {
+          if (timeout && timeout > 0) {
+            resolve(false);
+          }
+        }, timeout);
+        buffer.forEach((item) => {
+          void resolvedSyncPromise(item).then(() => {
+            if (!--counter) {
+              clearTimeout(capturedSetTimeout);
+              resolve(true);
+            }
+          }, reject);
+        });
+      });
+    }
+    return {
+      $: buffer,
+      add,
+      drain
+    };
+  }
+
+  // node_modules/@sentry/utils/esm/url.js
+  function parseUrl(url2) {
+    if (!url2) {
+      return {};
+    }
+    var match2 = url2.match(/^(([^:/?#]+):)?(\/\/([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?$/);
+    if (!match2) {
+      return {};
+    }
+    var query = match2[6] || "";
+    var fragment = match2[8] || "";
+    return {
+      host: match2[4],
+      path: match2[5],
+      protocol: match2[2],
+      relative: match2[5] + query + fragment
+    };
+  }
+
+  // node_modules/@sentry/utils/esm/severity.js
+  var validSeverityLevels = ["fatal", "error", "warning", "log", "info", "debug"];
+  function severityLevelFromString(level) {
+    return level === "warn" ? "warning" : validSeverityLevels.includes(level) ? level : "log";
+  }
+
+  // node_modules/@sentry/utils/esm/time.js
+  var dateTimestampSource = {
+    nowSeconds: () => Date.now() / 1e3
+  };
+  function getBrowserPerformance() {
+    const { performance: performance2 } = getGlobalObject();
+    if (!performance2 || !performance2.now) {
+      return void 0;
+    }
+    var timeOrigin = Date.now() - performance2.now();
+    return {
+      now: () => performance2.now(),
+      timeOrigin
+    };
+  }
+  function getNodePerformance() {
+    try {
+      var perfHooks = dynamicRequire(module, "perf_hooks");
+      return perfHooks.performance;
+    } catch (_2) {
+      return void 0;
+    }
+  }
+  var platformPerformance = isNodeEnv() ? getNodePerformance() : getBrowserPerformance();
+  var timestampSource = platformPerformance === void 0 ? dateTimestampSource : {
+    nowSeconds: () => (platformPerformance.timeOrigin + platformPerformance.now()) / 1e3
+  };
+  var dateTimestampInSeconds = dateTimestampSource.nowSeconds.bind(dateTimestampSource);
+  var timestampInSeconds = timestampSource.nowSeconds.bind(timestampSource);
+  var timestampWithMs = timestampInSeconds;
+  var _browserPerformanceTimeOriginMode;
+  var browserPerformanceTimeOrigin = (() => {
+    const { performance: performance2 } = getGlobalObject();
+    if (!performance2 || !performance2.now) {
+      _browserPerformanceTimeOriginMode = "none";
+      return void 0;
+    }
+    var threshold2 = 3600 * 1e3;
+    var performanceNow = performance2.now();
+    var dateNow = Date.now();
+    var timeOriginDelta = performance2.timeOrigin ? Math.abs(performance2.timeOrigin + performanceNow - dateNow) : threshold2;
+    var timeOriginIsReliable = timeOriginDelta < threshold2;
+    var navigationStart = performance2.timing && performance2.timing.navigationStart;
+    var hasNavigationStart = typeof navigationStart === "number";
+    var navigationStartDelta = hasNavigationStart ? Math.abs(navigationStart + performanceNow - dateNow) : threshold2;
+    var navigationStartIsReliable = navigationStartDelta < threshold2;
+    if (timeOriginIsReliable || navigationStartIsReliable) {
+      if (timeOriginDelta <= navigationStartDelta) {
+        _browserPerformanceTimeOriginMode = "timeOrigin";
+        return performance2.timeOrigin;
+      } else {
+        _browserPerformanceTimeOriginMode = "navigationStart";
+        return navigationStart;
+      }
+    }
+    _browserPerformanceTimeOriginMode = "dateNow";
+    return dateNow;
+  })();
+
+  // node_modules/@sentry/utils/esm/tracing.js
+  var TRACEPARENT_REGEXP = new RegExp("^[ \\t]*([0-9a-f]{32})?-?([0-9a-f]{16})?-?([01])?[ \\t]*$");
+  function extractTraceparentData(traceparent) {
+    var matches = traceparent.match(TRACEPARENT_REGEXP);
+    if (matches) {
+      let parentSampled;
+      if (matches[3] === "1") {
+        parentSampled = true;
+      } else if (matches[3] === "0") {
+        parentSampled = false;
+      }
+      return {
+        traceId: matches[1],
+        parentSampled,
+        parentSpanId: matches[2]
+      };
+    }
+    return void 0;
+  }
+
+  // node_modules/@sentry/utils/esm/envelope.js
+  function createEnvelope(headers, items = []) {
+    return [headers, items];
+  }
+  function addItemToEnvelope(envelope, newItem) {
+    const [headers, items] = envelope;
+    return [headers, [...items, newItem]];
+  }
+  function forEachEnvelopeItem(envelope, callback) {
+    var envelopeItems = envelope[1];
+    envelopeItems.forEach((envelopeItem) => {
+      var envelopeItemType = envelopeItem[0].type;
+      callback(envelopeItem, envelopeItemType);
+    });
+  }
+  function encodeUTF8(input, textEncoder) {
+    var utf8 = textEncoder || new TextEncoder();
+    return utf8.encode(input);
+  }
+  function serializeEnvelope(envelope, textEncoder) {
+    const [envHeaders, items] = envelope;
+    let parts2 = JSON.stringify(envHeaders);
+    function append(next) {
+      if (typeof parts2 === "string") {
+        parts2 = typeof next === "string" ? parts2 + next : [encodeUTF8(parts2, textEncoder), next];
+      } else {
+        parts2.push(typeof next === "string" ? encodeUTF8(next, textEncoder) : next);
+      }
+    }
+    for (var item of items) {
+      const [itemHeaders, payload] = item;
+      append(`
+${JSON.stringify(itemHeaders)}
+`);
+      append(typeof payload === "string" || payload instanceof Uint8Array ? payload : JSON.stringify(payload));
+    }
+    return typeof parts2 === "string" ? parts2 : concatBuffers(parts2);
+  }
+  function concatBuffers(buffers) {
+    var totalLength = buffers.reduce((acc, buf) => acc + buf.length, 0);
+    var merged = new Uint8Array(totalLength);
+    let offset = 0;
+    for (var buffer of buffers) {
+      merged.set(buffer, offset);
+      offset += buffer.length;
+    }
+    return merged;
+  }
+  function createAttachmentEnvelopeItem(attachment, textEncoder) {
+    var buffer = typeof attachment.data === "string" ? encodeUTF8(attachment.data, textEncoder) : attachment.data;
+    return [
+      dropUndefinedKeys({
+        type: "attachment",
+        length: buffer.length,
+        filename: attachment.filename,
+        content_type: attachment.contentType,
+        attachment_type: attachment.attachmentType
+      }),
+      buffer
+    ];
+  }
+  var ITEM_TYPE_TO_DATA_CATEGORY_MAP = {
+    session: "session",
+    sessions: "session",
+    attachment: "attachment",
+    transaction: "transaction",
+    event: "error",
+    client_report: "internal",
+    user_report: "default"
+  };
+  function envelopeItemTypeToDataCategory(type) {
+    return ITEM_TYPE_TO_DATA_CATEGORY_MAP[type];
+  }
+
+  // node_modules/@sentry/utils/esm/clientreport.js
+  function createClientReportEnvelope(discarded_events, dsn, timestamp) {
+    var clientReportItem = [
+      { type: "client_report" },
+      {
+        timestamp: timestamp || dateTimestampInSeconds(),
+        discarded_events
+      }
+    ];
+    return createEnvelope(dsn ? { dsn } : {}, [clientReportItem]);
+  }
+
+  // node_modules/@sentry/utils/esm/ratelimit.js
+  var DEFAULT_RETRY_AFTER = 60 * 1e3;
+  function parseRetryAfterHeader(header, now2 = Date.now()) {
+    var headerDelay = parseInt(`${header}`, 10);
+    if (!isNaN(headerDelay)) {
+      return headerDelay * 1e3;
+    }
+    var headerDate = Date.parse(`${header}`);
+    if (!isNaN(headerDate)) {
+      return headerDate - now2;
+    }
+    return DEFAULT_RETRY_AFTER;
+  }
+  function disabledUntil(limits, category) {
+    return limits[category] || limits.all || 0;
+  }
+  function isRateLimited(limits, category, now2 = Date.now()) {
+    return disabledUntil(limits, category) > now2;
+  }
+  function updateRateLimits(limits, { statusCode, headers }, now2 = Date.now()) {
+    var updatedRateLimits = __spreadValues({}, limits);
+    var rateLimitHeader = headers && headers["x-sentry-rate-limits"];
+    var retryAfterHeader = headers && headers["retry-after"];
+    if (rateLimitHeader) {
+      for (var limit of rateLimitHeader.trim().split(",")) {
+        const [retryAfter, categories] = limit.split(":", 2);
+        var headerDelay = parseInt(retryAfter, 10);
+        var delay = (!isNaN(headerDelay) ? headerDelay : 60) * 1e3;
+        if (!categories) {
+          updatedRateLimits.all = now2 + delay;
+        } else {
+          for (var category of categories.split(";")) {
+            updatedRateLimits[category] = now2 + delay;
+          }
+        }
+      }
+    } else if (retryAfterHeader) {
+      updatedRateLimits.all = now2 + parseRetryAfterHeader(retryAfterHeader, now2);
+    } else if (statusCode === 429) {
+      updatedRateLimits.all = now2 + 60 * 1e3;
+    }
+    return updatedRateLimits;
+  }
+
+  // node_modules/@sentry/utils/esm/baggage.js
+  var BAGGAGE_HEADER_NAME = "baggage";
+  var SENTRY_BAGGAGE_KEY_PREFIX = "sentry-";
+  var SENTRY_BAGGAGE_KEY_PREFIX_REGEX = /^sentry-/;
+  var MAX_BAGGAGE_STRING_LENGTH = 8192;
+  function createBaggage(initItems, baggageString = "", mutable = true) {
+    return [__spreadValues({}, initItems), baggageString, mutable];
+  }
+  function isSentryBaggageEmpty(baggage) {
+    return Object.keys(baggage[0]).length === 0;
+  }
+  function getSentryBaggageItems(baggage) {
+    return baggage[0];
+  }
+  function getThirdPartyBaggage(baggage) {
+    return baggage[1];
+  }
+  function isBaggageMutable(baggage) {
+    return baggage[2];
+  }
+  function setBaggageImmutable(baggage) {
+    baggage[2] = false;
+  }
+  function serializeBaggage(baggage) {
+    return Object.keys(baggage[0]).reduce((prev2, key) => {
+      var val = baggage[0][key];
+      var baggageEntry = `${SENTRY_BAGGAGE_KEY_PREFIX}${encodeURIComponent(key)}=${encodeURIComponent(val)}`;
+      var newVal = prev2 === "" ? baggageEntry : `${prev2},${baggageEntry}`;
+      if (newVal.length > MAX_BAGGAGE_STRING_LENGTH) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn(`Not adding key: ${key} with val: ${val} to baggage due to exceeding baggage size limits.`);
+        return prev2;
+      } else {
+        return newVal;
+      }
+    }, baggage[1]);
+  }
+  function parseBaggageHeader(inputBaggageValue, includeThirdPartyEntries = false) {
+    if (!Array.isArray(inputBaggageValue) && !isString(inputBaggageValue) || typeof inputBaggageValue === "number") {
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn("[parseBaggageHeader] Received input value of incompatible type: ", typeof inputBaggageValue, inputBaggageValue);
+      return createBaggage({}, "");
+    }
+    var baggageEntries = (isString(inputBaggageValue) ? inputBaggageValue : inputBaggageValue.join(",")).split(",").map((entry) => entry.trim()).filter((entry) => entry !== "" && (includeThirdPartyEntries || SENTRY_BAGGAGE_KEY_PREFIX_REGEX.test(entry)));
+    return baggageEntries.reduce(([baggageObj, baggageString], curr) => {
+      const [key, val] = curr.split("=");
+      if (SENTRY_BAGGAGE_KEY_PREFIX_REGEX.test(key)) {
+        var baggageKey = decodeURIComponent(key.split("-")[1]);
+        return [
+          __spreadProps(__spreadValues({}, baggageObj), {
+            [baggageKey]: decodeURIComponent(val)
+          }),
+          baggageString,
+          true
+        ];
+      } else {
+        return [baggageObj, baggageString === "" ? curr : `${baggageString},${curr}`, true];
+      }
+    }, [{}, "", true]);
+  }
+  function mergeAndSerializeBaggage(incomingBaggage, thirdPartyBaggageHeader) {
+    if (!incomingBaggage && !thirdPartyBaggageHeader) {
+      return "";
+    }
+    var headerBaggage = thirdPartyBaggageHeader && parseBaggageHeader(thirdPartyBaggageHeader, true) || void 0;
+    var thirdPartyHeaderBaggage = headerBaggage && getThirdPartyBaggage(headerBaggage);
+    var finalBaggage = createBaggage(incomingBaggage && incomingBaggage[0] || {}, thirdPartyHeaderBaggage || "");
+    return serializeBaggage(finalBaggage);
+  }
+  function parseBaggageSetMutability(rawBaggageValue, sentryTraceHeader) {
+    var baggage = parseBaggageHeader(rawBaggageValue || "");
+    (sentryTraceHeader || !isSentryBaggageEmpty(baggage)) && setBaggageImmutable(baggage);
+    return baggage;
+  }
+
+  // node_modules/@sentry/hub/esm/session.js
+  function makeSession(context2) {
+    var startingTime = timestampInSeconds();
+    var session = {
+      sid: uuid4(),
+      init: true,
+      timestamp: startingTime,
+      started: startingTime,
+      duration: 0,
+      status: "ok",
+      errors: 0,
+      ignoreDuration: false,
+      toJSON: () => sessionToJSON(session)
+    };
+    if (context2) {
+      updateSession(session, context2);
+    }
+    return session;
+  }
+  function updateSession(session, context2 = {}) {
+    if (context2.user) {
+      if (!session.ipAddress && context2.user.ip_address) {
+        session.ipAddress = context2.user.ip_address;
+      }
+      if (!session.did && !context2.did) {
+        session.did = context2.user.id || context2.user.email || context2.user.username;
+      }
+    }
+    session.timestamp = context2.timestamp || timestampInSeconds();
+    if (context2.ignoreDuration) {
+      session.ignoreDuration = context2.ignoreDuration;
+    }
+    if (context2.sid) {
+      session.sid = context2.sid.length === 32 ? context2.sid : uuid4();
+    }
+    if (context2.init !== void 0) {
+      session.init = context2.init;
+    }
+    if (!session.did && context2.did) {
+      session.did = `${context2.did}`;
+    }
+    if (typeof context2.started === "number") {
+      session.started = context2.started;
+    }
+    if (session.ignoreDuration) {
+      session.duration = void 0;
+    } else if (typeof context2.duration === "number") {
+      session.duration = context2.duration;
+    } else {
+      var duration = session.timestamp - session.started;
+      session.duration = duration >= 0 ? duration : 0;
+    }
+    if (context2.release) {
+      session.release = context2.release;
+    }
+    if (context2.environment) {
+      session.environment = context2.environment;
+    }
+    if (!session.ipAddress && context2.ipAddress) {
+      session.ipAddress = context2.ipAddress;
+    }
+    if (!session.userAgent && context2.userAgent) {
+      session.userAgent = context2.userAgent;
+    }
+    if (typeof context2.errors === "number") {
+      session.errors = context2.errors;
+    }
+    if (context2.status) {
+      session.status = context2.status;
+    }
+  }
+  function closeSession(session, status) {
+    let context2 = {};
+    if (status) {
+      context2 = { status };
+    } else if (session.status === "ok") {
+      context2 = { status: "exited" };
+    }
+    updateSession(session, context2);
+  }
+  function sessionToJSON(session) {
+    return dropUndefinedKeys({
+      sid: `${session.sid}`,
+      init: session.init,
+      started: new Date(session.started * 1e3).toISOString(),
+      timestamp: new Date(session.timestamp * 1e3).toISOString(),
+      status: session.status,
+      errors: session.errors,
+      did: typeof session.did === "number" || typeof session.did === "string" ? `${session.did}` : void 0,
+      duration: session.duration,
+      attrs: {
+        release: session.release,
+        environment: session.environment,
+        ip_address: session.ipAddress,
+        user_agent: session.userAgent
+      }
+    });
+  }
+
+  // node_modules/@sentry/hub/esm/scope.js
+  var MAX_BREADCRUMBS = 100;
+  var Scope = class {
+    constructor() {
+      this._notifyingListeners = false;
+      this._scopeListeners = [];
+      this._eventProcessors = [];
+      this._breadcrumbs = [];
+      this._attachments = [];
+      this._user = {};
+      this._tags = {};
+      this._extra = {};
+      this._contexts = {};
+      this._sdkProcessingMetadata = {};
+    }
+    static clone(scope) {
+      var newScope = new Scope();
+      if (scope) {
+        newScope._breadcrumbs = [...scope._breadcrumbs];
+        newScope._tags = __spreadValues({}, scope._tags);
+        newScope._extra = __spreadValues({}, scope._extra);
+        newScope._contexts = __spreadValues({}, scope._contexts);
+        newScope._user = scope._user;
+        newScope._level = scope._level;
+        newScope._span = scope._span;
+        newScope._session = scope._session;
+        newScope._transactionName = scope._transactionName;
+        newScope._fingerprint = scope._fingerprint;
+        newScope._eventProcessors = [...scope._eventProcessors];
+        newScope._requestSession = scope._requestSession;
+        newScope._attachments = [...scope._attachments];
+      }
+      return newScope;
+    }
+    addScopeListener(callback) {
+      this._scopeListeners.push(callback);
+    }
+    addEventProcessor(callback) {
+      this._eventProcessors.push(callback);
+      return this;
+    }
+    setUser(user) {
+      this._user = user || {};
+      if (this._session) {
+        updateSession(this._session, { user });
+      }
+      this._notifyScopeListeners();
+      return this;
+    }
+    getUser() {
+      return this._user;
+    }
+    getRequestSession() {
+      return this._requestSession;
+    }
+    setRequestSession(requestSession) {
+      this._requestSession = requestSession;
+      return this;
+    }
+    setTags(tags) {
+      this._tags = __spreadValues(__spreadValues({}, this._tags), tags);
+      this._notifyScopeListeners();
+      return this;
+    }
+    setTag(key, value2) {
+      this._tags = __spreadProps(__spreadValues({}, this._tags), { [key]: value2 });
+      this._notifyScopeListeners();
+      return this;
+    }
+    setExtras(extras) {
+      this._extra = __spreadValues(__spreadValues({}, this._extra), extras);
+      this._notifyScopeListeners();
+      return this;
+    }
+    setExtra(key, extra) {
+      this._extra = __spreadProps(__spreadValues({}, this._extra), { [key]: extra });
+      this._notifyScopeListeners();
+      return this;
+    }
+    setFingerprint(fingerprint) {
+      this._fingerprint = fingerprint;
+      this._notifyScopeListeners();
+      return this;
+    }
+    setLevel(level) {
+      this._level = level;
+      this._notifyScopeListeners();
+      return this;
+    }
+    setTransactionName(name) {
+      this._transactionName = name;
+      this._notifyScopeListeners();
+      return this;
+    }
+    setContext(key, context2) {
+      if (context2 === null) {
+        delete this._contexts[key];
+      } else {
+        this._contexts = __spreadProps(__spreadValues({}, this._contexts), { [key]: context2 });
+      }
+      this._notifyScopeListeners();
+      return this;
+    }
+    setSpan(span) {
+      this._span = span;
+      this._notifyScopeListeners();
+      return this;
+    }
+    getSpan() {
+      return this._span;
+    }
+    getTransaction() {
+      var span = this.getSpan();
+      return span && span.transaction;
+    }
+    setSession(session) {
+      if (!session) {
+        delete this._session;
+      } else {
+        this._session = session;
+      }
+      this._notifyScopeListeners();
+      return this;
+    }
+    getSession() {
+      return this._session;
+    }
+    update(captureContext) {
+      if (!captureContext) {
+        return this;
+      }
+      if (typeof captureContext === "function") {
+        var updatedScope = captureContext(this);
+        return updatedScope instanceof Scope ? updatedScope : this;
+      }
+      if (captureContext instanceof Scope) {
+        this._tags = __spreadValues(__spreadValues({}, this._tags), captureContext._tags);
+        this._extra = __spreadValues(__spreadValues({}, this._extra), captureContext._extra);
+        this._contexts = __spreadValues(__spreadValues({}, this._contexts), captureContext._contexts);
+        if (captureContext._user && Object.keys(captureContext._user).length) {
+          this._user = captureContext._user;
+        }
+        if (captureContext._level) {
+          this._level = captureContext._level;
+        }
+        if (captureContext._fingerprint) {
+          this._fingerprint = captureContext._fingerprint;
+        }
+        if (captureContext._requestSession) {
+          this._requestSession = captureContext._requestSession;
+        }
+      } else if (isPlainObject(captureContext)) {
+        captureContext = captureContext;
+        this._tags = __spreadValues(__spreadValues({}, this._tags), captureContext.tags);
+        this._extra = __spreadValues(__spreadValues({}, this._extra), captureContext.extra);
+        this._contexts = __spreadValues(__spreadValues({}, this._contexts), captureContext.contexts);
+        if (captureContext.user) {
+          this._user = captureContext.user;
+        }
+        if (captureContext.level) {
+          this._level = captureContext.level;
+        }
+        if (captureContext.fingerprint) {
+          this._fingerprint = captureContext.fingerprint;
+        }
+        if (captureContext.requestSession) {
+          this._requestSession = captureContext.requestSession;
+        }
+      }
+      return this;
+    }
+    clear() {
+      this._breadcrumbs = [];
+      this._tags = {};
+      this._extra = {};
+      this._user = {};
+      this._contexts = {};
+      this._level = void 0;
+      this._transactionName = void 0;
+      this._fingerprint = void 0;
+      this._requestSession = void 0;
+      this._span = void 0;
+      this._session = void 0;
+      this._notifyScopeListeners();
+      this._attachments = [];
+      return this;
+    }
+    addBreadcrumb(breadcrumb, maxBreadcrumbs) {
+      var maxCrumbs = typeof maxBreadcrumbs === "number" ? Math.min(maxBreadcrumbs, MAX_BREADCRUMBS) : MAX_BREADCRUMBS;
+      if (maxCrumbs <= 0) {
+        return this;
+      }
+      var mergedBreadcrumb = __spreadValues({
+        timestamp: dateTimestampInSeconds()
+      }, breadcrumb);
+      this._breadcrumbs = [...this._breadcrumbs, mergedBreadcrumb].slice(-maxCrumbs);
+      this._notifyScopeListeners();
+      return this;
+    }
+    clearBreadcrumbs() {
+      this._breadcrumbs = [];
+      this._notifyScopeListeners();
+      return this;
+    }
+    addAttachment(attachment) {
+      this._attachments.push(attachment);
+      return this;
+    }
+    getAttachments() {
+      return this._attachments;
+    }
+    clearAttachments() {
+      this._attachments = [];
+      return this;
+    }
+    applyToEvent(event, hint = {}) {
+      if (this._extra && Object.keys(this._extra).length) {
+        event.extra = __spreadValues(__spreadValues({}, this._extra), event.extra);
+      }
+      if (this._tags && Object.keys(this._tags).length) {
+        event.tags = __spreadValues(__spreadValues({}, this._tags), event.tags);
+      }
+      if (this._user && Object.keys(this._user).length) {
+        event.user = __spreadValues(__spreadValues({}, this._user), event.user);
+      }
+      if (this._contexts && Object.keys(this._contexts).length) {
+        event.contexts = __spreadValues(__spreadValues({}, this._contexts), event.contexts);
+      }
+      if (this._level) {
+        event.level = this._level;
+      }
+      if (this._transactionName) {
+        event.transaction = this._transactionName;
+      }
+      if (this._span) {
+        event.contexts = __spreadValues({ trace: this._span.getTraceContext() }, event.contexts);
+        var transactionName = this._span.transaction && this._span.transaction.name;
+        if (transactionName) {
+          event.tags = __spreadValues({ transaction: transactionName }, event.tags);
+        }
+      }
+      this._applyFingerprint(event);
+      event.breadcrumbs = [...event.breadcrumbs || [], ...this._breadcrumbs];
+      event.breadcrumbs = event.breadcrumbs.length > 0 ? event.breadcrumbs : void 0;
+      event.sdkProcessingMetadata = __spreadValues(__spreadValues({}, event.sdkProcessingMetadata), this._sdkProcessingMetadata);
+      return this._notifyEventProcessors([...getGlobalEventProcessors(), ...this._eventProcessors], event, hint);
+    }
+    setSDKProcessingMetadata(newData) {
+      this._sdkProcessingMetadata = __spreadValues(__spreadValues({}, this._sdkProcessingMetadata), newData);
+      return this;
+    }
+    _notifyEventProcessors(processors, event, hint, index2 = 0) {
+      return new SyncPromise((resolve, reject) => {
+        var processor = processors[index2];
+        if (event === null || typeof processor !== "function") {
+          resolve(event);
+        } else {
+          var result = processor(__spreadValues({}, event), hint);
+          (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && processor.id && result === null && logger.log(`Event processor "${processor.id}" dropped event`);
+          if (isThenable(result)) {
+            void result.then((final) => this._notifyEventProcessors(processors, final, hint, index2 + 1).then(resolve)).then(null, reject);
+          } else {
+            void this._notifyEventProcessors(processors, result, hint, index2 + 1).then(resolve).then(null, reject);
+          }
+        }
+      });
+    }
+    _notifyScopeListeners() {
+      if (!this._notifyingListeners) {
+        this._notifyingListeners = true;
+        this._scopeListeners.forEach((callback) => {
+          callback(this);
+        });
+        this._notifyingListeners = false;
+      }
+    }
+    _applyFingerprint(event) {
+      event.fingerprint = event.fingerprint ? arrayify(event.fingerprint) : [];
+      if (this._fingerprint) {
+        event.fingerprint = event.fingerprint.concat(this._fingerprint);
+      }
+      if (event.fingerprint && !event.fingerprint.length) {
+        delete event.fingerprint;
+      }
+    }
+  };
+  function getGlobalEventProcessors() {
+    return getGlobalSingleton("globalEventProcessors", () => []);
+  }
+  function addGlobalEventProcessor(callback) {
+    getGlobalEventProcessors().push(callback);
+  }
+
+  // node_modules/@sentry/hub/esm/hub.js
+  var API_VERSION = 4;
+  var DEFAULT_BREADCRUMBS = 100;
+  var Hub = class {
+    __init() {
+      this._stack = [{}];
+    }
+    constructor(client, scope = new Scope(), _version = API_VERSION) {
+      ;
+      this._version = _version;
+      Hub.prototype.__init.call(this);
+      this.getStackTop().scope = scope;
+      if (client) {
+        this.bindClient(client);
+      }
+    }
+    isOlderThan(version) {
+      return this._version < version;
+    }
+    bindClient(client) {
+      var top = this.getStackTop();
+      top.client = client;
+      if (client && client.setupIntegrations) {
+        client.setupIntegrations();
+      }
+    }
+    pushScope() {
+      var scope = Scope.clone(this.getScope());
+      this.getStack().push({
+        client: this.getClient(),
+        scope
+      });
+      return scope;
+    }
+    popScope() {
+      if (this.getStack().length <= 1)
+        return false;
+      return !!this.getStack().pop();
+    }
+    withScope(callback) {
+      var scope = this.pushScope();
+      try {
+        callback(scope);
+      } finally {
+        this.popScope();
+      }
+    }
+    getClient() {
+      return this.getStackTop().client;
+    }
+    getScope() {
+      return this.getStackTop().scope;
+    }
+    getStack() {
+      return this._stack;
+    }
+    getStackTop() {
+      return this._stack[this._stack.length - 1];
+    }
+    captureException(exception, hint) {
+      var eventId = this._lastEventId = hint && hint.event_id ? hint.event_id : uuid4();
+      var syntheticException = new Error("Sentry syntheticException");
+      this._withClient((client, scope) => {
+        client.captureException(exception, __spreadProps(__spreadValues({
+          originalException: exception,
+          syntheticException
+        }, hint), {
+          event_id: eventId
+        }), scope);
+      });
+      return eventId;
+    }
+    captureMessage(message, level, hint) {
+      var eventId = this._lastEventId = hint && hint.event_id ? hint.event_id : uuid4();
+      var syntheticException = new Error(message);
+      this._withClient((client, scope) => {
+        client.captureMessage(message, level, __spreadProps(__spreadValues({
+          originalException: message,
+          syntheticException
+        }, hint), {
+          event_id: eventId
+        }), scope);
+      });
+      return eventId;
+    }
+    captureEvent(event, hint) {
+      var eventId = hint && hint.event_id ? hint.event_id : uuid4();
+      if (event.type !== "transaction") {
+        this._lastEventId = eventId;
+      }
+      this._withClient((client, scope) => {
+        client.captureEvent(event, __spreadProps(__spreadValues({}, hint), { event_id: eventId }), scope);
+      });
+      return eventId;
+    }
+    lastEventId() {
+      return this._lastEventId;
+    }
+    addBreadcrumb(breadcrumb, hint) {
+      const { scope, client } = this.getStackTop();
+      if (!scope || !client)
+        return;
+      const { beforeBreadcrumb = null, maxBreadcrumbs = DEFAULT_BREADCRUMBS } = client.getOptions && client.getOptions() || {};
+      if (maxBreadcrumbs <= 0)
+        return;
+      var timestamp = dateTimestampInSeconds();
+      var mergedBreadcrumb = __spreadValues({ timestamp }, breadcrumb);
+      var finalBreadcrumb = beforeBreadcrumb ? consoleSandbox(() => beforeBreadcrumb(mergedBreadcrumb, hint)) : mergedBreadcrumb;
+      if (finalBreadcrumb === null)
+        return;
+      scope.addBreadcrumb(finalBreadcrumb, maxBreadcrumbs);
+    }
+    setUser(user) {
+      var scope = this.getScope();
+      if (scope)
+        scope.setUser(user);
+    }
+    setTags(tags) {
+      var scope = this.getScope();
+      if (scope)
+        scope.setTags(tags);
+    }
+    setExtras(extras) {
+      var scope = this.getScope();
+      if (scope)
+        scope.setExtras(extras);
+    }
+    setTag(key, value2) {
+      var scope = this.getScope();
+      if (scope)
+        scope.setTag(key, value2);
+    }
+    setExtra(key, extra) {
+      var scope = this.getScope();
+      if (scope)
+        scope.setExtra(key, extra);
+    }
+    setContext(name, context2) {
+      var scope = this.getScope();
+      if (scope)
+        scope.setContext(name, context2);
+    }
+    configureScope(callback) {
+      const { scope, client } = this.getStackTop();
+      if (scope && client) {
+        callback(scope);
+      }
+    }
+    run(callback) {
+      var oldHub = makeMain(this);
+      try {
+        callback(this);
+      } finally {
+        makeMain(oldHub);
+      }
+    }
+    getIntegration(integration) {
+      var client = this.getClient();
+      if (!client)
+        return null;
+      try {
+        return client.getIntegration(integration);
+      } catch (_oO) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn(`Cannot retrieve integration ${integration.id} from the current Hub`);
+        return null;
+      }
+    }
+    startTransaction(context2, customSamplingContext) {
+      return this._callExtensionMethod("startTransaction", context2, customSamplingContext);
+    }
+    traceHeaders() {
+      return this._callExtensionMethod("traceHeaders");
+    }
+    captureSession(endSession = false) {
+      if (endSession) {
+        return this.endSession();
+      }
+      this._sendSessionUpdate();
+    }
+    endSession() {
+      var layer = this.getStackTop();
+      var scope = layer && layer.scope;
+      var session = scope && scope.getSession();
+      if (session) {
+        closeSession(session);
+      }
+      this._sendSessionUpdate();
+      if (scope) {
+        scope.setSession();
+      }
+    }
+    startSession(context2) {
+      const { scope, client } = this.getStackTop();
+      const { release, environment } = client && client.getOptions() || {};
+      var global9 = getGlobalObject();
+      const { userAgent } = global9.navigator || {};
+      var session = makeSession(__spreadValues(__spreadValues(__spreadValues({
+        release,
+        environment
+      }, scope && { user: scope.getUser() }), userAgent && { userAgent }), context2));
+      if (scope) {
+        var currentSession = scope.getSession && scope.getSession();
+        if (currentSession && currentSession.status === "ok") {
+          updateSession(currentSession, { status: "exited" });
+        }
+        this.endSession();
+        scope.setSession(session);
+      }
+      return session;
+    }
+    shouldSendDefaultPii() {
+      var client = this.getClient();
+      var options2 = client && client.getOptions();
+      return Boolean(options2 && options2.sendDefaultPii);
+    }
+    _sendSessionUpdate() {
+      const { scope, client } = this.getStackTop();
+      if (!scope)
+        return;
+      var session = scope.getSession();
+      if (session) {
+        if (client && client.captureSession) {
+          client.captureSession(session);
+        }
+      }
+    }
+    _withClient(callback) {
+      const { scope, client } = this.getStackTop();
+      if (client) {
+        callback(client, scope);
+      }
+    }
+    _callExtensionMethod(method, ...args) {
+      var carrier = getMainCarrier();
+      var sentry = carrier.__SENTRY__;
+      if (sentry && sentry.extensions && typeof sentry.extensions[method] === "function") {
+        return sentry.extensions[method].apply(this, args);
+      }
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn(`Extension method ${method} couldn't be found, doing nothing.`);
+    }
+  };
+  function getMainCarrier() {
+    var carrier = getGlobalObject();
+    carrier.__SENTRY__ = carrier.__SENTRY__ || {
+      extensions: {},
+      hub: void 0
+    };
+    return carrier;
+  }
+  function makeMain(hub) {
+    var registry = getMainCarrier();
+    var oldHub = getHubFromCarrier(registry);
+    setHubOnCarrier(registry, hub);
+    return oldHub;
+  }
+  function getCurrentHub() {
+    var registry = getMainCarrier();
+    if (!hasHubOnCarrier(registry) || getHubFromCarrier(registry).isOlderThan(API_VERSION)) {
+      setHubOnCarrier(registry, new Hub());
+    }
+    if (isNodeEnv()) {
+      return getHubFromActiveDomain(registry);
+    }
+    return getHubFromCarrier(registry);
+  }
+  function getHubFromActiveDomain(registry) {
+    try {
+      var sentry = getMainCarrier().__SENTRY__;
+      var activeDomain = sentry && sentry.extensions && sentry.extensions.domain && sentry.extensions.domain.active;
+      if (!activeDomain) {
+        return getHubFromCarrier(registry);
+      }
+      if (!hasHubOnCarrier(activeDomain) || getHubFromCarrier(activeDomain).isOlderThan(API_VERSION)) {
+        var registryHubTopStack = getHubFromCarrier(registry).getStackTop();
+        setHubOnCarrier(activeDomain, new Hub(registryHubTopStack.client, Scope.clone(registryHubTopStack.scope)));
+      }
+      return getHubFromCarrier(activeDomain);
+    } catch (_Oo) {
+      return getHubFromCarrier(registry);
+    }
+  }
+  function hasHubOnCarrier(carrier) {
+    return !!(carrier && carrier.__SENTRY__ && carrier.__SENTRY__.hub);
+  }
+  function getHubFromCarrier(carrier) {
+    return getGlobalSingleton("hub", () => new Hub(), carrier);
+  }
+  function setHubOnCarrier(carrier, hub) {
+    if (!carrier)
+      return false;
+    var __SENTRY__ = carrier.__SENTRY__ = carrier.__SENTRY__ || {};
+    __SENTRY__.hub = hub;
+    return true;
+  }
+
+  // node_modules/@sentry/hub/esm/exports.js
+  function captureException(exception, captureContext) {
+    return getCurrentHub().captureException(exception, { captureContext });
+  }
+  function setTag(key, value2) {
+    getCurrentHub().setTag(key, value2);
+  }
+  function setUser(user) {
+    getCurrentHub().setUser(user);
+  }
+  function withScope(callback) {
+    getCurrentHub().withScope(callback);
+  }
+
+  // node_modules/@sentry/core/esm/api.js
+  var SENTRY_API_VERSION = "7";
+  function getBaseApiEndpoint(dsn) {
+    var protocol4 = dsn.protocol ? `${dsn.protocol}:` : "";
+    var port = dsn.port ? `:${dsn.port}` : "";
+    return `${protocol4}//${dsn.host}${port}${dsn.path ? `/${dsn.path}` : ""}/api/`;
+  }
+  function _getIngestEndpoint(dsn) {
+    return `${getBaseApiEndpoint(dsn)}${dsn.projectId}/envelope/`;
+  }
+  function _encodedAuth(dsn, sdkInfo) {
+    return urlEncode(__spreadValues({
+      sentry_key: dsn.publicKey,
+      sentry_version: SENTRY_API_VERSION
+    }, sdkInfo && { sentry_client: `${sdkInfo.name}/${sdkInfo.version}` }));
+  }
+  function getEnvelopeEndpointWithUrlEncodedAuth(dsn, tunnelOrOptions = {}) {
+    var tunnel = typeof tunnelOrOptions === "string" ? tunnelOrOptions : tunnelOrOptions.tunnel;
+    var sdkInfo = typeof tunnelOrOptions === "string" || !tunnelOrOptions._metadata ? void 0 : tunnelOrOptions._metadata.sdk;
+    return tunnel ? tunnel : `${_getIngestEndpoint(dsn)}?${_encodedAuth(dsn, sdkInfo)}`;
+  }
+
+  // node_modules/@sentry/core/esm/envelope.js
+  function getSdkMetadataForEnvelopeHeader(metadata) {
+    if (!metadata || !metadata.sdk) {
+      return;
+    }
+    const { name, version } = metadata.sdk;
+    return { name, version };
+  }
+  function enhanceEventWithSdkInfo(event, sdkInfo) {
+    if (!sdkInfo) {
+      return event;
+    }
+    event.sdk = event.sdk || {};
+    event.sdk.name = event.sdk.name || sdkInfo.name;
+    event.sdk.version = event.sdk.version || sdkInfo.version;
+    event.sdk.integrations = [...event.sdk.integrations || [], ...sdkInfo.integrations || []];
+    event.sdk.packages = [...event.sdk.packages || [], ...sdkInfo.packages || []];
+    return event;
+  }
+  function createSessionEnvelope(session, dsn, metadata, tunnel) {
+    var sdkInfo = getSdkMetadataForEnvelopeHeader(metadata);
+    var envelopeHeaders = __spreadValues(__spreadValues({
+      sent_at: new Date().toISOString()
+    }, sdkInfo && { sdk: sdkInfo }), !!tunnel && { dsn: dsnToString(dsn) });
+    var envelopeItem = "aggregates" in session ? [{ type: "sessions" }, session] : [{ type: "session" }, session];
+    return createEnvelope(envelopeHeaders, [envelopeItem]);
+  }
+  function createEventEnvelope(event, dsn, metadata, tunnel) {
+    var sdkInfo = getSdkMetadataForEnvelopeHeader(metadata);
+    var eventType = event.type || "event";
+    const { transactionSampling } = event.sdkProcessingMetadata || {};
+    const { method: samplingMethod, rate: sampleRate } = transactionSampling || {};
+    enhanceEventWithSdkInfo(event, metadata && metadata.sdk);
+    var envelopeHeaders = createEventEnvelopeHeaders(event, sdkInfo, tunnel, dsn);
+    delete event.sdkProcessingMetadata;
+    var eventItem = [
+      {
+        type: eventType,
+        sample_rates: [{ id: samplingMethod, rate: sampleRate }]
+      },
+      event
+    ];
+    return createEnvelope(envelopeHeaders, [eventItem]);
+  }
+  function createEventEnvelopeHeaders(event, sdkInfo, tunnel, dsn) {
+    var baggage = event.sdkProcessingMetadata && event.sdkProcessingMetadata.baggage;
+    var dynamicSamplingContext = baggage && getSentryBaggageItems(baggage);
+    return __spreadValues(__spreadValues(__spreadValues({
+      event_id: event.event_id,
+      sent_at: new Date().toISOString()
+    }, sdkInfo && { sdk: sdkInfo }), !!tunnel && { dsn: dsnToString(dsn) }), event.type === "transaction" && dynamicSamplingContext && {
+      trace: dropUndefinedKeys(__spreadValues({}, dynamicSamplingContext))
+    });
+  }
+
+  // node_modules/@sentry/core/esm/integration.js
+  var installedIntegrations = [];
+  function filterDuplicates(integrations) {
+    return integrations.reduce((acc, integrations2) => {
+      if (acc.every((accIntegration) => integrations2.name !== accIntegration.name)) {
+        acc.push(integrations2);
+      }
+      return acc;
+    }, []);
+  }
+  function getIntegrationsToSetup(options2) {
+    var defaultIntegrations2 = options2.defaultIntegrations && [...options2.defaultIntegrations] || [];
+    var userIntegrations = options2.integrations;
+    let integrations = [...filterDuplicates(defaultIntegrations2)];
+    if (Array.isArray(userIntegrations)) {
+      integrations = [
+        ...integrations.filter((integrations2) => userIntegrations.every((userIntegration) => userIntegration.name !== integrations2.name)),
+        ...filterDuplicates(userIntegrations)
+      ];
+    } else if (typeof userIntegrations === "function") {
+      integrations = userIntegrations(integrations);
+      integrations = Array.isArray(integrations) ? integrations : [integrations];
+    }
+    var integrationsNames = integrations.map((i3) => i3.name);
+    var alwaysLastToRun = "Debug";
+    if (integrationsNames.indexOf(alwaysLastToRun) !== -1) {
+      integrations.push(...integrations.splice(integrationsNames.indexOf(alwaysLastToRun), 1));
+    }
+    return integrations;
+  }
+  function setupIntegrations(integrations) {
+    var integrationIndex = {};
+    integrations.forEach((integration) => {
+      integrationIndex[integration.name] = integration;
+      if (installedIntegrations.indexOf(integration.name) === -1) {
+        integration.setupOnce(addGlobalEventProcessor, getCurrentHub);
+        installedIntegrations.push(integration.name);
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log(`Integration installed: ${integration.name}`);
+      }
+    });
+    return integrationIndex;
+  }
+
+  // node_modules/@sentry/core/esm/baseclient.js
+  var ALREADY_SEEN_ERROR = "Not capturing exception because it's already been captured.";
+  var BaseClient = class {
+    __init() {
+      this._integrations = {};
+    }
+    __init2() {
+      this._integrationsInitialized = false;
+    }
+    __init3() {
+      this._numProcessing = 0;
+    }
+    __init4() {
+      this._outcomes = {};
+    }
+    constructor(options2) {
+      ;
+      BaseClient.prototype.__init.call(this);
+      BaseClient.prototype.__init2.call(this);
+      BaseClient.prototype.__init3.call(this);
+      BaseClient.prototype.__init4.call(this);
+      this._options = options2;
+      if (options2.dsn) {
+        this._dsn = makeDsn(options2.dsn);
+        var url2 = getEnvelopeEndpointWithUrlEncodedAuth(this._dsn, options2);
+        this._transport = options2.transport(__spreadProps(__spreadValues({
+          recordDroppedEvent: this.recordDroppedEvent.bind(this)
+        }, options2.transportOptions), {
+          url: url2
+        }));
+      } else {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn("No DSN provided, client will not do anything.");
+      }
+    }
+    captureException(exception, hint, scope) {
+      if (checkOrSetAlreadyCaught(exception)) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log(ALREADY_SEEN_ERROR);
+        return;
+      }
+      let eventId = hint && hint.event_id;
+      this._process(this.eventFromException(exception, hint).then((event) => this._captureEvent(event, hint, scope)).then((result) => {
+        eventId = result;
+      }));
+      return eventId;
+    }
+    captureMessage(message, level, hint, scope) {
+      let eventId = hint && hint.event_id;
+      var promisedEvent = isPrimitive(message) ? this.eventFromMessage(String(message), level, hint) : this.eventFromException(message, hint);
+      this._process(promisedEvent.then((event) => this._captureEvent(event, hint, scope)).then((result) => {
+        eventId = result;
+      }));
+      return eventId;
+    }
+    captureEvent(event, hint, scope) {
+      if (hint && hint.originalException && checkOrSetAlreadyCaught(hint.originalException)) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log(ALREADY_SEEN_ERROR);
+        return;
+      }
+      let eventId = hint && hint.event_id;
+      this._process(this._captureEvent(event, hint, scope).then((result) => {
+        eventId = result;
+      }));
+      return eventId;
+    }
+    captureSession(session) {
+      if (!this._isEnabled()) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn("SDK not enabled, will not capture session.");
+        return;
+      }
+      if (!(typeof session.release === "string")) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn("Discarded session because of missing or non-string release");
+      } else {
+        this.sendSession(session);
+        updateSession(session, { init: false });
+      }
+    }
+    getDsn() {
+      return this._dsn;
+    }
+    getOptions() {
+      return this._options;
+    }
+    getTransport() {
+      return this._transport;
+    }
+    flush(timeout) {
+      var transport = this._transport;
+      if (transport) {
+        return this._isClientDoneProcessing(timeout).then((clientFinished) => {
+          return transport.flush(timeout).then((transportFlushed) => clientFinished && transportFlushed);
+        });
+      } else {
+        return resolvedSyncPromise(true);
+      }
+    }
+    close(timeout) {
+      return this.flush(timeout).then((result) => {
+        this.getOptions().enabled = false;
+        return result;
+      });
+    }
+    setupIntegrations() {
+      if (this._isEnabled() && !this._integrationsInitialized) {
+        this._integrations = setupIntegrations(this._options.integrations);
+        this._integrationsInitialized = true;
+      }
+    }
+    getIntegrationById(integrationId) {
+      return this._integrations[integrationId];
+    }
+    getIntegration(integration) {
+      try {
+        return this._integrations[integration.id] || null;
+      } catch (_oO) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn(`Cannot retrieve integration ${integration.id} from the current Client`);
+        return null;
+      }
+    }
+    sendEvent(event, hint = {}) {
+      if (this._dsn) {
+        let env = createEventEnvelope(event, this._dsn, this._options._metadata, this._options.tunnel);
+        for (var attachment of hint.attachments || []) {
+          env = addItemToEnvelope(env, createAttachmentEnvelopeItem(attachment, this._options.transportOptions && this._options.transportOptions.textEncoder));
+        }
+        this._sendEnvelope(env);
+      }
+    }
+    sendSession(session) {
+      if (this._dsn) {
+        var env = createSessionEnvelope(session, this._dsn, this._options._metadata, this._options.tunnel);
+        this._sendEnvelope(env);
+      }
+    }
+    recordDroppedEvent(reason, category) {
+      if (this._options.sendClientReports) {
+        var key = `${reason}:${category}`;
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log(`Adding outcome: "${key}"`);
+        this._outcomes[key] = this._outcomes[key] + 1 || 1;
+      }
+    }
+    _updateSessionFromEvent(session, event) {
+      let crashed = false;
+      let errored = false;
+      var exceptions = event.exception && event.exception.values;
+      if (exceptions) {
+        errored = true;
+        for (var ex of exceptions) {
+          var mechanism = ex.mechanism;
+          if (mechanism && mechanism.handled === false) {
+            crashed = true;
+            break;
+          }
+        }
+      }
+      var sessionNonTerminal = session.status === "ok";
+      var shouldUpdateAndSend = sessionNonTerminal && session.errors === 0 || sessionNonTerminal && crashed;
+      if (shouldUpdateAndSend) {
+        updateSession(session, __spreadProps(__spreadValues({}, crashed && { status: "crashed" }), {
+          errors: session.errors || Number(errored || crashed)
+        }));
+        this.captureSession(session);
+      }
+    }
+    _isClientDoneProcessing(timeout) {
+      return new SyncPromise((resolve) => {
+        let ticked = 0;
+        var tick = 1;
+        var interval = setInterval(() => {
+          if (this._numProcessing == 0) {
+            clearInterval(interval);
+            resolve(true);
+          } else {
+            ticked += tick;
+            if (timeout && ticked >= timeout) {
+              clearInterval(interval);
+              resolve(false);
+            }
+          }
+        }, tick);
+      });
+    }
+    _isEnabled() {
+      return this.getOptions().enabled !== false && this._dsn !== void 0;
+    }
+    _prepareEvent(event, hint, scope) {
+      const { normalizeDepth = 3, normalizeMaxBreadth = 1e3 } = this.getOptions();
+      var prepared = __spreadProps(__spreadValues({}, event), {
+        event_id: event.event_id || hint.event_id || uuid4(),
+        timestamp: event.timestamp || dateTimestampInSeconds()
+      });
+      this._applyClientOptions(prepared);
+      this._applyIntegrationsMetadata(prepared);
+      let finalScope = scope;
+      if (hint.captureContext) {
+        finalScope = Scope.clone(finalScope).update(hint.captureContext);
+      }
+      let result = resolvedSyncPromise(prepared);
+      if (finalScope) {
+        var attachments = [...hint.attachments || [], ...finalScope.getAttachments()];
+        if (attachments.length) {
+          hint.attachments = attachments;
+        }
+        result = finalScope.applyToEvent(prepared, hint);
+      }
+      return result.then((evt) => {
+        if (typeof normalizeDepth === "number" && normalizeDepth > 0) {
+          return this._normalizeEvent(evt, normalizeDepth, normalizeMaxBreadth);
+        }
+        return evt;
+      });
+    }
+    _normalizeEvent(event, depth, maxBreadth) {
+      if (!event) {
+        return null;
+      }
+      var normalized = __spreadValues(__spreadValues(__spreadValues(__spreadValues(__spreadValues({}, event), event.breadcrumbs && {
+        breadcrumbs: event.breadcrumbs.map((b2) => __spreadValues(__spreadValues({}, b2), b2.data && {
+          data: normalize(b2.data, depth, maxBreadth)
+        }))
+      }), event.user && {
+        user: normalize(event.user, depth, maxBreadth)
+      }), event.contexts && {
+        contexts: normalize(event.contexts, depth, maxBreadth)
+      }), event.extra && {
+        extra: normalize(event.extra, depth, maxBreadth)
+      });
+      if (event.contexts && event.contexts.trace && normalized.contexts) {
+        normalized.contexts.trace = event.contexts.trace;
+        if (event.contexts.trace.data) {
+          normalized.contexts.trace.data = normalize(event.contexts.trace.data, depth, maxBreadth);
+        }
+      }
+      if (event.spans) {
+        normalized.spans = event.spans.map((span) => {
+          if (span.data) {
+            span.data = normalize(span.data, depth, maxBreadth);
+          }
+          return span;
+        });
+      }
+      return normalized;
+    }
+    _applyClientOptions(event) {
+      var options2 = this.getOptions();
+      const { environment, release, dist, maxValueLength = 250 } = options2;
+      if (!("environment" in event)) {
+        event.environment = "environment" in options2 ? environment : "production";
+      }
+      if (event.release === void 0 && release !== void 0) {
+        event.release = release;
+      }
+      if (event.dist === void 0 && dist !== void 0) {
+        event.dist = dist;
+      }
+      if (event.message) {
+        event.message = truncate(event.message, maxValueLength);
+      }
+      var exception = event.exception && event.exception.values && event.exception.values[0];
+      if (exception && exception.value) {
+        exception.value = truncate(exception.value, maxValueLength);
+      }
+      var request = event.request;
+      if (request && request.url) {
+        request.url = truncate(request.url, maxValueLength);
+      }
+    }
+    _applyIntegrationsMetadata(event) {
+      var integrationsArray = Object.keys(this._integrations);
+      if (integrationsArray.length > 0) {
+        event.sdk = event.sdk || {};
+        event.sdk.integrations = [...event.sdk.integrations || [], ...integrationsArray];
+      }
+    }
+    _captureEvent(event, hint = {}, scope) {
+      return this._processEvent(event, hint, scope).then((finalEvent) => {
+        return finalEvent.event_id;
+      }, (reason) => {
+        if (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) {
+          var sentryError = reason;
+          if (sentryError.logLevel === "log") {
+            logger.log(sentryError.message);
+          } else {
+            logger.warn(sentryError);
+          }
+        }
+        return void 0;
+      });
+    }
+    _processEvent(event, hint, scope) {
+      const { beforeSend, sampleRate } = this.getOptions();
+      if (!this._isEnabled()) {
+        return rejectedSyncPromise(new SentryError("SDK not enabled, will not capture event.", "log"));
+      }
+      var isTransaction = event.type === "transaction";
+      if (!isTransaction && typeof sampleRate === "number" && Math.random() > sampleRate) {
+        this.recordDroppedEvent("sample_rate", "error");
+        return rejectedSyncPromise(new SentryError(`Discarding event because it's not included in the random sample (sampling rate = ${sampleRate})`, "log"));
+      }
+      return this._prepareEvent(event, hint, scope).then((prepared) => {
+        if (prepared === null) {
+          this.recordDroppedEvent("event_processor", event.type || "error");
+          throw new SentryError("An event processor returned null, will not send event.", "log");
+        }
+        var isInternalException = hint.data && hint.data.__sentry__ === true;
+        if (isInternalException || isTransaction || !beforeSend) {
+          return prepared;
+        }
+        var beforeSendResult = beforeSend(prepared, hint);
+        return _ensureBeforeSendRv(beforeSendResult);
+      }).then((processedEvent) => {
+        if (processedEvent === null) {
+          this.recordDroppedEvent("before_send", event.type || "error");
+          throw new SentryError("`beforeSend` returned `null`, will not send event.", "log");
+        }
+        var session = scope && scope.getSession();
+        if (!isTransaction && session) {
+          this._updateSessionFromEvent(session, processedEvent);
+        }
+        this.sendEvent(processedEvent, hint);
+        return processedEvent;
+      }).then(null, (reason) => {
+        if (reason instanceof SentryError) {
+          throw reason;
+        }
+        this.captureException(reason, {
+          data: {
+            __sentry__: true
+          },
+          originalException: reason
+        });
+        throw new SentryError(`Event processing pipeline threw an error, original event will not be sent. Details have been sent as a new event.
+Reason: ${reason}`);
+      });
+    }
+    _process(promise) {
+      this._numProcessing += 1;
+      void promise.then((value2) => {
+        this._numProcessing -= 1;
+        return value2;
+      }, (reason) => {
+        this._numProcessing -= 1;
+        return reason;
+      });
+    }
+    _sendEnvelope(envelope) {
+      if (this._transport && this._dsn) {
+        this._transport.send(envelope).then(null, (reason) => {
+          (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.error("Error while sending event:", reason);
+        });
+      } else {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.error("Transport disabled");
+      }
+    }
+    _clearOutcomes() {
+      var outcomes = this._outcomes;
+      this._outcomes = {};
+      return Object.keys(outcomes).map((key) => {
+        const [reason, category] = key.split(":");
+        return {
+          reason,
+          category,
+          quantity: outcomes[key]
+        };
+      });
+    }
+  };
+  function _ensureBeforeSendRv(rv) {
+    var nullErr = "`beforeSend` method has to return `null` or a valid event.";
+    if (isThenable(rv)) {
+      return rv.then((event) => {
+        if (!(isPlainObject(event) || event === null)) {
+          throw new SentryError(nullErr);
+        }
+        return event;
+      }, (e3) => {
+        throw new SentryError(`beforeSend rejected with ${e3}`);
+      });
+    } else if (!(isPlainObject(rv) || rv === null)) {
+      throw new SentryError(nullErr);
+    }
+    return rv;
+  }
+
+  // node_modules/@sentry/core/esm/sdk.js
+  function initAndBind(clientClass, options2) {
+    if (options2.debug === true) {
+      if (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) {
+        logger.enable();
+      } else {
+        console.warn("[Sentry] Cannot initialize SDK with `debug` option using a non-debug bundle.");
+      }
+    }
+    var hub = getCurrentHub();
+    var scope = hub.getScope();
+    if (scope) {
+      scope.update(options2.initialScope);
+    }
+    var client = new clientClass(options2);
+    hub.bindClient(client);
+  }
+
+  // node_modules/@sentry/core/esm/transports/base.js
+  var DEFAULT_TRANSPORT_BUFFER_SIZE = 30;
+  function createTransport(options2, makeRequest, buffer = makePromiseBuffer(options2.bufferSize || DEFAULT_TRANSPORT_BUFFER_SIZE)) {
+    let rateLimits = {};
+    var flush2 = (timeout) => buffer.drain(timeout);
+    function send(envelope) {
+      var filteredEnvelopeItems = [];
+      forEachEnvelopeItem(envelope, (item, type) => {
+        var envelopeItemDataCategory = envelopeItemTypeToDataCategory(type);
+        if (isRateLimited(rateLimits, envelopeItemDataCategory)) {
+          options2.recordDroppedEvent("ratelimit_backoff", envelopeItemDataCategory);
+        } else {
+          filteredEnvelopeItems.push(item);
+        }
+      });
+      if (filteredEnvelopeItems.length === 0) {
+        return resolvedSyncPromise();
+      }
+      var filteredEnvelope = createEnvelope(envelope[0], filteredEnvelopeItems);
+      var recordEnvelopeLoss = (reason) => {
+        forEachEnvelopeItem(filteredEnvelope, (_2, type) => {
+          options2.recordDroppedEvent(reason, envelopeItemTypeToDataCategory(type));
+        });
+      };
+      var requestTask = () => makeRequest({ body: serializeEnvelope(filteredEnvelope, options2.textEncoder) }).then((response) => {
+        if (response.statusCode !== void 0 && (response.statusCode < 200 || response.statusCode >= 300)) {
+          (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn(`Sentry responded with status code ${response.statusCode} to sent event.`);
+        }
+        rateLimits = updateRateLimits(rateLimits, response);
+      }, (error) => {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.error("Failed while sending event:", error);
+        recordEnvelopeLoss("network_error");
+      });
+      return buffer.add(requestTask).then((result) => result, (error) => {
+        if (error instanceof SentryError) {
+          (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.error("Skipped sending event because buffer is full.");
+          recordEnvelopeLoss("queue_overflow");
+          return resolvedSyncPromise();
+        } else {
+          throw error;
+        }
+      });
+    }
+    return {
+      send,
+      flush: flush2
+    };
+  }
+
+  // node_modules/@sentry/core/esm/version.js
+  var SDK_VERSION = "7.12.1";
+
+  // node_modules/@sentry/core/esm/integrations/index.js
+  var integrations_exports = {};
+  __export(integrations_exports, {
+    FunctionToString: () => FunctionToString,
+    InboundFilters: () => InboundFilters
+  });
+
+  // node_modules/@sentry/core/esm/integrations/functiontostring.js
+  var originalFunctionToString;
+  var FunctionToString = class {
+    constructor() {
+      FunctionToString.prototype.__init.call(this);
+    }
+    static __initStatic() {
+      this.id = "FunctionToString";
+    }
+    __init() {
+      this.name = FunctionToString.id;
+    }
+    setupOnce() {
+      originalFunctionToString = Function.prototype.toString;
+      Function.prototype.toString = function(...args) {
+        var context2 = getOriginalFunction(this) || this;
+        return originalFunctionToString.apply(context2, args);
+      };
+    }
+  };
+  FunctionToString.__initStatic();
+
+  // node_modules/@sentry/core/esm/integrations/inboundfilters.js
+  var DEFAULT_IGNORE_ERRORS = [/^Script error\.?$/, /^Javascript error: Script error\.? on line 0$/];
+  var InboundFilters = class {
+    static __initStatic() {
+      this.id = "InboundFilters";
+    }
+    __init() {
+      this.name = InboundFilters.id;
+    }
+    constructor(_options = {}) {
+      ;
+      this._options = _options;
+      InboundFilters.prototype.__init.call(this);
+    }
+    setupOnce(addGlobalEventProcessor2, getCurrentHub2) {
+      var eventProcess = (event) => {
+        var hub = getCurrentHub2();
+        if (hub) {
+          var self2 = hub.getIntegration(InboundFilters);
+          if (self2) {
+            var client = hub.getClient();
+            var clientOptions = client ? client.getOptions() : {};
+            var options2 = _mergeOptions(self2._options, clientOptions);
+            return _shouldDropEvent(event, options2) ? null : event;
+          }
+        }
+        return event;
+      };
+      eventProcess.id = this.name;
+      addGlobalEventProcessor2(eventProcess);
+    }
+  };
+  InboundFilters.__initStatic();
+  function _mergeOptions(internalOptions = {}, clientOptions = {}) {
+    return {
+      allowUrls: [...internalOptions.allowUrls || [], ...clientOptions.allowUrls || []],
+      denyUrls: [...internalOptions.denyUrls || [], ...clientOptions.denyUrls || []],
+      ignoreErrors: [
+        ...internalOptions.ignoreErrors || [],
+        ...clientOptions.ignoreErrors || [],
+        ...DEFAULT_IGNORE_ERRORS
+      ],
+      ignoreInternal: internalOptions.ignoreInternal !== void 0 ? internalOptions.ignoreInternal : true
+    };
+  }
+  function _shouldDropEvent(event, options2) {
+    if (options2.ignoreInternal && _isSentryError(event)) {
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn(`Event dropped due to being internal Sentry Error.
+Event: ${getEventDescription(event)}`);
+      return true;
+    }
+    if (_isIgnoredError(event, options2.ignoreErrors)) {
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn(`Event dropped due to being matched by \`ignoreErrors\` option.
+Event: ${getEventDescription(event)}`);
+      return true;
+    }
+    if (_isDeniedUrl(event, options2.denyUrls)) {
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn(`Event dropped due to being matched by \`denyUrls\` option.
+Event: ${getEventDescription(event)}.
+Url: ${_getEventFilterUrl(event)}`);
+      return true;
+    }
+    if (!_isAllowedUrl(event, options2.allowUrls)) {
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn(`Event dropped due to not being matched by \`allowUrls\` option.
+Event: ${getEventDescription(event)}.
+Url: ${_getEventFilterUrl(event)}`);
+      return true;
+    }
+    return false;
+  }
+  function _isIgnoredError(event, ignoreErrors) {
+    if (!ignoreErrors || !ignoreErrors.length) {
+      return false;
+    }
+    return _getPossibleEventMessages(event).some((message) => ignoreErrors.some((pattern) => isMatchingPattern(message, pattern)));
+  }
+  function _isDeniedUrl(event, denyUrls) {
+    if (!denyUrls || !denyUrls.length) {
+      return false;
+    }
+    var url2 = _getEventFilterUrl(event);
+    return !url2 ? false : denyUrls.some((pattern) => isMatchingPattern(url2, pattern));
+  }
+  function _isAllowedUrl(event, allowUrls) {
+    if (!allowUrls || !allowUrls.length) {
+      return true;
+    }
+    var url2 = _getEventFilterUrl(event);
+    return !url2 ? true : allowUrls.some((pattern) => isMatchingPattern(url2, pattern));
+  }
+  function _getPossibleEventMessages(event) {
+    if (event.message) {
+      return [event.message];
+    }
+    if (event.exception) {
+      try {
+        const { type = "", value: value2 = "" } = event.exception.values && event.exception.values[0] || {};
+        return [`${value2}`, `${type}: ${value2}`];
+      } catch (oO) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.error(`Cannot extract message for event ${getEventDescription(event)}`);
+        return [];
+      }
+    }
+    return [];
+  }
+  function _isSentryError(event) {
+    try {
+      return event.exception.values[0].type === "SentryError";
+    } catch (e3) {
+    }
+    return false;
+  }
+  function _getLastValidUrl(frames = []) {
+    for (let i3 = frames.length - 1; i3 >= 0; i3--) {
+      var frame = frames[i3];
+      if (frame && frame.filename !== "<anonymous>" && frame.filename !== "[native code]") {
+        return frame.filename || null;
+      }
+    }
+    return null;
+  }
+  function _getEventFilterUrl(event) {
+    try {
+      let frames;
+      try {
+        frames = event.exception.values[0].stacktrace.frames;
+      } catch (e3) {
+      }
+      return frames ? _getLastValidUrl(frames) : null;
+    } catch (oO) {
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.error(`Cannot extract url for event ${getEventDescription(event)}`);
+      return null;
+    }
+  }
+
+  // node_modules/@sentry/browser/esm/eventbuilder.js
+  function exceptionFromError(stackParser, ex) {
+    var frames = parseStackFrames(stackParser, ex);
+    var exception = {
+      type: ex && ex.name,
+      value: extractMessage(ex)
+    };
+    if (frames.length) {
+      exception.stacktrace = { frames };
+    }
+    if (exception.type === void 0 && exception.value === "") {
+      exception.value = "Unrecoverable error caught";
+    }
+    return exception;
+  }
+  function eventFromPlainObject(stackParser, exception, syntheticException, isUnhandledRejection) {
+    var event = {
+      exception: {
+        values: [
+          {
+            type: isEvent(exception) ? exception.constructor.name : isUnhandledRejection ? "UnhandledRejection" : "Error",
+            value: `Non-Error ${isUnhandledRejection ? "promise rejection" : "exception"} captured with keys: ${extractExceptionKeysForMessage(exception)}`
+          }
+        ]
+      },
+      extra: {
+        __serialized__: normalizeToSize(exception)
+      }
+    };
+    if (syntheticException) {
+      var frames = parseStackFrames(stackParser, syntheticException);
+      if (frames.length) {
+        event.exception.values[0].stacktrace = { frames };
+      }
+    }
+    return event;
+  }
+  function eventFromError(stackParser, ex) {
+    return {
+      exception: {
+        values: [exceptionFromError(stackParser, ex)]
+      }
+    };
+  }
+  function parseStackFrames(stackParser, ex) {
+    var stacktrace = ex.stacktrace || ex.stack || "";
+    var popSize = getPopSize(ex);
+    try {
+      return stackParser(stacktrace, popSize);
+    } catch (e3) {
+    }
+    return [];
+  }
+  var reactMinifiedRegexp = /Minified React error #\d+;/i;
+  function getPopSize(ex) {
+    if (ex) {
+      if (typeof ex.framesToPop === "number") {
+        return ex.framesToPop;
+      }
+      if (reactMinifiedRegexp.test(ex.message)) {
+        return 1;
+      }
+    }
+    return 0;
+  }
+  function extractMessage(ex) {
+    var message = ex && ex.message;
+    if (!message) {
+      return "No error message";
+    }
+    if (message.error && typeof message.error.message === "string") {
+      return message.error.message;
+    }
+    return message;
+  }
+  function eventFromException(stackParser, exception, hint, attachStacktrace) {
+    var syntheticException = hint && hint.syntheticException || void 0;
+    var event = eventFromUnknownInput(stackParser, exception, syntheticException, attachStacktrace);
+    addExceptionMechanism(event);
+    event.level = "error";
+    if (hint && hint.event_id) {
+      event.event_id = hint.event_id;
+    }
+    return resolvedSyncPromise(event);
+  }
+  function eventFromMessage(stackParser, message, level = "info", hint, attachStacktrace) {
+    var syntheticException = hint && hint.syntheticException || void 0;
+    var event = eventFromString(stackParser, message, syntheticException, attachStacktrace);
+    event.level = level;
+    if (hint && hint.event_id) {
+      event.event_id = hint.event_id;
+    }
+    return resolvedSyncPromise(event);
+  }
+  function eventFromUnknownInput(stackParser, exception, syntheticException, attachStacktrace, isUnhandledRejection) {
+    let event;
+    if (isErrorEvent(exception) && exception.error) {
+      var errorEvent = exception;
+      return eventFromError(stackParser, errorEvent.error);
+    }
+    if (isDOMError(exception) || isDOMException(exception)) {
+      var domException = exception;
+      if ("stack" in exception) {
+        event = eventFromError(stackParser, exception);
+      } else {
+        var name = domException.name || (isDOMError(domException) ? "DOMError" : "DOMException");
+        var message = domException.message ? `${name}: ${domException.message}` : name;
+        event = eventFromString(stackParser, message, syntheticException, attachStacktrace);
+        addExceptionTypeValue(event, message);
+      }
+      if ("code" in domException) {
+        event.tags = __spreadProps(__spreadValues({}, event.tags), { "DOMException.code": `${domException.code}` });
+      }
+      return event;
+    }
+    if (isError(exception)) {
+      return eventFromError(stackParser, exception);
+    }
+    if (isPlainObject(exception) || isEvent(exception)) {
+      var objectException = exception;
+      event = eventFromPlainObject(stackParser, objectException, syntheticException, isUnhandledRejection);
+      addExceptionMechanism(event, {
+        synthetic: true
+      });
+      return event;
+    }
+    event = eventFromString(stackParser, exception, syntheticException, attachStacktrace);
+    addExceptionTypeValue(event, `${exception}`, void 0);
+    addExceptionMechanism(event, {
+      synthetic: true
+    });
+    return event;
+  }
+  function eventFromString(stackParser, input, syntheticException, attachStacktrace) {
+    var event = {
+      message: input
+    };
+    if (attachStacktrace && syntheticException) {
+      var frames = parseStackFrames(stackParser, syntheticException);
+      if (frames.length) {
+        event.exception = {
+          values: [{ value: input, stacktrace: { frames } }]
+        };
+      }
+    }
+    return event;
+  }
+
+  // node_modules/@sentry/browser/esm/integrations/breadcrumbs.js
+  var BREADCRUMB_INTEGRATION_ID = "Breadcrumbs";
+  var Breadcrumbs = class {
+    static __initStatic() {
+      this.id = BREADCRUMB_INTEGRATION_ID;
+    }
+    __init() {
+      this.name = Breadcrumbs.id;
+    }
+    constructor(options2) {
+      ;
+      Breadcrumbs.prototype.__init.call(this);
+      this.options = __spreadValues({
+        console: true,
+        dom: true,
+        fetch: true,
+        history: true,
+        sentry: true,
+        xhr: true
+      }, options2);
+    }
+    setupOnce() {
+      if (this.options.console) {
+        addInstrumentationHandler("console", _consoleBreadcrumb);
+      }
+      if (this.options.dom) {
+        addInstrumentationHandler("dom", _domBreadcrumb(this.options.dom));
+      }
+      if (this.options.xhr) {
+        addInstrumentationHandler("xhr", _xhrBreadcrumb);
+      }
+      if (this.options.fetch) {
+        addInstrumentationHandler("fetch", _fetchBreadcrumb);
+      }
+      if (this.options.history) {
+        addInstrumentationHandler("history", _historyBreadcrumb);
+      }
+    }
+  };
+  Breadcrumbs.__initStatic();
+  function _domBreadcrumb(dom) {
+    function _innerDomBreadcrumb(handlerData) {
+      let target;
+      let keyAttrs = typeof dom === "object" ? dom.serializeAttribute : void 0;
+      if (typeof keyAttrs === "string") {
+        keyAttrs = [keyAttrs];
+      }
+      try {
+        target = handlerData.event.target ? htmlTreeAsString(handlerData.event.target, keyAttrs) : htmlTreeAsString(handlerData.event, keyAttrs);
+      } catch (e3) {
+        target = "<unknown>";
+      }
+      if (target.length === 0) {
+        return;
+      }
+      getCurrentHub().addBreadcrumb({
+        category: `ui.${handlerData.name}`,
+        message: target
+      }, {
+        event: handlerData.event,
+        name: handlerData.name,
+        global: handlerData.global
+      });
+    }
+    return _innerDomBreadcrumb;
+  }
+  function _consoleBreadcrumb(handlerData) {
+    var breadcrumb = {
+      category: "console",
+      data: {
+        arguments: handlerData.args,
+        logger: "console"
+      },
+      level: severityLevelFromString(handlerData.level),
+      message: safeJoin(handlerData.args, " ")
+    };
+    if (handlerData.level === "assert") {
+      if (handlerData.args[0] === false) {
+        breadcrumb.message = `Assertion failed: ${safeJoin(handlerData.args.slice(1), " ") || "console.assert"}`;
+        breadcrumb.data.arguments = handlerData.args.slice(1);
+      } else {
+        return;
+      }
+    }
+    getCurrentHub().addBreadcrumb(breadcrumb, {
+      input: handlerData.args,
+      level: handlerData.level
+    });
+  }
+  function _xhrBreadcrumb(handlerData) {
+    if (handlerData.endTimestamp) {
+      if (handlerData.xhr.__sentry_own_request__) {
+        return;
+      }
+      const { method, url: url2, status_code, body } = handlerData.xhr.__sentry_xhr__ || {};
+      getCurrentHub().addBreadcrumb({
+        category: "xhr",
+        data: {
+          method,
+          url: url2,
+          status_code
+        },
+        type: "http"
+      }, {
+        xhr: handlerData.xhr,
+        input: body
+      });
+      return;
+    }
+  }
+  function _fetchBreadcrumb(handlerData) {
+    if (!handlerData.endTimestamp) {
+      return;
+    }
+    if (handlerData.fetchData.url.match(/sentry_key/) && handlerData.fetchData.method === "POST") {
+      return;
+    }
+    if (handlerData.error) {
+      getCurrentHub().addBreadcrumb({
+        category: "fetch",
+        data: handlerData.fetchData,
+        level: "error",
+        type: "http"
+      }, {
+        data: handlerData.error,
+        input: handlerData.args
+      });
+    } else {
+      getCurrentHub().addBreadcrumb({
+        category: "fetch",
+        data: __spreadProps(__spreadValues({}, handlerData.fetchData), {
+          status_code: handlerData.response.status
+        }),
+        type: "http"
+      }, {
+        input: handlerData.args,
+        response: handlerData.response
+      });
+    }
+  }
+  function _historyBreadcrumb(handlerData) {
+    var global9 = getGlobalObject();
+    let from = handlerData.from;
+    let to = handlerData.to;
+    var parsedLoc = parseUrl(global9.location.href);
+    let parsedFrom = parseUrl(from);
+    var parsedTo = parseUrl(to);
+    if (!parsedFrom.path) {
+      parsedFrom = parsedLoc;
+    }
+    if (parsedLoc.protocol === parsedTo.protocol && parsedLoc.host === parsedTo.host) {
+      to = parsedTo.relative;
+    }
+    if (parsedLoc.protocol === parsedFrom.protocol && parsedLoc.host === parsedFrom.host) {
+      from = parsedFrom.relative;
+    }
+    getCurrentHub().addBreadcrumb({
+      category: "navigation",
+      data: {
+        from,
+        to
+      }
+    });
+  }
+
+  // node_modules/@sentry/browser/esm/transports/utils.js
+  var global4 = getGlobalObject();
+  var cachedFetchImpl;
+  function getNativeFetchImplementation() {
+    if (cachedFetchImpl) {
+      return cachedFetchImpl;
+    }
+    if (isNativeFetch(global4.fetch)) {
+      return cachedFetchImpl = global4.fetch.bind(global4);
+    }
+    var document2 = global4.document;
+    let fetchImpl = global4.fetch;
+    if (document2 && typeof document2.createElement === "function") {
+      try {
+        var sandbox = document2.createElement("iframe");
+        sandbox.hidden = true;
+        document2.head.appendChild(sandbox);
+        var contentWindow = sandbox.contentWindow;
+        if (contentWindow && contentWindow.fetch) {
+          fetchImpl = contentWindow.fetch;
+        }
+        document2.head.removeChild(sandbox);
+      } catch (e3) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn("Could not create sandbox iframe for pure fetch check, bailing to window.fetch: ", e3);
+      }
+    }
+    return cachedFetchImpl = fetchImpl.bind(global4);
+  }
+  function sendReport(url2, body) {
+    var isRealNavigator = Object.prototype.toString.call(global4 && global4.navigator) === "[object Navigator]";
+    var hasSendBeacon = isRealNavigator && typeof global4.navigator.sendBeacon === "function";
+    if (hasSendBeacon) {
+      var sendBeacon = global4.navigator.sendBeacon.bind(global4.navigator);
+      sendBeacon(url2, body);
+    } else if (supportsFetch()) {
+      var fetch2 = getNativeFetchImplementation();
+      fetch2(url2, {
+        body,
+        method: "POST",
+        credentials: "omit",
+        keepalive: true
+      }).then(null, (error) => {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.error(error);
+      });
+    }
+  }
+
+  // node_modules/@sentry/browser/esm/client.js
+  var globalObject = getGlobalObject();
+  var BrowserClient = class extends BaseClient {
+    constructor(options2) {
+      options2._metadata = options2._metadata || {};
+      options2._metadata.sdk = options2._metadata.sdk || {
+        name: "sentry.javascript.browser",
+        packages: [
+          {
+            name: "npm:@sentry/browser",
+            version: SDK_VERSION
+          }
+        ],
+        version: SDK_VERSION
+      };
+      super(options2);
+      if (options2.sendClientReports && globalObject.document) {
+        globalObject.document.addEventListener("visibilitychange", () => {
+          if (globalObject.document.visibilityState === "hidden") {
+            this._flushOutcomes();
+          }
+        });
+      }
+    }
+    eventFromException(exception, hint) {
+      return eventFromException(this._options.stackParser, exception, hint, this._options.attachStacktrace);
+    }
+    eventFromMessage(message, level = "info", hint) {
+      return eventFromMessage(this._options.stackParser, message, level, hint, this._options.attachStacktrace);
+    }
+    sendEvent(event, hint) {
+      var breadcrumbIntegration = this.getIntegrationById(BREADCRUMB_INTEGRATION_ID);
+      if (breadcrumbIntegration && breadcrumbIntegration.options && breadcrumbIntegration.options.sentry) {
+        getCurrentHub().addBreadcrumb({
+          category: `sentry.${event.type === "transaction" ? "transaction" : "event"}`,
+          event_id: event.event_id,
+          level: event.level,
+          message: getEventDescription(event)
+        }, {
+          event
+        });
+      }
+      super.sendEvent(event, hint);
+    }
+    _prepareEvent(event, hint, scope) {
+      event.platform = event.platform || "javascript";
+      return super._prepareEvent(event, hint, scope);
+    }
+    _flushOutcomes() {
+      var outcomes = this._clearOutcomes();
+      if (outcomes.length === 0) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("No outcomes to send");
+        return;
+      }
+      if (!this._dsn) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("No dsn provided, will not send outcomes");
+        return;
+      }
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("Sending outcomes:", outcomes);
+      var url2 = getEnvelopeEndpointWithUrlEncodedAuth(this._dsn, this._options);
+      var envelope = createClientReportEnvelope(outcomes, this._options.tunnel && dsnToString(this._dsn));
+      try {
+        sendReport(url2, serializeEnvelope(envelope));
+      } catch (e3) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.error(e3);
+      }
+    }
+  };
+
+  // node_modules/@sentry/browser/esm/transports/fetch.js
+  function makeFetchTransport(options2, nativeFetch = getNativeFetchImplementation()) {
+    function makeRequest(request) {
+      var requestOptions = __spreadValues({
+        body: request.body,
+        method: "POST",
+        referrerPolicy: "origin",
+        headers: options2.headers
+      }, options2.fetchOptions);
+      return nativeFetch(options2.url, requestOptions).then((response) => ({
+        statusCode: response.status,
+        headers: {
+          "x-sentry-rate-limits": response.headers.get("X-Sentry-Rate-Limits"),
+          "retry-after": response.headers.get("Retry-After")
+        }
+      }));
+    }
+    return createTransport(options2, makeRequest);
+  }
+
+  // node_modules/@sentry/browser/esm/transports/xhr.js
+  var XHR_READYSTATE_DONE = 4;
+  function makeXHRTransport(options2) {
+    function makeRequest(request) {
+      return new SyncPromise((resolve, reject) => {
+        var xhr = new XMLHttpRequest();
+        xhr.onerror = reject;
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === XHR_READYSTATE_DONE) {
+            resolve({
+              statusCode: xhr.status,
+              headers: {
+                "x-sentry-rate-limits": xhr.getResponseHeader("X-Sentry-Rate-Limits"),
+                "retry-after": xhr.getResponseHeader("Retry-After")
+              }
+            });
+          }
+        };
+        xhr.open("POST", options2.url);
+        for (var header in options2.headers) {
+          if (Object.prototype.hasOwnProperty.call(options2.headers, header)) {
+            xhr.setRequestHeader(header, options2.headers[header]);
+          }
+        }
+        xhr.send(request.body);
+      });
+    }
+    return createTransport(options2, makeRequest);
+  }
+
+  // node_modules/@sentry/browser/esm/stack-parsers.js
+  var UNKNOWN_FUNCTION = "?";
+  var CHROME_PRIORITY = 30;
+  var WINJS_PRIORITY = 40;
+  var GECKO_PRIORITY = 50;
+  function createFrame(filename, func2, lineno, colno) {
+    var frame = {
+      filename,
+      function: func2,
+      in_app: true
+    };
+    if (lineno !== void 0) {
+      frame.lineno = lineno;
+    }
+    if (colno !== void 0) {
+      frame.colno = colno;
+    }
+    return frame;
+  }
+  var chromeRegex = /^\s*at (?:(.*\).*?|.*?) ?\((?:address at )?)?((?:file|https?|blob|chrome-extension|address|native|eval|webpack|<anonymous>|[-a-z]+:|.*bundle|\/)?.*?)(?::(\d+))?(?::(\d+))?\)?\s*$/i;
+  var chromeEvalRegex = /\((\S*)(?::(\d+))(?::(\d+))\)/;
+  var chrome = (line) => {
+    var parts2 = chromeRegex.exec(line);
+    if (parts2) {
+      var isEval = parts2[2] && parts2[2].indexOf("eval") === 0;
+      if (isEval) {
+        var subMatch = chromeEvalRegex.exec(parts2[2]);
+        if (subMatch) {
+          parts2[2] = subMatch[1];
+          parts2[3] = subMatch[2];
+          parts2[4] = subMatch[3];
+        }
+      }
+      const [func2, filename] = extractSafariExtensionDetails(parts2[1] || UNKNOWN_FUNCTION, parts2[2]);
+      return createFrame(filename, func2, parts2[3] ? +parts2[3] : void 0, parts2[4] ? +parts2[4] : void 0);
+    }
+    return;
+  };
+  var chromeStackLineParser = [CHROME_PRIORITY, chrome];
+  var geckoREgex = /^\s*(.*?)(?:\((.*?)\))?(?:^|@)?((?:file|https?|blob|chrome|webpack|resource|moz-extension|safari-extension|safari-web-extension|capacitor)?:\/.*?|\[native code\]|[^@]*(?:bundle|\d+\.js)|\/[\w\-. /=]+)(?::(\d+))?(?::(\d+))?\s*$/i;
+  var geckoEvalRegex = /(\S+) line (\d+)(?: > eval line \d+)* > eval/i;
+  var gecko = (line) => {
+    var parts2 = geckoREgex.exec(line);
+    if (parts2) {
+      var isEval = parts2[3] && parts2[3].indexOf(" > eval") > -1;
+      if (isEval) {
+        var subMatch = geckoEvalRegex.exec(parts2[3]);
+        if (subMatch) {
+          parts2[1] = parts2[1] || "eval";
+          parts2[3] = subMatch[1];
+          parts2[4] = subMatch[2];
+          parts2[5] = "";
+        }
+      }
+      let filename = parts2[3];
+      let func2 = parts2[1] || UNKNOWN_FUNCTION;
+      [func2, filename] = extractSafariExtensionDetails(func2, filename);
+      return createFrame(filename, func2, parts2[4] ? +parts2[4] : void 0, parts2[5] ? +parts2[5] : void 0);
+    }
+    return;
+  };
+  var geckoStackLineParser = [GECKO_PRIORITY, gecko];
+  var winjsRegex = /^\s*at (?:((?:\[object object\])?.+) )?\(?((?:file|ms-appx|https?|webpack|blob):.*?):(\d+)(?::(\d+))?\)?\s*$/i;
+  var winjs = (line) => {
+    var parts2 = winjsRegex.exec(line);
+    return parts2 ? createFrame(parts2[2], parts2[1] || UNKNOWN_FUNCTION, +parts2[3], parts2[4] ? +parts2[4] : void 0) : void 0;
+  };
+  var winjsStackLineParser = [WINJS_PRIORITY, winjs];
+  var defaultStackLineParsers = [chromeStackLineParser, geckoStackLineParser, winjsStackLineParser];
+  var defaultStackParser = createStackParser(...defaultStackLineParsers);
+  var extractSafariExtensionDetails = (func2, filename) => {
+    var isSafariExtension = func2.indexOf("safari-extension") !== -1;
+    var isSafariWebExtension = func2.indexOf("safari-web-extension") !== -1;
+    return isSafariExtension || isSafariWebExtension ? [
+      func2.indexOf("@") !== -1 ? func2.split("@")[0] : UNKNOWN_FUNCTION,
+      isSafariExtension ? `safari-extension:${filename}` : `safari-web-extension:${filename}`
+    ] : [func2, filename];
+  };
+
+  // node_modules/@sentry/browser/esm/helpers.js
+  var ignoreOnError = 0;
+  function shouldIgnoreOnError() {
+    return ignoreOnError > 0;
+  }
+  function ignoreNextOnError() {
+    ignoreOnError += 1;
+    setTimeout(() => {
+      ignoreOnError -= 1;
+    });
+  }
+  function wrap(fn, options2 = {}, before) {
+    if (typeof fn !== "function") {
+      return fn;
+    }
+    try {
+      var wrapper = fn.__sentry_wrapped__;
+      if (wrapper) {
+        return wrapper;
+      }
+      if (getOriginalFunction(fn)) {
+        return fn;
+      }
+    } catch (e3) {
+      return fn;
+    }
+    var sentryWrapped = function() {
+      var args = Array.prototype.slice.call(arguments);
+      try {
+        if (before && typeof before === "function") {
+          before.apply(this, arguments);
+        }
+        var wrappedArguments = args.map((arg) => wrap(arg, options2));
+        return fn.apply(this, wrappedArguments);
+      } catch (ex) {
+        ignoreNextOnError();
+        withScope((scope) => {
+          scope.addEventProcessor((event) => {
+            if (options2.mechanism) {
+              addExceptionTypeValue(event, void 0, void 0);
+              addExceptionMechanism(event, options2.mechanism);
+            }
+            event.extra = __spreadProps(__spreadValues({}, event.extra), {
+              arguments: args
+            });
+            return event;
+          });
+          captureException(ex);
+        });
+        throw ex;
+      }
+    };
+    try {
+      for (var property in fn) {
+        if (Object.prototype.hasOwnProperty.call(fn, property)) {
+          sentryWrapped[property] = fn[property];
+        }
+      }
+    } catch (_oO) {
+    }
+    markFunctionWrapped(sentryWrapped, fn);
+    addNonEnumerableProperty(fn, "__sentry_wrapped__", sentryWrapped);
+    try {
+      var descriptor = Object.getOwnPropertyDescriptor(sentryWrapped, "name");
+      if (descriptor.configurable) {
+        Object.defineProperty(sentryWrapped, "name", {
+          get() {
+            return fn.name;
+          }
+        });
+      }
+    } catch (_oO) {
+    }
+    return sentryWrapped;
+  }
+
+  // node_modules/@sentry/browser/esm/integrations/index.js
+  var integrations_exports2 = {};
+  __export(integrations_exports2, {
+    Breadcrumbs: () => Breadcrumbs,
+    Dedupe: () => Dedupe,
+    GlobalHandlers: () => GlobalHandlers,
+    HttpContext: () => HttpContext,
+    LinkedErrors: () => LinkedErrors,
+    TryCatch: () => TryCatch
+  });
+
+  // node_modules/@sentry/browser/esm/integrations/globalhandlers.js
+  var GlobalHandlers = class {
+    static __initStatic() {
+      this.id = "GlobalHandlers";
+    }
+    __init() {
+      this.name = GlobalHandlers.id;
+    }
+    __init2() {
+      this._installFunc = {
+        onerror: _installGlobalOnErrorHandler,
+        onunhandledrejection: _installGlobalOnUnhandledRejectionHandler
+      };
+    }
+    constructor(options2) {
+      ;
+      GlobalHandlers.prototype.__init.call(this);
+      GlobalHandlers.prototype.__init2.call(this);
+      this._options = __spreadValues({
+        onerror: true,
+        onunhandledrejection: true
+      }, options2);
+    }
+    setupOnce() {
+      Error.stackTraceLimit = 50;
+      var options2 = this._options;
+      for (var key in options2) {
+        var installFunc = this._installFunc[key];
+        if (installFunc && options2[key]) {
+          globalHandlerLog(key);
+          installFunc();
+          this._installFunc[key] = void 0;
+        }
+      }
+    }
+  };
+  GlobalHandlers.__initStatic();
+  function _installGlobalOnErrorHandler() {
+    addInstrumentationHandler("error", (data) => {
+      const [hub, stackParser, attachStacktrace] = getHubAndOptions();
+      if (!hub.getIntegration(GlobalHandlers)) {
+        return;
+      }
+      const { msg, url: url2, line, column, error } = data;
+      if (shouldIgnoreOnError() || error && error.__sentry_own_request__) {
+        return;
+      }
+      var event = error === void 0 && isString(msg) ? _eventFromIncompleteOnError(msg, url2, line, column) : _enhanceEventWithInitialFrame(eventFromUnknownInput(stackParser, error || msg, void 0, attachStacktrace, false), url2, line, column);
+      event.level = "error";
+      addMechanismAndCapture(hub, error, event, "onerror");
+    });
+  }
+  function _installGlobalOnUnhandledRejectionHandler() {
+    addInstrumentationHandler("unhandledrejection", (e3) => {
+      const [hub, stackParser, attachStacktrace] = getHubAndOptions();
+      if (!hub.getIntegration(GlobalHandlers)) {
+        return;
+      }
+      let error = e3;
+      try {
+        if ("reason" in e3) {
+          error = e3.reason;
+        } else if ("detail" in e3 && "reason" in e3.detail) {
+          error = e3.detail.reason;
+        }
+      } catch (_oO) {
+      }
+      if (shouldIgnoreOnError() || error && error.__sentry_own_request__) {
+        return true;
+      }
+      var event = isPrimitive(error) ? _eventFromRejectionWithPrimitive(error) : eventFromUnknownInput(stackParser, error, void 0, attachStacktrace, true);
+      event.level = "error";
+      addMechanismAndCapture(hub, error, event, "onunhandledrejection");
+      return;
+    });
+  }
+  function _eventFromRejectionWithPrimitive(reason) {
+    return {
+      exception: {
+        values: [
+          {
+            type: "UnhandledRejection",
+            value: `Non-Error promise rejection captured with value: ${String(reason)}`
+          }
+        ]
+      }
+    };
+  }
+  function _eventFromIncompleteOnError(msg, url2, line, column) {
+    var ERROR_TYPES_RE = /^(?:[Uu]ncaught (?:exception: )?)?(?:((?:Eval|Internal|Range|Reference|Syntax|Type|URI|)Error): )?(.*)$/i;
+    let message = isErrorEvent(msg) ? msg.message : msg;
+    let name = "Error";
+    var groups = message.match(ERROR_TYPES_RE);
+    if (groups) {
+      name = groups[1];
+      message = groups[2];
+    }
+    var event = {
+      exception: {
+        values: [
+          {
+            type: name,
+            value: message
+          }
+        ]
+      }
+    };
+    return _enhanceEventWithInitialFrame(event, url2, line, column);
+  }
+  function _enhanceEventWithInitialFrame(event, url2, line, column) {
+    var e3 = event.exception = event.exception || {};
+    var ev = e3.values = e3.values || [];
+    var ev0 = ev[0] = ev[0] || {};
+    var ev0s = ev0.stacktrace = ev0.stacktrace || {};
+    var ev0sf = ev0s.frames = ev0s.frames || [];
+    var colno = isNaN(parseInt(column, 10)) ? void 0 : column;
+    var lineno = isNaN(parseInt(line, 10)) ? void 0 : line;
+    var filename = isString(url2) && url2.length > 0 ? url2 : getLocationHref();
+    if (ev0sf.length === 0) {
+      ev0sf.push({
+        colno,
+        filename,
+        function: "?",
+        in_app: true,
+        lineno
+      });
+    }
+    return event;
+  }
+  function globalHandlerLog(type) {
+    (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log(`Global Handler attached: ${type}`);
+  }
+  function addMechanismAndCapture(hub, error, event, type) {
+    addExceptionMechanism(event, {
+      handled: false,
+      type
+    });
+    hub.captureEvent(event, {
+      originalException: error
+    });
+  }
+  function getHubAndOptions() {
+    var hub = getCurrentHub();
+    var client = hub.getClient();
+    var options2 = client && client.getOptions() || {
+      stackParser: () => [],
+      attachStacktrace: false
+    };
+    return [hub, options2.stackParser, options2.attachStacktrace];
+  }
+
+  // node_modules/@sentry/browser/esm/integrations/trycatch.js
+  var DEFAULT_EVENT_TARGET = [
+    "EventTarget",
+    "Window",
+    "Node",
+    "ApplicationCache",
+    "AudioTrackList",
+    "ChannelMergerNode",
+    "CryptoOperation",
+    "EventSource",
+    "FileReader",
+    "HTMLUnknownElement",
+    "IDBDatabase",
+    "IDBRequest",
+    "IDBTransaction",
+    "KeyOperation",
+    "MediaController",
+    "MessagePort",
+    "ModalWindow",
+    "Notification",
+    "SVGElementInstance",
+    "Screen",
+    "TextTrack",
+    "TextTrackCue",
+    "TextTrackList",
+    "WebSocket",
+    "WebSocketWorker",
+    "Worker",
+    "XMLHttpRequest",
+    "XMLHttpRequestEventTarget",
+    "XMLHttpRequestUpload"
+  ];
+  var TryCatch = class {
+    static __initStatic() {
+      this.id = "TryCatch";
+    }
+    __init() {
+      this.name = TryCatch.id;
+    }
+    constructor(options2) {
+      ;
+      TryCatch.prototype.__init.call(this);
+      this._options = __spreadValues({
+        XMLHttpRequest: true,
+        eventTarget: true,
+        requestAnimationFrame: true,
+        setInterval: true,
+        setTimeout: true
+      }, options2);
+    }
+    setupOnce() {
+      var global9 = getGlobalObject();
+      if (this._options.setTimeout) {
+        fill(global9, "setTimeout", _wrapTimeFunction);
+      }
+      if (this._options.setInterval) {
+        fill(global9, "setInterval", _wrapTimeFunction);
+      }
+      if (this._options.requestAnimationFrame) {
+        fill(global9, "requestAnimationFrame", _wrapRAF);
+      }
+      if (this._options.XMLHttpRequest && "XMLHttpRequest" in global9) {
+        fill(XMLHttpRequest.prototype, "send", _wrapXHR);
+      }
+      var eventTargetOption = this._options.eventTarget;
+      if (eventTargetOption) {
+        var eventTarget = Array.isArray(eventTargetOption) ? eventTargetOption : DEFAULT_EVENT_TARGET;
+        eventTarget.forEach(_wrapEventTarget);
+      }
+    }
+  };
+  TryCatch.__initStatic();
+  function _wrapTimeFunction(original) {
+    return function(...args) {
+      var originalCallback = args[0];
+      args[0] = wrap(originalCallback, {
+        mechanism: {
+          data: { function: getFunctionName(original) },
+          handled: true,
+          type: "instrument"
+        }
+      });
+      return original.apply(this, args);
+    };
+  }
+  function _wrapRAF(original) {
+    return function(callback) {
+      return original.apply(this, [
+        wrap(callback, {
+          mechanism: {
+            data: {
+              function: "requestAnimationFrame",
+              handler: getFunctionName(original)
+            },
+            handled: true,
+            type: "instrument"
+          }
+        })
+      ]);
+    };
+  }
+  function _wrapXHR(originalSend) {
+    return function(...args) {
+      var xhr = this;
+      var xmlHttpRequestProps = ["onload", "onerror", "onprogress", "onreadystatechange"];
+      xmlHttpRequestProps.forEach((prop) => {
+        if (prop in xhr && typeof xhr[prop] === "function") {
+          fill(xhr, prop, function(original) {
+            var wrapOptions = {
+              mechanism: {
+                data: {
+                  function: prop,
+                  handler: getFunctionName(original)
+                },
+                handled: true,
+                type: "instrument"
+              }
+            };
+            var originalFunction = getOriginalFunction(original);
+            if (originalFunction) {
+              wrapOptions.mechanism.data.handler = getFunctionName(originalFunction);
+            }
+            return wrap(original, wrapOptions);
+          });
+        }
+      });
+      return originalSend.apply(this, args);
+    };
+  }
+  function _wrapEventTarget(target) {
+    var global9 = getGlobalObject();
+    var proto = global9[target] && global9[target].prototype;
+    if (!proto || !proto.hasOwnProperty || !proto.hasOwnProperty("addEventListener")) {
+      return;
+    }
+    fill(proto, "addEventListener", function(original) {
+      return function(eventName, fn, options2) {
+        try {
+          if (typeof fn.handleEvent === "function") {
+            fn.handleEvent = wrap(fn.handleEvent, {
+              mechanism: {
+                data: {
+                  function: "handleEvent",
+                  handler: getFunctionName(fn),
+                  target
+                },
+                handled: true,
+                type: "instrument"
+              }
+            });
+          }
+        } catch (err) {
+        }
+        return original.apply(this, [
+          eventName,
+          wrap(fn, {
+            mechanism: {
+              data: {
+                function: "addEventListener",
+                handler: getFunctionName(fn),
+                target
+              },
+              handled: true,
+              type: "instrument"
+            }
+          }),
+          options2
+        ]);
+      };
+    });
+    fill(proto, "removeEventListener", function(originalRemoveEventListener) {
+      return function(eventName, fn, options2) {
+        var wrappedEventHandler = fn;
+        try {
+          var originalEventHandler = wrappedEventHandler && wrappedEventHandler.__sentry_wrapped__;
+          if (originalEventHandler) {
+            originalRemoveEventListener.call(this, eventName, originalEventHandler, options2);
+          }
+        } catch (e3) {
+        }
+        return originalRemoveEventListener.call(this, eventName, wrappedEventHandler, options2);
+      };
+    });
+  }
+
+  // node_modules/@sentry/browser/esm/integrations/linkederrors.js
+  var DEFAULT_KEY = "cause";
+  var DEFAULT_LIMIT = 5;
+  var LinkedErrors = class {
+    static __initStatic() {
+      this.id = "LinkedErrors";
+    }
+    __init() {
+      this.name = LinkedErrors.id;
+    }
+    constructor(options2 = {}) {
+      ;
+      LinkedErrors.prototype.__init.call(this);
+      this._key = options2.key || DEFAULT_KEY;
+      this._limit = options2.limit || DEFAULT_LIMIT;
+    }
+    setupOnce() {
+      var client = getCurrentHub().getClient();
+      if (!client) {
+        return;
+      }
+      addGlobalEventProcessor((event, hint) => {
+        var self2 = getCurrentHub().getIntegration(LinkedErrors);
+        return self2 ? _handler(client.getOptions().stackParser, self2._key, self2._limit, event, hint) : event;
+      });
+    }
+  };
+  LinkedErrors.__initStatic();
+  function _handler(parser, key, limit, event, hint) {
+    if (!event.exception || !event.exception.values || !hint || !isInstanceOf(hint.originalException, Error)) {
+      return event;
+    }
+    var linkedErrors = _walkErrorTree(parser, limit, hint.originalException, key);
+    event.exception.values = [...linkedErrors, ...event.exception.values];
+    return event;
+  }
+  function _walkErrorTree(parser, limit, error, key, stack = []) {
+    if (!isInstanceOf(error[key], Error) || stack.length + 1 >= limit) {
+      return stack;
+    }
+    var exception = exceptionFromError(parser, error[key]);
+    return _walkErrorTree(parser, limit, error[key], key, [exception, ...stack]);
+  }
+
+  // node_modules/@sentry/browser/esm/integrations/httpcontext.js
+  var global5 = getGlobalObject();
+  var HttpContext = class {
+    constructor() {
+      HttpContext.prototype.__init.call(this);
+    }
+    static __initStatic() {
+      this.id = "HttpContext";
+    }
+    __init() {
+      this.name = HttpContext.id;
+    }
+    setupOnce() {
+      addGlobalEventProcessor((event) => {
+        if (getCurrentHub().getIntegration(HttpContext)) {
+          if (!global5.navigator && !global5.location && !global5.document) {
+            return event;
+          }
+          var url2 = event.request && event.request.url || global5.location && global5.location.href;
+          const { referrer } = global5.document || {};
+          const { userAgent } = global5.navigator || {};
+          var headers = __spreadValues(__spreadValues(__spreadValues({}, event.request && event.request.headers), referrer && { Referer: referrer }), userAgent && { "User-Agent": userAgent });
+          var request = __spreadProps(__spreadValues({}, url2 && { url: url2 }), { headers });
+          return __spreadProps(__spreadValues({}, event), { request });
+        }
+        return event;
+      });
+    }
+  };
+  HttpContext.__initStatic();
+
+  // node_modules/@sentry/browser/esm/integrations/dedupe.js
+  var Dedupe = class {
+    constructor() {
+      Dedupe.prototype.__init.call(this);
+    }
+    static __initStatic() {
+      this.id = "Dedupe";
+    }
+    __init() {
+      this.name = Dedupe.id;
+    }
+    setupOnce(addGlobalEventProcessor2, getCurrentHub2) {
+      var eventProcessor = (currentEvent) => {
+        var self2 = getCurrentHub2().getIntegration(Dedupe);
+        if (self2) {
+          try {
+            if (_shouldDropEvent2(currentEvent, self2._previousEvent)) {
+              (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn("Event dropped due to being a duplicate of previously captured event.");
+              return null;
+            }
+          } catch (_oO) {
+            return self2._previousEvent = currentEvent;
+          }
+          return self2._previousEvent = currentEvent;
+        }
+        return currentEvent;
+      };
+      eventProcessor.id = this.name;
+      addGlobalEventProcessor2(eventProcessor);
+    }
+  };
+  Dedupe.__initStatic();
+  function _shouldDropEvent2(currentEvent, previousEvent) {
+    if (!previousEvent) {
+      return false;
+    }
+    if (_isSameMessageEvent(currentEvent, previousEvent)) {
+      return true;
+    }
+    if (_isSameExceptionEvent(currentEvent, previousEvent)) {
+      return true;
+    }
+    return false;
+  }
+  function _isSameMessageEvent(currentEvent, previousEvent) {
+    var currentMessage = currentEvent.message;
+    var previousMessage = previousEvent.message;
+    if (!currentMessage && !previousMessage) {
+      return false;
+    }
+    if (currentMessage && !previousMessage || !currentMessage && previousMessage) {
+      return false;
+    }
+    if (currentMessage !== previousMessage) {
+      return false;
+    }
+    if (!_isSameFingerprint(currentEvent, previousEvent)) {
+      return false;
+    }
+    if (!_isSameStacktrace(currentEvent, previousEvent)) {
+      return false;
+    }
+    return true;
+  }
+  function _isSameExceptionEvent(currentEvent, previousEvent) {
+    var previousException = _getExceptionFromEvent(previousEvent);
+    var currentException = _getExceptionFromEvent(currentEvent);
+    if (!previousException || !currentException) {
+      return false;
+    }
+    if (previousException.type !== currentException.type || previousException.value !== currentException.value) {
+      return false;
+    }
+    if (!_isSameFingerprint(currentEvent, previousEvent)) {
+      return false;
+    }
+    if (!_isSameStacktrace(currentEvent, previousEvent)) {
+      return false;
+    }
+    return true;
+  }
+  function _isSameStacktrace(currentEvent, previousEvent) {
+    let currentFrames = _getFramesFromEvent(currentEvent);
+    let previousFrames = _getFramesFromEvent(previousEvent);
+    if (!currentFrames && !previousFrames) {
+      return true;
+    }
+    if (currentFrames && !previousFrames || !currentFrames && previousFrames) {
+      return false;
+    }
+    currentFrames = currentFrames;
+    previousFrames = previousFrames;
+    if (previousFrames.length !== currentFrames.length) {
+      return false;
+    }
+    for (let i3 = 0; i3 < previousFrames.length; i3++) {
+      var frameA = previousFrames[i3];
+      var frameB = currentFrames[i3];
+      if (frameA.filename !== frameB.filename || frameA.lineno !== frameB.lineno || frameA.colno !== frameB.colno || frameA.function !== frameB.function) {
+        return false;
+      }
+    }
+    return true;
+  }
+  function _isSameFingerprint(currentEvent, previousEvent) {
+    let currentFingerprint = currentEvent.fingerprint;
+    let previousFingerprint = previousEvent.fingerprint;
+    if (!currentFingerprint && !previousFingerprint) {
+      return true;
+    }
+    if (currentFingerprint && !previousFingerprint || !currentFingerprint && previousFingerprint) {
+      return false;
+    }
+    currentFingerprint = currentFingerprint;
+    previousFingerprint = previousFingerprint;
+    try {
+      return !!(currentFingerprint.join("") === previousFingerprint.join(""));
+    } catch (_oO) {
+      return false;
+    }
+  }
+  function _getExceptionFromEvent(event) {
+    return event.exception && event.exception.values && event.exception.values[0];
+  }
+  function _getFramesFromEvent(event) {
+    var exception = event.exception;
+    if (exception) {
+      try {
+        return exception.values[0].stacktrace.frames;
+      } catch (_oO) {
+        return void 0;
+      }
+    }
+    return void 0;
+  }
+
+  // node_modules/@sentry/browser/esm/sdk.js
+  var defaultIntegrations = [
+    new integrations_exports.InboundFilters(),
+    new integrations_exports.FunctionToString(),
+    new TryCatch(),
+    new Breadcrumbs(),
+    new GlobalHandlers(),
+    new LinkedErrors(),
+    new Dedupe(),
+    new HttpContext()
+  ];
+  function init(options2 = {}) {
+    if (options2.defaultIntegrations === void 0) {
+      options2.defaultIntegrations = defaultIntegrations;
+    }
+    if (options2.release === void 0) {
+      var window2 = getGlobalObject();
+      if (window2.SENTRY_RELEASE && window2.SENTRY_RELEASE.id) {
+        options2.release = window2.SENTRY_RELEASE.id;
+      }
+    }
+    if (options2.autoSessionTracking === void 0) {
+      options2.autoSessionTracking = true;
+    }
+    if (options2.sendClientReports === void 0) {
+      options2.sendClientReports = true;
+    }
+    var clientOptions = __spreadProps(__spreadValues({}, options2), {
+      stackParser: stackParserFromStackParserOptions(options2.stackParser || defaultStackParser),
+      integrations: getIntegrationsToSetup(options2),
+      transport: options2.transport || (supportsFetch() ? makeFetchTransport : makeXHRTransport)
+    });
+    initAndBind(BrowserClient, clientOptions);
+    if (options2.autoSessionTracking) {
+      startSessionTracking();
+    }
+  }
+  function startSessionOnHub(hub) {
+    hub.startSession({ ignoreDuration: true });
+    hub.captureSession();
+  }
+  function startSessionTracking() {
+    var window2 = getGlobalObject();
+    var document2 = window2.document;
+    if (typeof document2 === "undefined") {
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn("Session tracking in non-browser environment with @sentry/browser is not supported.");
+      return;
+    }
+    var hub = getCurrentHub();
+    if (!hub.captureSession) {
+      return;
+    }
+    startSessionOnHub(hub);
+    addInstrumentationHandler("history", ({ from, to }) => {
+      if (!(from === void 0 || from === to)) {
+        startSessionOnHub(getCurrentHub());
+      }
+    });
+  }
+
+  // node_modules/@sentry/browser/esm/index.js
+  var windowIntegrations = {};
+  var _window = getGlobalObject();
+  if (_window.Sentry && _window.Sentry.Integrations) {
+    windowIntegrations = _window.Sentry.Integrations;
+  }
+  var INTEGRATIONS = __spreadValues(__spreadValues(__spreadValues({}, windowIntegrations), integrations_exports), integrations_exports2);
+
+  // node_modules/@sentry/react/esm/sdk.js
+  function init2(options2) {
+    options2._metadata = options2._metadata || {};
+    options2._metadata.sdk = options2._metadata.sdk || {
+      name: "sentry.javascript.react",
+      packages: [
+        {
+          name: "npm:@sentry/react",
+          version: SDK_VERSION
+        }
+      ],
+      version: SDK_VERSION
+    };
+    init(options2);
+  }
+
+  // node_modules/@sentry/tracing/esm/utils.js
+  function hasTracingEnabled(maybeOptions) {
+    var client = getCurrentHub().getClient();
+    var options2 = maybeOptions || client && client.getOptions();
+    return !!options2 && ("tracesSampleRate" in options2 || "tracesSampler" in options2);
+  }
+  function getActiveTransaction(maybeHub) {
+    var hub = maybeHub || getCurrentHub();
+    var scope = hub.getScope();
+    return scope && scope.getTransaction();
+  }
+  function msToSec(time2) {
+    return time2 / 1e3;
+  }
+
+  // node_modules/@sentry/tracing/esm/errors.js
+  function registerErrorInstrumentation() {
+    addInstrumentationHandler("error", errorCallback);
+    addInstrumentationHandler("unhandledrejection", errorCallback);
+  }
+  function errorCallback() {
+    var activeTransaction = getActiveTransaction();
+    if (activeTransaction) {
+      var status = "internal_error";
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log(`[Tracing] Transaction: ${status} -> Global error occured`);
+      activeTransaction.setStatus(status);
+    }
+  }
+
+  // node_modules/@sentry/tracing/esm/span.js
+  var SpanRecorder = class {
+    __init() {
+      this.spans = [];
+    }
+    constructor(maxlen = 1e3) {
+      ;
+      SpanRecorder.prototype.__init.call(this);
+      this._maxlen = maxlen;
+    }
+    add(span) {
+      if (this.spans.length > this._maxlen) {
+        span.spanRecorder = void 0;
+      } else {
+        this.spans.push(span);
+      }
+    }
+  };
+  var Span = class {
+    __init2() {
+      this.traceId = uuid4();
+    }
+    __init3() {
+      this.spanId = uuid4().substring(16);
+    }
+    __init4() {
+      this.startTimestamp = timestampWithMs();
+    }
+    __init5() {
+      this.tags = {};
+    }
+    __init6() {
+      this.data = {};
+    }
+    constructor(spanContext) {
+      ;
+      Span.prototype.__init2.call(this);
+      Span.prototype.__init3.call(this);
+      Span.prototype.__init4.call(this);
+      Span.prototype.__init5.call(this);
+      Span.prototype.__init6.call(this);
+      if (!spanContext) {
+        return this;
+      }
+      if (spanContext.traceId) {
+        this.traceId = spanContext.traceId;
+      }
+      if (spanContext.spanId) {
+        this.spanId = spanContext.spanId;
+      }
+      if (spanContext.parentSpanId) {
+        this.parentSpanId = spanContext.parentSpanId;
+      }
+      if ("sampled" in spanContext) {
+        this.sampled = spanContext.sampled;
+      }
+      if (spanContext.op) {
+        this.op = spanContext.op;
+      }
+      if (spanContext.description) {
+        this.description = spanContext.description;
+      }
+      if (spanContext.data) {
+        this.data = spanContext.data;
+      }
+      if (spanContext.tags) {
+        this.tags = spanContext.tags;
+      }
+      if (spanContext.status) {
+        this.status = spanContext.status;
+      }
+      if (spanContext.startTimestamp) {
+        this.startTimestamp = spanContext.startTimestamp;
+      }
+      if (spanContext.endTimestamp) {
+        this.endTimestamp = spanContext.endTimestamp;
+      }
+    }
+    startChild(spanContext) {
+      var childSpan = new Span(__spreadProps(__spreadValues({}, spanContext), {
+        parentSpanId: this.spanId,
+        sampled: this.sampled,
+        traceId: this.traceId
+      }));
+      childSpan.spanRecorder = this.spanRecorder;
+      if (childSpan.spanRecorder) {
+        childSpan.spanRecorder.add(childSpan);
+      }
+      childSpan.transaction = this.transaction;
+      if ((typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && childSpan.transaction) {
+        var opStr = spanContext && spanContext.op || "< unknown op >";
+        var nameStr = childSpan.transaction.name || "< unknown name >";
+        var idStr = childSpan.transaction.spanId;
+        var logMessage = `[Tracing] Starting '${opStr}' span on transaction '${nameStr}' (${idStr}).`;
+        childSpan.transaction.metadata.spanMetadata[childSpan.spanId] = { logMessage };
+        logger.log(logMessage);
+      }
+      return childSpan;
+    }
+    setTag(key, value2) {
+      this.tags = __spreadProps(__spreadValues({}, this.tags), { [key]: value2 });
+      return this;
+    }
+    setData(key, value2) {
+      this.data = __spreadProps(__spreadValues({}, this.data), { [key]: value2 });
+      return this;
+    }
+    setStatus(value2) {
+      this.status = value2;
+      return this;
+    }
+    setHttpStatus(httpStatus) {
+      this.setTag("http.status_code", String(httpStatus));
+      var spanStatus = spanStatusfromHttpCode(httpStatus);
+      if (spanStatus !== "unknown_error") {
+        this.setStatus(spanStatus);
+      }
+      return this;
+    }
+    isSuccess() {
+      return this.status === "ok";
+    }
+    finish(endTimestamp) {
+      if ((typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && this.transaction && this.transaction.spanId !== this.spanId) {
+        const { logMessage } = this.transaction.metadata.spanMetadata[this.spanId];
+        if (logMessage) {
+          logger.log(logMessage.replace("Starting", "Finishing"));
+        }
+      }
+      this.endTimestamp = typeof endTimestamp === "number" ? endTimestamp : timestampWithMs();
+    }
+    toTraceparent() {
+      let sampledString = "";
+      if (this.sampled !== void 0) {
+        sampledString = this.sampled ? "-1" : "-0";
+      }
+      return `${this.traceId}-${this.spanId}${sampledString}`;
+    }
+    toContext() {
+      return dropUndefinedKeys({
+        data: this.data,
+        description: this.description,
+        endTimestamp: this.endTimestamp,
+        op: this.op,
+        parentSpanId: this.parentSpanId,
+        sampled: this.sampled,
+        spanId: this.spanId,
+        startTimestamp: this.startTimestamp,
+        status: this.status,
+        tags: this.tags,
+        traceId: this.traceId
+      });
+    }
+    updateWithContext(spanContext) {
+      this.data = _nullishCoalesce(spanContext.data, () => ({}));
+      this.description = spanContext.description;
+      this.endTimestamp = spanContext.endTimestamp;
+      this.op = spanContext.op;
+      this.parentSpanId = spanContext.parentSpanId;
+      this.sampled = spanContext.sampled;
+      this.spanId = _nullishCoalesce(spanContext.spanId, () => this.spanId);
+      this.startTimestamp = _nullishCoalesce(spanContext.startTimestamp, () => this.startTimestamp);
+      this.status = spanContext.status;
+      this.tags = _nullishCoalesce(spanContext.tags, () => ({}));
+      this.traceId = _nullishCoalesce(spanContext.traceId, () => this.traceId);
+      return this;
+    }
+    getTraceContext() {
+      return dropUndefinedKeys({
+        data: Object.keys(this.data).length > 0 ? this.data : void 0,
+        description: this.description,
+        op: this.op,
+        parent_span_id: this.parentSpanId,
+        span_id: this.spanId,
+        status: this.status,
+        tags: Object.keys(this.tags).length > 0 ? this.tags : void 0,
+        trace_id: this.traceId
+      });
+    }
+    toJSON() {
+      return dropUndefinedKeys({
+        data: Object.keys(this.data).length > 0 ? this.data : void 0,
+        description: this.description,
+        op: this.op,
+        parent_span_id: this.parentSpanId,
+        span_id: this.spanId,
+        start_timestamp: this.startTimestamp,
+        status: this.status,
+        tags: Object.keys(this.tags).length > 0 ? this.tags : void 0,
+        timestamp: this.endTimestamp,
+        trace_id: this.traceId
+      });
+    }
+  };
+  function spanStatusfromHttpCode(httpStatus) {
+    if (httpStatus < 400 && httpStatus >= 100) {
+      return "ok";
+    }
+    if (httpStatus >= 400 && httpStatus < 500) {
+      switch (httpStatus) {
+        case 401:
+          return "unauthenticated";
+        case 403:
+          return "permission_denied";
+        case 404:
+          return "not_found";
+        case 409:
+          return "already_exists";
+        case 413:
+          return "failed_precondition";
+        case 429:
+          return "resource_exhausted";
+        default:
+          return "invalid_argument";
+      }
+    }
+    if (httpStatus >= 500 && httpStatus < 600) {
+      switch (httpStatus) {
+        case 501:
+          return "unimplemented";
+        case 503:
+          return "unavailable";
+        case 504:
+          return "deadline_exceeded";
+        default:
+          return "internal_error";
+      }
+    }
+    return "unknown_error";
+  }
+
+  // node_modules/@sentry/tracing/esm/transaction.js
+  var Transaction = class extends Span {
+    __init() {
+      this._measurements = {};
+    }
+    constructor(transactionContext, hub) {
+      super(transactionContext);
+      Transaction.prototype.__init.call(this);
+      ;
+      this._hub = hub || getCurrentHub();
+      this._name = transactionContext.name || "";
+      this.metadata = __spreadProps(__spreadValues({}, transactionContext.metadata), {
+        spanMetadata: {}
+      });
+      this._trimEnd = transactionContext.trimEnd;
+      this.transaction = this;
+    }
+    get name() {
+      return this._name;
+    }
+    set name(newName) {
+      this._name = newName;
+      this.metadata.source = "custom";
+    }
+    setName(name, source = "custom") {
+      this.name = name;
+      this.metadata.source = source;
+    }
+    initSpanRecorder(maxlen = 1e3) {
+      if (!this.spanRecorder) {
+        this.spanRecorder = new SpanRecorder(maxlen);
+      }
+      this.spanRecorder.add(this);
+    }
+    setMeasurement(name, value2, unit2 = "") {
+      this._measurements[name] = { value: value2, unit: unit2 };
+    }
+    setMetadata(newMetadata) {
+      this.metadata = __spreadValues(__spreadValues({}, this.metadata), newMetadata);
+    }
+    finish(endTimestamp) {
+      if (this.endTimestamp !== void 0) {
+        return void 0;
+      }
+      if (!this.name) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn("Transaction has no name, falling back to `<unlabeled transaction>`.");
+        this.name = "<unlabeled transaction>";
+      }
+      super.finish(endTimestamp);
+      if (this.sampled !== true) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("[Tracing] Discarding transaction because its trace was not chosen to be sampled.");
+        var client = this._hub.getClient();
+        if (client) {
+          client.recordDroppedEvent("sample_rate", "transaction");
+        }
+        return void 0;
+      }
+      var finishedSpans = this.spanRecorder ? this.spanRecorder.spans.filter((s3) => s3 !== this && s3.endTimestamp) : [];
+      if (this._trimEnd && finishedSpans.length > 0) {
+        this.endTimestamp = finishedSpans.reduce((prev2, current) => {
+          if (prev2.endTimestamp && current.endTimestamp) {
+            return prev2.endTimestamp > current.endTimestamp ? prev2 : current;
+          }
+          return prev2;
+        }).endTimestamp;
+      }
+      var metadata = this.metadata;
+      var transaction = __spreadValues({
+        contexts: {
+          trace: this.getTraceContext()
+        },
+        spans: finishedSpans,
+        start_timestamp: this.startTimestamp,
+        tags: this.tags,
+        timestamp: this.endTimestamp,
+        transaction: this.name,
+        type: "transaction",
+        sdkProcessingMetadata: __spreadProps(__spreadValues({}, metadata), {
+          baggage: this.getBaggage()
+        })
+      }, metadata.source && {
+        transaction_info: {
+          source: metadata.source
+        }
+      });
+      var hasMeasurements = Object.keys(this._measurements).length > 0;
+      if (hasMeasurements) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("[Measurements] Adding measurements to transaction", JSON.stringify(this._measurements, void 0, 2));
+        transaction.measurements = this._measurements;
+      }
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log(`[Tracing] Finishing ${this.op} transaction: ${this.name}.`);
+      return this._hub.captureEvent(transaction);
+    }
+    toContext() {
+      var spanContext = super.toContext();
+      return dropUndefinedKeys(__spreadProps(__spreadValues({}, spanContext), {
+        name: this.name,
+        trimEnd: this._trimEnd
+      }));
+    }
+    updateWithContext(transactionContext) {
+      super.updateWithContext(transactionContext);
+      this.name = _nullishCoalesce(transactionContext.name, () => "");
+      this._trimEnd = transactionContext.trimEnd;
+      return this;
+    }
+    getBaggage() {
+      var existingBaggage = this.metadata.baggage;
+      var finalBaggage = !existingBaggage || isBaggageMutable(existingBaggage) ? this._populateBaggageWithSentryValues(existingBaggage) : existingBaggage;
+      this.metadata.baggage = finalBaggage;
+      return finalBaggage;
+    }
+    _populateBaggageWithSentryValues(baggage = createBaggage({})) {
+      var hub = this._hub || getCurrentHub();
+      var client = hub && hub.getClient();
+      if (!client)
+        return baggage;
+      const { environment, release } = client.getOptions() || {};
+      const { publicKey: public_key } = client.getDsn() || {};
+      var sample_rate = this.metadata && this.metadata.transactionSampling && this.metadata.transactionSampling.rate && this.metadata.transactionSampling.rate.toString();
+      var scope = hub.getScope();
+      const { segment: user_segment } = scope && scope.getUser() || {};
+      var source = this.metadata.source;
+      var transaction = source && source !== "url" ? this.name : void 0;
+      return createBaggage(dropUndefinedKeys(__spreadValues({
+        environment,
+        release,
+        transaction,
+        user_segment,
+        public_key,
+        trace_id: this.traceId,
+        sample_rate
+      }, getSentryBaggageItems(baggage))), "", false);
+    }
+  };
+
+  // node_modules/@sentry/tracing/esm/idletransaction.js
+  var DEFAULT_IDLE_TIMEOUT = 1e3;
+  var DEFAULT_FINAL_TIMEOUT = 3e4;
+  var HEARTBEAT_INTERVAL = 5e3;
+  var IdleTransactionSpanRecorder = class extends SpanRecorder {
+    constructor(_pushActivity, _popActivity, transactionSpanId, maxlen) {
+      super(maxlen);
+      this._pushActivity = _pushActivity;
+      this._popActivity = _popActivity;
+      this.transactionSpanId = transactionSpanId;
+      ;
+    }
+    add(span) {
+      if (span.spanId !== this.transactionSpanId) {
+        span.finish = (endTimestamp) => {
+          span.endTimestamp = typeof endTimestamp === "number" ? endTimestamp : timestampWithMs();
+          this._popActivity(span.spanId);
+        };
+        if (span.endTimestamp === void 0) {
+          this._pushActivity(span.spanId);
+        }
+      }
+      super.add(span);
+    }
+  };
+  var IdleTransaction = class extends Transaction {
+    __init() {
+      this.activities = {};
+    }
+    __init2() {
+      this._heartbeatCounter = 0;
+    }
+    __init3() {
+      this._finished = false;
+    }
+    __init4() {
+      this._beforeFinishCallbacks = [];
+    }
+    constructor(transactionContext, _idleHub, _idleTimeout = DEFAULT_IDLE_TIMEOUT, _finalTimeout = DEFAULT_FINAL_TIMEOUT, _onScope = false) {
+      super(transactionContext, _idleHub);
+      this._idleHub = _idleHub;
+      this._idleTimeout = _idleTimeout;
+      this._finalTimeout = _finalTimeout;
+      this._onScope = _onScope;
+      IdleTransaction.prototype.__init.call(this);
+      IdleTransaction.prototype.__init2.call(this);
+      IdleTransaction.prototype.__init3.call(this);
+      IdleTransaction.prototype.__init4.call(this);
+      ;
+      if (_onScope) {
+        clearActiveTransaction(_idleHub);
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log(`Setting idle transaction on scope. Span ID: ${this.spanId}`);
+        _idleHub.configureScope((scope) => scope.setSpan(this));
+      }
+      this._startIdleTimeout();
+      setTimeout(() => {
+        if (!this._finished) {
+          this.setStatus("deadline_exceeded");
+          this.finish();
+        }
+      }, this._finalTimeout);
+    }
+    finish(endTimestamp = timestampWithMs()) {
+      this._finished = true;
+      this.activities = {};
+      if (this.spanRecorder) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("[Tracing] finishing IdleTransaction", new Date(endTimestamp * 1e3).toISOString(), this.op);
+        for (var callback of this._beforeFinishCallbacks) {
+          callback(this, endTimestamp);
+        }
+        this.spanRecorder.spans = this.spanRecorder.spans.filter((span) => {
+          if (span.spanId === this.spanId) {
+            return true;
+          }
+          if (!span.endTimestamp) {
+            span.endTimestamp = endTimestamp;
+            span.setStatus("cancelled");
+            (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("[Tracing] cancelling span since transaction ended early", JSON.stringify(span, void 0, 2));
+          }
+          var keepSpan = span.startTimestamp < endTimestamp;
+          if (!keepSpan) {
+            (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("[Tracing] discarding Span since it happened after Transaction was finished", JSON.stringify(span, void 0, 2));
+          }
+          return keepSpan;
+        });
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("[Tracing] flushing IdleTransaction");
+      } else {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("[Tracing] No active IdleTransaction");
+      }
+      if (this._onScope) {
+        clearActiveTransaction(this._idleHub);
+      }
+      return super.finish(endTimestamp);
+    }
+    registerBeforeFinishCallback(callback) {
+      this._beforeFinishCallbacks.push(callback);
+    }
+    initSpanRecorder(maxlen) {
+      if (!this.spanRecorder) {
+        var pushActivity = (id) => {
+          if (this._finished) {
+            return;
+          }
+          this._pushActivity(id);
+        };
+        var popActivity = (id) => {
+          if (this._finished) {
+            return;
+          }
+          this._popActivity(id);
+        };
+        this.spanRecorder = new IdleTransactionSpanRecorder(pushActivity, popActivity, this.spanId, maxlen);
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("Starting heartbeat");
+        this._pingHeartbeat();
+      }
+      this.spanRecorder.add(this);
+    }
+    _cancelIdleTimeout() {
+      if (this._idleTimeoutID) {
+        clearTimeout(this._idleTimeoutID);
+        this._idleTimeoutID = void 0;
+      }
+    }
+    _startIdleTimeout(endTimestamp) {
+      this._cancelIdleTimeout();
+      this._idleTimeoutID = setTimeout(() => {
+        if (!this._finished && Object.keys(this.activities).length === 0) {
+          this.finish(endTimestamp);
+        }
+      }, this._idleTimeout);
+    }
+    _pushActivity(spanId) {
+      this._cancelIdleTimeout();
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log(`[Tracing] pushActivity: ${spanId}`);
+      this.activities[spanId] = true;
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("[Tracing] new activities count", Object.keys(this.activities).length);
+    }
+    _popActivity(spanId) {
+      if (this.activities[spanId]) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log(`[Tracing] popActivity ${spanId}`);
+        delete this.activities[spanId];
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("[Tracing] new activities count", Object.keys(this.activities).length);
+      }
+      if (Object.keys(this.activities).length === 0) {
+        var endTimestamp = timestampWithMs() + this._idleTimeout / 1e3;
+        this._startIdleTimeout(endTimestamp);
+      }
+    }
+    _beat() {
+      if (this._finished) {
+        return;
+      }
+      var heartbeatString = Object.keys(this.activities).join("");
+      if (heartbeatString === this._prevHeartbeatString) {
+        this._heartbeatCounter += 1;
+      } else {
+        this._heartbeatCounter = 1;
+      }
+      this._prevHeartbeatString = heartbeatString;
+      if (this._heartbeatCounter >= 3) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("[Tracing] Transaction finished because of no change for 3 heart beats");
+        this.setStatus("deadline_exceeded");
+        this.finish();
+      } else {
+        this._pingHeartbeat();
+      }
+    }
+    _pingHeartbeat() {
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log(`pinging Heartbeat -> current counter: ${this._heartbeatCounter}`);
+      setTimeout(() => {
+        this._beat();
+      }, HEARTBEAT_INTERVAL);
+    }
+  };
+  function clearActiveTransaction(hub) {
+    var scope = hub.getScope();
+    if (scope) {
+      var transaction = scope.getTransaction();
+      if (transaction) {
+        scope.setSpan(void 0);
+      }
+    }
+  }
+
+  // node_modules/@sentry/tracing/esm/hubextensions.js
+  function traceHeaders() {
+    var scope = this.getScope();
+    if (scope) {
+      var span = scope.getSpan();
+      if (span) {
+        return {
+          "sentry-trace": span.toTraceparent()
+        };
+      }
+    }
+    return {};
+  }
+  function sample(transaction, options2, samplingContext) {
+    if (!hasTracingEnabled(options2)) {
+      transaction.sampled = false;
+      return transaction;
+    }
+    if (transaction.sampled !== void 0) {
+      transaction.setMetadata({
+        transactionSampling: { method: "explicitly_set" }
+      });
+      return transaction;
+    }
+    let sampleRate;
+    if (typeof options2.tracesSampler === "function") {
+      sampleRate = options2.tracesSampler(samplingContext);
+      transaction.setMetadata({
+        transactionSampling: {
+          method: "client_sampler",
+          rate: Number(sampleRate)
+        }
+      });
+    } else if (samplingContext.parentSampled !== void 0) {
+      sampleRate = samplingContext.parentSampled;
+      transaction.setMetadata({
+        transactionSampling: { method: "inheritance" }
+      });
+    } else {
+      sampleRate = options2.tracesSampleRate;
+      transaction.setMetadata({
+        transactionSampling: {
+          method: "client_rate",
+          rate: Number(sampleRate)
+        }
+      });
+    }
+    if (!isValidSampleRate(sampleRate)) {
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn("[Tracing] Discarding transaction because of invalid sample rate.");
+      transaction.sampled = false;
+      return transaction;
+    }
+    if (!sampleRate) {
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log(`[Tracing] Discarding transaction because ${typeof options2.tracesSampler === "function" ? "tracesSampler returned 0 or false" : "a negative sampling decision was inherited or tracesSampleRate is set to 0"}`);
+      transaction.sampled = false;
+      return transaction;
+    }
+    transaction.sampled = Math.random() < sampleRate;
+    if (!transaction.sampled) {
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log(`[Tracing] Discarding transaction because it's not included in the random sample (sampling rate = ${Number(sampleRate)})`);
+      return transaction;
+    }
+    (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log(`[Tracing] starting ${transaction.op} transaction - ${transaction.name}`);
+    return transaction;
+  }
+  function isValidSampleRate(rate) {
+    if (isNaN2(rate) || !(typeof rate === "number" || typeof rate === "boolean")) {
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn(`[Tracing] Given sample rate is invalid. Sample rate must be a boolean or a number between 0 and 1. Got ${JSON.stringify(rate)} of type ${JSON.stringify(typeof rate)}.`);
+      return false;
+    }
+    if (rate < 0 || rate > 1) {
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn(`[Tracing] Given sample rate is invalid. Sample rate must be between 0 and 1. Got ${rate}.`);
+      return false;
+    }
+    return true;
+  }
+  function _startTransaction(transactionContext, customSamplingContext) {
+    var client = this.getClient();
+    var options2 = client && client.getOptions() || {};
+    let transaction = new Transaction(transactionContext, this);
+    transaction = sample(transaction, options2, __spreadValues({
+      parentSampled: transactionContext.parentSampled,
+      transactionContext
+    }, customSamplingContext));
+    if (transaction.sampled) {
+      transaction.initSpanRecorder(options2._experiments && options2._experiments.maxSpans);
+    }
+    return transaction;
+  }
+  function startIdleTransaction(hub, transactionContext, idleTimeout, finalTimeout, onScope, customSamplingContext) {
+    var client = hub.getClient();
+    var options2 = client && client.getOptions() || {};
+    let transaction = new IdleTransaction(transactionContext, hub, idleTimeout, finalTimeout, onScope);
+    transaction = sample(transaction, options2, __spreadValues({
+      parentSampled: transactionContext.parentSampled,
+      transactionContext
+    }, customSamplingContext));
+    if (transaction.sampled) {
+      transaction.initSpanRecorder(options2._experiments && options2._experiments.maxSpans);
+    }
+    return transaction;
+  }
+  function _addTracingExtensions() {
+    var carrier = getMainCarrier();
+    if (!carrier.__SENTRY__) {
+      return;
+    }
+    carrier.__SENTRY__.extensions = carrier.__SENTRY__.extensions || {};
+    if (!carrier.__SENTRY__.extensions.startTransaction) {
+      carrier.__SENTRY__.extensions.startTransaction = _startTransaction;
+    }
+    if (!carrier.__SENTRY__.extensions.traceHeaders) {
+      carrier.__SENTRY__.extensions.traceHeaders = traceHeaders;
+    }
+  }
+  function _autoloadDatabaseIntegrations() {
+    var carrier = getMainCarrier();
+    if (!carrier.__SENTRY__) {
+      return;
+    }
+    var packageToIntegrationMapping = {
+      mongodb() {
+        var integration = dynamicRequire(module, "./integrations/node/mongo");
+        return new integration.Mongo();
+      },
+      mongoose() {
+        var integration = dynamicRequire(module, "./integrations/node/mongo");
+        return new integration.Mongo({ mongoose: true });
+      },
+      mysql() {
+        var integration = dynamicRequire(module, "./integrations/node/mysql");
+        return new integration.Mysql();
+      },
+      pg() {
+        var integration = dynamicRequire(module, "./integrations/node/postgres");
+        return new integration.Postgres();
+      }
+    };
+    var mappedPackages = Object.keys(packageToIntegrationMapping).filter((moduleName) => !!loadModule(moduleName)).map((pkg) => {
+      try {
+        return packageToIntegrationMapping[pkg]();
+      } catch (e3) {
+        return void 0;
+      }
+    }).filter((p2) => p2);
+    if (mappedPackages.length > 0) {
+      carrier.__SENTRY__.integrations = [...carrier.__SENTRY__.integrations || [], ...mappedPackages];
+    }
+  }
+  function addExtensionMethods() {
+    _addTracingExtensions();
+    if (isNodeEnv()) {
+      _autoloadDatabaseIntegrations();
+    }
+    registerErrorInstrumentation();
+  }
+
+  // node_modules/@sentry/tracing/esm/browser/backgroundtab.js
+  var global6 = getGlobalObject();
+  function registerBackgroundTabDetection() {
+    if (global6 && global6.document) {
+      global6.document.addEventListener("visibilitychange", () => {
+        var activeTransaction = getActiveTransaction();
+        if (global6.document.hidden && activeTransaction) {
+          var statusType = "cancelled";
+          (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log(`[Tracing] Transaction: ${statusType} -> since tab moved to the background, op: ${activeTransaction.op}`);
+          if (!activeTransaction.status) {
+            activeTransaction.setStatus(statusType);
+          }
+          activeTransaction.setTag("visibilitychange", "document.hidden");
+          activeTransaction.finish();
+        }
+      });
+    } else {
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn("[Tracing] Could not set up background tab detection due to lack of global document");
+    }
+  }
+
+  // node_modules/@sentry/tracing/esm/browser/web-vitals/lib/bindReporter.js
+  var bindReporter = (callback, metric, reportAllChanges) => {
+    let prevValue;
+    return (forceReport) => {
+      if (metric.value >= 0) {
+        if (forceReport || reportAllChanges) {
+          metric.delta = metric.value - (prevValue || 0);
+          if (metric.delta || prevValue === void 0) {
+            prevValue = metric.value;
+            callback(metric);
+          }
+        }
+      }
+    };
+  };
+
+  // node_modules/@sentry/tracing/esm/browser/web-vitals/lib/generateUniqueID.js
+  var generateUniqueID = () => {
+    return `v2-${Date.now()}-${Math.floor(Math.random() * (9e12 - 1)) + 1e12}`;
+  };
+
+  // node_modules/@sentry/tracing/esm/browser/web-vitals/lib/initMetric.js
+  var initMetric = (name, value2) => {
+    return {
+      name,
+      value: _nullishCoalesce(value2, () => -1),
+      delta: 0,
+      entries: [],
+      id: generateUniqueID()
+    };
+  };
+
+  // node_modules/@sentry/tracing/esm/browser/web-vitals/lib/observe.js
+  var observe = (type, callback) => {
+    try {
+      if (PerformanceObserver.supportedEntryTypes.includes(type)) {
+        if (type === "first-input" && !("PerformanceEventTiming" in self)) {
+          return;
+        }
+        var po = new PerformanceObserver((l2) => l2.getEntries().map(callback));
+        po.observe({ type, buffered: true });
+        return po;
+      }
+    } catch (e3) {
+    }
+    return;
+  };
+
+  // node_modules/@sentry/tracing/esm/browser/web-vitals/lib/onHidden.js
+  var onHidden = (cb, once) => {
+    var onHiddenOrPageHide = (event) => {
+      if (event.type === "pagehide" || getGlobalObject().document.visibilityState === "hidden") {
+        cb(event);
+        if (once) {
+          removeEventListener("visibilitychange", onHiddenOrPageHide, true);
+          removeEventListener("pagehide", onHiddenOrPageHide, true);
+        }
+      }
+    };
+    addEventListener("visibilitychange", onHiddenOrPageHide, true);
+    addEventListener("pagehide", onHiddenOrPageHide, true);
+  };
+
+  // node_modules/@sentry/tracing/esm/browser/web-vitals/getCLS.js
+  var getCLS = (onReport, reportAllChanges) => {
+    var metric = initMetric("CLS", 0);
+    let report;
+    let sessionValue = 0;
+    let sessionEntries = [];
+    var entryHandler = (entry) => {
+      if (entry && !entry.hadRecentInput) {
+        var firstSessionEntry = sessionEntries[0];
+        var lastSessionEntry = sessionEntries[sessionEntries.length - 1];
+        if (sessionValue && sessionEntries.length !== 0 && entry.startTime - lastSessionEntry.startTime < 1e3 && entry.startTime - firstSessionEntry.startTime < 5e3) {
+          sessionValue += entry.value;
+          sessionEntries.push(entry);
+        } else {
+          sessionValue = entry.value;
+          sessionEntries = [entry];
+        }
+        if (sessionValue > metric.value) {
+          metric.value = sessionValue;
+          metric.entries = sessionEntries;
+          if (report) {
+            report();
+          }
+        }
+      }
+    };
+    var po = observe("layout-shift", entryHandler);
+    if (po) {
+      report = bindReporter(onReport, metric, reportAllChanges);
+      onHidden(() => {
+        po.takeRecords().map(entryHandler);
+        report(true);
+      });
+    }
+  };
+
+  // node_modules/@sentry/tracing/esm/browser/web-vitals/lib/getVisibilityWatcher.js
+  var firstHiddenTime = -1;
+  var initHiddenTime = () => {
+    return getGlobalObject().document.visibilityState === "hidden" ? 0 : Infinity;
+  };
+  var trackChanges = () => {
+    onHidden(({ timeStamp }) => {
+      firstHiddenTime = timeStamp;
+    }, true);
+  };
+  var getVisibilityWatcher = () => {
+    if (firstHiddenTime < 0) {
+      firstHiddenTime = initHiddenTime();
+      trackChanges();
+    }
+    return {
+      get firstHiddenTime() {
+        return firstHiddenTime;
+      }
+    };
+  };
+
+  // node_modules/@sentry/tracing/esm/browser/web-vitals/getFID.js
+  var getFID = (onReport, reportAllChanges) => {
+    var visibilityWatcher = getVisibilityWatcher();
+    var metric = initMetric("FID");
+    let report;
+    var entryHandler = (entry) => {
+      if (report && entry.startTime < visibilityWatcher.firstHiddenTime) {
+        metric.value = entry.processingStart - entry.startTime;
+        metric.entries.push(entry);
+        report(true);
+      }
+    };
+    var po = observe("first-input", entryHandler);
+    if (po) {
+      report = bindReporter(onReport, metric, reportAllChanges);
+      onHidden(() => {
+        po.takeRecords().map(entryHandler);
+        po.disconnect();
+      }, true);
+    }
+  };
+
+  // node_modules/@sentry/tracing/esm/browser/web-vitals/getLCP.js
+  var reportedMetricIDs = {};
+  var getLCP = (onReport, reportAllChanges) => {
+    var visibilityWatcher = getVisibilityWatcher();
+    var metric = initMetric("LCP");
+    let report;
+    var entryHandler = (entry) => {
+      var value2 = entry.startTime;
+      if (value2 < visibilityWatcher.firstHiddenTime) {
+        metric.value = value2;
+        metric.entries.push(entry);
+      }
+      if (report) {
+        report();
+      }
+    };
+    var po = observe("largest-contentful-paint", entryHandler);
+    if (po) {
+      report = bindReporter(onReport, metric, reportAllChanges);
+      var stopListening = () => {
+        if (!reportedMetricIDs[metric.id]) {
+          po.takeRecords().map(entryHandler);
+          po.disconnect();
+          reportedMetricIDs[metric.id] = true;
+          report(true);
+        }
+      };
+      ["keydown", "click"].forEach((type) => {
+        addEventListener(type, stopListening, { once: true, capture: true });
+      });
+      onHidden(stopListening, true);
+    }
+  };
+
+  // node_modules/@sentry/tracing/esm/browser/metrics/utils.js
+  function isMeasurementValue(value2) {
+    return typeof value2 === "number" && isFinite(value2);
+  }
+  function _startChild(transaction, _a) {
+    var _b = _a, { startTimestamp } = _b, ctx = __objRest(_b, ["startTimestamp"]);
+    if (startTimestamp && transaction.startTimestamp > startTimestamp) {
+      transaction.startTimestamp = startTimestamp;
+    }
+    return transaction.startChild(__spreadValues({
+      startTimestamp
+    }, ctx));
+  }
+
+  // node_modules/@sentry/tracing/esm/browser/metrics/index.js
+  var global7 = getGlobalObject();
+  function getBrowserPerformanceAPI() {
+    return global7 && global7.addEventListener && global7.performance;
+  }
+  var _performanceCursor = 0;
+  var _measurements = {};
+  var _lcpEntry;
+  var _clsEntry;
+  function startTrackingWebVitals(reportAllChanges = false) {
+    var performance2 = getBrowserPerformanceAPI();
+    if (performance2 && browserPerformanceTimeOrigin) {
+      if (performance2.mark) {
+        global7.performance.mark("sentry-tracing-init");
+      }
+      _trackCLS();
+      _trackLCP(reportAllChanges);
+      _trackFID();
+    }
+  }
+  function startTrackingLongTasks() {
+    var entryHandler = (entry) => {
+      var transaction = getActiveTransaction();
+      if (!transaction) {
+        return;
+      }
+      var startTime = msToSec(browserPerformanceTimeOrigin + entry.startTime);
+      var duration = msToSec(entry.duration);
+      transaction.startChild({
+        description: "Main UI thread blocked",
+        op: "ui.long-task",
+        startTimestamp: startTime,
+        endTimestamp: startTime + duration
+      });
+    };
+    observe("longtask", entryHandler);
+  }
+  function _trackCLS() {
+    getCLS((metric) => {
+      var entry = metric.entries.pop();
+      if (!entry) {
+        return;
+      }
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("[Measurements] Adding CLS");
+      _measurements["cls"] = { value: metric.value, unit: "" };
+      _clsEntry = entry;
+    });
+  }
+  function _trackLCP(reportAllChanges) {
+    getLCP((metric) => {
+      var entry = metric.entries.pop();
+      if (!entry) {
+        return;
+      }
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("[Measurements] Adding LCP");
+      _measurements["lcp"] = { value: metric.value, unit: "millisecond" };
+      _lcpEntry = entry;
+    }, reportAllChanges);
+  }
+  function _trackFID() {
+    getFID((metric) => {
+      var entry = metric.entries.pop();
+      if (!entry) {
+        return;
+      }
+      var timeOrigin = msToSec(browserPerformanceTimeOrigin);
+      var startTime = msToSec(entry.startTime);
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("[Measurements] Adding FID");
+      _measurements["fid"] = { value: metric.value, unit: "millisecond" };
+      _measurements["mark.fid"] = { value: timeOrigin + startTime, unit: "second" };
+    });
+  }
+  function addPerformanceEntries(transaction) {
+    var performance2 = getBrowserPerformanceAPI();
+    if (!performance2 || !global7.performance.getEntries || !browserPerformanceTimeOrigin) {
+      return;
+    }
+    (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("[Tracing] Adding & adjusting spans using Performance API");
+    var timeOrigin = msToSec(browserPerformanceTimeOrigin);
+    var performanceEntries = performance2.getEntries();
+    let responseStartTimestamp;
+    let requestStartTimestamp;
+    performanceEntries.slice(_performanceCursor).forEach((entry) => {
+      var startTime = msToSec(entry.startTime);
+      var duration = msToSec(entry.duration);
+      if (transaction.op === "navigation" && timeOrigin + startTime < transaction.startTimestamp) {
+        return;
+      }
+      switch (entry.entryType) {
+        case "navigation": {
+          _addNavigationSpans(transaction, entry, timeOrigin);
+          responseStartTimestamp = timeOrigin + msToSec(entry.responseStart);
+          requestStartTimestamp = timeOrigin + msToSec(entry.requestStart);
+          break;
+        }
+        case "mark":
+        case "paint":
+        case "measure": {
+          _addMeasureSpans(transaction, entry, startTime, duration, timeOrigin);
+          var firstHidden = getVisibilityWatcher();
+          var shouldRecord = entry.startTime < firstHidden.firstHiddenTime;
+          if (entry.name === "first-paint" && shouldRecord) {
+            (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("[Measurements] Adding FP");
+            _measurements["fp"] = { value: entry.startTime, unit: "millisecond" };
+          }
+          if (entry.name === "first-contentful-paint" && shouldRecord) {
+            (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("[Measurements] Adding FCP");
+            _measurements["fcp"] = { value: entry.startTime, unit: "millisecond" };
+          }
+          break;
+        }
+        case "resource": {
+          var resourceName = entry.name.replace(global7.location.origin, "");
+          _addResourceSpans(transaction, entry, resourceName, startTime, duration, timeOrigin);
+          break;
+        }
+        default:
+      }
+    });
+    _performanceCursor = Math.max(performanceEntries.length - 1, 0);
+    _trackNavigator(transaction);
+    if (transaction.op === "pageload") {
+      if (typeof responseStartTimestamp === "number") {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("[Measurements] Adding TTFB");
+        _measurements["ttfb"] = {
+          value: (responseStartTimestamp - transaction.startTimestamp) * 1e3,
+          unit: "millisecond"
+        };
+        if (typeof requestStartTimestamp === "number" && requestStartTimestamp <= responseStartTimestamp) {
+          _measurements["ttfb.requestTime"] = {
+            value: (responseStartTimestamp - requestStartTimestamp) * 1e3,
+            unit: "millisecond"
+          };
+        }
+      }
+      ["fcp", "fp", "lcp"].forEach((name) => {
+        if (!_measurements[name] || timeOrigin >= transaction.startTimestamp) {
+          return;
+        }
+        var oldValue = _measurements[name].value;
+        var measurementTimestamp = timeOrigin + msToSec(oldValue);
+        var normalizedValue = Math.abs((measurementTimestamp - transaction.startTimestamp) * 1e3);
+        var delta = normalizedValue - oldValue;
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log(`[Measurements] Normalized ${name} from ${oldValue} to ${normalizedValue} (${delta})`);
+        _measurements[name].value = normalizedValue;
+      });
+      var fidMark = _measurements["mark.fid"];
+      if (fidMark && _measurements["fid"]) {
+        _startChild(transaction, {
+          description: "first input delay",
+          endTimestamp: fidMark.value + msToSec(_measurements["fid"].value),
+          op: "web.vitals",
+          startTimestamp: fidMark.value
+        });
+        delete _measurements["mark.fid"];
+      }
+      if (!("fcp" in _measurements)) {
+        delete _measurements.cls;
+      }
+      Object.keys(_measurements).forEach((measurementName) => {
+        transaction.setMeasurement(measurementName, _measurements[measurementName].value, _measurements[measurementName].unit);
+      });
+      _tagMetricInfo(transaction);
+    }
+    _lcpEntry = void 0;
+    _clsEntry = void 0;
+    _measurements = {};
+  }
+  function _addMeasureSpans(transaction, entry, startTime, duration, timeOrigin) {
+    var measureStartTimestamp = timeOrigin + startTime;
+    var measureEndTimestamp = measureStartTimestamp + duration;
+    _startChild(transaction, {
+      description: entry.name,
+      endTimestamp: measureEndTimestamp,
+      op: entry.entryType,
+      startTimestamp: measureStartTimestamp
+    });
+    return measureStartTimestamp;
+  }
+  function _addNavigationSpans(transaction, entry, timeOrigin) {
+    ["unloadEvent", "redirect", "domContentLoadedEvent", "loadEvent", "connect"].forEach((event) => {
+      _addPerformanceNavigationTiming(transaction, entry, event, timeOrigin);
+    });
+    _addPerformanceNavigationTiming(transaction, entry, "secureConnection", timeOrigin, "TLS/SSL", "connectEnd");
+    _addPerformanceNavigationTiming(transaction, entry, "fetch", timeOrigin, "cache", "domainLookupStart");
+    _addPerformanceNavigationTiming(transaction, entry, "domainLookup", timeOrigin, "DNS");
+    _addRequest(transaction, entry, timeOrigin);
+  }
+  function _addPerformanceNavigationTiming(transaction, entry, event, timeOrigin, description, eventEnd) {
+    var end = eventEnd ? entry[eventEnd] : entry[`${event}End`];
+    var start = entry[`${event}Start`];
+    if (!start || !end) {
+      return;
+    }
+    _startChild(transaction, {
+      op: "browser",
+      description: _nullishCoalesce(description, () => event),
+      startTimestamp: timeOrigin + msToSec(start),
+      endTimestamp: timeOrigin + msToSec(end)
+    });
+  }
+  function _addRequest(transaction, entry, timeOrigin) {
+    _startChild(transaction, {
+      op: "browser",
+      description: "request",
+      startTimestamp: timeOrigin + msToSec(entry.requestStart),
+      endTimestamp: timeOrigin + msToSec(entry.responseEnd)
+    });
+    _startChild(transaction, {
+      op: "browser",
+      description: "response",
+      startTimestamp: timeOrigin + msToSec(entry.responseStart),
+      endTimestamp: timeOrigin + msToSec(entry.responseEnd)
+    });
+  }
+  function _addResourceSpans(transaction, entry, resourceName, startTime, duration, timeOrigin) {
+    if (entry.initiatorType === "xmlhttprequest" || entry.initiatorType === "fetch") {
+      return;
+    }
+    var data = {};
+    if ("transferSize" in entry) {
+      data["Transfer Size"] = entry.transferSize;
+    }
+    if ("encodedBodySize" in entry) {
+      data["Encoded Body Size"] = entry.encodedBodySize;
+    }
+    if ("decodedBodySize" in entry) {
+      data["Decoded Body Size"] = entry.decodedBodySize;
+    }
+    var startTimestamp = timeOrigin + startTime;
+    var endTimestamp = startTimestamp + duration;
+    _startChild(transaction, {
+      description: resourceName,
+      endTimestamp,
+      op: entry.initiatorType ? `resource.${entry.initiatorType}` : "resource",
+      startTimestamp,
+      data
+    });
+  }
+  function _trackNavigator(transaction) {
+    var navigator2 = global7.navigator;
+    if (!navigator2) {
+      return;
+    }
+    var connection = navigator2.connection;
+    if (connection) {
+      if (connection.effectiveType) {
+        transaction.setTag("effectiveConnectionType", connection.effectiveType);
+      }
+      if (connection.type) {
+        transaction.setTag("connectionType", connection.type);
+      }
+      if (isMeasurementValue(connection.rtt)) {
+        _measurements["connection.rtt"] = { value: connection.rtt, unit: "millisecond" };
+      }
+      if (isMeasurementValue(connection.downlink)) {
+        _measurements["connection.downlink"] = { value: connection.downlink, unit: "" };
+      }
+    }
+    if (isMeasurementValue(navigator2.deviceMemory)) {
+      transaction.setTag("deviceMemory", `${navigator2.deviceMemory} GB`);
+    }
+    if (isMeasurementValue(navigator2.hardwareConcurrency)) {
+      transaction.setTag("hardwareConcurrency", String(navigator2.hardwareConcurrency));
+    }
+  }
+  function _tagMetricInfo(transaction) {
+    if (_lcpEntry) {
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("[Measurements] Adding LCP Data");
+      if (_lcpEntry.element) {
+        transaction.setTag("lcp.element", htmlTreeAsString(_lcpEntry.element));
+      }
+      if (_lcpEntry.id) {
+        transaction.setTag("lcp.id", _lcpEntry.id);
+      }
+      if (_lcpEntry.url) {
+        transaction.setTag("lcp.url", _lcpEntry.url.trim().slice(0, 200));
+      }
+      transaction.setTag("lcp.size", _lcpEntry.size);
+    }
+    if (_clsEntry && _clsEntry.sources) {
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log("[Measurements] Adding CLS Data");
+      _clsEntry.sources.forEach((source, index2) => transaction.setTag(`cls.source.${index2 + 1}`, htmlTreeAsString(source.node)));
+    }
+  }
+
+  // node_modules/@sentry/tracing/esm/browser/request.js
+  var DEFAULT_TRACING_ORIGINS = ["localhost", /^\//];
+  var defaultRequestInstrumentationOptions = {
+    traceFetch: true,
+    traceXHR: true,
+    tracingOrigins: DEFAULT_TRACING_ORIGINS
+  };
+  function instrumentOutgoingRequests(_options) {
+    const { traceFetch, traceXHR, tracingOrigins, shouldCreateSpanForRequest } = __spreadValues(__spreadValues({}, defaultRequestInstrumentationOptions), _options);
+    var urlMap = {};
+    var defaultShouldCreateSpan = (url2) => {
+      if (urlMap[url2]) {
+        return urlMap[url2];
+      }
+      var origins = tracingOrigins;
+      urlMap[url2] = origins.some((origin) => isMatchingPattern(url2, origin)) && !isMatchingPattern(url2, "sentry_key");
+      return urlMap[url2];
+    };
+    let shouldCreateSpan = defaultShouldCreateSpan;
+    if (typeof shouldCreateSpanForRequest === "function") {
+      shouldCreateSpan = (url2) => {
+        return defaultShouldCreateSpan(url2) && shouldCreateSpanForRequest(url2);
+      };
+    }
+    var spans = {};
+    if (traceFetch) {
+      addInstrumentationHandler("fetch", (handlerData) => {
+        fetchCallback(handlerData, shouldCreateSpan, spans);
+      });
+    }
+    if (traceXHR) {
+      addInstrumentationHandler("xhr", (handlerData) => {
+        xhrCallback(handlerData, shouldCreateSpan, spans);
+      });
+    }
+  }
+  function fetchCallback(handlerData, shouldCreateSpan, spans) {
+    if (!hasTracingEnabled() || !(handlerData.fetchData && shouldCreateSpan(handlerData.fetchData.url))) {
+      return;
+    }
+    if (handlerData.endTimestamp) {
+      var spanId = handlerData.fetchData.__span;
+      if (!spanId)
+        return;
+      var span = spans[spanId];
+      if (span) {
+        if (handlerData.response) {
+          span.setHttpStatus(handlerData.response.status);
+        } else if (handlerData.error) {
+          span.setStatus("internal_error");
+        }
+        span.finish();
+        delete spans[spanId];
+      }
+      return;
+    }
+    var activeTransaction = getActiveTransaction();
+    if (activeTransaction) {
+      var span = activeTransaction.startChild({
+        data: __spreadProps(__spreadValues({}, handlerData.fetchData), {
+          type: "fetch"
+        }),
+        description: `${handlerData.fetchData.method} ${handlerData.fetchData.url}`,
+        op: "http.client"
+      });
+      handlerData.fetchData.__span = span.spanId;
+      spans[span.spanId] = span;
+      var request = handlerData.args[0] = handlerData.args[0];
+      var options2 = handlerData.args[1] = handlerData.args[1] || {};
+      options2.headers = addTracingHeaders(request, activeTransaction.getBaggage(), span, options2);
+    }
+  }
+  function addTracingHeaders(request, incomingBaggage, span, options2) {
+    let headers = options2.headers;
+    if (isInstanceOf(request, Request)) {
+      headers = request.headers;
+    }
+    if (headers) {
+      if (typeof headers.append === "function") {
+        headers.append("sentry-trace", span.toTraceparent());
+        headers.append(BAGGAGE_HEADER_NAME, mergeAndSerializeBaggage(incomingBaggage, headers.get(BAGGAGE_HEADER_NAME)));
+      } else if (Array.isArray(headers)) {
+        const [, headerBaggageString] = headers.find(([key, _2]) => key === BAGGAGE_HEADER_NAME);
+        headers = [
+          ...headers,
+          ["sentry-trace", span.toTraceparent()],
+          [BAGGAGE_HEADER_NAME, mergeAndSerializeBaggage(incomingBaggage, headerBaggageString)]
+        ];
+      } else {
+        headers = __spreadProps(__spreadValues({}, headers), {
+          "sentry-trace": span.toTraceparent(),
+          baggage: mergeAndSerializeBaggage(incomingBaggage, headers.baggage)
+        });
+      }
+    } else {
+      headers = { "sentry-trace": span.toTraceparent(), baggage: mergeAndSerializeBaggage(incomingBaggage) };
+    }
+    return headers;
+  }
+  function xhrCallback(handlerData, shouldCreateSpan, spans) {
+    if (!hasTracingEnabled() || handlerData.xhr && handlerData.xhr.__sentry_own_request__ || !(handlerData.xhr && handlerData.xhr.__sentry_xhr__ && shouldCreateSpan(handlerData.xhr.__sentry_xhr__.url))) {
+      return;
+    }
+    var xhr = handlerData.xhr.__sentry_xhr__;
+    if (handlerData.endTimestamp) {
+      var spanId = handlerData.xhr.__sentry_xhr_span_id__;
+      if (!spanId)
+        return;
+      var span = spans[spanId];
+      if (span) {
+        span.setHttpStatus(xhr.status_code);
+        span.finish();
+        delete spans[spanId];
+      }
+      return;
+    }
+    var activeTransaction = getActiveTransaction();
+    if (activeTransaction) {
+      var span = activeTransaction.startChild({
+        data: __spreadProps(__spreadValues({}, xhr.data), {
+          type: "xhr",
+          method: xhr.method,
+          url: xhr.url
+        }),
+        description: `${xhr.method} ${xhr.url}`,
+        op: "http.client"
+      });
+      handlerData.xhr.__sentry_xhr_span_id__ = span.spanId;
+      spans[handlerData.xhr.__sentry_xhr_span_id__] = span;
+      if (handlerData.xhr.setRequestHeader) {
+        try {
+          handlerData.xhr.setRequestHeader("sentry-trace", span.toTraceparent());
+          var headerBaggageString = handlerData.xhr.getRequestHeader && handlerData.xhr.getRequestHeader(BAGGAGE_HEADER_NAME);
+          handlerData.xhr.setRequestHeader(BAGGAGE_HEADER_NAME, mergeAndSerializeBaggage(activeTransaction.getBaggage(), headerBaggageString));
+        } catch (_2) {
+        }
+      }
+    }
+  }
+
+  // node_modules/@sentry/tracing/esm/browser/router.js
+  var global8 = getGlobalObject();
+  function instrumentRoutingWithDefaults(customStartTransaction, startTransactionOnPageLoad = true, startTransactionOnLocationChange = true) {
+    if (!global8 || !global8.location) {
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn("Could not initialize routing instrumentation due to invalid location");
+      return;
+    }
+    let startingUrl = global8.location.href;
+    let activeTransaction;
+    if (startTransactionOnPageLoad) {
+      activeTransaction = customStartTransaction({
+        name: global8.location.pathname,
+        op: "pageload",
+        metadata: { source: "url" }
+      });
+    }
+    if (startTransactionOnLocationChange) {
+      addInstrumentationHandler("history", ({ to, from }) => {
+        if (from === void 0 && startingUrl && startingUrl.indexOf(to) !== -1) {
+          startingUrl = void 0;
+          return;
+        }
+        if (from !== to) {
+          startingUrl = void 0;
+          if (activeTransaction) {
+            (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log(`[Tracing] Finishing current transaction with op: ${activeTransaction.op}`);
+            activeTransaction.finish();
+          }
+          activeTransaction = customStartTransaction({
+            name: global8.location.pathname,
+            op: "navigation",
+            metadata: { source: "url" }
+          });
+        }
+      });
+    }
+  }
+
+  // node_modules/@sentry/tracing/esm/browser/browsertracing.js
+  var BROWSER_TRACING_INTEGRATION_ID = "BrowserTracing";
+  var DEFAULT_BROWSER_TRACING_OPTIONS = __spreadValues({
+    idleTimeout: DEFAULT_IDLE_TIMEOUT,
+    finalTimeout: DEFAULT_FINAL_TIMEOUT,
+    markBackgroundTransactions: true,
+    routingInstrumentation: instrumentRoutingWithDefaults,
+    startTransactionOnLocationChange: true,
+    startTransactionOnPageLoad: true,
+    _experiments: { enableLongTask: true }
+  }, defaultRequestInstrumentationOptions);
+  var BrowserTracing = class {
+    __init() {
+      this.name = BROWSER_TRACING_INTEGRATION_ID;
+    }
+    constructor(_options) {
+      ;
+      BrowserTracing.prototype.__init.call(this);
+      let tracingOrigins = defaultRequestInstrumentationOptions.tracingOrigins;
+      if (_options) {
+        if (_options.tracingOrigins && Array.isArray(_options.tracingOrigins)) {
+          tracingOrigins = _options.tracingOrigins;
+        } else {
+          (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && (this._emitOptionsWarning = true);
+        }
+      }
+      this.options = __spreadProps(__spreadValues(__spreadValues({}, DEFAULT_BROWSER_TRACING_OPTIONS), _options), {
+        tracingOrigins
+      });
+      const { _metricOptions } = this.options;
+      startTrackingWebVitals(_metricOptions && _metricOptions._reportAllChanges);
+      if (_optionalChain([this, "access", (_2) => _2.options, "access", (_3) => _3._experiments, "optionalAccess", (_4) => _4.enableLongTask])) {
+        startTrackingLongTasks();
+      }
+    }
+    setupOnce(_2, getCurrentHub2) {
+      this._getCurrentHub = getCurrentHub2;
+      if (this._emitOptionsWarning) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn("[Tracing] You need to define `tracingOrigins` in the options. Set an array of urls or patterns to trace.");
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn(`[Tracing] We added a reasonable default for you: ${defaultRequestInstrumentationOptions.tracingOrigins}`);
+      }
+      const {
+        routingInstrumentation: instrumentRouting,
+        startTransactionOnLocationChange,
+        startTransactionOnPageLoad,
+        markBackgroundTransactions,
+        traceFetch,
+        traceXHR,
+        tracingOrigins,
+        shouldCreateSpanForRequest
+      } = this.options;
+      instrumentRouting((context2) => this._createRouteTransaction(context2), startTransactionOnPageLoad, startTransactionOnLocationChange);
+      if (markBackgroundTransactions) {
+        registerBackgroundTabDetection();
+      }
+      instrumentOutgoingRequests({ traceFetch, traceXHR, tracingOrigins, shouldCreateSpanForRequest });
+    }
+    _createRouteTransaction(context2) {
+      if (!this._getCurrentHub) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.warn(`[Tracing] Did not create ${context2.op} transaction because _getCurrentHub is invalid.`);
+        return void 0;
+      }
+      const { beforeNavigate, idleTimeout, finalTimeout } = this.options;
+      var parentContextFromHeader = context2.op === "pageload" ? extractTraceDataFromMetaTags() : void 0;
+      var expandedContext = __spreadProps(__spreadValues(__spreadValues(__spreadValues({}, context2), parentContextFromHeader), parentContextFromHeader && {
+        metadata: __spreadValues(__spreadValues({}, context2.metadata), parentContextFromHeader.metadata)
+      }), {
+        trimEnd: true
+      });
+      var modifiedContext = typeof beforeNavigate === "function" ? beforeNavigate(expandedContext) : expandedContext;
+      var finalContext = modifiedContext === void 0 ? __spreadProps(__spreadValues({}, expandedContext), { sampled: false }) : modifiedContext;
+      finalContext.metadata = finalContext.name !== expandedContext.name ? __spreadProps(__spreadValues({}, finalContext.metadata), { source: "custom" }) : finalContext.metadata;
+      if (finalContext.sampled === false) {
+        (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log(`[Tracing] Will not send ${finalContext.op} transaction because of beforeNavigate.`);
+      }
+      (typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__) && logger.log(`[Tracing] Starting ${finalContext.op} transaction on scope`);
+      var hub = this._getCurrentHub();
+      const { location: location2 } = getGlobalObject();
+      var idleTransaction = startIdleTransaction(hub, finalContext, idleTimeout, finalTimeout, true, { location: location2 });
+      idleTransaction.registerBeforeFinishCallback((transaction) => {
+        addPerformanceEntries(transaction);
+        transaction.setTag("sentry_reportAllChanges", Boolean(this.options._metricOptions && this.options._metricOptions._reportAllChanges));
+      });
+      return idleTransaction;
+    }
+  };
+  function extractTraceDataFromMetaTags() {
+    var sentrytraceValue = getMetaContent("sentry-trace");
+    var baggageValue = getMetaContent("baggage");
+    var sentrytraceData = sentrytraceValue ? extractTraceparentData(sentrytraceValue) : void 0;
+    var baggage = parseBaggageSetMutability(baggageValue, sentrytraceValue);
+    if (sentrytraceData || baggage) {
+      return __spreadValues(__spreadValues({}, sentrytraceData && sentrytraceData), baggage && { metadata: { baggage } });
+    }
+    return void 0;
+  }
+  function getMetaContent(metaName) {
+    var metaTag = getDomElement(`meta[name=${metaName}]`);
+    return metaTag ? metaTag.getAttribute("content") : null;
+  }
+
+  // node_modules/@sentry/tracing/esm/index.js
+  if (typeof __SENTRY_TRACING__ === "undefined" || __SENTRY_TRACING__) {
+    addExtensionMethods();
+  }
 
   // src/App.tsx
   var import_react62 = __toModule(require_react());
@@ -37756,7 +43684,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   function getConfirmation(message, callback) {
     callback(window.confirm(message));
   }
-  function supportsHistory() {
+  function supportsHistory2() {
     var ua = window.navigator.userAgent;
     if ((ua.indexOf("Android 2.") !== -1 || ua.indexOf("Android 4.0") !== -1) && ua.indexOf("Mobile Safari") !== -1 && ua.indexOf("Chrome") === -1 && ua.indexOf("Windows Phone") === -1)
       return false;
@@ -37786,7 +43714,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     }
     !canUseDOM ? true ? tiny_invariant_esm_default(false, "Browser history needs a DOM") : tiny_invariant_esm_default(false) : void 0;
     var globalHistory = window.history;
-    var canUseHistory = supportsHistory();
+    var canUseHistory = supportsHistory2();
     var needsHashChangeListener = !supportsPopStateOnHashChange();
     var _props = props, _props$forceRefresh = _props.forceRefresh, forceRefresh = _props$forceRefresh === void 0 ? false : _props$forceRefresh, _props$getUserConfirm = _props.getUserConfirmation, getUserConfirmation = _props$getUserConfirm === void 0 ? getConfirmation : _props$getUserConfirm, _props$keyLength = _props.keyLength, keyLength = _props$keyLength === void 0 ? 6 : _props$keyLength;
     var basename = props.basename ? stripTrailingSlash(addLeadingSlash(props.basename)) : "";
@@ -38344,13 +44272,13 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     }
   }
   function createEventEmitter(value2) {
-    var handlers = [];
+    var handlers2 = [];
     return {
       on: function on2(handler) {
-        handlers.push(handler);
+        handlers2.push(handler);
       },
       off: function off(handler) {
-        handlers = handlers.filter(function(h2) {
+        handlers2 = handlers2.filter(function(h2) {
           return h2 !== handler;
         });
       },
@@ -38359,7 +44287,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       },
       set: function set2(newValue, changedBits) {
         value2 = newValue;
-        handlers.forEach(function(handler) {
+        handlers2.forEach(function(handler) {
           return handler(value2, changedBits);
         });
       }
@@ -38978,22 +44906,22 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   }
   if (true) {
     if (typeof window !== "undefined") {
-      global2 = window;
+      global9 = window;
       key = "__react_router_build__";
       buildNames = {
         cjs: "CommonJS",
         esm: "ES modules",
         umd: "UMD"
       };
-      if (global2[key] && global2[key] !== "esm") {
-        initialBuildName = buildNames[global2[key]];
+      if (global9[key] && global9[key] !== "esm") {
+        initialBuildName = buildNames[global9[key]];
         secondaryBuildName = buildNames["esm"];
         throw new Error("You are loading the " + secondaryBuildName + " build of React Router " + ("on a page that is already running the " + initialBuildName + " ") + "build, so things won't work right.");
       }
-      global2[key] = "esm";
+      global9[key] = "esm";
     }
   }
-  var global2;
+  var global9;
   var key;
   var buildNames;
   var initialBuildName;
@@ -41545,7 +47473,7 @@ to {
     }, [setChat]);
     return [chat, resetChat];
   }
-  function init(channelInfo) {
+  function init3(channelInfo) {
     const opts = {
       channels: [channelInfo.login],
       identity: {
@@ -42318,11 +48246,11 @@ to {
   var BASE64_OVERHEAD = 1.33;
   function byteLength(obj) {
     if (typeof obj === "string") {
-      return utf8Length(obj);
+      return utf8Length2(obj);
     }
     return Math.ceil((obj.byteLength || obj.size) * BASE64_OVERHEAD);
   }
-  function utf8Length(str) {
+  function utf8Length2(str) {
     let c3 = 0, length2 = 0;
     for (let i3 = 0, l2 = str.length; i3 < l2; i3++) {
       c3 = str.charCodeAt(i3);
@@ -42555,13 +48483,13 @@ to {
       }
     }
     doClose() {
-      const close = () => {
+      const close2 = () => {
         this.write([{ type: "close" }]);
       };
       if (this.readyState === "open") {
-        close();
+        close2();
       } else {
-        this.once("open", close);
+        this.once("open", close2);
       }
     }
     write(packets) {
@@ -42592,7 +48520,7 @@ to {
     }
     request(opts = {}) {
       Object.assign(opts, { xd: this.xd, xs: this.xs }, this.opts);
-      return new Request(this.uri(), opts);
+      return new Request2(this.uri(), opts);
     }
     doWrite(data, fn) {
       const req = this.request({
@@ -42613,7 +48541,7 @@ to {
       this.pollXhr = req;
     }
   };
-  var Request = class extends Emitter {
+  var Request2 = class extends Emitter {
     constructor(uri, opts) {
       super();
       installTimerFunctions(this, opts);
@@ -42677,8 +48605,8 @@ to {
         return;
       }
       if (typeof document !== "undefined") {
-        this.index = Request.requestsCount++;
-        Request.requests[this.index] = this;
+        this.index = Request2.requestsCount++;
+        Request2.requests[this.index] = this;
       }
     }
     onError(err) {
@@ -42697,7 +48625,7 @@ to {
         }
       }
       if (typeof document !== "undefined") {
-        delete Request.requests[this.index];
+        delete Request2.requests[this.index];
       }
       this.xhr = null;
     }
@@ -42713,8 +48641,8 @@ to {
       this.cleanup();
     }
   };
-  Request.requestsCount = 0;
-  Request.requests = {};
+  Request2.requestsCount = 0;
+  Request2.requests = {};
   if (typeof document !== "undefined") {
     if (typeof attachEvent === "function") {
       attachEvent("onunload", unloadHandler);
@@ -42724,9 +48652,9 @@ to {
     }
   }
   function unloadHandler() {
-    for (let i3 in Request.requests) {
-      if (Request.requests.hasOwnProperty(i3)) {
-        Request.requests[i3].abort();
+    for (let i3 in Request2.requests) {
+      if (Request2.requests.hasOwnProperty(i3)) {
+        Request2.requests[i3].abort();
       }
     }
   }
@@ -43236,14 +49164,14 @@ to {
       this.flush();
     }
     close() {
-      const close = () => {
+      const close2 = () => {
         this.onClose("forced close");
         this.transport.close();
       };
       const cleanupAndClose = () => {
         this.off("upgrade", cleanupAndClose);
         this.off("upgradeError", cleanupAndClose);
-        close();
+        close2();
       };
       const waitForUpgrade = () => {
         this.once("upgrade", cleanupAndClose);
@@ -43256,13 +49184,13 @@ to {
             if (this.upgrading) {
               waitForUpgrade();
             } else {
-              close();
+              close2();
             }
           });
         } else if (this.upgrading) {
           waitForUpgrade();
         } else {
-          close();
+          close2();
         }
       }
       return this;
@@ -50016,7 +55944,7 @@ to {
   var _objectToString = objectToString$1;
   var Symbol3 = _Symbol;
   var getRawTag = _getRawTag;
-  var objectToString = _objectToString;
+  var objectToString2 = _objectToString;
   var nullTag = "[object Null]";
   var undefinedTag = "[object Undefined]";
   var symToStringTag = Symbol3 ? Symbol3.toStringTag : void 0;
@@ -50024,7 +55952,7 @@ to {
     if (value2 == null) {
       return value2 === void 0 ? undefinedTag : nullTag;
     }
-    return symToStringTag && symToStringTag in Object(value2) ? getRawTag(value2) : objectToString(value2);
+    return symToStringTag && symToStringTag in Object(value2) ? getRawTag(value2) : objectToString2(value2);
   }
   var _baseGetTag = baseGetTag$1;
   function isObjectLike$1(value2) {
@@ -50125,7 +56053,7 @@ to {
       lastInvokeTime = 0;
       lastArgs = lastCallTime = lastThis = timerId = void 0;
     }
-    function flush() {
+    function flush2() {
       return timerId === void 0 ? result : trailingEdge(now());
     }
     function debounced() {
@@ -50149,7 +56077,7 @@ to {
       return result;
     }
     debounced.cancel = cancel;
-    debounced.flush = flush;
+    debounced.flush = flush2;
     return debounced;
   }
   var debounce_1 = debounce$1;
@@ -52883,7 +58811,7 @@ to {
   function identity5(x3) {
     return x3;
   }
-  function normalize(a3, b2) {
+  function normalize2(a3, b2) {
     return (b2 -= a3 = +a3) ? function(x3) {
       return (x3 - a3) / b2;
     } : constants(isNaN(b2) ? NaN : 0.5);
@@ -52899,9 +58827,9 @@ to {
   function bimap(domain, range4, interpolate) {
     var d0 = domain[0], d1 = domain[1], r0 = range4[0], r1 = range4[1];
     if (d1 < d0)
-      d0 = normalize(d1, d0), r0 = interpolate(r1, r0);
+      d0 = normalize2(d1, d0), r0 = interpolate(r1, r0);
     else
-      d0 = normalize(d0, d1), r0 = interpolate(r0, r1);
+      d0 = normalize2(d0, d1), r0 = interpolate(r0, r1);
     return function(x3) {
       return r0(d0(x3));
     };
@@ -52913,7 +58841,7 @@ to {
       range4 = range4.slice().reverse();
     }
     while (++i3 < j3) {
-      d3[i3] = normalize(domain[i3], domain[i3 + 1]);
+      d3[i3] = normalize2(domain[i3], domain[i3 + 1]);
       r[i3] = interpolate(range4[i3], range4[i3 + 1]);
     }
     return function(x3) {
@@ -53119,13 +59047,13 @@ to {
     var group = locale4.grouping === void 0 || locale4.thousands === void 0 ? identity_default : formatGroup_default(map3.call(locale4.grouping, Number), locale4.thousands + ""), currencyPrefix = locale4.currency === void 0 ? "" : locale4.currency[0] + "", currencySuffix = locale4.currency === void 0 ? "" : locale4.currency[1] + "", decimal = locale4.decimal === void 0 ? "." : locale4.decimal + "", numerals = locale4.numerals === void 0 ? identity_default : formatNumerals_default(map3.call(locale4.numerals, String)), percent = locale4.percent === void 0 ? "%" : locale4.percent + "", minus = locale4.minus === void 0 ? "\u2212" : locale4.minus + "", nan = locale4.nan === void 0 ? "NaN" : locale4.nan + "";
     function newFormat(specifier) {
       specifier = formatSpecifier(specifier);
-      var fill = specifier.fill, align = specifier.align, sign2 = specifier.sign, symbol = specifier.symbol, zero3 = specifier.zero, width = specifier.width, comma = specifier.comma, precision = specifier.precision, trim = specifier.trim, type = specifier.type;
+      var fill2 = specifier.fill, align = specifier.align, sign2 = specifier.sign, symbol = specifier.symbol, zero3 = specifier.zero, width = specifier.width, comma = specifier.comma, precision = specifier.precision, trim = specifier.trim, type = specifier.type;
       if (type === "n")
         comma = true, type = "g";
       else if (!formatTypes_default[type])
         precision === void 0 && (precision = 12), trim = true, type = "g";
-      if (zero3 || fill === "0" && align === "=")
-        zero3 = true, fill = "0", align = "=";
+      if (zero3 || fill2 === "0" && align === "=")
+        zero3 = true, fill2 = "0", align = "=";
       var prefix2 = symbol === "$" ? currencyPrefix : symbol === "#" && /[boxX]/.test(type) ? "0" + type.toLowerCase() : "", suffix = symbol === "$" ? currencySuffix : /[%p]/.test(type) ? percent : "";
       var formatType = formatTypes_default[type], maybeSuffix = /[defgprs%]/.test(type);
       precision = precision === void 0 ? 6 : /[gprs]/.test(type) ? Math.max(1, Math.min(21, precision)) : Math.max(0, Math.min(20, precision));
@@ -53157,7 +59085,7 @@ to {
         }
         if (comma && !zero3)
           value2 = group(value2, Infinity);
-        var length2 = valuePrefix.length + value2.length + valueSuffix.length, padding = length2 < width ? new Array(width - length2 + 1).join(fill) : "";
+        var length2 = valuePrefix.length + value2.length + valueSuffix.length, padding = length2 < width ? new Array(width - length2 + 1).join(fill2) : "";
         if (comma && zero3)
           value2 = group(padding + value2, padding.length ? width - valueSuffix.length : Infinity), padding = "";
         switch (align) {
@@ -54352,9 +60280,9 @@ to {
   var numberRe = /^\s*\d+/;
   var percentRe = /^%/;
   var requoteRe = /[\\^$*+?|[\]().{}]/g;
-  function pad(value2, fill, width) {
+  function pad(value2, fill2, width) {
     var sign2 = value2 < 0 ? "-" : "", string2 = (sign2 ? -value2 : value2) + "", length2 = string2.length;
-    return sign2 + (length2 < width ? new Array(width - length2 + 1).join(fill) + string2 : string2);
+    return sign2 + (length2 < width ? new Array(width - length2 + 1).join(fill2) + string2 : string2);
   }
   function requote(s3) {
     return s3.replace(requoteRe, "\\$&");
@@ -54979,7 +60907,7 @@ to {
   };
   var getMainColorOfGraphicItem = function getMainColorOfGraphicItem2(item) {
     var _ref3 = item, displayName = _ref3.type.displayName;
-    var _item$props = item.props, stroke = _item$props.stroke, fill = _item$props.fill;
+    var _item$props = item.props, stroke = _item$props.stroke, fill2 = _item$props.fill;
     var result;
     switch (displayName) {
       case "Line":
@@ -54987,10 +60915,10 @@ to {
         break;
       case "Area":
       case "Radar":
-        result = stroke && stroke !== "none" ? stroke : fill;
+        result = stroke && stroke !== "none" ? stroke : fill2;
         break;
       default:
-        result = fill;
+        result = fill2;
         break;
     }
     return result;
@@ -57965,10 +63893,10 @@ to {
     }, {
       key: "renderBackground",
       value: function renderBackground() {
-        var _this$props5 = this.props, x3 = _this$props5.x, y2 = _this$props5.y, width = _this$props5.width, height = _this$props5.height, fill = _this$props5.fill, stroke = _this$props5.stroke;
+        var _this$props5 = this.props, x3 = _this$props5.x, y2 = _this$props5.y, width = _this$props5.width, height = _this$props5.height, fill2 = _this$props5.fill, stroke = _this$props5.stroke;
         return /* @__PURE__ */ import_react39.default.createElement("rect", {
           stroke,
-          fill,
+          fill: fill2,
           x: x3,
           y: y2,
           width,
@@ -62317,7 +68245,7 @@ to {
         resetChat();
         console.info("[setup][client]", data);
         if (data.login)
-          setClient((cl) => cl ? cl : init(data));
+          setClient((cl) => cl ? cl : init3(data));
         setChannel(data);
         history.push("/");
       }
@@ -62516,6 +68444,7 @@ to {
       }
     } catch (e3) {
       console.warn("[update][error]", e3);
+      captureException(e3);
       Et.error("Failed to check for update", {
         position: "bottom-center",
         style: { fontSize: "1rem", padding: "0.2rem" }
@@ -62730,7 +68659,7 @@ to {
           resetChat();
           setClient(null);
         } else {
-          setClient(init(channelInfo));
+          setClient(init3(channelInfo));
         }
       }
     }, /* @__PURE__ */ import_react51.default.createElement("input", {
@@ -66776,20 +72705,21 @@ to {
         return null;
       console.info("[client][app][startClient]");
       if (settings.autoConnect)
-        setClient((cl) => cl ? cl : init(c3));
+        setClient((cl) => cl ? cl : init3(c3));
     });
     const updateClientInfo = import_react62.default.useCallback((d3) => {
       console.info("[auth][client][update]", d3);
       setChannelInfo(d3);
       client == null ? void 0 : client.disconnect();
       client == null ? void 0 : client.removeAllListeners();
-      setClient(init(d3));
+      setClient(init3(d3));
     }, [client]);
     useAuthEvents(updateClientInfo);
     import_react62.default.useEffect(() => {
+      setUser({ username: channelInfo.login });
       if (channelInfo.login) {
         if (settings.autoConnect)
-          setClient((cl) => cl ? cl : init(channelInfo));
+          setClient((cl) => cl ? cl : init3(channelInfo));
       }
     }, [channelInfo.login]);
     const [forfeits, setForfeits] = import_react62.default.useState([]);
@@ -66870,9 +72800,22 @@ to {
   }
 
   // src/index.tsx
+  init2({
+    dsn: "https://185864889dcb4a71961b896a59e09846@o304997.ingest.sentry.io/6745310",
+    integrations: [new BrowserTracing()],
+    tracesSampleRate: 1
+  });
+  setTag("version", NL_APPVERSION);
   window["myApp"] = {
-    onWindowClose: () => {
-      Neutralino.app.exit();
+    onWindowClose: async () => {
+      try {
+        const channelInfo = JSON.parse(await Neutralino.storage.getData(`main-channelinfo`));
+        relay_default.emit("event", { type: "timer-cancel", channelId: channelInfo == null ? void 0 : channelInfo.userId });
+      } catch (e3) {
+        captureException(e3);
+      } finally {
+        Neutralino.app.exit();
+      }
     },
     setTitle: (channel, isActive) => {
       Neutralino.window.setTitle(["Giveaway-o-tron", channel, isActive ? "[Connected]" : ""].filter(Boolean).join(" - "));
@@ -66880,9 +72823,16 @@ to {
   };
   Neutralino.init();
   Neutralino.events.on("windowClose", window["myApp"].onWindowClose);
-  Neutralino.events.on("ready", () => {
-    void watch();
-    import_react_dom4.default.render(/* @__PURE__ */ import_react63.default.createElement(App, null), document.querySelector("#app"));
+  Neutralino.events.on("ready", async () => {
+    try {
+      const channelInfo = JSON.parse(await Neutralino.storage.getData(`main-channelinfo`));
+      setUser({ id: channelInfo == null ? void 0 : channelInfo.userId, username: channelInfo == null ? void 0 : channelInfo.login });
+    } catch (e3) {
+      captureException(e3);
+    } finally {
+      void watch();
+      import_react_dom4.default.render(/* @__PURE__ */ import_react63.default.createElement(App, null), document.querySelector("#app"));
+    }
   });
 })();
 /*

@@ -24,6 +24,8 @@
     ]
   },
   "dependencies": {
+    "@sentry/nextjs": "^7.12.1",
+    "add": "^2.0.6",
     "auto-text-size": "^0.1.2",
     "fathom-client": "^3.4.1",
     "isomorphic-fetch": "^3.0.0",
@@ -39,7 +41,8 @@
     "react-hot-toast": "^2.3.0",
     "react-icons": "^4.4.0",
     "socket.io-client": "^4.5.1",
-    "tailwindcss-animate": "^1.0.5"
+    "tailwindcss-animate": "^1.0.5",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",

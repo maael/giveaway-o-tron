@@ -20,6 +20,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sentry/react": "^7.12.1",
+    "@sentry/tracing": "^7.12.1",
     "classnames": "^2.3.1",
     "date-fns": "^2.29.2",
     "howler": "^2.2.3",
