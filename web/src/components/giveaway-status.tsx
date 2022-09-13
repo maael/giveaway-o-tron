@@ -120,10 +120,10 @@ export default function GW2Alerts() {
     body:
       status.status === 'start'
         ? status.command
-          ? `Message with ${status.command
+          ? `Message with "${status.command
               .split(' ')
               .map((c) => SPECIAL_COMMAND_TEXT[c] || c)
-              .join(' ')} for a chance to win!`
+              .join(' ')}" for a chance to win!`
           : "Make sure to send a message in chat, there's no command!"
         : status.status === 'ended'
         ? 'Good luck!'
@@ -183,7 +183,7 @@ function Gw2Status({ status, title, goalTs, body, command, followersOnly }: Stat
       ) : null}
       <div
         className={`text-white uppercase px-4 py-2 text-bold text-center absolute ${
-          command && Object.keys(SPECIAL_COMMAND_TEXT).includes(command) ? 'text-xl' : 'text-2xl'
+          command && Object.keys(SPECIAL_COMMAND_TEXT).some((k) => command.includes(k)) ? 'text-xl' : 'text-2xl'
         }`}
         style={{ top: 284, width: 360 }}
       >
