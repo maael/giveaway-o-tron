@@ -5,6 +5,7 @@ import { join } from 'path'
 import { MDXRemote } from 'next-mdx-remote'
 import rehypeAutoLinkHeadings from 'rehype-autolink-headings'
 import rehypeSlug from 'rehype-slug'
+import * as components from '~/components/mdx'
 
 export default function Guide({ fathom, data }) {
   return (
@@ -23,14 +24,17 @@ export default function Guide({ fathom, data }) {
 
         {data.map((d, i) => [
           <div className="prose" key={d.frontmatter.title}>
-            <div className="item">
-              <MDXRemote {...d} />
+            <div className={`item ${d.frontmatter.title.toLowerCase().replace(/\s/g, '-').replace(/\?/g, '')}`}>
+              <MDXRemote {...d} components={components} />
             </div>
           </div>,
           i === 0 ? (
             <div className="prose -mb-5" key="faq-title">
-              <a id="faq"></a>
-              <h1>FAQ</h1>
+              <h1>
+                <a id="faq" href="#faq">
+                  FAQ
+                </a>
+              </h1>
             </div>
           ) : null,
         ])}
@@ -48,7 +52,7 @@ export async function getStaticProps() {
     fileInfo.map((content) =>
       serialize(content, {
         parseFrontmatter: true,
-        mdxOptions: { rehypePlugins: [rehypeSlug, rehypeAutoLinkHeadings] },
+        mdxOptions: { rehypePlugins: [rehypeSlug, [rehypeAutoLinkHeadings, { behavior: 'wrap' }]] },
       })
     )
   )

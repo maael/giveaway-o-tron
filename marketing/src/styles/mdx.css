@@ -2,6 +2,15 @@
   @apply text-left max-w-2xl mx-auto px-2;
 }
 
+.prose h1 a,
+.prose h2 a,
+.prose h3 a,
+.prose h4 a,
+.prose h5 a,
+.prose h6 a {
+  @apply text-white no-underline;
+}
+
 .prose h1 {
   @apply text-5xl font-bold pt-2 pb-1 text-center;
 }
@@ -11,7 +20,19 @@
 }
 
 .prose h3 {
-  @apply text-lg font-bold pt-5 pb-2;
+  @apply text-lg font-bold pt-3 pb-2;
+}
+
+.prose h3:has(a strong) {
+  @apply pt-4;
+}
+
+.prose h4 {
+  @apply text-lg font-bold pt-3 pb-1;
+}
+
+.prose h5 + h3 {
+  @apply !pt-6;
 }
 
 .prose h5 {
