@@ -1,5 +1,15 @@
 import React, { Dispatch, SetStateAction } from 'react'
-import { FaAngleDown, FaAngleUp, FaBell, FaBellSlash, FaCheck, FaClock, FaTimes } from 'react-icons/fa'
+import {
+  FaAngleDown,
+  FaAngleUp,
+  FaBell,
+  FaBellSlash,
+  FaCheck,
+  FaClock,
+  FaEye,
+  FaEyeSlash,
+  FaTimes,
+} from 'react-icons/fa'
 import Countdown, { zeroPad } from 'react-countdown'
 import toast from 'react-hot-toast'
 import format from 'date-fns/formatDistanceStrict'
@@ -59,6 +69,7 @@ const Time = React.memo(function Time({
   setSettings,
   discordSettings,
   duration,
+  alertHidden,
 }: {
   followersOnly: Props['settings']['followersOnly']
   alertTheme: Props['settings']['alertTheme']
@@ -66,6 +77,7 @@ const Time = React.memo(function Time({
   chatCommand: Props['settings']['chatCommand']
   timerBell: Props['settings']['timerBell']
   duration: Props['settings']['timerDuration']
+  alertHidden: Props['settings']['timerAlertHidden']
   setSettings: Props['setSettings']
 } & Pick<Props, 'channelId' | 'setChatPaused' | 'resetChat' | 'discordSettings'>) {
   const [active, setActive] = React.useState(false)
@@ -97,6 +109,25 @@ const Time = React.memo(function Time({
   return active ? (
     <div className="flex-1 border border-purple-600 rounded-md flex justify-center items-center text-center relative">
       <StableCountdown value={value} onComplete={onComplete} />
+      <div className="absolute right-8 top-2 text-white text-opacity-60 hover:text-opacity-100 select-none cursor-pointer">
+        {alertHidden ? (
+          <FaEye
+            onClick={() => {
+              setSettings((s) => ({ ...s, timerAlertHidden: !s.timerAlertHidden }))
+              relay.emit('event', { type: 'timer-hide', hidden: false, channelId })
+            }}
+            title="Show the timer alert"
+          />
+        ) : (
+          <FaEyeSlash
+            onClick={() => {
+              setSettings((s) => ({ ...s, timerAlertHidden: !s.timerAlertHidden }))
+              relay.emit('event', { type: 'timer-hide', hidden: true, channelId })
+            }}
+            title="Hide the timer alert"
+          />
+        )}
+      </div>
       <FaTimes
         className="absolute right-3 top-2 text-red-500 select-none cursor-pointer"
         onClick={() => {
@@ -138,6 +169,7 @@ const Time = React.memo(function Time({
         onClick={() => {
           resetChat()
           setChatPaused(false)
+          setSettings((s) => ({ ...s, timerAlertHidden: false }))
           setActive(true)
           const disabledDueToTimer =
             duration && discordSettings.giveawayMinTime && duration < discordSettings.giveawayMinTime
@@ -300,6 +332,7 @@ export default function SettingsComponent({
           alertTheme={settings.alertTheme}
           alertCustomImageUrl={settings.alertCustomImageUrl}
           followersOnly={settings.followersOnly}
+          alertHidden={settings.timerAlertHidden}
         />
       </div>
       <div className="flex flex-row gap-2 mt-2 text-sm">

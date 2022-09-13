@@ -18,6 +18,7 @@ export interface Settings {
   timerBell?: boolean
   giveawayName?: string
   timerDuration?: number
+  timerAlertHidden?: boolean
 }
 
 export interface DiscordSettings {

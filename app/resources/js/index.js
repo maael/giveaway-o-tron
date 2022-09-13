@@ -41721,7 +41721,8 @@ to {
     giveawayName: "",
     timerBell: false,
     timerDuration: ONE_MIN,
-    alertCustomImageUrl: ""
+    alertCustomImageUrl: "",
+    timerAlertHidden: false
   };
   var defaultDiscordSettings = {
     guildId: "",
@@ -44604,6 +44605,12 @@ to {
   function FaExclamationTriangle(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 576 512" }, "child": [{ "tag": "path", "attr": { "d": "M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z" } }] })(props);
   }
+  function FaEyeSlash(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 640 512" }, "child": [{ "tag": "path", "attr": { "d": "M320 400c-75.85 0-137.25-58.71-142.9-133.11L72.2 185.82c-13.79 17.3-26.48 35.59-36.72 55.59a32.35 32.35 0 0 0 0 29.19C89.71 376.41 197.07 448 320 448c26.91 0 52.87-4 77.89-10.46L346 397.39a144.13 144.13 0 0 1-26 2.61zm313.82 58.1l-110.55-85.44a331.25 331.25 0 0 0 81.25-102.07 32.35 32.35 0 0 0 0-29.19C550.29 135.59 442.93 64 320 64a308.15 308.15 0 0 0-147.32 37.7L45.46 3.37A16 16 0 0 0 23 6.18L3.37 31.45A16 16 0 0 0 6.18 53.9l588.36 454.73a16 16 0 0 0 22.46-2.81l19.64-25.27a16 16 0 0 0-2.82-22.45zm-183.72-142l-39.3-30.38A94.75 94.75 0 0 0 416 256a94.76 94.76 0 0 0-121.31-92.21A47.65 47.65 0 0 1 304 192a46.64 46.64 0 0 1-1.54 10l-73.61-56.89A142.31 142.31 0 0 1 320 112a143.92 143.92 0 0 1 144 144c0 21.63-5.29 41.79-13.9 60.11z" } }] })(props);
+  }
+  function FaEye(props) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 576 512" }, "child": [{ "tag": "path", "attr": { "d": "M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z" } }] })(props);
+  }
   function FaPauseCircle(props) {
     return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 512 512" }, "child": [{ "tag": "path", "attr": { "d": "M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm-16 328c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h48c8.8 0 16 7.2 16 16v160zm112 0c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h48c8.8 0 16 7.2 16 16v160z" } }] })(props);
   }
@@ -45236,7 +45243,8 @@ to {
     timerBell,
     setSettings,
     discordSettings,
-    duration
+    duration,
+    alertHidden
   }) {
     const [active, setActive] = import_react14.default.useState(false);
     const value2 = duration || ONE_MIN2;
@@ -45266,7 +45274,21 @@ to {
     }, /* @__PURE__ */ import_react14.default.createElement(StableCountdown, {
       value: value2,
       onComplete
-    }), /* @__PURE__ */ import_react14.default.createElement(FaTimes, {
+    }), /* @__PURE__ */ import_react14.default.createElement("div", {
+      className: "absolute right-8 top-2 text-white text-opacity-60 hover:text-opacity-100 select-none cursor-pointer"
+    }, alertHidden ? /* @__PURE__ */ import_react14.default.createElement(FaEye, {
+      onClick: () => {
+        setSettings((s3) => __spreadProps(__spreadValues({}, s3), { timerAlertHidden: !s3.timerAlertHidden }));
+        relay_default.emit("event", { type: "timer-hide", hidden: false, channelId });
+      },
+      title: "Show the timer alert"
+    }) : /* @__PURE__ */ import_react14.default.createElement(FaEyeSlash, {
+      onClick: () => {
+        setSettings((s3) => __spreadProps(__spreadValues({}, s3), { timerAlertHidden: !s3.timerAlertHidden }));
+        relay_default.emit("event", { type: "timer-hide", hidden: true, channelId });
+      },
+      title: "Hide the timer alert"
+    })), /* @__PURE__ */ import_react14.default.createElement(FaTimes, {
       className: "absolute right-3 top-2 text-red-500 select-none cursor-pointer",
       onClick: () => {
         setActive(false);
@@ -45297,6 +45319,7 @@ to {
       onClick: () => {
         resetChat();
         setChatPaused(false);
+        setSettings((s3) => __spreadProps(__spreadValues({}, s3), { timerAlertHidden: false }));
         setActive(true);
         const disabledDueToTimer = duration && discordSettings.giveawayMinTime && duration < discordSettings.giveawayMinTime;
         relay_default.emit("event", {
@@ -45416,7 +45439,8 @@ to {
       duration: settings.timerDuration,
       alertTheme: settings.alertTheme,
       alertCustomImageUrl: settings.alertCustomImageUrl,
-      followersOnly: settings.followersOnly
+      followersOnly: settings.followersOnly,
+      alertHidden: settings.timerAlertHidden
     })), /* @__PURE__ */ import_react14.default.createElement("div", {
       className: "flex flex-row gap-2 mt-2 text-sm"
     }, /* @__PURE__ */ import_react14.default.createElement(SliderOuter, {

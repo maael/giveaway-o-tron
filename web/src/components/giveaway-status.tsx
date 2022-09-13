@@ -39,6 +39,7 @@ export default function GW2Alerts() {
     followersOnly?: boolean
     theme?: string
     imageUrl?: string
+    hidden?: boolean
   }>({})
 
   const handleEvent = React.useCallback(
@@ -52,6 +53,7 @@ export default function GW2Alerts() {
       duration?: number
       followersOnly?: string
       alertCustomImageUrl?: string
+      hidden?: boolean
     }) => {
       console.info('[event]', e)
       if (`${e.channelId}` !== `${channel}`) return
@@ -71,6 +73,8 @@ export default function GW2Alerts() {
           theme: e.alertTheme,
           imageUrl: e.alertCustomImageUrl,
         })
+      } else if (e.type === 'timer-hide') {
+        setStatus((s) => ({ ...s, hidden: e.hidden }))
       } else if (e.type === 'timer-cancel') {
         setStatus({})
       }
@@ -131,7 +135,7 @@ export default function GW2Alerts() {
   React.useEffect(() => {
     new Image().src = '/images/chest-notification.png'
   }, [])
-  return status.status ? (
+  return status.status && !status.hidden ? (
     <div className="w-full h-full">
       {status.theme === 'gw2' ? <Gw2Status {...props} /> : <CustomStatus {...props} />}
     </div>

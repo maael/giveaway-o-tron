@@ -66,6 +66,7 @@ export const defaultSettings: Required<Settings> = {
   timerBell: false,
   timerDuration: ONE_MIN,
   alertCustomImageUrl: '',
+  timerAlertHidden: false,
 }
 
 export const defaultDiscordSettings: Required<DiscordSettings> = {
