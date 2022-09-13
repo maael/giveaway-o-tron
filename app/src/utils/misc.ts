@@ -28,8 +28,32 @@ const specialCommands = {
   $gw2_or_steam$: /(^|\s)\w+\.\d{4}($|\s)|(^|\s)\d{8}($|\s)/,
 }
 
+const specialCommandsForCombination = {
+  $gw2_account$: '\\w+\\.\\d{4}',
+  $steam_friend$: '\\d{8}',
+  $gw2_or_steam$: '\\w+\\.\\d{4}|\\d{8}',
+}
+
+function escapeRegExp(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
+}
+
 export function handleChatCommand(chatItem: ChatItem, command: string) {
-  const translatedCommand: string | RegExp = specialCommands[command] || command
+  const cleanCommand = command.trim()
+  let translatedCommand: string | RegExp = specialCommands[cleanCommand] || cleanCommand
+  const matchingCommand = Object.keys(specialCommandsForCombination).some(
+    (k) => cleanCommand.includes(k) && cleanCommand !== k
+  )
+  if (matchingCommand) {
+    const tranformedCommand = new RegExp(
+      cleanCommand
+        .split(' ')
+        .map((c) => specialCommandsForCombination[c] || escapeRegExp(c))
+        .join(' '),
+      'i'
+    )
+    translatedCommand = tranformedCommand
+  }
   if (typeof translatedCommand === 'string') {
     return translatedCommand ? chatItem.msg.toLowerCase().includes(translatedCommand.toLowerCase()) : true
   } else {

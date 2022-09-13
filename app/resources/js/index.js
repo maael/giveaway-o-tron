@@ -41685,8 +41685,22 @@ to {
     $steam_friend$: /(^|\s)\d{8}($|\s)/,
     $gw2_or_steam$: /(^|\s)\w+\.\d{4}($|\s)|(^|\s)\d{8}($|\s)/
   };
+  var specialCommandsForCombination = {
+    $gw2_account$: "\\w+\\.\\d{4}",
+    $steam_friend$: "\\d{8}",
+    $gw2_or_steam$: "\\w+\\.\\d{4}|\\d{8}"
+  };
+  function escapeRegExp(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+  }
   function handleChatCommand(chatItem, command) {
-    const translatedCommand = specialCommands[command] || command;
+    const cleanCommand = command.trim();
+    let translatedCommand = specialCommands[cleanCommand] || cleanCommand;
+    const matchingCommand = Object.keys(specialCommandsForCombination).some((k3) => cleanCommand.includes(k3) && cleanCommand !== k3);
+    if (matchingCommand) {
+      const tranformedCommand = new RegExp(cleanCommand.split(" ").map((c3) => specialCommandsForCombination[c3] || escapeRegExp(c3)).join(" "), "i");
+      translatedCommand = tranformedCommand;
+    }
     if (typeof translatedCommand === "string") {
       return translatedCommand ? chatItem.msg.toLowerCase().includes(translatedCommand.toLowerCase()) : true;
     } else {
@@ -44327,7 +44341,8 @@ to {
     let users = chatCommandEvents.reduce((acc, c3) => acc.some((i3) => i3.username === c3.username) ? acc : acc.concat(c3), []);
     giveawayUserStats.users = users.length;
     users = users.filter((i3) => {
-      if (!settings.chatCommand)
+      var _a;
+      if (!((_a = settings.chatCommand) == null ? void 0 : _a.trim()))
         return true;
       if (!settings.spamLimit || settings.spamLimit === 1)
         return true;
@@ -45327,7 +45342,7 @@ to {
           channelId,
           ts: new Date().toISOString(),
           duration,
-          chatCommand,
+          chatCommand: chatCommand == null ? void 0 : chatCommand.trim(),
           discordGuildId: discordSettings.guildId,
           discordChannelId: discordSettings.channelId,
           discordColour: getDiscordColour(discordSettings.messageColour),
@@ -45404,7 +45419,7 @@ to {
       className: "bg-gray-700 px-2 py-1 border-b border-purple-600 flex-1",
       placeholder: "Empty means any message...",
       value: settings.chatCommand,
-      onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { chatCommand: e3.target.value.trim() })),
+      onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { chatCommand: e3.target.value })),
       title: "Chat command to enter - leave empty for none"
     }), /* @__PURE__ */ import_react14.default.createElement(ChatCommandPicker, {
       setSettings
@@ -62457,7 +62472,7 @@ to {
         className: "grid col-span-4"
       }, /* @__PURE__ */ import_react49.default.createElement(SettingItem, {
         label: "Chat Command",
-        value: giveaway.settings.chatCommand.toString() || "No command"
+        value: giveaway.settings.chatCommand.toString().trim() || "No command"
       })), /* @__PURE__ */ import_react49.default.createElement("div", {
         className: "grid col-span-4"
       }, /* @__PURE__ */ import_react49.default.createElement(SettingItem, {

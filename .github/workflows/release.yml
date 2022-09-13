@@ -24,6 +24,8 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install dependencies
         run: yarn
+      - name: Tests
+        run: yarn test
       - name: Get neutralino.js
         run: yarn neu-update
       - name: Build

@@ -126,7 +126,10 @@ export default function PastGiveaways({
               <SettingItem label="Followers Only" value={giveaway.settings.followersOnly} />
               <SettingItem label="Send Messages" value={giveaway.settings.sendMessages} />
               <div className="grid col-span-4">
-                <SettingItem label="Chat Command" value={giveaway.settings.chatCommand.toString() || 'No command'} />
+                <SettingItem
+                  label="Chat Command"
+                  value={giveaway.settings.chatCommand.toString().trim() || 'No command'}
+                />
               </div>
               <div className="grid col-span-4">
                 <SettingItem label="Winner Message" value={giveaway.settings.winnerMessage.toString()} />

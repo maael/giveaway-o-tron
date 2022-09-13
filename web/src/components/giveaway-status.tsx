@@ -5,9 +5,9 @@ import { io } from 'socket.io-client'
 import Countdown, { zeroPad } from 'react-countdown'
 
 const SPECIAL_COMMAND_TEXT = {
-  $gw2_account$: 'with your Guild Wars 2 account name XXXX.1234',
-  $steam_friend$: 'with your 8 digit Steam friend code',
-  $gw2_or_steam$: 'with either your GW2 account name or Steam friend code',
+  $gw2_account$: 'your Guild Wars 2 account name XXXX.1234',
+  $steam_friend$: 'your 8 digit Steam friend code',
+  $gw2_or_steam$: 'either your GW2 account name or Steam friend code',
 }
 
 const countDownRenderer = ({ hours, minutes, seconds, completed }) => {
@@ -60,7 +60,7 @@ export default function GW2Alerts() {
       if (e.type === 'timer-start') {
         setStatus({
           status: 'start',
-          command: e.chatCommand,
+          command: e.chatCommand ? e.chatCommand.trim() : e.chatCommand,
           goalTs: e.ts && e.duration ? Number(new Date(e.ts)) + e.duration : undefined,
           followersOnly: !!e.followersOnly,
           theme: e.alertTheme,
@@ -120,7 +120,10 @@ export default function GW2Alerts() {
     body:
       status.status === 'start'
         ? status.command
-          ? `Message ${SPECIAL_COMMAND_TEXT[status.command] || `including ${status.command}`} for a chance to win!`
+          ? `Message with ${status.command
+              .split(' ')
+              .map((c) => SPECIAL_COMMAND_TEXT[c] || c)
+              .join(' ')} for a chance to win!`
           : "Make sure to send a message in chat, there's no command!"
         : status.status === 'ended'
         ? 'Good luck!'

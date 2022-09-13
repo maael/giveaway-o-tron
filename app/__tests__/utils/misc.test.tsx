@@ -1,0 +1,126 @@
+import { ChatItem } from '~/chat'
+import { handleChatCommand } from '../../src/utils/misc'
+
+function mockChatItem(msg: string): ChatItem {
+  return {
+    id: 'test-1',
+    isMod: false,
+    isSubscriber: false,
+    color: '#FF0000',
+    displayName: 'Test',
+    userId: 'test-1',
+    username: 'test',
+    type: '',
+    turbo: false,
+    tmiTs: Date.now(),
+    receivedTs: Date.now(),
+    returningChatter: false,
+    firstMessage: false,
+    formattedTmiTs: 'test',
+    msg,
+  }
+}
+
+const cases = [
+  {
+    command: 'basic',
+    msg: 'this is a basic of commands',
+    expected: true,
+  },
+  {
+    command: 'basic',
+    msg: 'this is a of commands',
+    expected: false,
+  },
+  {
+    command: 'insensitive',
+    msg: 'this is test a of INSENSITIVE commands',
+    expected: true,
+  },
+  {
+    command: '$gw2_account$',
+    msg: 'this is test a of Mael.1234 commands',
+    expected: true,
+  },
+  {
+    command: '$gw2_account$',
+    msg: 'this is test a of !Mael.1234 commands',
+    expected: false,
+  },
+  {
+    command: '$gw2_account$',
+    msg: 'this is test a of commands',
+    expected: false,
+  },
+  {
+    command: '$steam_friend$',
+    msg: 'this is test a 12345678 of commands',
+    expected: true,
+  },
+  {
+    command: '$steam_friend$',
+    msg: 'this is test a 123456789 of commands',
+    expected: false,
+  },
+  {
+    command: '$steam_friend$',
+    msg: 'this is test a 1234 of commands',
+    expected: false,
+  },
+  {
+    command: '$gw2_or_steam$',
+    msg: 'this is test a of Mael.1234 commands',
+    expected: true,
+  },
+  {
+    command: '$steam_friend$',
+    msg: 'this is test a 12345678 of commands',
+    expected: true,
+  },
+  {
+    command: 'space command',
+    msg: 'this is test a space command of commands',
+    expected: true,
+  },
+  {
+    command: 'space command',
+    msg: 'this is test a spacecommand of commands',
+    expected: false,
+  },
+  {
+    command: '$gw2_account$ combined',
+    msg: 'this is test a Mael.1234 combined of commands',
+    expected: true,
+  },
+  {
+    command: '$gw2_account$ combined',
+    msg: 'this is test a Mael.1234 of commands',
+    expected: false,
+  },
+  {
+    command: '$gw2_account$ combined',
+    msg: 'this is test a combined of commands',
+    expected: false,
+  },
+  {
+    command: '$gw2_account$ combined with .+ regex things',
+    msg: 'this is test a Mael.1234 combined with .+ regex things of commands',
+    expected: true,
+  },
+  {
+    command: '$gw2_account$ combined with CASE INSENSITIVE .+ regex things',
+    msg: 'this is test a Mael.1234 combined with case insensitive .+ regex things of commands',
+    expected: true,
+  },
+  {
+    command: '$gw2_account$ combined with .+ regex things',
+    msg: 'this is test a Mael.1234 combined with lots of other regex things of commands',
+    expected: false,
+  },
+]
+
+describe('Misc', () => {
+  test.each(cases)('handleChatCommand() | $command = $expected', ({ command, msg, expected }) => {
+    expect(handleChatCommand(mockChatItem(msg), command)).toBe(expected)
+  })
+})

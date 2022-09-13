@@ -76,7 +76,7 @@ export async function getChatGiveaway(
   )
   giveawayUserStats.users = users.length
   users = users.filter((i) => {
-    if (!settings.chatCommand) return true
+    if (!settings.chatCommand?.trim()) return true
     if (!settings.spamLimit || settings.spamLimit === 1) return true
     const count = spamCounts.get(i.username)
     if (count === undefined) return

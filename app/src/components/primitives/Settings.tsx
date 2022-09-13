@@ -178,7 +178,7 @@ const Time = React.memo(function Time({
             channelId,
             ts: new Date().toISOString(),
             duration,
-            chatCommand,
+            chatCommand: chatCommand?.trim(),
             discordGuildId: discordSettings.guildId,
             discordChannelId: discordSettings.channelId,
             discordColour: getDiscordColour(discordSettings.messageColour),
@@ -281,7 +281,7 @@ export default function SettingsComponent({
             className="bg-gray-700 px-2 py-1 border-b border-purple-600 flex-1"
             placeholder="Empty means any message..."
             value={settings.chatCommand}
-            onChange={(e) => setSettings((s) => ({ ...s, chatCommand: e.target.value.trim() }))}
+            onChange={(e) => setSettings((s) => ({ ...s, chatCommand: e.target.value }))}
             title="Chat command to enter - leave empty for none"
           />
           <ChatCommandPicker setSettings={setSettings} />
