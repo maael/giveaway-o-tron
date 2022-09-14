@@ -54,17 +54,12 @@ jobs:
         working-directory: web
     steps:
       - uses: actions/checkout@master
-      - name: Set output
-        id: vars
-        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
       - uses: actions/download-artifact@master
         with:
           name: resource-file
           path: web/public/versions
       - name: Version File
-        env:
-          RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
-        run: echo '{"tag":"$RELEASE_VERSION"}' > src/version.json
+        run: yarn generate-version-file
       - uses: EndBug/add-and-commit@v9
         with:
           add: '["web/public/versions", "web/src/version.json"]'
