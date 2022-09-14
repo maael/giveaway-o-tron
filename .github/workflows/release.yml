@@ -67,6 +67,6 @@ jobs:
         run: echo '{"tag":"$RELEASE_VERSION"}' > version.json
       - uses: EndBug/add-and-commit@v9
         with:
-          add: web/public/versions
-          message: "chore: Update version file"
+          add: '["web/public/versions", "web/src/version.json"]'
+          message: "chore: Update version files"
           push: origin HEAD:main
