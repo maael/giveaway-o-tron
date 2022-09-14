@@ -16,7 +16,7 @@ function escapeRegExp(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
 }
 
-export function handleChatCommand(msg: string, command: string) {
+export function handleChatCommand(msg: string, command: string): { isMatch: boolean; match: string } {
   const cleanCommand = command.trim()
   let translatedCommand: string | RegExp = specialCommands[cleanCommand] || cleanCommand
   const matchingCommand = Object.keys(specialCommandsForCombination).some(
@@ -33,9 +33,12 @@ export function handleChatCommand(msg: string, command: string) {
     translatedCommand = tranformedCommand
   }
   if (typeof translatedCommand === 'string') {
-    return translatedCommand ? msg.toLowerCase().includes(translatedCommand.toLowerCase()) : true
+    return {
+      isMatch: translatedCommand ? msg.toLowerCase().includes(translatedCommand.toLowerCase()) : true,
+      match: '',
+    }
   } else {
-    return msg.match(translatedCommand) !== null
+    return { isMatch: msg.match(translatedCommand) !== null, match: '' }
   }
 }
 
@@ -46,7 +49,7 @@ export default function ChatTester() {
     setMsgs((m) =>
       m.map((i) => ({
         ...i,
-        match: handleChatCommand(i.msg, cmd),
+        match: handleChatCommand(i.msg, cmd).isMatch,
       }))
     )
   }, [cmd, msgs.length])

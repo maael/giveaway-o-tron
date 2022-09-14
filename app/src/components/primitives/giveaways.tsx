@@ -1,7 +1,8 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import { GiPartyPopper } from 'react-icons/gi'
-import { FaBullhorn, FaDice, FaSpinner, FaTimes } from 'react-icons/fa'
+import { FaBullhorn, FaDice, FaExclamationTriangle, FaSpinner, FaTimes } from 'react-icons/fa'
 import toast from 'react-hot-toast'
+import cls from 'classnames'
 import { ChatItem } from '../../chat'
 import {
   Settings as TSettings,
@@ -142,6 +143,7 @@ export function ChatGiveaway({
                 username: w.login,
                 isFollower: !!w.wasFollower,
                 isSubscriber: !!w.wasSubscriber,
+                otherUsersWithEntry: w.otherUsersWithEntry,
               }))
             )
           )
@@ -175,6 +177,7 @@ export type WinnerUser = Partial<{
   isSubscriber: boolean
   isFollower: boolean
   source: 'instant' | 'chat'
+  otherUsersWithEntry?: string[]
 }>
 export function Winner({
   winners,
@@ -182,27 +185,51 @@ export function Winner({
   ...anounceArgs
 }: { winners: WinnerUser[]; onClear: (idx: number) => void } & Omit<AnnounceArgs, 'winner' | 'giveawayType'>) {
   return winners.length ? (
-    <div className="grid gap-1 grid-cols-2 mt-3">
-      {winners.map((winner, i) => (
-        <div
-          key={winner.username}
-          className="bg-gray-600 text-white rounded-md overflow-hidden flex flex-row items-center justify-center px-2 py-4 text-center relative"
-        >
-          <div className="text-2xl absolute left-5">{i + 1}.</div>
-          <GiPartyPopper className="text-purple-300 text-xl" /> <div className="px-2">{winner.username} wins!</div>{' '}
-          <GiPartyPopper className="text-purple-300 text-xl" />
-          <FaBullhorn
-            className="text-2xl absolute right-12 cursor-pointer select-none transform opacity-80 transition-opacity hover:opacity-100 hover:scale-105"
-            onClick={() =>
-              announceWinner({ ...anounceArgs, giveawayType: winner.source!, winner: winner.username!, force: true })
-            }
-          />
-          <FaTimes
-            className="text-2xl absolute right-5 text-red-500 cursor-pointer transform opacity-80 transition-opacity hover:opacity-100 select-none hover:scale-105"
-            onClick={() => onClear(i)}
-          />
-        </div>
-      ))}
+    <div className="grid gap-2 grid-cols-2 mt-3">
+      {winners.map((winner, i) => {
+        const hasWarning = (winner.otherUsersWithEntry || []).length !== 0
+        return (
+          <div
+            key={winner.username}
+            className={cls(
+              'bg-gray-600 border border-gray-600 text-white rounded-md overflow-hidden flex flex-row items-center justify-center px-2 py-4 text-center relative',
+              { 'border-yellow-500': hasWarning }
+            )}
+          >
+            <div className={cls('flex flex-row items-center relative', { '-top-2': hasWarning })}>
+              <GiPartyPopper className="text-purple-300 text-xl" /> <div className="px-2">{winner.username} wins!</div>{' '}
+              <GiPartyPopper className="text-purple-300 text-xl" />
+            </div>
+            <FaBullhorn
+              className={cls(
+                'text-2xl absolute right-12 cursor-pointer select-none transform opacity-80 transition-opacity hover:opacity-100 hover:scale-105',
+                { '-mt-4': hasWarning }
+              )}
+              onClick={() =>
+                announceWinner({
+                  ...anounceArgs,
+                  giveawayType: winner.source!,
+                  winner: winner.username!,
+                  force: true,
+                })
+              }
+            />
+            <FaTimes
+              className={cls(
+                'text-2xl absolute right-5 text-red-500 cursor-pointer transform opacity-80 transition-opacity hover:opacity-100 select-none hover:scale-105',
+                { '-mt-4': hasWarning }
+              )}
+              onClick={() => onClear(i)}
+            />
+            {hasWarning ? (
+              <div className="text-xs text-yellow-500 pt-2 absolute bottom-1 right-0 left-0 flex flex-row gap-1 text-center justify-center items-center">
+                <FaExclamationTriangle /> {winner.otherUsersWithEntry?.length} other Twitch users submitted same entry,
+                shown in chat
+              </div>
+            ) : null}
+          </div>
+        )
+      })}
     </div>
   ) : null
 }

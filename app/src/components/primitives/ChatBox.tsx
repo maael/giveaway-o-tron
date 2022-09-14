@@ -4,7 +4,16 @@ import toast from 'react-hot-toast'
 import format from 'date-fns/format'
 import { ChatItem } from '../../chat'
 import { WinnerUser } from '../primitives/giveaways'
-import { FaCheck, FaPauseCircle, FaPlayCircle, FaSave, FaSearch, FaTimes, FaTimesCircle } from 'react-icons/fa'
+import {
+  FaCheck,
+  FaExclamationTriangle,
+  FaPauseCircle,
+  FaPlayCircle,
+  FaSave,
+  FaSearch,
+  FaTimes,
+  FaTimesCircle,
+} from 'react-icons/fa'
 import { Settings } from '~/utils'
 
 function isVisibleIn(ele: HTMLElement, container: HTMLElement, buffer: number = 50) {
@@ -85,7 +94,9 @@ export default function ChatBox({
 }: Props) {
   const shouldAutoScroll = settings.autoScroll ?? true
   const limitedMessages = chatEvents.filter((c) =>
-    winners.length ? winners.map((c) => c.username).includes(c.username) : true
+    winners.length
+      ? winners.flatMap((c) => [c.username].concat(c.otherUsersWithEntry || [])).includes(c.username)
+      : true
   )
   const chatBottomRef = React.useRef<null | HTMLDivElement>(null)
   const chatRef = React.useRef<null | HTMLDivElement>(null)
@@ -165,11 +176,16 @@ export default function ChatBox({
               ref={chatRef}
             >
               {searchedMessages.map((c) => {
+                const hasWarning =
+                  winners.length > 0 && winners.some((w) => (w.otherUsersWithEntry || []).includes(c.username))
                 return (
-                  <div key={c.id}>
-                    <span className="text-xs">[{c.formattedTmiTs}]</span>
+                  <div
+                    key={c.id}
+                    className={cls('relative', { 'bg-yellow-500 bg-opacity-60 rounded-md px-1': hasWarning })}
+                  >
+                    <span className="text-xs mr-0.5">[{c.formattedTmiTs}]</span>
                     <span
-                      className={cls('rounded-full bg-gray-300 h-4 w-4 inline-block mx-1 relative', {
+                      className={cls('rounded-full bg-gray-300 h-4 w-4 inline-block relative', {
                         'bg-yellow-500': c.isSubscriber,
                         'bg-purple-600': c.isMod,
                         'top-1': !c.isSubscriber && !c.isMod,
@@ -191,7 +207,16 @@ export default function ChatBox({
                         </span>
                       ) : null}
                     </span>
-                    <span style={{ color: c.color }}>[{c.displayName}]</span> {c.msg}
+                    <span className="mx-0.5" style={{ color: c.color }}>
+                      [{c.displayName}]
+                    </span>{' '}
+                    {c.msg}
+                    {hasWarning ? (
+                      <FaExclamationTriangle
+                        className="text-lg top-0.5 right-1.5 absolute cursor-help"
+                        title="This user submitted an entry matching a winner"
+                      />
+                    ) : null}
                   </div>
                 )
               })}

@@ -81,6 +81,7 @@ export interface GiveawayResult {
     wasSubscriber: boolean | null
     wasFollower: boolean | null
     notes?: string
+    otherUsersWithEntry?: string[]
   }[]
   createdAt: string
   type: GiveawayType

@@ -55,6 +55,8 @@ export async function getChatGiveaway(
   forfeits: string[]
 ): Promise<GiveawayInformation> {
   const forfeitSet = new Set([...forfeits])
+  const matchMap = new Map<string, Set<string>>()
+  const userMatchMap = new Map<string, string>()
   const giveawayUserStats = prepareStats()
   console.info('[giveaway][chat][start]')
   let subCount = 0
@@ -64,7 +66,14 @@ export async function getChatGiveaway(
       !settings.blocklist.map((b) => b.trim()).includes(u.displayName) &&
       !settings.blocklist.map((b) => b.trim()).includes(u.username)
   )
-  const chatCommandEvents = nonblockedChatItems.filter((c) => handleChatCommand(c, chatCommand))
+  const chatCommandEvents = nonblockedChatItems.filter((c) => {
+    const chatResult = handleChatCommand(c, chatCommand)
+    if (chatResult.isSpecial) {
+      matchMap.set(chatResult.match, (matchMap.get(chatResult.match) || new Set()).add(c.username))
+      userMatchMap.set(c.username, chatResult.match)
+    }
+    return chatResult.isMatch
+  })
   giveawayUserStats.entries = chatCommandEvents.length
   const spamCounts = chatCommandEvents.reduce((acc, u) => {
     acc.set(u.username, (acc.get(u.username) || 0) + 1)
@@ -117,6 +126,9 @@ export async function getChatGiveaway(
       login: winner.username,
       wasSubscriber: winner.isSubscriber,
       wasFollower: followers?.has(winner.username),
+      otherUsersWithEntry: [...(matchMap.get(userMatchMap.get(winner.username) || '') || new Set())].filter(
+        (u) => u !== winner.username
+      ),
       source: 'chat',
     }
   }).filter(Boolean) as GiveawayResult['winners']
