@@ -64,7 +64,7 @@ jobs:
       - name: Version File
         env:
           RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
-        run: echo '{"tag":"$RELEASE_VERSION"}' > version.json
+        run: echo '{"tag":"$RELEASE_VERSION"}' > src/version.json
       - uses: EndBug/add-and-commit@v9
         with:
           add: '["web/public/versions", "web/src/version.json"]'
