@@ -68116,7 +68116,7 @@ to {
       width: "100%",
       height: "100%"
     }, /* @__PURE__ */ import_react46.default.createElement(AreaChart, {
-      data: cacheHistory.followers.slice(0, 30)
+      data: cacheHistory.followers.slice(-30)
     }, /* @__PURE__ */ import_react46.default.createElement(XAxis, {
       dataKey: "time"
     }), /* @__PURE__ */ import_react46.default.createElement(YAxis, null), /* @__PURE__ */ import_react46.default.createElement(Tooltip, {
@@ -68132,7 +68132,7 @@ to {
       width: "100%",
       height: "100%"
     }, /* @__PURE__ */ import_react46.default.createElement(AreaChart, {
-      data: cacheHistory.subs.slice(0, 30)
+      data: cacheHistory.subs.slice(-30)
     }, /* @__PURE__ */ import_react46.default.createElement(XAxis, {
       dataKey: "time"
     }), /* @__PURE__ */ import_react46.default.createElement(YAxis, null), /* @__PURE__ */ import_react46.default.createElement(Tooltip, {

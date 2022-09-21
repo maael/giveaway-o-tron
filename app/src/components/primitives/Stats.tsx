@@ -87,7 +87,7 @@ function FullView({ stats, cacheHistory }: { stats: CacheStats; cacheHistory: Ca
       <div className="flex-1 flex flex-row justify-center items-center gap-2">
         <div className="flex-1 h-full">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={cacheHistory.followers.slice(0, 30)}>
+            <AreaChart data={cacheHistory.followers.slice(-30)}>
               <XAxis dataKey="time" />
               <YAxis />
               <Tooltip content={<CustomTooltip />} />
@@ -97,7 +97,7 @@ function FullView({ stats, cacheHistory }: { stats: CacheStats; cacheHistory: Ca
         </div>
         <div className="flex-1 h-full">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={cacheHistory.subs.slice(0, 30)}>
+            <AreaChart data={cacheHistory.subs.slice(-30)}>
               <XAxis dataKey="time" />
               <YAxis />
               <Tooltip content={<CustomTooltip />} />
