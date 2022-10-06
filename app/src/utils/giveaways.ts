@@ -68,7 +68,7 @@ export async function getChatGiveaway(
   )
   const chatCommandEvents = nonblockedChatItems.filter((c) => {
     const chatResult = handleChatCommand(c, chatCommand)
-    if (chatResult.isSpecial) {
+    if (chatResult.isSpecial && chatResult.match.trim()) {
       matchMap.set(chatResult.match, (matchMap.get(chatResult.match) || new Set()).add(c.username))
       userMatchMap.set(c.username, chatResult.match)
     }

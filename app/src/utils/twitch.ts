@@ -5,7 +5,7 @@ import { Cache, CACHE_KEY } from './twitchCaches'
 import { refreshTokenFlow } from './auth'
 import React from 'react'
 import format from 'date-fns/format'
-import useStorage from '~/components/hooks/useStorage'
+import useStorage from '../components/hooks/useStorage'
 
 const BOTS = ['streamelements', 'streamlabs', 'nightbot']
 

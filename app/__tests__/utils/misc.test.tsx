@@ -1,25 +1,5 @@
-import { ChatItem } from '~/chat'
 import { handleChatCommand } from '../../src/utils/misc'
-
-function mockChatItem(msg: string): ChatItem {
-  return {
-    id: 'test-1',
-    isMod: false,
-    isSubscriber: false,
-    color: '#FF0000',
-    displayName: 'Test',
-    userId: 'test-1',
-    username: 'test',
-    type: '',
-    turbo: false,
-    tmiTs: Date.now(),
-    receivedTs: Date.now(),
-    returningChatter: false,
-    firstMessage: false,
-    formattedTmiTs: 'test',
-    msg,
-  }
-}
+import { mockChatItem } from '../jest-utils'
 
 const cases = [
   {

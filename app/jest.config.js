@@ -8,12 +8,17 @@ module.exports = {
   collectCoverage: false,
   coverageProvider: 'v8',
   preset: 'ts-jest',
-  globals: {
-    'ts-jest': {
-      tsConfig: {
-        isolatedModules: false,
+  transform: {
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        tsconfig: {
+          isolatedModules: false,
+        },
       },
-    },
+    ],
   },
   testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['<rootDir>/__tests__/setup-jest.ts'],
+  testMatch: ['<rootDir>/__tests__/**/*.test.ts?(x)'],
 }
