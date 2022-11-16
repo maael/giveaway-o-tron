@@ -10,6 +10,15 @@ Sentry.init({
   dsn: 'https://185864889dcb4a71961b896a59e09846@o304997.ingest.sentry.io/6745310',
   integrations: [new BrowserTracing()],
   tracesSampleRate: 1.0,
+  beforeSend(event) {
+    if (event.message?.includes('Unable to connect.')) return null
+    if (
+      event.message?.includes('Cannot disconnect from server. Socket is not opened or connection is already closing.')
+    ) {
+      return null
+    }
+    return event
+  },
 })
 
 Sentry.setTag('version', NL_APPVERSION)

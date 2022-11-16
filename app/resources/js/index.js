@@ -50270,7 +50270,7 @@ to {
     const nonblockedChatItems = chatItems.filter((u3) => !settings.blocklist.map((b2) => b2.trim()).includes(u3.displayName) && !settings.blocklist.map((b2) => b2.trim()).includes(u3.username));
     const chatCommandEvents = nonblockedChatItems.filter((c3) => {
       const chatResult = handleChatCommand(c3, chatCommand);
-      if (chatResult.isSpecial) {
+      if (chatResult.isSpecial && chatResult.match.trim()) {
         matchMap.set(chatResult.match, (matchMap.get(chatResult.match) || new Set()).add(c3.username));
         userMatchMap.set(c3.username, chatResult.match);
       }
@@ -72837,7 +72837,16 @@ to {
   init2({
     dsn: "https://185864889dcb4a71961b896a59e09846@o304997.ingest.sentry.io/6745310",
     integrations: [new BrowserTracing()],
-    tracesSampleRate: 1
+    tracesSampleRate: 1,
+    beforeSend(event) {
+      var _a, _b;
+      if ((_a = event.message) == null ? void 0 : _a.includes("Unable to connect."))
+        return null;
+      if ((_b = event.message) == null ? void 0 : _b.includes("Cannot disconnect from server. Socket is not opened or connection is already closing.")) {
+        return null;
+      }
+      return event;
+    }
   });
   setTag("version", NL_APPVERSION);
   window["myApp"] = {
