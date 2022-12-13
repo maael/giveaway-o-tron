@@ -8,7 +8,7 @@ const SPECIAL_COMMAND_TEXT = {
   $gw2_account$: 'your Guild Wars 2 account name XXXX.1234',
   $steam_friend$: 'your 8 digit Steam friend code',
   $gw2_or_steam$: 'either your GW2 account name or Steam friend code',
-  $gw2_or_steam_or_paypal$: 'either your GW2 account name or Steam friend code or "paypal"',
+  $gw2_or_steam_or_paypal$: 'either your GW2 account name or Steam friend code or the word paypal',
 }
 
 const countDownRenderer = ({ hours, minutes, seconds, completed }) => {
@@ -190,7 +190,7 @@ function Gw2Status({ status, title, goalTs, body, command, followersOnly }: Stat
       ) : null}
       <div
         className={`text-white uppercase px-4 py-2 text-bold text-center absolute cagfont ${
-          command && Object.keys(SPECIAL_COMMAND_TEXT).some((k) => command.includes(k)) ? 'text-xl' : 'text-2xl'
+          command && Object.keys(SPECIAL_COMMAND_TEXT).some((k) => command.includes(k)) ? 'text-lg' : 'text-2xl'
         }`}
         style={{ top: 284, width: 360 }}
       >
