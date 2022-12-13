@@ -107,6 +107,18 @@ const cases = [
     msg: 'this is test a Mael.1234 combined with lots of other regex things of commands',
     expected: false,
   },
+  {
+    command: '$gw2_or_steam_or_paypal$',
+    msg: 'this is test a case sensitive Paypal of commands',
+    match: 'Paypal',
+    expected: true,
+  },
+  {
+    command: '$gw2_or_steam_or_paypal$',
+    msg: 'this is test a case sensitive paypal of commands',
+    match: 'paypal',
+    expected: true,
+  },
 ]
 
 describe('Misc', () => {

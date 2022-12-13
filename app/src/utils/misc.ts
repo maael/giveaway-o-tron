@@ -26,7 +26,7 @@ const specialCommands = {
   $gw2_account$: /(^|\s)\w+\.\d{4}($|\s)/,
   $steam_friend$: /(^|\s)\d{8}($|\s)/,
   $gw2_or_steam$: /(^|\s)\w+\.\d{4}($|\s)|(^|\s)\d{8}($|\s)/,
-  $gw2_or_steam_or_paypal$: /(^|\s)\w+\.\d{4}($|\s)|(^|\s)\d{8}|paypal($|\s)/,
+  $gw2_or_steam_or_paypal$: /(^|\s)\w+\.\d{4}($|\s)|(^|\s)\d{8}|paypal($|\s)/i,
 }
 
 const specialCommandsForCombination = {
