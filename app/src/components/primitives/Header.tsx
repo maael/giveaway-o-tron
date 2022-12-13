@@ -91,7 +91,13 @@ export default function Header({
         onSubmit={(e) => {
           e.preventDefault()
           if (client) {
-            client.disconnect()
+            if (client.readyState() === 'OPEN') {
+              try {
+                client.disconnect()
+              } catch (e) {
+                console.warn('[header-disconnect]', e)
+              }
+            }
             resetChat()
             setClient(null)
           } else {

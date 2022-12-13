@@ -47486,8 +47486,13 @@ to {
       }
     };
     const client = new import_tmi.default.client(opts);
-    if (client.lastJoined)
-      client.disconnect();
+    if (client.lastJoined && client.readyState() === "OPEN") {
+      try {
+        client.disconnect();
+      } catch (e3) {
+        console.warn("[chat-disconnect]", e3);
+      }
+    }
     function onMessageHandler(target, context2, msg, self2) {
       if (self2) {
         return;
@@ -47611,12 +47616,14 @@ to {
   var specialCommands = {
     $gw2_account$: /(^|\s)\w+\.\d{4}($|\s)/,
     $steam_friend$: /(^|\s)\d{8}($|\s)/,
-    $gw2_or_steam$: /(^|\s)\w+\.\d{4}($|\s)|(^|\s)\d{8}($|\s)/
+    $gw2_or_steam$: /(^|\s)\w+\.\d{4}($|\s)|(^|\s)\d{8}($|\s)/,
+    $gw2_or_steam_or_paypal$: /(^|\s)\w+\.\d{4}($|\s)|(^|\s)\d{8}|paypal($|\s)/
   };
   var specialCommandsForCombination = {
     $gw2_account$: "\\w+\\.\\d{4}",
     $steam_friend$: "\\d{8}",
-    $gw2_or_steam$: "\\w+\\.\\d{4}|\\d{8}"
+    $gw2_or_steam$: "\\w+\\.\\d{4}|\\d{8}",
+    $gw2_or_steam_or_paypal$: "\\w+\\.\\d{4}|\\d{8}|paypal"
   };
   function escapeRegExp(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
@@ -51331,7 +51338,14 @@ to {
         setOpen(false);
       },
       title: "Counts messages that include either a GW2 Account or Steam Friend Code as entries"
-    }, "GW2 or Steam")) : null);
+    }, "GW2 or Steam"), /* @__PURE__ */ import_react14.default.createElement("div", {
+      className: "hover:bg-purple-600 px-2",
+      onClick: () => {
+        setSettings((s3) => __spreadProps(__spreadValues({}, s3), { chatCommand: "$gw2_or_steam_or_paypal$" }));
+        setOpen(false);
+      },
+      title: "Counts messages that include either a GW2 Account or Steam Friend Code or the word paypal as entries"
+    }, "GW2/Steam/PayPal")) : null);
   }
   function SettingsComponent({
     channelId,
@@ -68249,7 +68263,7 @@ to {
   }) {
     const history = useHistory();
     import_react48.default.useEffect(() => {
-      if (channel.login) {
+      if (channel.login && !NL_ARGS.includes("--restarted")) {
         history.push("/");
       }
     }, [channel.login]);
@@ -68617,8 +68631,13 @@ to {
     }, /* @__PURE__ */ React43.createElement(FaExclamationTriangle, null), " Sign Out Token Tool"), /* @__PURE__ */ React43.createElement("button", {
       className: "bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity text-xs",
       onClick: async () => {
-        await Neutralino.storage.setData("main-channelinfo", null);
-        window.location.reload();
+        try {
+          await Neutralino.storage.setData("main-channelinfo", null);
+          await await Neutralino.filesystem.readDirectory(`${NL_CWD}/.storage/main-channelinfo.neustorage`);
+          await Neutralino.app.restartProcess({ args: "--restarted" });
+        } catch (e3) {
+          await Neutralino.app.restartProcess({ args: "--restarted" });
+        }
       }
     }, /* @__PURE__ */ React43.createElement(FaExclamationTriangle, null), " Reset Channel Info")));
   }
@@ -68689,7 +68708,13 @@ to {
       onSubmit: (e3) => {
         e3.preventDefault();
         if (client) {
-          client.disconnect();
+          if (client.readyState() === "OPEN") {
+            try {
+              client.disconnect();
+            } catch (e4) {
+              console.warn("[header-disconnect]", e4);
+            }
+          }
           resetChat();
           setClient(null);
         } else {
@@ -72744,7 +72769,13 @@ to {
     const updateClientInfo = import_react62.default.useCallback((d3) => {
       console.info("[auth][client][update]", d3);
       setChannelInfo(d3);
-      client == null ? void 0 : client.disconnect();
+      if ((client == null ? void 0 : client.readyState()) === "OPEN") {
+        try {
+          client.disconnect();
+        } catch (e3) {
+          console.warn("[app-disconnect]", e3);
+        }
+      }
       client == null ? void 0 : client.removeAllListeners();
       setClient(init3(d3));
     }, [client]);

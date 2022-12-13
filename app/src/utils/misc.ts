@@ -26,12 +26,14 @@ const specialCommands = {
   $gw2_account$: /(^|\s)\w+\.\d{4}($|\s)/,
   $steam_friend$: /(^|\s)\d{8}($|\s)/,
   $gw2_or_steam$: /(^|\s)\w+\.\d{4}($|\s)|(^|\s)\d{8}($|\s)/,
+  $gw2_or_steam_or_paypal$: /(^|\s)\w+\.\d{4}($|\s)|(^|\s)\d{8}|paypal($|\s)/,
 }
 
 const specialCommandsForCombination = {
   $gw2_account$: '\\w+\\.\\d{4}',
   $steam_friend$: '\\d{8}',
   $gw2_or_steam$: '\\w+\\.\\d{4}|\\d{8}',
+  $gw2_or_steam_or_paypal$: '\\w+\\.\\d{4}|\\d{8}|paypal',
 }
 
 function escapeRegExp(text) {

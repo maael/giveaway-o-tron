@@ -8,3 +8,4 @@ declare const NL_MODE: string
 declare const NL_PID: string
 declare const NL_ARGS: string[]
 declare const NL_APPVERSION: string
+declare const NL_CWD: string

@@ -23,12 +23,15 @@ function Gw2Alert({ winner, visible }: { winner: string; visible: boolean }) {
       }`}
     >
       <img src="/images/chest-notification.png" />
-      <div className="text-white text-4xl uppercasetext-bold left-0 right-0 text-center absolute" style={{ top: 230 }}>
+      <div
+        className="text-white text-4xl uppercasetext-bold left-0 right-0 text-center absolute gwfont"
+        style={{ top: 230 }}
+      >
         Giveaway chest!
       </div>
       <div>
         <div
-          className="text-white uppercase px-4 py-2 text-bold text-center absolute mx-auto items-center-important"
+          className="text-white uppercase px-4 py-2 text-bold text-center absolute mx-auto items-center-important cagfont"
           style={{ top: 292, left: 50, right: 50, width: 450, height: 50 }}
         >
           <AutoTextSize maxFontSizePx={50}>
@@ -36,7 +39,7 @@ function Gw2Alert({ winner, visible }: { winner: string; visible: boolean }) {
           </AutoTextSize>
         </div>
         <div
-          className="text-white text-4xl uppercase px-4 py-2 text-bold text-center absolute mx-auto"
+          className="text-white text-4xl uppercase px-4 py-2 text-bold text-center absolute mx-auto cagfont"
           style={{ top: 340, left: 50, right: 50, width: 450, height: 50 }}
         >
           won!
@@ -141,7 +144,13 @@ export default function GW2Alerts() {
 
     return () => {
       console.info('[hook][disconnect]')
-      socket.disconnect()
+      if (socket.connected) {
+        try {
+          socket.disconnect()
+        } catch (e) {
+          console.warn('[gw2-alert][error]', e)
+        }
+      }
     }
   }, [handleEvent, channel])
   React.useEffect(() => {

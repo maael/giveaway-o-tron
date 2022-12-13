@@ -241,6 +241,16 @@ function ChatCommandPicker({ setSettings }: Pick<Props, 'setSettings'>) {
           >
             GW2 or Steam
           </div>
+          <div
+            className="hover:bg-purple-600 px-2"
+            onClick={() => {
+              setSettings((s) => ({ ...s, chatCommand: '$gw2_or_steam_or_paypal$' }))
+              setOpen(false)
+            }}
+            title="Counts messages that include either a GW2 Account or Steam Friend Code or the word paypal as entries"
+          >
+            GW2/Steam/PayPal
+          </div>
         </div>
       ) : null}
     </div>

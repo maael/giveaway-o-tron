@@ -17,7 +17,7 @@ export default function Setup({
 }) {
   const history = useHistory()
   React.useEffect(() => {
-    if (channel.login) {
+    if (channel.login && !NL_ARGS.includes('--restarted')) {
       history.push('/')
     }
   }, [channel.login])

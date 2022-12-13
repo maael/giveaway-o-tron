@@ -8,12 +8,13 @@ const SPECIAL_COMMAND_TEXT = {
   $gw2_account$: 'your Guild Wars 2 account name XXXX.1234',
   $steam_friend$: 'your 8 digit Steam friend code',
   $gw2_or_steam$: 'either your GW2 account name or Steam friend code',
+  $gw2_or_steam_or_paypal$: 'either your GW2 account name or Steam friend code or "paypal"',
 }
 
 const countDownRenderer = ({ hours, minutes, seconds, completed }) => {
   if (completed) {
     // Render a complete state
-    return <div className="animate-pulse">Giveaway closed!</div>
+    return <div className="animate-pulse cagfont">Giveaway closed!</div>
   } else {
     // Render a countdown
     return (
@@ -106,7 +107,13 @@ export default function GW2Alerts() {
 
     return () => {
       console.info('[hook][disconnect]')
-      socket.disconnect()
+      if (socket.connected) {
+        try {
+          socket.disconnect()
+        } catch (e) {
+          console.warn('[giveaway-status][error]', e)
+        }
+      }
     }
   }, [handleEvent, channel])
   console.info('[status]', status)
@@ -164,7 +171,7 @@ function Gw2Status({ status, title, goalTs, body, command, followersOnly }: Stat
     >
       <img src="/images/chest-notification.png" />
       <div
-        className={`text-white uppercasetext-bold left-2 right-2 text-center absolute uppercase ${
+        className={`text-white uppercasetext-bold left-2 right-2 text-center absolute uppercase gwfont ${
           goalTs ? 'text-2xl' : followersOnly ? 'text-2xl' : 'text-3xl'
         }`}
         style={{ top: goalTs ? 225 : 235 }}
@@ -173,7 +180,7 @@ function Gw2Status({ status, title, goalTs, body, command, followersOnly }: Stat
       </div>
       {goalTs ? (
         <div
-          className={`text-white uppercasetext-bold left-2 right-2 text-center absolute uppercase ${
+          className={`text-white uppercasetext-bold left-2 right-2 text-center absolute uppercase cagfont ${
             followersOnly ? 'text-xl' : 'text-xl'
           }`}
           style={{ top: 252 }}
@@ -182,7 +189,7 @@ function Gw2Status({ status, title, goalTs, body, command, followersOnly }: Stat
         </div>
       ) : null}
       <div
-        className={`text-white uppercase px-4 py-2 text-bold text-center absolute ${
+        className={`text-white uppercase px-4 py-2 text-bold text-center absolute cagfont ${
           command && Object.keys(SPECIAL_COMMAND_TEXT).some((k) => command.includes(k)) ? 'text-xl' : 'text-2xl'
         }`}
         style={{ top: 284, width: 360 }}

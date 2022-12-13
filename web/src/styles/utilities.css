@@ -7,3 +7,21 @@
   align-items: center !important;
   justify-content: center !important;
 }
+
+.cagfont {
+  font-family: Cagliostro, Arial, Helvetica, sans-serif;
+}
+
+@font-face {
+  font-family: 'Cagliostro';
+  src: url(/fonts/Cagliostro-Regular.ttf);
+}
+
+.gwfont {
+  font-family: GwTwo, Arial, Helvetica, sans-serif;
+}
+
+@font-face {
+  font-family: 'GwTwo';
+  src: url(/fonts/GWTwoFont.ttf);
+}

@@ -73,7 +73,13 @@ export default function init(channelInfo: ChannelInfo) {
   // Create a client with our options
   const client = new tmi.client(opts)
 
-  if ((client as any).lastJoined) client.disconnect()
+  if ((client as any).lastJoined && client.readyState() === 'OPEN') {
+    try {
+      client.disconnect()
+    } catch (e) {
+      console.warn('[chat-disconnect]', e)
+    }
+  }
 
   // Called every time a message comes in
   function onMessageHandler(target, context, msg, self) {

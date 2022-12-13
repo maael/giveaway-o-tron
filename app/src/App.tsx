@@ -49,7 +49,13 @@ function InnerApp() {
     (d) => {
       console.info('[auth][client][update]', d)
       setChannelInfo(d)
-      client?.disconnect()
+      if (client?.readyState() === 'OPEN') {
+        try {
+          client.disconnect()
+        } catch (e) {
+          console.warn('[app-disconnect]', e)
+        }
+      }
       client?.removeAllListeners()
       setClient(chat(d))
     },

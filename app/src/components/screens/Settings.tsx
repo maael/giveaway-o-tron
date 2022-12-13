@@ -1,9 +1,7 @@
-import format from 'date-fns/formatDistanceStrict'
 import * as React from 'react'
 import { FaCheck, FaDownload, FaExclamationTriangle, FaPlus, FaTimes } from 'react-icons/fa'
-import { alertThemeMap, defaultSettings, removeIdx, Settings } from '~/utils'
+import { removeIdx, Settings } from '~/utils'
 import { APP_VERSION, checkForUpdate } from '~/utils/updates'
-import { ONE_S, SliderInner } from '../primitives/Slider'
 
 export default function SettingsScreen({
   settings,
@@ -173,8 +171,13 @@ export default function SettingsScreen({
         <button
           className="bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity text-xs"
           onClick={async () => {
-            await Neutralino.storage.setData('main-channelinfo', null)
-            window.location.reload()
+            try {
+              await Neutralino.storage.setData('main-channelinfo', null)
+              await await Neutralino.filesystem.readDirectory(`${NL_CWD}/.storage/main-channelinfo.neustorage`)
+              await Neutralino.app.restartProcess({ args: '--restarted' })
+            } catch {
+              await Neutralino.app.restartProcess({ args: '--restarted' })
+            }
           }}
         >
           <FaExclamationTriangle /> Reset Channel Info
