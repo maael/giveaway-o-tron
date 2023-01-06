@@ -17,10 +17,10 @@ export default function Obs({
   setSettings: React.Dispatch<React.SetStateAction<Settings>>
 }) {
   const [copiedAlertURL, copyAlertURL] = useCopyToClipboard(
-    `https://giveaway-o-tron.vercel.app/alerts/gw2?channel=${channelInfo.userId}`
+    `https://giveaway-o-tron.vercel.app/alerts/gw2?channel=${channelInfo.userId}&rv=2`
   )
   const [copiedStatusURL, copyStatusURL] = useCopyToClipboard(
-    `https://giveaway-o-tron.vercel.app/alerts/status?channel=${channelInfo.userId}`
+    `https://giveaway-o-tron.vercel.app/alerts/status?channel=${channelInfo.userId}&rv=2`
   )
   return (
     <div className="mt-2 flex flex-col gap-3 flex-1 pb-2 max-h-full">

@@ -3,6 +3,7 @@ import * as React from 'react'
 import { useRouter } from 'next/router'
 import { io } from 'socket.io-client'
 import Countdown, { zeroPad } from 'react-countdown'
+import { getRelayURI } from './util'
 
 const SPECIAL_COMMAND_TEXT = {
   $gw2_account$: 'your Guild Wars 2 account name XXXX.1234',
@@ -32,6 +33,7 @@ const StableCountdown = React.memo(function StableCountdown({ value }: { value: 
 export default function GW2Alerts() {
   const router = useRouter()
   const channel = router.query.channel
+  const relayVersion = router.query.rv
 
   const [status, setStatus] = React.useState<{
     status?: string
@@ -84,7 +86,7 @@ export default function GW2Alerts() {
   )
   React.useEffect(() => {
     if (!channel) return
-    const socket = io(`wss://giveaway-o-tron-relay.onrender.com`, {
+    const socket = io(getRelayURI(relayVersion), {
       query: { channel },
       transports: ['websocket', 'polling'],
     })
@@ -115,7 +117,7 @@ export default function GW2Alerts() {
         }
       }
     }
-  }, [handleEvent, channel])
+  }, [handleEvent, relayVersion, channel])
   console.info('[status]', status)
   const props = {
     title:

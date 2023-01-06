@@ -5,6 +5,7 @@ import { io } from 'socket.io-client'
 import toast, { Toaster } from 'react-hot-toast'
 import ReactCanvasConfetti from 'react-canvas-confetti'
 import { AutoTextSize } from 'auto-text-size'
+import { getRelayURI } from '../util'
 
 const canvasStyles = {
   position: 'fixed',
@@ -65,6 +66,7 @@ function CustomAlert({ winner, imageUrl, visible }: { imageUrl?: string; winner:
 export default function GW2Alerts() {
   const router = useRouter()
   const channel = router.query.channel
+  const relayVersion = router.query.rv
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const refAnimationInstance = React.useRef<any>(null)
 
@@ -121,7 +123,7 @@ export default function GW2Alerts() {
   )
   React.useEffect(() => {
     if (!channel) return
-    const socket = io(`wss://giveaway-o-tron-relay.onrender.com`, {
+    const socket = io(getRelayURI(relayVersion), {
       query: { channel },
       transports: ['websocket', 'polling'],
     })
@@ -152,7 +154,7 @@ export default function GW2Alerts() {
         }
       }
     }
-  }, [handleEvent, channel])
+  }, [handleEvent, relayVersion, channel])
   React.useEffect(() => {
     new Image().src = '/images/chest-notification.png'
   }, [])

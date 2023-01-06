@@ -50220,7 +50220,7 @@ to {
   });
 
   // src/utils/relay.ts
-  var socket = lookup2("wss://giveaway-o-tron-relay.onrender.com", {
+  var socket = lookup2("wss://mael-relay.onrender.com/giveaway-o-tron", {
     transports: ["websocket", "polling"]
   });
   socket.on("connect", function() {
@@ -72602,8 +72602,8 @@ to {
     settings,
     setSettings
   }) {
-    const [copiedAlertURL, copyAlertURL] = useCopyToClipboard_default(`https://giveaway-o-tron.vercel.app/alerts/gw2?channel=${channelInfo.userId}`);
-    const [copiedStatusURL, copyStatusURL] = useCopyToClipboard_default(`https://giveaway-o-tron.vercel.app/alerts/status?channel=${channelInfo.userId}`);
+    const [copiedAlertURL, copyAlertURL] = useCopyToClipboard_default(`https://giveaway-o-tron.vercel.app/alerts/gw2?channel=${channelInfo.userId}&rv=2`);
+    const [copiedStatusURL, copyStatusURL] = useCopyToClipboard_default(`https://giveaway-o-tron.vercel.app/alerts/status?channel=${channelInfo.userId}&rv=2`);
     return /* @__PURE__ */ import_react61.default.createElement("div", {
       className: "mt-2 flex flex-col gap-3 flex-1 pb-2 max-h-full"
     }, /* @__PURE__ */ import_react61.default.createElement("h1", {

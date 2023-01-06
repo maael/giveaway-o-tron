@@ -1,11 +1,10 @@
-const title = 'Matt Elphick | Software Engineer'
-const description = 'Software engineer mainly messing around with JavaScript.'
+const title = 'Giveaway-o-tron | OBS Overlays'
+const description = 'OBS Overlays for use with Giveaway-o-tron.'
 const url = 'https://mael.tech/'
 
 export default {
   title,
   description,
-  canonical: url,
   openGraph: {
     title,
     description,
