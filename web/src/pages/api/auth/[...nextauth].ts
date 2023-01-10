@@ -39,8 +39,9 @@ export default NextAuth({
       return token
     },
     async session({ session, token, user: _user }) {
-      session.accessToken = token.accessToken
-      session.refreshToken = token.refreshToken
+      // eslint-disable-next-line @typescript-eslint/no-extra-semi
+      ;(session as any).accessToken = token.accessToken
+      ;(session as any).refreshToken = token.refreshToken
       return session
     },
   },

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Image from 'next/image'
-import { useSession, signIn } from 'next-auth/react'
+import { useSession, signIn, signOut } from 'next-auth/react'
 import { FaCheck, FaCopy } from 'react-icons/fa'
 import useCopyToClipboard from '~/components/hooks/useCopyToClipboard'
 
@@ -44,6 +44,9 @@ export default function Index() {
             </button>
           </div>
           <div className="mt-5 text-sm">To finish setup, enter these tokens on the app.</div>
+          <button className="px-2 py-1 bg-gray-600 rounded-md hover:bg-gray-700" onClick={() => signOut()}>
+            Logout / Refresh Tokens
+          </button>
         </>
       )}
     </div>
