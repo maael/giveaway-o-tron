@@ -17,6 +17,9 @@ const canvasStyles = {
 } as const
 
 function Gw2Alert({ winner, visible }: { winner: string; visible: boolean }) {
+  const winnerParts = winner.split('|$$|')
+  const winnerName = winnerParts[0]
+  const type = (winnerParts[1] || 'winner').toLowerCase()
   return (
     <div
       className={`flex flex-col justify-center items-center bg-transparent relative fill-mode-both ${
@@ -36,14 +39,14 @@ function Gw2Alert({ winner, visible }: { winner: string; visible: boolean }) {
           style={{ top: 292, left: 50, right: 50, width: 450, height: 50 }}
         >
           <AutoTextSize maxFontSizePx={50}>
-            <p className="mx-auto my-auto">{winner}</p>
+            <p className="mx-auto my-auto">{winnerName}</p>
           </AutoTextSize>
         </div>
         <div
           className="text-white text-4xl uppercase px-4 py-2 text-bold text-center absolute mx-auto cagfont"
           style={{ top: 340, left: 50, right: 50, width: 450, height: 50 }}
         >
-          won!
+          {type === 'blocked' ? 'blocked!' : type === 'rigged' ? 'won! Totally not rigged.' : 'won!'}
         </div>
       </div>
     </div>
