@@ -251,6 +251,7 @@ export function announceWinner({
   console.info('[relay][event]', eventData)
   relay.emit('event', eventData)
   if (settings.sendMessages) {
-    chatClient?.say(channelInfo.login!, settings.winnerMessage.replace('@name', `@${winner}`))
+    const cleanMessage = winner.split('|$$|')[0] || winner
+    chatClient?.say(channelInfo.login!, settings.winnerMessage.replace('@name', `@${cleanMessage}`))
   }
 }

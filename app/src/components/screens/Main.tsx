@@ -15,6 +15,7 @@ import { Winner, InstantGiveaway, ChatGiveaway, WinnerUser } from '../primitives
 import ChatBox, { ChatControls } from '../primitives/ChatBox'
 import formatDuration from 'date-fns/formatDuration'
 import Stats from '../primitives/Stats'
+import MukSettings from '../primitives/MukSettings'
 
 export default function MainScreen({
   chatEvents,
@@ -88,6 +89,12 @@ export default function MainScreen({
           forfeits={forfeits}
         />
       </div>
+      <MukSettings
+        discordSettings={discordSettings}
+        settings={settings}
+        chatClient={client}
+        channelInfo={channelInfo}
+      />
       <Settings
         channelId={channelInfo.userId}
         settings={settings}

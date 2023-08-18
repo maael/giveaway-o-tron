@@ -98,6 +98,11 @@ export default function ChatBox({
       ? winners.flatMap((c) => [c.username].concat(c.otherUsersWithEntry || [])).includes(c.username)
       : true
   )
+  const userCount = React.useMemo(() => {
+    const users = new Set()
+    chatEvents.map((c) => users.add(c.userId))
+    return users.size
+  }, [chatEvents])
   const chatBottomRef = React.useRef<null | HTMLDivElement>(null)
   const chatRef = React.useRef<null | HTMLDivElement>(null)
   React.useLayoutEffect(() => {
@@ -138,8 +143,13 @@ export default function ChatBox({
             />
           </div>
 
-          <div className="flex-1">
-            {chatEvents.length} message{chatEvents.length === 1 ? '' : 's'}
+          <div className="ml-1 flex-1 text-xs flex gap-2">
+            <span>
+              {chatEvents.length} message{chatEvents.length === 1 ? '' : 's'}
+            </span>
+            <span>
+              {userCount} user{userCount === 1 ? '' : 's'}
+            </span>
           </div>
 
           <div className="flex-1 text-yellow-600 text-xs">
