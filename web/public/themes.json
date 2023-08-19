@@ -1,0 +1,18 @@
+[
+  {
+    "id": "gw2",
+    "name": "Guild Wars 2"
+  },
+  {
+    "id": "gw2-aurene",
+    "name": "Guild Wars 2 - Aurene"
+  },
+  {
+    "id": "gw2-soto",
+    "name": "Guild Wars 2 - SotO"
+  },
+  {
+    "id": "custom",
+    "name": "Custom"
+  }
+]
