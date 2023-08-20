@@ -1,11 +1,12 @@
 import React from 'react'
 import format from 'date-fns/formatDistanceStrict'
-import { alertOptions, AlertTheme, alertThemeMap, ChannelInfo, defaultSettings, Settings } from '~/utils'
+import { ChannelInfo, defaultSettings, Settings } from '~/utils'
 import { ONE_S, SliderInner } from '../primitives/Slider'
 import { FaCheck, FaTrophy } from 'react-icons/fa'
 import useCopyToClipboard from '../hooks/useCopyToClipboard'
 import Select from 'react-select'
 import Input from '../primitives/Input'
+import { useThemes } from '~/utils/themes'
 
 export default function Obs({
   channelInfo,
@@ -22,6 +23,9 @@ export default function Obs({
   const [copiedStatusURL, copyStatusURL] = useCopyToClipboard(
     `https://giveaway-o-tron.vercel.app/alerts/status?channel=${channelInfo.userId}&rv=2`
   )
+  const { loading: themesLoading, themes, options: themeOptions } = useThemes()
+  const selectedThemeOption = themeOptions.find((i) => (settings.alertTheme || defaultSettings.alertTheme) === i.value)
+  const selectedTheme = themes.find((i) => (settings.alertTheme || defaultSettings.alertTheme) === i.id)
   return (
     <div className="mt-2 flex flex-col gap-3 flex-1 pb-2 max-h-full">
       <h1 className="text-3xl -mb-1">OBS Settings</h1>
@@ -90,6 +94,7 @@ export default function Obs({
               Theme
             </div>
             <Select
+              isLoading={themesLoading}
               isSearchable={false}
               isClearable={false}
               onChange={(e) => {
@@ -134,14 +139,14 @@ export default function Obs({
                   cursor: 'pointer',
                 }),
               }}
-              value={alertOptions.find((i) => (settings.alertTheme || defaultSettings.alertTheme) === i.value)}
-              options={alertOptions}
+              value={selectedThemeOption}
+              options={themeOptions}
             />
           </div>
         </div>
       </div>
 
-      {settings.alertTheme === AlertTheme.Custom ? (
+      {settings.alertTheme === 'custom' ? (
         <div className="flex flex-col gap-2">
           <div className="flex flex-row gap-2">
             <div className="flex-1">
@@ -165,10 +170,10 @@ export default function Obs({
         </div>
         <div className="flex-1">
           <div className="bg-gray-600 rounded-md h-full w-full flex py-2 relative">
-            {settings.alertTheme === AlertTheme.Custom ? (
+            {settings.alertTheme === 'custom' ? (
               <CustomPreview imageUrl={settings.alertCustomImageUrl} />
             ) : (
-              <GW2Preview />
+              <Preview preview={selectedTheme?.preview} />
             )}
           </div>
         </div>
@@ -196,27 +201,15 @@ function CustomPreview({ imageUrl }: { imageUrl?: string }) {
   )
 }
 
-function GW2Preview() {
-  return (
+function Preview({ preview }: { preview?: string }) {
+  return preview ? (
     <div className="relative h-full w-full">
       <div
         className="flex flex-1 flex-col justify-center items-center bg-transparent animate-wiggle absolute inset-0"
         style={{ scale: '50%' }}
       >
-        <img src="https://giveaway-o-tron.vercel.app/images/chest-notification.png" />
-        <div
-          className="text-white text-4xl uppercasetext-bold left-0 right-0 text-center absolute"
-          style={{ top: '48%' }}
-        >
-          Giveaway chest!
-        </div>
-        <div
-          className="text-white text-3xl uppercase px-4 py-2 text-bold text-center absolute break-all"
-          style={{ top: '75%', left: 50, right: 50 }}
-        >
-          @name won!
-        </div>
+        <img src={`https://giveaway-o-tron.vercel.app${preview}`} />
       </div>
     </div>
-  )
+  ) : null
 }

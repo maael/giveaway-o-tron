@@ -1085,7 +1085,7 @@
             }
             return dispatcher.useContext(Context, unstable_observedBits);
           }
-          function useState7(initialState) {
+          function useState8(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1097,7 +1097,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect8(create, deps) {
+          function useEffect9(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1109,7 +1109,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
-          function useMemo2(create, deps) {
+          function useMemo3(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useMemo(create, deps);
           }
@@ -1667,13 +1667,13 @@
           exports.useCallback = useCallback6;
           exports.useContext = useContext2;
           exports.useDebugValue = useDebugValue;
-          exports.useEffect = useEffect8;
+          exports.useEffect = useEffect9;
           exports.useImperativeHandle = useImperativeHandle2;
           exports.useLayoutEffect = useLayoutEffect2;
-          exports.useMemo = useMemo2;
+          exports.useMemo = useMemo3;
           exports.useReducer = useReducer;
           exports.useRef = useRef5;
-          exports.useState = useState7;
+          exports.useState = useState8;
           exports.version = ReactVersion;
         })();
       }
@@ -37439,7 +37439,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   });
 
   // src/index.tsx
-  var import_react64 = __toModule(require_react());
+  var import_react65 = __toModule(require_react());
   var import_react_dom4 = __toModule(require_react_dom());
 
   // node_modules/@sentry/utils/esm/env.js
@@ -43371,7 +43371,7 @@ Url: ${_getEventFilterUrl(event)}`);
   }
 
   // src/App.tsx
-  var import_react63 = __toModule(require_react());
+  var import_react64 = __toModule(require_react());
 
   // node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js
   function _setPrototypeOf(o2, p2) {
@@ -47592,18 +47592,6 @@ to {
   // src/components/screens/Main.tsx
   var import_react48 = __toModule(require_react());
 
-  // src/utils/types.ts
-  var AlertTheme;
-  (function(AlertTheme2) {
-    AlertTheme2["GW2"] = "gw2";
-    AlertTheme2["Custom"] = "custom";
-  })(AlertTheme || (AlertTheme = {}));
-  var GiveawayType;
-  (function(GiveawayType2) {
-    GiveawayType2["Instant"] = "Instant";
-    GiveawayType2["Chat"] = "Chat";
-  })(GiveawayType || (GiveawayType = {}));
-
   // src/utils/misc.ts
   var ONE_MIN = 1e3 * 60;
   function removeIdx(ar, idx) {
@@ -47671,7 +47659,7 @@ to {
     performanceMode: false,
     forfeitCommand: "",
     alertDuration: 4e3,
-    alertTheme: AlertTheme.GW2,
+    alertTheme: "gw2",
     autoAnnounce: true,
     giveawayName: "",
     timerBell: false,
@@ -47694,13 +47682,6 @@ to {
     winnerEnabled: true,
     giveawayMinTime: ONE_MIN
   };
-  var alertThemeMap = {
-    [AlertTheme.GW2]: "Guild Wars 2",
-    [AlertTheme.Custom]: "Custom"
-  };
-  var alertOptions = Object.entries(alertThemeMap).map(([k3, v2]) => {
-    return { value: k3, label: v2 };
-  }).filter((i3) => Boolean(i3.label));
   function getDiscordColour(discordColour) {
     const colour = Number(`0x${discordColour == null ? void 0 : discordColour.replace("#", "")}`);
     return isNaN(colour) ? void 0 : colour;
@@ -48001,6 +47982,13 @@ to {
       return dumbCache;
     }
   }
+
+  // src/utils/types.ts
+  var GiveawayType;
+  (function(GiveawayType2) {
+    GiveawayType2["Instant"] = "Instant";
+    GiveawayType2["Chat"] = "Chat";
+  })(GiveawayType || (GiveawayType = {}));
 
   // node_modules/engine.io-parser/build/esm/commons.js
   var PACKET_TYPES = Object.create(null);
@@ -68972,7 +68960,7 @@ to {
   }
 
   // src/components/screens/Obs.tsx
-  var import_react62 = __toModule(require_react());
+  var import_react63 = __toModule(require_react());
 
   // src/components/hooks/useCopyToClipboard.ts
   var React49 = __toModule(require_react());
@@ -72640,6 +72628,45 @@ to {
   });
   var react_select_esm_default = StateManagedSelect;
 
+  // src/utils/themes.ts
+  var import_react62 = __toModule(require_react());
+  var DEFAULT_THEMES = [
+    {
+      id: "gw2",
+      name: "Guild Wars 2",
+      preview: "/images/gw2/preview.png"
+    },
+    {
+      id: "custom",
+      name: "Custom"
+    }
+  ];
+  function useThemes() {
+    const [themes, setThemes] = (0, import_react62.useState)(DEFAULT_THEMES);
+    const [loading, setLoading] = (0, import_react62.useState)(false);
+    (0, import_react62.useEffect)(() => {
+      ;
+      (async () => {
+        try {
+          setLoading(true);
+          const fetchedThemes = await fetch("https://giveaway-o-tron.vercel.app/themes.json").then((r) => r.json());
+          if (fetchedThemes.length > 2) {
+            console.info("[themes:get:data]", fetchedThemes);
+            setThemes(fetchedThemes);
+          }
+        } catch (e3) {
+          console.error("[themes:get:error]", e3);
+        } finally {
+          setLoading(false);
+        }
+      })();
+    }, []);
+    return (0, import_react62.useMemo)(() => ({ loading, themes, options: listToOptions(themes) }), [loading, themes]);
+  }
+  function listToOptions(list) {
+    return list.map((item) => ({ value: item.id, label: item.name })).filter((i3) => Boolean(i3.label));
+  }
+
   // src/components/screens/Obs.tsx
   function Obs({
     channelInfo,
@@ -72648,49 +72675,53 @@ to {
   }) {
     const [copiedAlertURL, copyAlertURL] = useCopyToClipboard_default(`https://giveaway-o-tron.vercel.app/alerts/gw2?channel=${channelInfo.userId}&rv=2`);
     const [copiedStatusURL, copyStatusURL] = useCopyToClipboard_default(`https://giveaway-o-tron.vercel.app/alerts/status?channel=${channelInfo.userId}&rv=2`);
-    return /* @__PURE__ */ import_react62.default.createElement("div", {
+    const { loading: themesLoading, themes, options: themeOptions } = useThemes();
+    const selectedThemeOption = themeOptions.find((i3) => (settings.alertTheme || defaultSettings.alertTheme) === i3.value);
+    const selectedTheme = themes.find((i3) => (settings.alertTheme || defaultSettings.alertTheme) === i3.id);
+    return /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "mt-2 flex flex-col gap-3 flex-1 pb-2 max-h-full"
-    }, /* @__PURE__ */ import_react62.default.createElement("h1", {
+    }, /* @__PURE__ */ import_react63.default.createElement("h1", {
       className: "text-3xl -mb-1"
-    }, "OBS Settings"), /* @__PURE__ */ import_react62.default.createElement("div", {
+    }, "OBS Settings"), /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react62.default.createElement("button", {
+    }, /* @__PURE__ */ import_react63.default.createElement("button", {
       className: "bg-purple-600 px-2 py-1 flex-1 rounded-md transition-transform hover:scale-110 flex flex-row gap-1 justify-center items-center",
       onClick: () => copyAlertURL()
-    }, copiedAlertURL ? /* @__PURE__ */ import_react62.default.createElement(import_react62.default.Fragment, null, /* @__PURE__ */ import_react62.default.createElement(FaCheck, null), " Copied") : /* @__PURE__ */ import_react62.default.createElement(import_react62.default.Fragment, null, /* @__PURE__ */ import_react62.default.createElement(FaTrophy, null), " Copy Winner Alert Source URL")), /* @__PURE__ */ import_react62.default.createElement("button", {
+    }, copiedAlertURL ? /* @__PURE__ */ import_react63.default.createElement(import_react63.default.Fragment, null, /* @__PURE__ */ import_react63.default.createElement(FaCheck, null), " Copied") : /* @__PURE__ */ import_react63.default.createElement(import_react63.default.Fragment, null, /* @__PURE__ */ import_react63.default.createElement(FaTrophy, null), " Copy Winner Alert Source URL")), /* @__PURE__ */ import_react63.default.createElement("button", {
       className: "bg-purple-600 px-2 py-1 flex-1 rounded-md transition-transform hover:scale-110 flex flex-row gap-1 justify-center items-center",
       onClick: () => copyStatusURL()
-    }, copiedStatusURL ? /* @__PURE__ */ import_react62.default.createElement(import_react62.default.Fragment, null, /* @__PURE__ */ import_react62.default.createElement(FaCheck, null), " Copied") : /* @__PURE__ */ import_react62.default.createElement(import_react62.default.Fragment, null, /* @__PURE__ */ import_react62.default.createElement(FaTrophy, null), " Copy Giveaway Status Alert Source URL"))), /* @__PURE__ */ import_react62.default.createElement("div", {
+    }, copiedStatusURL ? /* @__PURE__ */ import_react63.default.createElement(import_react63.default.Fragment, null, /* @__PURE__ */ import_react63.default.createElement(FaCheck, null), " Copied") : /* @__PURE__ */ import_react63.default.createElement(import_react63.default.Fragment, null, /* @__PURE__ */ import_react63.default.createElement(FaTrophy, null), " Copy Giveaway Status Alert Source URL"))), /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "flex flex-col gap-2"
-    }, /* @__PURE__ */ import_react62.default.createElement("div", {
+    }, /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react62.default.createElement("div", {
+    }, /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ import_react62.default.createElement("h2", {
+    }, /* @__PURE__ */ import_react63.default.createElement("h2", {
       className: "text-xl"
-    }, "Alert Settings"))), /* @__PURE__ */ import_react62.default.createElement("div", {
+    }, "Alert Settings"))), /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "flex flex-row gap-2 justify-center items-center"
-    }, /* @__PURE__ */ import_react62.default.createElement("div", {
+    }, /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
-    }, /* @__PURE__ */ import_react62.default.createElement("div", {
+    }, /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",
       title: "Will clear chat, and then pause it after the time, to enable a giveaway with cut off"
-    }, "Duration"), /* @__PURE__ */ import_react62.default.createElement("div", {
+    }, "Duration"), /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "px-2 flex-1 flex justify-center items-center"
-    }, /* @__PURE__ */ import_react62.default.createElement(SliderInner, {
+    }, /* @__PURE__ */ import_react63.default.createElement(SliderInner, {
       min: ONE_S,
       max: ONE_S * 30,
       value: settings.alertDuration || defaultSettings.alertDuration,
       step: ONE_S,
       onChange: (v2) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { alertDuration: v2 }))
-    })), /* @__PURE__ */ import_react62.default.createElement("div", {
+    })), /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "flex-1 justify-center items-center text-center flex"
-    }, formatDistanceStrict(Date.now() + (settings.alertDuration || defaultSettings.alertDuration), new Date()))), /* @__PURE__ */ import_react62.default.createElement("div", {
+    }, formatDistanceStrict(Date.now() + (settings.alertDuration || defaultSettings.alertDuration), new Date()))), /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
-    }, /* @__PURE__ */ import_react62.default.createElement("div", {
+    }, /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",
       title: "Will clear chat, and then pause it after the time, to enable a giveaway with cut off"
-    }, "Theme"), /* @__PURE__ */ import_react62.default.createElement(react_select_esm_default, {
+    }, "Theme"), /* @__PURE__ */ import_react63.default.createElement(react_select_esm_default, {
+      isLoading: themesLoading,
       isSearchable: false,
       isClearable: false,
       onChange: (e3) => {
@@ -72727,41 +72758,43 @@ to {
           cursor: "pointer"
         })
       },
-      value: alertOptions.find((i3) => (settings.alertTheme || defaultSettings.alertTheme) === i3.value),
-      options: alertOptions
-    })))), settings.alertTheme === AlertTheme.Custom ? /* @__PURE__ */ import_react62.default.createElement("div", {
+      value: selectedThemeOption,
+      options: themeOptions
+    })))), settings.alertTheme === "custom" ? /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "flex flex-col gap-2"
-    }, /* @__PURE__ */ import_react62.default.createElement("div", {
+    }, /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react62.default.createElement("div", {
+    }, /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ import_react62.default.createElement("h2", {
+    }, /* @__PURE__ */ import_react63.default.createElement("h2", {
       className: "text-xl"
-    }, "Custom Theme Settings"))), /* @__PURE__ */ import_react62.default.createElement(Input, {
+    }, "Custom Theme Settings"))), /* @__PURE__ */ import_react63.default.createElement(Input, {
       value: settings.alertCustomImageUrl,
       label: "Image URL",
       placeholder: "URL...",
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { alertCustomImageUrl: e3.target.value.trim() }))
-    })) : null, /* @__PURE__ */ import_react62.default.createElement("div", {
+    })) : null, /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "flex flex-col gap-2 flex-1"
-    }, /* @__PURE__ */ import_react62.default.createElement("div", {
+    }, /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react62.default.createElement("div", {
+    }, /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ import_react62.default.createElement("h2", {
+    }, /* @__PURE__ */ import_react63.default.createElement("h2", {
       className: "text-xl"
-    }, "Preview"))), /* @__PURE__ */ import_react62.default.createElement("div", {
+    }, "Preview"))), /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ import_react62.default.createElement("div", {
+    }, /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "bg-gray-600 rounded-md h-full w-full flex py-2 relative"
-    }, settings.alertTheme === AlertTheme.Custom ? /* @__PURE__ */ import_react62.default.createElement(CustomPreview, {
+    }, settings.alertTheme === "custom" ? /* @__PURE__ */ import_react63.default.createElement(CustomPreview, {
       imageUrl: settings.alertCustomImageUrl
-    }) : /* @__PURE__ */ import_react62.default.createElement(GW2Preview, null)))));
+    }) : /* @__PURE__ */ import_react63.default.createElement(Preview, {
+      preview: selectedTheme == null ? void 0 : selectedTheme.preview
+    })))));
   }
   function CustomPreview({ imageUrl }) {
-    return /* @__PURE__ */ import_react62.default.createElement("div", {
+    return /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "flex-1 flex flex-col justify-center items-center gap-2 text-center"
-    }, imageUrl ? /* @__PURE__ */ import_react62.default.createElement("div", {
+    }, imageUrl ? /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "flex-1 flex justify-center items-center relative w-full overflow-hidden",
       style: {
         backgroundImage: `url(${imageUrl})`,
@@ -72769,39 +72802,33 @@ to {
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center"
       }
-    }) : null, /* @__PURE__ */ import_react62.default.createElement("div", {
+    }) : null, /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "flex-0 flex justify-center items-center text-2xl uppercase"
     }, "@name won!"));
   }
-  function GW2Preview() {
-    return /* @__PURE__ */ import_react62.default.createElement("div", {
+  function Preview({ preview }) {
+    return preview ? /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "relative h-full w-full"
-    }, /* @__PURE__ */ import_react62.default.createElement("div", {
+    }, /* @__PURE__ */ import_react63.default.createElement("div", {
       className: "flex flex-1 flex-col justify-center items-center bg-transparent animate-wiggle absolute inset-0",
       style: { scale: "50%" }
-    }, /* @__PURE__ */ import_react62.default.createElement("img", {
-      src: "https://giveaway-o-tron.vercel.app/images/chest-notification.png"
-    }), /* @__PURE__ */ import_react62.default.createElement("div", {
-      className: "text-white text-4xl uppercasetext-bold left-0 right-0 text-center absolute",
-      style: { top: "48%" }
-    }, "Giveaway chest!"), /* @__PURE__ */ import_react62.default.createElement("div", {
-      className: "text-white text-3xl uppercase px-4 py-2 text-bold text-center absolute break-all",
-      style: { top: "75%", left: 50, right: 50 }
-    }, "@name won!")));
+    }, /* @__PURE__ */ import_react63.default.createElement("img", {
+      src: `https://giveaway-o-tron.vercel.app${preview}`
+    }))) : null;
   }
 
   // src/App.tsx
   function App() {
-    return /* @__PURE__ */ import_react63.default.createElement(MemoryRouter, {
+    return /* @__PURE__ */ import_react64.default.createElement(MemoryRouter, {
       initialEntries: ["/setup"]
-    }, /* @__PURE__ */ import_react63.default.createElement(InnerApp, null));
+    }, /* @__PURE__ */ import_react64.default.createElement(InnerApp, null));
   }
   function InnerApp() {
     useUpdateCheck();
     const [settings, setSettings] = useStorage("settings", defaultSettings);
     const [discordSettings, setDiscordSettings] = useStorage("discord", defaultDiscordSettings);
-    const [winners, setWinners] = import_react63.default.useState([]);
-    const [client, setClient] = import_react63.default.useState(null);
+    const [winners, setWinners] = import_react64.default.useState([]);
+    const [client, setClient] = import_react64.default.useState(null);
     const [channelInfo, setChannelInfo] = useStorage("channelInfo", {}, (c3) => {
       console.info("[client][app]", c3);
       if (!c3.login)
@@ -72810,7 +72837,7 @@ to {
       if (settings.autoConnect)
         setClient((cl) => cl ? cl : init3(c3));
     });
-    const updateClientInfo = import_react63.default.useCallback((d3) => {
+    const updateClientInfo = import_react64.default.useCallback((d3) => {
       console.info("[auth][client][update]", d3);
       setChannelInfo(d3);
       if ((client == null ? void 0 : client.readyState()) === "OPEN") {
@@ -72824,36 +72851,36 @@ to {
       setClient(init3(d3));
     }, [client]);
     useAuthEvents(updateClientInfo);
-    import_react63.default.useEffect(() => {
+    import_react64.default.useEffect(() => {
       setUser({ username: channelInfo.login });
       if (channelInfo.login) {
         if (settings.autoConnect)
           setClient((cl) => cl ? cl : init3(channelInfo));
       }
     }, [channelInfo.login]);
-    const [forfeits, setForfeits] = import_react63.default.useState([]);
-    const onNewChat = import_react63.default.useCallback((chat) => {
+    const [forfeits, setForfeits] = import_react64.default.useState([]);
+    const onNewChat = import_react64.default.useCallback((chat) => {
       if (settings.forfeitCommand && chat.msg.toLowerCase().includes(settings.forfeitCommand.toLowerCase())) {
         setForfeits((f3) => f3.concat(chat.username));
       }
     }, [settings.forfeitCommand]);
-    const [chatPaused, setChatPaused] = import_react63.default.useState(false);
+    const [chatPaused, setChatPaused] = import_react64.default.useState(false);
     const [chatEvents, resetChat] = useChatEvents(chatPaused, winners, onNewChat);
-    import_react63.default.useEffect(() => {
+    import_react64.default.useEffect(() => {
       window["myApp"].setTitle(channelInfo.login, !!client);
     }, [channelInfo.login, client]);
     const [pastGiveaways, setPastGiveaways] = useStorage("past-giveaways", []);
     const stats = useCacheStats();
     const cacheHistory = useCacheHistory(stats);
-    return /* @__PURE__ */ import_react63.default.createElement(import_react63.default.Fragment, null, /* @__PURE__ */ import_react63.default.createElement(Header, {
+    return /* @__PURE__ */ import_react64.default.createElement(import_react64.default.Fragment, null, /* @__PURE__ */ import_react64.default.createElement(Header, {
       client,
       resetChat,
       setClient,
       channelInfo
-    }), /* @__PURE__ */ import_react63.default.createElement(Switch, null, /* @__PURE__ */ import_react63.default.createElement(Route, {
+    }), /* @__PURE__ */ import_react64.default.createElement(Switch, null, /* @__PURE__ */ import_react64.default.createElement(Route, {
       path: "/",
       exact: true
-    }, /* @__PURE__ */ import_react63.default.createElement(MainScreen, {
+    }, /* @__PURE__ */ import_react64.default.createElement(MainScreen, {
       client,
       chatEvents,
       discordSettings,
@@ -72870,42 +72897,42 @@ to {
       forfeits,
       stats,
       cacheHistory
-    })), /* @__PURE__ */ import_react63.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react64.default.createElement(Route, {
       path: "/setup",
       exact: true
-    }, /* @__PURE__ */ import_react63.default.createElement(Setup, {
+    }, /* @__PURE__ */ import_react64.default.createElement(Setup, {
       resetChat,
       setClient,
       channel: channelInfo,
       setChannel: setChannelInfo
-    })), /* @__PURE__ */ import_react63.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react64.default.createElement(Route, {
       path: "/giveaways",
       exact: true
-    }, /* @__PURE__ */ import_react63.default.createElement(PastGiveaways, {
+    }, /* @__PURE__ */ import_react64.default.createElement(PastGiveaways, {
       giveaways: pastGiveaways,
       setPastGiveaways
-    })), /* @__PURE__ */ import_react63.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react64.default.createElement(Route, {
       path: "/settings",
       exact: true
-    }, /* @__PURE__ */ import_react63.default.createElement(SettingsScreen, {
+    }, /* @__PURE__ */ import_react64.default.createElement(SettingsScreen, {
       settings,
       setSettings,
       forfeits,
       setForfeits
-    })), /* @__PURE__ */ import_react63.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react64.default.createElement(Route, {
       path: "/discord",
       exact: true
-    }, /* @__PURE__ */ import_react63.default.createElement(Discord, {
+    }, /* @__PURE__ */ import_react64.default.createElement(Discord, {
       settings: discordSettings,
       setSettings: setDiscordSettings
-    })), /* @__PURE__ */ import_react63.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react64.default.createElement(Route, {
       path: "/obs",
       exact: true
-    }, /* @__PURE__ */ import_react63.default.createElement(Obs, {
+    }, /* @__PURE__ */ import_react64.default.createElement(Obs, {
       channelInfo,
       settings,
       setSettings
-    }))), /* @__PURE__ */ import_react63.default.createElement(Oe, null));
+    }))), /* @__PURE__ */ import_react64.default.createElement(Oe, null));
   }
 
   // src/index.tsx
@@ -72949,7 +72976,7 @@ to {
       captureException(e3);
     } finally {
       void watch();
-      import_react_dom4.default.render(/* @__PURE__ */ import_react64.default.createElement(App, null), document.querySelector("#app"));
+      import_react_dom4.default.render(/* @__PURE__ */ import_react65.default.createElement(App, null), document.querySelector("#app"));
     }
   });
 })();

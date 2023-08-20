@@ -1,5 +1,5 @@
 import { ChatItem } from '~/chat'
-import { AlertTheme, Settings, DiscordSettings } from './types'
+import { Settings, DiscordSettings } from './types'
 
 export const ONE_MIN = 1000 * 60
 
@@ -94,7 +94,7 @@ export const defaultSettings: Required<Settings> = {
   performanceMode: false,
   forfeitCommand: '',
   alertDuration: 4000,
-  alertTheme: AlertTheme.GW2,
+  alertTheme: 'gw2',
   autoAnnounce: true,
   giveawayName: '',
   timerBell: false,
@@ -118,17 +118,6 @@ export const defaultDiscordSettings: Required<DiscordSettings> = {
   winnerEnabled: true,
   giveawayMinTime: ONE_MIN,
 }
-
-export const alertThemeMap: Record<AlertTheme, string> = {
-  [AlertTheme.GW2]: 'Guild Wars 2',
-  [AlertTheme.Custom]: 'Custom',
-}
-
-export const alertOptions = Object.entries(alertThemeMap)
-  .map(([k, v]) => {
-    return { value: k, label: v }
-  })
-  .filter((i) => Boolean(i.label)) as { value: AlertTheme; label: string }[]
 
 export function getDiscordColour(discordColour?: string) {
   const colour = Number(`0x${discordColour?.replace('#', '')}`)

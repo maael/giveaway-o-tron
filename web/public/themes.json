@@ -1,15 +1,28 @@
 [
   {
     "id": "gw2",
-    "name": "Guild Wars 2"
+    "name": "Guild Wars 2",
+    "preview": "/images/gw2/preview.png"
   },
   {
     "id": "gw2-aurene",
-    "name": "Guild Wars 2 - Aurene"
+    "name": "Guild Wars 2 - Aurene",
+    "preview": "/images/gw2-aurene/preview.png"
   },
   {
     "id": "gw2-soto",
-    "name": "Guild Wars 2 - SotO"
+    "name": "Guild Wars 2 - SotO",
+    "preview": "/images/gw2-soto/preview.png"
+  },
+  {
+    "id": "mukluk",
+    "name": "Mukluk",
+    "preview": "/images/mukluk/preview.png"
+  },
+  {
+    "id": "guildmm",
+    "name": "GuildMM",
+    "preview": "/images/guildmm/preview.png"
   },
   {
     "id": "custom",
