@@ -4,8 +4,8 @@ import { useRouter } from 'next/router'
 import { io } from 'socket.io-client'
 import toast, { Toaster } from 'react-hot-toast'
 import ReactCanvasConfetti from 'react-canvas-confetti'
-import { AutoTextSize } from 'auto-text-size'
 import { getRelayURI } from '../util'
+import { CustomAlert, Gw2Alert } from './style'
 
 const canvasStyles = {
   position: 'fixed',
@@ -15,56 +15,6 @@ const canvasStyles = {
   top: 0,
   left: 0,
 } as const
-
-function Gw2Alert({ winner, visible }: { winner: string; visible: boolean }) {
-  const winnerParts = winner.split('|$$|')
-  const winnerName = winnerParts[0]
-  const type = (winnerParts[1] || 'winner').toLowerCase()
-  return (
-    <div
-      className={`flex flex-col justify-center items-center bg-transparent relative fill-mode-both ${
-        visible ? 'animate-wiggle' : 'animate-out fade-out'
-      }`}
-    >
-      <img src="/images/chest-notification.png" />
-      <div
-        className="text-white text-4xl uppercasetext-bold left-0 right-0 text-center absolute gwfont"
-        style={{ top: 230 }}
-      >
-        Giveaway chest!
-      </div>
-      <div>
-        <div
-          className="text-white uppercase px-4 py-2 text-bold text-center absolute mx-auto items-center-important cagfont"
-          style={{ top: 292, left: 50, right: 50, width: 450, height: 50 }}
-        >
-          <AutoTextSize maxFontSizePx={50}>
-            <p className="mx-auto my-auto">{winnerName}</p>
-          </AutoTextSize>
-        </div>
-        <div
-          className="text-white text-4xl uppercase px-4 py-2 text-bold text-center absolute mx-auto cagfont"
-          style={{ top: 340, left: 50, right: 50, width: 450, height: 50 }}
-        >
-          {type === 'blocked' ? 'blocked!' : type === 'rigged' ? 'won! Totally not rigged.' : 'won!'}
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function CustomAlert({ winner, imageUrl, visible }: { imageUrl?: string; winner: string; visible: boolean }) {
-  return (
-    <div
-      className={`flex flex-col justify-center items-center bg-transparent relative fill-mode-both ${
-        visible ? 'animate-in fade-in' : 'animate-out fade-out'
-      }`}
-    >
-      <img src={imageUrl} />
-      <div className="text-4xl mt-5 uppercase text-white font-bold">{winner} won!</div>
-    </div>
-  )
-}
 
 export default function GW2Alerts() {
   const router = useRouter()
@@ -115,7 +65,7 @@ export default function GW2Alerts() {
             return e.alertTheme === 'custom' ? (
               <CustomAlert winner={e.winner} imageUrl={e.alertCustomImageUrl} visible={t.visible} />
             ) : (
-              <Gw2Alert winner={e.winner} visible={t.visible} />
+              <Gw2Alert winner={e.winner} visible={t.visible} type={e.alertTheme} />
             )
           },
           { duration: e.alertDuration || 4000 }
@@ -159,7 +109,11 @@ export default function GW2Alerts() {
     }
   }, [handleEvent, relayVersion, channel])
   React.useEffect(() => {
-    new Image().src = '/images/chest-notification.png'
+    new Image().src = '/images/gw2/notification.png'
+    new Image().src = '/images/gw2-aurene/notification.png'
+    new Image().src = '/images/gw2-soto/notification.png'
+    new Image().src = '/images/mukluk/notification.png'
+    new Image().src = '/images/guildmm/notification.png'
   }, [])
   return (
     <div className="w-full h-full">

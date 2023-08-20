@@ -2,33 +2,9 @@
 import * as React from 'react'
 import { useRouter } from 'next/router'
 import { io } from 'socket.io-client'
-import Countdown, { zeroPad } from 'react-countdown'
-import { getRelayURI } from './util'
-
-const SPECIAL_COMMAND_TEXT = {
-  $gw2_account$: 'your Guild Wars 2 account name XXXX.1234',
-  $steam_friend$: 'your 8 digit Steam friend code',
-  $gw2_or_steam$: 'either your GW2 account name or Steam friend code',
-  $gw2_or_steam_or_paypal$: 'either your GW2 account name or Steam friend code or the word paypal',
-}
-
-const countDownRenderer = ({ hours, minutes, seconds, completed }) => {
-  if (completed) {
-    // Render a complete state
-    return <div className="animate-pulse cagfont">Giveaway closed!</div>
-  } else {
-    // Render a countdown
-    return (
-      <span>
-        {zeroPad(hours, 2)} : {zeroPad(minutes, 2)} : {zeroPad(seconds, 2)}
-      </span>
-    )
-  }
-}
-
-const StableCountdown = React.memo(function StableCountdown({ value }: { value: number }) {
-  return <Countdown renderer={countDownRenderer} date={value} />
-})
+import { getRelayURI } from '../util'
+import { GW2Status, CustomStatus } from './style'
+import { SPECIAL_COMMAND_TEXT } from './style/shared'
 
 export default function GW2Alerts() {
   const router = useRouter()
@@ -124,7 +100,7 @@ export default function GW2Alerts() {
       status.status === 'start'
         ? `${status.followersOnly ? 'Followers g' : 'G'}iveaway open`
         : status.status === 'ended'
-        ? 'The giveaway is closed'
+        ? 'Good luck!'
         : null,
     body:
       status.status === 'start'
@@ -135,7 +111,7 @@ export default function GW2Alerts() {
               .join(' ')}" for a chance to win!`
           : "Make sure to send a message in chat, there's no command!"
         : status.status === 'ended'
-        ? 'Good luck!'
+        ? 'The giveaway is closed'
         : null,
     status: status.status,
     command: status.command,
@@ -145,73 +121,15 @@ export default function GW2Alerts() {
   }
   console.info('[props]', props)
   React.useEffect(() => {
-    new Image().src = '/images/chest-notification.png'
+    new Image().src = '/images/gw2/notification.png'
+    new Image().src = '/images/gw2-aurene/notification.png'
+    new Image().src = '/images/gw2-soto/notification.png'
+    new Image().src = '/images/mukluk/notification.png'
+    new Image().src = '/images/guildmm/notification.png'
   }, [])
   return status.status && !status.hidden ? (
     <div className="w-full h-full">
-      {status.theme === 'gw2' ? <Gw2Status {...props} /> : <CustomStatus {...props} />}
+      {status.theme === 'custom' ? <CustomStatus {...props} /> : <GW2Status {...props} alertType={status.theme} />}
     </div>
   ) : null
-}
-
-interface StatusProps {
-  title?: string | null
-  body?: string | null
-  status?: string
-  command?: string
-  followersOnly?: boolean
-  imageUrl?: string
-  goalTs?: number
-}
-
-function Gw2Status({ status, title, goalTs, body, command, followersOnly }: StatusProps) {
-  return (
-    <div
-      className={`flex flex-col justify-center items-center bg-transparent relative fill-mode-both ${
-        status ? (status === 'start' ? 'animate-slowwiggle' : '') : 'animate-out fade-out'
-      }`}
-    >
-      <img src="/images/chest-notification.png" />
-      <div
-        className={`text-white uppercasetext-bold left-2 right-2 text-center absolute uppercase gwfont ${
-          goalTs ? 'text-2xl' : followersOnly ? 'text-2xl' : 'text-3xl'
-        }`}
-        style={{ top: goalTs ? 225 : 235 }}
-      >
-        {title}
-      </div>
-      {goalTs ? (
-        <div
-          className={`text-white uppercasetext-bold left-2 right-2 text-center absolute uppercase cagfont ${
-            followersOnly ? 'text-xl' : 'text-xl'
-          }`}
-          style={{ top: 252 }}
-        >
-          <StableCountdown value={Number(goalTs)} />
-        </div>
-      ) : null}
-      <div
-        className={`text-white uppercase px-4 py-2 text-bold text-center absolute cagfont ${
-          command && Object.keys(SPECIAL_COMMAND_TEXT).some((k) => command.includes(k)) ? 'text-lg' : 'text-2xl'
-        }`}
-        style={{ top: 284, width: 360 }}
-      >
-        {body}
-      </div>
-    </div>
-  )
-}
-
-function CustomStatus({ status, title, body, imageUrl }: StatusProps) {
-  return (
-    <div
-      className={`flex flex-col justify-center items-center bg-transparent relative fill-mode-both text-white font-bold text-center ${
-        status ? (status === 'start' ? 'animate-in fade-in' : '') : 'animate-out fade-out'
-      }`}
-    >
-      {imageUrl ? <img src={imageUrl} className="h-72" /> : null}
-      <div className="text-5xl my-3">{title}</div>
-      <div className="text-4xl">{body}</div>
-    </div>
-  )
 }
