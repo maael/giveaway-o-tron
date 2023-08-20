@@ -50418,9 +50418,8 @@ to {
     };
     console.info("[relay][event]", eventData);
     relay_default.emit("event", eventData);
-    if (settings.sendMessages) {
-      const cleanMessage = winner.split("|$$|")[0] || winner;
-      chatClient == null ? void 0 : chatClient.say(channelInfo.login, settings.winnerMessage.replace("@name", `@${cleanMessage}`));
+    if (settings.sendMessages && !(winner == null ? void 0 : winner.includes("|$$|"))) {
+      chatClient == null ? void 0 : chatClient.say(channelInfo.login, settings.winnerMessage.replace("@name", `@${winner}`));
     }
   }
 
