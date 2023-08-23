@@ -25,6 +25,11 @@
     "preview": "/images/guildmm/preview.png"
   },
   {
+    "id": "fipi",
+    "name": "Fipi",
+    "preview": "/images/fipi/preview.png"
+  },
+  {
     "id": "custom",
     "name": "Custom"
   }
