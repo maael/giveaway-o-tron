@@ -1085,7 +1085,7 @@
             }
             return dispatcher.useContext(Context, unstable_observedBits);
           }
-          function useState8(initialState) {
+          function useState9(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1109,7 +1109,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
-          function useMemo3(create, deps) {
+          function useMemo4(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useMemo(create, deps);
           }
@@ -1670,10 +1670,10 @@
           exports.useEffect = useEffect9;
           exports.useImperativeHandle = useImperativeHandle2;
           exports.useLayoutEffect = useLayoutEffect2;
-          exports.useMemo = useMemo3;
+          exports.useMemo = useMemo4;
           exports.useReducer = useReducer;
           exports.useRef = useRef5;
-          exports.useState = useState8;
+          exports.useState = useState9;
           exports.version = ReactVersion;
         })();
       }
@@ -2481,11 +2481,11 @@
       if (true) {
         (function() {
           "use strict";
-          var React55 = require_react();
+          var React56 = require_react();
           var _assign = require_object_assign();
           var Scheduler = require_scheduler();
           var tracing = require_tracing();
-          var ReactSharedInternals = React55.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React56.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function warn5(format3) {
             {
               for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -2517,7 +2517,7 @@
               Function.prototype.apply.call(console[level], console, argsWithFormat);
             }
           }
-          if (!React55) {
+          if (!React56) {
             {
               throw Error("ReactDOM was loaded before React. Make sure you load the React package before loading ReactDOM.");
             }
@@ -3733,7 +3733,7 @@
           var didWarnInvalidChild = false;
           function flattenChildren(children) {
             var content = "";
-            React55.Children.forEach(children, function(child) {
+            React56.Children.forEach(children, function(child) {
               if (child == null) {
                 return;
               }
@@ -3744,7 +3744,7 @@
           function validateProps(element2, props) {
             {
               if (typeof props.children === "object" && props.children !== null) {
-                React55.Children.forEach(props.children, function(child) {
+                React56.Children.forEach(props.children, function(child) {
                   if (child == null) {
                     return;
                   }
@@ -10937,7 +10937,7 @@
           }
           var fakeInternalInstance = {};
           var isArray2 = Array.isArray;
-          var emptyRefsObject = new React55.Component().refs;
+          var emptyRefsObject = new React56.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -19736,7 +19736,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
               root3.mutableSourceEagerHydrationData.push(mutableSource, version);
             }
           }
-          function createPortal2(children, containerInfo, implementation) {
+          function createPortal3(children, containerInfo, implementation) {
             var key = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : null;
             return {
               $$typeof: REACT_PORTAL_TYPE,
@@ -20389,7 +20389,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
                 throw Error("Target container is not a DOM element.");
               }
             }
-            return createPortal2(children, container, null, key);
+            return createPortal3(children, container, null, key);
           }
           function renderSubtreeIntoContainer(parentComponent, element2, containerNode, callback) {
             return unstable_renderSubtreeIntoContainer(parentComponent, element2, containerNode, callback);
@@ -26045,7 +26045,7 @@ ${JSON.stringify(message, null, 4)}`);
         return to.concat(ar || Array.prototype.slice.call(from));
       };
       Object.defineProperty(exports, "__esModule", { value: true });
-      var React55 = __importStar(require_react());
+      var React56 = __importStar(require_react());
       var utils_1 = require_utils2();
       var types_1 = require_types();
       var INCREASE_KEYS = ["ArrowRight", "ArrowUp", "k", "PageUp"];
@@ -26054,7 +26054,7 @@ ${JSON.stringify(message, null, 4)}`);
         __extends2(Range3, _super);
         function Range3(props) {
           var _this = _super.call(this, props) || this;
-          _this.trackRef = React55.createRef();
+          _this.trackRef = React56.createRef();
           _this.thumbRefs = [];
           _this.state = {
             draggedTrackPos: [-1, -1],
@@ -26372,7 +26372,7 @@ ${JSON.stringify(message, null, 4)}`);
             _this.numOfMarks = (props2.max - props2.min) / _this.props.step;
             _this.markRefs = [];
             for (var i3 = 0; i3 < _this.numOfMarks + 1; i3++) {
-              _this.markRefs[i3] = React55.createRef();
+              _this.markRefs[i3] = React56.createRef();
             }
           };
           _this.calculateMarkOffsets = function() {
@@ -26413,7 +26413,7 @@ ${JSON.stringify(message, null, 4)}`);
           _this.schdOnTouchMove = (0, utils_1.schd)(_this.onTouchMove);
           _this.schdOnEnd = (0, utils_1.schd)(_this.onEnd);
           _this.thumbRefs = props.values.map(function() {
-            return React55.createRef();
+            return React56.createRef();
           });
           _this.updateMarkRefs(props);
           return _this;
@@ -26553,7 +26553,7 @@ ${JSON.stringify(message, null, 4)}`);
           max: 100
         };
         return Range3;
-      }(React55.Component);
+      }(React56.Component);
       exports.default = Range2;
     }
   });
@@ -36764,7 +36764,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   var require_emotion_element_ae8cc4ba_cjs_dev = __commonJS({
     "node_modules/@emotion/react/dist/emotion-element-ae8cc4ba.cjs.dev.js"(exports) {
       "use strict";
-      var React55 = require_react();
+      var React56 = require_react();
       var createCache2 = require_emotion_cache_cjs();
       var _extends23 = require_extends();
       var weakMemoize = require_emotion_weak_memoize_cjs();
@@ -36794,12 +36794,12 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         n3["default"] = e3;
         return Object.freeze(n3);
       }
-      var React__namespace = /* @__PURE__ */ _interopNamespace(React55);
+      var React__namespace = /* @__PURE__ */ _interopNamespace(React56);
       var createCache__default = /* @__PURE__ */ _interopDefault(createCache2);
       var weakMemoize__default = /* @__PURE__ */ _interopDefault(weakMemoize);
       var isBrowser = typeof document !== "undefined";
       var hasOwnProperty2 = {}.hasOwnProperty;
-      var EmotionCacheContext = /* @__PURE__ */ React55.createContext(typeof HTMLElement !== "undefined" ? /* @__PURE__ */ createCache__default["default"]({
+      var EmotionCacheContext = /* @__PURE__ */ React56.createContext(typeof HTMLElement !== "undefined" ? /* @__PURE__ */ createCache__default["default"]({
         key: "css"
       }) : null);
       if (true) {
@@ -36807,23 +36807,23 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       }
       var CacheProvider = EmotionCacheContext.Provider;
       var __unsafe_useEmotionCache = function useEmotionCache() {
-        return React55.useContext(EmotionCacheContext);
+        return React56.useContext(EmotionCacheContext);
       };
       exports.withEmotionCache = function withEmotionCache(func2) {
-        return /* @__PURE__ */ React55.forwardRef(function(props, ref) {
-          var cache3 = React55.useContext(EmotionCacheContext);
+        return /* @__PURE__ */ React56.forwardRef(function(props, ref) {
+          var cache3 = React56.useContext(EmotionCacheContext);
           return func2(props, cache3, ref);
         });
       };
       if (!isBrowser) {
         exports.withEmotionCache = function withEmotionCache(func2) {
           return function(props) {
-            var cache3 = React55.useContext(EmotionCacheContext);
+            var cache3 = React56.useContext(EmotionCacheContext);
             if (cache3 === null) {
               cache3 = createCache__default["default"]({
                 key: "css"
               });
-              return /* @__PURE__ */ React55.createElement(EmotionCacheContext.Provider, {
+              return /* @__PURE__ */ React56.createElement(EmotionCacheContext.Provider, {
                 value: cache3
               }, func2(props, cache3));
             } else {
@@ -36832,12 +36832,12 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           };
         };
       }
-      var ThemeContext = /* @__PURE__ */ React55.createContext({});
+      var ThemeContext = /* @__PURE__ */ React56.createContext({});
       if (true) {
         ThemeContext.displayName = "EmotionThemeContext";
       }
       var useTheme = function useTheme2() {
-        return React55.useContext(ThemeContext);
+        return React56.useContext(ThemeContext);
       };
       var getTheme = function getTheme2(outerTheme, theme) {
         if (typeof theme === "function") {
@@ -36858,24 +36858,24 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         });
       });
       var ThemeProvider = function ThemeProvider2(props) {
-        var theme = React55.useContext(ThemeContext);
+        var theme = React56.useContext(ThemeContext);
         if (props.theme !== theme) {
           theme = createCacheWithTheme(theme)(props.theme);
         }
-        return /* @__PURE__ */ React55.createElement(ThemeContext.Provider, {
+        return /* @__PURE__ */ React56.createElement(ThemeContext.Provider, {
           value: theme
         }, props.children);
       };
       function withTheme(Component11) {
         var componentName = Component11.displayName || Component11.name || "Component";
         var render = function render2(props, ref) {
-          var theme = React55.useContext(ThemeContext);
-          return /* @__PURE__ */ React55.createElement(Component11, _extends23({
+          var theme = React56.useContext(ThemeContext);
+          return /* @__PURE__ */ React56.createElement(Component11, _extends23({
             theme,
             ref
           }, props));
         };
-        var WithTheme = /* @__PURE__ */ React55.forwardRef(render);
+        var WithTheme = /* @__PURE__ */ React56.forwardRef(render);
         WithTheme.displayName = "WithTheme(" + componentName + ")";
         return _isolatedHnrs_dist_emotionReact_isolatedHnrs["default"](WithTheme, Component11);
       }
@@ -36955,7 +36955,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
             serializedNames += " " + next.name;
             next = next.next;
           }
-          return /* @__PURE__ */ React55.createElement("style", (_ref23 = {}, _ref23["data-emotion"] = cache3.key + " " + serializedNames, _ref23.dangerouslySetInnerHTML = {
+          return /* @__PURE__ */ React56.createElement("style", (_ref23 = {}, _ref23["data-emotion"] = cache3.key + " " + serializedNames, _ref23.dangerouslySetInnerHTML = {
             __html: rules
           }, _ref23.nonce = cache3.sheet.nonce, _ref23));
         }
@@ -36974,7 +36974,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         } else if (props.className != null) {
           className = props.className + " ";
         }
-        var serialized = serialize.serializeStyles(registeredStyles, void 0, React55.useContext(ThemeContext));
+        var serialized = serialize.serializeStyles(registeredStyles, void 0, React56.useContext(ThemeContext));
         if (serialized.name.indexOf("-") === -1) {
           var labelFromStack = props[labelPropName];
           if (labelFromStack) {
@@ -36990,11 +36990,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         }
         newProps.ref = ref;
         newProps.className = className;
-        return /* @__PURE__ */ React55.createElement(React55.Fragment, null, /* @__PURE__ */ React55.createElement(Insertion, {
+        return /* @__PURE__ */ React56.createElement(React56.Fragment, null, /* @__PURE__ */ React56.createElement(Insertion, {
           cache: cache3,
           serialized,
           isStringTag: typeof WrappedComponent === "string"
-        }), /* @__PURE__ */ React55.createElement(WrappedComponent, newProps));
+        }), /* @__PURE__ */ React56.createElement(WrappedComponent, newProps));
       });
       if (true) {
         Emotion.displayName = "EmotionCssPropInternal";
@@ -37018,7 +37018,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     "node_modules/@emotion/react/dist/emotion-react.cjs.dev.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
-      var React55 = require_react();
+      var React56 = require_react();
       require_emotion_cache_cjs();
       var emotionElement = require_emotion_element_ae8cc4ba_cjs_dev();
       require_extends();
@@ -37047,7 +37047,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         n3["default"] = e3;
         return Object.freeze(n3);
       }
-      var React__namespace = /* @__PURE__ */ _interopNamespace(React55);
+      var React__namespace = /* @__PURE__ */ _interopNamespace(React56);
       var pkg = {
         name: "@emotion/react",
         version: "11.10.0",
@@ -37172,7 +37172,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       var jsx3 = function jsx4(type, props) {
         var args = arguments;
         if (props == null || !emotionElement.hasOwnProperty.call(props, "css")) {
-          return React55.createElement.apply(void 0, args);
+          return React56.createElement.apply(void 0, args);
         }
         var argsLength = args.length;
         var createElementArgArray = new Array(argsLength);
@@ -37181,9 +37181,9 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         for (var i3 = 2; i3 < argsLength; i3++) {
           createElementArgArray[i3] = args[i3];
         }
-        return React55.createElement.apply(null, createElementArgArray);
+        return React56.createElement.apply(null, createElementArgArray);
       };
-      var useInsertionEffect = React__namespace["useInsertionEffect"] ? React__namespace["useInsertionEffect"] : React55.useLayoutEffect;
+      var useInsertionEffect = React__namespace["useInsertionEffect"] ? React__namespace["useInsertionEffect"] : React56.useLayoutEffect;
       var warnedAboutCssPropForGlobal = false;
       var Global2 = /* @__PURE__ */ emotionElement.withEmotionCache(function(props, cache3) {
         if (!warnedAboutCssPropForGlobal && (props.className || props.css)) {
@@ -37191,7 +37191,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           warnedAboutCssPropForGlobal = true;
         }
         var styles = props.styles;
-        var serialized = serialize.serializeStyles([styles], void 0, React55.useContext(emotionElement.ThemeContext));
+        var serialized = serialize.serializeStyles([styles], void 0, React56.useContext(emotionElement.ThemeContext));
         if (!emotionElement.isBrowser) {
           var _ref3;
           var serializedNames = serialized.name;
@@ -37210,11 +37210,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           if (shouldCache) {
             return null;
           }
-          return /* @__PURE__ */ React55.createElement("style", (_ref3 = {}, _ref3["data-emotion"] = cache3.key + "-global " + serializedNames, _ref3.dangerouslySetInnerHTML = {
+          return /* @__PURE__ */ React56.createElement("style", (_ref3 = {}, _ref3["data-emotion"] = cache3.key + "-global " + serializedNames, _ref3.dangerouslySetInnerHTML = {
             __html: rules
           }, _ref3.nonce = cache3.sheet.nonce, _ref3));
         }
-        var sheetRef = React55.useRef();
+        var sheetRef = React56.useRef();
         useInsertionEffect(function() {
           var key = cache3.key + "-global";
           var sheet = new cache3.sheet.constructor({
@@ -37342,7 +37342,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         });
         if (!emotionElement.isBrowser && rules.length !== 0) {
           var _ref23;
-          return /* @__PURE__ */ React55.createElement("style", (_ref23 = {}, _ref23["data-emotion"] = cache3.key + " " + serializedArr.map(function(serialized) {
+          return /* @__PURE__ */ React56.createElement("style", (_ref23 = {}, _ref23["data-emotion"] = cache3.key + " " + serializedArr.map(function(serialized) {
             return serialized.name;
           }).join(" "), _ref23.dangerouslySetInnerHTML = {
             __html: rules
@@ -37377,11 +37377,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         var content = {
           css: css6,
           cx,
-          theme: React55.useContext(emotionElement.ThemeContext)
+          theme: React56.useContext(emotionElement.ThemeContext)
         };
         var ele = props.children(content);
         hasRendered = true;
-        return /* @__PURE__ */ React55.createElement(React55.Fragment, null, /* @__PURE__ */ React55.createElement(Insertion, {
+        return /* @__PURE__ */ React56.createElement(React56.Fragment, null, /* @__PURE__ */ React56.createElement(Insertion, {
           cache: cache3,
           serializedArr
         }), ele);
@@ -37439,8 +37439,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   });
 
   // src/index.tsx
-  var import_react65 = __toModule(require_react());
-  var import_react_dom4 = __toModule(require_react_dom());
+  var import_react66 = __toModule(require_react());
+  var import_react_dom5 = __toModule(require_react_dom());
 
   // node_modules/@sentry/utils/esm/env.js
   function isBrowserBundle() {
@@ -43371,7 +43371,7 @@ Url: ${_getEventFilterUrl(event)}`);
   }
 
   // src/App.tsx
-  var import_react64 = __toModule(require_react());
+  var import_react65 = __toModule(require_react());
 
   // node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js
   function _setPrototypeOf(o2, p2) {
@@ -47590,7 +47590,7 @@ to {
   }
 
   // src/components/screens/Main.tsx
-  var import_react48 = __toModule(require_react());
+  var import_react49 = __toModule(require_react());
 
   // src/utils/misc.ts
   var ONE_MIN = 1e3 * 60;
@@ -51589,8 +51589,35 @@ to {
   }
 
   // src/components/primitives/ChatBox.tsx
-  var import_react16 = __toModule(require_react());
+  var import_react17 = __toModule(require_react());
   var import_classnames2 = __toModule(require_classnames());
+
+  // src/components/hooks/useModal.tsx
+  var import_react16 = __toModule(require_react());
+  var import_react_dom = __toModule(require_react_dom());
+  var ModalState;
+  (function(ModalState2) {
+    ModalState2["Open"] = "open";
+    ModalState2["Closed"] = "closed";
+  })(ModalState || (ModalState = {}));
+  function useModal() {
+    const [state, setState] = (0, import_react16.useState)(ModalState.Closed);
+    return (0, import_react16.useMemo)(() => ({
+      isOpen: state === ModalState.Open,
+      close: () => setState(ModalState.Closed),
+      open: () => setState(ModalState.Open)
+    }), [state]);
+  }
+  function Modal({ isOpen, close: close2, children }) {
+    return isOpen ? (0, import_react_dom.createPortal)(/* @__PURE__ */ import_react16.default.createElement("div", {
+      onClick: close2,
+      className: "bg-opacity-75 bg-black inset-0 fixed z-50 flex justify-center items-center"
+    }, /* @__PURE__ */ import_react16.default.createElement("div", {
+      className: "py-5 px-8 bg-gray-700 rounded-md flex flex-col justify-center gap-2 drop-shadow-lg"
+    }, children)), document.body) : null;
+  }
+
+  // src/components/primitives/ChatBox.tsx
   function isVisibleIn(ele, container, buffer = 50) {
     const eleTop = ele.offsetTop;
     const eleBottom = eleTop + ele.clientHeight;
@@ -51604,19 +51631,35 @@ to {
     setPaused,
     clear
   }) {
-    return /* @__PURE__ */ import_react16.default.createElement(import_react16.default.Fragment, null, paused ? /* @__PURE__ */ import_react16.default.createElement(FaPlayCircle, {
+    const { close: close2, open, isOpen } = useModal();
+    return /* @__PURE__ */ import_react17.default.createElement(import_react17.default.Fragment, null, /* @__PURE__ */ import_react17.default.createElement(Modal, {
+      isOpen,
+      close: close2
+    }, "This will clear the chat, are you sure you want to continue?", /* @__PURE__ */ import_react17.default.createElement("div", {
+      className: "flex flex-row gap-2 justify-between"
+    }, /* @__PURE__ */ import_react17.default.createElement("button", {
+      className: "bg-purple-600 px-2 py-1 flex-1 select-none cursor-pointer gap-1 transition-colors hover:bg-purple-700 rounded-md drop-shadow-lg",
+      onClick: close2
+    }, "Cancel"), /* @__PURE__ */ import_react17.default.createElement("button", {
+      className: "bg-red-600 px-2 py-1 flex-1 select-none cursor-pointer gap-1 transition-colors hover:bg-red-700 rounded-md drop-shadow-lg",
+      onClick: () => {
+        clear();
+        Et.success("Chat cleared");
+        close2();
+      }
+    }, "Clear Chat"))), paused ? /* @__PURE__ */ import_react17.default.createElement(FaPlayCircle, {
       className: "select-none cursor-pointer transition-opacity hover:opacity-70",
       onClick: () => setPaused((p2) => !p2),
       title: "Resume chat"
-    }) : /* @__PURE__ */ import_react16.default.createElement(FaPauseCircle, {
+    }) : /* @__PURE__ */ import_react17.default.createElement(FaPauseCircle, {
       className: "select-none cursor-pointer  transition-opacity hover:opacity-70",
       onClick: () => setPaused((p2) => !p2),
       title: "Pause chat, misses messages while paused"
-    }), /* @__PURE__ */ import_react16.default.createElement(FaTimesCircle, {
+    }), /* @__PURE__ */ import_react17.default.createElement(FaTimesCircle, {
       className: "text-red-500 select-none cursor-pointer  transition-opacity hover:opacity-70",
-      onClick: () => clear(),
+      onClick: open,
       title: "Clear chat"
-    }), /* @__PURE__ */ import_react16.default.createElement(FaSave, {
+    }), /* @__PURE__ */ import_react17.default.createElement(FaSave, {
       className: "select-none cursor-pointer  transition-opacity hover:opacity-70",
       title: "Saves all messages (not just those shown)",
       onClick: async () => {
@@ -51639,14 +51682,14 @@ to {
     var _a;
     const shouldAutoScroll = (_a = settings.autoScroll) != null ? _a : true;
     const limitedMessages = chatEvents.filter((c3) => winners.length ? winners.flatMap((c4) => [c4.username].concat(c4.otherUsersWithEntry || [])).includes(c3.username) : true);
-    const userCount = import_react16.default.useMemo(() => {
+    const userCount = import_react17.default.useMemo(() => {
       const users = new Set();
       chatEvents.map((c3) => users.add(c3.userId));
       return users.size;
     }, [chatEvents]);
-    const chatBottomRef = import_react16.default.useRef(null);
-    const chatRef = import_react16.default.useRef(null);
-    import_react16.default.useLayoutEffect(() => {
+    const chatBottomRef = import_react17.default.useRef(null);
+    const chatRef = import_react17.default.useRef(null);
+    import_react17.default.useLayoutEffect(() => {
       var _a2;
       if (chatRef.current && chatBottomRef.current) {
         const shouldScroll = isVisibleIn(chatBottomRef.current, chatRef.current);
@@ -51658,89 +51701,89 @@ to {
         }
       }
     }, [limitedMessages, shouldAutoScroll]);
-    const [search, setSearch] = import_react16.default.useState("");
+    const [search, setSearch] = import_react17.default.useState("");
     const searchedMessages = search ? limitedMessages.filter((m3) => m3.username.toLowerCase().includes(search.toLowerCase()) || m3.msg.toLowerCase().includes(search.toLowerCase())) : limitedMessages;
-    return /* @__PURE__ */ import_react16.default.createElement(import_react16.default.Fragment, null, /* @__PURE__ */ import_react16.default.createElement("div", {
+    return /* @__PURE__ */ import_react17.default.createElement(import_react17.default.Fragment, null, /* @__PURE__ */ import_react17.default.createElement("div", {
       className: "mt-2 rounded-md bg-gray-700 flex-1 flex flex-col relative overflow-hidden"
-    }, /* @__PURE__ */ import_react16.default.createElement("div", {
+    }, /* @__PURE__ */ import_react17.default.createElement("div", {
       className: "bg-gray-600 h-8 gap-2 flex justify-between px-5 items-center text-white z-50"
-    }, /* @__PURE__ */ import_react16.default.createElement("div", {
+    }, /* @__PURE__ */ import_react17.default.createElement("div", {
       className: "flex flex-row justify-center items-center flex-1 text-xs"
-    }, /* @__PURE__ */ import_react16.default.createElement("div", {
+    }, /* @__PURE__ */ import_react17.default.createElement("div", {
       className: "flex-0 bg-purple-600 px-2 py-1.5 border border-purple-600 rounded-l-md",
       title: "This will be sent to chat by your account to tell winners, if Send Message is enabled below"
-    }, /* @__PURE__ */ import_react16.default.createElement(FaSearch, null)), /* @__PURE__ */ import_react16.default.createElement("input", {
+    }, /* @__PURE__ */ import_react17.default.createElement(FaSearch, null)), /* @__PURE__ */ import_react17.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-600 flex-1",
       placeholder: "Search...",
       value: search,
       onChange: (e3) => setSearch(e3.target.value),
       title: "Search chat"
-    })), /* @__PURE__ */ import_react16.default.createElement("div", {
+    })), /* @__PURE__ */ import_react17.default.createElement("div", {
       className: "ml-1 flex-1 text-xs flex gap-2"
-    }, /* @__PURE__ */ import_react16.default.createElement("span", null, chatEvents.length, " message", chatEvents.length === 1 ? "" : "s"), /* @__PURE__ */ import_react16.default.createElement("span", null, userCount, " user", userCount === 1 ? "" : "s")), /* @__PURE__ */ import_react16.default.createElement("div", {
+    }, /* @__PURE__ */ import_react17.default.createElement("span", null, chatEvents.length, " message", chatEvents.length === 1 ? "" : "s"), /* @__PURE__ */ import_react17.default.createElement("span", null, userCount, " user", userCount === 1 ? "" : "s")), /* @__PURE__ */ import_react17.default.createElement("div", {
       className: "flex-1 text-yellow-600 text-xs"
-    }, winners.length ? /* @__PURE__ */ import_react16.default.createElement(import_react16.default.Fragment, null, limitedMessages.length, " winner message", limitedMessages.length === 1 ? "" : "s") : null), /* @__PURE__ */ import_react16.default.createElement("div", {
+    }, winners.length ? /* @__PURE__ */ import_react17.default.createElement(import_react17.default.Fragment, null, limitedMessages.length, " winner message", limitedMessages.length === 1 ? "" : "s") : null), /* @__PURE__ */ import_react17.default.createElement("div", {
       className: "flex flex-row justify-center items-center gap-2 text-xl flex-2"
-    }, /* @__PURE__ */ import_react16.default.createElement("div", {
+    }, /* @__PURE__ */ import_react17.default.createElement("div", {
       className: "text-xs text-center"
-    }, messageDelay), /* @__PURE__ */ import_react16.default.createElement("button", {
+    }, messageDelay), /* @__PURE__ */ import_react17.default.createElement("button", {
       className: (0, import_classnames2.default)("text-xs flex justify-center items-center gap-1 border border-purple-600 px-2 py-1 rounded-md", {
         "bg-purple-600": shouldAutoScroll
       }),
       onClick: () => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { autoScroll: !s3.autoScroll }))
-    }, shouldAutoScroll ? /* @__PURE__ */ import_react16.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react16.default.createElement(FaTimes, null), " Following"), /* @__PURE__ */ import_react16.default.createElement(ChatControls, {
+    }, shouldAutoScroll ? /* @__PURE__ */ import_react17.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react17.default.createElement(FaTimes, null), " Following"), /* @__PURE__ */ import_react17.default.createElement(ChatControls, {
       chatEvents,
       paused,
       setPaused,
       clear
-    }))), /* @__PURE__ */ import_react16.default.createElement("div", {
+    }))), /* @__PURE__ */ import_react17.default.createElement("div", {
       className: "relative flex-1"
-    }, chatEvents.length === 0 ? /* @__PURE__ */ import_react16.default.createElement("span", {
+    }, chatEvents.length === 0 ? /* @__PURE__ */ import_react17.default.createElement("span", {
       className: (0, import_classnames2.default)("absolute inset-0 text-center flex justify-center items-center")
-    }, "Logs will appear here...") : /* @__PURE__ */ import_react16.default.createElement("div", {
+    }, "Logs will appear here...") : /* @__PURE__ */ import_react17.default.createElement("div", {
       className: (0, import_classnames2.default)("absolute overflow-y-auto inset-0 px-2 pt-1 pb-3 flex flex-col gap-1 h-full"),
       ref: chatRef
     }, searchedMessages.map((c3) => {
       const hasWarning = winners.length > 0 && winners.some((w2) => (w2.otherUsersWithEntry || []).includes(c3.username));
-      return /* @__PURE__ */ import_react16.default.createElement("div", {
+      return /* @__PURE__ */ import_react17.default.createElement("div", {
         key: c3.id,
         className: (0, import_classnames2.default)("relative", { "bg-yellow-500 bg-opacity-60 rounded-md px-1": hasWarning })
-      }, /* @__PURE__ */ import_react16.default.createElement("span", {
+      }, /* @__PURE__ */ import_react17.default.createElement("span", {
         className: "text-xs mr-0.5"
-      }, "[", c3.formattedTmiTs, "]"), /* @__PURE__ */ import_react16.default.createElement("span", {
+      }, "[", c3.formattedTmiTs, "]"), /* @__PURE__ */ import_react17.default.createElement("span", {
         className: (0, import_classnames2.default)("rounded-full bg-gray-300 h-4 w-4 inline-block relative", {
           "bg-yellow-500": c3.isSubscriber,
           "bg-purple-600": c3.isMod,
           "top-1": !c3.isSubscriber && !c3.isMod
         })
-      }, c3.isMod ? /* @__PURE__ */ import_react16.default.createElement("span", {
+      }, c3.isMod ? /* @__PURE__ */ import_react17.default.createElement("span", {
         className: "flex justify-center items-center text-xs cursor-default select-none",
         title: "Mod"
-      }, "M") : c3.isSubscriber ? /* @__PURE__ */ import_react16.default.createElement("span", {
+      }, "M") : c3.isSubscriber ? /* @__PURE__ */ import_react17.default.createElement("span", {
         className: "flex justify-center items-center text-xs cursor-default select-none",
         title: "Subscriber"
-      }, "S") : null), /* @__PURE__ */ import_react16.default.createElement("span", {
+      }, "S") : null), /* @__PURE__ */ import_react17.default.createElement("span", {
         className: "mx-0.5",
         style: { color: c3.color }
-      }, "[", c3.displayName, "]"), " ", c3.msg, hasWarning ? /* @__PURE__ */ import_react16.default.createElement(FaExclamationTriangle, {
+      }, "[", c3.displayName, "]"), " ", c3.msg, hasWarning ? /* @__PURE__ */ import_react17.default.createElement(FaExclamationTriangle, {
         className: "text-lg top-0.5 right-1.5 absolute cursor-help",
         title: "This user submitted an entry matching a winner"
       }) : null);
-    }), /* @__PURE__ */ import_react16.default.createElement("div", {
+    }), /* @__PURE__ */ import_react17.default.createElement("div", {
       ref: chatBottomRef
     })))));
   }
 
   // src/components/primitives/Stats.tsx
-  var import_react46 = __toModule(require_react());
+  var import_react47 = __toModule(require_react());
 
   // node_modules/recharts/es6/container/Surface.js
-  var import_react18 = __toModule(require_react());
+  var import_react19 = __toModule(require_react());
   var import_classnames3 = __toModule(require_classnames());
 
   // node_modules/recharts/es6/util/types.js
   var import_isObject = __toModule(require_isObject());
-  var import_react17 = __toModule(require_react());
+  var import_react18 = __toModule(require_react());
   function _typeof(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
@@ -51762,7 +51805,7 @@ to {
       return null;
     }
     var inputProps = props;
-    if (/* @__PURE__ */ (0, import_react17.isValidElement)(props)) {
+    if (/* @__PURE__ */ (0, import_react18.isValidElement)(props)) {
       inputProps = props.props;
     }
     if (!(0, import_isObject.default)(inputProps)) {
@@ -51781,7 +51824,7 @@ to {
       return null;
     }
     var inputProps = props;
-    if (/* @__PURE__ */ (0, import_react17.isValidElement)(props)) {
+    if (/* @__PURE__ */ (0, import_react18.isValidElement)(props)) {
       inputProps = props.props;
     }
     if (!(0, import_isObject.default)(inputProps)) {
@@ -51875,7 +51918,7 @@ to {
       y: 0
     };
     var layerClass = (0, import_classnames3.default)("recharts-surface", className);
-    return /* @__PURE__ */ import_react18.default.createElement("svg", _extends2({}, filterProps(others, true, true), {
+    return /* @__PURE__ */ import_react19.default.createElement("svg", _extends2({}, filterProps(others, true, true), {
       className: layerClass,
       width,
       height,
@@ -51886,7 +51929,7 @@ to {
   }
 
   // node_modules/recharts/es6/container/Layer.js
-  var import_react19 = __toModule(require_react());
+  var import_react20 = __toModule(require_react());
   var import_classnames4 = __toModule(require_classnames());
   function _extends3() {
     _extends3 = Object.assign || function(target) {
@@ -51937,7 +51980,7 @@ to {
   function Layer(props) {
     var children = props.children, className = props.className, others = _objectWithoutProperties2(props, ["children", "className"]);
     var layerClass = (0, import_classnames4.default)("recharts-layer", className);
-    return /* @__PURE__ */ import_react19.default.createElement("g", _extends3({
+    return /* @__PURE__ */ import_react20.default.createElement("g", _extends3({
       className: layerClass
     }, filterProps(others, true)), children);
   }
@@ -51945,15 +51988,15 @@ to {
   // node_modules/recharts/es6/component/Legend.js
   var import_isFunction = __toModule(require_isFunction());
   var import_uniqBy = __toModule(require_uniqBy());
-  var import_react22 = __toModule(require_react());
+  var import_react23 = __toModule(require_react());
 
   // node_modules/recharts/es6/component/DefaultLegendContent.js
-  var import_react21 = __toModule(require_react());
+  var import_react22 = __toModule(require_react());
   var import_classnames6 = __toModule(require_classnames());
 
   // node_modules/recharts/es6/shape/Symbols.js
   var import_upperFirst = __toModule(require_upperFirst());
-  var import_react20 = __toModule(require_react());
+  var import_react21 = __toModule(require_react());
 
   // node_modules/d3-path/src/path.js
   var pi = Math.PI;
@@ -53038,7 +53081,7 @@ to {
       value: function render() {
         var _this$props2 = this.props, className = _this$props2.className, cx = _this$props2.cx, cy = _this$props2.cy, size = _this$props2.size;
         if (cx === +cx && cy === +cy && size === +size) {
-          return /* @__PURE__ */ import_react20.default.createElement("path", _extends4({}, filterProps(this.props, true), {
+          return /* @__PURE__ */ import_react21.default.createElement("path", _extends4({}, filterProps(this.props, true), {
             className: (0, import_classnames5.default)("recharts-symbols", className),
             transform: "translate(".concat(cx, ", ").concat(cy, ")"),
             d: this.getPath()
@@ -53048,7 +53091,7 @@ to {
       }
     }]);
     return Symbols2;
-  }(import_react20.PureComponent);
+  }(import_react21.PureComponent);
   Symbols.defaultProps = {
     type: "circle",
     size: 64,
@@ -53223,7 +53266,7 @@ to {
         var thirdSize = SIZE / 3;
         var color2 = data.inactive ? inactiveColor : data.color;
         if (data.type === "plainline") {
-          return /* @__PURE__ */ import_react21.default.createElement("line", {
+          return /* @__PURE__ */ import_react22.default.createElement("line", {
             strokeWidth: 4,
             fill: "none",
             stroke: color2,
@@ -53236,7 +53279,7 @@ to {
           });
         }
         if (data.type === "line") {
-          return /* @__PURE__ */ import_react21.default.createElement("path", {
+          return /* @__PURE__ */ import_react22.default.createElement("path", {
             strokeWidth: 4,
             fill: "none",
             stroke: color2,
@@ -53245,19 +53288,19 @@ to {
           });
         }
         if (data.type === "rect") {
-          return /* @__PURE__ */ import_react21.default.createElement("path", {
+          return /* @__PURE__ */ import_react22.default.createElement("path", {
             stroke: "none",
             fill: color2,
             d: "M0,".concat(SIZE / 8, "h").concat(SIZE, "v").concat(SIZE * 3 / 4, "h").concat(-SIZE, "z"),
             className: "recharts-legend-icon"
           });
         }
-        if (/* @__PURE__ */ import_react21.default.isValidElement(data.legendIcon)) {
+        if (/* @__PURE__ */ import_react22.default.isValidElement(data.legendIcon)) {
           var iconProps = _objectSpread({}, data);
           delete iconProps.legendIcon;
-          return /* @__PURE__ */ import_react21.default.cloneElement(data.legendIcon, iconProps);
+          return /* @__PURE__ */ import_react22.default.cloneElement(data.legendIcon, iconProps);
         }
-        return /* @__PURE__ */ import_react21.default.createElement(Symbols, {
+        return /* @__PURE__ */ import_react22.default.createElement(Symbols, {
           fill: color2,
           cx: halfSize,
           cy: halfSize,
@@ -53296,16 +53339,16 @@ to {
             return null;
           }
           var color2 = entry.inactive ? inactiveColor : entry.color;
-          return /* @__PURE__ */ import_react21.default.createElement("li", _extends5({
+          return /* @__PURE__ */ import_react22.default.createElement("li", _extends5({
             className,
             style: itemStyle,
             key: "legend-item-".concat(i3)
-          }, adaptEventsOfChild(_this.props, entry, i3)), /* @__PURE__ */ import_react21.default.createElement(Surface, {
+          }, adaptEventsOfChild(_this.props, entry, i3)), /* @__PURE__ */ import_react22.default.createElement(Surface, {
             width: iconSize,
             height: iconSize,
             viewBox,
             style: svgStyle
-          }, _this.renderIcon(entry)), /* @__PURE__ */ import_react21.default.createElement("span", {
+          }, _this.renderIcon(entry)), /* @__PURE__ */ import_react22.default.createElement("span", {
             className: "recharts-legend-item-text",
             style: {
               color: color2
@@ -53325,14 +53368,14 @@ to {
           margin: 0,
           textAlign: layout === "horizontal" ? align : "left"
         };
-        return /* @__PURE__ */ import_react21.default.createElement("ul", {
+        return /* @__PURE__ */ import_react22.default.createElement("ul", {
           className: "recharts-default-legend",
           style: finalStyle
         }, this.renderItems());
       }
     }]);
     return DefaultLegendContent2;
-  }(import_react21.PureComponent);
+  }(import_react22.PureComponent);
   DefaultLegendContent.displayName = "Legend";
   DefaultLegendContent.defaultProps = {
     iconSize: 14,
@@ -53615,14 +53658,14 @@ to {
     return payload;
   }
   function renderContent(content, props) {
-    if (/* @__PURE__ */ import_react22.default.isValidElement(content)) {
-      return /* @__PURE__ */ import_react22.default.cloneElement(content, props);
+    if (/* @__PURE__ */ import_react23.default.isValidElement(content)) {
+      return /* @__PURE__ */ import_react23.default.cloneElement(content, props);
     }
     if ((0, import_isFunction.default)(content)) {
-      return /* @__PURE__ */ import_react22.default.createElement(content, props);
+      return /* @__PURE__ */ import_react23.default.createElement(content, props);
     }
     var ref = props.ref, otherProps = _objectWithoutProperties3(props, ["ref"]);
-    return /* @__PURE__ */ import_react22.default.createElement(DefaultLegendContent, otherProps);
+    return /* @__PURE__ */ import_react23.default.createElement(DefaultLegendContent, otherProps);
   }
   var EPS = 1;
   var Legend = /* @__PURE__ */ function(_PureComponent) {
@@ -53749,7 +53792,7 @@ to {
           width: width || "auto",
           height: height || "auto"
         }, this.getDefaultPosition(wrapperStyle)), wrapperStyle);
-        return /* @__PURE__ */ import_react22.default.createElement("div", {
+        return /* @__PURE__ */ import_react23.default.createElement("div", {
           className: "recharts-legend-wrapper",
           style: outerStyle,
           ref: function ref(node) {
@@ -53777,7 +53820,7 @@ to {
       }
     }]);
     return Legend2;
-  }(import_react22.PureComponent);
+  }(import_react23.PureComponent);
   Legend.displayName = "Legend";
   Legend.defaultProps = {
     iconSize: 14,
@@ -53790,10 +53833,10 @@ to {
   var import_isNil2 = __toModule(require_isNil());
   var import_isFunction2 = __toModule(require_isFunction());
   var import_uniqBy2 = __toModule(require_uniqBy());
-  var import_react27 = __toModule(require_react());
+  var import_react28 = __toModule(require_react());
 
   // node_modules/react-smooth/es6/Animate.js
-  var import_react23 = __toModule(require_react());
+  var import_react24 = __toModule(require_react());
   var import_prop_types5 = __toModule(require_prop_types());
   var import_fast_equals = __toModule(require_fast_equals());
 
@@ -54849,7 +54892,7 @@ to {
       key: "render",
       value: function render() {
         var _this$props4 = this.props, children = _this$props4.children, begin = _this$props4.begin, duration = _this$props4.duration, attributeName = _this$props4.attributeName, easing = _this$props4.easing, isActive = _this$props4.isActive, steps = _this$props4.steps, from = _this$props4.from, to = _this$props4.to, canBegin = _this$props4.canBegin, onAnimationEnd2 = _this$props4.onAnimationEnd, shouldReAnimate = _this$props4.shouldReAnimate, onAnimationReStart = _this$props4.onAnimationReStart, others = _objectWithoutProperties4(_this$props4, ["children", "begin", "duration", "attributeName", "easing", "isActive", "steps", "from", "to", "canBegin", "onAnimationEnd", "shouldReAnimate", "onAnimationReStart"]);
-        var count = import_react23.Children.count(children);
+        var count = import_react24.Children.count(children);
         var stateStyle = translateStyle(this.state.style);
         if (typeof children === "function") {
           return children(stateStyle);
@@ -54859,22 +54902,22 @@ to {
         }
         var cloneContainer = function cloneContainer2(container) {
           var _container$props = container.props, _container$props$styl = _container$props.style, style = _container$props$styl === void 0 ? {} : _container$props$styl, className = _container$props.className;
-          var res = /* @__PURE__ */ (0, import_react23.cloneElement)(container, _objectSpread5(_objectSpread5({}, others), {}, {
+          var res = /* @__PURE__ */ (0, import_react24.cloneElement)(container, _objectSpread5(_objectSpread5({}, others), {}, {
             style: _objectSpread5(_objectSpread5({}, style), stateStyle),
             className
           }));
           return res;
         };
         if (count === 1) {
-          return cloneContainer(import_react23.Children.only(children));
+          return cloneContainer(import_react24.Children.only(children));
         }
-        return /* @__PURE__ */ import_react23.default.createElement("div", null, import_react23.Children.map(children, function(child) {
+        return /* @__PURE__ */ import_react24.default.createElement("div", null, import_react24.Children.map(children, function(child) {
           return cloneContainer(child);
         }));
       }
     }]);
     return Animate2;
-  }(import_react23.PureComponent);
+  }(import_react24.PureComponent);
   Animate.displayName = "Animate";
   Animate.propTypes = {
     from: import_prop_types5.default.oneOfType([import_prop_types5.default.object, import_prop_types5.default.string]),
@@ -54916,12 +54959,12 @@ to {
   var Animate_default = Animate;
 
   // node_modules/react-smooth/es6/AnimateGroup.js
-  var import_react25 = __toModule(require_react());
+  var import_react26 = __toModule(require_react());
   var import_react_transition_group2 = __toModule(require_react_transition_group());
   var import_prop_types7 = __toModule(require_prop_types());
 
   // node_modules/react-smooth/es6/AnimateGroupChild.js
-  var import_react24 = __toModule(require_react());
+  var import_react25 = __toModule(require_react());
   var import_react_transition_group = __toModule(require_react_transition_group());
   var import_prop_types6 = __toModule(require_prop_types());
   function _typeof7(obj) {
@@ -55167,17 +55210,17 @@ to {
       value: function render() {
         var _this2 = this;
         var _this$props3 = this.props, children = _this$props3.children, appearOptions = _this$props3.appearOptions, enterOptions = _this$props3.enterOptions, leaveOptions = _this$props3.leaveOptions, props = _objectWithoutProperties5(_this$props3, ["children", "appearOptions", "enterOptions", "leaveOptions"]);
-        return /* @__PURE__ */ import_react24.default.createElement(import_react_transition_group.Transition, _extends6({}, props, {
+        return /* @__PURE__ */ import_react25.default.createElement(import_react_transition_group.Transition, _extends6({}, props, {
           onEnter: this.handleEnter,
           onExit: this.handleExit,
           timeout: this.parseTimeout()
         }), function() {
-          return /* @__PURE__ */ import_react24.default.createElement(Animate_default, _this2.state, import_react24.Children.only(children));
+          return /* @__PURE__ */ import_react25.default.createElement(Animate_default, _this2.state, import_react25.Children.only(children));
         });
       }
     }]);
     return AnimateGroupChild2;
-  }(import_react24.Component);
+  }(import_react25.Component);
   AnimateGroupChild.propTypes = {
     appearOptions: import_prop_types6.default.object,
     enterOptions: import_prop_types6.default.object,
@@ -55189,10 +55232,10 @@ to {
   // node_modules/react-smooth/es6/AnimateGroup.js
   function AnimateGroup(props) {
     var component = props.component, children = props.children, appear = props.appear, enter = props.enter, leave = props.leave;
-    return /* @__PURE__ */ import_react25.default.createElement(import_react_transition_group2.TransitionGroup, {
+    return /* @__PURE__ */ import_react26.default.createElement(import_react_transition_group2.TransitionGroup, {
       component
-    }, import_react25.Children.map(children, function(child, index2) {
-      return /* @__PURE__ */ import_react25.default.createElement(AnimateGroupChild_default, {
+    }, import_react26.Children.map(children, function(child, index2) {
+      return /* @__PURE__ */ import_react26.default.createElement(AnimateGroupChild_default, {
         appearOptions: appear,
         enterOptions: enter,
         leaveOptions: leave,
@@ -55221,7 +55264,7 @@ to {
   var import_isNil = __toModule(require_isNil());
   var import_sortBy = __toModule(require_sortBy());
   var import_isArray2 = __toModule(require_isArray());
-  var import_react26 = __toModule(require_react());
+  var import_react27 = __toModule(require_react());
   var import_classnames7 = __toModule(require_classnames());
   function _typeof8(obj) {
     "@babel/helpers - typeof";
@@ -55455,21 +55498,21 @@ to {
                 value2 = formatted;
               }
             }
-            return /* @__PURE__ */ import_react26.default.createElement("li", {
+            return /* @__PURE__ */ import_react27.default.createElement("li", {
               className: "recharts-tooltip-item",
               key: "tooltip-item-".concat(i3),
               style: finalItemStyle
-            }, isNumOrStr(name) ? /* @__PURE__ */ import_react26.default.createElement("span", {
+            }, isNumOrStr(name) ? /* @__PURE__ */ import_react27.default.createElement("span", {
               className: "recharts-tooltip-item-name"
-            }, name) : null, isNumOrStr(name) ? /* @__PURE__ */ import_react26.default.createElement("span", {
+            }, name) : null, isNumOrStr(name) ? /* @__PURE__ */ import_react27.default.createElement("span", {
               className: "recharts-tooltip-item-separator"
-            }, separator) : null, /* @__PURE__ */ import_react26.default.createElement("span", {
+            }, separator) : null, /* @__PURE__ */ import_react27.default.createElement("span", {
               className: "recharts-tooltip-item-value"
-            }, value2), /* @__PURE__ */ import_react26.default.createElement("span", {
+            }, value2), /* @__PURE__ */ import_react27.default.createElement("span", {
               className: "recharts-tooltip-item-unit"
             }, entry.unit || ""));
           });
-          return /* @__PURE__ */ import_react26.default.createElement("ul", {
+          return /* @__PURE__ */ import_react27.default.createElement("ul", {
             className: "recharts-tooltip-item-list",
             style: listStyle
           }, items);
@@ -55497,17 +55540,17 @@ to {
         if (hasLabel && labelFormatter && payload !== void 0 && payload !== null) {
           finalLabel = labelFormatter(label, payload);
         }
-        return /* @__PURE__ */ import_react26.default.createElement("div", {
+        return /* @__PURE__ */ import_react27.default.createElement("div", {
           className: wrapperCN,
           style: finalStyle
-        }, /* @__PURE__ */ import_react26.default.createElement("p", {
+        }, /* @__PURE__ */ import_react27.default.createElement("p", {
           className: labelCN,
           style: finalLabelStyle
-        }, /* @__PURE__ */ import_react26.default.isValidElement(finalLabel) ? finalLabel : "".concat(finalLabel)), this.renderContent());
+        }, /* @__PURE__ */ import_react27.default.isValidElement(finalLabel) ? finalLabel : "".concat(finalLabel)), this.renderContent());
       }
     }]);
     return DefaultTooltipContent2;
-  }(import_react26.PureComponent);
+  }(import_react27.PureComponent);
   DefaultTooltipContent.displayName = "DefaultTooltipContent";
   DefaultTooltipContent.defaultProps = {
     separator: " : ",
@@ -55688,13 +55731,13 @@ to {
     return payload;
   }
   function renderContent2(content, props) {
-    if (/* @__PURE__ */ import_react27.default.isValidElement(content)) {
-      return /* @__PURE__ */ import_react27.default.cloneElement(content, props);
+    if (/* @__PURE__ */ import_react28.default.isValidElement(content)) {
+      return /* @__PURE__ */ import_react28.default.cloneElement(content, props);
     }
     if ((0, import_isFunction2.default)(content)) {
-      return /* @__PURE__ */ import_react27.default.createElement(content, props);
+      return /* @__PURE__ */ import_react28.default.createElement(content, props);
     }
-    return /* @__PURE__ */ import_react27.default.createElement(DefaultTooltipContent, props);
+    return /* @__PURE__ */ import_react28.default.createElement(DefaultTooltipContent, props);
   }
   var Tooltip = /* @__PURE__ */ function(_PureComponent) {
     _inherits8(Tooltip2, _PureComponent);
@@ -55822,7 +55865,7 @@ to {
           })), outerStyle);
         }
         var cls4 = (0, import_classnames8.default)(CLS_PREFIX, (_classNames = {}, _defineProperty8(_classNames, "".concat(CLS_PREFIX, "-right"), isNumber(translateX) && coordinate && isNumber(coordinate.x) && translateX >= coordinate.x), _defineProperty8(_classNames, "".concat(CLS_PREFIX, "-left"), isNumber(translateX) && coordinate && isNumber(coordinate.x) && translateX < coordinate.x), _defineProperty8(_classNames, "".concat(CLS_PREFIX, "-bottom"), isNumber(translateY) && coordinate && isNumber(coordinate.y) && translateY >= coordinate.y), _defineProperty8(_classNames, "".concat(CLS_PREFIX, "-top"), isNumber(translateY) && coordinate && isNumber(coordinate.y) && translateY < coordinate.y), _classNames));
-        return /* @__PURE__ */ import_react27.default.createElement("div", {
+        return /* @__PURE__ */ import_react28.default.createElement("div", {
           tabIndex: 0,
           onKeyDown: function onKeyDown(event) {
             if (event.key === "Escape") {
@@ -55846,7 +55889,7 @@ to {
       }
     }]);
     return Tooltip2;
-  }(import_react27.PureComponent);
+  }(import_react28.PureComponent);
   Tooltip.displayName = "Tooltip";
   Tooltip.defaultProps = {
     active: false,
@@ -55883,12 +55926,12 @@ to {
   // node_modules/recharts/es6/component/ResponsiveContainer.js
   var import_debounce = __toModule(require_debounce());
   var import_classnames9 = __toModule(require_classnames());
-  var import_react29 = __toModule(require_react());
+  var import_react30 = __toModule(require_react());
 
   // node_modules/react-resize-detector/build/index.esm.js
-  var React21 = __toModule(require_react());
-  var import_react28 = __toModule(require_react());
-  var import_react_dom = __toModule(require_react_dom());
+  var React22 = __toModule(require_react());
+  var import_react29 = __toModule(require_react());
+  var import_react_dom2 = __toModule(require_react_dom());
   var extendStatics = function(d3, b2) {
     extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d4, b3) {
       d4.__proto__ = b3;
@@ -56215,7 +56258,7 @@ to {
           return targetDomEl;
         if (_this.targetRef && isDOMElement(_this.targetRef.current))
           return _this.targetRef.current;
-        var currentElement = (0, import_react_dom.findDOMNode)(_this);
+        var currentElement = (0, import_react_dom2.findDOMNode)(_this);
         if (!currentElement)
           return null;
         var renderType = _this.getRenderType();
@@ -56254,7 +56297,7 @@ to {
         if (isFunction(children)) {
           return "childFunction";
         }
-        if ((0, import_react28.isValidElement)(children)) {
+        if ((0, import_react29.isValidElement)(children)) {
           return "child";
         }
         if (Array.isArray(children)) {
@@ -56268,7 +56311,7 @@ to {
         height: void 0
       };
       _this.skipOnMount = skipOnMount;
-      _this.targetRef = (0, import_react28.createRef)();
+      _this.targetRef = (0, import_react29.createRef)();
       _this.observableElement = null;
       if (isSSR()) {
         return _this;
@@ -56308,21 +56351,21 @@ to {
           if (typedChildren.type && typeof typedChildren.type === "string") {
             childProps.targetRef;
             var nativeProps = __rest2(childProps, ["targetRef"]);
-            return (0, import_react28.cloneElement)(typedChildren, nativeProps);
+            return (0, import_react29.cloneElement)(typedChildren, nativeProps);
           }
-          return (0, import_react28.cloneElement)(typedChildren, childProps);
+          return (0, import_react29.cloneElement)(typedChildren, childProps);
         case "childArray":
           typedChildren = children;
           return typedChildren.map(function(el) {
-            return !!el && (0, import_react28.cloneElement)(el, childProps);
+            return !!el && (0, import_react29.cloneElement)(el, childProps);
           });
         default:
-          return React21.createElement(WrapperTag, null);
+          return React22.createElement(WrapperTag, null);
       }
     };
     return ResizeDetector2;
-  }(import_react28.PureComponent);
-  var useEnhancedEffect = isSSR() ? import_react28.useEffect : import_react28.useLayoutEffect;
+  }(import_react29.PureComponent);
+  var useEnhancedEffect = isSSR() ? import_react29.useEffect : import_react29.useLayoutEffect;
 
   // node_modules/recharts/es6/util/LogUtils.js
   var isDev2 = true;
@@ -56420,17 +56463,17 @@ to {
     if (Array.isArray(arr))
       return arr;
   }
-  var ResponsiveContainer = /* @__PURE__ */ (0, import_react29.forwardRef)(function(_ref3, ref) {
+  var ResponsiveContainer = /* @__PURE__ */ (0, import_react30.forwardRef)(function(_ref3, ref) {
     var aspect = _ref3.aspect, _ref$width = _ref3.width, width = _ref$width === void 0 ? "100%" : _ref$width, _ref$height = _ref3.height, height = _ref$height === void 0 ? "100%" : _ref$height, minWidth = _ref3.minWidth, minHeight = _ref3.minHeight, maxHeight = _ref3.maxHeight, children = _ref3.children, _ref$debounce = _ref3.debounce, debounce2 = _ref$debounce === void 0 ? 0 : _ref$debounce, id = _ref3.id, className = _ref3.className;
-    var _useState = (0, import_react29.useState)({
+    var _useState = (0, import_react30.useState)({
       containerWidth: -1,
       containerHeight: -1
     }), _useState2 = _slicedToArray4(_useState, 2), sizes = _useState2[0], setSizes = _useState2[1];
-    var containerRef = (0, import_react29.useRef)(null);
-    (0, import_react29.useImperativeHandle)(ref, function() {
+    var containerRef = (0, import_react30.useRef)(null);
+    (0, import_react30.useImperativeHandle)(ref, function() {
       return containerRef;
     }, [containerRef]);
-    var _useState3 = (0, import_react29.useState)(false), _useState4 = _slicedToArray4(_useState3, 2), mounted = _useState4[0], setMounted = _useState4[1];
+    var _useState3 = (0, import_react30.useState)(false), _useState4 = _slicedToArray4(_useState3, 2), mounted = _useState4[0], setMounted = _useState4[1];
     var getContainerSize = function getContainerSize2() {
       if (!containerRef.current) {
         return null;
@@ -56477,12 +56520,12 @@ to {
         }
       }
       warn3(calculatedWidth > 0 || calculatedHeight > 0, "The width(%s) and height(%s) of chart should be greater than 0,\n       please check the style of container, or the props width(%s) and height(%s),\n       or add a minWidth(%s) or minHeight(%s) or use aspect(%s) to control the\n       height and width.", calculatedWidth, calculatedHeight, width, height, minWidth, minHeight, aspect);
-      return /* @__PURE__ */ (0, import_react29.cloneElement)(children, {
+      return /* @__PURE__ */ (0, import_react30.cloneElement)(children, {
         width: calculatedWidth,
         height: calculatedHeight
       });
     };
-    (0, import_react29.useEffect)(function() {
+    (0, import_react30.useEffect)(function() {
       if (mounted) {
         var size = getContainerSize();
         if (size) {
@@ -56490,7 +56533,7 @@ to {
         }
       }
     }, [mounted]);
-    (0, import_react29.useEffect)(function() {
+    (0, import_react30.useEffect)(function() {
       setMounted(true);
     }, []);
     var style = {
@@ -56500,12 +56543,12 @@ to {
       minHeight,
       maxHeight
     };
-    return /* @__PURE__ */ import_react29.default.createElement(ResizeDetector, {
+    return /* @__PURE__ */ import_react30.default.createElement(ResizeDetector, {
       handleWidth: true,
       handleHeight: true,
       onResize: handleResize,
       targetRef: containerRef
-    }, /* @__PURE__ */ import_react29.default.createElement("div", _extends7({}, id != null ? {
+    }, /* @__PURE__ */ import_react30.default.createElement("div", _extends7({}, id != null ? {
       id: "".concat(id)
     } : {}, {
       className: (0, import_classnames9.default)("recharts-responsive-container", className),
@@ -56516,7 +56559,7 @@ to {
 
   // node_modules/recharts/es6/component/Text.js
   var import_isNil3 = __toModule(require_isNil());
-  var import_react30 = __toModule(require_react());
+  var import_react31 = __toModule(require_react());
   var import_reduce_css_calc = __toModule(require_dist());
   var import_classnames10 = __toModule(require_classnames());
 
@@ -57094,13 +57137,13 @@ to {
         if (transforms.length) {
           textProps.transform = transforms.join(" ");
         }
-        return /* @__PURE__ */ import_react30.default.createElement("text", _extends8({}, filterProps(textProps, true), {
+        return /* @__PURE__ */ import_react31.default.createElement("text", _extends8({}, filterProps(textProps, true), {
           x: x3,
           y: y2,
           className: (0, import_classnames10.default)("recharts-text", className),
           textAnchor
         }), wordsByLines.map(function(line, index2) {
-          return /* @__PURE__ */ import_react30.default.createElement("tspan", {
+          return /* @__PURE__ */ import_react31.default.createElement("tspan", {
             x: x3,
             dy: index2 === 0 ? startDy : lineHeight,
             key: index2
@@ -57124,7 +57167,7 @@ to {
       }
     }]);
     return Text2;
-  }(import_react30.Component);
+  }(import_react31.Component);
   Text.defaultProps = {
     x: 0,
     y: 0,
@@ -57139,7 +57182,7 @@ to {
   var import_isObject2 = __toModule(require_isObject());
   var import_isFunction4 = __toModule(require_isFunction());
   var import_isNil7 = __toModule(require_isNil());
-  var import_react32 = __toModule(require_react());
+  var import_react33 = __toModule(require_react());
   var import_classnames11 = __toModule(require_classnames());
 
   // node_modules/recharts/es6/util/ReactUtils.js
@@ -57147,7 +57190,7 @@ to {
   var import_get2 = __toModule(require_get());
   var import_isNil4 = __toModule(require_isNil());
   var import_isArray3 = __toModule(require_isArray());
-  var import_react31 = __toModule(require_react());
+  var import_react32 = __toModule(require_react());
   var import_react_is2 = __toModule(require_react_is());
 
   // node_modules/recharts/es6/util/ShallowEqual.js
@@ -57228,7 +57271,7 @@ to {
       return lastResult;
     }
     var result = [];
-    import_react31.Children.forEach(children, function(child) {
+    import_react32.Children.forEach(children, function(child) {
       if ((0, import_isNil4.default)(child))
         return;
       if ((0, import_react_is2.isFragment)(child)) {
@@ -57281,8 +57324,8 @@ to {
     if (nextChildren === prevChildren) {
       return true;
     }
-    var count = import_react31.Children.count(nextChildren);
-    if (count !== import_react31.Children.count(prevChildren)) {
+    var count = import_react32.Children.count(nextChildren);
+    if (count !== import_react32.Children.count(prevChildren)) {
       return false;
     }
     if (count === 0) {
@@ -61887,13 +61930,13 @@ to {
     var endPoint = polarToCartesian(cx, cy, radius, labelAngle + (direction ? 1 : -1) * 359);
     var path2 = "M".concat(startPoint.x, ",").concat(startPoint.y, "\n    A").concat(radius, ",").concat(radius, ",0,1,").concat(direction ? 0 : 1, ",\n    ").concat(endPoint.x, ",").concat(endPoint.y);
     var id = (0, import_isNil7.default)(labelProps.id) ? uniqueId("recharts-radial-line-") : labelProps.id;
-    return /* @__PURE__ */ import_react32.default.createElement("text", _extends9({}, attrs, {
+    return /* @__PURE__ */ import_react33.default.createElement("text", _extends9({}, attrs, {
       dominantBaseline: "central",
       className: (0, import_classnames11.default)("recharts-radial-bar-label", className)
-    }), /* @__PURE__ */ import_react32.default.createElement("defs", null, /* @__PURE__ */ import_react32.default.createElement("path", {
+    }), /* @__PURE__ */ import_react33.default.createElement("defs", null, /* @__PURE__ */ import_react33.default.createElement("path", {
       id,
       d: path2
-    })), /* @__PURE__ */ import_react32.default.createElement("textPath", {
+    })), /* @__PURE__ */ import_react33.default.createElement("textPath", {
       xlinkHref: "#".concat(id)
     }, label));
   };
@@ -62090,16 +62133,16 @@ to {
   };
   function Label(props) {
     var viewBox = props.viewBox, position = props.position, value2 = props.value, children = props.children, content = props.content, _props$className = props.className, className = _props$className === void 0 ? "" : _props$className, textBreakAll = props.textBreakAll;
-    if (!viewBox || (0, import_isNil7.default)(value2) && (0, import_isNil7.default)(children) && !/* @__PURE__ */ (0, import_react32.isValidElement)(content) && !(0, import_isFunction4.default)(content)) {
+    if (!viewBox || (0, import_isNil7.default)(value2) && (0, import_isNil7.default)(children) && !/* @__PURE__ */ (0, import_react33.isValidElement)(content) && !(0, import_isFunction4.default)(content)) {
       return null;
     }
-    if (/* @__PURE__ */ (0, import_react32.isValidElement)(content)) {
-      return /* @__PURE__ */ (0, import_react32.cloneElement)(content, props);
+    if (/* @__PURE__ */ (0, import_react33.isValidElement)(content)) {
+      return /* @__PURE__ */ (0, import_react33.cloneElement)(content, props);
     }
     var label;
     if ((0, import_isFunction4.default)(content)) {
-      label = /* @__PURE__ */ (0, import_react32.createElement)(content, props);
-      if (/* @__PURE__ */ (0, import_react32.isValidElement)(label)) {
+      label = /* @__PURE__ */ (0, import_react33.createElement)(content, props);
+      if (/* @__PURE__ */ (0, import_react33.isValidElement)(label)) {
         return label;
       }
     } else {
@@ -62111,7 +62154,7 @@ to {
       return renderRadialLabel(props, label, attrs);
     }
     var positionAttrs = isPolarLabel ? getAttrsOfPolarLabel(props) : getAttrsOfCartesianLabel(props);
-    return /* @__PURE__ */ import_react32.default.createElement(Text, _extends9({
+    return /* @__PURE__ */ import_react33.default.createElement(Text, _extends9({
       className: (0, import_classnames11.default)("recharts-label", className)
     }, attrs, positionAttrs, {
       breakAll: textBreakAll
@@ -62173,40 +62216,40 @@ to {
       return null;
     }
     if (label === true) {
-      return /* @__PURE__ */ import_react32.default.createElement(Label, {
+      return /* @__PURE__ */ import_react33.default.createElement(Label, {
         key: "label-implicit",
         viewBox
       });
     }
     if (isNumOrStr(label)) {
-      return /* @__PURE__ */ import_react32.default.createElement(Label, {
+      return /* @__PURE__ */ import_react33.default.createElement(Label, {
         key: "label-implicit",
         viewBox,
         value: label
       });
     }
-    if (/* @__PURE__ */ (0, import_react32.isValidElement)(label)) {
+    if (/* @__PURE__ */ (0, import_react33.isValidElement)(label)) {
       if (label.type === Label) {
-        return /* @__PURE__ */ (0, import_react32.cloneElement)(label, {
+        return /* @__PURE__ */ (0, import_react33.cloneElement)(label, {
           key: "label-implicit",
           viewBox
         });
       }
-      return /* @__PURE__ */ import_react32.default.createElement(Label, {
+      return /* @__PURE__ */ import_react33.default.createElement(Label, {
         key: "label-implicit",
         content: label,
         viewBox
       });
     }
     if ((0, import_isFunction4.default)(label)) {
-      return /* @__PURE__ */ import_react32.default.createElement(Label, {
+      return /* @__PURE__ */ import_react33.default.createElement(Label, {
         key: "label-implicit",
         content: label,
         viewBox
       });
     }
     if ((0, import_isObject2.default)(label)) {
-      return /* @__PURE__ */ import_react32.default.createElement(Label, _extends9({
+      return /* @__PURE__ */ import_react33.default.createElement(Label, _extends9({
         viewBox
       }, label, {
         key: "label-implicit"
@@ -62222,7 +62265,7 @@ to {
     var children = parentProps.children;
     var parentViewBox = parseViewBox(parentProps);
     var explicitChildren = findAllByType(children, Label.displayName).map(function(child, index2) {
-      return /* @__PURE__ */ (0, import_react32.cloneElement)(child, {
+      return /* @__PURE__ */ (0, import_react33.cloneElement)(child, {
         viewBox: viewBox || parentViewBox,
         key: "label-".concat(index2)
       });
@@ -62242,7 +62285,7 @@ to {
   var import_isNil8 = __toModule(require_isNil());
   var import_last = __toModule(require_last());
   var import_isArray5 = __toModule(require_isArray());
-  var import_react33 = __toModule(require_react());
+  var import_react34 = __toModule(require_react());
   function _toConsumableArray10(arr) {
     return _arrayWithoutHoles10(arr) || _iterableToArray11(arr) || _unsupportedIterableToArray14(arr) || _nonIterableSpread10();
   }
@@ -62371,14 +62414,14 @@ to {
     if (!data || !data.length) {
       return null;
     }
-    return /* @__PURE__ */ import_react33.default.createElement(Layer, {
+    return /* @__PURE__ */ import_react34.default.createElement(Layer, {
       className: "recharts-label-list"
     }, data.map(function(entry, index2) {
       var value2 = (0, import_isNil8.default)(dataKey) ? valueAccessor2(entry, index2) : getValueByDataKey(entry && entry.payload, dataKey);
       var idProps = (0, import_isNil8.default)(id) ? {} : {
         id: "".concat(id, "-").concat(index2)
       };
-      return /* @__PURE__ */ import_react33.default.createElement(Label, _extends10({}, filterProps(entry, true), others, idProps, {
+      return /* @__PURE__ */ import_react34.default.createElement(Label, _extends10({}, filterProps(entry, true), others, idProps, {
         parentViewBox: entry.parentViewBox,
         index: index2,
         value: value2,
@@ -62396,20 +62439,20 @@ to {
       return null;
     }
     if (label === true) {
-      return /* @__PURE__ */ import_react33.default.createElement(LabelList, {
+      return /* @__PURE__ */ import_react34.default.createElement(LabelList, {
         key: "labelList-implicit",
         data
       });
     }
-    if (/* @__PURE__ */ import_react33.default.isValidElement(label) || (0, import_isFunction5.default)(label)) {
-      return /* @__PURE__ */ import_react33.default.createElement(LabelList, {
+    if (/* @__PURE__ */ import_react34.default.isValidElement(label) || (0, import_isFunction5.default)(label)) {
+      return /* @__PURE__ */ import_react34.default.createElement(LabelList, {
         key: "labelList-implicit",
         data,
         content: label
       });
     }
     if ((0, import_isObject3.default)(label)) {
-      return /* @__PURE__ */ import_react33.default.createElement(LabelList, _extends10({
+      return /* @__PURE__ */ import_react34.default.createElement(LabelList, _extends10({
         data
       }, label, {
         key: "labelList-implicit"
@@ -62424,7 +62467,7 @@ to {
     }
     var children = parentProps.children;
     var explicitChilren = findAllByType(children, LabelList.displayName).map(function(child, index2) {
-      return /* @__PURE__ */ (0, import_react33.cloneElement)(child, {
+      return /* @__PURE__ */ (0, import_react34.cloneElement)(child, {
         data,
         key: "labelList-".concat(index2)
       });
@@ -62439,7 +62482,7 @@ to {
   LabelList.defaultProps = defaultProps;
 
   // node_modules/recharts/es6/shape/Sector.js
-  var import_react34 = __toModule(require_react());
+  var import_react35 = __toModule(require_react());
   var import_classnames12 = __toModule(require_classnames());
   function _typeof11(obj) {
     "@babel/helpers - typeof";
@@ -62695,14 +62738,14 @@ to {
             endAngle
           });
         }
-        return /* @__PURE__ */ import_react34.default.createElement("path", _extends11({}, filterProps(this.props, true), {
+        return /* @__PURE__ */ import_react35.default.createElement("path", _extends11({}, filterProps(this.props, true), {
           className: layerClass,
           d: path2
         }));
       }
     }]);
     return Sector2;
-  }(import_react34.PureComponent);
+  }(import_react35.PureComponent);
   Sector.defaultProps = {
     cx: 0,
     cy: 0,
@@ -62719,7 +62762,7 @@ to {
   var import_isArray6 = __toModule(require_isArray());
   var import_upperFirst3 = __toModule(require_upperFirst());
   var import_isFunction6 = __toModule(require_isFunction());
-  var import_react35 = __toModule(require_react());
+  var import_react36 = __toModule(require_react());
   var import_classnames13 = __toModule(require_classnames());
   function _typeof12(obj) {
     "@babel/helpers - typeof";
@@ -62955,7 +62998,7 @@ to {
           return null;
         }
         var realPath = points && points.length ? this.getPath() : path2;
-        return /* @__PURE__ */ import_react35.default.createElement("path", _extends12({}, filterProps(this.props), adaptEventHandlers(this.props), {
+        return /* @__PURE__ */ import_react36.default.createElement("path", _extends12({}, filterProps(this.props), adaptEventHandlers(this.props), {
           className: (0, import_classnames13.default)("recharts-curve", className),
           d: realPath,
           ref: pathRef
@@ -62963,7 +63006,7 @@ to {
       }
     }]);
     return Curve2;
-  }(import_react35.PureComponent);
+  }(import_react36.PureComponent);
   Curve.defaultProps = {
     type: "linear",
     points: [],
@@ -62971,7 +63014,7 @@ to {
   };
 
   // node_modules/recharts/es6/shape/Rectangle.js
-  var import_react36 = __toModule(require_react());
+  var import_react37 = __toModule(require_react());
   var import_classnames14 = __toModule(require_classnames());
   function _typeof13(obj) {
     "@babel/helpers - typeof";
@@ -63177,12 +63220,12 @@ to {
         }
         var layerClass = (0, import_classnames14.default)("recharts-rectangle", className);
         if (!isUpdateAnimationActive) {
-          return /* @__PURE__ */ import_react36.default.createElement("path", _extends13({}, filterProps(this.props, true), {
+          return /* @__PURE__ */ import_react37.default.createElement("path", _extends13({}, filterProps(this.props, true), {
             className: layerClass,
             d: getRectanglePath(x3, y2, width, height, radius)
           }));
         }
-        return /* @__PURE__ */ import_react36.default.createElement(es6_default, {
+        return /* @__PURE__ */ import_react37.default.createElement(es6_default, {
           canBegin: totalLength > 0,
           from: {
             width,
@@ -63201,7 +63244,7 @@ to {
           isActive: isUpdateAnimationActive
         }, function(_ref3) {
           var currWidth = _ref3.width, currHeight = _ref3.height, currX = _ref3.x, currY = _ref3.y;
-          return /* @__PURE__ */ import_react36.default.createElement(es6_default, {
+          return /* @__PURE__ */ import_react37.default.createElement(es6_default, {
             canBegin: totalLength > 0,
             from: "0px ".concat(totalLength === -1 ? 1 : totalLength, "px"),
             to: "".concat(totalLength, "px 0px"),
@@ -63210,7 +63253,7 @@ to {
             duration: animationDuration,
             isActive: isAnimationActive,
             easing: animationEasing
-          }, /* @__PURE__ */ import_react36.default.createElement("path", _extends13({}, filterProps(_this2.props, true), {
+          }, /* @__PURE__ */ import_react37.default.createElement("path", _extends13({}, filterProps(_this2.props, true), {
             className: layerClass,
             d: getRectanglePath(currX, currY, currWidth, currHeight, radius),
             ref: function ref(node) {
@@ -63221,7 +63264,7 @@ to {
       }
     }]);
     return Rectangle2;
-  }(import_react36.PureComponent);
+  }(import_react37.PureComponent);
   Rectangle.defaultProps = {
     x: 0,
     y: 0,
@@ -63236,7 +63279,7 @@ to {
   };
 
   // node_modules/recharts/es6/shape/Dot.js
-  var import_react37 = __toModule(require_react());
+  var import_react38 = __toModule(require_react());
   var import_classnames15 = __toModule(require_classnames());
   function _typeof14(obj) {
     "@babel/helpers - typeof";
@@ -63361,7 +63404,7 @@ to {
         var _this$props = this.props, cx = _this$props.cx, cy = _this$props.cy, r = _this$props.r, className = _this$props.className;
         var layerClass = (0, import_classnames15.default)("recharts-dot", className);
         if (cx === +cx && cy === +cy && r === +r) {
-          return /* @__PURE__ */ import_react37.default.createElement("circle", _extends14({}, filterProps(this.props), adaptEventHandlers(this.props), {
+          return /* @__PURE__ */ import_react38.default.createElement("circle", _extends14({}, filterProps(this.props), adaptEventHandlers(this.props), {
             className: layerClass,
             cx,
             cy,
@@ -63372,10 +63415,10 @@ to {
       }
     }]);
     return Dot2;
-  }(import_react37.PureComponent);
+  }(import_react38.PureComponent);
 
   // node_modules/recharts/es6/shape/Cross.js
-  var import_react38 = __toModule(require_react());
+  var import_react39 = __toModule(require_react());
   var import_classnames16 = __toModule(require_classnames());
   function _typeof15(obj) {
     "@babel/helpers - typeof";
@@ -63501,7 +63544,7 @@ to {
         if (!isNumber(x3) || !isNumber(y2) || !isNumber(width) || !isNumber(height) || !isNumber(top) || !isNumber(left)) {
           return null;
         }
-        return /* @__PURE__ */ import_react38.default.createElement("path", _extends15({}, filterProps(this.props, true), {
+        return /* @__PURE__ */ import_react39.default.createElement("path", _extends15({}, filterProps(this.props, true), {
           className: (0, import_classnames16.default)("recharts-cross", className),
           d: Cross2.getPath(x3, y2, width, height, top, left)
         }));
@@ -63513,7 +63556,7 @@ to {
       }
     }]);
     return Cross2;
-  }(import_react38.PureComponent);
+  }(import_react39.PureComponent);
   Cross.defaultProps = {
     x: 0,
     y: 0,
@@ -63526,7 +63569,7 @@ to {
   // node_modules/recharts/es6/cartesian/Brush.js
   var import_isFunction7 = __toModule(require_isFunction());
   var import_range2 = __toModule(require_range());
-  var import_react39 = __toModule(require_react());
+  var import_react40 = __toModule(require_react());
   var import_classnames17 = __toModule(require_classnames());
 
   // node_modules/recharts/es6/util/CssPrefixUtils.js
@@ -63935,7 +63978,7 @@ to {
       key: "renderBackground",
       value: function renderBackground() {
         var _this$props5 = this.props, x3 = _this$props5.x, y2 = _this$props5.y, width = _this$props5.width, height = _this$props5.height, fill2 = _this$props5.fill, stroke = _this$props5.stroke;
-        return /* @__PURE__ */ import_react39.default.createElement("rect", {
+        return /* @__PURE__ */ import_react40.default.createElement("rect", {
           stroke,
           fill: fill2,
           x: x3,
@@ -63948,11 +63991,11 @@ to {
       key: "renderPanorama",
       value: function renderPanorama() {
         var _this$props6 = this.props, x3 = _this$props6.x, y2 = _this$props6.y, width = _this$props6.width, height = _this$props6.height, data = _this$props6.data, children = _this$props6.children, padding = _this$props6.padding;
-        var chartElement = import_react39.Children.only(children);
+        var chartElement = import_react40.Children.only(children);
         if (!chartElement) {
           return null;
         }
-        return /* @__PURE__ */ import_react39.default.cloneElement(chartElement, {
+        return /* @__PURE__ */ import_react40.default.cloneElement(chartElement, {
           x: x3,
           y: y2,
           width,
@@ -63973,7 +64016,7 @@ to {
           width: travellerWidth,
           height
         });
-        return /* @__PURE__ */ import_react39.default.createElement(Layer, {
+        return /* @__PURE__ */ import_react40.default.createElement(Layer, {
           className: "recharts-brush-traveller",
           onMouseEnter: this.handleEnterSlideOrTraveller,
           onMouseLeave: this.handleLeaveSlideOrTraveller,
@@ -63990,7 +64033,7 @@ to {
         var _this$props8 = this.props, y2 = _this$props8.y, height = _this$props8.height, stroke = _this$props8.stroke, travellerWidth = _this$props8.travellerWidth;
         var x3 = Math.min(startX, endX) + travellerWidth;
         var width = Math.max(Math.abs(endX - startX) - travellerWidth, 0);
-        return /* @__PURE__ */ import_react39.default.createElement("rect", {
+        return /* @__PURE__ */ import_react40.default.createElement("rect", {
           className: "recharts-brush-slide",
           onMouseEnter: this.handleEnterSlideOrTraveller,
           onMouseLeave: this.handleLeaveSlideOrTraveller,
@@ -64018,14 +64061,14 @@ to {
           pointerEvents: "none",
           fill: stroke
         };
-        return /* @__PURE__ */ import_react39.default.createElement(Layer, {
+        return /* @__PURE__ */ import_react40.default.createElement(Layer, {
           className: "recharts-brush-texts"
-        }, /* @__PURE__ */ import_react39.default.createElement(Text, _extends16({
+        }, /* @__PURE__ */ import_react40.default.createElement(Text, _extends16({
           textAnchor: "end",
           verticalAnchor: "middle",
           x: Math.min(startX, endX) - offset,
           y: y2 + height / 2
-        }, attrs), this.getTextOfTick(startIndex)), /* @__PURE__ */ import_react39.default.createElement(Text, _extends16({
+        }, attrs), this.getTextOfTick(startIndex)), /* @__PURE__ */ import_react40.default.createElement(Text, _extends16({
           textAnchor: "start",
           verticalAnchor: "middle",
           x: Math.max(startX, endX) + travellerWidth + offset,
@@ -64041,9 +64084,9 @@ to {
           return null;
         }
         var layerClass = (0, import_classnames17.default)("recharts-brush", className);
-        var isPanoramic = import_react39.default.Children.count(children) === 1;
+        var isPanoramic = import_react40.default.Children.count(children) === 1;
         var style = generatePrefixStyle3("userSelect", "none");
-        return /* @__PURE__ */ import_react39.default.createElement(Layer, {
+        return /* @__PURE__ */ import_react40.default.createElement(Layer, {
           className: layerClass,
           onMouseMove: this.handleDrag,
           onMouseLeave: this.handleLeaveWrapper,
@@ -64056,21 +64099,21 @@ to {
       value: function renderDefaultTraveller(props) {
         var x3 = props.x, y2 = props.y, width = props.width, height = props.height, stroke = props.stroke;
         var lineY = Math.floor(y2 + height / 2) - 1;
-        return /* @__PURE__ */ import_react39.default.createElement(import_react39.default.Fragment, null, /* @__PURE__ */ import_react39.default.createElement("rect", {
+        return /* @__PURE__ */ import_react40.default.createElement(import_react40.default.Fragment, null, /* @__PURE__ */ import_react40.default.createElement("rect", {
           x: x3,
           y: y2,
           width,
           height,
           fill: stroke,
           stroke: "none"
-        }), /* @__PURE__ */ import_react39.default.createElement("line", {
+        }), /* @__PURE__ */ import_react40.default.createElement("line", {
           x1: x3 + 1,
           y1: lineY,
           x2: x3 + width - 1,
           y2: lineY,
           fill: "none",
           stroke: "#fff"
-        }), /* @__PURE__ */ import_react39.default.createElement("line", {
+        }), /* @__PURE__ */ import_react40.default.createElement("line", {
           x1: x3 + 1,
           y1: lineY + 2,
           x2: x3 + width - 1,
@@ -64083,8 +64126,8 @@ to {
       key: "renderTraveller",
       value: function renderTraveller(option, props) {
         var rectangle;
-        if (/* @__PURE__ */ import_react39.default.isValidElement(option)) {
-          rectangle = /* @__PURE__ */ import_react39.default.cloneElement(option, props);
+        if (/* @__PURE__ */ import_react40.default.isValidElement(option)) {
+          rectangle = /* @__PURE__ */ import_react40.default.cloneElement(option, props);
         } else if ((0, import_isFunction7.default)(option)) {
           rectangle = option(props);
         } else {
@@ -64151,7 +64194,7 @@ to {
       }
     }]);
     return Brush2;
-  }(import_react39.PureComponent);
+  }(import_react40.PureComponent);
   Brush.displayName = "Brush";
   Brush.defaultProps = {
     height: 40,
@@ -64172,7 +64215,7 @@ to {
   // node_modules/recharts/es6/cartesian/ReferenceLine.js
   var import_some = __toModule(require_some());
   var import_isFunction8 = __toModule(require_isFunction());
-  var import_react40 = __toModule(require_react());
+  var import_react41 = __toModule(require_react());
   var import_classnames18 = __toModule(require_classnames());
 
   // node_modules/recharts/es6/util/IfOverflowMatches.js
@@ -64561,12 +64604,12 @@ to {
   }
   var renderLine = function renderLine2(option, props) {
     var line;
-    if (/* @__PURE__ */ import_react40.default.isValidElement(option)) {
-      line = /* @__PURE__ */ import_react40.default.cloneElement(option, props);
+    if (/* @__PURE__ */ import_react41.default.isValidElement(option)) {
+      line = /* @__PURE__ */ import_react41.default.cloneElement(option, props);
     } else if ((0, import_isFunction8.default)(option)) {
       line = option(props);
     } else {
-      line = /* @__PURE__ */ import_react40.default.createElement("line", _extends17({}, props, {
+      line = /* @__PURE__ */ import_react41.default.createElement("line", _extends17({}, props, {
         className: "recharts-reference-line-line"
       }));
     }
@@ -64648,7 +64691,7 @@ to {
       x2: x22,
       y2
     });
-    return /* @__PURE__ */ import_react40.default.createElement(Layer, {
+    return /* @__PURE__ */ import_react41.default.createElement(Layer, {
       className: (0, import_classnames18.default)("recharts-reference-line", className)
     }, renderLine(shape, lineProps), Label.renderCallByParent(props, rectWithCoords({
       x1,
@@ -64672,7 +64715,7 @@ to {
 
   // node_modules/recharts/es6/cartesian/ReferenceDot.js
   var import_isFunction9 = __toModule(require_isFunction());
-  var import_react41 = __toModule(require_react());
+  var import_react42 = __toModule(require_react());
   var import_classnames19 = __toModule(require_classnames());
   function _extends18() {
     _extends18 = Object.assign || function(target) {
@@ -64763,7 +64806,7 @@ to {
       cx,
       cy
     });
-    return /* @__PURE__ */ import_react41.default.createElement(Layer, {
+    return /* @__PURE__ */ import_react42.default.createElement(Layer, {
       className: (0, import_classnames19.default)("recharts-reference-dot", className)
     }, ReferenceDot.renderDot(shape, dotProps), Label.renderCallByParent(props, {
       x: cx - r,
@@ -64786,12 +64829,12 @@ to {
   };
   ReferenceDot.renderDot = function(option, props) {
     var dot;
-    if (/* @__PURE__ */ import_react41.default.isValidElement(option)) {
-      dot = /* @__PURE__ */ import_react41.default.cloneElement(option, props);
+    if (/* @__PURE__ */ import_react42.default.isValidElement(option)) {
+      dot = /* @__PURE__ */ import_react42.default.cloneElement(option, props);
     } else if ((0, import_isFunction9.default)(option)) {
       dot = option(props);
     } else {
-      dot = /* @__PURE__ */ import_react41.default.createElement(Dot, _extends18({}, props, {
+      dot = /* @__PURE__ */ import_react42.default.createElement(Dot, _extends18({}, props, {
         cx: props.cx,
         cy: props.cy,
         className: "recharts-reference-dot-dot"
@@ -64802,7 +64845,7 @@ to {
 
   // node_modules/recharts/es6/cartesian/ReferenceArea.js
   var import_isFunction10 = __toModule(require_isFunction());
-  var import_react42 = __toModule(require_react());
+  var import_react43 = __toModule(require_react());
   var import_classnames20 = __toModule(require_classnames());
   function _extends19() {
     _extends19 = Object.assign || function(target) {
@@ -64900,7 +64943,7 @@ to {
       return null;
     }
     var clipPath = ifOverflowMatches(props, "hidden") ? "url(#".concat(clipPathId, ")") : void 0;
-    return /* @__PURE__ */ import_react42.default.createElement(Layer, {
+    return /* @__PURE__ */ import_react43.default.createElement(Layer, {
       className: (0, import_classnames20.default)("recharts-reference-area", className)
     }, ReferenceArea.renderRect(shape, _objectSpread21(_objectSpread21({
       clipPath
@@ -64920,12 +64963,12 @@ to {
   };
   ReferenceArea.renderRect = function(option, props) {
     var rect;
-    if (/* @__PURE__ */ import_react42.default.isValidElement(option)) {
-      rect = /* @__PURE__ */ import_react42.default.cloneElement(option, props);
+    if (/* @__PURE__ */ import_react43.default.isValidElement(option)) {
+      rect = /* @__PURE__ */ import_react43.default.cloneElement(option, props);
     } else if ((0, import_isFunction10.default)(option)) {
       rect = option(props);
     } else {
-      rect = /* @__PURE__ */ import_react42.default.createElement(Rectangle, _extends19({}, props, {
+      rect = /* @__PURE__ */ import_react43.default.createElement(Rectangle, _extends19({}, props, {
         className: "recharts-reference-area-rect"
       }));
     }
@@ -64935,7 +64978,7 @@ to {
   // node_modules/recharts/es6/cartesian/CartesianAxis.js
   var import_get4 = __toModule(require_get());
   var import_isFunction11 = __toModule(require_isFunction());
-  var import_react43 = __toModule(require_react());
+  var import_react44 = __toModule(require_react());
   var import_classnames21 = __toModule(require_classnames());
   function _typeof17(obj) {
     "@babel/helpers - typeof";
@@ -65242,7 +65285,7 @@ to {
             y2: y2 + height
           });
         }
-        return /* @__PURE__ */ import_react43.default.createElement("line", _extends20({}, props, {
+        return /* @__PURE__ */ import_react44.default.createElement("line", _extends20({}, props, {
           className: (0, import_classnames21.default)("recharts-cartesian-axis-line", (0, import_get4.default)(axisLine, "className"))
         }));
       }
@@ -65275,14 +65318,14 @@ to {
             visibleTicksCount: finalTicks.length,
             tickFormatter
           });
-          return /* @__PURE__ */ import_react43.default.createElement(Layer, _extends20({
+          return /* @__PURE__ */ import_react44.default.createElement(Layer, _extends20({
             className: "recharts-cartesian-axis-tick",
             key: "tick-".concat(i3)
-          }, adaptEventsOfChild(_this.props, entry, i3)), tickLine && /* @__PURE__ */ import_react43.default.createElement("line", _extends20({}, tickLineProps, lineCoord, {
+          }, adaptEventsOfChild(_this.props, entry, i3)), tickLine && /* @__PURE__ */ import_react44.default.createElement("line", _extends20({}, tickLineProps, lineCoord, {
             className: (0, import_classnames21.default)("recharts-cartesian-axis-tick-line", (0, import_get4.default)(tickLine, "className"))
           })), tick && CartesianAxis2.renderTickItem(tick, tickProps, "".concat((0, import_isFunction11.default)(tickFormatter) ? tickFormatter(entry.value, i3) : entry.value).concat(unit2 || "")));
         });
-        return /* @__PURE__ */ import_react43.default.createElement("g", {
+        return /* @__PURE__ */ import_react44.default.createElement("g", {
           className: "recharts-cartesian-axis-ticks"
         }, items);
       }
@@ -65301,7 +65344,7 @@ to {
         if (width <= 0 || height <= 0 || !finalTicks || !finalTicks.length) {
           return null;
         }
-        return /* @__PURE__ */ import_react43.default.createElement(Layer, {
+        return /* @__PURE__ */ import_react44.default.createElement(Layer, {
           className: (0, import_classnames21.default)("recharts-cartesian-axis", className)
         }, axisLine && this.renderAxisLine(), this.renderTicks(finalTicks), Label.renderCallByParent(this.props));
       }
@@ -65460,12 +65503,12 @@ to {
       key: "renderTickItem",
       value: function renderTickItem(option, props, value2) {
         var tickItem;
-        if (/* @__PURE__ */ import_react43.default.isValidElement(option)) {
-          tickItem = /* @__PURE__ */ import_react43.default.cloneElement(option, props);
+        if (/* @__PURE__ */ import_react44.default.isValidElement(option)) {
+          tickItem = /* @__PURE__ */ import_react44.default.cloneElement(option, props);
         } else if ((0, import_isFunction11.default)(option)) {
           tickItem = option(props);
         } else {
-          tickItem = /* @__PURE__ */ import_react43.default.createElement(Text, _extends20({}, props, {
+          tickItem = /* @__PURE__ */ import_react44.default.createElement(Text, _extends20({}, props, {
             className: "recharts-cartesian-axis-tick-value"
           }), value2);
         }
@@ -65473,7 +65516,7 @@ to {
       }
     }]);
     return CartesianAxis2;
-  }(import_react43.Component);
+  }(import_react44.Component);
   CartesianAxis.displayName = "CartesianAxis";
   CartesianAxis.defaultProps = {
     x: 0,
@@ -65507,7 +65550,7 @@ to {
   var import_get5 = __toModule(require_get());
   var import_isNil9 = __toModule(require_isNil());
   var import_isArray7 = __toModule(require_isArray());
-  var import_react44 = __toModule(require_react());
+  var import_react45 = __toModule(require_react());
   var import_classnames22 = __toModule(require_classnames());
   function _typeof18(obj) {
     "@babel/helpers - typeof";
@@ -65750,7 +65793,7 @@ to {
         var dotsProps = {
           clipPath: needClip ? "url(#clipPath-".concat(clipPathId, ")") : null
         };
-        return /* @__PURE__ */ import_react44.default.createElement(Layer, _extends21({
+        return /* @__PURE__ */ import_react45.default.createElement(Layer, _extends21({
           className: "recharts-area-dots"
         }, dotsProps), dots);
       }
@@ -65772,7 +65815,7 @@ to {
           })), maxY);
         }
         if (isNumber(maxY)) {
-          return /* @__PURE__ */ import_react44.default.createElement("rect", {
+          return /* @__PURE__ */ import_react45.default.createElement("rect", {
             x: startX < endX ? startX : startX - width,
             y: 0,
             width,
@@ -65799,7 +65842,7 @@ to {
           })), maxX);
         }
         if (isNumber(maxX)) {
-          return /* @__PURE__ */ import_react44.default.createElement("rect", {
+          return /* @__PURE__ */ import_react45.default.createElement("rect", {
             x: 0,
             y: startY < endY ? startY : startY - height,
             width: maxX + (strokeWidth ? parseInt("".concat(strokeWidth), 10) : 1),
@@ -65821,9 +65864,9 @@ to {
       key: "renderAreaStatically",
       value: function renderAreaStatically(points, baseLine, needClip, clipPathId) {
         var _this$props4 = this.props, layout = _this$props4.layout, type = _this$props4.type, stroke = _this$props4.stroke, connectNulls = _this$props4.connectNulls, isRange = _this$props4.isRange, ref = _this$props4.ref, others = _objectWithoutProperties10(_this$props4, ["layout", "type", "stroke", "connectNulls", "isRange", "ref"]);
-        return /* @__PURE__ */ import_react44.default.createElement(Layer, {
+        return /* @__PURE__ */ import_react45.default.createElement(Layer, {
           clipPath: needClip ? "url(#clipPath-".concat(clipPathId, ")") : null
-        }, /* @__PURE__ */ import_react44.default.createElement(Curve, _extends21({}, filterProps(others, true), {
+        }, /* @__PURE__ */ import_react45.default.createElement(Curve, _extends21({}, filterProps(others, true), {
           points,
           connectNulls,
           type,
@@ -65831,14 +65874,14 @@ to {
           layout,
           stroke: "none",
           className: "recharts-area-area"
-        })), stroke !== "none" && /* @__PURE__ */ import_react44.default.createElement(Curve, _extends21({}, filterProps(this.props), {
+        })), stroke !== "none" && /* @__PURE__ */ import_react45.default.createElement(Curve, _extends21({}, filterProps(this.props), {
           className: "recharts-area-curve",
           layout,
           type,
           connectNulls,
           fill: "none",
           points
-        })), stroke !== "none" && isRange && /* @__PURE__ */ import_react44.default.createElement(Curve, _extends21({}, filterProps(this.props), {
+        })), stroke !== "none" && isRange && /* @__PURE__ */ import_react45.default.createElement(Curve, _extends21({}, filterProps(this.props), {
           className: "recharts-area-curve",
           layout,
           type,
@@ -65853,7 +65896,7 @@ to {
         var _this2 = this;
         var _this$props5 = this.props, points = _this$props5.points, baseLine = _this$props5.baseLine, isAnimationActive = _this$props5.isAnimationActive, animationBegin = _this$props5.animationBegin, animationDuration = _this$props5.animationDuration, animationEasing = _this$props5.animationEasing, animationId = _this$props5.animationId;
         var _this$state = this.state, prevPoints = _this$state.prevPoints, prevBaseLine = _this$state.prevBaseLine;
-        return /* @__PURE__ */ import_react44.default.createElement(es6_default, {
+        return /* @__PURE__ */ import_react45.default.createElement(es6_default, {
           begin: animationBegin,
           duration: animationDuration,
           isActive: isAnimationActive,
@@ -65908,9 +65951,9 @@ to {
             }
             return _this2.renderAreaStatically(stepPoints, stepBaseLine, needClip, clipPathId);
           }
-          return /* @__PURE__ */ import_react44.default.createElement(Layer, null, /* @__PURE__ */ import_react44.default.createElement("defs", null, /* @__PURE__ */ import_react44.default.createElement("clipPath", {
+          return /* @__PURE__ */ import_react45.default.createElement(Layer, null, /* @__PURE__ */ import_react45.default.createElement("defs", null, /* @__PURE__ */ import_react45.default.createElement("clipPath", {
             id: "animationClipPath-".concat(clipPathId)
-          }, _this2.renderClipRect(t2))), /* @__PURE__ */ import_react44.default.createElement(Layer, {
+          }, _this2.renderClipRect(t2))), /* @__PURE__ */ import_react45.default.createElement(Layer, {
             clipPath: "url(#animationClipPath-".concat(clipPathId, ")")
           }, _this2.renderAreaStatically(points, baseLine, needClip, clipPathId)));
         });
@@ -65937,11 +65980,11 @@ to {
         var layerClass = (0, import_classnames22.default)("recharts-area", className);
         var needClip = xAxis && xAxis.allowDataOverflow || yAxis && yAxis.allowDataOverflow;
         var clipPathId = (0, import_isNil9.default)(id) ? this.id : id;
-        return /* @__PURE__ */ import_react44.default.createElement(Layer, {
+        return /* @__PURE__ */ import_react45.default.createElement(Layer, {
           className: layerClass
-        }, needClip ? /* @__PURE__ */ import_react44.default.createElement("defs", null, /* @__PURE__ */ import_react44.default.createElement("clipPath", {
+        }, needClip ? /* @__PURE__ */ import_react45.default.createElement("defs", null, /* @__PURE__ */ import_react45.default.createElement("clipPath", {
           id: "clipPath-".concat(clipPathId)
-        }, /* @__PURE__ */ import_react44.default.createElement("rect", {
+        }, /* @__PURE__ */ import_react45.default.createElement("rect", {
           x: left,
           y: top,
           width,
@@ -65970,7 +66013,7 @@ to {
       }
     }]);
     return Area2;
-  }(import_react44.PureComponent);
+  }(import_react45.PureComponent);
   Area.displayName = "Area";
   Area.defaultProps = {
     stroke: "#3182bd",
@@ -66090,12 +66133,12 @@ to {
   };
   Area.renderDotItem = function(option, props) {
     var dotItem;
-    if (/* @__PURE__ */ import_react44.default.isValidElement(option)) {
-      dotItem = /* @__PURE__ */ import_react44.default.cloneElement(option, props);
+    if (/* @__PURE__ */ import_react45.default.isValidElement(option)) {
+      dotItem = /* @__PURE__ */ import_react45.default.cloneElement(option, props);
     } else if ((0, import_isFunction12.default)(option)) {
       dotItem = option(props);
     } else {
-      dotItem = /* @__PURE__ */ import_react44.default.createElement(Dot, _extends21({}, props, {
+      dotItem = /* @__PURE__ */ import_react45.default.createElement(Dot, _extends21({}, props, {
         className: "recharts-area-dot"
       }));
     }
@@ -66165,7 +66208,7 @@ to {
   var import_isNil10 = __toModule(require_isNil());
   var import_isBoolean = __toModule(require_isBoolean());
   var import_isArray8 = __toModule(require_isArray());
-  var import_react45 = __toModule(require_react());
+  var import_react46 = __toModule(require_react());
   var import_classnames23 = __toModule(require_classnames());
 
   // node_modules/recharts/es6/util/DetectReferenceElementsDomain.js
@@ -67230,13 +67273,13 @@ to {
             key,
             className: "recharts-tooltip-cursor"
           });
-          return /* @__PURE__ */ (0, import_react45.isValidElement)(element2.props.cursor) ? /* @__PURE__ */ (0, import_react45.cloneElement)(element2.props.cursor, cursorProps) : /* @__PURE__ */ (0, import_react45.createElement)(cursorComp, cursorProps);
+          return /* @__PURE__ */ (0, import_react46.isValidElement)(element2.props.cursor) ? /* @__PURE__ */ (0, import_react46.cloneElement)(element2.props.cursor, cursorProps) : /* @__PURE__ */ (0, import_react46.createElement)(cursorComp, cursorProps);
         };
         _this.renderPolarAxis = function(element2, displayName, index2) {
           var axisType = (0, import_get6.default)(element2, "type.axisType");
           var axisMap = (0, import_get6.default)(_this.state, "".concat(axisType, "Map"));
           var axisOption = axisMap[element2.props["".concat(axisType, "Id")]];
-          return /* @__PURE__ */ (0, import_react45.cloneElement)(element2, _objectSpread24(_objectSpread24({}, axisOption), {}, {
+          return /* @__PURE__ */ (0, import_react46.cloneElement)(element2, _objectSpread24(_objectSpread24({}, axisOption), {}, {
             className: axisType,
             key: element2.key || "".concat(displayName, "-").concat(index2),
             ticks: getTicksOfAxis(axisOption, true)
@@ -67261,7 +67304,7 @@ to {
           });
           var yAxis = yAxisWithFiniteDomain || getAnyElementOfObject(yAxisMap);
           var props = element2.props || {};
-          return /* @__PURE__ */ (0, import_react45.cloneElement)(element2, {
+          return /* @__PURE__ */ (0, import_react46.cloneElement)(element2, {
             key: element2.key || "grid",
             x: isNumber(props.x) ? props.x : offset.left,
             y: isNumber(props.y) ? props.y : offset.top,
@@ -67282,7 +67325,7 @@ to {
           var radiusAxis = getAnyElementOfObject(radiusAxisMap);
           var angleAxis = getAnyElementOfObject(angleAxisMap);
           var cx = angleAxis.cx, cy = angleAxis.cy, innerRadius = angleAxis.innerRadius, outerRadius = angleAxis.outerRadius;
-          return /* @__PURE__ */ (0, import_react45.cloneElement)(element2, {
+          return /* @__PURE__ */ (0, import_react46.cloneElement)(element2, {
             polarAngles: (0, import_isArray8.default)(polarAngles) ? polarAngles : getTicksOfAxis(angleAxis, true).map(function(entry) {
               return entry.coordinate;
             }),
@@ -67312,7 +67355,7 @@ to {
             return null;
           }
           var item = props.item, otherProps = _objectWithoutProperties11(props, ["item"]);
-          return /* @__PURE__ */ (0, import_react45.cloneElement)(item, _objectSpread24(_objectSpread24({}, otherProps), {}, {
+          return /* @__PURE__ */ (0, import_react46.cloneElement)(item, _objectSpread24(_objectSpread24({}, otherProps), {}, {
             chartWidth: width,
             chartHeight: height,
             margin,
@@ -67329,7 +67372,7 @@ to {
             return null;
           }
           var _this$state5 = _this.state, isTooltipActive = _this$state5.isTooltipActive, activeCoordinate = _this$state5.activeCoordinate, activePayload = _this$state5.activePayload, activeLabel = _this$state5.activeLabel, offset = _this$state5.offset;
-          return /* @__PURE__ */ (0, import_react45.cloneElement)(tooltipItem, {
+          return /* @__PURE__ */ (0, import_react46.cloneElement)(tooltipItem, {
             viewBox: _objectSpread24(_objectSpread24({}, offset), {}, {
               x: offset.left,
               y: offset.top
@@ -67343,7 +67386,7 @@ to {
         _this.renderBrush = function(element2) {
           var _this$props3 = _this.props, margin = _this$props3.margin, data = _this$props3.data;
           var _this$state6 = _this.state, offset = _this$state6.offset, dataStartIndex = _this$state6.dataStartIndex, dataEndIndex = _this$state6.dataEndIndex, updateId = _this$state6.updateId;
-          return /* @__PURE__ */ (0, import_react45.cloneElement)(element2, {
+          return /* @__PURE__ */ (0, import_react46.cloneElement)(element2, {
             key: element2.key || "_recharts-brush",
             onChange: combineEventHandlers(_this.handleBrushChange, null, element2.props.onChange),
             data,
@@ -67362,7 +67405,7 @@ to {
           var _assertThisInitialize = _assertThisInitialized18(_this), clipPathId = _assertThisInitialize.clipPathId;
           var _this$state7 = _this.state, xAxisMap = _this$state7.xAxisMap, yAxisMap = _this$state7.yAxisMap, offset = _this$state7.offset;
           var _element$props2 = element2.props, xAxisId = _element$props2.xAxisId, yAxisId = _element$props2.yAxisId;
-          return /* @__PURE__ */ (0, import_react45.cloneElement)(element2, {
+          return /* @__PURE__ */ (0, import_react46.cloneElement)(element2, {
             key: element2.key || "".concat(displayName, "-").concat(index2),
             xAxis: xAxisMap[xAxisId],
             yAxis: yAxisMap[yAxisId],
@@ -67428,7 +67471,7 @@ to {
               onMouseEnter: combineEventHandlers(_this.handleItemMouseEnter, null, element2.props.onMouseEnter)
             };
           }
-          var graphicalItem = /* @__PURE__ */ (0, import_react45.cloneElement)(element2, _objectSpread24(_objectSpread24({}, item.props), itemEvents));
+          var graphicalItem = /* @__PURE__ */ (0, import_react46.cloneElement)(element2, _objectSpread24(_objectSpread24({}, item.props), itemEvents));
           function findWithPayload(entry) {
             return typeof tooltipAxis.dataKey === "function" ? tooltipAxis.dataKey(entry.payload) : null;
           }
@@ -67458,7 +67501,7 @@ to {
           return [graphicalItem, null];
         };
         _this.renderCustomized = function(element2, displayName, index2) {
-          return /* @__PURE__ */ (0, import_react45.cloneElement)(element2, _objectSpread24(_objectSpread24({
+          return /* @__PURE__ */ (0, import_react46.cloneElement)(element2, _objectSpread24(_objectSpread24({
             key: "recharts-customized-".concat(index2)
           }, _this.props), _this.state));
         };
@@ -67749,7 +67792,7 @@ to {
         key: "renderAxis",
         value: function renderAxis(axisOptions, element2, displayName, index2) {
           var _this$props5 = this.props, width = _this$props5.width, height = _this$props5.height;
-          return /* @__PURE__ */ import_react45.default.createElement(CartesianAxis, _extends22({}, axisOptions, {
+          return /* @__PURE__ */ import_react46.default.createElement(CartesianAxis, _extends22({}, axisOptions, {
             className: "recharts-".concat(axisOptions.axisType, " ").concat(axisOptions.axisType),
             key: element2.key || "".concat(displayName, "-").concat(index2),
             viewBox: {
@@ -67766,9 +67809,9 @@ to {
         value: function renderClipPath() {
           var clipPathId = this.clipPathId;
           var _this$state$offset = this.state.offset, left = _this$state$offset.left, top = _this$state$offset.top, height = _this$state$offset.height, width = _this$state$offset.width;
-          return /* @__PURE__ */ import_react45.default.createElement("defs", null, /* @__PURE__ */ import_react45.default.createElement("clipPath", {
+          return /* @__PURE__ */ import_react46.default.createElement("defs", null, /* @__PURE__ */ import_react46.default.createElement("clipPath", {
             id: clipPathId
-          }, /* @__PURE__ */ import_react45.default.createElement("rect", {
+          }, /* @__PURE__ */ import_react46.default.createElement("rect", {
             x: left,
             y: top,
             height,
@@ -67915,13 +67958,13 @@ to {
             }
           };
           if (compact) {
-            return /* @__PURE__ */ import_react45.default.createElement(Surface, _extends22({}, attrs, {
+            return /* @__PURE__ */ import_react46.default.createElement(Surface, _extends22({}, attrs, {
               width,
               height
             }), this.renderClipPath(), renderByOrder(children, map4));
           }
           var events = this.parseEventsOfWrapper();
-          return /* @__PURE__ */ import_react45.default.createElement("div", _extends22({
+          return /* @__PURE__ */ import_react46.default.createElement("div", _extends22({
             className: (0, import_classnames23.default)("recharts-wrapper", className),
             style: _objectSpread24({
               position: "relative",
@@ -67933,14 +67976,14 @@ to {
             ref: function ref(node) {
               _this2.container = node;
             }
-          }), /* @__PURE__ */ import_react45.default.createElement(Surface, _extends22({}, attrs, {
+          }), /* @__PURE__ */ import_react46.default.createElement(Surface, _extends22({}, attrs, {
             width,
             height
           }), this.renderClipPath(), renderByOrder(children, map4)), this.renderLegend(), this.renderTooltip());
         }
       }]);
       return CategoricalChartWrapper;
-    }(import_react45.Component), _class.displayName = chartName, _class.defaultProps = _objectSpread24({
+    }(import_react46.Component), _class.displayName = chartName, _class.defaultProps = _objectSpread24({
       layout: "horizontal",
       stackOffset: "none",
       barCategoryGap: "10%",
@@ -68012,14 +68055,14 @@ to {
       return null;
     }, _class.renderActiveDot = function(option, props) {
       var dot;
-      if (/* @__PURE__ */ (0, import_react45.isValidElement)(option)) {
-        dot = /* @__PURE__ */ (0, import_react45.cloneElement)(option, props);
+      if (/* @__PURE__ */ (0, import_react46.isValidElement)(option)) {
+        dot = /* @__PURE__ */ (0, import_react46.cloneElement)(option, props);
       } else if ((0, import_isFunction13.default)(option)) {
         dot = option(props);
       } else {
-        dot = /* @__PURE__ */ import_react45.default.createElement(Dot, props);
+        dot = /* @__PURE__ */ import_react46.default.createElement(Dot, props);
       }
-      return /* @__PURE__ */ import_react45.default.createElement(Layer, {
+      return /* @__PURE__ */ import_react46.default.createElement(Layer, {
         className: "recharts-active-dot",
         key: props.key
       }, dot);
@@ -68045,111 +68088,111 @@ to {
     let percent = `${count === 0 && total === 0 && status === "done" ? 100 : Math.min(100, count / total * 100).toFixed(0)}%`;
     if (status === "inprogress" && count === 0 && total === 0)
       percent = `0%`;
-    return /* @__PURE__ */ import_react46.default.createElement("div", {
+    return /* @__PURE__ */ import_react47.default.createElement("div", {
       className: "bg-gray-300 rounded-lg flex-1 h-2 overflow-hidden border-b border-purple-600",
       title: percent
-    }, /* @__PURE__ */ import_react46.default.createElement("div", {
+    }, /* @__PURE__ */ import_react47.default.createElement("div", {
       className: "bg-purple-600 h-full",
       style: { width: percent }
     }));
   }
   function StatusIcon({ status, lastUpdated }) {
     const title = lastUpdated ? `Last updated: ${format(lastUpdated, "dd/MM hh:mm")}` : "";
-    return status === "done" ? /* @__PURE__ */ import_react46.default.createElement(FaCheckCircle, {
+    return status === "done" ? /* @__PURE__ */ import_react47.default.createElement(FaCheckCircle, {
       title,
       className: "text-green-600"
-    }) : status === "error" ? /* @__PURE__ */ import_react46.default.createElement(FaExclamationCircle, {
+    }) : status === "error" ? /* @__PURE__ */ import_react47.default.createElement(FaExclamationCircle, {
       title,
       className: "text-red-600"
-    }) : /* @__PURE__ */ import_react46.default.createElement(FaSpinner, {
+    }) : /* @__PURE__ */ import_react47.default.createElement(FaSpinner, {
       title,
       className: "animate-spin"
     });
   }
   function Stats({ stats, cacheHistory }) {
-    const [fullView, setFullView] = import_react46.default.useState(false);
-    return /* @__PURE__ */ import_react46.default.createElement(import_react46.default.Fragment, null, fullView ? /* @__PURE__ */ import_react46.default.createElement(FullView, {
+    const [fullView, setFullView] = import_react47.default.useState(false);
+    return /* @__PURE__ */ import_react47.default.createElement(import_react47.default.Fragment, null, fullView ? /* @__PURE__ */ import_react47.default.createElement(FullView, {
       stats,
       cacheHistory
-    }) : null, /* @__PURE__ */ import_react46.default.createElement("div", {
+    }) : null, /* @__PURE__ */ import_react47.default.createElement("div", {
       className: `flex flex-row gap-6 mt-2 mx-3 text-xs justify-center items-center ${fullView ? "opacity-100" : "opacity-60"} hover:opacity-100 transition-opacity`
-    }, /* @__PURE__ */ import_react46.default.createElement("div", {
+    }, /* @__PURE__ */ import_react47.default.createElement("div", {
       className: "flex flex-row gap-2 justify-center items-center flex-1"
-    }, /* @__PURE__ */ import_react46.default.createElement("div", {
+    }, /* @__PURE__ */ import_react47.default.createElement("div", {
       className: "bg-purple-600 rounded-md text-center px-2 py-0.5"
-    }, "Followers"), /* @__PURE__ */ import_react46.default.createElement(ProgressBar, __spreadValues({}, stats.followers)), /* @__PURE__ */ import_react46.default.createElement(StatusIcon, {
+    }, "Followers"), /* @__PURE__ */ import_react47.default.createElement(ProgressBar, __spreadValues({}, stats.followers)), /* @__PURE__ */ import_react47.default.createElement(StatusIcon, {
       status: stats.followers.status,
       lastUpdated: stats.followers.lastUpdated
-    })), /* @__PURE__ */ import_react46.default.createElement("div", {
+    })), /* @__PURE__ */ import_react47.default.createElement("div", {
       className: "flex flex-row gap-2 justify-center items-center flex-1"
-    }, /* @__PURE__ */ import_react46.default.createElement("div", {
+    }, /* @__PURE__ */ import_react47.default.createElement("div", {
       className: "bg-purple-600 rounded-md text-center px-2 py-0.5"
-    }, "Subscribers"), /* @__PURE__ */ import_react46.default.createElement(ProgressBar, __spreadValues({}, stats.subs)), /* @__PURE__ */ import_react46.default.createElement(StatusIcon, {
+    }, "Subscribers"), /* @__PURE__ */ import_react47.default.createElement(ProgressBar, __spreadValues({}, stats.subs)), /* @__PURE__ */ import_react47.default.createElement(StatusIcon, {
       status: stats.subs.status,
       lastUpdated: stats.subs.lastUpdated
-    })), /* @__PURE__ */ import_react46.default.createElement("button", {
+    })), /* @__PURE__ */ import_react47.default.createElement("button", {
       className: "bg-purple-600 p-1 rounded-md",
       onClick: () => setFullView((v2) => !v2)
-    }, fullView ? /* @__PURE__ */ import_react46.default.createElement(FaAngleDown, null) : /* @__PURE__ */ import_react46.default.createElement(FaAngleUp, null))));
+    }, fullView ? /* @__PURE__ */ import_react47.default.createElement(FaAngleDown, null) : /* @__PURE__ */ import_react47.default.createElement(FaAngleUp, null))));
   }
   function FullView({ stats, cacheHistory }) {
-    return /* @__PURE__ */ import_react46.default.createElement("div", {
+    return /* @__PURE__ */ import_react47.default.createElement("div", {
       className: "bg-gray-700 flex-3 mt-2 rounded-md px-3 pt-3 flex flex-col gap-2"
-    }, /* @__PURE__ */ import_react46.default.createElement("div", {
+    }, /* @__PURE__ */ import_react47.default.createElement("div", {
       className: "text-sm flex flex-row justify-center items-center gap-2"
-    }, /* @__PURE__ */ import_react46.default.createElement("div", {
+    }, /* @__PURE__ */ import_react47.default.createElement("div", {
       className: "flex flex-row gap-2 justify-center items-center flex-1"
-    }, /* @__PURE__ */ import_react46.default.createElement("div", {
+    }, /* @__PURE__ */ import_react47.default.createElement("div", {
       className: "bg-purple-600 rounded-md text-center px-2 py-0.5"
-    }, Intl.NumberFormat().format(stats.followers.count), " /", " ", Intl.NumberFormat().format(Math.max(stats.followers.total, stats.followers.count)), " Followers")), /* @__PURE__ */ import_react46.default.createElement("div", {
+    }, Intl.NumberFormat().format(stats.followers.count), " /", " ", Intl.NumberFormat().format(Math.max(stats.followers.total, stats.followers.count)), " Followers")), /* @__PURE__ */ import_react47.default.createElement("div", {
       className: "flex flex-row gap-2 justify-center items-center flex-1"
-    }, /* @__PURE__ */ import_react46.default.createElement("div", {
+    }, /* @__PURE__ */ import_react47.default.createElement("div", {
       className: "bg-purple-600 rounded-md text-center px-2 py-0.5"
-    }, Intl.NumberFormat().format(stats.subs.count), " /", " ", Intl.NumberFormat().format(Math.max(stats.subs.total, stats.subs.count)), " Subscribers"))), /* @__PURE__ */ import_react46.default.createElement("div", {
+    }, Intl.NumberFormat().format(stats.subs.count), " /", " ", Intl.NumberFormat().format(Math.max(stats.subs.total, stats.subs.count)), " Subscribers"))), /* @__PURE__ */ import_react47.default.createElement("div", {
       className: "opacity-60 flex flex-row text-xs -mt-1 justify-center items-center gap-2"
-    }, /* @__PURE__ */ import_react46.default.createElement("div", {
+    }, /* @__PURE__ */ import_react47.default.createElement("div", {
       className: "flex flex-row gap-2 justify-center items-center flex-1"
-    }, /* @__PURE__ */ import_react46.default.createElement("div", {
+    }, /* @__PURE__ */ import_react47.default.createElement("div", {
       className: "rounded-md text-center"
-    }, "Last Updated: ", stats.followers.lastUpdated ? format(stats.followers.lastUpdated, "dd/MM/yy hh:mm") : "")), /* @__PURE__ */ import_react46.default.createElement("div", {
+    }, "Last Updated: ", stats.followers.lastUpdated ? format(stats.followers.lastUpdated, "dd/MM/yy hh:mm") : "")), /* @__PURE__ */ import_react47.default.createElement("div", {
       className: "flex flex-row gap-2 justify-center items-center flex-1"
-    }, /* @__PURE__ */ import_react46.default.createElement("div", {
+    }, /* @__PURE__ */ import_react47.default.createElement("div", {
       className: "rounded-md text-center"
-    }, "Last Updated: ", stats.subs.lastUpdated ? format(stats.subs.lastUpdated, "dd/MM/yy hh:mm") : ""))), /* @__PURE__ */ import_react46.default.createElement("div", {
+    }, "Last Updated: ", stats.subs.lastUpdated ? format(stats.subs.lastUpdated, "dd/MM/yy hh:mm") : ""))), /* @__PURE__ */ import_react47.default.createElement("div", {
       className: "flex-1 flex flex-row justify-center items-center gap-2"
-    }, /* @__PURE__ */ import_react46.default.createElement("div", {
+    }, /* @__PURE__ */ import_react47.default.createElement("div", {
       className: "flex-1 h-full"
-    }, /* @__PURE__ */ import_react46.default.createElement(ResponsiveContainer, {
+    }, /* @__PURE__ */ import_react47.default.createElement(ResponsiveContainer, {
       width: "100%",
       height: "100%"
-    }, /* @__PURE__ */ import_react46.default.createElement(AreaChart, {
+    }, /* @__PURE__ */ import_react47.default.createElement(AreaChart, {
       data: cacheHistory.followers.slice(-30)
-    }, /* @__PURE__ */ import_react46.default.createElement(XAxis, {
+    }, /* @__PURE__ */ import_react47.default.createElement(XAxis, {
       dataKey: "time"
-    }), /* @__PURE__ */ import_react46.default.createElement(YAxis, null), /* @__PURE__ */ import_react46.default.createElement(Tooltip, {
-      content: /* @__PURE__ */ import_react46.default.createElement(CustomTooltip, null)
-    }), /* @__PURE__ */ import_react46.default.createElement(Area, {
+    }), /* @__PURE__ */ import_react47.default.createElement(YAxis, null), /* @__PURE__ */ import_react47.default.createElement(Tooltip, {
+      content: /* @__PURE__ */ import_react47.default.createElement(CustomTooltip, null)
+    }), /* @__PURE__ */ import_react47.default.createElement(Area, {
       dataKey: "count",
       stroke: "#7c3aed",
       fill: "#7c3aed",
       fillOpacity: 0.1
-    })))), /* @__PURE__ */ import_react46.default.createElement("div", {
+    })))), /* @__PURE__ */ import_react47.default.createElement("div", {
       className: "flex-1 h-full"
-    }, /* @__PURE__ */ import_react46.default.createElement(ResponsiveContainer, {
+    }, /* @__PURE__ */ import_react47.default.createElement(ResponsiveContainer, {
       width: "100%",
       height: "100%"
-    }, /* @__PURE__ */ import_react46.default.createElement(AreaChart, {
+    }, /* @__PURE__ */ import_react47.default.createElement(AreaChart, {
       data: cacheHistory.subs.slice(-30)
-    }, /* @__PURE__ */ import_react46.default.createElement(XAxis, {
+    }, /* @__PURE__ */ import_react47.default.createElement(XAxis, {
       dataKey: "time"
-    }), /* @__PURE__ */ import_react46.default.createElement(YAxis, null), /* @__PURE__ */ import_react46.default.createElement(Tooltip, {
-      content: /* @__PURE__ */ import_react46.default.createElement(CustomTooltip, null)
-    }), /* @__PURE__ */ import_react46.default.createElement(Area, {
+    }), /* @__PURE__ */ import_react47.default.createElement(YAxis, null), /* @__PURE__ */ import_react47.default.createElement(Tooltip, {
+      content: /* @__PURE__ */ import_react47.default.createElement(CustomTooltip, null)
+    }), /* @__PURE__ */ import_react47.default.createElement(Area, {
       dataKey: "count",
       stroke: "#7c3aed",
       fill: "#7c3aed",
       fillOpacity: 0.1
-    }))))), /* @__PURE__ */ import_react46.default.createElement("div", {
+    }))))), /* @__PURE__ */ import_react47.default.createElement("div", {
       className: "text-xs opacity-40 text-center relative -top-2 -mt-2"
     }, "These numbers may appear high, as unfollows/unsubs aren't tracked"));
   }
@@ -68157,11 +68200,11 @@ to {
     var _a, _b, _c, _d;
     if (!active || !payload || !payload[0])
       return null;
-    return /* @__PURE__ */ import_react46.default.createElement("div", null, /* @__PURE__ */ import_react46.default.createElement("div", null, (_b = (_a = payload[0]) == null ? void 0 : _a.payload) == null ? void 0 : _b.fullTime), /* @__PURE__ */ import_react46.default.createElement("div", null, "Count: ", (((_d = (_c = payload[0]) == null ? void 0 : _c.payload) == null ? void 0 : _d.count) || 0).toFixed(0)));
+    return /* @__PURE__ */ import_react47.default.createElement("div", null, /* @__PURE__ */ import_react47.default.createElement("div", null, (_b = (_a = payload[0]) == null ? void 0 : _a.payload) == null ? void 0 : _b.fullTime), /* @__PURE__ */ import_react47.default.createElement("div", null, "Count: ", (((_d = (_c = payload[0]) == null ? void 0 : _c.payload) == null ? void 0 : _d.count) || 0).toFixed(0)));
   }
 
   // src/components/primitives/MukSettings.tsx
-  var import_react47 = __toModule(require_react());
+  var import_react48 = __toModule(require_react());
   var ALLOWED_LOGINS = ["mukluk", "odialo"];
   function MukSettings(props) {
     var _a;
@@ -68176,21 +68219,21 @@ to {
         force: true
       });
     };
-    return ALLOWED_LOGINS.includes(((_a = props.channelInfo) == null ? void 0 : _a.login) || "") ? /* @__PURE__ */ import_react47.default.createElement("div", {
+    return ALLOWED_LOGINS.includes(((_a = props.channelInfo) == null ? void 0 : _a.login) || "") ? /* @__PURE__ */ import_react48.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react47.default.createElement("button", {
+    }, /* @__PURE__ */ import_react48.default.createElement("button", {
       title: "A giveaway that includes all viewers who have chatted, optionally with a chat command if set",
       className: "bg-purple-600 px-2 py-2 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-transform hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700",
       onClick: () => fakeAnnounce("Shy|$$|blocked")
-    }, /* @__PURE__ */ import_react47.default.createElement(FaTimesCircle, null), " Block Shy"), /* @__PURE__ */ import_react47.default.createElement("button", {
+    }, /* @__PURE__ */ import_react48.default.createElement(FaTimesCircle, null), " Block Shy"), /* @__PURE__ */ import_react48.default.createElement("button", {
       title: "A giveaway that includes all viewers who have chatted, optionally with a chat command if set",
       className: "bg-purple-600 px-2 py-2 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-transform hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700",
       onClick: () => fakeAnnounce("Arilozen|$$|blocked")
-    }, /* @__PURE__ */ import_react47.default.createElement(FaTimesCircle, null), " Block Arilozen"), /* @__PURE__ */ import_react47.default.createElement("button", {
+    }, /* @__PURE__ */ import_react48.default.createElement(FaTimesCircle, null), " Block Arilozen"), /* @__PURE__ */ import_react48.default.createElement("button", {
       title: "A giveaway that includes all viewers who have chatted, optionally with a chat command if set",
       className: "bg-purple-600 px-2 py-2 text-white rounded-md mt-2 overflow-hidden flex flex-row items-center justify-center text-center gap-1 flex-1 select-none transform transition-transform hover:translate-y-0.5 hover:scale-95 hover:bg-purple-700",
       onClick: () => fakeAnnounce("Flutegirl1|$$|rigged")
-    }, /* @__PURE__ */ import_react47.default.createElement(FaTrophy, null), " Rigged Mode")) : null;
+    }, /* @__PURE__ */ import_react48.default.createElement(FaTrophy, null), " Rigged Mode")) : null;
   }
 
   // src/components/screens/Main.tsx
@@ -68211,7 +68254,7 @@ to {
     stats,
     cacheHistory
   }) {
-    const messageDelay = import_react48.default.useMemo(() => {
+    const messageDelay = import_react49.default.useMemo(() => {
       const mostRecent = chatEvents[chatEvents.length - 1];
       if (!mostRecent)
         return "0s delay";
@@ -68219,19 +68262,19 @@ to {
         seconds: Number(((mostRecent.receivedTs - mostRecent.tmiTs) / 1e3).toFixed(2))
       }).replace(" seconds", "s")} delay`;
     }, [chatEvents]);
-    return /* @__PURE__ */ import_react48.default.createElement("div", {
+    return /* @__PURE__ */ import_react49.default.createElement("div", {
       className: "flex flex-col flex-1",
       style: { height: "100vh" }
-    }, /* @__PURE__ */ import_react48.default.createElement(Winner, {
+    }, /* @__PURE__ */ import_react49.default.createElement(Winner, {
       winners,
       onClear: (idx) => setWinners((w2) => removeIdx(w2, idx)),
       chatClient: client,
       settings,
       discordSettings,
       channelInfo
-    }), /* @__PURE__ */ import_react48.default.createElement("div", {
+    }), /* @__PURE__ */ import_react49.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react48.default.createElement(InstantGiveaway, {
+    }, /* @__PURE__ */ import_react49.default.createElement(InstantGiveaway, {
       discordSettings,
       settings,
       channelInfo,
@@ -68239,7 +68282,7 @@ to {
       client,
       setPastGiveaways,
       forfeits
-    }), /* @__PURE__ */ import_react48.default.createElement(ChatGiveaway, {
+    }), /* @__PURE__ */ import_react49.default.createElement(ChatGiveaway, {
       discordSettings,
       settings,
       channelInfo,
@@ -68248,28 +68291,28 @@ to {
       client,
       setPastGiveaways,
       forfeits
-    })), /* @__PURE__ */ import_react48.default.createElement(MukSettings, {
+    })), /* @__PURE__ */ import_react49.default.createElement(MukSettings, {
       discordSettings,
       settings,
       chatClient: client,
       channelInfo
-    }), /* @__PURE__ */ import_react48.default.createElement(SettingsComponent, {
+    }), /* @__PURE__ */ import_react49.default.createElement(SettingsComponent, {
       channelId: channelInfo.userId,
       settings,
       setSettings,
       setChatPaused,
       resetChat,
       discordSettings
-    }), settings.performanceMode && !winners.length ? /* @__PURE__ */ import_react48.default.createElement("div", {
+    }), settings.performanceMode && !winners.length ? /* @__PURE__ */ import_react49.default.createElement("div", {
       className: "h-full flex-1 gap-2 flex flex-col justify-center items-center"
-    }, /* @__PURE__ */ import_react48.default.createElement("div", {
+    }, /* @__PURE__ */ import_react49.default.createElement("div", {
       className: "flex justify-center items-center gap-2 flex-row"
-    }, /* @__PURE__ */ import_react48.default.createElement("div", null, chatEvents.length, " messages"), /* @__PURE__ */ import_react48.default.createElement(ChatControls, {
+    }, /* @__PURE__ */ import_react49.default.createElement("div", null, chatEvents.length, " messages"), /* @__PURE__ */ import_react49.default.createElement(ChatControls, {
       chatEvents,
       paused: chatPaused,
       setPaused: setChatPaused,
       clear: resetChat
-    })), /* @__PURE__ */ import_react48.default.createElement("div", null, messageDelay)) : /* @__PURE__ */ import_react48.default.createElement(ChatBox, {
+    })), /* @__PURE__ */ import_react49.default.createElement("div", null, messageDelay)) : /* @__PURE__ */ import_react49.default.createElement(ChatBox, {
       messageDelay,
       chatEvents,
       winners,
@@ -68278,14 +68321,14 @@ to {
       clear: resetChat,
       settings,
       setSettings
-    }), /* @__PURE__ */ import_react48.default.createElement(Stats, {
+    }), /* @__PURE__ */ import_react49.default.createElement(Stats, {
       stats,
       cacheHistory
     }));
   }
 
   // src/components/screens/Setup.tsx
-  var import_react49 = __toModule(require_react());
+  var import_react50 = __toModule(require_react());
   function Setup({
     resetChat,
     setClient,
@@ -68293,24 +68336,24 @@ to {
     setChannel
   }) {
     const history = useHistory();
-    import_react49.default.useEffect(() => {
+    import_react50.default.useEffect(() => {
       if (channel.login && !NL_ARGS.includes("--restarted")) {
         history.push("/");
       }
     }, [channel.login]);
-    return /* @__PURE__ */ import_react49.default.createElement("div", {
+    return /* @__PURE__ */ import_react50.default.createElement("div", {
       className: "flex flex-col justify-center items-center h-full gap-3 -mt-10"
-    }, /* @__PURE__ */ import_react49.default.createElement("div", {
+    }, /* @__PURE__ */ import_react50.default.createElement("div", {
       className: "text-3xl"
-    }, "First Time Setup"), /* @__PURE__ */ import_react49.default.createElement("p", {
+    }, "First Time Setup"), /* @__PURE__ */ import_react50.default.createElement("p", {
       className: "max-w-md text-center opacity-70"
-    }, "Click below to open a browser and log in with your Twitch account, to get the tokens needed below."), /* @__PURE__ */ import_react49.default.createElement("button", {
+    }, "Click below to open a browser and log in with your Twitch account, to get the tokens needed below."), /* @__PURE__ */ import_react50.default.createElement("button", {
       className: "bg-purple-600 text-white py-1 px-3 rounded-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 justify-center",
       onClick: () => Neutralino.os.open("https://giveaway-o-tron.vercel.app"),
       title: "Go to Twitch"
-    }, "Authenticate with Twitch to get tokens \u2192"), /* @__PURE__ */ import_react49.default.createElement("p", {
+    }, "Authenticate with Twitch to get tokens \u2192"), /* @__PURE__ */ import_react50.default.createElement("p", {
       className: "max-w-lg text-center opacity-70 mt-4"
-    }, "Once you have the tokens, you can post them below."), /* @__PURE__ */ import_react49.default.createElement("form", {
+    }, "Once you have the tokens, you can post them below."), /* @__PURE__ */ import_react50.default.createElement("form", {
       className: "flex flex-col gap-2 justify-center items-center",
       onSubmit: async (e3) => {
         e3.preventDefault();
@@ -68328,65 +68371,65 @@ to {
         setChannel(data);
         history.push("/");
       }
-    }, /* @__PURE__ */ import_react49.default.createElement("input", {
+    }, /* @__PURE__ */ import_react50.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-md border-b border-purple-500 overflow-ellipsis",
       placeholder: "Access Token...",
       name: "accessToken",
       type: "password"
-    }), /* @__PURE__ */ import_react49.default.createElement("input", {
+    }), /* @__PURE__ */ import_react50.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-md border-b border-purple-500 overflow-ellipsis",
       placeholder: "Refresh Token...",
       name: "refreshToken",
       type: "password"
-    }), /* @__PURE__ */ import_react49.default.createElement("button", {
+    }), /* @__PURE__ */ import_react50.default.createElement("button", {
       className: "bg-purple-600 text-white py-1 px-5 rounded-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 justify-center text-xl mt-2",
       title: "Setup connection"
-    }, /* @__PURE__ */ import_react49.default.createElement(FaTwitch, null), /* @__PURE__ */ import_react49.default.createElement("span", {
+    }, /* @__PURE__ */ import_react50.default.createElement(FaTwitch, null), /* @__PURE__ */ import_react50.default.createElement("span", {
       className: "relative -top-0.5"
     }, "Finish Setup"))));
   }
 
   // src/components/screens/PastGiveaways.tsx
-  var import_react50 = __toModule(require_react());
+  var import_react51 = __toModule(require_react());
   var typeNameMap = {
     [GiveawayType.Chat]: "Active Chatter Giveaway",
     [GiveawayType.Instant]: "Viewers Instant Giveaway"
   };
   function SettingItem({ label, value: value2 }) {
-    return /* @__PURE__ */ import_react50.default.createElement("div", {
+    return /* @__PURE__ */ import_react51.default.createElement("div", {
       className: "flex flex-row justify-center items-center flex-1"
-    }, /* @__PURE__ */ import_react50.default.createElement("div", {
+    }, /* @__PURE__ */ import_react51.default.createElement("div", {
       className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md"
-    }, label), /* @__PURE__ */ import_react50.default.createElement("div", {
+    }, label), /* @__PURE__ */ import_react51.default.createElement("div", {
       className: "bg-gray-600 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1 overflow-ellipsis h-full max-w-full flex justify-center items-center"
-    }, typeof value2 === "boolean" ? value2 ? /* @__PURE__ */ import_react50.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react50.default.createElement(FaTimes, null) : value2));
+    }, typeof value2 === "boolean" ? value2 ? /* @__PURE__ */ import_react51.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react51.default.createElement(FaTimes, null) : value2));
   }
   var LIMIT_GIVEAWAY_LIST = 10;
   function PastGiveaways({
     giveaways,
     setPastGiveaways
   }) {
-    return /* @__PURE__ */ import_react50.default.createElement("div", {
+    return /* @__PURE__ */ import_react51.default.createElement("div", {
       className: "mt-4 flex flex-col gap-5 flex-1 pb-5"
-    }, /* @__PURE__ */ import_react50.default.createElement("h1", {
+    }, /* @__PURE__ */ import_react51.default.createElement("h1", {
       className: "text-3xl flex items-center"
     }, "Last ", Math.min(giveaways.length, LIMIT_GIVEAWAY_LIST), " of ", giveaways.length, " Total Past Giveaway", giveaways.length === 1 ? "" : "s"), giveaways.slice(0, LIMIT_GIVEAWAY_LIST).map((giveaway, idx) => {
       var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j;
-      return /* @__PURE__ */ import_react50.default.createElement("div", {
+      return /* @__PURE__ */ import_react51.default.createElement("div", {
         key: idx,
         className: "border border-purple-600 rounded-md px-3 py-2 flex flex-col gap-2 bg-gray-700"
-      }, /* @__PURE__ */ import_react50.default.createElement("div", {
+      }, /* @__PURE__ */ import_react51.default.createElement("div", {
         className: "flex flex-row gap-1 justify-between font-bold"
-      }, typeNameMap[giveaway.type], /* @__PURE__ */ import_react50.default.createElement("div", {
+      }, typeNameMap[giveaway.type], /* @__PURE__ */ import_react51.default.createElement("div", {
         title: format(new Date(giveaway.createdAt), "PPPppp"),
         className: "flex flex-row gap-1 justify-center items-center"
-      }, /* @__PURE__ */ import_react50.default.createElement(FaClock, {
+      }, /* @__PURE__ */ import_react51.default.createElement(FaClock, {
         className: "text-xs"
-      }), formatDistanceToNow(new Date(giveaway.createdAt), { addSuffix: true }))), /* @__PURE__ */ import_react50.default.createElement("div", {
+      }), formatDistanceToNow(new Date(giveaway.createdAt), { addSuffix: true }))), /* @__PURE__ */ import_react51.default.createElement("div", {
         className: "flex flex-row justify-center items-center flex-1"
-      }, /* @__PURE__ */ import_react50.default.createElement("div", {
+      }, /* @__PURE__ */ import_react51.default.createElement("div", {
         className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md"
-      }, "Notes"), /* @__PURE__ */ import_react50.default.createElement("input", {
+      }, "Notes"), /* @__PURE__ */ import_react51.default.createElement("input", {
         className: "bg-gray-600 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1 overflow-ellipsis h-full max-w-full flex justify-center items-center",
         placeholder: "Notes...",
         value: giveaway.notes || "",
@@ -68398,34 +68441,34 @@ to {
           clone[giveawayIdxToChange].notes = e3.target.value;
           return clone;
         })
-      })), /* @__PURE__ */ import_react50.default.createElement("div", null, /* @__PURE__ */ import_react50.default.createElement("div", {
+      })), /* @__PURE__ */ import_react51.default.createElement("div", null, /* @__PURE__ */ import_react51.default.createElement("div", {
         className: "border-b border-purple-600 mb-2"
-      }, "Winners"), /* @__PURE__ */ import_react50.default.createElement("div", {
+      }, "Winners"), /* @__PURE__ */ import_react51.default.createElement("div", {
         className: "flex flex-col gap-2 px-2"
-      }, giveaway.winners.map((w2, widx) => /* @__PURE__ */ import_react50.default.createElement("div", {
+      }, giveaway.winners.map((w2, widx) => /* @__PURE__ */ import_react51.default.createElement("div", {
         key: `${idx}-${widx}`,
         className: "border border-purple-600 rounded-md flex flex-row gap-1 flex-1 items-center"
-      }, /* @__PURE__ */ import_react50.default.createElement("div", {
+      }, /* @__PURE__ */ import_react51.default.createElement("div", {
         className: "bg-purple-600 text-white h-full flex justify-center items-center px-3 py-2"
-      }, w2.login), /* @__PURE__ */ import_react50.default.createElement("div", {
+      }, w2.login), /* @__PURE__ */ import_react51.default.createElement("div", {
         className: "px-3 py-2 flex flex-row gap-3 flex-1"
-      }, /* @__PURE__ */ import_react50.default.createElement("div", {
+      }, /* @__PURE__ */ import_react51.default.createElement("div", {
         className: "flex flex-row items-center gap-1"
-      }, "Sub:", " ", w2.wasSubscriber ? /* @__PURE__ */ import_react50.default.createElement(FaCheck, {
+      }, "Sub:", " ", w2.wasSubscriber ? /* @__PURE__ */ import_react51.default.createElement(FaCheck, {
         className: "text-green-600"
-      }) : /* @__PURE__ */ import_react50.default.createElement(FaTimes, {
+      }) : /* @__PURE__ */ import_react51.default.createElement(FaTimes, {
         className: "text-red-600"
-      })), /* @__PURE__ */ import_react50.default.createElement("div", {
+      })), /* @__PURE__ */ import_react51.default.createElement("div", {
         className: "flex flex-row items-center gap-1"
-      }, "Follower:", " ", w2.wasFollower ? /* @__PURE__ */ import_react50.default.createElement(FaCheck, {
+      }, "Follower:", " ", w2.wasFollower ? /* @__PURE__ */ import_react51.default.createElement(FaCheck, {
         className: "text-green-600"
-      }) : /* @__PURE__ */ import_react50.default.createElement(FaTimes, {
+      }) : /* @__PURE__ */ import_react51.default.createElement(FaTimes, {
         className: "text-red-600"
-      })), /* @__PURE__ */ import_react50.default.createElement("div", {
+      })), /* @__PURE__ */ import_react51.default.createElement("div", {
         className: "flex flex-row justify-center items-center flex-1"
-      }, /* @__PURE__ */ import_react50.default.createElement("div", {
+      }, /* @__PURE__ */ import_react51.default.createElement("div", {
         className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md"
-      }, "Notes"), /* @__PURE__ */ import_react50.default.createElement("input", {
+      }, "Notes"), /* @__PURE__ */ import_react51.default.createElement("input", {
         className: "bg-gray-600 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1 overflow-ellipsis h-full max-w-full flex justify-center items-center",
         placeholder: "Notes...",
         value: w2.notes,
@@ -68440,49 +68483,49 @@ to {
           clone[giveawayIdxToChange].winners[winnerIdxToChange].notes = e3.target.value;
           return clone;
         })
-      }))))))), /* @__PURE__ */ import_react50.default.createElement("div", null, /* @__PURE__ */ import_react50.default.createElement("div", {
+      }))))))), /* @__PURE__ */ import_react51.default.createElement("div", null, /* @__PURE__ */ import_react51.default.createElement("div", {
         className: "border-b border-purple-600 mb-2"
-      }, "Stats"), /* @__PURE__ */ import_react50.default.createElement("div", {
+      }, "Stats"), /* @__PURE__ */ import_react51.default.createElement("div", {
         className: "grid grid-cols-5 gap-2 px-2"
-      }, /* @__PURE__ */ import_react50.default.createElement(SettingItem, {
+      }, /* @__PURE__ */ import_react51.default.createElement(SettingItem, {
         label: "Users",
         value: (_b = (_a = giveaway.giveawayStats) == null ? void 0 : _a.users) != null ? _b : "?"
-      }), /* @__PURE__ */ import_react50.default.createElement(SettingItem, {
+      }), /* @__PURE__ */ import_react51.default.createElement(SettingItem, {
         label: "Entries",
         value: (_d = (_c = giveaway.giveawayStats) == null ? void 0 : _c.entries) != null ? _d : "?"
-      }), /* @__PURE__ */ import_react50.default.createElement(SettingItem, {
+      }), /* @__PURE__ */ import_react51.default.createElement(SettingItem, {
         label: "Followers",
         value: (_f = (_e = giveaway.giveawayStats) == null ? void 0 : _e.followers) != null ? _f : "?"
-      }), /* @__PURE__ */ import_react50.default.createElement(SettingItem, {
+      }), /* @__PURE__ */ import_react51.default.createElement(SettingItem, {
         label: "Subs",
         value: (_h = (_g = giveaway.giveawayStats) == null ? void 0 : _g.subs) != null ? _h : "?"
-      }), /* @__PURE__ */ import_react50.default.createElement(SettingItem, {
+      }), /* @__PURE__ */ import_react51.default.createElement(SettingItem, {
         label: "Final Entries",
         value: (_j = (_i = giveaway.giveawayStats) == null ? void 0 : _i.finalEntries) != null ? _j : "?"
-      }))), /* @__PURE__ */ import_react50.default.createElement("div", null, /* @__PURE__ */ import_react50.default.createElement("div", {
+      }))), /* @__PURE__ */ import_react51.default.createElement("div", null, /* @__PURE__ */ import_react51.default.createElement("div", {
         className: "border-b border-purple-600 mb-2"
-      }, "Settings"), /* @__PURE__ */ import_react50.default.createElement("div", {
+      }, "Settings"), /* @__PURE__ */ import_react51.default.createElement("div", {
         className: "grid grid-cols-4 gap-2 px-2"
-      }, /* @__PURE__ */ import_react50.default.createElement(SettingItem, {
+      }, /* @__PURE__ */ import_react51.default.createElement(SettingItem, {
         label: "Sub Luck",
         value: giveaway.settings.subLuck.toString()
-      }), /* @__PURE__ */ import_react50.default.createElement(SettingItem, {
+      }), /* @__PURE__ */ import_react51.default.createElement(SettingItem, {
         label: "# Winners",
         value: giveaway.settings.numberOfWinners.toString()
-      }), /* @__PURE__ */ import_react50.default.createElement(SettingItem, {
+      }), /* @__PURE__ */ import_react51.default.createElement(SettingItem, {
         label: "Followers Only",
         value: giveaway.settings.followersOnly
-      }), /* @__PURE__ */ import_react50.default.createElement(SettingItem, {
+      }), /* @__PURE__ */ import_react51.default.createElement(SettingItem, {
         label: "Send Messages",
         value: giveaway.settings.sendMessages
-      }), /* @__PURE__ */ import_react50.default.createElement("div", {
+      }), /* @__PURE__ */ import_react51.default.createElement("div", {
         className: "grid col-span-4"
-      }, /* @__PURE__ */ import_react50.default.createElement(SettingItem, {
+      }, /* @__PURE__ */ import_react51.default.createElement(SettingItem, {
         label: "Chat Command",
         value: giveaway.settings.chatCommand.toString().trim() || "No command"
-      })), /* @__PURE__ */ import_react50.default.createElement("div", {
+      })), /* @__PURE__ */ import_react51.default.createElement("div", {
         className: "grid col-span-4"
-      }, /* @__PURE__ */ import_react50.default.createElement(SettingItem, {
+      }, /* @__PURE__ */ import_react51.default.createElement(SettingItem, {
         label: "Winner Message",
         value: giveaway.settings.winnerMessage.toString()
       })))));
@@ -68490,10 +68533,10 @@ to {
   }
 
   // src/components/screens/Settings.tsx
-  var React44 = __toModule(require_react());
+  var React45 = __toModule(require_react());
 
   // src/utils/updates.tsx
-  var import_react51 = __toModule(require_react());
+  var import_react52 = __toModule(require_react());
   var APP_VERSION = globalThis.NL_APP_VERSION;
   async function checkForUpdate() {
     try {
@@ -68501,12 +68544,12 @@ to {
       if (manifest.version != NL_APPVERSION) {
         console.info("[update]", { from: NL_APPVERSION, to: manifest.version });
         Et((t2) => {
-          return /* @__PURE__ */ import_react51.default.createElement("div", {
+          return /* @__PURE__ */ import_react52.default.createElement("div", {
             className: "flex flex-row gap-4 justify-center items-center"
-          }, /* @__PURE__ */ import_react51.default.createElement("button", {
+          }, /* @__PURE__ */ import_react52.default.createElement("button", {
             onClick: () => Neutralino.os.open(manifest.data.url),
             className: "underline text-purple-600"
-          }, "v", manifest.version, " available \u2192"), "or", /* @__PURE__ */ import_react51.default.createElement("button", {
+          }, "v", manifest.version, " available \u2192"), "or", /* @__PURE__ */ import_react52.default.createElement("button", {
             className: "bg-purple-600 px-2 py-1 rounded-md text-white hover:scale-105",
             onClick: async () => {
               Et("The app will now install the update and try to reopen, you may need to reopen it manually", {
@@ -68531,7 +68574,7 @@ to {
     }
   }
   function useUpdateCheck() {
-    import_react51.default.useEffect(() => {
+    import_react52.default.useEffect(() => {
       void checkForUpdate();
     }, []);
   }
@@ -68543,29 +68586,29 @@ to {
     forfeits,
     setForfeits
   }) {
-    return /* @__PURE__ */ React44.createElement("div", {
+    return /* @__PURE__ */ React45.createElement("div", {
       className: "mt-2 flex flex-col gap-3 flex-1 pb-2"
-    }, /* @__PURE__ */ React44.createElement("h1", {
+    }, /* @__PURE__ */ React45.createElement("h1", {
       className: "text-3xl -mb-1"
-    }, "Settings"), /* @__PURE__ */ React44.createElement("div", {
+    }, "Settings"), /* @__PURE__ */ React45.createElement("div", {
       className: "flex flex-col gap-2"
-    }, /* @__PURE__ */ React44.createElement("div", {
+    }, /* @__PURE__ */ React45.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ React44.createElement("div", {
+    }, /* @__PURE__ */ React45.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ React44.createElement("h2", {
+    }, /* @__PURE__ */ React45.createElement("h2", {
       className: "text-xl"
-    }, "Blocklist ", /* @__PURE__ */ React44.createElement("small", null, "(", settings.blocklist.length, ")")), /* @__PURE__ */ React44.createElement("small", {
+    }, "Blocklist ", /* @__PURE__ */ React45.createElement("small", null, "(", settings.blocklist.length, ")")), /* @__PURE__ */ React45.createElement("small", {
       className: "text-m"
-    }, "These users will be excluded from giveaways")), /* @__PURE__ */ React44.createElement("button", {
+    }, "These users will be excluded from giveaways")), /* @__PURE__ */ React45.createElement("button", {
       className: "border border-purple-600 rounded-md px-3 flex flex-row gap-1 justify-center items-center",
       onClick: () => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { blocklist: (s3.blocklist || []).concat("") }))
-    }, /* @__PURE__ */ React44.createElement(FaPlus, null), " Add Item")), /* @__PURE__ */ React44.createElement("div", {
+    }, /* @__PURE__ */ React45.createElement(FaPlus, null), " Add Item")), /* @__PURE__ */ React45.createElement("div", {
       className: "grid grid-cols-4 gap-2 text-sm"
-    }, (settings.blocklist || []).map((u3, i3) => /* @__PURE__ */ React44.createElement("div", {
+    }, (settings.blocklist || []).map((u3, i3) => /* @__PURE__ */ React45.createElement("div", {
       className: "relative flex-1",
       key: i3
-    }, /* @__PURE__ */ React44.createElement("input", {
+    }, /* @__PURE__ */ React45.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-md border-b border-purple-500 w-full overflow-ellipsis",
       placeholder: "Name...",
       value: u3,
@@ -68575,91 +68618,91 @@ to {
         return __spreadProps(__spreadValues({}, s3), { blocklist: list });
       }),
       title: "Account name to block from winner giveaways"
-    }), /* @__PURE__ */ React44.createElement("button", {
+    }), /* @__PURE__ */ React45.createElement("button", {
       className: "text-red-600 absolute right-1.5 top-1.5 text-xl",
       onClick: () => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { blocklist: removeIdx(s3.blocklist, i3) }))
-    }, /* @__PURE__ */ React44.createElement(FaTimes, null)))))), /* @__PURE__ */ React44.createElement("div", {
+    }, /* @__PURE__ */ React45.createElement(FaTimes, null)))))), /* @__PURE__ */ React45.createElement("div", {
       className: "flex flex-col gap-2"
-    }, /* @__PURE__ */ React44.createElement("div", {
+    }, /* @__PURE__ */ React45.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ React44.createElement("div", {
+    }, /* @__PURE__ */ React45.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ React44.createElement("h2", {
+    }, /* @__PURE__ */ React45.createElement("h2", {
       className: "text-xl"
-    }, "Performance Mode"), /* @__PURE__ */ React44.createElement("small", {
+    }, "Performance Mode"), /* @__PURE__ */ React45.createElement("small", {
       className: "text-m"
-    }, "Will hide chat when there are no winners, and disable chat scroll following"))), /* @__PURE__ */ React44.createElement("div", {
+    }, "Will hide chat when there are no winners, and disable chat scroll following"))), /* @__PURE__ */ React45.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
-    }, /* @__PURE__ */ React44.createElement("div", {
+    }, /* @__PURE__ */ React45.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",
       title: "If enabled, will send messages tagging winners in Twitch chat"
-    }, "Enabled?"), /* @__PURE__ */ React44.createElement("button", {
+    }, "Enabled?"), /* @__PURE__ */ React45.createElement("button", {
       className: "flex-1 text-2xl text-center justify-center items-center flex transition-opacity hover:opacity-60",
       onClick: () => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { performanceMode: !s3.performanceMode }))
-    }, settings.performanceMode ? /* @__PURE__ */ React44.createElement(FaCheck, null) : /* @__PURE__ */ React44.createElement(FaTimes, null)))), /* @__PURE__ */ React44.createElement("div", {
+    }, settings.performanceMode ? /* @__PURE__ */ React45.createElement(FaCheck, null) : /* @__PURE__ */ React45.createElement(FaTimes, null)))), /* @__PURE__ */ React45.createElement("div", {
       className: "flex flex-col gap-2"
-    }, /* @__PURE__ */ React44.createElement("div", {
+    }, /* @__PURE__ */ React45.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ React44.createElement("div", {
+    }, /* @__PURE__ */ React45.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ React44.createElement("h2", {
+    }, /* @__PURE__ */ React45.createElement("h2", {
       className: "text-xl"
-    }, "Giveaway Forfeit Command"), /* @__PURE__ */ React44.createElement("small", {
+    }, "Giveaway Forfeit Command"), /* @__PURE__ */ React45.createElement("small", {
       className: "text-m"
-    }, "If a user types anything that matchs this command, they will forfeit winner any command, until list is cleared. No spaces."))), /* @__PURE__ */ React44.createElement("div", {
+    }, "If a user types anything that matchs this command, they will forfeit winner any command, until list is cleared. No spaces."))), /* @__PURE__ */ React45.createElement("div", {
       className: "flex flex-row gap-4"
-    }, /* @__PURE__ */ React44.createElement("div", {
+    }, /* @__PURE__ */ React45.createElement("div", {
       className: "flex flex-row justify-center items-center flex-1"
-    }, /* @__PURE__ */ React44.createElement("div", {
+    }, /* @__PURE__ */ React45.createElement("div", {
       className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md",
       title: "Filters messages to include this"
-    }, "Forfeit Command"), /* @__PURE__ */ React44.createElement("input", {
+    }, "Forfeit Command"), /* @__PURE__ */ React45.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1",
       placeholder: "Empty means no forfeits...",
       value: settings.forfeitCommand || "",
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { forfeitCommand: e3.target.value.trim() })),
       title: "Forfeit command..."
-    })), /* @__PURE__ */ React44.createElement("div", {
+    })), /* @__PURE__ */ React45.createElement("div", {
       className: "flex-0 bg-purple-600 px-2 py-1 rounded-md flex justify-center items-center"
-    }, "Number of forfeits: ", forfeits.length), /* @__PURE__ */ React44.createElement("button", {
+    }, "Number of forfeits: ", forfeits.length), /* @__PURE__ */ React45.createElement("button", {
       className: "flex-0 bg-red-600 px-2 py-1 rounded-md flex justify-center items-center gap-1",
       onClick: () => setForfeits([])
-    }, /* @__PURE__ */ React44.createElement(FaTimes, null), " Reset List"))), /* @__PURE__ */ React44.createElement("div", {
+    }, /* @__PURE__ */ React45.createElement(FaTimes, null), " Reset List"))), /* @__PURE__ */ React45.createElement("div", {
       className: "flex flex-col gap-2"
-    }, /* @__PURE__ */ React44.createElement("div", {
+    }, /* @__PURE__ */ React45.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ React44.createElement("div", {
+    }, /* @__PURE__ */ React45.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ React44.createElement("h2", {
+    }, /* @__PURE__ */ React45.createElement("h2", {
       className: "text-xl"
-    }, "Alert/Message Settings"))), /* @__PURE__ */ React44.createElement("div", {
+    }, "Alert/Message Settings"))), /* @__PURE__ */ React45.createElement("div", {
       className: "flex flex-row gap-2 justify-center items-center"
-    }, /* @__PURE__ */ React44.createElement("div", {
+    }, /* @__PURE__ */ React45.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
-    }, /* @__PURE__ */ React44.createElement("div", {
+    }, /* @__PURE__ */ React45.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",
       title: "If enabled, will automatically send the alert and chat message, otherwise you have to manually send them"
-    }, "Auto Announce"), /* @__PURE__ */ React44.createElement("button", {
+    }, "Auto Announce"), /* @__PURE__ */ React45.createElement("button", {
       className: "flex-1 text-2xl text-center justify-center items-center flex transition-opacity hover:opacity-60",
       onClick: () => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { autoAnnounce: s3.autoAnnounce === void 0 ? false : !s3.autoAnnounce }))
-    }, settings.autoAnnounce || settings.autoAnnounce === void 0 ? /* @__PURE__ */ React44.createElement(FaCheck, null) : /* @__PURE__ */ React44.createElement(FaTimes, null))))), /* @__PURE__ */ React44.createElement("div", {
+    }, settings.autoAnnounce || settings.autoAnnounce === void 0 ? /* @__PURE__ */ React45.createElement(FaCheck, null) : /* @__PURE__ */ React45.createElement(FaTimes, null))))), /* @__PURE__ */ React45.createElement("div", {
       className: "flex-1 flex items-end gap-2"
-    }, /* @__PURE__ */ React44.createElement("div", {
+    }, /* @__PURE__ */ React45.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ React44.createElement("button", {
+    }, /* @__PURE__ */ React45.createElement("button", {
       className: "text-purple-200 opacity-80 text-xs",
       onClick: () => Neutralino.os.open(`https://github.com/maael/giveaway-o-tron/releases/v${APP_VERSION}`)
-    }, "Version: ", APP_VERSION ? `v${APP_VERSION}` : "Unknown Version")), /* @__PURE__ */ React44.createElement("button", {
+    }, "Version: ", APP_VERSION ? `v${APP_VERSION}` : "Unknown Version")), /* @__PURE__ */ React45.createElement("button", {
       className: "bg-purple-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity text-xs",
       onClick: async () => {
         await checkForUpdate();
       }
-    }, /* @__PURE__ */ React44.createElement(FaDownload, null), " Check for update"), /* @__PURE__ */ React44.createElement("button", {
+    }, /* @__PURE__ */ React45.createElement(FaDownload, null), " Check for update"), /* @__PURE__ */ React45.createElement("button", {
       className: "bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity text-xs",
       onClick: async () => {
         Neutralino.os.open(`https://giveaway-o-tron.vercel.app/api/auth/signout`);
       }
-    }, /* @__PURE__ */ React44.createElement(FaExclamationTriangle, null), " Sign Out Token Tool"), /* @__PURE__ */ React44.createElement("button", {
+    }, /* @__PURE__ */ React45.createElement(FaExclamationTriangle, null), " Sign Out Token Tool"), /* @__PURE__ */ React45.createElement("button", {
       className: "bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity text-xs",
       onClick: async () => {
         try {
@@ -68670,11 +68713,11 @@ to {
           await Neutralino.app.restartProcess({ args: "--restarted" });
         }
       }
-    }, /* @__PURE__ */ React44.createElement(FaExclamationTriangle, null), " Reset Channel Info")));
+    }, /* @__PURE__ */ React45.createElement(FaExclamationTriangle, null), " Reset Channel Info")));
   }
 
   // src/components/primitives/Header.tsx
-  var import_react52 = __toModule(require_react());
+  var import_react53 = __toModule(require_react());
 
   // node_modules/react-icons/si/index.esm.js
   function SiObsstudio(props) {
@@ -68690,51 +68733,51 @@ to {
   }) {
     const location2 = useLocation();
     const homeRoute = channelInfo.login ? "/" : "/setup";
-    return /* @__PURE__ */ import_react52.default.createElement("div", {
+    return /* @__PURE__ */ import_react53.default.createElement("div", {
       className: "flex flex-row justify-start gap-2"
-    }, /* @__PURE__ */ import_react52.default.createElement("div", {
+    }, /* @__PURE__ */ import_react53.default.createElement("div", {
       className: "flex-1 flex flex-row gap-2 items-center"
-    }, /* @__PURE__ */ import_react52.default.createElement("div", {
+    }, /* @__PURE__ */ import_react53.default.createElement("div", {
       className: "inline-block"
-    }, /* @__PURE__ */ import_react52.default.createElement(Link, {
+    }, /* @__PURE__ */ import_react53.default.createElement(Link, {
       to: homeRoute
-    }, /* @__PURE__ */ import_react52.default.createElement("h1", {
+    }, /* @__PURE__ */ import_react53.default.createElement("h1", {
       className: "flex flex-row gap-1 items-center text-white bg-purple-600 rounded-md px-3 py-1 transform hover:scale-105 transition-transform shadow-md"
-    }, /* @__PURE__ */ import_react52.default.createElement(FaRobot, {
+    }, /* @__PURE__ */ import_react53.default.createElement(FaRobot, {
       className: "text-2xl"
-    }), " ", /* @__PURE__ */ import_react52.default.createElement("span", {
+    }), " ", /* @__PURE__ */ import_react53.default.createElement("span", {
       className: "hidden sm:block"
-    }, location2.pathname === homeRoute ? /* @__PURE__ */ import_react52.default.createElement("span", {
+    }, location2.pathname === homeRoute ? /* @__PURE__ */ import_react53.default.createElement("span", {
       className: "relative -top-0.5 ml-1"
-    }, "Giveaway-o-tron") : /* @__PURE__ */ import_react52.default.createElement(FaAngleLeft, {
+    }, "Giveaway-o-tron") : /* @__PURE__ */ import_react53.default.createElement(FaAngleLeft, {
       className: "text-xl"
-    }))))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react52.default.createElement(Link, {
+    }))))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react53.default.createElement(Link, {
       to: "/settings"
-    }, /* @__PURE__ */ import_react52.default.createElement("div", {
+    }, /* @__PURE__ */ import_react53.default.createElement("div", {
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
       title: "Settings (blocklist etc)"
-    }, /* @__PURE__ */ import_react52.default.createElement(FaCogs, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react52.default.createElement(Link, {
+    }, /* @__PURE__ */ import_react53.default.createElement(FaCogs, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react53.default.createElement(Link, {
       to: "/discord"
-    }, /* @__PURE__ */ import_react52.default.createElement("div", {
+    }, /* @__PURE__ */ import_react53.default.createElement("div", {
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
       title: "Discord integration"
-    }, /* @__PURE__ */ import_react52.default.createElement(FaDiscord, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react52.default.createElement(Link, {
+    }, /* @__PURE__ */ import_react53.default.createElement(FaDiscord, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react53.default.createElement(Link, {
       to: "/giveaways"
-    }, /* @__PURE__ */ import_react52.default.createElement("div", {
+    }, /* @__PURE__ */ import_react53.default.createElement("div", {
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
       title: "Past giveways"
-    }, /* @__PURE__ */ import_react52.default.createElement(FaClock, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react52.default.createElement(Link, {
+    }, /* @__PURE__ */ import_react53.default.createElement(FaClock, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react53.default.createElement(Link, {
       to: "/obs"
-    }, /* @__PURE__ */ import_react52.default.createElement("div", {
+    }, /* @__PURE__ */ import_react53.default.createElement("div", {
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
       title: "Past giveways"
-    }, /* @__PURE__ */ import_react52.default.createElement(SiObsstudio, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react52.default.createElement("button", {
+    }, /* @__PURE__ */ import_react53.default.createElement(SiObsstudio, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react53.default.createElement("button", {
       title: "Open FAQ",
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
       onClick: () => {
         Neutralino.os.open("https://giveaway-o-tron.mael.tech/guide#faq");
       }
-    }, /* @__PURE__ */ import_react52.default.createElement(FaQuestion, null))), /* @__PURE__ */ import_react52.default.createElement("form", {
+    }, /* @__PURE__ */ import_react53.default.createElement(FaQuestion, null))), /* @__PURE__ */ import_react53.default.createElement("form", {
       className: "flex flex-row flex-0",
       onSubmit: (e3) => {
         e3.preventDefault();
@@ -68752,25 +68795,25 @@ to {
           setClient(init3(channelInfo));
         }
       }
-    }, /* @__PURE__ */ import_react52.default.createElement("input", {
+    }, /* @__PURE__ */ import_react53.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-l-md border-b border-l border-purple-500",
       placeholder: "Channel Name",
       value: channelInfo.login || "",
       disabled: true,
       title: !!client ? "Disconnect to change" : "Set channel to connect to"
-    }), /* @__PURE__ */ import_react52.default.createElement("button", {
+    }), /* @__PURE__ */ import_react53.default.createElement("button", {
       className: "bg-purple-600 text-white py-1 px-3 rounded-r-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 w-32 justify-center",
       title: "Connect to chat"
-    }, /* @__PURE__ */ import_react52.default.createElement(FaTwitch, null), " ", /* @__PURE__ */ import_react52.default.createElement("span", {
+    }, /* @__PURE__ */ import_react53.default.createElement(FaTwitch, null), " ", /* @__PURE__ */ import_react53.default.createElement("span", {
       className: "hidden sm:block"
     }, client ? "Disconnect" : "Connect"))));
   }
 
   // src/components/screens/Discord.tsx
-  var import_react55 = __toModule(require_react());
+  var import_react56 = __toModule(require_react());
 
   // src/components/primitives/Checkbox.tsx
-  var import_react53 = __toModule(require_react());
+  var import_react54 = __toModule(require_react());
   function Checkbox(_a) {
     var _b = _a, {
       value: value2,
@@ -68781,14 +68824,14 @@ to {
       "onChange",
       "name"
     ]);
-    return /* @__PURE__ */ import_react53.default.createElement("button", __spreadValues({
+    return /* @__PURE__ */ import_react54.default.createElement("button", __spreadValues({
       onClick: () => onChange2((v2) => __spreadProps(__spreadValues({}, v2), { [name]: !v2[name] }))
-    }, btnProps), value2 ? /* @__PURE__ */ import_react53.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react53.default.createElement(FaTimes, null));
+    }, btnProps), value2 ? /* @__PURE__ */ import_react54.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react54.default.createElement(FaTimes, null));
   }
 
   // src/components/primitives/Input.tsx
   var import_classnames24 = __toModule(require_classnames());
-  var import_react54 = __toModule(require_react());
+  var import_react55 = __toModule(require_react());
   function Input(_a) {
     var _b = _a, {
       label,
@@ -68799,12 +68842,12 @@ to {
       "title",
       "outerClassName"
     ]);
-    return /* @__PURE__ */ import_react54.default.createElement("div", {
+    return /* @__PURE__ */ import_react55.default.createElement("div", {
       className: (0, import_classnames24.default)(outerClassName, "flex flex-row justify-center items-center flex-1")
-    }, /* @__PURE__ */ import_react54.default.createElement("div", {
+    }, /* @__PURE__ */ import_react55.default.createElement("div", {
       className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md h-full",
       title
-    }, label), /* @__PURE__ */ import_react54.default.createElement("input", __spreadValues({
+    }, label), /* @__PURE__ */ import_react55.default.createElement("input", __spreadValues({
       className: "bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1 h-full overflow-ellipsis"
     }, inputProps)));
   }
@@ -68815,154 +68858,154 @@ to {
     setSettings
   }) {
     var _a, _b, _c;
-    return /* @__PURE__ */ import_react55.default.createElement("div", {
+    return /* @__PURE__ */ import_react56.default.createElement("div", {
       className: "mt-2 flex flex-col gap-2 flex-1"
-    }, /* @__PURE__ */ import_react55.default.createElement("div", {
+    }, /* @__PURE__ */ import_react56.default.createElement("div", {
       className: "flex flex-row justify-between items-center"
-    }, /* @__PURE__ */ import_react55.default.createElement("h1", {
+    }, /* @__PURE__ */ import_react56.default.createElement("h1", {
       className: "text-3xl"
-    }, "Discord"), /* @__PURE__ */ import_react55.default.createElement("button", {
+    }, "Discord"), /* @__PURE__ */ import_react56.default.createElement("button", {
       className: "bg-purple-600 text-white py-1 px-5 rounded-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 justify-center text-xl mt-2",
       onClick: () => {
         Neutralino.os.open("https://discord.com/api/oauth2/authorize?client_id=1012331926301974558&permissions=150528&scope=bot");
       }
-    }, /* @__PURE__ */ import_react55.default.createElement(FaEnvelope, null), " Invite Bot")), /* @__PURE__ */ import_react55.default.createElement("div", {
+    }, /* @__PURE__ */ import_react56.default.createElement(FaEnvelope, null), " Invite Bot")), /* @__PURE__ */ import_react56.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react55.default.createElement(Input, {
+    }, /* @__PURE__ */ import_react56.default.createElement(Input, {
       label: "Server ID",
       placeholder: "ID...",
       value: settings.guildId || "",
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { guildId: e3.target.value }))
-    }), /* @__PURE__ */ import_react55.default.createElement(Input, {
+    }), /* @__PURE__ */ import_react56.default.createElement(Input, {
       label: "Channel ID",
       placeholder: "ID...",
       value: settings.channelId || "",
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { channelId: e3.target.value }))
-    })), /* @__PURE__ */ import_react55.default.createElement("p", {
+    })), /* @__PURE__ */ import_react56.default.createElement("p", {
       className: "text-sm opacity-90 text-center"
-    }, "After inviting the bot using the button above, find these IDs by:"), /* @__PURE__ */ import_react55.default.createElement("ol", {
+    }, "After inviting the bot using the button above, find these IDs by:"), /* @__PURE__ */ import_react56.default.createElement("ol", {
       className: "text-sm list-decimal max-w-md mx-auto opacity-90 -mt-1"
-    }, /* @__PURE__ */ import_react55.default.createElement("li", null, "In Discord, go to settings"), /* @__PURE__ */ import_react55.default.createElement("li", null, "Go to Appearance, Advanced, and enable Developer Mode"), /* @__PURE__ */ import_react55.default.createElement("li", null, "Right click on your Discord Server icon in the sidebar, and select Copy ID, and paste above"), /* @__PURE__ */ import_react55.default.createElement("li", null, "Do the same again but for a channel")), /* @__PURE__ */ import_react55.default.createElement("h1", {
+    }, /* @__PURE__ */ import_react56.default.createElement("li", null, "In Discord, go to settings"), /* @__PURE__ */ import_react56.default.createElement("li", null, "Go to Appearance, Advanced, and enable Developer Mode"), /* @__PURE__ */ import_react56.default.createElement("li", null, "Right click on your Discord Server icon in the sidebar, and select Copy ID, and paste above"), /* @__PURE__ */ import_react56.default.createElement("li", null, "Do the same again but for a channel")), /* @__PURE__ */ import_react56.default.createElement("h1", {
       className: "text-xl"
-    }, "Message Settings"), /* @__PURE__ */ import_react55.default.createElement("div", {
+    }, "Message Settings"), /* @__PURE__ */ import_react56.default.createElement("div", {
       className: "flex flex-col gap-2 text-sm"
-    }, /* @__PURE__ */ import_react55.default.createElement("div", {
+    }, /* @__PURE__ */ import_react56.default.createElement("div", {
       className: "flex flex-row justify-center items-center gap-6"
-    }, /* @__PURE__ */ import_react55.default.createElement(Input, {
+    }, /* @__PURE__ */ import_react56.default.createElement(Input, {
       outerClassName: "flex-1",
       label: "Message Colour",
       placeholder: "Hex code...",
       value: settings.messageColour || "",
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { messageColour: e3.target.value }))
-    }), /* @__PURE__ */ import_react55.default.createElement(SliderOuter, {
+    }), /* @__PURE__ */ import_react56.default.createElement(SliderOuter, {
       label: "Giveaway Alert Min Time",
       value: settings.giveawayMinTime || ONE_MIN,
-      renderValue: (v2) => /* @__PURE__ */ import_react55.default.createElement(import_react55.default.Fragment, null, formatDistanceStrict(Date.now() + v2, new Date())),
+      renderValue: (v2) => /* @__PURE__ */ import_react56.default.createElement(import_react56.default.Fragment, null, formatDistanceStrict(Date.now() + v2, new Date())),
       min: ONE_MIN,
       max: ONE_MIN * 30,
       onChange: (v2) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { giveawayMinTime: v2 }))
-    })), /* @__PURE__ */ import_react55.default.createElement("div", {
+    })), /* @__PURE__ */ import_react56.default.createElement("div", {
       className: "flex flex-row justify-center items-center gap-2"
-    }, /* @__PURE__ */ import_react55.default.createElement("div", {
+    }, /* @__PURE__ */ import_react56.default.createElement("div", {
       className: "flex-1 bg-purple-600 px-2 py-1 text-center rounded-md"
-    }, "Giveaway Start:"), /* @__PURE__ */ import_react55.default.createElement(Input, {
+    }, "Giveaway Start:"), /* @__PURE__ */ import_react56.default.createElement(Input, {
       outerClassName: "flex-2",
       label: "Title",
       placeholder: "Title...",
       value: settings.startTitle || "",
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { startTitle: e3.target.value }))
-    }), /* @__PURE__ */ import_react55.default.createElement(Input, {
+    }), /* @__PURE__ */ import_react56.default.createElement(Input, {
       outerClassName: "flex-3",
       label: "Body",
       placeholder: "Body...",
       value: settings.startBody || "",
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { startBody: e3.target.value }))
-    }), /* @__PURE__ */ import_react55.default.createElement(Checkbox, {
+    }), /* @__PURE__ */ import_react56.default.createElement(Checkbox, {
       className: "bg-purple-600 rounded-md h-full px-2 py-1",
       value: (_a = settings.startEnabled) != null ? _a : true,
       name: "startEnabled",
       onChange: setSettings,
       title: "Enable Discord messages for starting giveaways"
-    })), /* @__PURE__ */ import_react55.default.createElement("div", {
+    })), /* @__PURE__ */ import_react56.default.createElement("div", {
       className: "flex flex-row justify-center items-center gap-2"
-    }, /* @__PURE__ */ import_react55.default.createElement("div", {
+    }, /* @__PURE__ */ import_react56.default.createElement("div", {
       className: "flex-1 bg-purple-600 px-2 py-1 text-center rounded-md"
-    }, "Giveaway End:"), /* @__PURE__ */ import_react55.default.createElement(Input, {
+    }, "Giveaway End:"), /* @__PURE__ */ import_react56.default.createElement(Input, {
       outerClassName: "flex-2",
       label: "Title",
       placeholder: "Title...",
       value: settings.endTitle || "",
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { endTitle: e3.target.value }))
-    }), /* @__PURE__ */ import_react55.default.createElement(Input, {
+    }), /* @__PURE__ */ import_react56.default.createElement(Input, {
       outerClassName: "flex-3",
       label: "Body",
       placeholder: "Body...",
       value: settings.endBody || "",
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { endBody: e3.target.value }))
-    }), /* @__PURE__ */ import_react55.default.createElement(Checkbox, {
+    }), /* @__PURE__ */ import_react56.default.createElement(Checkbox, {
       className: "bg-purple-600 rounded-md h-full px-2 py-1",
       value: (_b = settings.endEnabled) != null ? _b : true,
       name: "endEnabled",
       onChange: setSettings,
       title: "Enable Discord messages for ending giveaways"
-    })), /* @__PURE__ */ import_react55.default.createElement("div", {
+    })), /* @__PURE__ */ import_react56.default.createElement("div", {
       className: "flex flex-row justify-center items-center gap-2"
-    }, /* @__PURE__ */ import_react55.default.createElement("div", {
+    }, /* @__PURE__ */ import_react56.default.createElement("div", {
       className: "flex-1 bg-purple-600 px-2 py-1 text-center rounded-md"
-    }, "Winner:"), /* @__PURE__ */ import_react55.default.createElement(Input, {
+    }, "Winner:"), /* @__PURE__ */ import_react56.default.createElement(Input, {
       outerClassName: "flex-2",
       label: "Title",
       placeholder: "Title...",
       value: settings.winnerTitle || "",
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { winnerTitle: e3.target.value }))
-    }), /* @__PURE__ */ import_react55.default.createElement(Input, {
+    }), /* @__PURE__ */ import_react56.default.createElement(Input, {
       outerClassName: "flex-3",
       label: "Body",
       placeholder: "Body...",
       value: settings.winnerBody || "",
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { winnerBody: e3.target.value }))
-    }), /* @__PURE__ */ import_react55.default.createElement(Checkbox, {
+    }), /* @__PURE__ */ import_react56.default.createElement(Checkbox, {
       className: "bg-purple-600 rounded-md h-full px-2 py-1",
       value: (_c = settings.winnerEnabled) != null ? _c : true,
       name: "winnerEnabled",
       onChange: setSettings,
       title: "Enable Discord messages for winners"
-    })), /* @__PURE__ */ import_react55.default.createElement("p", {
+    })), /* @__PURE__ */ import_react56.default.createElement("p", {
       className: "px-2 mb-3 opacity-90 text-sm"
-    }, "You can mention roles with @rolename. Some special keywords you can include are:"), /* @__PURE__ */ import_react55.default.createElement("div", {
+    }, "You can mention roles with @rolename. Some special keywords you can include are:"), /* @__PURE__ */ import_react56.default.createElement("div", {
       className: "flex flex-col gap-2 -mt-3 text-sm"
-    }, /* @__PURE__ */ import_react55.default.createElement("div", {
+    }, /* @__PURE__ */ import_react56.default.createElement("div", {
       className: "flex flex-row gap-2 relative"
-    }, /* @__PURE__ */ import_react55.default.createElement("div", {
+    }, /* @__PURE__ */ import_react56.default.createElement("div", {
       className: "w-1/5 flex justify-end items-start"
-    }, /* @__PURE__ */ import_react55.default.createElement("em", {
+    }, /* @__PURE__ */ import_react56.default.createElement("em", {
       className: "not-italic px-3 py-1 bg-gray-700 text-purple-400 rounded-md"
-    }, "$winner")), /* @__PURE__ */ import_react55.default.createElement("p", {
+    }, "$winner")), /* @__PURE__ */ import_react56.default.createElement("p", {
       className: "flex flex-row items-center"
-    }, "Will be replaced by the winners username (title and body)")), /* @__PURE__ */ import_react55.default.createElement("div", {
+    }, "Will be replaced by the winners username (title and body)")), /* @__PURE__ */ import_react56.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react55.default.createElement("div", {
+    }, /* @__PURE__ */ import_react56.default.createElement("div", {
       className: "w-1/5 flex justify-end items-start"
-    }, /* @__PURE__ */ import_react55.default.createElement("em", {
+    }, /* @__PURE__ */ import_react56.default.createElement("em", {
       className: "not-italic px-3 py-1 bg-gray-700 text-purple-400 rounded-md"
-    }, "$prize")), /* @__PURE__ */ import_react55.default.createElement("p", {
+    }, "$prize")), /* @__PURE__ */ import_react56.default.createElement("p", {
       className: "flex flex-row items-center"
-    }, "Will be replaced by the giveaway name if there is one (title and body)")), /* @__PURE__ */ import_react55.default.createElement("div", {
+    }, "Will be replaced by the giveaway name if there is one (title and body)")), /* @__PURE__ */ import_react56.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react55.default.createElement("div", {
+    }, /* @__PURE__ */ import_react56.default.createElement("div", {
       className: "w-1/5 flex justify-end items-start"
-    }, /* @__PURE__ */ import_react55.default.createElement("em", {
+    }, /* @__PURE__ */ import_react56.default.createElement("em", {
       className: "not-italic px-3 py-1 bg-gray-700 text-purple-400 rounded-md"
-    }, "[any text]($link)")), /* @__PURE__ */ import_react55.default.createElement("p", {
+    }, "[any text]($link)")), /* @__PURE__ */ import_react56.default.createElement("p", {
       className: "flex flex-row items-center"
     }, "Will be replaced by the text between the square brackets, linking to your Twitch (body only)")))));
   }
 
   // src/components/screens/Obs.tsx
-  var import_react63 = __toModule(require_react());
+  var import_react64 = __toModule(require_react());
 
   // src/components/hooks/useCopyToClipboard.ts
-  var React49 = __toModule(require_react());
+  var React50 = __toModule(require_react());
   var useCopyToClipboard = (text, options2 = { resetTimeout: 1e3 }) => {
     const copyToClipboard = (str) => {
       var _a, _b, _c, _d;
@@ -68983,10 +69026,10 @@ to {
       }
       return success;
     };
-    const mounted = React49.useRef(false);
-    const resetTimer = React49.useRef();
-    const [copied, setCopied] = React49.useState(false);
-    React49.useEffect(() => {
+    const mounted = React50.useRef(false);
+    const resetTimer = React50.useRef();
+    const [copied, setCopied] = React50.useState(false);
+    React50.useEffect(() => {
       mounted.current = true;
       return () => {
         if (resetTimer.current)
@@ -68994,13 +69037,13 @@ to {
         mounted.current = false;
       };
     }, []);
-    const copy3 = React49.useCallback(() => {
+    const copy3 = React50.useCallback(() => {
       if (resetTimer.current)
         clearTimeout(resetTimer.current);
       setCopied(copyToClipboard(text));
       resetTimer.current = setTimeout(() => setCopied(false), options2.resetTimeout);
     }, [text, options2.resetTimeout]);
-    React49.useEffect(() => () => {
+    React50.useEffect(() => () => {
       setCopied(false);
     }, [text]);
     return [copied, copy3];
@@ -69008,7 +69051,7 @@ to {
   var useCopyToClipboard_default = useCopyToClipboard;
 
   // node_modules/react-select/dist/index-a7690a33.esm.js
-  var import_react56 = __toModule(require_emotion_react_cjs());
+  var import_react57 = __toModule(require_emotion_react_cjs());
 
   // node_modules/@babel/runtime/helpers/esm/taggedTemplateLiteral.js
   function _taggedTemplateLiteral(strings, raw) {
@@ -69187,8 +69230,8 @@ to {
   }
 
   // node_modules/react-select/dist/index-a7690a33.esm.js
-  var import_react57 = __toModule(require_react());
-  var import_react_dom2 = __toModule(require_react_dom());
+  var import_react58 = __toModule(require_react());
+  var import_react_dom3 = __toModule(require_react_dom());
   function _defineProperty26(obj, key, value2) {
     if (key in obj) {
       Object.defineProperty(obj, key, {
@@ -69595,7 +69638,7 @@ to {
       label: "menu"
     }, _defineProperty25(_ref3, alignToControl(placement), "100%"), _defineProperty25(_ref3, "backgroundColor", colors2.neutral0), _defineProperty25(_ref3, "borderRadius", borderRadius2), _defineProperty25(_ref3, "boxShadow", "0 0 0 1px hsla(0, 0%, 0%, 0.1), 0 4px 11px hsla(0, 0%, 0%, 0.1)"), _defineProperty25(_ref3, "marginBottom", spacing2.menuGutter), _defineProperty25(_ref3, "marginTop", spacing2.menuGutter), _defineProperty25(_ref3, "position", "absolute"), _defineProperty25(_ref3, "width", "100%"), _defineProperty25(_ref3, "zIndex", 1), _ref3;
   };
-  var PortalPlacementContext = /* @__PURE__ */ (0, import_react57.createContext)({
+  var PortalPlacementContext = /* @__PURE__ */ (0, import_react58.createContext)({
     getPortalPlacement: null
   });
   var MenuPlacer = /* @__PURE__ */ function(_Component) {
@@ -69654,11 +69697,11 @@ to {
       }
     }]);
     return MenuPlacer2;
-  }(import_react57.Component);
+  }(import_react58.Component);
   MenuPlacer.contextType = PortalPlacementContext;
   var Menu = function Menu2(props) {
     var children = props.children, className = props.className, cx = props.cx, getStyles = props.getStyles, innerRef = props.innerRef, innerProps = props.innerProps;
-    return (0, import_react56.jsx)("div", _extends({
+    return (0, import_react57.jsx)("div", _extends({
       css: getStyles("menu", props),
       className: cx({
         menu: true
@@ -69679,7 +69722,7 @@ to {
   };
   var MenuList = function MenuList2(props) {
     var children = props.children, className = props.className, cx = props.cx, getStyles = props.getStyles, innerProps = props.innerProps, innerRef = props.innerRef, isMulti = props.isMulti;
-    return (0, import_react56.jsx)("div", _extends({
+    return (0, import_react57.jsx)("div", _extends({
       css: getStyles("menuList", props),
       className: cx({
         "menu-list": true,
@@ -69700,7 +69743,7 @@ to {
   var loadingMessageCSS = noticeCSS;
   var NoOptionsMessage = function NoOptionsMessage2(props) {
     var children = props.children, className = props.className, cx = props.cx, getStyles = props.getStyles, innerProps = props.innerProps;
-    return (0, import_react56.jsx)("div", _extends({
+    return (0, import_react57.jsx)("div", _extends({
       css: getStyles("noOptionsMessage", props),
       className: cx({
         "menu-notice": true,
@@ -69713,7 +69756,7 @@ to {
   };
   var LoadingMessage = function LoadingMessage2(props) {
     var children = props.children, className = props.className, cx = props.cx, getStyles = props.getStyles, innerProps = props.innerProps;
-    return (0, import_react56.jsx)("div", _extends({
+    return (0, import_react57.jsx)("div", _extends({
       css: getStyles("loadingMessage", props),
       className: cx({
         "menu-notice": true,
@@ -69775,21 +69818,21 @@ to {
           position,
           rect
         };
-        var menuWrapper = (0, import_react56.jsx)("div", _extends({
+        var menuWrapper = (0, import_react57.jsx)("div", _extends({
           css: getStyles("menuPortal", state),
           className: cx({
             "menu-portal": true
           }, className)
         }, innerProps), children);
-        return (0, import_react56.jsx)(PortalPlacementContext.Provider, {
+        return (0, import_react57.jsx)(PortalPlacementContext.Provider, {
           value: {
             getPortalPlacement: this.getPortalPlacement
           }
-        }, appendTo ? /* @__PURE__ */ (0, import_react_dom2.createPortal)(menuWrapper, appendTo) : menuWrapper);
+        }, appendTo ? /* @__PURE__ */ (0, import_react_dom3.createPortal)(menuWrapper, appendTo) : menuWrapper);
       }
     }]);
     return MenuPortal2;
-  }(import_react57.Component);
+  }(import_react58.Component);
   var containerCSS = function containerCSS2(_ref3) {
     var isDisabled = _ref3.isDisabled, isRtl = _ref3.isRtl;
     return {
@@ -69801,7 +69844,7 @@ to {
   };
   var SelectContainer = function SelectContainer2(props) {
     var children = props.children, className = props.className, cx = props.cx, getStyles = props.getStyles, innerProps = props.innerProps, isDisabled = props.isDisabled, isRtl = props.isRtl;
-    return (0, import_react56.jsx)("div", _extends({
+    return (0, import_react57.jsx)("div", _extends({
       css: getStyles("container", props),
       className: cx({
         "--is-disabled": isDisabled,
@@ -69824,7 +69867,7 @@ to {
   };
   var ValueContainer = function ValueContainer2(props) {
     var children = props.children, className = props.className, cx = props.cx, innerProps = props.innerProps, isMulti = props.isMulti, getStyles = props.getStyles, hasValue = props.hasValue;
-    return (0, import_react56.jsx)("div", _extends({
+    return (0, import_react57.jsx)("div", _extends({
       css: getStyles("valueContainer", props),
       className: cx({
         "value-container": true,
@@ -69843,7 +69886,7 @@ to {
   };
   var IndicatorsContainer = function IndicatorsContainer2(props) {
     var children = props.children, className = props.className, cx = props.cx, innerProps = props.innerProps, getStyles = props.getStyles;
-    return (0, import_react56.jsx)("div", _extends({
+    return (0, import_react57.jsx)("div", _extends({
       css: getStyles("indicatorsContainer", props),
       className: cx({
         indicators: true
@@ -69866,7 +69909,7 @@ to {
   };
   var Svg = function Svg2(_ref3) {
     var size = _ref3.size, props = _objectWithoutProperties12(_ref3, _excluded$2);
-    return (0, import_react56.jsx)("svg", _extends({
+    return (0, import_react57.jsx)("svg", _extends({
       height: size,
       width: size,
       viewBox: "0 0 20 20",
@@ -69876,16 +69919,16 @@ to {
     }, props));
   };
   var CrossIcon = function CrossIcon2(props) {
-    return (0, import_react56.jsx)(Svg, _extends({
+    return (0, import_react57.jsx)(Svg, _extends({
       size: 20
-    }, props), (0, import_react56.jsx)("path", {
+    }, props), (0, import_react57.jsx)("path", {
       d: "M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
     }));
   };
   var DownChevron = function DownChevron2(props) {
-    return (0, import_react56.jsx)(Svg, _extends({
+    return (0, import_react57.jsx)(Svg, _extends({
       size: 20
-    }, props), (0, import_react56.jsx)("path", {
+    }, props), (0, import_react57.jsx)("path", {
       d: "M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
     }));
   };
@@ -69905,24 +69948,24 @@ to {
   var dropdownIndicatorCSS = baseCSS;
   var DropdownIndicator = function DropdownIndicator2(props) {
     var children = props.children, className = props.className, cx = props.cx, getStyles = props.getStyles, innerProps = props.innerProps;
-    return (0, import_react56.jsx)("div", _extends({
+    return (0, import_react57.jsx)("div", _extends({
       css: getStyles("dropdownIndicator", props),
       className: cx({
         indicator: true,
         "dropdown-indicator": true
       }, className)
-    }, innerProps), children || (0, import_react56.jsx)(DownChevron, null));
+    }, innerProps), children || (0, import_react57.jsx)(DownChevron, null));
   };
   var clearIndicatorCSS = baseCSS;
   var ClearIndicator = function ClearIndicator2(props) {
     var children = props.children, className = props.className, cx = props.cx, getStyles = props.getStyles, innerProps = props.innerProps;
-    return (0, import_react56.jsx)("div", _extends({
+    return (0, import_react57.jsx)("div", _extends({
       css: getStyles("clearIndicator", props),
       className: cx({
         indicator: true,
         "clear-indicator": true
       }, className)
-    }, innerProps), children || (0, import_react56.jsx)(CrossIcon, null));
+    }, innerProps), children || (0, import_react57.jsx)(CrossIcon, null));
   };
   var indicatorSeparatorCSS = function indicatorSeparatorCSS2(_ref4) {
     var isDisabled = _ref4.isDisabled, _ref4$theme = _ref4.theme, baseUnit2 = _ref4$theme.spacing.baseUnit, colors2 = _ref4$theme.colors;
@@ -69937,14 +69980,14 @@ to {
   };
   var IndicatorSeparator = function IndicatorSeparator2(props) {
     var className = props.className, cx = props.cx, getStyles = props.getStyles, innerProps = props.innerProps;
-    return (0, import_react56.jsx)("span", _extends({}, innerProps, {
+    return (0, import_react57.jsx)("span", _extends({}, innerProps, {
       css: getStyles("indicatorSeparator", props),
       className: cx({
         "indicator-separator": true
       }, className)
     }));
   };
-  var loadingDotAnimations = (0, import_react56.keyframes)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  0%, 80%, 100% { opacity: 0; }\n  40% { opacity: 1; }\n"])));
+  var loadingDotAnimations = (0, import_react57.keyframes)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  0%, 80%, 100% { opacity: 0; }\n  40% { opacity: 1; }\n"])));
   var loadingIndicatorCSS = function loadingIndicatorCSS2(_ref5) {
     var isFocused = _ref5.isFocused, size = _ref5.size, _ref5$theme = _ref5.theme, colors2 = _ref5$theme.colors, baseUnit2 = _ref5$theme.spacing.baseUnit;
     return {
@@ -69963,8 +70006,8 @@ to {
   };
   var LoadingDot = function LoadingDot2(_ref6) {
     var delay = _ref6.delay, offset = _ref6.offset;
-    return (0, import_react56.jsx)("span", {
-      css: /* @__PURE__ */ (0, import_react56.css)({
+    return (0, import_react57.jsx)("span", {
+      css: /* @__PURE__ */ (0, import_react57.css)({
         animation: "".concat(loadingDotAnimations, " 1s ease-in-out ").concat(delay, "ms infinite;"),
         backgroundColor: "currentColor",
         borderRadius: "1em",
@@ -69978,19 +70021,19 @@ to {
   };
   var LoadingIndicator = function LoadingIndicator2(props) {
     var className = props.className, cx = props.cx, getStyles = props.getStyles, innerProps = props.innerProps, isRtl = props.isRtl;
-    return (0, import_react56.jsx)("div", _extends({
+    return (0, import_react57.jsx)("div", _extends({
       css: getStyles("loadingIndicator", props),
       className: cx({
         indicator: true,
         "loading-indicator": true
       }, className)
-    }, innerProps), (0, import_react56.jsx)(LoadingDot, {
+    }, innerProps), (0, import_react57.jsx)(LoadingDot, {
       delay: 0,
       offset: isRtl
-    }), (0, import_react56.jsx)(LoadingDot, {
+    }), (0, import_react57.jsx)(LoadingDot, {
       delay: 160,
       offset: true
-    }), (0, import_react56.jsx)(LoadingDot, {
+    }), (0, import_react57.jsx)(LoadingDot, {
       delay: 320,
       offset: !isRtl
     }));
@@ -70024,7 +70067,7 @@ to {
   };
   var Control = function Control2(props) {
     var children = props.children, cx = props.cx, getStyles = props.getStyles, className = props.className, isDisabled = props.isDisabled, isFocused = props.isFocused, innerRef = props.innerRef, innerProps = props.innerProps, menuIsOpen = props.menuIsOpen;
-    return (0, import_react56.jsx)("div", _extends({
+    return (0, import_react57.jsx)("div", _extends({
       ref: innerRef,
       css: getStyles("control", props),
       className: cx({
@@ -70045,17 +70088,17 @@ to {
   };
   var Group = function Group2(props) {
     var children = props.children, className = props.className, cx = props.cx, getStyles = props.getStyles, Heading = props.Heading, headingProps = props.headingProps, innerProps = props.innerProps, label = props.label, theme = props.theme, selectProps = props.selectProps;
-    return (0, import_react56.jsx)("div", _extends({
+    return (0, import_react57.jsx)("div", _extends({
       css: getStyles("group", props),
       className: cx({
         group: true
       }, className)
-    }, innerProps), (0, import_react56.jsx)(Heading, _extends({}, headingProps, {
+    }, innerProps), (0, import_react57.jsx)(Heading, _extends({}, headingProps, {
       selectProps,
       theme,
       getStyles,
       cx
-    }), label), (0, import_react56.jsx)("div", null, children));
+    }), label), (0, import_react57.jsx)("div", null, children));
   };
   var groupHeadingCSS = function groupHeadingCSS2(_ref23) {
     var spacing2 = _ref23.theme.spacing;
@@ -70077,7 +70120,7 @@ to {
     var _cleanCommonProps = cleanCommonProps(props);
     _cleanCommonProps.data;
     var innerProps = _objectWithoutProperties12(_cleanCommonProps, _excluded$1);
-    return (0, import_react56.jsx)("div", _extends({
+    return (0, import_react57.jsx)("div", _extends({
       css: getStyles("groupHeading", props),
       className: cx({
         "group-heading": true
@@ -70128,13 +70171,13 @@ to {
   var Input2 = function Input3(props) {
     var className = props.className, cx = props.cx, getStyles = props.getStyles, value2 = props.value;
     var _cleanCommonProps = cleanCommonProps(props), innerRef = _cleanCommonProps.innerRef, isDisabled = _cleanCommonProps.isDisabled, isHidden = _cleanCommonProps.isHidden, inputClassName = _cleanCommonProps.inputClassName, innerProps = _objectWithoutProperties12(_cleanCommonProps, _excluded);
-    return (0, import_react56.jsx)("div", {
+    return (0, import_react57.jsx)("div", {
       className: cx({
         "input-container": true
       }, className),
       css: getStyles("input", props),
       "data-value": value2 || ""
-    }, (0, import_react56.jsx)("input", _extends({
+    }, (0, import_react57.jsx)("input", _extends({
       className: cx({
         input: true
       }, inputClassName),
@@ -70184,24 +70227,24 @@ to {
   };
   var MultiValueGeneric = function MultiValueGeneric2(_ref4) {
     var children = _ref4.children, innerProps = _ref4.innerProps;
-    return (0, import_react56.jsx)("div", innerProps, children);
+    return (0, import_react57.jsx)("div", innerProps, children);
   };
   var MultiValueContainer = MultiValueGeneric;
   var MultiValueLabel = MultiValueGeneric;
   function MultiValueRemove(_ref5) {
     var children = _ref5.children, innerProps = _ref5.innerProps;
-    return (0, import_react56.jsx)("div", _extends({
+    return (0, import_react57.jsx)("div", _extends({
       role: "button"
-    }, innerProps), children || (0, import_react56.jsx)(CrossIcon, {
+    }, innerProps), children || (0, import_react57.jsx)(CrossIcon, {
       size: 14
     }));
   }
   var MultiValue = function MultiValue2(props) {
     var children = props.children, className = props.className, components2 = props.components, cx = props.cx, data = props.data, getStyles = props.getStyles, innerProps = props.innerProps, isDisabled = props.isDisabled, removeProps3 = props.removeProps, selectProps = props.selectProps;
     var Container = components2.Container, Label2 = components2.Label, Remove = components2.Remove;
-    return (0, import_react56.jsx)(import_react56.ClassNames, null, function(_ref6) {
+    return (0, import_react57.jsx)(import_react57.ClassNames, null, function(_ref6) {
       var css5 = _ref6.css, emotionCx = _ref6.cx;
-      return (0, import_react56.jsx)(Container, {
+      return (0, import_react57.jsx)(Container, {
         data,
         innerProps: _objectSpread25({
           className: emotionCx(css5(getStyles("multiValue", props)), cx({
@@ -70210,7 +70253,7 @@ to {
           }, className))
         }, innerProps),
         selectProps
-      }, (0, import_react56.jsx)(Label2, {
+      }, (0, import_react57.jsx)(Label2, {
         data,
         innerProps: {
           className: emotionCx(css5(getStyles("multiValueLabel", props)), cx({
@@ -70218,7 +70261,7 @@ to {
           }, className))
         },
         selectProps
-      }, children), (0, import_react56.jsx)(Remove, {
+      }, children), (0, import_react57.jsx)(Remove, {
         data,
         innerProps: _objectSpread25({
           className: emotionCx(css5(getStyles("multiValueRemove", props)), cx({
@@ -70250,7 +70293,7 @@ to {
   };
   var Option = function Option2(props) {
     var children = props.children, className = props.className, cx = props.cx, getStyles = props.getStyles, isDisabled = props.isDisabled, isFocused = props.isFocused, isSelected = props.isSelected, innerRef = props.innerRef, innerProps = props.innerProps;
-    return (0, import_react56.jsx)("div", _extends({
+    return (0, import_react57.jsx)("div", _extends({
       css: getStyles("option", props),
       className: cx({
         option: true,
@@ -70274,7 +70317,7 @@ to {
   };
   var Placeholder = function Placeholder2(props) {
     var children = props.children, className = props.className, cx = props.cx, getStyles = props.getStyles, innerProps = props.innerProps;
-    return (0, import_react56.jsx)("div", _extends({
+    return (0, import_react57.jsx)("div", _extends({
       css: getStyles("placeholder", props),
       className: cx({
         placeholder: true
@@ -70297,7 +70340,7 @@ to {
   };
   var SingleValue = function SingleValue2(props) {
     var children = props.children, className = props.className, cx = props.cx, getStyles = props.getStyles, isDisabled = props.isDisabled, innerProps = props.innerProps;
-    return (0, import_react56.jsx)("div", _extends({
+    return (0, import_react57.jsx)("div", _extends({
       css: getStyles("singleValue", props),
       className: cx({
         "single-value": true,
@@ -70337,33 +70380,33 @@ to {
   };
 
   // node_modules/react-select/dist/useStateManager-68425271.esm.js
-  var import_react58 = __toModule(require_react());
+  var import_react59 = __toModule(require_react());
   var _excluded2 = ["defaultInputValue", "defaultMenuIsOpen", "defaultValue", "inputValue", "menuIsOpen", "onChange", "onInputChange", "onMenuClose", "onMenuOpen", "value"];
   function useStateManager(_ref3) {
     var _ref$defaultInputValu = _ref3.defaultInputValue, defaultInputValue = _ref$defaultInputValu === void 0 ? "" : _ref$defaultInputValu, _ref$defaultMenuIsOpe = _ref3.defaultMenuIsOpen, defaultMenuIsOpen = _ref$defaultMenuIsOpe === void 0 ? false : _ref$defaultMenuIsOpe, _ref$defaultValue = _ref3.defaultValue, defaultValue = _ref$defaultValue === void 0 ? null : _ref$defaultValue, propsInputValue = _ref3.inputValue, propsMenuIsOpen = _ref3.menuIsOpen, propsOnChange = _ref3.onChange, propsOnInputChange = _ref3.onInputChange, propsOnMenuClose = _ref3.onMenuClose, propsOnMenuOpen = _ref3.onMenuOpen, propsValue = _ref3.value, restSelectProps = _objectWithoutProperties12(_ref3, _excluded2);
-    var _useState = (0, import_react58.useState)(propsInputValue !== void 0 ? propsInputValue : defaultInputValue), _useState2 = _slicedToArray9(_useState, 2), stateInputValue = _useState2[0], setStateInputValue = _useState2[1];
-    var _useState3 = (0, import_react58.useState)(propsMenuIsOpen !== void 0 ? propsMenuIsOpen : defaultMenuIsOpen), _useState4 = _slicedToArray9(_useState3, 2), stateMenuIsOpen = _useState4[0], setStateMenuIsOpen = _useState4[1];
-    var _useState5 = (0, import_react58.useState)(propsValue !== void 0 ? propsValue : defaultValue), _useState6 = _slicedToArray9(_useState5, 2), stateValue = _useState6[0], setStateValue = _useState6[1];
-    var onChange2 = (0, import_react58.useCallback)(function(value3, actionMeta) {
+    var _useState = (0, import_react59.useState)(propsInputValue !== void 0 ? propsInputValue : defaultInputValue), _useState2 = _slicedToArray9(_useState, 2), stateInputValue = _useState2[0], setStateInputValue = _useState2[1];
+    var _useState3 = (0, import_react59.useState)(propsMenuIsOpen !== void 0 ? propsMenuIsOpen : defaultMenuIsOpen), _useState4 = _slicedToArray9(_useState3, 2), stateMenuIsOpen = _useState4[0], setStateMenuIsOpen = _useState4[1];
+    var _useState5 = (0, import_react59.useState)(propsValue !== void 0 ? propsValue : defaultValue), _useState6 = _slicedToArray9(_useState5, 2), stateValue = _useState6[0], setStateValue = _useState6[1];
+    var onChange2 = (0, import_react59.useCallback)(function(value3, actionMeta) {
       if (typeof propsOnChange === "function") {
         propsOnChange(value3, actionMeta);
       }
       setStateValue(value3);
     }, [propsOnChange]);
-    var onInputChange = (0, import_react58.useCallback)(function(value3, actionMeta) {
+    var onInputChange = (0, import_react59.useCallback)(function(value3, actionMeta) {
       var newValue;
       if (typeof propsOnInputChange === "function") {
         newValue = propsOnInputChange(value3, actionMeta);
       }
       setStateInputValue(newValue !== void 0 ? newValue : value3);
     }, [propsOnInputChange]);
-    var onMenuOpen = (0, import_react58.useCallback)(function() {
+    var onMenuOpen = (0, import_react59.useCallback)(function() {
       if (typeof propsOnMenuOpen === "function") {
         propsOnMenuOpen();
       }
       setStateMenuIsOpen(true);
     }, [propsOnMenuOpen]);
-    var onMenuClose = (0, import_react58.useCallback)(function() {
+    var onMenuClose = (0, import_react59.useCallback)(function() {
       if (typeof propsOnMenuClose === "function") {
         propsOnMenuClose();
       }
@@ -70384,8 +70427,8 @@ to {
   }
 
   // node_modules/react-select/dist/react-select.esm.js
-  var React51 = __toModule(require_react());
-  var import_react61 = __toModule(require_react());
+  var React52 = __toModule(require_react());
+  var import_react62 = __toModule(require_react());
 
   // node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js
   function _arrayWithoutHoles12(arr) {
@@ -70410,9 +70453,9 @@ to {
   }
 
   // node_modules/react-select/dist/Select-54ac8379.esm.js
-  var React50 = __toModule(require_react());
-  var import_react59 = __toModule(require_react());
-  var import_react60 = __toModule(require_emotion_react_cjs());
+  var React51 = __toModule(require_react());
+  var import_react60 = __toModule(require_react());
+  var import_react61 = __toModule(require_emotion_react_cjs());
 
   // node_modules/memoize-one/dist/memoize-one.esm.js
   var safeIsNaN = Number.isNaN || function ponyfill(value2) {
@@ -70478,7 +70521,7 @@ to {
     toString: _EMOTION_STRINGIFIED_CSS_ERROR__$1
   };
   var A11yText = function A11yText2(props) {
-    return (0, import_react60.jsx)("span", _extends({
+    return (0, import_react61.jsx)("span", _extends({
       css: _ref
     }, props));
   };
@@ -70538,10 +70581,10 @@ to {
     var ariaLiveMessages = selectProps.ariaLiveMessages, getOptionLabel4 = selectProps.getOptionLabel, inputValue = selectProps.inputValue, isMulti = selectProps.isMulti, isOptionDisabled3 = selectProps.isOptionDisabled, isSearchable = selectProps.isSearchable, menuIsOpen = selectProps.menuIsOpen, options2 = selectProps.options, screenReaderStatus2 = selectProps.screenReaderStatus, tabSelectsValue = selectProps.tabSelectsValue;
     var ariaLabel = selectProps["aria-label"];
     var ariaLive = selectProps["aria-live"];
-    var messages = (0, import_react59.useMemo)(function() {
+    var messages = (0, import_react60.useMemo)(function() {
       return _objectSpread25(_objectSpread25({}, defaultAriaLiveMessages), ariaLiveMessages || {});
     }, [ariaLiveMessages]);
-    var ariaSelected = (0, import_react59.useMemo)(function() {
+    var ariaSelected = (0, import_react60.useMemo)(function() {
       var message = "";
       if (ariaSelection && messages.onChange) {
         var option = ariaSelection.option, selectedOptions = ariaSelection.options, removedValue = ariaSelection.removedValue, removedValues = ariaSelection.removedValues, value2 = ariaSelection.value;
@@ -70561,7 +70604,7 @@ to {
       }
       return message;
     }, [ariaSelection, messages, isOptionDisabled3, selectValue, getOptionLabel4]);
-    var ariaFocused = (0, import_react59.useMemo)(function() {
+    var ariaFocused = (0, import_react60.useMemo)(function() {
       var focusMsg = "";
       var focused = focusedOption || focusedValue;
       var isSelected = !!(focusedOption && selectValue && selectValue.includes(focusedOption));
@@ -70579,7 +70622,7 @@ to {
       }
       return focusMsg;
     }, [focusedOption, focusedValue, getOptionLabel4, isOptionDisabled3, messages, options2, selectValue]);
-    var ariaResults = (0, import_react59.useMemo)(function() {
+    var ariaResults = (0, import_react60.useMemo)(function() {
       var resultsMsg = "";
       if (menuIsOpen && options2.length && messages.onFilter) {
         var resultsMessage = screenReaderStatus2({
@@ -70592,7 +70635,7 @@ to {
       }
       return resultsMsg;
     }, [focusableOptions, inputValue, menuIsOpen, messages, options2, screenReaderStatus2]);
-    var ariaGuidance = (0, import_react59.useMemo)(function() {
+    var ariaGuidance = (0, import_react60.useMemo)(function() {
       var guidanceMsg = "";
       if (messages.guidance) {
         var context2 = focusedValue ? "value" : menuIsOpen ? "menu" : "input";
@@ -70608,15 +70651,15 @@ to {
       return guidanceMsg;
     }, [ariaLabel, focusedOption, focusedValue, isMulti, isOptionDisabled3, isSearchable, menuIsOpen, messages, selectValue, tabSelectsValue]);
     var ariaContext = "".concat(ariaFocused, " ").concat(ariaResults, " ").concat(ariaGuidance);
-    var ScreenReaderText = (0, import_react60.jsx)(import_react59.Fragment, null, (0, import_react60.jsx)("span", {
+    var ScreenReaderText = (0, import_react61.jsx)(import_react60.Fragment, null, (0, import_react61.jsx)("span", {
       id: "aria-selection"
-    }, ariaSelected), (0, import_react60.jsx)("span", {
+    }, ariaSelected), (0, import_react61.jsx)("span", {
       id: "aria-context"
     }, ariaContext));
     var isInitialFocus = (ariaSelection === null || ariaSelection === void 0 ? void 0 : ariaSelection.action) === "initial-input-focus";
-    return (0, import_react60.jsx)(import_react59.Fragment, null, (0, import_react60.jsx)(A11yText, {
+    return (0, import_react61.jsx)(import_react60.Fragment, null, (0, import_react61.jsx)(A11yText, {
       id
-    }, isInitialFocus && ScreenReaderText), (0, import_react60.jsx)(A11yText, {
+    }, isInitialFocus && ScreenReaderText), (0, import_react61.jsx)(A11yText, {
       "aria-live": ariaLive,
       "aria-atomic": "false",
       "aria-relevant": "additions text"
@@ -70928,10 +70971,10 @@ to {
   function DummyInput(_ref3) {
     var innerRef = _ref3.innerRef, props = _objectWithoutProperties12(_ref3, _excluded3);
     var filteredProps = removeProps(props, "onExited", "in", "enter", "exit", "appear");
-    return (0, import_react60.jsx)("input", _extends({
+    return (0, import_react61.jsx)("input", _extends({
       ref: innerRef
     }, filteredProps, {
-      css: /* @__PURE__ */ (0, import_react60.css)({
+      css: /* @__PURE__ */ (0, import_react61.css)({
         label: "dummyInput",
         background: 0,
         border: 0,
@@ -70955,11 +70998,11 @@ to {
   };
   function useScrollCapture(_ref3) {
     var isEnabled = _ref3.isEnabled, onBottomArrive = _ref3.onBottomArrive, onBottomLeave = _ref3.onBottomLeave, onTopArrive = _ref3.onTopArrive, onTopLeave = _ref3.onTopLeave;
-    var isBottom = (0, import_react59.useRef)(false);
-    var isTop = (0, import_react59.useRef)(false);
-    var touchStart = (0, import_react59.useRef)(0);
-    var scrollTarget = (0, import_react59.useRef)(null);
-    var handleEventDelta = (0, import_react59.useCallback)(function(event, delta) {
+    var isBottom = (0, import_react60.useRef)(false);
+    var isTop = (0, import_react60.useRef)(false);
+    var touchStart = (0, import_react60.useRef)(0);
+    var scrollTarget = (0, import_react60.useRef)(null);
+    var handleEventDelta = (0, import_react60.useCallback)(function(event, delta) {
       if (scrollTarget.current === null)
         return;
       var _scrollTarget$current = scrollTarget.current, scrollTop = _scrollTarget$current.scrollTop, scrollHeight = _scrollTarget$current.scrollHeight, clientHeight = _scrollTarget$current.clientHeight;
@@ -70996,17 +71039,17 @@ to {
         cancelScroll(event);
       }
     }, [onBottomArrive, onBottomLeave, onTopArrive, onTopLeave]);
-    var onWheel = (0, import_react59.useCallback)(function(event) {
+    var onWheel = (0, import_react60.useCallback)(function(event) {
       handleEventDelta(event, event.deltaY);
     }, [handleEventDelta]);
-    var onTouchStart = (0, import_react59.useCallback)(function(event) {
+    var onTouchStart = (0, import_react60.useCallback)(function(event) {
       touchStart.current = event.changedTouches[0].clientY;
     }, []);
-    var onTouchMove = (0, import_react59.useCallback)(function(event) {
+    var onTouchMove = (0, import_react60.useCallback)(function(event) {
       var deltaY = touchStart.current - event.changedTouches[0].clientY;
       handleEventDelta(event, deltaY);
     }, [handleEventDelta]);
-    var startListening = (0, import_react59.useCallback)(function(el) {
+    var startListening = (0, import_react60.useCallback)(function(el) {
       if (!el)
         return;
       var notPassive = supportsPassiveEvents ? {
@@ -71016,14 +71059,14 @@ to {
       el.addEventListener("touchstart", onTouchStart, notPassive);
       el.addEventListener("touchmove", onTouchMove, notPassive);
     }, [onTouchMove, onTouchStart, onWheel]);
-    var stopListening = (0, import_react59.useCallback)(function(el) {
+    var stopListening = (0, import_react60.useCallback)(function(el) {
       if (!el)
         return;
       el.removeEventListener("wheel", onWheel, false);
       el.removeEventListener("touchstart", onTouchStart, false);
       el.removeEventListener("touchmove", onTouchMove, false);
     }, [onTouchMove, onTouchStart, onWheel]);
-    (0, import_react59.useEffect)(function() {
+    (0, import_react60.useEffect)(function() {
       if (!isEnabled)
         return;
       var element2 = scrollTarget.current;
@@ -71070,9 +71113,9 @@ to {
   };
   function useScrollLock(_ref3) {
     var isEnabled = _ref3.isEnabled, _ref$accountForScroll = _ref3.accountForScrollbars, accountForScrollbars = _ref$accountForScroll === void 0 ? true : _ref$accountForScroll;
-    var originalStyles = (0, import_react59.useRef)({});
-    var scrollTarget = (0, import_react59.useRef)(null);
-    var addScrollLock = (0, import_react59.useCallback)(function(touchScrollTarget) {
+    var originalStyles = (0, import_react60.useRef)({});
+    var scrollTarget = (0, import_react60.useRef)(null);
+    var addScrollLock = (0, import_react60.useCallback)(function(touchScrollTarget) {
       if (!canUseDOM2)
         return;
       var target = document.body;
@@ -71106,7 +71149,7 @@ to {
       }
       activeScrollLocks += 1;
     }, [accountForScrollbars]);
-    var removeScrollLock = (0, import_react59.useCallback)(function(touchScrollTarget) {
+    var removeScrollLock = (0, import_react60.useCallback)(function(touchScrollTarget) {
       if (!canUseDOM2)
         return;
       var target = document.body;
@@ -71128,7 +71171,7 @@ to {
         }
       }
     }, [accountForScrollbars]);
-    (0, import_react59.useEffect)(function() {
+    (0, import_react60.useEffect)(function() {
       if (!isEnabled)
         return;
       var element2 = scrollTarget.current;
@@ -71172,7 +71215,7 @@ to {
       setScrollCaptureTarget(element2);
       setScrollLockTarget(element2);
     };
-    return (0, import_react60.jsx)(import_react59.Fragment, null, lockEnabled && (0, import_react60.jsx)("div", {
+    return (0, import_react61.jsx)(import_react60.Fragment, null, lockEnabled && (0, import_react61.jsx)("div", {
       onClick: blurSelectInput,
       css: _ref22
     }), children(targetRef));
@@ -72203,7 +72246,7 @@ to {
           "aria-describedby": this.getElementId("placeholder")
         });
         if (!isSearchable) {
-          return /* @__PURE__ */ React50.createElement(DummyInput, _extends({
+          return /* @__PURE__ */ React51.createElement(DummyInput, _extends({
             id,
             innerRef: this.getInputRef,
             onBlur: this.onInputBlur,
@@ -72216,7 +72259,7 @@ to {
             value: ""
           }, ariaAttributes));
         }
-        return /* @__PURE__ */ React50.createElement(Input4, _extends({}, commonProps, {
+        return /* @__PURE__ */ React51.createElement(Input4, _extends({}, commonProps, {
           autoCapitalize: "none",
           autoComplete: "off",
           autoCorrect: "off",
@@ -72243,7 +72286,7 @@ to {
         var _this$props9 = this.props, controlShouldRenderValue = _this$props9.controlShouldRenderValue, isDisabled = _this$props9.isDisabled, isMulti = _this$props9.isMulti, inputValue = _this$props9.inputValue, placeholder = _this$props9.placeholder;
         var _this$state5 = this.state, selectValue = _this$state5.selectValue, focusedValue = _this$state5.focusedValue, isFocused = _this$state5.isFocused;
         if (!this.hasValue() || !controlShouldRenderValue) {
-          return inputValue ? null : /* @__PURE__ */ React50.createElement(Placeholder3, _extends({}, commonProps, {
+          return inputValue ? null : /* @__PURE__ */ React51.createElement(Placeholder3, _extends({}, commonProps, {
             key: "placeholder",
             isDisabled,
             isFocused,
@@ -72256,7 +72299,7 @@ to {
           return selectValue.map(function(opt, index2) {
             var isOptionFocused = opt === focusedValue;
             var key = "".concat(_this3.getOptionLabel(opt), "-").concat(_this3.getOptionValue(opt));
-            return /* @__PURE__ */ React50.createElement(MultiValue3, _extends({}, commonProps, {
+            return /* @__PURE__ */ React51.createElement(MultiValue3, _extends({}, commonProps, {
               components: {
                 Container: MultiValueContainer2,
                 Label: MultiValueLabel2,
@@ -72285,7 +72328,7 @@ to {
           return null;
         }
         var singleValue = selectValue[0];
-        return /* @__PURE__ */ React50.createElement(SingleValue3, _extends({}, commonProps, {
+        return /* @__PURE__ */ React51.createElement(SingleValue3, _extends({}, commonProps, {
           data: singleValue,
           isDisabled
         }), this.formatOptionLabel(singleValue, "value"));
@@ -72305,7 +72348,7 @@ to {
           onTouchEnd: this.onClearIndicatorTouchEnd,
           "aria-hidden": "true"
         };
-        return /* @__PURE__ */ React50.createElement(ClearIndicator3, _extends({}, commonProps, {
+        return /* @__PURE__ */ React51.createElement(ClearIndicator3, _extends({}, commonProps, {
           innerProps,
           isFocused
         }));
@@ -72322,7 +72365,7 @@ to {
         var innerProps = {
           "aria-hidden": "true"
         };
-        return /* @__PURE__ */ React50.createElement(LoadingIndicator3, _extends({}, commonProps, {
+        return /* @__PURE__ */ React51.createElement(LoadingIndicator3, _extends({}, commonProps, {
           innerProps,
           isDisabled,
           isFocused
@@ -72337,7 +72380,7 @@ to {
         var commonProps = this.commonProps;
         var isDisabled = this.props.isDisabled;
         var isFocused = this.state.isFocused;
-        return /* @__PURE__ */ React50.createElement(IndicatorSeparator3, _extends({}, commonProps, {
+        return /* @__PURE__ */ React51.createElement(IndicatorSeparator3, _extends({}, commonProps, {
           isDisabled,
           isFocused
         }));
@@ -72356,7 +72399,7 @@ to {
           onTouchEnd: this.onDropdownIndicatorTouchEnd,
           "aria-hidden": "true"
         };
-        return /* @__PURE__ */ React50.createElement(DropdownIndicator3, _extends({}, commonProps, {
+        return /* @__PURE__ */ React51.createElement(DropdownIndicator3, _extends({}, commonProps, {
           innerProps,
           isDisabled,
           isFocused
@@ -72389,7 +72432,7 @@ to {
             onMouseOver: onHover,
             tabIndex: -1
           };
-          return /* @__PURE__ */ React50.createElement(Option3, _extends({}, commonProps, {
+          return /* @__PURE__ */ React51.createElement(Option3, _extends({}, commonProps, {
             innerProps,
             data,
             isDisabled,
@@ -72409,7 +72452,7 @@ to {
               var _data = item.data, options2 = item.options, groupIndex = item.index;
               var groupId = "".concat(_this4.getElementId("group"), "-").concat(groupIndex);
               var headingId = "".concat(groupId, "-heading");
-              return /* @__PURE__ */ React50.createElement(Group3, _extends({}, commonProps, {
+              return /* @__PURE__ */ React51.createElement(Group3, _extends({}, commonProps, {
                 key: groupId,
                 data: _data,
                 options: options2,
@@ -72432,14 +72475,14 @@ to {
           });
           if (message === null)
             return null;
-          menuUI = /* @__PURE__ */ React50.createElement(LoadingMessage3, commonProps, message);
+          menuUI = /* @__PURE__ */ React51.createElement(LoadingMessage3, commonProps, message);
         } else {
           var _message = noOptionsMessage2({
             inputValue
           });
           if (_message === null)
             return null;
-          menuUI = /* @__PURE__ */ React50.createElement(NoOptionsMessage3, commonProps, _message);
+          menuUI = /* @__PURE__ */ React51.createElement(NoOptionsMessage3, commonProps, _message);
         }
         var menuPlacementProps = {
           minMenuHeight,
@@ -72448,9 +72491,9 @@ to {
           menuPosition,
           menuShouldScrollIntoView
         };
-        var menuElement = /* @__PURE__ */ React50.createElement(MenuPlacer, _extends({}, commonProps, menuPlacementProps), function(_ref4) {
+        var menuElement = /* @__PURE__ */ React51.createElement(MenuPlacer, _extends({}, commonProps, menuPlacementProps), function(_ref4) {
           var ref = _ref4.ref, _ref4$placerProps = _ref4.placerProps, placement = _ref4$placerProps.placement, maxHeight = _ref4$placerProps.maxHeight;
-          return /* @__PURE__ */ React50.createElement(Menu3, _extends({}, commonProps, menuPlacementProps, {
+          return /* @__PURE__ */ React51.createElement(Menu3, _extends({}, commonProps, menuPlacementProps, {
             innerRef: ref,
             innerProps: {
               onMouseDown: _this4.onMenuMouseDown,
@@ -72459,13 +72502,13 @@ to {
             },
             isLoading,
             placement
-          }), /* @__PURE__ */ React50.createElement(ScrollManager, {
+          }), /* @__PURE__ */ React51.createElement(ScrollManager, {
             captureEnabled: captureMenuScroll,
             onTopArrive: onMenuScrollToTop,
             onBottomArrive: onMenuScrollToBottom,
             lockEnabled: menuShouldBlockScroll
           }, function(scrollTargetRef) {
-            return /* @__PURE__ */ React50.createElement(MenuList3, _extends({}, commonProps, {
+            return /* @__PURE__ */ React51.createElement(MenuList3, _extends({}, commonProps, {
               innerRef: function innerRef(instance) {
                 _this4.getMenuListRef(instance);
                 scrollTargetRef(instance);
@@ -72476,7 +72519,7 @@ to {
             }), menuUI);
           }));
         });
-        return menuPortalTarget || menuPosition === "fixed" ? /* @__PURE__ */ React50.createElement(MenuPortal2, _extends({}, commonProps, {
+        return menuPortalTarget || menuPosition === "fixed" ? /* @__PURE__ */ React51.createElement(MenuPortal2, _extends({}, commonProps, {
           appendTo: menuPortalTarget,
           controlElement: this.controlRef,
           menuPlacement,
@@ -72496,28 +72539,28 @@ to {
             var value2 = selectValue.map(function(opt) {
               return _this5.getOptionValue(opt);
             }).join(delimiter);
-            return /* @__PURE__ */ React50.createElement("input", {
+            return /* @__PURE__ */ React51.createElement("input", {
               name,
               type: "hidden",
               value: value2
             });
           } else {
             var input = selectValue.length > 0 ? selectValue.map(function(opt, i3) {
-              return /* @__PURE__ */ React50.createElement("input", {
+              return /* @__PURE__ */ React51.createElement("input", {
                 key: "i-".concat(i3),
                 name,
                 type: "hidden",
                 value: _this5.getOptionValue(opt)
               });
-            }) : /* @__PURE__ */ React50.createElement("input", {
+            }) : /* @__PURE__ */ React51.createElement("input", {
               name,
               type: "hidden"
             });
-            return /* @__PURE__ */ React50.createElement("div", null, input);
+            return /* @__PURE__ */ React51.createElement("div", null, input);
           }
         } else {
           var _value = selectValue[0] ? this.getOptionValue(selectValue[0]) : "";
-          return /* @__PURE__ */ React50.createElement("input", {
+          return /* @__PURE__ */ React51.createElement("input", {
             name,
             type: "hidden",
             value: _value
@@ -72530,7 +72573,7 @@ to {
         var commonProps = this.commonProps;
         var _this$state6 = this.state, ariaSelection = _this$state6.ariaSelection, focusedOption = _this$state6.focusedOption, focusedValue = _this$state6.focusedValue, isFocused = _this$state6.isFocused, selectValue = _this$state6.selectValue;
         var focusableOptions = this.getFocusableOptions();
-        return /* @__PURE__ */ React50.createElement(LiveRegion, _extends({}, commonProps, {
+        return /* @__PURE__ */ React51.createElement(LiveRegion, _extends({}, commonProps, {
           id: this.getElementId("live-region"),
           ariaSelection,
           focusedOption,
@@ -72547,7 +72590,7 @@ to {
         var _this$props14 = this.props, className = _this$props14.className, id = _this$props14.id, isDisabled = _this$props14.isDisabled, menuIsOpen = _this$props14.menuIsOpen;
         var isFocused = this.state.isFocused;
         var commonProps = this.commonProps = this.getCommonProps();
-        return /* @__PURE__ */ React50.createElement(SelectContainer3, _extends({}, commonProps, {
+        return /* @__PURE__ */ React51.createElement(SelectContainer3, _extends({}, commonProps, {
           className,
           innerProps: {
             id,
@@ -72555,7 +72598,7 @@ to {
           },
           isDisabled,
           isFocused
-        }), this.renderLiveRegion(), /* @__PURE__ */ React50.createElement(Control3, _extends({}, commonProps, {
+        }), this.renderLiveRegion(), /* @__PURE__ */ React51.createElement(Control3, _extends({}, commonProps, {
           innerRef: this.getControlRef,
           innerProps: {
             onMouseDown: this.onControlMouseDown,
@@ -72564,9 +72607,9 @@ to {
           isDisabled,
           isFocused,
           menuIsOpen
-        }), /* @__PURE__ */ React50.createElement(ValueContainer3, _extends({}, commonProps, {
+        }), /* @__PURE__ */ React51.createElement(ValueContainer3, _extends({}, commonProps, {
           isDisabled
-        }), this.renderPlaceholderOrValue(), this.renderInput()), /* @__PURE__ */ React50.createElement(IndicatorsContainer3, _extends({}, commonProps, {
+        }), this.renderPlaceholderOrValue(), this.renderInput()), /* @__PURE__ */ React51.createElement(IndicatorsContainer3, _extends({}, commonProps, {
           isDisabled
         }), this.renderClearIndicator(), this.renderLoadingIndicator(), this.renderIndicatorSeparator(), this.renderDropdownIndicator())), this.renderMenu(), this.renderFormField());
       }
@@ -72613,22 +72656,22 @@ to {
       }
     }]);
     return Select2;
-  }(import_react59.Component);
+  }(import_react60.Component);
   Select.defaultProps = defaultProps2;
 
   // node_modules/react-select/dist/react-select.esm.js
   var import_cache = __toModule(require_emotion_cache_cjs());
-  var import_react_dom3 = __toModule(require_react_dom());
-  var StateManagedSelect = /* @__PURE__ */ (0, import_react61.forwardRef)(function(props, ref) {
+  var import_react_dom4 = __toModule(require_react_dom());
+  var StateManagedSelect = /* @__PURE__ */ (0, import_react62.forwardRef)(function(props, ref) {
     var baseSelectProps = useStateManager(props);
-    return /* @__PURE__ */ React51.createElement(Select, _extends({
+    return /* @__PURE__ */ React52.createElement(Select, _extends({
       ref
     }, baseSelectProps));
   });
   var react_select_esm_default = StateManagedSelect;
 
   // src/utils/themes.ts
-  var import_react62 = __toModule(require_react());
+  var import_react63 = __toModule(require_react());
   var DEFAULT_THEMES = [
     {
       id: "gw2",
@@ -72641,9 +72684,9 @@ to {
     }
   ];
   function useThemes() {
-    const [themes, setThemes] = (0, import_react62.useState)(DEFAULT_THEMES);
-    const [loading, setLoading] = (0, import_react62.useState)(false);
-    (0, import_react62.useEffect)(() => {
+    const [themes, setThemes] = (0, import_react63.useState)(DEFAULT_THEMES);
+    const [loading, setLoading] = (0, import_react63.useState)(false);
+    (0, import_react63.useEffect)(() => {
       ;
       (async () => {
         try {
@@ -72660,7 +72703,7 @@ to {
         }
       })();
     }, []);
-    return (0, import_react62.useMemo)(() => ({ loading, themes, options: listToOptions(themes) }), [loading, themes]);
+    return (0, import_react63.useMemo)(() => ({ loading, themes, options: listToOptions(themes) }), [loading, themes]);
   }
   function listToOptions(list) {
     return list.map((item) => ({ value: item.id, label: item.name })).filter((i3) => Boolean(i3.label));
@@ -72677,49 +72720,49 @@ to {
     const { loading: themesLoading, themes, options: themeOptions } = useThemes();
     const selectedThemeOption = themeOptions.find((i3) => (settings.alertTheme || defaultSettings.alertTheme) === i3.value);
     const selectedTheme = themes.find((i3) => (settings.alertTheme || defaultSettings.alertTheme) === i3.id);
-    return /* @__PURE__ */ import_react63.default.createElement("div", {
+    return /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "mt-2 flex flex-col gap-3 flex-1 pb-2 max-h-full"
-    }, /* @__PURE__ */ import_react63.default.createElement("h1", {
+    }, /* @__PURE__ */ import_react64.default.createElement("h1", {
       className: "text-3xl -mb-1"
-    }, "OBS Settings"), /* @__PURE__ */ import_react63.default.createElement("div", {
+    }, "OBS Settings"), /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react63.default.createElement("button", {
+    }, /* @__PURE__ */ import_react64.default.createElement("button", {
       className: "bg-purple-600 px-2 py-1 flex-1 rounded-md transition-transform hover:scale-110 flex flex-row gap-1 justify-center items-center",
       onClick: () => copyAlertURL()
-    }, copiedAlertURL ? /* @__PURE__ */ import_react63.default.createElement(import_react63.default.Fragment, null, /* @__PURE__ */ import_react63.default.createElement(FaCheck, null), " Copied") : /* @__PURE__ */ import_react63.default.createElement(import_react63.default.Fragment, null, /* @__PURE__ */ import_react63.default.createElement(FaTrophy, null), " Copy Winner Alert Source URL")), /* @__PURE__ */ import_react63.default.createElement("button", {
+    }, copiedAlertURL ? /* @__PURE__ */ import_react64.default.createElement(import_react64.default.Fragment, null, /* @__PURE__ */ import_react64.default.createElement(FaCheck, null), " Copied") : /* @__PURE__ */ import_react64.default.createElement(import_react64.default.Fragment, null, /* @__PURE__ */ import_react64.default.createElement(FaTrophy, null), " Copy Winner Alert Source URL")), /* @__PURE__ */ import_react64.default.createElement("button", {
       className: "bg-purple-600 px-2 py-1 flex-1 rounded-md transition-transform hover:scale-110 flex flex-row gap-1 justify-center items-center",
       onClick: () => copyStatusURL()
-    }, copiedStatusURL ? /* @__PURE__ */ import_react63.default.createElement(import_react63.default.Fragment, null, /* @__PURE__ */ import_react63.default.createElement(FaCheck, null), " Copied") : /* @__PURE__ */ import_react63.default.createElement(import_react63.default.Fragment, null, /* @__PURE__ */ import_react63.default.createElement(FaTrophy, null), " Copy Giveaway Status Alert Source URL"))), /* @__PURE__ */ import_react63.default.createElement("div", {
+    }, copiedStatusURL ? /* @__PURE__ */ import_react64.default.createElement(import_react64.default.Fragment, null, /* @__PURE__ */ import_react64.default.createElement(FaCheck, null), " Copied") : /* @__PURE__ */ import_react64.default.createElement(import_react64.default.Fragment, null, /* @__PURE__ */ import_react64.default.createElement(FaTrophy, null), " Copy Giveaway Status Alert Source URL"))), /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "flex flex-col gap-2"
-    }, /* @__PURE__ */ import_react63.default.createElement("div", {
+    }, /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react63.default.createElement("div", {
+    }, /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ import_react63.default.createElement("h2", {
+    }, /* @__PURE__ */ import_react64.default.createElement("h2", {
       className: "text-xl"
-    }, "Alert Settings"))), /* @__PURE__ */ import_react63.default.createElement("div", {
+    }, "Alert Settings"))), /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "flex flex-row gap-2 justify-center items-center"
-    }, /* @__PURE__ */ import_react63.default.createElement("div", {
+    }, /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
-    }, /* @__PURE__ */ import_react63.default.createElement("div", {
+    }, /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",
       title: "Will clear chat, and then pause it after the time, to enable a giveaway with cut off"
-    }, "Duration"), /* @__PURE__ */ import_react63.default.createElement("div", {
+    }, "Duration"), /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "px-2 flex-1 flex justify-center items-center"
-    }, /* @__PURE__ */ import_react63.default.createElement(SliderInner, {
+    }, /* @__PURE__ */ import_react64.default.createElement(SliderInner, {
       min: ONE_S,
       max: ONE_S * 30,
       value: settings.alertDuration || defaultSettings.alertDuration,
       step: ONE_S,
       onChange: (v2) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { alertDuration: v2 }))
-    })), /* @__PURE__ */ import_react63.default.createElement("div", {
+    })), /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "flex-1 justify-center items-center text-center flex"
-    }, formatDistanceStrict(Date.now() + (settings.alertDuration || defaultSettings.alertDuration), new Date()))), /* @__PURE__ */ import_react63.default.createElement("div", {
+    }, formatDistanceStrict(Date.now() + (settings.alertDuration || defaultSettings.alertDuration), new Date()))), /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
-    }, /* @__PURE__ */ import_react63.default.createElement("div", {
+    }, /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",
       title: "Will clear chat, and then pause it after the time, to enable a giveaway with cut off"
-    }, "Theme"), /* @__PURE__ */ import_react63.default.createElement(react_select_esm_default, {
+    }, "Theme"), /* @__PURE__ */ import_react64.default.createElement(react_select_esm_default, {
       isLoading: themesLoading,
       isSearchable: false,
       isClearable: false,
@@ -72759,41 +72802,41 @@ to {
       },
       value: selectedThemeOption,
       options: themeOptions
-    })))), settings.alertTheme === "custom" ? /* @__PURE__ */ import_react63.default.createElement("div", {
+    })))), settings.alertTheme === "custom" ? /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "flex flex-col gap-2"
-    }, /* @__PURE__ */ import_react63.default.createElement("div", {
+    }, /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react63.default.createElement("div", {
+    }, /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ import_react63.default.createElement("h2", {
+    }, /* @__PURE__ */ import_react64.default.createElement("h2", {
       className: "text-xl"
-    }, "Custom Theme Settings"))), /* @__PURE__ */ import_react63.default.createElement(Input, {
+    }, "Custom Theme Settings"))), /* @__PURE__ */ import_react64.default.createElement(Input, {
       value: settings.alertCustomImageUrl,
       label: "Image URL",
       placeholder: "URL...",
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { alertCustomImageUrl: e3.target.value.trim() }))
-    })) : null, /* @__PURE__ */ import_react63.default.createElement("div", {
+    })) : null, /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "flex flex-col gap-2 flex-1"
-    }, /* @__PURE__ */ import_react63.default.createElement("div", {
+    }, /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react63.default.createElement("div", {
+    }, /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ import_react63.default.createElement("h2", {
+    }, /* @__PURE__ */ import_react64.default.createElement("h2", {
       className: "text-xl"
-    }, "Preview"))), /* @__PURE__ */ import_react63.default.createElement("div", {
+    }, "Preview"))), /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ import_react63.default.createElement("div", {
+    }, /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "bg-gray-600 rounded-md h-full w-full flex py-2 relative"
-    }, settings.alertTheme === "custom" ? /* @__PURE__ */ import_react63.default.createElement(CustomPreview, {
+    }, settings.alertTheme === "custom" ? /* @__PURE__ */ import_react64.default.createElement(CustomPreview, {
       imageUrl: settings.alertCustomImageUrl
-    }) : /* @__PURE__ */ import_react63.default.createElement(Preview, {
+    }) : /* @__PURE__ */ import_react64.default.createElement(Preview, {
       preview: selectedTheme == null ? void 0 : selectedTheme.preview
     })))));
   }
   function CustomPreview({ imageUrl }) {
-    return /* @__PURE__ */ import_react63.default.createElement("div", {
+    return /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "flex-1 flex flex-col justify-center items-center gap-2 text-center"
-    }, imageUrl ? /* @__PURE__ */ import_react63.default.createElement("div", {
+    }, imageUrl ? /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "flex-1 flex justify-center items-center relative w-full overflow-hidden",
       style: {
         backgroundImage: `url(${imageUrl})`,
@@ -72801,33 +72844,33 @@ to {
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center"
       }
-    }) : null, /* @__PURE__ */ import_react63.default.createElement("div", {
+    }) : null, /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "flex-0 flex justify-center items-center text-2xl uppercase"
     }, "@name won!"));
   }
   function Preview({ preview }) {
-    return preview ? /* @__PURE__ */ import_react63.default.createElement("div", {
+    return preview ? /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "relative h-full w-full"
-    }, /* @__PURE__ */ import_react63.default.createElement("div", {
+    }, /* @__PURE__ */ import_react64.default.createElement("div", {
       className: "flex flex-1 flex-col justify-center items-center bg-transparent animate-wiggle absolute inset-0",
       style: { scale: "50%" }
-    }, /* @__PURE__ */ import_react63.default.createElement("img", {
+    }, /* @__PURE__ */ import_react64.default.createElement("img", {
       src: `https://giveaway-o-tron.vercel.app${preview}`
     }))) : null;
   }
 
   // src/App.tsx
   function App() {
-    return /* @__PURE__ */ import_react64.default.createElement(MemoryRouter, {
+    return /* @__PURE__ */ import_react65.default.createElement(MemoryRouter, {
       initialEntries: ["/setup"]
-    }, /* @__PURE__ */ import_react64.default.createElement(InnerApp, null));
+    }, /* @__PURE__ */ import_react65.default.createElement(InnerApp, null));
   }
   function InnerApp() {
     useUpdateCheck();
     const [settings, setSettings] = useStorage("settings", defaultSettings);
     const [discordSettings, setDiscordSettings] = useStorage("discord", defaultDiscordSettings);
-    const [winners, setWinners] = import_react64.default.useState([]);
-    const [client, setClient] = import_react64.default.useState(null);
+    const [winners, setWinners] = import_react65.default.useState([]);
+    const [client, setClient] = import_react65.default.useState(null);
     const [channelInfo, setChannelInfo] = useStorage("channelInfo", {}, (c3) => {
       console.info("[client][app]", c3);
       if (!c3.login)
@@ -72836,7 +72879,7 @@ to {
       if (settings.autoConnect)
         setClient((cl) => cl ? cl : init3(c3));
     });
-    const updateClientInfo = import_react64.default.useCallback((d3) => {
+    const updateClientInfo = import_react65.default.useCallback((d3) => {
       console.info("[auth][client][update]", d3);
       setChannelInfo(d3);
       if ((client == null ? void 0 : client.readyState()) === "OPEN") {
@@ -72850,36 +72893,36 @@ to {
       setClient(init3(d3));
     }, [client]);
     useAuthEvents(updateClientInfo);
-    import_react64.default.useEffect(() => {
+    import_react65.default.useEffect(() => {
       setUser({ username: channelInfo.login });
       if (channelInfo.login) {
         if (settings.autoConnect)
           setClient((cl) => cl ? cl : init3(channelInfo));
       }
     }, [channelInfo.login]);
-    const [forfeits, setForfeits] = import_react64.default.useState([]);
-    const onNewChat = import_react64.default.useCallback((chat) => {
+    const [forfeits, setForfeits] = import_react65.default.useState([]);
+    const onNewChat = import_react65.default.useCallback((chat) => {
       if (settings.forfeitCommand && chat.msg.toLowerCase().includes(settings.forfeitCommand.toLowerCase())) {
         setForfeits((f3) => f3.concat(chat.username));
       }
     }, [settings.forfeitCommand]);
-    const [chatPaused, setChatPaused] = import_react64.default.useState(false);
+    const [chatPaused, setChatPaused] = import_react65.default.useState(false);
     const [chatEvents, resetChat] = useChatEvents(chatPaused, winners, onNewChat);
-    import_react64.default.useEffect(() => {
+    import_react65.default.useEffect(() => {
       window["myApp"].setTitle(channelInfo.login, !!client);
     }, [channelInfo.login, client]);
     const [pastGiveaways, setPastGiveaways] = useStorage("past-giveaways", []);
     const stats = useCacheStats();
     const cacheHistory = useCacheHistory(stats);
-    return /* @__PURE__ */ import_react64.default.createElement(import_react64.default.Fragment, null, /* @__PURE__ */ import_react64.default.createElement(Header, {
+    return /* @__PURE__ */ import_react65.default.createElement(import_react65.default.Fragment, null, /* @__PURE__ */ import_react65.default.createElement(Header, {
       client,
       resetChat,
       setClient,
       channelInfo
-    }), /* @__PURE__ */ import_react64.default.createElement(Switch, null, /* @__PURE__ */ import_react64.default.createElement(Route, {
+    }), /* @__PURE__ */ import_react65.default.createElement(Switch, null, /* @__PURE__ */ import_react65.default.createElement(Route, {
       path: "/",
       exact: true
-    }, /* @__PURE__ */ import_react64.default.createElement(MainScreen, {
+    }, /* @__PURE__ */ import_react65.default.createElement(MainScreen, {
       client,
       chatEvents,
       discordSettings,
@@ -72896,42 +72939,42 @@ to {
       forfeits,
       stats,
       cacheHistory
-    })), /* @__PURE__ */ import_react64.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react65.default.createElement(Route, {
       path: "/setup",
       exact: true
-    }, /* @__PURE__ */ import_react64.default.createElement(Setup, {
+    }, /* @__PURE__ */ import_react65.default.createElement(Setup, {
       resetChat,
       setClient,
       channel: channelInfo,
       setChannel: setChannelInfo
-    })), /* @__PURE__ */ import_react64.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react65.default.createElement(Route, {
       path: "/giveaways",
       exact: true
-    }, /* @__PURE__ */ import_react64.default.createElement(PastGiveaways, {
+    }, /* @__PURE__ */ import_react65.default.createElement(PastGiveaways, {
       giveaways: pastGiveaways,
       setPastGiveaways
-    })), /* @__PURE__ */ import_react64.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react65.default.createElement(Route, {
       path: "/settings",
       exact: true
-    }, /* @__PURE__ */ import_react64.default.createElement(SettingsScreen, {
+    }, /* @__PURE__ */ import_react65.default.createElement(SettingsScreen, {
       settings,
       setSettings,
       forfeits,
       setForfeits
-    })), /* @__PURE__ */ import_react64.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react65.default.createElement(Route, {
       path: "/discord",
       exact: true
-    }, /* @__PURE__ */ import_react64.default.createElement(Discord, {
+    }, /* @__PURE__ */ import_react65.default.createElement(Discord, {
       settings: discordSettings,
       setSettings: setDiscordSettings
-    })), /* @__PURE__ */ import_react64.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react65.default.createElement(Route, {
       path: "/obs",
       exact: true
-    }, /* @__PURE__ */ import_react64.default.createElement(Obs, {
+    }, /* @__PURE__ */ import_react65.default.createElement(Obs, {
       channelInfo,
       settings,
       setSettings
-    }))), /* @__PURE__ */ import_react64.default.createElement(Oe, null));
+    }))), /* @__PURE__ */ import_react65.default.createElement(Oe, null));
   }
 
   // src/index.tsx
@@ -72975,7 +73018,7 @@ to {
       captureException(e3);
     } finally {
       void watch();
-      import_react_dom4.default.render(/* @__PURE__ */ import_react65.default.createElement(App, null), document.querySelector("#app"));
+      import_react_dom5.default.render(/* @__PURE__ */ import_react66.default.createElement(App, null), document.querySelector("#app"));
     }
   });
 })();

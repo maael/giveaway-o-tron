@@ -15,6 +15,7 @@ import {
   FaTimesCircle,
 } from 'react-icons/fa'
 import { Settings } from '~/utils'
+import { Modal, useModal } from '../hooks/useModal'
 
 function isVisibleIn(ele: HTMLElement, container: HTMLElement, buffer: number = 50) {
   const eleTop = ele.offsetTop
@@ -38,8 +39,30 @@ export function ChatControls({
   setPaused,
   clear,
 }: Pick<Props, 'chatEvents' | 'paused' | 'setPaused' | 'clear'>) {
+  const { close, open, isOpen } = useModal()
   return (
     <>
+      <Modal isOpen={isOpen} close={close}>
+        This will clear the chat, are you sure you want to continue?
+        <div className="flex flex-row gap-2 justify-between">
+          <button
+            className="bg-purple-600 px-2 py-1 flex-1 select-none cursor-pointer gap-1 transition-colors hover:bg-purple-700 rounded-md drop-shadow-lg"
+            onClick={close}
+          >
+            Cancel
+          </button>
+          <button
+            className="bg-red-600 px-2 py-1 flex-1 select-none cursor-pointer gap-1 transition-colors hover:bg-red-700 rounded-md drop-shadow-lg"
+            onClick={() => {
+              clear()
+              toast.success('Chat cleared')
+              close()
+            }}
+          >
+            Clear Chat
+          </button>
+        </div>
+      </Modal>
       {paused ? (
         <FaPlayCircle
           className="select-none cursor-pointer transition-opacity hover:opacity-70"
@@ -55,7 +78,7 @@ export function ChatControls({
       )}
       <FaTimesCircle
         className="text-red-500 select-none cursor-pointer  transition-opacity hover:opacity-70"
-        onClick={() => clear()}
+        onClick={open}
         title="Clear chat"
       />
       <FaSave
