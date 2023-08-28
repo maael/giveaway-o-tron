@@ -30,6 +30,11 @@
     "preview": "/images/fipi/preview.png"
   },
   {
+    "id": "arilozen",
+    "name": "Arilozen",
+    "preview": "/images/arilozen/preview.png"
+  },
+  {
     "id": "custom",
     "name": "Custom"
   }
