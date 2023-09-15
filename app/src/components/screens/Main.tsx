@@ -16,6 +16,7 @@ import ChatBox, { ChatControls } from '../primitives/ChatBox'
 import formatDuration from 'date-fns/formatDuration'
 import Stats from '../primitives/Stats'
 import MukSettings from '../primitives/MukSettings'
+import useCheckTwitchScopes from '../hooks/useCheckTwitchScopes'
 
 export default function MainScreen({
   chatEvents,
@@ -58,6 +59,7 @@ export default function MainScreen({
       seconds: Number(((mostRecent.receivedTs - mostRecent.tmiTs) / 1000).toFixed(2)),
     }).replace(' seconds', 's')} delay`
   }, [chatEvents])
+  useCheckTwitchScopes(channelInfo)
   return (
     <div className="flex flex-col flex-1" style={{ height: '100vh' }}>
       <Winner

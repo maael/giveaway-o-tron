@@ -173,7 +173,7 @@ export default function SettingsScreen({
           onClick={async () => {
             try {
               await Neutralino.storage.setData('main-channelinfo', null)
-              await await Neutralino.filesystem.readDirectory(`${NL_CWD}/.storage/main-channelinfo.neustorage`)
+              await Neutralino.filesystem.readDirectory(`${NL_CWD}/.storage/main-channelinfo.neustorage`)
               await Neutralino.app.restartProcess({ args: '--restarted' })
             } catch {
               await Neutralino.app.restartProcess({ args: '--restarted' })

@@ -101,24 +101,28 @@ export function useCacheHistory(stats: CacheStats): CacheHistory {
   return { followers: followerHistory, subs: subsHistory }
 }
 
-async function callTwitchApi(channelInfo: ChannelInfo, path: string, isRefresh: boolean = false) {
-  const res = await fetch(`https://api.twitch.tv/helix/${path}`, {
+async function callWithInfo(base: string, channelInfo: ChannelInfo, path: string, isRefresh: boolean = false) {
+  const res = await fetch(`${base}${path}`, {
     headers: {
       Authorization: `Bearer ${channelInfo.token}`,
       'Client-ID': `${channelInfo.clientId}`,
     },
   })
   if (res.status === 401 && !isRefresh) {
-    console.error('[callTwitchApi][401]')
+    console.error('[callWithInfo][401]')
     const data = await res.json()
     if (data.message.includes('scope')) {
       throw new Error(data.message)
     } else {
-      const newwInfo = await refreshTokenFlow(channelInfo.refreshToken!)
-      return callTwitchApi(newwInfo, path, true)
+      const newInfo = await refreshTokenFlow(channelInfo.refreshToken!)
+      return callWithInfo(base, newInfo, path, true)
     }
   }
   return res
+}
+
+async function callTwitchApi(channelInfo: ChannelInfo, path: string, isRefresh: boolean = false) {
+  return callWithInfo('https://api.twitch.tv/helix/', channelInfo, path, isRefresh)
 }
 
 export async function getViewers(channelInfo: ChannelInfo) {
