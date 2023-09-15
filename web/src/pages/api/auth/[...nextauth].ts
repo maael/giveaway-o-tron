@@ -17,7 +17,7 @@ export default NextAuth({
       authorization: {
         params: {
           scope:
-            'openid user:read:email user:read:subscriptions chat:read chat:edit channel:read:subscriptions channel_subscriptions',
+            'openid user:read:email user:read:subscriptions chat:read chat:edit channel:read:subscriptions channel_subscriptions moderator:read:followers',
           claims: {
             id_token: {
               email: null,

@@ -38,6 +38,7 @@ export async function validateToken(token: string, refreshToken: string, isRefre
       clientId: data.client_id,
       login: data.login,
       userId: data.user_id,
+      scopes: data.scopes,
     }
   } catch (e) {
     console.info('[validate][error]', e)

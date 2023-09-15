@@ -71,6 +71,12 @@ export default function Setup({
           <span className="relative -top-0.5">Finish Setup</span>
         </button>
       </form>
+      {NL_ARGS.includes('--error=scopes') ? (
+        <div className="bg-red-300 border border-red-600 text-red-900 text-center rounded-md max-w-md px-3 py-1 text-xs mt-1">
+          There was a problem with your Twitch tokens, please make sure to logout and refresh tokens before entering
+          them again
+        </div>
+      ) : null}
     </div>
   )
 }

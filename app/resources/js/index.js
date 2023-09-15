@@ -1097,7 +1097,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect9(create, deps) {
+          function useEffect10(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1667,7 +1667,7 @@
           exports.useCallback = useCallback6;
           exports.useContext = useContext2;
           exports.useDebugValue = useDebugValue;
-          exports.useEffect = useEffect9;
+          exports.useEffect = useEffect10;
           exports.useImperativeHandle = useImperativeHandle2;
           exports.useLayoutEffect = useLayoutEffect2;
           exports.useMemo = useMemo4;
@@ -37439,7 +37439,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   });
 
   // src/index.tsx
-  var import_react66 = __toModule(require_react());
+  var import_react67 = __toModule(require_react());
   var import_react_dom5 = __toModule(require_react_dom());
 
   // node_modules/@sentry/utils/esm/env.js
@@ -43371,7 +43371,7 @@ Url: ${_getEventFilterUrl(event)}`);
   }
 
   // src/App.tsx
-  var import_react65 = __toModule(require_react());
+  var import_react66 = __toModule(require_react());
 
   // node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js
   function _setPrototypeOf(o2, p2) {
@@ -47590,7 +47590,7 @@ to {
   }
 
   // src/components/screens/Main.tsx
-  var import_react49 = __toModule(require_react());
+  var import_react50 = __toModule(require_react());
 
   // src/utils/misc.ts
   var ONE_MIN = 1e3 * 60;
@@ -47722,7 +47722,8 @@ to {
         refreshToken,
         clientId: data.client_id,
         login: data.login,
-        userId: data.user_id
+        userId: data.user_id,
+        scopes: data.scopes
       };
     } catch (e3) {
       console.info("[validate][error]", e3);
@@ -47875,31 +47876,34 @@ to {
     }, [stats.subs.lastUpdated]);
     return { followers: followerHistory, subs: subsHistory };
   }
-  async function callTwitchApi(channelInfo, path2, isRefresh = false) {
-    const res = await fetch(`https://api.twitch.tv/helix/${path2}`, {
+  async function callWithInfo(base, channelInfo, path2, isRefresh = false) {
+    const res = await fetch(`${base}${path2}`, {
       headers: {
         Authorization: `Bearer ${channelInfo.token}`,
         "Client-ID": `${channelInfo.clientId}`
       }
     });
     if (res.status === 401 && !isRefresh) {
-      console.error("[callTwitchApi][401]");
+      console.error("[callWithInfo][401]");
       const data = await res.json();
       if (data.message.includes("scope")) {
         throw new Error(data.message);
       } else {
-        const newwInfo = await refreshTokenFlow(channelInfo.refreshToken);
-        return callTwitchApi(newwInfo, path2, true);
+        const newInfo = await refreshTokenFlow(channelInfo.refreshToken);
+        return callWithInfo(base, newInfo, path2, true);
       }
     }
     return res;
+  }
+  async function callTwitchApi(channelInfo, path2, isRefresh = false) {
+    return callWithInfo("https://api.twitch.tv/helix/", channelInfo, path2, isRefresh);
   }
   async function getViewers(channelInfo) {
     return fetch(`https://discord-slash-commands.vercel.app/api/twitch-chatters?channel=${channelInfo.login}`).then((res) => res.json()).then((d3) => d3.chatters.viewers.concat(d3.chatters.moderators).concat(d3.chatters.vips).concat(d3.chatters.admins).concat(d3.chatters.staff).concat(d3.chatters.global_mods).filter((n3) => !BOTS.includes(n3)));
   }
   var dumbFollowersCache = new Map();
   async function getFollowers(channelInfo) {
-    return genericCacher("followers", CACHE_KEY.dumbfollows, channelInfo, "users/follows?to_id=", dumbFollowersCache, (i3) => ({ id: i3.from_id, login: i3.from_login }));
+    return genericCacher("followers", CACHE_KEY.dumbfollows, channelInfo, "channels/followers?broadcaster_id=", dumbFollowersCache, (i3) => ({ id: i3.from_id, login: i3.from_login }));
   }
   var dumbSubscriberCache = new Map();
   async function getSubs(channelInfo) {
@@ -68236,6 +68240,40 @@ to {
     }, /* @__PURE__ */ import_react48.default.createElement(FaTrophy, null), " Rigged Mode")) : null;
   }
 
+  // src/components/hooks/useCheckTwitchScopes.ts
+  var import_react49 = __toModule(require_react());
+  var REQUIRED_SCOPES = [
+    "openid",
+    "user:read:email",
+    "user:read:subscriptions",
+    "chat:read",
+    "chat:edit",
+    "channel:read:subscriptions",
+    "channel_subscriptions",
+    "moderator:read:followers"
+  ];
+  function useCheckTwitchScopes(channelInfo) {
+    (0, import_react49.useEffect)(() => {
+      ;
+      (async () => {
+        if (!channelInfo.token || !channelInfo.refreshToken) {
+          return;
+        }
+        const result = await validateToken(channelInfo.token, channelInfo.refreshToken, false);
+        if (REQUIRED_SCOPES.some((s3) => !((result == null ? void 0 : result.scopes) || []).includes(s3))) {
+          console.warn("Missing scopes, wiping tokens and prompting reauth");
+          try {
+            await Neutralino.storage.setData("main-channelinfo", null);
+            await Neutralino.filesystem.readDirectory(`${NL_CWD}/.storage/main-channelinfo.neustorage`);
+            await Neutralino.app.restartProcess({ args: "--restarted --error=scopes" });
+          } catch (e3) {
+            await Neutralino.app.restartProcess({ args: "--restarted --error=scopes" });
+          }
+        }
+      })();
+    }, [channelInfo]);
+  }
+
   // src/components/screens/Main.tsx
   function MainScreen({
     chatEvents,
@@ -68254,7 +68292,7 @@ to {
     stats,
     cacheHistory
   }) {
-    const messageDelay = import_react49.default.useMemo(() => {
+    const messageDelay = import_react50.default.useMemo(() => {
       const mostRecent = chatEvents[chatEvents.length - 1];
       if (!mostRecent)
         return "0s delay";
@@ -68262,19 +68300,20 @@ to {
         seconds: Number(((mostRecent.receivedTs - mostRecent.tmiTs) / 1e3).toFixed(2))
       }).replace(" seconds", "s")} delay`;
     }, [chatEvents]);
-    return /* @__PURE__ */ import_react49.default.createElement("div", {
+    useCheckTwitchScopes(channelInfo);
+    return /* @__PURE__ */ import_react50.default.createElement("div", {
       className: "flex flex-col flex-1",
       style: { height: "100vh" }
-    }, /* @__PURE__ */ import_react49.default.createElement(Winner, {
+    }, /* @__PURE__ */ import_react50.default.createElement(Winner, {
       winners,
       onClear: (idx) => setWinners((w2) => removeIdx(w2, idx)),
       chatClient: client,
       settings,
       discordSettings,
       channelInfo
-    }), /* @__PURE__ */ import_react49.default.createElement("div", {
+    }), /* @__PURE__ */ import_react50.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react49.default.createElement(InstantGiveaway, {
+    }, /* @__PURE__ */ import_react50.default.createElement(InstantGiveaway, {
       discordSettings,
       settings,
       channelInfo,
@@ -68282,7 +68321,7 @@ to {
       client,
       setPastGiveaways,
       forfeits
-    }), /* @__PURE__ */ import_react49.default.createElement(ChatGiveaway, {
+    }), /* @__PURE__ */ import_react50.default.createElement(ChatGiveaway, {
       discordSettings,
       settings,
       channelInfo,
@@ -68291,28 +68330,28 @@ to {
       client,
       setPastGiveaways,
       forfeits
-    })), /* @__PURE__ */ import_react49.default.createElement(MukSettings, {
+    })), /* @__PURE__ */ import_react50.default.createElement(MukSettings, {
       discordSettings,
       settings,
       chatClient: client,
       channelInfo
-    }), /* @__PURE__ */ import_react49.default.createElement(SettingsComponent, {
+    }), /* @__PURE__ */ import_react50.default.createElement(SettingsComponent, {
       channelId: channelInfo.userId,
       settings,
       setSettings,
       setChatPaused,
       resetChat,
       discordSettings
-    }), settings.performanceMode && !winners.length ? /* @__PURE__ */ import_react49.default.createElement("div", {
+    }), settings.performanceMode && !winners.length ? /* @__PURE__ */ import_react50.default.createElement("div", {
       className: "h-full flex-1 gap-2 flex flex-col justify-center items-center"
-    }, /* @__PURE__ */ import_react49.default.createElement("div", {
+    }, /* @__PURE__ */ import_react50.default.createElement("div", {
       className: "flex justify-center items-center gap-2 flex-row"
-    }, /* @__PURE__ */ import_react49.default.createElement("div", null, chatEvents.length, " messages"), /* @__PURE__ */ import_react49.default.createElement(ChatControls, {
+    }, /* @__PURE__ */ import_react50.default.createElement("div", null, chatEvents.length, " messages"), /* @__PURE__ */ import_react50.default.createElement(ChatControls, {
       chatEvents,
       paused: chatPaused,
       setPaused: setChatPaused,
       clear: resetChat
-    })), /* @__PURE__ */ import_react49.default.createElement("div", null, messageDelay)) : /* @__PURE__ */ import_react49.default.createElement(ChatBox, {
+    })), /* @__PURE__ */ import_react50.default.createElement("div", null, messageDelay)) : /* @__PURE__ */ import_react50.default.createElement(ChatBox, {
       messageDelay,
       chatEvents,
       winners,
@@ -68321,14 +68360,14 @@ to {
       clear: resetChat,
       settings,
       setSettings
-    }), /* @__PURE__ */ import_react49.default.createElement(Stats, {
+    }), /* @__PURE__ */ import_react50.default.createElement(Stats, {
       stats,
       cacheHistory
     }));
   }
 
   // src/components/screens/Setup.tsx
-  var import_react50 = __toModule(require_react());
+  var import_react51 = __toModule(require_react());
   function Setup({
     resetChat,
     setClient,
@@ -68336,24 +68375,24 @@ to {
     setChannel
   }) {
     const history = useHistory();
-    import_react50.default.useEffect(() => {
+    import_react51.default.useEffect(() => {
       if (channel.login && !NL_ARGS.includes("--restarted")) {
         history.push("/");
       }
     }, [channel.login]);
-    return /* @__PURE__ */ import_react50.default.createElement("div", {
+    return /* @__PURE__ */ import_react51.default.createElement("div", {
       className: "flex flex-col justify-center items-center h-full gap-3 -mt-10"
-    }, /* @__PURE__ */ import_react50.default.createElement("div", {
+    }, /* @__PURE__ */ import_react51.default.createElement("div", {
       className: "text-3xl"
-    }, "First Time Setup"), /* @__PURE__ */ import_react50.default.createElement("p", {
+    }, "First Time Setup"), /* @__PURE__ */ import_react51.default.createElement("p", {
       className: "max-w-md text-center opacity-70"
-    }, "Click below to open a browser and log in with your Twitch account, to get the tokens needed below."), /* @__PURE__ */ import_react50.default.createElement("button", {
+    }, "Click below to open a browser and log in with your Twitch account, to get the tokens needed below."), /* @__PURE__ */ import_react51.default.createElement("button", {
       className: "bg-purple-600 text-white py-1 px-3 rounded-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 justify-center",
       onClick: () => Neutralino.os.open("https://giveaway-o-tron.vercel.app"),
       title: "Go to Twitch"
-    }, "Authenticate with Twitch to get tokens \u2192"), /* @__PURE__ */ import_react50.default.createElement("p", {
+    }, "Authenticate with Twitch to get tokens \u2192"), /* @__PURE__ */ import_react51.default.createElement("p", {
       className: "max-w-lg text-center opacity-70 mt-4"
-    }, "Once you have the tokens, you can post them below."), /* @__PURE__ */ import_react50.default.createElement("form", {
+    }, "Once you have the tokens, you can post them below."), /* @__PURE__ */ import_react51.default.createElement("form", {
       className: "flex flex-col gap-2 justify-center items-center",
       onSubmit: async (e3) => {
         e3.preventDefault();
@@ -68371,65 +68410,67 @@ to {
         setChannel(data);
         history.push("/");
       }
-    }, /* @__PURE__ */ import_react50.default.createElement("input", {
+    }, /* @__PURE__ */ import_react51.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-md border-b border-purple-500 overflow-ellipsis",
       placeholder: "Access Token...",
       name: "accessToken",
       type: "password"
-    }), /* @__PURE__ */ import_react50.default.createElement("input", {
+    }), /* @__PURE__ */ import_react51.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-md border-b border-purple-500 overflow-ellipsis",
       placeholder: "Refresh Token...",
       name: "refreshToken",
       type: "password"
-    }), /* @__PURE__ */ import_react50.default.createElement("button", {
+    }), /* @__PURE__ */ import_react51.default.createElement("button", {
       className: "bg-purple-600 text-white py-1 px-5 rounded-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 justify-center text-xl mt-2",
       title: "Setup connection"
-    }, /* @__PURE__ */ import_react50.default.createElement(FaTwitch, null), /* @__PURE__ */ import_react50.default.createElement("span", {
+    }, /* @__PURE__ */ import_react51.default.createElement(FaTwitch, null), /* @__PURE__ */ import_react51.default.createElement("span", {
       className: "relative -top-0.5"
-    }, "Finish Setup"))));
+    }, "Finish Setup"))), NL_ARGS.includes("--error=scopes") ? /* @__PURE__ */ import_react51.default.createElement("div", {
+      className: "bg-red-300 border border-red-600 text-red-900 text-center rounded-md max-w-md px-3 py-1 text-xs mt-1"
+    }, "There was a problem with your Twitch tokens, please make sure to logout and refresh tokens before entering them again") : null);
   }
 
   // src/components/screens/PastGiveaways.tsx
-  var import_react51 = __toModule(require_react());
+  var import_react52 = __toModule(require_react());
   var typeNameMap = {
     [GiveawayType.Chat]: "Active Chatter Giveaway",
     [GiveawayType.Instant]: "Viewers Instant Giveaway"
   };
   function SettingItem({ label, value: value2 }) {
-    return /* @__PURE__ */ import_react51.default.createElement("div", {
+    return /* @__PURE__ */ import_react52.default.createElement("div", {
       className: "flex flex-row justify-center items-center flex-1"
-    }, /* @__PURE__ */ import_react51.default.createElement("div", {
+    }, /* @__PURE__ */ import_react52.default.createElement("div", {
       className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md"
-    }, label), /* @__PURE__ */ import_react51.default.createElement("div", {
+    }, label), /* @__PURE__ */ import_react52.default.createElement("div", {
       className: "bg-gray-600 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1 overflow-ellipsis h-full max-w-full flex justify-center items-center"
-    }, typeof value2 === "boolean" ? value2 ? /* @__PURE__ */ import_react51.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react51.default.createElement(FaTimes, null) : value2));
+    }, typeof value2 === "boolean" ? value2 ? /* @__PURE__ */ import_react52.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react52.default.createElement(FaTimes, null) : value2));
   }
   var LIMIT_GIVEAWAY_LIST = 10;
   function PastGiveaways({
     giveaways,
     setPastGiveaways
   }) {
-    return /* @__PURE__ */ import_react51.default.createElement("div", {
+    return /* @__PURE__ */ import_react52.default.createElement("div", {
       className: "mt-4 flex flex-col gap-5 flex-1 pb-5"
-    }, /* @__PURE__ */ import_react51.default.createElement("h1", {
+    }, /* @__PURE__ */ import_react52.default.createElement("h1", {
       className: "text-3xl flex items-center"
     }, "Last ", Math.min(giveaways.length, LIMIT_GIVEAWAY_LIST), " of ", giveaways.length, " Total Past Giveaway", giveaways.length === 1 ? "" : "s"), giveaways.slice(0, LIMIT_GIVEAWAY_LIST).map((giveaway, idx) => {
       var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j;
-      return /* @__PURE__ */ import_react51.default.createElement("div", {
+      return /* @__PURE__ */ import_react52.default.createElement("div", {
         key: idx,
         className: "border border-purple-600 rounded-md px-3 py-2 flex flex-col gap-2 bg-gray-700"
-      }, /* @__PURE__ */ import_react51.default.createElement("div", {
+      }, /* @__PURE__ */ import_react52.default.createElement("div", {
         className: "flex flex-row gap-1 justify-between font-bold"
-      }, typeNameMap[giveaway.type], /* @__PURE__ */ import_react51.default.createElement("div", {
+      }, typeNameMap[giveaway.type], /* @__PURE__ */ import_react52.default.createElement("div", {
         title: format(new Date(giveaway.createdAt), "PPPppp"),
         className: "flex flex-row gap-1 justify-center items-center"
-      }, /* @__PURE__ */ import_react51.default.createElement(FaClock, {
+      }, /* @__PURE__ */ import_react52.default.createElement(FaClock, {
         className: "text-xs"
-      }), formatDistanceToNow(new Date(giveaway.createdAt), { addSuffix: true }))), /* @__PURE__ */ import_react51.default.createElement("div", {
+      }), formatDistanceToNow(new Date(giveaway.createdAt), { addSuffix: true }))), /* @__PURE__ */ import_react52.default.createElement("div", {
         className: "flex flex-row justify-center items-center flex-1"
-      }, /* @__PURE__ */ import_react51.default.createElement("div", {
+      }, /* @__PURE__ */ import_react52.default.createElement("div", {
         className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md"
-      }, "Notes"), /* @__PURE__ */ import_react51.default.createElement("input", {
+      }, "Notes"), /* @__PURE__ */ import_react52.default.createElement("input", {
         className: "bg-gray-600 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1 overflow-ellipsis h-full max-w-full flex justify-center items-center",
         placeholder: "Notes...",
         value: giveaway.notes || "",
@@ -68441,34 +68482,34 @@ to {
           clone[giveawayIdxToChange].notes = e3.target.value;
           return clone;
         })
-      })), /* @__PURE__ */ import_react51.default.createElement("div", null, /* @__PURE__ */ import_react51.default.createElement("div", {
+      })), /* @__PURE__ */ import_react52.default.createElement("div", null, /* @__PURE__ */ import_react52.default.createElement("div", {
         className: "border-b border-purple-600 mb-2"
-      }, "Winners"), /* @__PURE__ */ import_react51.default.createElement("div", {
+      }, "Winners"), /* @__PURE__ */ import_react52.default.createElement("div", {
         className: "flex flex-col gap-2 px-2"
-      }, giveaway.winners.map((w2, widx) => /* @__PURE__ */ import_react51.default.createElement("div", {
+      }, giveaway.winners.map((w2, widx) => /* @__PURE__ */ import_react52.default.createElement("div", {
         key: `${idx}-${widx}`,
         className: "border border-purple-600 rounded-md flex flex-row gap-1 flex-1 items-center"
-      }, /* @__PURE__ */ import_react51.default.createElement("div", {
+      }, /* @__PURE__ */ import_react52.default.createElement("div", {
         className: "bg-purple-600 text-white h-full flex justify-center items-center px-3 py-2"
-      }, w2.login), /* @__PURE__ */ import_react51.default.createElement("div", {
+      }, w2.login), /* @__PURE__ */ import_react52.default.createElement("div", {
         className: "px-3 py-2 flex flex-row gap-3 flex-1"
-      }, /* @__PURE__ */ import_react51.default.createElement("div", {
+      }, /* @__PURE__ */ import_react52.default.createElement("div", {
         className: "flex flex-row items-center gap-1"
-      }, "Sub:", " ", w2.wasSubscriber ? /* @__PURE__ */ import_react51.default.createElement(FaCheck, {
+      }, "Sub:", " ", w2.wasSubscriber ? /* @__PURE__ */ import_react52.default.createElement(FaCheck, {
         className: "text-green-600"
-      }) : /* @__PURE__ */ import_react51.default.createElement(FaTimes, {
+      }) : /* @__PURE__ */ import_react52.default.createElement(FaTimes, {
         className: "text-red-600"
-      })), /* @__PURE__ */ import_react51.default.createElement("div", {
+      })), /* @__PURE__ */ import_react52.default.createElement("div", {
         className: "flex flex-row items-center gap-1"
-      }, "Follower:", " ", w2.wasFollower ? /* @__PURE__ */ import_react51.default.createElement(FaCheck, {
+      }, "Follower:", " ", w2.wasFollower ? /* @__PURE__ */ import_react52.default.createElement(FaCheck, {
         className: "text-green-600"
-      }) : /* @__PURE__ */ import_react51.default.createElement(FaTimes, {
+      }) : /* @__PURE__ */ import_react52.default.createElement(FaTimes, {
         className: "text-red-600"
-      })), /* @__PURE__ */ import_react51.default.createElement("div", {
+      })), /* @__PURE__ */ import_react52.default.createElement("div", {
         className: "flex flex-row justify-center items-center flex-1"
-      }, /* @__PURE__ */ import_react51.default.createElement("div", {
+      }, /* @__PURE__ */ import_react52.default.createElement("div", {
         className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md"
-      }, "Notes"), /* @__PURE__ */ import_react51.default.createElement("input", {
+      }, "Notes"), /* @__PURE__ */ import_react52.default.createElement("input", {
         className: "bg-gray-600 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1 overflow-ellipsis h-full max-w-full flex justify-center items-center",
         placeholder: "Notes...",
         value: w2.notes,
@@ -68483,49 +68524,49 @@ to {
           clone[giveawayIdxToChange].winners[winnerIdxToChange].notes = e3.target.value;
           return clone;
         })
-      }))))))), /* @__PURE__ */ import_react51.default.createElement("div", null, /* @__PURE__ */ import_react51.default.createElement("div", {
+      }))))))), /* @__PURE__ */ import_react52.default.createElement("div", null, /* @__PURE__ */ import_react52.default.createElement("div", {
         className: "border-b border-purple-600 mb-2"
-      }, "Stats"), /* @__PURE__ */ import_react51.default.createElement("div", {
+      }, "Stats"), /* @__PURE__ */ import_react52.default.createElement("div", {
         className: "grid grid-cols-5 gap-2 px-2"
-      }, /* @__PURE__ */ import_react51.default.createElement(SettingItem, {
+      }, /* @__PURE__ */ import_react52.default.createElement(SettingItem, {
         label: "Users",
         value: (_b = (_a = giveaway.giveawayStats) == null ? void 0 : _a.users) != null ? _b : "?"
-      }), /* @__PURE__ */ import_react51.default.createElement(SettingItem, {
+      }), /* @__PURE__ */ import_react52.default.createElement(SettingItem, {
         label: "Entries",
         value: (_d = (_c = giveaway.giveawayStats) == null ? void 0 : _c.entries) != null ? _d : "?"
-      }), /* @__PURE__ */ import_react51.default.createElement(SettingItem, {
+      }), /* @__PURE__ */ import_react52.default.createElement(SettingItem, {
         label: "Followers",
         value: (_f = (_e = giveaway.giveawayStats) == null ? void 0 : _e.followers) != null ? _f : "?"
-      }), /* @__PURE__ */ import_react51.default.createElement(SettingItem, {
+      }), /* @__PURE__ */ import_react52.default.createElement(SettingItem, {
         label: "Subs",
         value: (_h = (_g = giveaway.giveawayStats) == null ? void 0 : _g.subs) != null ? _h : "?"
-      }), /* @__PURE__ */ import_react51.default.createElement(SettingItem, {
+      }), /* @__PURE__ */ import_react52.default.createElement(SettingItem, {
         label: "Final Entries",
         value: (_j = (_i = giveaway.giveawayStats) == null ? void 0 : _i.finalEntries) != null ? _j : "?"
-      }))), /* @__PURE__ */ import_react51.default.createElement("div", null, /* @__PURE__ */ import_react51.default.createElement("div", {
+      }))), /* @__PURE__ */ import_react52.default.createElement("div", null, /* @__PURE__ */ import_react52.default.createElement("div", {
         className: "border-b border-purple-600 mb-2"
-      }, "Settings"), /* @__PURE__ */ import_react51.default.createElement("div", {
+      }, "Settings"), /* @__PURE__ */ import_react52.default.createElement("div", {
         className: "grid grid-cols-4 gap-2 px-2"
-      }, /* @__PURE__ */ import_react51.default.createElement(SettingItem, {
+      }, /* @__PURE__ */ import_react52.default.createElement(SettingItem, {
         label: "Sub Luck",
         value: giveaway.settings.subLuck.toString()
-      }), /* @__PURE__ */ import_react51.default.createElement(SettingItem, {
+      }), /* @__PURE__ */ import_react52.default.createElement(SettingItem, {
         label: "# Winners",
         value: giveaway.settings.numberOfWinners.toString()
-      }), /* @__PURE__ */ import_react51.default.createElement(SettingItem, {
+      }), /* @__PURE__ */ import_react52.default.createElement(SettingItem, {
         label: "Followers Only",
         value: giveaway.settings.followersOnly
-      }), /* @__PURE__ */ import_react51.default.createElement(SettingItem, {
+      }), /* @__PURE__ */ import_react52.default.createElement(SettingItem, {
         label: "Send Messages",
         value: giveaway.settings.sendMessages
-      }), /* @__PURE__ */ import_react51.default.createElement("div", {
+      }), /* @__PURE__ */ import_react52.default.createElement("div", {
         className: "grid col-span-4"
-      }, /* @__PURE__ */ import_react51.default.createElement(SettingItem, {
+      }, /* @__PURE__ */ import_react52.default.createElement(SettingItem, {
         label: "Chat Command",
         value: giveaway.settings.chatCommand.toString().trim() || "No command"
-      })), /* @__PURE__ */ import_react51.default.createElement("div", {
+      })), /* @__PURE__ */ import_react52.default.createElement("div", {
         className: "grid col-span-4"
-      }, /* @__PURE__ */ import_react51.default.createElement(SettingItem, {
+      }, /* @__PURE__ */ import_react52.default.createElement(SettingItem, {
         label: "Winner Message",
         value: giveaway.settings.winnerMessage.toString()
       })))));
@@ -68536,7 +68577,7 @@ to {
   var React45 = __toModule(require_react());
 
   // src/utils/updates.tsx
-  var import_react52 = __toModule(require_react());
+  var import_react53 = __toModule(require_react());
   var APP_VERSION = globalThis.NL_APP_VERSION;
   async function checkForUpdate() {
     try {
@@ -68544,12 +68585,12 @@ to {
       if (manifest.version != NL_APPVERSION) {
         console.info("[update]", { from: NL_APPVERSION, to: manifest.version });
         Et((t2) => {
-          return /* @__PURE__ */ import_react52.default.createElement("div", {
+          return /* @__PURE__ */ import_react53.default.createElement("div", {
             className: "flex flex-row gap-4 justify-center items-center"
-          }, /* @__PURE__ */ import_react52.default.createElement("button", {
+          }, /* @__PURE__ */ import_react53.default.createElement("button", {
             onClick: () => Neutralino.os.open(manifest.data.url),
             className: "underline text-purple-600"
-          }, "v", manifest.version, " available \u2192"), "or", /* @__PURE__ */ import_react52.default.createElement("button", {
+          }, "v", manifest.version, " available \u2192"), "or", /* @__PURE__ */ import_react53.default.createElement("button", {
             className: "bg-purple-600 px-2 py-1 rounded-md text-white hover:scale-105",
             onClick: async () => {
               Et("The app will now install the update and try to reopen, you may need to reopen it manually", {
@@ -68574,7 +68615,7 @@ to {
     }
   }
   function useUpdateCheck() {
-    import_react52.default.useEffect(() => {
+    import_react53.default.useEffect(() => {
       void checkForUpdate();
     }, []);
   }
@@ -68707,7 +68748,7 @@ to {
       onClick: async () => {
         try {
           await Neutralino.storage.setData("main-channelinfo", null);
-          await await Neutralino.filesystem.readDirectory(`${NL_CWD}/.storage/main-channelinfo.neustorage`);
+          await Neutralino.filesystem.readDirectory(`${NL_CWD}/.storage/main-channelinfo.neustorage`);
           await Neutralino.app.restartProcess({ args: "--restarted" });
         } catch (e3) {
           await Neutralino.app.restartProcess({ args: "--restarted" });
@@ -68717,7 +68758,7 @@ to {
   }
 
   // src/components/primitives/Header.tsx
-  var import_react53 = __toModule(require_react());
+  var import_react54 = __toModule(require_react());
 
   // node_modules/react-icons/si/index.esm.js
   function SiObsstudio(props) {
@@ -68733,51 +68774,51 @@ to {
   }) {
     const location2 = useLocation();
     const homeRoute = channelInfo.login ? "/" : "/setup";
-    return /* @__PURE__ */ import_react53.default.createElement("div", {
+    return /* @__PURE__ */ import_react54.default.createElement("div", {
       className: "flex flex-row justify-start gap-2"
-    }, /* @__PURE__ */ import_react53.default.createElement("div", {
+    }, /* @__PURE__ */ import_react54.default.createElement("div", {
       className: "flex-1 flex flex-row gap-2 items-center"
-    }, /* @__PURE__ */ import_react53.default.createElement("div", {
+    }, /* @__PURE__ */ import_react54.default.createElement("div", {
       className: "inline-block"
-    }, /* @__PURE__ */ import_react53.default.createElement(Link, {
+    }, /* @__PURE__ */ import_react54.default.createElement(Link, {
       to: homeRoute
-    }, /* @__PURE__ */ import_react53.default.createElement("h1", {
+    }, /* @__PURE__ */ import_react54.default.createElement("h1", {
       className: "flex flex-row gap-1 items-center text-white bg-purple-600 rounded-md px-3 py-1 transform hover:scale-105 transition-transform shadow-md"
-    }, /* @__PURE__ */ import_react53.default.createElement(FaRobot, {
+    }, /* @__PURE__ */ import_react54.default.createElement(FaRobot, {
       className: "text-2xl"
-    }), " ", /* @__PURE__ */ import_react53.default.createElement("span", {
+    }), " ", /* @__PURE__ */ import_react54.default.createElement("span", {
       className: "hidden sm:block"
-    }, location2.pathname === homeRoute ? /* @__PURE__ */ import_react53.default.createElement("span", {
+    }, location2.pathname === homeRoute ? /* @__PURE__ */ import_react54.default.createElement("span", {
       className: "relative -top-0.5 ml-1"
-    }, "Giveaway-o-tron") : /* @__PURE__ */ import_react53.default.createElement(FaAngleLeft, {
+    }, "Giveaway-o-tron") : /* @__PURE__ */ import_react54.default.createElement(FaAngleLeft, {
       className: "text-xl"
-    }))))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react53.default.createElement(Link, {
+    }))))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react54.default.createElement(Link, {
       to: "/settings"
-    }, /* @__PURE__ */ import_react53.default.createElement("div", {
+    }, /* @__PURE__ */ import_react54.default.createElement("div", {
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
       title: "Settings (blocklist etc)"
-    }, /* @__PURE__ */ import_react53.default.createElement(FaCogs, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react53.default.createElement(Link, {
+    }, /* @__PURE__ */ import_react54.default.createElement(FaCogs, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react54.default.createElement(Link, {
       to: "/discord"
-    }, /* @__PURE__ */ import_react53.default.createElement("div", {
+    }, /* @__PURE__ */ import_react54.default.createElement("div", {
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
       title: "Discord integration"
-    }, /* @__PURE__ */ import_react53.default.createElement(FaDiscord, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react53.default.createElement(Link, {
+    }, /* @__PURE__ */ import_react54.default.createElement(FaDiscord, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react54.default.createElement(Link, {
       to: "/giveaways"
-    }, /* @__PURE__ */ import_react53.default.createElement("div", {
+    }, /* @__PURE__ */ import_react54.default.createElement("div", {
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
       title: "Past giveways"
-    }, /* @__PURE__ */ import_react53.default.createElement(FaClock, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react53.default.createElement(Link, {
+    }, /* @__PURE__ */ import_react54.default.createElement(FaClock, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react54.default.createElement(Link, {
       to: "/obs"
-    }, /* @__PURE__ */ import_react53.default.createElement("div", {
+    }, /* @__PURE__ */ import_react54.default.createElement("div", {
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
       title: "Past giveways"
-    }, /* @__PURE__ */ import_react53.default.createElement(SiObsstudio, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react53.default.createElement("button", {
+    }, /* @__PURE__ */ import_react54.default.createElement(SiObsstudio, null))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react54.default.createElement("button", {
       title: "Open FAQ",
       className: "bg-purple-600 p-2 flex justify-center items-center rounded-md",
       onClick: () => {
         Neutralino.os.open("https://giveaway-o-tron.mael.tech/guide#faq");
       }
-    }, /* @__PURE__ */ import_react53.default.createElement(FaQuestion, null))), /* @__PURE__ */ import_react53.default.createElement("form", {
+    }, /* @__PURE__ */ import_react54.default.createElement(FaQuestion, null))), /* @__PURE__ */ import_react54.default.createElement("form", {
       className: "flex flex-row flex-0",
       onSubmit: (e3) => {
         e3.preventDefault();
@@ -68795,25 +68836,25 @@ to {
           setClient(init3(channelInfo));
         }
       }
-    }, /* @__PURE__ */ import_react53.default.createElement("input", {
+    }, /* @__PURE__ */ import_react54.default.createElement("input", {
       className: "bg-gray-700 px-2 py-1 rounded-l-md border-b border-l border-purple-500",
       placeholder: "Channel Name",
       value: channelInfo.login || "",
       disabled: true,
       title: !!client ? "Disconnect to change" : "Set channel to connect to"
-    }), /* @__PURE__ */ import_react53.default.createElement("button", {
+    }), /* @__PURE__ */ import_react54.default.createElement("button", {
       className: "bg-purple-600 text-white py-1 px-3 rounded-r-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 w-32 justify-center",
       title: "Connect to chat"
-    }, /* @__PURE__ */ import_react53.default.createElement(FaTwitch, null), " ", /* @__PURE__ */ import_react53.default.createElement("span", {
+    }, /* @__PURE__ */ import_react54.default.createElement(FaTwitch, null), " ", /* @__PURE__ */ import_react54.default.createElement("span", {
       className: "hidden sm:block"
     }, client ? "Disconnect" : "Connect"))));
   }
 
   // src/components/screens/Discord.tsx
-  var import_react56 = __toModule(require_react());
+  var import_react57 = __toModule(require_react());
 
   // src/components/primitives/Checkbox.tsx
-  var import_react54 = __toModule(require_react());
+  var import_react55 = __toModule(require_react());
   function Checkbox(_a) {
     var _b = _a, {
       value: value2,
@@ -68824,14 +68865,14 @@ to {
       "onChange",
       "name"
     ]);
-    return /* @__PURE__ */ import_react54.default.createElement("button", __spreadValues({
+    return /* @__PURE__ */ import_react55.default.createElement("button", __spreadValues({
       onClick: () => onChange2((v2) => __spreadProps(__spreadValues({}, v2), { [name]: !v2[name] }))
-    }, btnProps), value2 ? /* @__PURE__ */ import_react54.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react54.default.createElement(FaTimes, null));
+    }, btnProps), value2 ? /* @__PURE__ */ import_react55.default.createElement(FaCheck, null) : /* @__PURE__ */ import_react55.default.createElement(FaTimes, null));
   }
 
   // src/components/primitives/Input.tsx
   var import_classnames24 = __toModule(require_classnames());
-  var import_react55 = __toModule(require_react());
+  var import_react56 = __toModule(require_react());
   function Input(_a) {
     var _b = _a, {
       label,
@@ -68842,12 +68883,12 @@ to {
       "title",
       "outerClassName"
     ]);
-    return /* @__PURE__ */ import_react55.default.createElement("div", {
+    return /* @__PURE__ */ import_react56.default.createElement("div", {
       className: (0, import_classnames24.default)(outerClassName, "flex flex-row justify-center items-center flex-1")
-    }, /* @__PURE__ */ import_react55.default.createElement("div", {
+    }, /* @__PURE__ */ import_react56.default.createElement("div", {
       className: "flex-0 bg-purple-600 px-2 py-1 rounded-l-md h-full",
       title
-    }, label), /* @__PURE__ */ import_react55.default.createElement("input", __spreadValues({
+    }, label), /* @__PURE__ */ import_react56.default.createElement("input", __spreadValues({
       className: "bg-gray-700 px-2 py-1 rounded-r-md border-b border-purple-500 flex-1 h-full overflow-ellipsis"
     }, inputProps)));
   }
@@ -68858,151 +68899,151 @@ to {
     setSettings
   }) {
     var _a, _b, _c;
-    return /* @__PURE__ */ import_react56.default.createElement("div", {
+    return /* @__PURE__ */ import_react57.default.createElement("div", {
       className: "mt-2 flex flex-col gap-2 flex-1"
-    }, /* @__PURE__ */ import_react56.default.createElement("div", {
+    }, /* @__PURE__ */ import_react57.default.createElement("div", {
       className: "flex flex-row justify-between items-center"
-    }, /* @__PURE__ */ import_react56.default.createElement("h1", {
+    }, /* @__PURE__ */ import_react57.default.createElement("h1", {
       className: "text-3xl"
-    }, "Discord"), /* @__PURE__ */ import_react56.default.createElement("button", {
+    }, "Discord"), /* @__PURE__ */ import_react57.default.createElement("button", {
       className: "bg-purple-600 text-white py-1 px-5 rounded-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 justify-center text-xl mt-2",
       onClick: () => {
         Neutralino.os.open("https://discord.com/api/oauth2/authorize?client_id=1012331926301974558&permissions=150528&scope=bot");
       }
-    }, /* @__PURE__ */ import_react56.default.createElement(FaEnvelope, null), " Invite Bot")), /* @__PURE__ */ import_react56.default.createElement("div", {
+    }, /* @__PURE__ */ import_react57.default.createElement(FaEnvelope, null), " Invite Bot")), /* @__PURE__ */ import_react57.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react56.default.createElement(Input, {
+    }, /* @__PURE__ */ import_react57.default.createElement(Input, {
       label: "Server ID",
       placeholder: "ID...",
       value: settings.guildId || "",
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { guildId: e3.target.value }))
-    }), /* @__PURE__ */ import_react56.default.createElement(Input, {
+    }), /* @__PURE__ */ import_react57.default.createElement(Input, {
       label: "Channel ID",
       placeholder: "ID...",
       value: settings.channelId || "",
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { channelId: e3.target.value }))
-    })), /* @__PURE__ */ import_react56.default.createElement("p", {
+    })), /* @__PURE__ */ import_react57.default.createElement("p", {
       className: "text-sm opacity-90 text-center"
-    }, "After inviting the bot using the button above, find these IDs by:"), /* @__PURE__ */ import_react56.default.createElement("ol", {
+    }, "After inviting the bot using the button above, find these IDs by:"), /* @__PURE__ */ import_react57.default.createElement("ol", {
       className: "text-sm list-decimal max-w-md mx-auto opacity-90 -mt-1"
-    }, /* @__PURE__ */ import_react56.default.createElement("li", null, "In Discord, go to settings"), /* @__PURE__ */ import_react56.default.createElement("li", null, "Go to Appearance, Advanced, and enable Developer Mode"), /* @__PURE__ */ import_react56.default.createElement("li", null, "Right click on your Discord Server icon in the sidebar, and select Copy ID, and paste above"), /* @__PURE__ */ import_react56.default.createElement("li", null, "Do the same again but for a channel")), /* @__PURE__ */ import_react56.default.createElement("h1", {
+    }, /* @__PURE__ */ import_react57.default.createElement("li", null, "In Discord, go to settings"), /* @__PURE__ */ import_react57.default.createElement("li", null, "Go to Appearance, Advanced, and enable Developer Mode"), /* @__PURE__ */ import_react57.default.createElement("li", null, "Right click on your Discord Server icon in the sidebar, and select Copy ID, and paste above"), /* @__PURE__ */ import_react57.default.createElement("li", null, "Do the same again but for a channel")), /* @__PURE__ */ import_react57.default.createElement("h1", {
       className: "text-xl"
-    }, "Message Settings"), /* @__PURE__ */ import_react56.default.createElement("div", {
+    }, "Message Settings"), /* @__PURE__ */ import_react57.default.createElement("div", {
       className: "flex flex-col gap-2 text-sm"
-    }, /* @__PURE__ */ import_react56.default.createElement("div", {
+    }, /* @__PURE__ */ import_react57.default.createElement("div", {
       className: "flex flex-row justify-center items-center gap-6"
-    }, /* @__PURE__ */ import_react56.default.createElement(Input, {
+    }, /* @__PURE__ */ import_react57.default.createElement(Input, {
       outerClassName: "flex-1",
       label: "Message Colour",
       placeholder: "Hex code...",
       value: settings.messageColour || "",
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { messageColour: e3.target.value }))
-    }), /* @__PURE__ */ import_react56.default.createElement(SliderOuter, {
+    }), /* @__PURE__ */ import_react57.default.createElement(SliderOuter, {
       label: "Giveaway Alert Min Time",
       value: settings.giveawayMinTime || ONE_MIN,
-      renderValue: (v2) => /* @__PURE__ */ import_react56.default.createElement(import_react56.default.Fragment, null, formatDistanceStrict(Date.now() + v2, new Date())),
+      renderValue: (v2) => /* @__PURE__ */ import_react57.default.createElement(import_react57.default.Fragment, null, formatDistanceStrict(Date.now() + v2, new Date())),
       min: ONE_MIN,
       max: ONE_MIN * 30,
       onChange: (v2) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { giveawayMinTime: v2 }))
-    })), /* @__PURE__ */ import_react56.default.createElement("div", {
+    })), /* @__PURE__ */ import_react57.default.createElement("div", {
       className: "flex flex-row justify-center items-center gap-2"
-    }, /* @__PURE__ */ import_react56.default.createElement("div", {
+    }, /* @__PURE__ */ import_react57.default.createElement("div", {
       className: "flex-1 bg-purple-600 px-2 py-1 text-center rounded-md"
-    }, "Giveaway Start:"), /* @__PURE__ */ import_react56.default.createElement(Input, {
+    }, "Giveaway Start:"), /* @__PURE__ */ import_react57.default.createElement(Input, {
       outerClassName: "flex-2",
       label: "Title",
       placeholder: "Title...",
       value: settings.startTitle || "",
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { startTitle: e3.target.value }))
-    }), /* @__PURE__ */ import_react56.default.createElement(Input, {
+    }), /* @__PURE__ */ import_react57.default.createElement(Input, {
       outerClassName: "flex-3",
       label: "Body",
       placeholder: "Body...",
       value: settings.startBody || "",
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { startBody: e3.target.value }))
-    }), /* @__PURE__ */ import_react56.default.createElement(Checkbox, {
+    }), /* @__PURE__ */ import_react57.default.createElement(Checkbox, {
       className: "bg-purple-600 rounded-md h-full px-2 py-1",
       value: (_a = settings.startEnabled) != null ? _a : true,
       name: "startEnabled",
       onChange: setSettings,
       title: "Enable Discord messages for starting giveaways"
-    })), /* @__PURE__ */ import_react56.default.createElement("div", {
+    })), /* @__PURE__ */ import_react57.default.createElement("div", {
       className: "flex flex-row justify-center items-center gap-2"
-    }, /* @__PURE__ */ import_react56.default.createElement("div", {
+    }, /* @__PURE__ */ import_react57.default.createElement("div", {
       className: "flex-1 bg-purple-600 px-2 py-1 text-center rounded-md"
-    }, "Giveaway End:"), /* @__PURE__ */ import_react56.default.createElement(Input, {
+    }, "Giveaway End:"), /* @__PURE__ */ import_react57.default.createElement(Input, {
       outerClassName: "flex-2",
       label: "Title",
       placeholder: "Title...",
       value: settings.endTitle || "",
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { endTitle: e3.target.value }))
-    }), /* @__PURE__ */ import_react56.default.createElement(Input, {
+    }), /* @__PURE__ */ import_react57.default.createElement(Input, {
       outerClassName: "flex-3",
       label: "Body",
       placeholder: "Body...",
       value: settings.endBody || "",
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { endBody: e3.target.value }))
-    }), /* @__PURE__ */ import_react56.default.createElement(Checkbox, {
+    }), /* @__PURE__ */ import_react57.default.createElement(Checkbox, {
       className: "bg-purple-600 rounded-md h-full px-2 py-1",
       value: (_b = settings.endEnabled) != null ? _b : true,
       name: "endEnabled",
       onChange: setSettings,
       title: "Enable Discord messages for ending giveaways"
-    })), /* @__PURE__ */ import_react56.default.createElement("div", {
+    })), /* @__PURE__ */ import_react57.default.createElement("div", {
       className: "flex flex-row justify-center items-center gap-2"
-    }, /* @__PURE__ */ import_react56.default.createElement("div", {
+    }, /* @__PURE__ */ import_react57.default.createElement("div", {
       className: "flex-1 bg-purple-600 px-2 py-1 text-center rounded-md"
-    }, "Winner:"), /* @__PURE__ */ import_react56.default.createElement(Input, {
+    }, "Winner:"), /* @__PURE__ */ import_react57.default.createElement(Input, {
       outerClassName: "flex-2",
       label: "Title",
       placeholder: "Title...",
       value: settings.winnerTitle || "",
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { winnerTitle: e3.target.value }))
-    }), /* @__PURE__ */ import_react56.default.createElement(Input, {
+    }), /* @__PURE__ */ import_react57.default.createElement(Input, {
       outerClassName: "flex-3",
       label: "Body",
       placeholder: "Body...",
       value: settings.winnerBody || "",
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { winnerBody: e3.target.value }))
-    }), /* @__PURE__ */ import_react56.default.createElement(Checkbox, {
+    }), /* @__PURE__ */ import_react57.default.createElement(Checkbox, {
       className: "bg-purple-600 rounded-md h-full px-2 py-1",
       value: (_c = settings.winnerEnabled) != null ? _c : true,
       name: "winnerEnabled",
       onChange: setSettings,
       title: "Enable Discord messages for winners"
-    })), /* @__PURE__ */ import_react56.default.createElement("p", {
+    })), /* @__PURE__ */ import_react57.default.createElement("p", {
       className: "px-2 mb-3 opacity-90 text-sm"
-    }, "You can mention roles with @rolename. Some special keywords you can include are:"), /* @__PURE__ */ import_react56.default.createElement("div", {
+    }, "You can mention roles with @rolename. Some special keywords you can include are:"), /* @__PURE__ */ import_react57.default.createElement("div", {
       className: "flex flex-col gap-2 -mt-3 text-sm"
-    }, /* @__PURE__ */ import_react56.default.createElement("div", {
+    }, /* @__PURE__ */ import_react57.default.createElement("div", {
       className: "flex flex-row gap-2 relative"
-    }, /* @__PURE__ */ import_react56.default.createElement("div", {
+    }, /* @__PURE__ */ import_react57.default.createElement("div", {
       className: "w-1/5 flex justify-end items-start"
-    }, /* @__PURE__ */ import_react56.default.createElement("em", {
+    }, /* @__PURE__ */ import_react57.default.createElement("em", {
       className: "not-italic px-3 py-1 bg-gray-700 text-purple-400 rounded-md"
-    }, "$winner")), /* @__PURE__ */ import_react56.default.createElement("p", {
+    }, "$winner")), /* @__PURE__ */ import_react57.default.createElement("p", {
       className: "flex flex-row items-center"
-    }, "Will be replaced by the winners username (title and body)")), /* @__PURE__ */ import_react56.default.createElement("div", {
+    }, "Will be replaced by the winners username (title and body)")), /* @__PURE__ */ import_react57.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react56.default.createElement("div", {
+    }, /* @__PURE__ */ import_react57.default.createElement("div", {
       className: "w-1/5 flex justify-end items-start"
-    }, /* @__PURE__ */ import_react56.default.createElement("em", {
+    }, /* @__PURE__ */ import_react57.default.createElement("em", {
       className: "not-italic px-3 py-1 bg-gray-700 text-purple-400 rounded-md"
-    }, "$prize")), /* @__PURE__ */ import_react56.default.createElement("p", {
+    }, "$prize")), /* @__PURE__ */ import_react57.default.createElement("p", {
       className: "flex flex-row items-center"
-    }, "Will be replaced by the giveaway name if there is one (title and body)")), /* @__PURE__ */ import_react56.default.createElement("div", {
+    }, "Will be replaced by the giveaway name if there is one (title and body)")), /* @__PURE__ */ import_react57.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react56.default.createElement("div", {
+    }, /* @__PURE__ */ import_react57.default.createElement("div", {
       className: "w-1/5 flex justify-end items-start"
-    }, /* @__PURE__ */ import_react56.default.createElement("em", {
+    }, /* @__PURE__ */ import_react57.default.createElement("em", {
       className: "not-italic px-3 py-1 bg-gray-700 text-purple-400 rounded-md"
-    }, "[any text]($link)")), /* @__PURE__ */ import_react56.default.createElement("p", {
+    }, "[any text]($link)")), /* @__PURE__ */ import_react57.default.createElement("p", {
       className: "flex flex-row items-center"
     }, "Will be replaced by the text between the square brackets, linking to your Twitch (body only)")))));
   }
 
   // src/components/screens/Obs.tsx
-  var import_react64 = __toModule(require_react());
+  var import_react65 = __toModule(require_react());
 
   // src/components/hooks/useCopyToClipboard.ts
   var React50 = __toModule(require_react());
@@ -69051,7 +69092,7 @@ to {
   var useCopyToClipboard_default = useCopyToClipboard;
 
   // node_modules/react-select/dist/index-a7690a33.esm.js
-  var import_react57 = __toModule(require_emotion_react_cjs());
+  var import_react58 = __toModule(require_emotion_react_cjs());
 
   // node_modules/@babel/runtime/helpers/esm/taggedTemplateLiteral.js
   function _taggedTemplateLiteral(strings, raw) {
@@ -69230,7 +69271,7 @@ to {
   }
 
   // node_modules/react-select/dist/index-a7690a33.esm.js
-  var import_react58 = __toModule(require_react());
+  var import_react59 = __toModule(require_react());
   var import_react_dom3 = __toModule(require_react_dom());
   function _defineProperty26(obj, key, value2) {
     if (key in obj) {
@@ -69638,7 +69679,7 @@ to {
       label: "menu"
     }, _defineProperty25(_ref3, alignToControl(placement), "100%"), _defineProperty25(_ref3, "backgroundColor", colors2.neutral0), _defineProperty25(_ref3, "borderRadius", borderRadius2), _defineProperty25(_ref3, "boxShadow", "0 0 0 1px hsla(0, 0%, 0%, 0.1), 0 4px 11px hsla(0, 0%, 0%, 0.1)"), _defineProperty25(_ref3, "marginBottom", spacing2.menuGutter), _defineProperty25(_ref3, "marginTop", spacing2.menuGutter), _defineProperty25(_ref3, "position", "absolute"), _defineProperty25(_ref3, "width", "100%"), _defineProperty25(_ref3, "zIndex", 1), _ref3;
   };
-  var PortalPlacementContext = /* @__PURE__ */ (0, import_react58.createContext)({
+  var PortalPlacementContext = /* @__PURE__ */ (0, import_react59.createContext)({
     getPortalPlacement: null
   });
   var MenuPlacer = /* @__PURE__ */ function(_Component) {
@@ -69697,11 +69738,11 @@ to {
       }
     }]);
     return MenuPlacer2;
-  }(import_react58.Component);
+  }(import_react59.Component);
   MenuPlacer.contextType = PortalPlacementContext;
   var Menu = function Menu2(props) {
     var children = props.children, className = props.className, cx = props.cx, getStyles = props.getStyles, innerRef = props.innerRef, innerProps = props.innerProps;
-    return (0, import_react57.jsx)("div", _extends({
+    return (0, import_react58.jsx)("div", _extends({
       css: getStyles("menu", props),
       className: cx({
         menu: true
@@ -69722,7 +69763,7 @@ to {
   };
   var MenuList = function MenuList2(props) {
     var children = props.children, className = props.className, cx = props.cx, getStyles = props.getStyles, innerProps = props.innerProps, innerRef = props.innerRef, isMulti = props.isMulti;
-    return (0, import_react57.jsx)("div", _extends({
+    return (0, import_react58.jsx)("div", _extends({
       css: getStyles("menuList", props),
       className: cx({
         "menu-list": true,
@@ -69743,7 +69784,7 @@ to {
   var loadingMessageCSS = noticeCSS;
   var NoOptionsMessage = function NoOptionsMessage2(props) {
     var children = props.children, className = props.className, cx = props.cx, getStyles = props.getStyles, innerProps = props.innerProps;
-    return (0, import_react57.jsx)("div", _extends({
+    return (0, import_react58.jsx)("div", _extends({
       css: getStyles("noOptionsMessage", props),
       className: cx({
         "menu-notice": true,
@@ -69756,7 +69797,7 @@ to {
   };
   var LoadingMessage = function LoadingMessage2(props) {
     var children = props.children, className = props.className, cx = props.cx, getStyles = props.getStyles, innerProps = props.innerProps;
-    return (0, import_react57.jsx)("div", _extends({
+    return (0, import_react58.jsx)("div", _extends({
       css: getStyles("loadingMessage", props),
       className: cx({
         "menu-notice": true,
@@ -69818,13 +69859,13 @@ to {
           position,
           rect
         };
-        var menuWrapper = (0, import_react57.jsx)("div", _extends({
+        var menuWrapper = (0, import_react58.jsx)("div", _extends({
           css: getStyles("menuPortal", state),
           className: cx({
             "menu-portal": true
           }, className)
         }, innerProps), children);
-        return (0, import_react57.jsx)(PortalPlacementContext.Provider, {
+        return (0, import_react58.jsx)(PortalPlacementContext.Provider, {
           value: {
             getPortalPlacement: this.getPortalPlacement
           }
@@ -69832,7 +69873,7 @@ to {
       }
     }]);
     return MenuPortal2;
-  }(import_react58.Component);
+  }(import_react59.Component);
   var containerCSS = function containerCSS2(_ref3) {
     var isDisabled = _ref3.isDisabled, isRtl = _ref3.isRtl;
     return {
@@ -69844,7 +69885,7 @@ to {
   };
   var SelectContainer = function SelectContainer2(props) {
     var children = props.children, className = props.className, cx = props.cx, getStyles = props.getStyles, innerProps = props.innerProps, isDisabled = props.isDisabled, isRtl = props.isRtl;
-    return (0, import_react57.jsx)("div", _extends({
+    return (0, import_react58.jsx)("div", _extends({
       css: getStyles("container", props),
       className: cx({
         "--is-disabled": isDisabled,
@@ -69867,7 +69908,7 @@ to {
   };
   var ValueContainer = function ValueContainer2(props) {
     var children = props.children, className = props.className, cx = props.cx, innerProps = props.innerProps, isMulti = props.isMulti, getStyles = props.getStyles, hasValue = props.hasValue;
-    return (0, import_react57.jsx)("div", _extends({
+    return (0, import_react58.jsx)("div", _extends({
       css: getStyles("valueContainer", props),
       className: cx({
         "value-container": true,
@@ -69886,7 +69927,7 @@ to {
   };
   var IndicatorsContainer = function IndicatorsContainer2(props) {
     var children = props.children, className = props.className, cx = props.cx, innerProps = props.innerProps, getStyles = props.getStyles;
-    return (0, import_react57.jsx)("div", _extends({
+    return (0, import_react58.jsx)("div", _extends({
       css: getStyles("indicatorsContainer", props),
       className: cx({
         indicators: true
@@ -69909,7 +69950,7 @@ to {
   };
   var Svg = function Svg2(_ref3) {
     var size = _ref3.size, props = _objectWithoutProperties12(_ref3, _excluded$2);
-    return (0, import_react57.jsx)("svg", _extends({
+    return (0, import_react58.jsx)("svg", _extends({
       height: size,
       width: size,
       viewBox: "0 0 20 20",
@@ -69919,16 +69960,16 @@ to {
     }, props));
   };
   var CrossIcon = function CrossIcon2(props) {
-    return (0, import_react57.jsx)(Svg, _extends({
+    return (0, import_react58.jsx)(Svg, _extends({
       size: 20
-    }, props), (0, import_react57.jsx)("path", {
+    }, props), (0, import_react58.jsx)("path", {
       d: "M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
     }));
   };
   var DownChevron = function DownChevron2(props) {
-    return (0, import_react57.jsx)(Svg, _extends({
+    return (0, import_react58.jsx)(Svg, _extends({
       size: 20
-    }, props), (0, import_react57.jsx)("path", {
+    }, props), (0, import_react58.jsx)("path", {
       d: "M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
     }));
   };
@@ -69948,24 +69989,24 @@ to {
   var dropdownIndicatorCSS = baseCSS;
   var DropdownIndicator = function DropdownIndicator2(props) {
     var children = props.children, className = props.className, cx = props.cx, getStyles = props.getStyles, innerProps = props.innerProps;
-    return (0, import_react57.jsx)("div", _extends({
+    return (0, import_react58.jsx)("div", _extends({
       css: getStyles("dropdownIndicator", props),
       className: cx({
         indicator: true,
         "dropdown-indicator": true
       }, className)
-    }, innerProps), children || (0, import_react57.jsx)(DownChevron, null));
+    }, innerProps), children || (0, import_react58.jsx)(DownChevron, null));
   };
   var clearIndicatorCSS = baseCSS;
   var ClearIndicator = function ClearIndicator2(props) {
     var children = props.children, className = props.className, cx = props.cx, getStyles = props.getStyles, innerProps = props.innerProps;
-    return (0, import_react57.jsx)("div", _extends({
+    return (0, import_react58.jsx)("div", _extends({
       css: getStyles("clearIndicator", props),
       className: cx({
         indicator: true,
         "clear-indicator": true
       }, className)
-    }, innerProps), children || (0, import_react57.jsx)(CrossIcon, null));
+    }, innerProps), children || (0, import_react58.jsx)(CrossIcon, null));
   };
   var indicatorSeparatorCSS = function indicatorSeparatorCSS2(_ref4) {
     var isDisabled = _ref4.isDisabled, _ref4$theme = _ref4.theme, baseUnit2 = _ref4$theme.spacing.baseUnit, colors2 = _ref4$theme.colors;
@@ -69980,14 +70021,14 @@ to {
   };
   var IndicatorSeparator = function IndicatorSeparator2(props) {
     var className = props.className, cx = props.cx, getStyles = props.getStyles, innerProps = props.innerProps;
-    return (0, import_react57.jsx)("span", _extends({}, innerProps, {
+    return (0, import_react58.jsx)("span", _extends({}, innerProps, {
       css: getStyles("indicatorSeparator", props),
       className: cx({
         "indicator-separator": true
       }, className)
     }));
   };
-  var loadingDotAnimations = (0, import_react57.keyframes)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  0%, 80%, 100% { opacity: 0; }\n  40% { opacity: 1; }\n"])));
+  var loadingDotAnimations = (0, import_react58.keyframes)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  0%, 80%, 100% { opacity: 0; }\n  40% { opacity: 1; }\n"])));
   var loadingIndicatorCSS = function loadingIndicatorCSS2(_ref5) {
     var isFocused = _ref5.isFocused, size = _ref5.size, _ref5$theme = _ref5.theme, colors2 = _ref5$theme.colors, baseUnit2 = _ref5$theme.spacing.baseUnit;
     return {
@@ -70006,8 +70047,8 @@ to {
   };
   var LoadingDot = function LoadingDot2(_ref6) {
     var delay = _ref6.delay, offset = _ref6.offset;
-    return (0, import_react57.jsx)("span", {
-      css: /* @__PURE__ */ (0, import_react57.css)({
+    return (0, import_react58.jsx)("span", {
+      css: /* @__PURE__ */ (0, import_react58.css)({
         animation: "".concat(loadingDotAnimations, " 1s ease-in-out ").concat(delay, "ms infinite;"),
         backgroundColor: "currentColor",
         borderRadius: "1em",
@@ -70021,19 +70062,19 @@ to {
   };
   var LoadingIndicator = function LoadingIndicator2(props) {
     var className = props.className, cx = props.cx, getStyles = props.getStyles, innerProps = props.innerProps, isRtl = props.isRtl;
-    return (0, import_react57.jsx)("div", _extends({
+    return (0, import_react58.jsx)("div", _extends({
       css: getStyles("loadingIndicator", props),
       className: cx({
         indicator: true,
         "loading-indicator": true
       }, className)
-    }, innerProps), (0, import_react57.jsx)(LoadingDot, {
+    }, innerProps), (0, import_react58.jsx)(LoadingDot, {
       delay: 0,
       offset: isRtl
-    }), (0, import_react57.jsx)(LoadingDot, {
+    }), (0, import_react58.jsx)(LoadingDot, {
       delay: 160,
       offset: true
-    }), (0, import_react57.jsx)(LoadingDot, {
+    }), (0, import_react58.jsx)(LoadingDot, {
       delay: 320,
       offset: !isRtl
     }));
@@ -70067,7 +70108,7 @@ to {
   };
   var Control = function Control2(props) {
     var children = props.children, cx = props.cx, getStyles = props.getStyles, className = props.className, isDisabled = props.isDisabled, isFocused = props.isFocused, innerRef = props.innerRef, innerProps = props.innerProps, menuIsOpen = props.menuIsOpen;
-    return (0, import_react57.jsx)("div", _extends({
+    return (0, import_react58.jsx)("div", _extends({
       ref: innerRef,
       css: getStyles("control", props),
       className: cx({
@@ -70088,17 +70129,17 @@ to {
   };
   var Group = function Group2(props) {
     var children = props.children, className = props.className, cx = props.cx, getStyles = props.getStyles, Heading = props.Heading, headingProps = props.headingProps, innerProps = props.innerProps, label = props.label, theme = props.theme, selectProps = props.selectProps;
-    return (0, import_react57.jsx)("div", _extends({
+    return (0, import_react58.jsx)("div", _extends({
       css: getStyles("group", props),
       className: cx({
         group: true
       }, className)
-    }, innerProps), (0, import_react57.jsx)(Heading, _extends({}, headingProps, {
+    }, innerProps), (0, import_react58.jsx)(Heading, _extends({}, headingProps, {
       selectProps,
       theme,
       getStyles,
       cx
-    }), label), (0, import_react57.jsx)("div", null, children));
+    }), label), (0, import_react58.jsx)("div", null, children));
   };
   var groupHeadingCSS = function groupHeadingCSS2(_ref23) {
     var spacing2 = _ref23.theme.spacing;
@@ -70120,7 +70161,7 @@ to {
     var _cleanCommonProps = cleanCommonProps(props);
     _cleanCommonProps.data;
     var innerProps = _objectWithoutProperties12(_cleanCommonProps, _excluded$1);
-    return (0, import_react57.jsx)("div", _extends({
+    return (0, import_react58.jsx)("div", _extends({
       css: getStyles("groupHeading", props),
       className: cx({
         "group-heading": true
@@ -70171,13 +70212,13 @@ to {
   var Input2 = function Input3(props) {
     var className = props.className, cx = props.cx, getStyles = props.getStyles, value2 = props.value;
     var _cleanCommonProps = cleanCommonProps(props), innerRef = _cleanCommonProps.innerRef, isDisabled = _cleanCommonProps.isDisabled, isHidden = _cleanCommonProps.isHidden, inputClassName = _cleanCommonProps.inputClassName, innerProps = _objectWithoutProperties12(_cleanCommonProps, _excluded);
-    return (0, import_react57.jsx)("div", {
+    return (0, import_react58.jsx)("div", {
       className: cx({
         "input-container": true
       }, className),
       css: getStyles("input", props),
       "data-value": value2 || ""
-    }, (0, import_react57.jsx)("input", _extends({
+    }, (0, import_react58.jsx)("input", _extends({
       className: cx({
         input: true
       }, inputClassName),
@@ -70227,24 +70268,24 @@ to {
   };
   var MultiValueGeneric = function MultiValueGeneric2(_ref4) {
     var children = _ref4.children, innerProps = _ref4.innerProps;
-    return (0, import_react57.jsx)("div", innerProps, children);
+    return (0, import_react58.jsx)("div", innerProps, children);
   };
   var MultiValueContainer = MultiValueGeneric;
   var MultiValueLabel = MultiValueGeneric;
   function MultiValueRemove(_ref5) {
     var children = _ref5.children, innerProps = _ref5.innerProps;
-    return (0, import_react57.jsx)("div", _extends({
+    return (0, import_react58.jsx)("div", _extends({
       role: "button"
-    }, innerProps), children || (0, import_react57.jsx)(CrossIcon, {
+    }, innerProps), children || (0, import_react58.jsx)(CrossIcon, {
       size: 14
     }));
   }
   var MultiValue = function MultiValue2(props) {
     var children = props.children, className = props.className, components2 = props.components, cx = props.cx, data = props.data, getStyles = props.getStyles, innerProps = props.innerProps, isDisabled = props.isDisabled, removeProps3 = props.removeProps, selectProps = props.selectProps;
     var Container = components2.Container, Label2 = components2.Label, Remove = components2.Remove;
-    return (0, import_react57.jsx)(import_react57.ClassNames, null, function(_ref6) {
+    return (0, import_react58.jsx)(import_react58.ClassNames, null, function(_ref6) {
       var css5 = _ref6.css, emotionCx = _ref6.cx;
-      return (0, import_react57.jsx)(Container, {
+      return (0, import_react58.jsx)(Container, {
         data,
         innerProps: _objectSpread25({
           className: emotionCx(css5(getStyles("multiValue", props)), cx({
@@ -70253,7 +70294,7 @@ to {
           }, className))
         }, innerProps),
         selectProps
-      }, (0, import_react57.jsx)(Label2, {
+      }, (0, import_react58.jsx)(Label2, {
         data,
         innerProps: {
           className: emotionCx(css5(getStyles("multiValueLabel", props)), cx({
@@ -70261,7 +70302,7 @@ to {
           }, className))
         },
         selectProps
-      }, children), (0, import_react57.jsx)(Remove, {
+      }, children), (0, import_react58.jsx)(Remove, {
         data,
         innerProps: _objectSpread25({
           className: emotionCx(css5(getStyles("multiValueRemove", props)), cx({
@@ -70293,7 +70334,7 @@ to {
   };
   var Option = function Option2(props) {
     var children = props.children, className = props.className, cx = props.cx, getStyles = props.getStyles, isDisabled = props.isDisabled, isFocused = props.isFocused, isSelected = props.isSelected, innerRef = props.innerRef, innerProps = props.innerProps;
-    return (0, import_react57.jsx)("div", _extends({
+    return (0, import_react58.jsx)("div", _extends({
       css: getStyles("option", props),
       className: cx({
         option: true,
@@ -70317,7 +70358,7 @@ to {
   };
   var Placeholder = function Placeholder2(props) {
     var children = props.children, className = props.className, cx = props.cx, getStyles = props.getStyles, innerProps = props.innerProps;
-    return (0, import_react57.jsx)("div", _extends({
+    return (0, import_react58.jsx)("div", _extends({
       css: getStyles("placeholder", props),
       className: cx({
         placeholder: true
@@ -70340,7 +70381,7 @@ to {
   };
   var SingleValue = function SingleValue2(props) {
     var children = props.children, className = props.className, cx = props.cx, getStyles = props.getStyles, isDisabled = props.isDisabled, innerProps = props.innerProps;
-    return (0, import_react57.jsx)("div", _extends({
+    return (0, import_react58.jsx)("div", _extends({
       css: getStyles("singleValue", props),
       className: cx({
         "single-value": true,
@@ -70380,33 +70421,33 @@ to {
   };
 
   // node_modules/react-select/dist/useStateManager-68425271.esm.js
-  var import_react59 = __toModule(require_react());
+  var import_react60 = __toModule(require_react());
   var _excluded2 = ["defaultInputValue", "defaultMenuIsOpen", "defaultValue", "inputValue", "menuIsOpen", "onChange", "onInputChange", "onMenuClose", "onMenuOpen", "value"];
   function useStateManager(_ref3) {
     var _ref$defaultInputValu = _ref3.defaultInputValue, defaultInputValue = _ref$defaultInputValu === void 0 ? "" : _ref$defaultInputValu, _ref$defaultMenuIsOpe = _ref3.defaultMenuIsOpen, defaultMenuIsOpen = _ref$defaultMenuIsOpe === void 0 ? false : _ref$defaultMenuIsOpe, _ref$defaultValue = _ref3.defaultValue, defaultValue = _ref$defaultValue === void 0 ? null : _ref$defaultValue, propsInputValue = _ref3.inputValue, propsMenuIsOpen = _ref3.menuIsOpen, propsOnChange = _ref3.onChange, propsOnInputChange = _ref3.onInputChange, propsOnMenuClose = _ref3.onMenuClose, propsOnMenuOpen = _ref3.onMenuOpen, propsValue = _ref3.value, restSelectProps = _objectWithoutProperties12(_ref3, _excluded2);
-    var _useState = (0, import_react59.useState)(propsInputValue !== void 0 ? propsInputValue : defaultInputValue), _useState2 = _slicedToArray9(_useState, 2), stateInputValue = _useState2[0], setStateInputValue = _useState2[1];
-    var _useState3 = (0, import_react59.useState)(propsMenuIsOpen !== void 0 ? propsMenuIsOpen : defaultMenuIsOpen), _useState4 = _slicedToArray9(_useState3, 2), stateMenuIsOpen = _useState4[0], setStateMenuIsOpen = _useState4[1];
-    var _useState5 = (0, import_react59.useState)(propsValue !== void 0 ? propsValue : defaultValue), _useState6 = _slicedToArray9(_useState5, 2), stateValue = _useState6[0], setStateValue = _useState6[1];
-    var onChange2 = (0, import_react59.useCallback)(function(value3, actionMeta) {
+    var _useState = (0, import_react60.useState)(propsInputValue !== void 0 ? propsInputValue : defaultInputValue), _useState2 = _slicedToArray9(_useState, 2), stateInputValue = _useState2[0], setStateInputValue = _useState2[1];
+    var _useState3 = (0, import_react60.useState)(propsMenuIsOpen !== void 0 ? propsMenuIsOpen : defaultMenuIsOpen), _useState4 = _slicedToArray9(_useState3, 2), stateMenuIsOpen = _useState4[0], setStateMenuIsOpen = _useState4[1];
+    var _useState5 = (0, import_react60.useState)(propsValue !== void 0 ? propsValue : defaultValue), _useState6 = _slicedToArray9(_useState5, 2), stateValue = _useState6[0], setStateValue = _useState6[1];
+    var onChange2 = (0, import_react60.useCallback)(function(value3, actionMeta) {
       if (typeof propsOnChange === "function") {
         propsOnChange(value3, actionMeta);
       }
       setStateValue(value3);
     }, [propsOnChange]);
-    var onInputChange = (0, import_react59.useCallback)(function(value3, actionMeta) {
+    var onInputChange = (0, import_react60.useCallback)(function(value3, actionMeta) {
       var newValue;
       if (typeof propsOnInputChange === "function") {
         newValue = propsOnInputChange(value3, actionMeta);
       }
       setStateInputValue(newValue !== void 0 ? newValue : value3);
     }, [propsOnInputChange]);
-    var onMenuOpen = (0, import_react59.useCallback)(function() {
+    var onMenuOpen = (0, import_react60.useCallback)(function() {
       if (typeof propsOnMenuOpen === "function") {
         propsOnMenuOpen();
       }
       setStateMenuIsOpen(true);
     }, [propsOnMenuOpen]);
-    var onMenuClose = (0, import_react59.useCallback)(function() {
+    var onMenuClose = (0, import_react60.useCallback)(function() {
       if (typeof propsOnMenuClose === "function") {
         propsOnMenuClose();
       }
@@ -70428,7 +70469,7 @@ to {
 
   // node_modules/react-select/dist/react-select.esm.js
   var React52 = __toModule(require_react());
-  var import_react62 = __toModule(require_react());
+  var import_react63 = __toModule(require_react());
 
   // node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js
   function _arrayWithoutHoles12(arr) {
@@ -70454,8 +70495,8 @@ to {
 
   // node_modules/react-select/dist/Select-54ac8379.esm.js
   var React51 = __toModule(require_react());
-  var import_react60 = __toModule(require_react());
-  var import_react61 = __toModule(require_emotion_react_cjs());
+  var import_react61 = __toModule(require_react());
+  var import_react62 = __toModule(require_emotion_react_cjs());
 
   // node_modules/memoize-one/dist/memoize-one.esm.js
   var safeIsNaN = Number.isNaN || function ponyfill(value2) {
@@ -70521,7 +70562,7 @@ to {
     toString: _EMOTION_STRINGIFIED_CSS_ERROR__$1
   };
   var A11yText = function A11yText2(props) {
-    return (0, import_react61.jsx)("span", _extends({
+    return (0, import_react62.jsx)("span", _extends({
       css: _ref
     }, props));
   };
@@ -70581,10 +70622,10 @@ to {
     var ariaLiveMessages = selectProps.ariaLiveMessages, getOptionLabel4 = selectProps.getOptionLabel, inputValue = selectProps.inputValue, isMulti = selectProps.isMulti, isOptionDisabled3 = selectProps.isOptionDisabled, isSearchable = selectProps.isSearchable, menuIsOpen = selectProps.menuIsOpen, options2 = selectProps.options, screenReaderStatus2 = selectProps.screenReaderStatus, tabSelectsValue = selectProps.tabSelectsValue;
     var ariaLabel = selectProps["aria-label"];
     var ariaLive = selectProps["aria-live"];
-    var messages = (0, import_react60.useMemo)(function() {
+    var messages = (0, import_react61.useMemo)(function() {
       return _objectSpread25(_objectSpread25({}, defaultAriaLiveMessages), ariaLiveMessages || {});
     }, [ariaLiveMessages]);
-    var ariaSelected = (0, import_react60.useMemo)(function() {
+    var ariaSelected = (0, import_react61.useMemo)(function() {
       var message = "";
       if (ariaSelection && messages.onChange) {
         var option = ariaSelection.option, selectedOptions = ariaSelection.options, removedValue = ariaSelection.removedValue, removedValues = ariaSelection.removedValues, value2 = ariaSelection.value;
@@ -70604,7 +70645,7 @@ to {
       }
       return message;
     }, [ariaSelection, messages, isOptionDisabled3, selectValue, getOptionLabel4]);
-    var ariaFocused = (0, import_react60.useMemo)(function() {
+    var ariaFocused = (0, import_react61.useMemo)(function() {
       var focusMsg = "";
       var focused = focusedOption || focusedValue;
       var isSelected = !!(focusedOption && selectValue && selectValue.includes(focusedOption));
@@ -70622,7 +70663,7 @@ to {
       }
       return focusMsg;
     }, [focusedOption, focusedValue, getOptionLabel4, isOptionDisabled3, messages, options2, selectValue]);
-    var ariaResults = (0, import_react60.useMemo)(function() {
+    var ariaResults = (0, import_react61.useMemo)(function() {
       var resultsMsg = "";
       if (menuIsOpen && options2.length && messages.onFilter) {
         var resultsMessage = screenReaderStatus2({
@@ -70635,7 +70676,7 @@ to {
       }
       return resultsMsg;
     }, [focusableOptions, inputValue, menuIsOpen, messages, options2, screenReaderStatus2]);
-    var ariaGuidance = (0, import_react60.useMemo)(function() {
+    var ariaGuidance = (0, import_react61.useMemo)(function() {
       var guidanceMsg = "";
       if (messages.guidance) {
         var context2 = focusedValue ? "value" : menuIsOpen ? "menu" : "input";
@@ -70651,15 +70692,15 @@ to {
       return guidanceMsg;
     }, [ariaLabel, focusedOption, focusedValue, isMulti, isOptionDisabled3, isSearchable, menuIsOpen, messages, selectValue, tabSelectsValue]);
     var ariaContext = "".concat(ariaFocused, " ").concat(ariaResults, " ").concat(ariaGuidance);
-    var ScreenReaderText = (0, import_react61.jsx)(import_react60.Fragment, null, (0, import_react61.jsx)("span", {
+    var ScreenReaderText = (0, import_react62.jsx)(import_react61.Fragment, null, (0, import_react62.jsx)("span", {
       id: "aria-selection"
-    }, ariaSelected), (0, import_react61.jsx)("span", {
+    }, ariaSelected), (0, import_react62.jsx)("span", {
       id: "aria-context"
     }, ariaContext));
     var isInitialFocus = (ariaSelection === null || ariaSelection === void 0 ? void 0 : ariaSelection.action) === "initial-input-focus";
-    return (0, import_react61.jsx)(import_react60.Fragment, null, (0, import_react61.jsx)(A11yText, {
+    return (0, import_react62.jsx)(import_react61.Fragment, null, (0, import_react62.jsx)(A11yText, {
       id
-    }, isInitialFocus && ScreenReaderText), (0, import_react61.jsx)(A11yText, {
+    }, isInitialFocus && ScreenReaderText), (0, import_react62.jsx)(A11yText, {
       "aria-live": ariaLive,
       "aria-atomic": "false",
       "aria-relevant": "additions text"
@@ -70971,10 +71012,10 @@ to {
   function DummyInput(_ref3) {
     var innerRef = _ref3.innerRef, props = _objectWithoutProperties12(_ref3, _excluded3);
     var filteredProps = removeProps(props, "onExited", "in", "enter", "exit", "appear");
-    return (0, import_react61.jsx)("input", _extends({
+    return (0, import_react62.jsx)("input", _extends({
       ref: innerRef
     }, filteredProps, {
-      css: /* @__PURE__ */ (0, import_react61.css)({
+      css: /* @__PURE__ */ (0, import_react62.css)({
         label: "dummyInput",
         background: 0,
         border: 0,
@@ -70998,11 +71039,11 @@ to {
   };
   function useScrollCapture(_ref3) {
     var isEnabled = _ref3.isEnabled, onBottomArrive = _ref3.onBottomArrive, onBottomLeave = _ref3.onBottomLeave, onTopArrive = _ref3.onTopArrive, onTopLeave = _ref3.onTopLeave;
-    var isBottom = (0, import_react60.useRef)(false);
-    var isTop = (0, import_react60.useRef)(false);
-    var touchStart = (0, import_react60.useRef)(0);
-    var scrollTarget = (0, import_react60.useRef)(null);
-    var handleEventDelta = (0, import_react60.useCallback)(function(event, delta) {
+    var isBottom = (0, import_react61.useRef)(false);
+    var isTop = (0, import_react61.useRef)(false);
+    var touchStart = (0, import_react61.useRef)(0);
+    var scrollTarget = (0, import_react61.useRef)(null);
+    var handleEventDelta = (0, import_react61.useCallback)(function(event, delta) {
       if (scrollTarget.current === null)
         return;
       var _scrollTarget$current = scrollTarget.current, scrollTop = _scrollTarget$current.scrollTop, scrollHeight = _scrollTarget$current.scrollHeight, clientHeight = _scrollTarget$current.clientHeight;
@@ -71039,17 +71080,17 @@ to {
         cancelScroll(event);
       }
     }, [onBottomArrive, onBottomLeave, onTopArrive, onTopLeave]);
-    var onWheel = (0, import_react60.useCallback)(function(event) {
+    var onWheel = (0, import_react61.useCallback)(function(event) {
       handleEventDelta(event, event.deltaY);
     }, [handleEventDelta]);
-    var onTouchStart = (0, import_react60.useCallback)(function(event) {
+    var onTouchStart = (0, import_react61.useCallback)(function(event) {
       touchStart.current = event.changedTouches[0].clientY;
     }, []);
-    var onTouchMove = (0, import_react60.useCallback)(function(event) {
+    var onTouchMove = (0, import_react61.useCallback)(function(event) {
       var deltaY = touchStart.current - event.changedTouches[0].clientY;
       handleEventDelta(event, deltaY);
     }, [handleEventDelta]);
-    var startListening = (0, import_react60.useCallback)(function(el) {
+    var startListening = (0, import_react61.useCallback)(function(el) {
       if (!el)
         return;
       var notPassive = supportsPassiveEvents ? {
@@ -71059,14 +71100,14 @@ to {
       el.addEventListener("touchstart", onTouchStart, notPassive);
       el.addEventListener("touchmove", onTouchMove, notPassive);
     }, [onTouchMove, onTouchStart, onWheel]);
-    var stopListening = (0, import_react60.useCallback)(function(el) {
+    var stopListening = (0, import_react61.useCallback)(function(el) {
       if (!el)
         return;
       el.removeEventListener("wheel", onWheel, false);
       el.removeEventListener("touchstart", onTouchStart, false);
       el.removeEventListener("touchmove", onTouchMove, false);
     }, [onTouchMove, onTouchStart, onWheel]);
-    (0, import_react60.useEffect)(function() {
+    (0, import_react61.useEffect)(function() {
       if (!isEnabled)
         return;
       var element2 = scrollTarget.current;
@@ -71113,9 +71154,9 @@ to {
   };
   function useScrollLock(_ref3) {
     var isEnabled = _ref3.isEnabled, _ref$accountForScroll = _ref3.accountForScrollbars, accountForScrollbars = _ref$accountForScroll === void 0 ? true : _ref$accountForScroll;
-    var originalStyles = (0, import_react60.useRef)({});
-    var scrollTarget = (0, import_react60.useRef)(null);
-    var addScrollLock = (0, import_react60.useCallback)(function(touchScrollTarget) {
+    var originalStyles = (0, import_react61.useRef)({});
+    var scrollTarget = (0, import_react61.useRef)(null);
+    var addScrollLock = (0, import_react61.useCallback)(function(touchScrollTarget) {
       if (!canUseDOM2)
         return;
       var target = document.body;
@@ -71149,7 +71190,7 @@ to {
       }
       activeScrollLocks += 1;
     }, [accountForScrollbars]);
-    var removeScrollLock = (0, import_react60.useCallback)(function(touchScrollTarget) {
+    var removeScrollLock = (0, import_react61.useCallback)(function(touchScrollTarget) {
       if (!canUseDOM2)
         return;
       var target = document.body;
@@ -71171,7 +71212,7 @@ to {
         }
       }
     }, [accountForScrollbars]);
-    (0, import_react60.useEffect)(function() {
+    (0, import_react61.useEffect)(function() {
       if (!isEnabled)
         return;
       var element2 = scrollTarget.current;
@@ -71215,7 +71256,7 @@ to {
       setScrollCaptureTarget(element2);
       setScrollLockTarget(element2);
     };
-    return (0, import_react61.jsx)(import_react60.Fragment, null, lockEnabled && (0, import_react61.jsx)("div", {
+    return (0, import_react62.jsx)(import_react61.Fragment, null, lockEnabled && (0, import_react62.jsx)("div", {
       onClick: blurSelectInput,
       css: _ref22
     }), children(targetRef));
@@ -72656,13 +72697,13 @@ to {
       }
     }]);
     return Select2;
-  }(import_react60.Component);
+  }(import_react61.Component);
   Select.defaultProps = defaultProps2;
 
   // node_modules/react-select/dist/react-select.esm.js
   var import_cache = __toModule(require_emotion_cache_cjs());
   var import_react_dom4 = __toModule(require_react_dom());
-  var StateManagedSelect = /* @__PURE__ */ (0, import_react62.forwardRef)(function(props, ref) {
+  var StateManagedSelect = /* @__PURE__ */ (0, import_react63.forwardRef)(function(props, ref) {
     var baseSelectProps = useStateManager(props);
     return /* @__PURE__ */ React52.createElement(Select, _extends({
       ref
@@ -72671,7 +72712,7 @@ to {
   var react_select_esm_default = StateManagedSelect;
 
   // src/utils/themes.ts
-  var import_react63 = __toModule(require_react());
+  var import_react64 = __toModule(require_react());
   var DEFAULT_THEMES = [
     {
       id: "gw2",
@@ -72684,9 +72725,9 @@ to {
     }
   ];
   function useThemes() {
-    const [themes, setThemes] = (0, import_react63.useState)(DEFAULT_THEMES);
-    const [loading, setLoading] = (0, import_react63.useState)(false);
-    (0, import_react63.useEffect)(() => {
+    const [themes, setThemes] = (0, import_react64.useState)(DEFAULT_THEMES);
+    const [loading, setLoading] = (0, import_react64.useState)(false);
+    (0, import_react64.useEffect)(() => {
       ;
       (async () => {
         try {
@@ -72703,7 +72744,7 @@ to {
         }
       })();
     }, []);
-    return (0, import_react63.useMemo)(() => ({ loading, themes, options: listToOptions(themes) }), [loading, themes]);
+    return (0, import_react64.useMemo)(() => ({ loading, themes, options: listToOptions(themes) }), [loading, themes]);
   }
   function listToOptions(list) {
     return list.map((item) => ({ value: item.id, label: item.name })).filter((i3) => Boolean(i3.label));
@@ -72720,49 +72761,49 @@ to {
     const { loading: themesLoading, themes, options: themeOptions } = useThemes();
     const selectedThemeOption = themeOptions.find((i3) => (settings.alertTheme || defaultSettings.alertTheme) === i3.value);
     const selectedTheme = themes.find((i3) => (settings.alertTheme || defaultSettings.alertTheme) === i3.id);
-    return /* @__PURE__ */ import_react64.default.createElement("div", {
+    return /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "mt-2 flex flex-col gap-3 flex-1 pb-2 max-h-full"
-    }, /* @__PURE__ */ import_react64.default.createElement("h1", {
+    }, /* @__PURE__ */ import_react65.default.createElement("h1", {
       className: "text-3xl -mb-1"
-    }, "OBS Settings"), /* @__PURE__ */ import_react64.default.createElement("div", {
+    }, "OBS Settings"), /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react64.default.createElement("button", {
+    }, /* @__PURE__ */ import_react65.default.createElement("button", {
       className: "bg-purple-600 px-2 py-1 flex-1 rounded-md transition-transform hover:scale-110 flex flex-row gap-1 justify-center items-center",
       onClick: () => copyAlertURL()
-    }, copiedAlertURL ? /* @__PURE__ */ import_react64.default.createElement(import_react64.default.Fragment, null, /* @__PURE__ */ import_react64.default.createElement(FaCheck, null), " Copied") : /* @__PURE__ */ import_react64.default.createElement(import_react64.default.Fragment, null, /* @__PURE__ */ import_react64.default.createElement(FaTrophy, null), " Copy Winner Alert Source URL")), /* @__PURE__ */ import_react64.default.createElement("button", {
+    }, copiedAlertURL ? /* @__PURE__ */ import_react65.default.createElement(import_react65.default.Fragment, null, /* @__PURE__ */ import_react65.default.createElement(FaCheck, null), " Copied") : /* @__PURE__ */ import_react65.default.createElement(import_react65.default.Fragment, null, /* @__PURE__ */ import_react65.default.createElement(FaTrophy, null), " Copy Winner Alert Source URL")), /* @__PURE__ */ import_react65.default.createElement("button", {
       className: "bg-purple-600 px-2 py-1 flex-1 rounded-md transition-transform hover:scale-110 flex flex-row gap-1 justify-center items-center",
       onClick: () => copyStatusURL()
-    }, copiedStatusURL ? /* @__PURE__ */ import_react64.default.createElement(import_react64.default.Fragment, null, /* @__PURE__ */ import_react64.default.createElement(FaCheck, null), " Copied") : /* @__PURE__ */ import_react64.default.createElement(import_react64.default.Fragment, null, /* @__PURE__ */ import_react64.default.createElement(FaTrophy, null), " Copy Giveaway Status Alert Source URL"))), /* @__PURE__ */ import_react64.default.createElement("div", {
+    }, copiedStatusURL ? /* @__PURE__ */ import_react65.default.createElement(import_react65.default.Fragment, null, /* @__PURE__ */ import_react65.default.createElement(FaCheck, null), " Copied") : /* @__PURE__ */ import_react65.default.createElement(import_react65.default.Fragment, null, /* @__PURE__ */ import_react65.default.createElement(FaTrophy, null), " Copy Giveaway Status Alert Source URL"))), /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "flex flex-col gap-2"
-    }, /* @__PURE__ */ import_react64.default.createElement("div", {
+    }, /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react64.default.createElement("div", {
+    }, /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ import_react64.default.createElement("h2", {
+    }, /* @__PURE__ */ import_react65.default.createElement("h2", {
       className: "text-xl"
-    }, "Alert Settings"))), /* @__PURE__ */ import_react64.default.createElement("div", {
+    }, "Alert Settings"))), /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "flex flex-row gap-2 justify-center items-center"
-    }, /* @__PURE__ */ import_react64.default.createElement("div", {
+    }, /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
-    }, /* @__PURE__ */ import_react64.default.createElement("div", {
+    }, /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",
       title: "Will clear chat, and then pause it after the time, to enable a giveaway with cut off"
-    }, "Duration"), /* @__PURE__ */ import_react64.default.createElement("div", {
+    }, "Duration"), /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "px-2 flex-1 flex justify-center items-center"
-    }, /* @__PURE__ */ import_react64.default.createElement(SliderInner, {
+    }, /* @__PURE__ */ import_react65.default.createElement(SliderInner, {
       min: ONE_S,
       max: ONE_S * 30,
       value: settings.alertDuration || defaultSettings.alertDuration,
       step: ONE_S,
       onChange: (v2) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { alertDuration: v2 }))
-    })), /* @__PURE__ */ import_react64.default.createElement("div", {
+    })), /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "flex-1 justify-center items-center text-center flex"
-    }, formatDistanceStrict(Date.now() + (settings.alertDuration || defaultSettings.alertDuration), new Date()))), /* @__PURE__ */ import_react64.default.createElement("div", {
+    }, formatDistanceStrict(Date.now() + (settings.alertDuration || defaultSettings.alertDuration), new Date()))), /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "flex-1 border border-purple-600 rounded-md flex relative"
-    }, /* @__PURE__ */ import_react64.default.createElement("div", {
+    }, /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "bg-purple-600 px-2 py-1 flex-0",
       title: "Will clear chat, and then pause it after the time, to enable a giveaway with cut off"
-    }, "Theme"), /* @__PURE__ */ import_react64.default.createElement(react_select_esm_default, {
+    }, "Theme"), /* @__PURE__ */ import_react65.default.createElement(react_select_esm_default, {
       isLoading: themesLoading,
       isSearchable: false,
       isClearable: false,
@@ -72802,41 +72843,41 @@ to {
       },
       value: selectedThemeOption,
       options: themeOptions
-    })))), settings.alertTheme === "custom" ? /* @__PURE__ */ import_react64.default.createElement("div", {
+    })))), settings.alertTheme === "custom" ? /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "flex flex-col gap-2"
-    }, /* @__PURE__ */ import_react64.default.createElement("div", {
+    }, /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react64.default.createElement("div", {
+    }, /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ import_react64.default.createElement("h2", {
+    }, /* @__PURE__ */ import_react65.default.createElement("h2", {
       className: "text-xl"
-    }, "Custom Theme Settings"))), /* @__PURE__ */ import_react64.default.createElement(Input, {
+    }, "Custom Theme Settings"))), /* @__PURE__ */ import_react65.default.createElement(Input, {
       value: settings.alertCustomImageUrl,
       label: "Image URL",
       placeholder: "URL...",
       onChange: (e3) => setSettings((s3) => __spreadProps(__spreadValues({}, s3), { alertCustomImageUrl: e3.target.value.trim() }))
-    })) : null, /* @__PURE__ */ import_react64.default.createElement("div", {
+    })) : null, /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "flex flex-col gap-2 flex-1"
-    }, /* @__PURE__ */ import_react64.default.createElement("div", {
+    }, /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "flex flex-row gap-2"
-    }, /* @__PURE__ */ import_react64.default.createElement("div", {
+    }, /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ import_react64.default.createElement("h2", {
+    }, /* @__PURE__ */ import_react65.default.createElement("h2", {
       className: "text-xl"
-    }, "Preview"))), /* @__PURE__ */ import_react64.default.createElement("div", {
+    }, "Preview"))), /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "flex-1"
-    }, /* @__PURE__ */ import_react64.default.createElement("div", {
+    }, /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "bg-gray-600 rounded-md h-full w-full flex py-2 relative"
-    }, settings.alertTheme === "custom" ? /* @__PURE__ */ import_react64.default.createElement(CustomPreview, {
+    }, settings.alertTheme === "custom" ? /* @__PURE__ */ import_react65.default.createElement(CustomPreview, {
       imageUrl: settings.alertCustomImageUrl
-    }) : /* @__PURE__ */ import_react64.default.createElement(Preview, {
+    }) : /* @__PURE__ */ import_react65.default.createElement(Preview, {
       preview: selectedTheme == null ? void 0 : selectedTheme.preview
     })))));
   }
   function CustomPreview({ imageUrl }) {
-    return /* @__PURE__ */ import_react64.default.createElement("div", {
+    return /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "flex-1 flex flex-col justify-center items-center gap-2 text-center"
-    }, imageUrl ? /* @__PURE__ */ import_react64.default.createElement("div", {
+    }, imageUrl ? /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "flex-1 flex justify-center items-center relative w-full overflow-hidden",
       style: {
         backgroundImage: `url(${imageUrl})`,
@@ -72844,33 +72885,33 @@ to {
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center"
       }
-    }) : null, /* @__PURE__ */ import_react64.default.createElement("div", {
+    }) : null, /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "flex-0 flex justify-center items-center text-2xl uppercase"
     }, "@name won!"));
   }
   function Preview({ preview }) {
-    return preview ? /* @__PURE__ */ import_react64.default.createElement("div", {
+    return preview ? /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "relative h-full w-full"
-    }, /* @__PURE__ */ import_react64.default.createElement("div", {
+    }, /* @__PURE__ */ import_react65.default.createElement("div", {
       className: "flex flex-1 flex-col justify-center items-center bg-transparent animate-wiggle absolute inset-0",
       style: { scale: "50%" }
-    }, /* @__PURE__ */ import_react64.default.createElement("img", {
+    }, /* @__PURE__ */ import_react65.default.createElement("img", {
       src: `https://giveaway-o-tron.vercel.app${preview}`
     }))) : null;
   }
 
   // src/App.tsx
   function App() {
-    return /* @__PURE__ */ import_react65.default.createElement(MemoryRouter, {
+    return /* @__PURE__ */ import_react66.default.createElement(MemoryRouter, {
       initialEntries: ["/setup"]
-    }, /* @__PURE__ */ import_react65.default.createElement(InnerApp, null));
+    }, /* @__PURE__ */ import_react66.default.createElement(InnerApp, null));
   }
   function InnerApp() {
     useUpdateCheck();
     const [settings, setSettings] = useStorage("settings", defaultSettings);
     const [discordSettings, setDiscordSettings] = useStorage("discord", defaultDiscordSettings);
-    const [winners, setWinners] = import_react65.default.useState([]);
-    const [client, setClient] = import_react65.default.useState(null);
+    const [winners, setWinners] = import_react66.default.useState([]);
+    const [client, setClient] = import_react66.default.useState(null);
     const [channelInfo, setChannelInfo] = useStorage("channelInfo", {}, (c3) => {
       console.info("[client][app]", c3);
       if (!c3.login)
@@ -72879,7 +72920,7 @@ to {
       if (settings.autoConnect)
         setClient((cl) => cl ? cl : init3(c3));
     });
-    const updateClientInfo = import_react65.default.useCallback((d3) => {
+    const updateClientInfo = import_react66.default.useCallback((d3) => {
       console.info("[auth][client][update]", d3);
       setChannelInfo(d3);
       if ((client == null ? void 0 : client.readyState()) === "OPEN") {
@@ -72893,36 +72934,36 @@ to {
       setClient(init3(d3));
     }, [client]);
     useAuthEvents(updateClientInfo);
-    import_react65.default.useEffect(() => {
+    import_react66.default.useEffect(() => {
       setUser({ username: channelInfo.login });
       if (channelInfo.login) {
         if (settings.autoConnect)
           setClient((cl) => cl ? cl : init3(channelInfo));
       }
     }, [channelInfo.login]);
-    const [forfeits, setForfeits] = import_react65.default.useState([]);
-    const onNewChat = import_react65.default.useCallback((chat) => {
+    const [forfeits, setForfeits] = import_react66.default.useState([]);
+    const onNewChat = import_react66.default.useCallback((chat) => {
       if (settings.forfeitCommand && chat.msg.toLowerCase().includes(settings.forfeitCommand.toLowerCase())) {
         setForfeits((f3) => f3.concat(chat.username));
       }
     }, [settings.forfeitCommand]);
-    const [chatPaused, setChatPaused] = import_react65.default.useState(false);
+    const [chatPaused, setChatPaused] = import_react66.default.useState(false);
     const [chatEvents, resetChat] = useChatEvents(chatPaused, winners, onNewChat);
-    import_react65.default.useEffect(() => {
+    import_react66.default.useEffect(() => {
       window["myApp"].setTitle(channelInfo.login, !!client);
     }, [channelInfo.login, client]);
     const [pastGiveaways, setPastGiveaways] = useStorage("past-giveaways", []);
     const stats = useCacheStats();
     const cacheHistory = useCacheHistory(stats);
-    return /* @__PURE__ */ import_react65.default.createElement(import_react65.default.Fragment, null, /* @__PURE__ */ import_react65.default.createElement(Header, {
+    return /* @__PURE__ */ import_react66.default.createElement(import_react66.default.Fragment, null, /* @__PURE__ */ import_react66.default.createElement(Header, {
       client,
       resetChat,
       setClient,
       channelInfo
-    }), /* @__PURE__ */ import_react65.default.createElement(Switch, null, /* @__PURE__ */ import_react65.default.createElement(Route, {
+    }), /* @__PURE__ */ import_react66.default.createElement(Switch, null, /* @__PURE__ */ import_react66.default.createElement(Route, {
       path: "/",
       exact: true
-    }, /* @__PURE__ */ import_react65.default.createElement(MainScreen, {
+    }, /* @__PURE__ */ import_react66.default.createElement(MainScreen, {
       client,
       chatEvents,
       discordSettings,
@@ -72939,42 +72980,42 @@ to {
       forfeits,
       stats,
       cacheHistory
-    })), /* @__PURE__ */ import_react65.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react66.default.createElement(Route, {
       path: "/setup",
       exact: true
-    }, /* @__PURE__ */ import_react65.default.createElement(Setup, {
+    }, /* @__PURE__ */ import_react66.default.createElement(Setup, {
       resetChat,
       setClient,
       channel: channelInfo,
       setChannel: setChannelInfo
-    })), /* @__PURE__ */ import_react65.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react66.default.createElement(Route, {
       path: "/giveaways",
       exact: true
-    }, /* @__PURE__ */ import_react65.default.createElement(PastGiveaways, {
+    }, /* @__PURE__ */ import_react66.default.createElement(PastGiveaways, {
       giveaways: pastGiveaways,
       setPastGiveaways
-    })), /* @__PURE__ */ import_react65.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react66.default.createElement(Route, {
       path: "/settings",
       exact: true
-    }, /* @__PURE__ */ import_react65.default.createElement(SettingsScreen, {
+    }, /* @__PURE__ */ import_react66.default.createElement(SettingsScreen, {
       settings,
       setSettings,
       forfeits,
       setForfeits
-    })), /* @__PURE__ */ import_react65.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react66.default.createElement(Route, {
       path: "/discord",
       exact: true
-    }, /* @__PURE__ */ import_react65.default.createElement(Discord, {
+    }, /* @__PURE__ */ import_react66.default.createElement(Discord, {
       settings: discordSettings,
       setSettings: setDiscordSettings
-    })), /* @__PURE__ */ import_react65.default.createElement(Route, {
+    })), /* @__PURE__ */ import_react66.default.createElement(Route, {
       path: "/obs",
       exact: true
-    }, /* @__PURE__ */ import_react65.default.createElement(Obs, {
+    }, /* @__PURE__ */ import_react66.default.createElement(Obs, {
       channelInfo,
       settings,
       setSettings
-    }))), /* @__PURE__ */ import_react65.default.createElement(Oe, null));
+    }))), /* @__PURE__ */ import_react66.default.createElement(Oe, null));
   }
 
   // src/index.tsx
@@ -73018,7 +73059,7 @@ to {
       captureException(e3);
     } finally {
       void watch();
-      import_react_dom5.default.render(/* @__PURE__ */ import_react66.default.createElement(App, null), document.querySelector("#app"));
+      import_react_dom5.default.render(/* @__PURE__ */ import_react67.default.createElement(App, null), document.querySelector("#app"));
     }
   });
 })();
