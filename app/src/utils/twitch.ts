@@ -146,7 +146,7 @@ export async function getFollowers(channelInfo: ChannelInfo) {
     'followers',
     CACHE_KEY.dumbfollows,
     channelInfo,
-    'users/follows?to_id=',
+    'channels/followers?broadcaster_id=',
     dumbFollowersCache,
     (i) => ({ id: i.from_id, login: i.from_login })
   )
