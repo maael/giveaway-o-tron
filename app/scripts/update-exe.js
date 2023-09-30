@@ -60,7 +60,6 @@ Promise.all([loadResedit(), loadPE()])
       {
         FileDescription: 'Giveaway-o-tron - Twitch giveaway bot',
         ProductName: 'Giveaway-o-tron',
-        copyRigh,
       }
     )
     vi.outputToResourceEntries(res.entries)
