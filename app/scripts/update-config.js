@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const getVersion = require('./util/version')
 
 const configPath = path.join(__dirname, '..', 'neutralino.config.json')
 const config = require(configPath)
@@ -11,13 +12,7 @@ config.modes.window = config.modes.window || {}
 config.modes.window.enableInspector = false
 config.modes.window.alwaysOnTop = false
 
-const githubRef = process.env.GITHUB_REF || ''
-let githubVersion
-if (githubRef.startsWith('refs/tags/v')) {
-  githubVersion = githubRef.replace('refs/tags/v', '').trim()
-}
-
-config.version = process.env.APP_VERSION || githubVersion || config.version
+config.version = getVersion()
 config.globalVariables.APP_VERSION = config.version
 config.modes.browser.globalVariables.APP_VERSION = config.version
 
