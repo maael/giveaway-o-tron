@@ -140,6 +140,7 @@ export function ChatGiveaway({
           setWinners((w) =>
             w.concat(
               giveawayWinner.map((w) => ({
+                displayName: w.displayName,
                 username: w.login,
                 isFollower: !!w.wasFollower,
                 isSubscriber: !!w.wasSubscriber,
@@ -173,6 +174,7 @@ export function ChatGiveaway({
 
 export type WinnerUser = Partial<{
   username: string
+  displayName: string
   id: string
   isSubscriber: boolean
   isFollower: boolean
@@ -197,7 +199,8 @@ export function Winner({
             )}
           >
             <div className={cls('flex flex-row items-center relative', { '-top-2': hasWarning })}>
-              <GiPartyPopper className="text-purple-300 text-xl" /> <div className="px-2">{winner.username} wins!</div>{' '}
+              <GiPartyPopper className="text-purple-300 text-xl" />{' '}
+              <div className="px-2">{winner.displayName || winner.username} wins!</div>{' '}
               <GiPartyPopper className="text-purple-300 text-xl" />
             </div>
             <FaBullhorn
@@ -209,7 +212,7 @@ export function Winner({
                 announceWinner({
                   ...anounceArgs,
                   giveawayType: winner.source!,
-                  winner: winner.username!,
+                  winner: (winner.displayName || winner.username)!,
                   force: true,
                 })
               }

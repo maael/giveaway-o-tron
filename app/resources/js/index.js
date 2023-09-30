@@ -47782,7 +47782,7 @@ to {
         }
       };
       this.store = async function store(data) {
-        await Neutralino.storage.setData(this.key, JSON.stringify([...data]));
+        await Neutralino.storage.setData(this.key, JSON.stringify([...data].filter((d3) => d3[0] !== null)));
       };
       this.key = `${channel}-${key}`;
     }
@@ -47903,7 +47903,7 @@ to {
   }
   var dumbFollowersCache = new Map();
   async function getFollowers(channelInfo) {
-    return genericCacher("followers", CACHE_KEY.dumbfollows, channelInfo, "channels/followers?broadcaster_id=", dumbFollowersCache, (i3) => ({ id: i3.from_id, login: i3.from_login }));
+    return genericCacher("followers", CACHE_KEY.dumbfollows, channelInfo, "channels/followers?broadcaster_id=", dumbFollowersCache, (i3) => ({ id: i3.user_id, login: i3.user_login }));
   }
   var dumbSubscriberCache = new Map();
   async function getSubs(channelInfo) {
@@ -50326,6 +50326,7 @@ to {
         discordSettings
       });
       return {
+        displayName: winner.displayName,
         login: winner.username,
         wasSubscriber: winner.isSubscriber,
         wasFollower: followers == null ? void 0 : followers.has(winner.username),
@@ -51527,6 +51528,7 @@ to {
             return;
           }
           setWinners((w2) => w2.concat(giveawayWinner.map((w3) => ({
+            displayName: w3.displayName,
             username: w3.login,
             isFollower: !!w3.wasFollower,
             isSubscriber: !!w3.wasSubscriber,
@@ -51574,13 +51576,13 @@ to {
         className: "text-purple-300 text-xl"
       }), " ", /* @__PURE__ */ import_react15.default.createElement("div", {
         className: "px-2"
-      }, winner.username, " wins!"), " ", /* @__PURE__ */ import_react15.default.createElement(GiPartyPopper, {
+      }, winner.displayName || winner.username, " wins!"), " ", /* @__PURE__ */ import_react15.default.createElement(GiPartyPopper, {
         className: "text-purple-300 text-xl"
       })), /* @__PURE__ */ import_react15.default.createElement(FaBullhorn, {
         className: (0, import_classnames.default)("text-2xl absolute right-12 cursor-pointer select-none transform opacity-80 transition-opacity hover:opacity-100 hover:scale-105", { "-mt-4": hasWarning }),
         onClick: () => announceWinner(__spreadProps(__spreadValues({}, anounceArgs), {
           giveawayType: winner.source,
-          winner: winner.username,
+          winner: winner.displayName || winner.username,
           force: true
         }))
       }), /* @__PURE__ */ import_react15.default.createElement(FaTimes, {
@@ -68173,7 +68175,9 @@ to {
       data: cacheHistory.followers.slice(-30)
     }, /* @__PURE__ */ import_react47.default.createElement(XAxis, {
       dataKey: "time"
-    }), /* @__PURE__ */ import_react47.default.createElement(YAxis, null), /* @__PURE__ */ import_react47.default.createElement(Tooltip, {
+    }), /* @__PURE__ */ import_react47.default.createElement(YAxis, {
+      min: 0
+    }), /* @__PURE__ */ import_react47.default.createElement(Tooltip, {
       content: /* @__PURE__ */ import_react47.default.createElement(CustomTooltip, null)
     }), /* @__PURE__ */ import_react47.default.createElement(Area, {
       dataKey: "count",
@@ -68189,7 +68193,9 @@ to {
       data: cacheHistory.subs.slice(-30)
     }, /* @__PURE__ */ import_react47.default.createElement(XAxis, {
       dataKey: "time"
-    }), /* @__PURE__ */ import_react47.default.createElement(YAxis, null), /* @__PURE__ */ import_react47.default.createElement(Tooltip, {
+    }), /* @__PURE__ */ import_react47.default.createElement(YAxis, {
+      min: 0
+    }), /* @__PURE__ */ import_react47.default.createElement(Tooltip, {
       content: /* @__PURE__ */ import_react47.default.createElement(CustomTooltip, null)
     }), /* @__PURE__ */ import_react47.default.createElement(Area, {
       dataKey: "count",

@@ -72,6 +72,7 @@ export interface GiveawayResult {
     entries: number
   }
   winners: {
+    displayName?: string
     login: string
     wasSubscriber: boolean | null
     wasFollower: boolean | null

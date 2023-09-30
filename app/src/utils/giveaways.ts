@@ -123,6 +123,7 @@ export async function getChatGiveaway(
       discordSettings,
     })
     return {
+      displayName: winner.displayName,
       login: winner.username,
       wasSubscriber: winner.isSubscriber,
       wasFollower: followers?.has(winner.username),

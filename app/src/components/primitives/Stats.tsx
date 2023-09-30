@@ -89,7 +89,7 @@ function FullView({ stats, cacheHistory }: { stats: CacheStats; cacheHistory: Ca
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={cacheHistory.followers.slice(-30)}>
               <XAxis dataKey="time" />
-              <YAxis />
+              <YAxis min={0} />
               <Tooltip content={<CustomTooltip />} />
               <Area dataKey="count" stroke="#7c3aed" fill="#7c3aed" fillOpacity={0.1} />
             </AreaChart>
@@ -99,7 +99,7 @@ function FullView({ stats, cacheHistory }: { stats: CacheStats; cacheHistory: Ca
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={cacheHistory.subs.slice(-30)}>
               <XAxis dataKey="time" />
-              <YAxis />
+              <YAxis min={0} />
               <Tooltip content={<CustomTooltip />} />
               <Area dataKey="count" stroke="#7c3aed" fill="#7c3aed" fillOpacity={0.1} />
             </AreaChart>

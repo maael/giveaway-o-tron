@@ -26,7 +26,7 @@ export class Cache {
   }
 
   store = async function store(data: Map<any, any>) {
-    await Neutralino.storage.setData(this.key, JSON.stringify([...data]))
+    await Neutralino.storage.setData(this.key, JSON.stringify([...data].filter((d) => d[0] !== null)))
   }
 }
 

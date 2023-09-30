@@ -152,7 +152,7 @@ export async function getFollowers(channelInfo: ChannelInfo) {
     channelInfo,
     'channels/followers?broadcaster_id=',
     dumbFollowersCache,
-    (i) => ({ id: i.from_id, login: i.from_login })
+    (i) => ({ id: i.user_id, login: i.user_login })
   )
 }
 
