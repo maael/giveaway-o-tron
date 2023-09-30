@@ -6,59 +6,71 @@ const exePath = path.join(__dirname, '..', 'dist', 'giveaway-o-tron', 'giveaway-
 const fs = require('fs')
 const getVersion = require('./util/version')
 
-Promise.all([loadResedit(), loadPE()]).then(([ResEdit, PELibrary]) => {
-  const version = getVersion()
-  const versionParts = version.split('.')
-  // load and parse data
-  const data = fs.readFileSync(exePath)
-  // (the Node.js Buffer instance can be specified directly to NtExecutable.from)
-  const exe = PELibrary.NtExecutable.from(data)
-  const res = PELibrary.NtExecutableResource.from(exe)
+const wait = (ms) => new Promise((r) => setTimeout(r, ms))
 
-  // rewrite resources
-  // - You can use helper classes as followings:
-  //   - ResEdit.Resource.IconGroupEntry: access icon resource data
-  //   - ResEdit.Resource.StringTable: access string resource data
-  //   - ResEdit.Resource.VersionInfo: access version info data
+Promise.all([loadResedit(), loadPE()])
+  .then(async ([ResEdit, PELibrary]) => {
+    console.info('[exe][wait]')
+    await wait(2_000)
+    console.info('[exe][start]')
 
-  // -- replace icons
+    const version = getVersion()
+    const versionParts = version.split('.')
+    // load and parse data
+    const data = fs.readFileSync(exePath)
+    // (the Node.js Buffer instance can be specified directly to NtExecutable.from)
+    const exe = PELibrary.NtExecutable.from(data)
+    const res = PELibrary.NtExecutableResource.from(exe)
 
-  // load icon data from file
-  // (you can use ResEdit.Data.IconFile to parse icon data)
-  const iconFile = ResEdit.Data.IconFile.from(fs.readFileSync(iconPath))
+    // rewrite resources
+    // - You can use helper classes as followings:
+    //   - ResEdit.Resource.IconGroupEntry: access icon resource data
+    //   - ResEdit.Resource.StringTable: access string resource data
+    //   - ResEdit.Resource.VersionInfo: access version info data
 
-  ResEdit.Resource.IconGroupEntry.replaceIconsForResource(
-    // destEntries
-    res.entries,
-    // iconGroupID
-    // - This ID is originally defined in base executable file
-    //   (the ID list can be retrieved by `ResEdit.Resource.IconGroupEntry.fromEntries(res.entries).map((entry) => entry.id)`)
-    101,
-    // lang ('lang: 1033' means 'en-US')
-    1033,
-    // icons (map IconFileItem to IconItem/RawIconItem)
-    iconFile.icons.map((item) => item.data)
-  )
+    // -- replace icons
 
-  // -- replace version
+    // load icon data from file
+    // (you can use ResEdit.Data.IconFile to parse icon data)
+    const iconFile = ResEdit.Data.IconFile.from(fs.readFileSync(iconPath))
 
-  const viList = ResEdit.Resource.VersionInfo.fromEntries(res.entries)
-  const vi = viList[0] || ResEdit.Resource.VersionInfo.createEmpty()
-  // ('1033' means 'en-US')
-  vi.setFileVersion(versionParts[0], versionParts[1], versionParts[2], 0, 1033)
-  vi.setProductVersion(versionParts[0], versionParts[1], versionParts[2], 0, 1033)
-  // ('lang: 1033' means 'en-US', 'codepage: 1200' is the default codepage)
-  vi.setStringValues(
-    { lang: 1033, codepage: 1200 },
-    {
-      FileDescription: 'Giveaway-o-tron - Twitch giveaway bot',
-      ProductName: 'Giveaway-o-tron',
-    }
-  )
-  vi.outputToResourceEntries(res.entries)
+    ResEdit.Resource.IconGroupEntry.replaceIconsForResource(
+      // destEntries
+      res.entries,
+      // iconGroupID
+      // - This ID is originally defined in base executable file
+      //   (the ID list can be retrieved by `ResEdit.Resource.IconGroupEntry.fromEntries(res.entries).map((entry) => entry.id)`)
+      101,
+      // lang ('lang: 1033' means 'en-US')
+      1033,
+      // icons (map IconFileItem to IconItem/RawIconItem)
+      iconFile.icons.map((item) => item.data)
+    )
 
-  // write to another binary
-  res.outputResource(exe)
-  const newBinary = exe.generate()
-  fs.writeFileSync(exePath, Buffer.from(newBinary))
-})
+    // -- replace version
+
+    const viList = ResEdit.Resource.VersionInfo.fromEntries(res.entries)
+    const vi = viList[0] || ResEdit.Resource.VersionInfo.createEmpty()
+    // ('1033' means 'en-US')
+    vi.setFileVersion(versionParts[0], versionParts[1], versionParts[2], 0, 1033)
+    vi.setProductVersion(versionParts[0], versionParts[1], versionParts[2], 0, 1033)
+    // ('lang: 1033' means 'en-US', 'codepage: 1200' is the default codepage)
+    vi.setStringValues(
+      { lang: 1033, codepage: 1200 },
+      {
+        FileDescription: 'Giveaway-o-tron - Twitch giveaway bot',
+        ProductName: 'Giveaway-o-tron',
+        copyRigh,
+      }
+    )
+    vi.outputToResourceEntries(res.entries)
+
+    // write to another binary
+    res.outputResource(exe)
+    const newBinary = exe.generate()
+    fs.writeFileSync(exePath, Buffer.from(newBinary))
+    console.info('[exe][done]')
+  })
+  .catch((e) => {
+    console.error('[exe][error]', e)
+  })
