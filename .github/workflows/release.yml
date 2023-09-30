@@ -28,20 +28,20 @@ jobs:
         run: yarn test
       - name: Get neutralino.js
         run: yarn neu-update
-      - name: Install rcedit
-        uses: crazy-max/ghaction-chocolatey@v3
-        with:
-          args: install rcedit
+      # - name: Install rcedit
+      #   uses: crazy-max/ghaction-chocolatey@v3
+      #   with:
+      #     args: install rcedit
       - name: Build
         run: yarn run build
-      - name: Print current directory
-        run: pwd
-      - name: Print exe directory
-        run: dir ./dist/giveaway-o-tron
-      - name: Print icon directory
-        run: dir ./resources/icons
-      - name: Update icon path
-        run: rcedit "D:\a\giveaway-o-tron\giveaway-o-tron\app\dist\giveaway-o-tron\giveaway-o-tron.exe" --set-icon "D:\a\giveaway-o-tron\giveaway-o-tron\app\resources\icons\trayIcon.ico"
+      # - name: Print current directory
+      #   run: pwd
+      # - name: Print exe directory
+      #   run: dir ./dist/giveaway-o-tron
+      # - name: Print icon directory
+      #   run: dir ./resources/icons
+      # - name: Update icon path
+      #   run: rcedit "D:\a\giveaway-o-tron\giveaway-o-tron\app\dist\giveaway-o-tron\giveaway-o-tron.exe" --set-icon "D:\a\giveaway-o-tron\giveaway-o-tron\app\resources\icons\trayIcon.ico"
       - name: Archive Release
         uses: thedoctor0/zip-release@master
         with:
