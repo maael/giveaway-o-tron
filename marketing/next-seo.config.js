@@ -13,5 +13,13 @@ export default {
     site_name: title,
     type: 'website',
     locale: 'en_GB',
+    images: [
+      {
+        url: `${url}/images/preview.png`,
+        width: 1200,
+        height: 627,
+        alt: 'Giveaway-o-tron',
+      },
+    ],
   },
 }
