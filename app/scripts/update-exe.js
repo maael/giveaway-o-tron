@@ -29,7 +29,9 @@ async function confirmFile(name, path) {
   const iconExists = await confirmFile('icon', icoPath)
   const exeExists = await confirmFile('exe', exePath)
   if (!iconExists || !exeExists) throw new Error('Missing required file')
-  await rcedit(exePath, {
+  const relativePath = ['.', path.sep, path.relative(process.cwd(), exePath)].join('')
+  console.info('[exe] Relative path:', relativePath)
+  await rcedit(relativePath, {
     icon: icoPath,
     'file-version': version,
     'product-version': version,
