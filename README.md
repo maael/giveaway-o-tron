@@ -8,7 +8,7 @@ Windows program and a website to allow Twitch giveaways with multiple options.
 
 > **Warning**
 > When creating a new release - the zip generation is broken, and needs to be generated locally and replaced.
-> The resource.neu and updating existing apps will work as expected though
+> The resource.neu and updating existing apps will work as expected though.
 
 ## Features
 
