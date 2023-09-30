@@ -28,8 +28,14 @@ jobs:
         run: yarn test
       - name: Get neutralino.js
         run: yarn neu-update
+      - name: Install rcedit
+        uses: crazy-max/ghaction-chocolatey@v3
+        with:
+          args: install rcedit
       - name: Build
         run: yarn run build
+      - name: Update icon path
+        run: rcedit "./app/dist/giveaway-o-tron/giveaway-o-tron.exe" --set-icon "./app/resources/icons/trayIcon.ico"
       - name: Archive Release
         uses: thedoctor0/zip-release@master
         with:
