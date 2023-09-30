@@ -33,7 +33,7 @@ export default function Index({ fathom }) {
       </div>
       <div className="py-10 flex flex-col gap-8 justify-center items-center mx-auto text-center -mt-6 -mb-6">
         <h2 className="text-4xl font-bold">Introducing Giveaway-o-tron!</h2>
-        <h2 className="text-4xl font-bold">A brand new Twitch giveaway app</h2>
+        <h2 className="text-4xl font-bold">A brand new free Twitch giveaway app</h2>
         <p className="text-lg opacity-80 max-w-md ">
           Take back control of your giveaways, the app runs locally, with all the features you could want, and a healthy
           dose of reliablility on top
@@ -95,19 +95,37 @@ export default function Index({ fathom }) {
       </div>
       <TwitterTweetEmbed tweetId="1559959019619581952" options={{ align: 'center', theme: 'dark' }} />
       <div className="py-3 flex flex-col gap-4 justify-center items-center max-w-md mx-auto text-center -mb-1">
-        <h2 className="text-4xl font-bold">The Test Run</h2>
+        <h2 className="text-4xl font-bold">Users</h2>
         <p className="text-lg opacity-80">
-          Some examples from early on in the tool development, including one of the magic commands, a Guild Wars 2
-          account name command, and a giveaway showing the chat limiting to winners only
+          Here are some channels where you can find people using giveaway-o-tron for their giveaways.
         </p>
+        <div className="gap-5 grid grid-cols-1 sm:grid-cols-2">
+          <TwitchUser link="mukluk" label="Mukluk" />
+          <TwitchUser link="arilozen" label="Arilozen" />
+          <TwitchUser link="noggdog" label="NoggDog" />
+          <TwitchUser link="itzfipi" label="iTzFipi" />
+          <TwitchUser link="guildmm" label="GuildMM" />
+          <TwitchUser link="saiyanloki" label="saiyanloki" />
+        </div>
       </div>
-      <PlayerWrapper video="1567875737" time="0h38m10s" />
-      <PlayerWrapper video="1570309446" time="2h31m08s" />
+      {/* Twitch VODs have been delisted <PlayerWrapper video="1567875737" time="0h38m10s" />
+      <PlayerWrapper video="1570309446" time="2h31m08s" /> */}
     </>
   )
 }
 
-function PlayerWrapper({ video, time }: { video: string; time: string }) {
+function TwitchUser({ link, label }: { link: string; label: string }) {
+  return (
+    <a href={`https://twitch.tv/${link}/videos`} className="flex flex-row gap-2 justify-center items-center text-xl">
+      <div className="border-2 border-purple-600 rounded-full w-20 aspect-square relative">
+        <Image layout="fill" src={`/images/users/${link}.png`} className="rounded-full" />
+      </div>
+      {label}
+    </a>
+  )
+}
+
+function _PlayerWrapper({ video, time }: { video: string; time: string }) {
   const divRef = React.useRef<null | HTMLDivElement>(null)
   const [dimensions, setDimensions] = React.useState({ height: 0, width: 0 })
   React.useLayoutEffect(() => {

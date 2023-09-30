@@ -1,5 +1,5 @@
 const title = 'Giveaway-o-tron | A Twitch giveaway tool'
-const description = 'A Twitch giveaway tool packed with features'
+const description = 'A free Twitch giveaway tool packed with features'
 const url = 'https://giveaway-o-tron.mael.tech'
 
 export default {
