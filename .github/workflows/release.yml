@@ -41,7 +41,7 @@ jobs:
       - name: Print icon directory
         run: dir ./resources/icons
       - name: Update icon path
-        run: rcedit "./dist/giveaway-o-tron/giveaway-o-tron.exe" --set-icon "./resources/icons/trayIcon.ico"
+        run: rcedit "D:\a\giveaway-o-tron\giveaway-o-tron\app\dist\giveaway-o-tron\giveaway-o-tron.exe" --set-icon "D:\a\giveaway-o-tron\giveaway-o-tron\app\resources\icons\trayIcon.ico"
       - name: Archive Release
         uses: thedoctor0/zip-release@master
         with:
