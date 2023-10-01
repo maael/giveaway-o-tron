@@ -1,3 +1,4 @@
+import { signOut } from 'next-auth/react'
 import * as React from 'react'
 import { FaCheck, FaExclamationTriangle, FaPlus, FaTimes } from 'react-icons/fa'
 import { removeIdx, Settings, store } from '~/utils'
@@ -180,21 +181,11 @@ export default function SettingsScreen({
         <button
           className="bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity text-xs"
           onClick={async () => {
-            window.open(`https://giveaway-o-tron.vercel.app/api/auth/signout`, '_blank')
-          }}
-        >
-          <FaExclamationTriangle /> Sign Out Token Tool
-        </button>
-        <button
-          className="bg-red-600 px-3 py-1 rounded-md opacity-50 hover:opacity-100 flex justify-center items-center gap-1 transition-opacity text-xs"
-          onClick={async () => {
             try {
               await store.setItem('main-channelInfo', '')
-              window.location.search = '--restarted'
-              window.location.reload()
-            } catch {
-              window.location.search = '--restarted'
-              window.location.reload()
+              await signOut()
+            } catch (e) {
+              console.error('[reset][error]', e)
             }
           }}
         >
