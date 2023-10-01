@@ -49,7 +49,7 @@ export default async function watch() {
       clearInterval(interval)
       startPollingData(freshChannelInfo!, true)
     }
-  }, 2000)
+  }, 5_000)
 }
 
 async function startPollingData(channelInfo: ChannelInfo, first: boolean = false) {

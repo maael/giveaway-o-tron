@@ -1,6 +1,8 @@
 import React from 'react'
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom'
 import * as Sentry from '@sentry/react'
+import { SessionProvider } from 'next-auth/react'
+import { useSession, signIn } from 'next-auth/react'
 import chat, { ChatItem, useChatEvents } from '~/chat'
 import useStorage from '~/components/hooks/useStorage'
 import MainScreen from '~/components/screens/Main'
@@ -18,6 +20,7 @@ import {
   useAuthEvents,
   useCacheHistory,
   useCacheStats,
+  validateToken,
 } from '~/utils'
 import { WinnerUser } from '~/components/primitives/giveaways'
 import DiscordScreen from '~/components/screens/Discord'
@@ -31,12 +34,33 @@ if (typeof window !== undefined) {
   void twitchCache()
 }
 
-export default function App() {
+export default function App({ session }: { session: any }) {
   return (
-    <Router initialEntries={['/setup']}>
-      <InnerApp />
-    </Router>
+    <SessionProvider session={session}>
+      <Router initialEntries={['/setup']}>
+        <InnerApp />
+      </Router>
+    </SessionProvider>
   )
+}
+
+function useHandleLogin(channelInfo: ChannelInfo, setChannelInfo: any) {
+  const session = useSession()
+  React.useEffect(() => {
+    if (!channelInfo.token && session.status === 'unauthenticated') {
+      signIn('twitch')
+    }
+  }, [session.status, channelInfo.token])
+  React.useEffect(() => {
+    const data = session.data as any
+    if (session.status === 'authenticated' && data) {
+      ;(async () => {
+        const sessionData = session.data as any
+        const data = await validateToken(sessionData.accessToken, sessionData.refreshToken)
+        setChannelInfo(data)
+      })()
+    }
+  }, [session.status])
 }
 
 function InnerApp() {
@@ -50,6 +74,7 @@ function InnerApp() {
     console.info('[client][app][startClient]')
     if (settings.autoConnect) setClient((cl) => (cl ? cl : chat(c)))
   })
+  useHandleLogin(channelInfo, setChannelInfo)
   const updateClientInfo = React.useCallback(
     (d) => {
       console.info('[auth][client][update]', d)
@@ -115,7 +140,7 @@ function InnerApp() {
           />
         </Route>
         <Route path="/setup" exact>
-          <SetupScreen resetChat={resetChat} setClient={setClient} channel={channelInfo} setChannel={setChannelInfo} />
+          <SetupScreen channel={channelInfo} />
         </Route>
         <Route path="/giveaways" exact>
           <PastGiveawaysScreen giveaways={pastGiveaways} setPastGiveaways={setPastGiveaways} />

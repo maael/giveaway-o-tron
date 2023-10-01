@@ -7,7 +7,7 @@ import useFathom from '~/components/hooks/useFathom'
 import { DefaultSeo } from 'next-seo'
 import SEO from '~/next-seo.config'
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const fathom = useFathom()
   return (
     <>
@@ -17,7 +17,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <meta name="theme-color" content="#1e293b" />
       </Head>
       <DefaultSeo {...SEO} />
-      <Component {...pageProps} fathom={fathom} />
+      <Component {...pageProps} fathom={fathom} session={session} />
       <Toaster />
     </>
   )
