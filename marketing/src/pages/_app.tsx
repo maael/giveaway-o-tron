@@ -1,26 +1,24 @@
-import '~/styles/main.css'
-import Head from 'next/head'
-import { AppProps } from 'next/app'
-import { DefaultSeo } from 'next-seo'
-import useFathom from '~/components/hooks/useFathom'
-import SEO from '~/../next-seo.config'
-import EmojiFavicon from '~/components/primitives/EmojiFavicon'
+import type { AppProps } from 'next/app'
+import { Toaster } from 'react-hot-toast'
 
-function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+import '../styles/globals.css'
+import Head from 'next/head'
+import useFathom from '~/components/hooks/useFathom'
+import { DefaultSeo } from 'next-seo'
+import SEO from '~/next-seo.config'
+
+export default function MyApp({ Component, pageProps }: AppProps) {
   const fathom = useFathom()
   return (
     <>
       <Head>
+        <link rel="icon" type="image/x-icon" href="/icons/appIcon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#1e293b" />
       </Head>
       <DefaultSeo {...SEO} />
-      <div className="flex flex-col gap-5 px-10 lg:px-3 mx-auto max-w-6xl pt-3 pb-20">
-        <Component {...pageProps} fathom={fathom} />
-      </div>
-      <EmojiFavicon emoji="🤖" />
+      <Component {...pageProps} fathom={fathom} />
+      <Toaster />
     </>
   )
 }
-
-export default App

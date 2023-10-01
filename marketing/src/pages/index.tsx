@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 import * as React from 'react'
@@ -16,19 +15,16 @@ import {
   FaSadTear,
 } from 'react-icons/fa'
 import { TwitterTweetEmbed } from 'react-twitter-embed'
-import Header from '~/components/primitives/Header'
+import Header from '~/components/marketing/Header'
+import { btnClass } from '~/styling'
 
-const TwitchPlayer = dynamic(() => import('react-twitch-embed-video'), {
-  ssr: false,
-})
-
-export default function Index({ fathom }) {
+export default function Index({ fathom }: { fathom: any }) {
   return (
     <>
       <Header fathom={fathom} />
       <div>
-        <div className="w-full md:w-2/3 relative aspect-video mx-auto shadow-[0_3px_40px_5px_rgba(0,0,0,0.3)] shadow-purple-600 -mt-8 md:mt-0">
-          <Image src="/images/screenshot.png" className="shadow-lg" layout="fill" />
+        <div className="w-full md:w-1/2 relative aspect-video mx-auto shadow-[0_3px_40px_5px_rgba(0,0,0,0.3)] shadow-purple-600 -mt-8 md:mt-0">
+          <Image alt="Screenshot of giveaway-o-tron" src="/images/screenshot.png" className="shadow-lg" layout="fill" />
         </div>
       </div>
       <div className="py-10 flex flex-col gap-8 justify-center items-center mx-auto text-center -mt-6 -mb-6">
@@ -39,10 +35,10 @@ export default function Index({ fathom }) {
           dose of reliablility on top
         </p>
         <div className="flex flex-row gap-4 justify-center items-center">
-          <Link href="/guide">
-            <a className="button">Get Started</a>
+          <Link href="/guide" className={btnClass}>
+            Get Started
           </Link>
-          <a href="#mainfeatures" className="button bg-opacity-50">
+          <a href="#mainfeatures" className={`${btnClass} bg-opacity-50`}>
             Learn More
           </a>
         </div>
@@ -108,8 +104,6 @@ export default function Index({ fathom }) {
           <TwitchUser link="saiyanloki" label="saiyanloki" />
         </div>
       </div>
-      {/* Twitch VODs have been delisted <PlayerWrapper video="1567875737" time="0h38m10s" />
-      <PlayerWrapper video="1570309446" time="2h31m08s" /> */}
     </>
   )
 }
@@ -118,34 +112,15 @@ function TwitchUser({ link, label }: { link: string; label: string }) {
   return (
     <a href={`https://twitch.tv/${link}/videos`} className="flex flex-row gap-2 justify-center items-center text-xl">
       <div className="border-2 border-purple-600 rounded-full w-20 aspect-square relative">
-        <Image layout="fill" src={`/images/users/${link}.png`} className="rounded-full" />
+        <Image
+          layout="fill"
+          alt={`${label} profile picture`}
+          src={`/images/users/${link}.png`}
+          className="rounded-full"
+        />
       </div>
       {label}
     </a>
-  )
-}
-
-function _PlayerWrapper({ video, time }: { video: string; time: string }) {
-  const divRef = React.useRef<null | HTMLDivElement>(null)
-  const [dimensions, setDimensions] = React.useState({ height: 0, width: 0 })
-  React.useLayoutEffect(() => {
-    if (divRef.current) {
-      setDimensions({ height: divRef.current.clientHeight, width: divRef.current.clientWidth })
-    }
-  }, [])
-  return (
-    <div ref={divRef} className="w-full md:w-2/3 aspect-video my-2 mx-auto relative">
-      <TwitchPlayer
-        video={video}
-        time={time}
-        autoplay={false}
-        width={dimensions.width}
-        height={dimensions.height}
-        theme="dark"
-        targetClass="w-full h-full"
-        targetId={video}
-      />
-    </div>
   )
 }
 
