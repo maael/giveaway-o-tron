@@ -78,24 +78,28 @@ export function useCacheHistory(stats: CacheStats): CacheHistory {
     if (!stats.followers.lastUpdated) return
     const ts = new Date()
     setFollowerHistory((h) =>
-      h.concat({
-        count: stats.followers.count || 0,
-        time: format(ts, 'hh:mm'),
-        fullTime: format(ts, 'dd/MM hh:mm'),
-        name: ts.toISOString(),
-      })
+      h
+        .concat({
+          count: stats.followers.count || 0,
+          time: format(ts, 'hh:mm'),
+          fullTime: format(ts, 'dd/MM hh:mm'),
+          name: ts.toISOString(),
+        })
+        .slice(-100)
     )
   }, [stats.followers.lastUpdated])
   React.useEffect(() => {
     if (!stats.subs.lastUpdated) return
     const ts = new Date()
     setSubsHistory((h) =>
-      h.concat({
-        count: stats.subs.count || 0,
-        time: format(ts, 'hh:mm'),
-        fullTime: format(ts, 'dd/MM hh:mm'),
-        name: ts.toISOString(),
-      })
+      h
+        .concat({
+          count: stats.subs.count || 0,
+          time: format(ts, 'hh:mm'),
+          fullTime: format(ts, 'dd/MM hh:mm'),
+          name: ts.toISOString(),
+        })
+        .slice(-100)
     )
   }, [stats.subs.lastUpdated])
   return { followers: followerHistory, subs: subsHistory }
