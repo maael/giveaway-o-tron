@@ -140,3 +140,6 @@ dist
 collector/app.js
 temp
 .tmp
+
+# Sentry Auth Token
+.sentryclirc
