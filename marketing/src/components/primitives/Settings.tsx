@@ -193,6 +193,9 @@ const Time = React.memo(function Time({
             alertCustomImageUrl,
             followersOnly,
           })
+          window.onbeforeunload = () => {
+            relay.emit('event', { type: 'timer-cancel', channelId })
+          }
         }}
         title="Warning: will clear chat"
       >
