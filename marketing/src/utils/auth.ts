@@ -48,28 +48,15 @@ export async function validateToken(token: string, refreshToken: string, isRefre
 }
 
 export async function refreshTokenFlow(refreshToken: string) {
-  console.info('[refreshTokenFlow]', refreshToken)
-  const channelInfo = await store.getItem<ChannelInfo>('main-channelInfo')
-  const details = {
-    client_id: channelInfo?.clientId || atob(globalThis.NL_TID),
-    client_secret: atob(globalThis.NL_TS),
-    grant_type: 'refresh_token',
-    refresh_token: refreshToken,
-  }
-
-  const formBody: string[] = []
-  for (let property in details) {
-    const encodedKey = encodeURIComponent(property)
-    const encodedValue = encodeURIComponent(details[property])
-    formBody.push(`${encodedKey}=${encodedValue}`)
-  }
-  const body = formBody.join('&')
-  const res = await fetch(`https://id.twitch.tv/oauth2/token`, {
+  console.info('[refreshTokenFlow]', { refreshToken })
+  const res = await fetch(`/api/auth/refresh`, {
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
     },
     method: 'POST',
-    body,
+    body: JSON.stringify({
+      refreshToken,
+    }),
   })
   if (res.status === 403) {
     console.error('[refresh][error]')
@@ -79,6 +66,8 @@ export async function refreshTokenFlow(refreshToken: string) {
     access_token: string
     refresh_token: string
   }
+  console.info('[refreshTokenFlow][data]', { data })
+  const channelInfo = await store.getItem<ChannelInfo>('main-channelInfo')
   await store.setItem('main-channelInfo', {
     ...channelInfo,
     token: data.access_token,

@@ -27,9 +27,6 @@ import ObsScreen from '~/components/screens/Obs'
 import twitchCache from '~/utils/twitchCaches'
 import * as Sentry from '@sentry/nextjs'
 
-globalThis.NL_TID = 'MDZ6dGY1amYwdzd1dDFzaWF1c3hnOHFnZmx2ZGJm'
-globalThis.NL_TS = 'aWQ0Zm9qbzQ1NWoxbjJybGR6ODgycmV0dHZ1aHl1'
-
 if (typeof window !== undefined) {
   void twitchCache()
 }
@@ -56,6 +53,7 @@ function useHandleLogin(channelInfo: ChannelInfo, setChannelInfo: any) {
     if (session.status === 'authenticated' && data) {
       ;(async () => {
         const sessionData = session.data as any
+        console.info('[handlelogin][validateToken]', sessionData)
         const data = await validateToken(sessionData.accessToken, sessionData.refreshToken)
         setChannelInfo(data)
       })()

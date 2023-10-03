@@ -44,6 +44,7 @@ export default async function watch() {
     const channelInfo = await dataStore.getItem<ChannelInfo>('main-channelInfo')
     if (channelInfo) {
       if (!channelInfo.login) return
+      console.info('[twitchCache][validateToken]')
       await validateToken(channelInfo.token!, channelInfo.refreshToken!)
       const freshChannelInfo = await dataStore.getItem<ChannelInfo>('main-channelInfo')
       clearInterval(interval)
