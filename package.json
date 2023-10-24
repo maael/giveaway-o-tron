@@ -1,6 +1,0 @@
-{
-  "devDependencies": {
-    "cross-env": "^7.0.3",
-    "json": "^11.0.0"
-  }
-}
