@@ -68780,7 +68780,14 @@ to {
   }) {
     const location2 = useLocation();
     const homeRoute = channelInfo.login ? "/" : "/setup";
-    return /* @__PURE__ */ import_react54.default.createElement("div", {
+    return /* @__PURE__ */ import_react54.default.createElement(import_react54.default.Fragment, null, /* @__PURE__ */ import_react54.default.createElement("div", {
+      className: "flex flex-row justify-start gap-2"
+    }, /* @__PURE__ */ import_react54.default.createElement("div", {
+      className: "bg-red-800 flex-1 flex px-2 py-1 rounded-md mb-2 text-center text-xs justify-center items-center cursor-pointer",
+      onClick: () => {
+        Neutralino.os.open("https://giveaway-o-tron.mael.tech/app");
+      }
+    }, "This app will no longer be updated, please use the web app version available at https://giveaway-o-tron.mael.tech \u2192")), /* @__PURE__ */ import_react54.default.createElement("div", {
       className: "flex flex-row justify-start gap-2"
     }, /* @__PURE__ */ import_react54.default.createElement("div", {
       className: "flex-1 flex flex-row gap-2 items-center"
@@ -68796,7 +68803,7 @@ to {
       className: "hidden sm:block"
     }, location2.pathname === homeRoute ? /* @__PURE__ */ import_react54.default.createElement("span", {
       className: "relative -top-0.5 ml-1"
-    }, "Giveaway-o-tron") : /* @__PURE__ */ import_react54.default.createElement(FaAngleLeft, {
+    }, "Giveaway-o-tron 2") : /* @__PURE__ */ import_react54.default.createElement(FaAngleLeft, {
       className: "text-xl"
     }))))), location2.pathname === "/setup" ? null : /* @__PURE__ */ import_react54.default.createElement(Link, {
       to: "/settings"
@@ -68853,7 +68860,7 @@ to {
       title: "Connect to chat"
     }, /* @__PURE__ */ import_react54.default.createElement(FaTwitch, null), " ", /* @__PURE__ */ import_react54.default.createElement("span", {
       className: "hidden sm:block"
-    }, client ? "Disconnect" : "Connect"))));
+    }, client ? "Disconnect" : "Connect")))));
   }
 
   // src/components/screens/Discord.tsx
