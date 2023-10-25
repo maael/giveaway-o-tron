@@ -1,0 +1,79 @@
+name: Publish Release
+on:
+  push:
+    tags:
+      - v*
+jobs:
+  build:
+    runs-on: windows-latest
+    if: github.actor != 'dependabot[bot]'
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@master
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        run: yarn
+      - name: Tests
+        run: yarn test
+      - name: Get neutralino.js
+        run: yarn neu-update
+      # - name: Install rcedit
+      #   uses: crazy-max/ghaction-chocolatey@v3
+      #   with:
+      #     args: install rcedit
+      - name: Build
+        run: yarn run build
+      # - name: Print current directory
+      #   run: pwd
+      # - name: Print exe directory
+      #   run: dir ./dist/giveaway-o-tron
+      # - name: Print icon directory
+      #   run: dir ./resources/icons
+      # - name: Update icon path
+      #   run: rcedit "D:\a\giveaway-o-tron\giveaway-o-tron\app\dist\giveaway-o-tron\giveaway-o-tron.exe" --set-icon "D:\a\giveaway-o-tron\giveaway-o-tron\app\resources\icons\trayIcon.ico"
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
+        with:
+          type: "zip"
+          directory: "./app/dist"
+          filename: "giveaway-o-tron.zip"
+          path: giveaway-o-tron
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "./app/dist/giveaway-o-tron.zip,./app/dist/giveaway-o-tron/resources.neu"
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@master
+        with:
+          name: resource-file
+          path: ./app/dist/giveaway-o-tron/resources.neu
+  add_resource:
+    needs: build
+    runs-on: windows-latest
+    if: github.actor != 'dependabot[bot]'
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/download-artifact@master
+        with:
+          name: resource-file
+          path: web/public/versions
+      - name: Version File
+        run: yarn generate-version-file
+      - uses: EndBug/add-and-commit@v9
+        with:
+          add: '["web/public/versions", "web/src/version.json"]'
+          message: "chore: Update version files"
+          push: origin HEAD:main
