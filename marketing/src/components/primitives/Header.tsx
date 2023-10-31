@@ -7,11 +7,14 @@ import {
   FaClock,
   FaQuestion,
   FaDiscord,
+  FaYoutube,
 } from 'react-icons/fa'
 import { SiObsstudio } from 'react-icons/si'
 import { Link, useLocation } from 'react-router-dom'
+import cls from 'classnames'
 import { ChannelInfo } from '~/utils'
 import chat from '../../chat'
+import useSession from '../hooks/useSession'
 
 export default function Header({
   client,
@@ -24,6 +27,7 @@ export default function Header({
   setClient: Dispatch<SetStateAction<ReturnType<typeof chat> | null>>
   channelInfo: ChannelInfo
 }) {
+  const session = useSession()
   const location = useLocation()
   const homeRoute = channelInfo.login ? '/' : '/setup'
   return (
@@ -86,41 +90,30 @@ export default function Header({
           </button>
         )}
       </div>
-      {channelInfo.login ? (
-        <form
-          className="flex flex-row flex-0"
-          onSubmit={(e) => {
-            e.preventDefault()
-            if (client) {
-              if (client.readyState() === 'OPEN') {
-                try {
-                  client.disconnect()
-                } catch (e) {
-                  console.warn('[header-disconnect]', e)
-                }
-              }
-              resetChat()
-              setClient(null)
-            } else {
-              setClient(chat(channelInfo))
-            }
-          }}
-        >
-          <input
-            className="bg-gray-700 px-2 py-1 rounded-l-md border-b border-l border-purple-500"
-            placeholder="Channel Name"
-            value={channelInfo.login || ''}
-            disabled
-            title={!!client ? 'Disconnect to change' : 'Set channel to connect to'}
-          />
-          <button
-            className="bg-purple-600 text-white py-1 px-3 rounded-r-md transform hover:scale-105 transition-transform shadow-md flex flex-row items-center gap-2 w-32 justify-center"
-            title="Connect to chat"
-          >
-            <TwitchIco /> <span className="hidden sm:block">{client ? 'Disconnect' : 'Connect'}</span>
-          </button>
-        </form>
-      ) : null}
+      <a
+        href={session.data?.youtube ? '/api/auth/logout' : '/api/auth/google'}
+        className={cls(
+          'flex flex-row gap-1 rounded-md bg-red-600 justify-center items-center px-2 cursor-pointer hover:opacity-100',
+          {
+            'opacity-50': !session.data?.youtube?.username,
+          }
+        )}
+      >
+        <FaYoutube className="text-sm" />
+        <span className="relative -top-0.5">{session.data?.youtube?.username}</span>
+      </a>
+      <a
+        href={session.data?.twitch ? '/api/auth/logout' : '/api/auth/twitch'}
+        className={cls(
+          'flex flex-row gap-1 rounded-md bg-purple-600 justify-center items-center px-2 cursor-pointer hover:opacity-100',
+          {
+            'opacity-50': !session.data?.twitch?.username,
+          }
+        )}
+      >
+        <TwitchIco className="text-sm" />
+        <span className="relative -top-0.5">{session.data?.twitch?.username}</span>
+      </a>
     </div>
   )
 }

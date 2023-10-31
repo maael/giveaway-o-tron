@@ -1,7 +1,5 @@
 import React from 'react'
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom'
-import { SessionProvider } from 'next-auth/react'
-import { useSession, signIn } from 'next-auth/react'
 import chat, { ChatItem, useChatEvents } from '~/chat'
 import useStorage from '~/components/hooks/useStorage'
 import MainScreen from '~/components/screens/Main'
@@ -9,6 +7,7 @@ import SetupScreen from '~/components/screens/Setup'
 import PastGiveawaysScreen from '~/components/screens/PastGiveaways'
 import SettingsScreen from '~/components/screens/Settings'
 import Header from '~/components/primitives/Header'
+import useSession, { SessionProvider } from '~/components/hooks/useSession'
 import {
   ChannelInfo,
   defaultDiscordSettings,
@@ -31,9 +30,9 @@ if (typeof window !== undefined) {
   void twitchCache()
 }
 
-export default function App({ session }: { session: any }) {
+export default function App() {
   return (
-    <SessionProvider session={session}>
+    <SessionProvider>
       <Router initialEntries={['/setup']}>
         <InnerApp />
       </Router>
@@ -43,16 +42,18 @@ export default function App({ session }: { session: any }) {
 
 function useHandleLogin(channelInfo: ChannelInfo, setChannelInfo: any) {
   const session = useSession()
+  console.info('session', session)
   React.useEffect(() => {
     if (!channelInfo.token && session.status === 'unauthenticated') {
-      signIn('twitch')
+      window.location.href = '/api/auth/twitch'
+      console.info('unauthenticated', session)
     }
   }, [session.status, channelInfo.token])
   React.useEffect(() => {
     const data = session.data as any
     if (session.status === 'authenticated' && data) {
       ;(async () => {
-        const sessionData = session.data as any
+        const sessionData = session.data?.twitch as any
         console.info('[handlelogin][validateToken]', sessionData)
         const data = await validateToken(sessionData.accessToken, sessionData.refreshToken)
         setChannelInfo(data)
