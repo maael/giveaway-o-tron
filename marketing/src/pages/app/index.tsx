@@ -40,13 +40,26 @@ export default function App() {
   )
 }
 
+function useYoutubeChat() {
+  const session = useSession()
+  React.useEffect(() => {
+    ;(async () => {
+      if (session.data?.youtube?.accessToken) {
+        console.info('[youtube] Start')
+        const data = await fetch('https://www.googleapis.com/youtube/v3/liveStreams?mine=true', {
+          headers: { Authorization: `Bearer ${session.data?.youtube?.accessToken}` },
+        }).then((r) => r.json())
+        console.info('[youtube] Data', data)
+      }
+    })()
+  }, [session?.data?.youtube?.accessToken])
+}
+
 function useHandleLogin(channelInfo: ChannelInfo, setChannelInfo: any) {
   const session = useSession()
-  console.info('session', session)
   React.useEffect(() => {
-    if (!channelInfo.token && session.status === 'unauthenticated') {
+    if (session.status === 'unauthenticated') {
       window.location.href = '/api/auth/twitch'
-      console.info('unauthenticated', session)
     }
   }, [session.status, channelInfo.token])
   React.useEffect(() => {
@@ -74,6 +87,7 @@ function InnerApp() {
     if (settings.autoConnect) setClient((cl) => (cl ? cl : chat(c)))
   })
   useHandleLogin(channelInfo, setChannelInfo)
+  useYoutubeChat()
   const updateClientInfo = React.useCallback(
     (d) => {
       console.info('[auth][client][update]', d)
