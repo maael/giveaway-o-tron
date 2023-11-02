@@ -100,7 +100,7 @@ export default function Header({
         )}
       >
         <FaYoutube className="text-sm" />
-        <span className="relative -top-0.5">{session.data?.youtube?.username}</span>
+        <span className="relative -top-0.5">{session.data?.youtube?.username.slice(0, 4)}...</span>
       </a>
       <a
         href={session.data?.twitch ? '/api/auth/logout' : '/api/auth/twitch'}

@@ -13,6 +13,8 @@ import {
   FaSearch,
   FaTimes,
   FaTimesCircle,
+  FaTwitch,
+  FaYoutubeSquare,
 } from 'react-icons/fa'
 import { Settings } from '~/utils'
 import { Modal, useModal } from '../hooks/useModal'
@@ -235,6 +237,14 @@ export default function ChatBox({
                     })}
                   >
                     <span className="text-xs mr-0.5">[{c.formattedTmiTs}]</span>
+                    <span
+                      className={cls('text-xs mr-0.5 relative top-0.5 inline-block', {
+                        'text-red-600': c.source === 'youtube',
+                        'text-purple-600': c.source === 'twitch',
+                      })}
+                    >
+                      {c.source === 'youtube' ? <FaYoutubeSquare /> : <FaTwitch />}
+                    </span>
                     <span
                       className={cls('rounded-full bg-gray-300 h-4 w-4 inline-block relative', {
                         'bg-yellow-500': c.isSubscriber,

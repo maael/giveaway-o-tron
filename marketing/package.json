@@ -41,6 +41,7 @@
     "react-twitter-embed": "^4.0.4",
     "recharts": "^2.8.0",
     "socket.io-client": "^4.7.2",
+    "string-to-color": "^2.2.2",
     "swr": "^2.2.4",
     "tmi.js": "^1.8.5"
   },

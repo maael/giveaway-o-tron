@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
 import tmi from 'tmi.js'
 import toast from 'react-hot-toast'
 import { ChannelInfo } from './utils'
@@ -21,6 +21,7 @@ export interface ChatItem {
   tmiTs: number
   receivedTs: number
   formattedTmiTs: string
+  source: 'youtube' | 'twitch'
 }
 
 export type Chat = ReturnType<typeof init> | null
@@ -37,7 +38,7 @@ export function useChatEvents(
   paused: boolean,
   winners: WinnerUser[],
   onChat: (chat: ChatItem) => void
-): [ChatItem[], () => void] {
+): [ChatItem[], () => void, Dispatch<SetStateAction<ChatItem[]>>] {
   const [chat, setChat] = useState<ChatItem[]>([])
   useEffect(() => {
     function handleChat(d: CustomEvent<ChatItem>) {
@@ -53,7 +54,7 @@ export function useChatEvents(
   const resetChat = useCallback(() => {
     setChat([])
   }, [setChat])
-  return [chat, resetChat]
+  return [chat, resetChat, setChat]
 }
 
 export default function init(channelInfo: ChannelInfo) {
@@ -104,6 +105,7 @@ export default function init(channelInfo: ChannelInfo) {
       tmiTs,
       receivedTs: Date.now(),
       formattedTmiTs: format(new Date(tmiTs), 'HH:mm:ss'),
+      source: 'twitch',
     }
 
     chatEmitter.emit(data)
