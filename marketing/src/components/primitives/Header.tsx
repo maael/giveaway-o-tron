@@ -15,6 +15,7 @@ import cls from 'classnames'
 import { ChannelInfo } from '~/utils'
 import chat from '../../chat'
 import useSession from '../hooks/useSession'
+import { useBeta } from '../hooks/useBeta'
 
 export default function Header({
   client,
@@ -29,6 +30,7 @@ export default function Header({
 }) {
   const session = useSession()
   const location = useLocation()
+  const inBeta = useBeta()
   const homeRoute = channelInfo.login ? '/' : '/setup'
   return (
     <div className="flex flex-row justify-start gap-2">
@@ -90,18 +92,20 @@ export default function Header({
           </button>
         )}
       </div>
-      <a
-        href={session.data?.youtube ? '/api/auth/logout' : '/api/auth/google'}
-        className={cls(
-          'flex flex-row gap-1 rounded-md bg-red-600 justify-center items-center px-2 cursor-pointer hover:opacity-100',
-          {
-            'opacity-50': !session.data?.youtube?.username,
-          }
-        )}
-      >
-        <FaYoutube className="text-sm" />
-        <span className="relative -top-0.5">{session.data?.youtube?.username.slice(0, 4)}...</span>
-      </a>
+      {inBeta ? (
+        <a
+          href={session.data?.youtube ? '/api/auth/logout' : '/api/auth/google'}
+          className={cls(
+            'flex flex-row gap-1 rounded-md bg-red-600 justify-center items-center px-2 cursor-pointer hover:opacity-100',
+            {
+              'opacity-50': !session.data?.youtube?.username,
+            }
+          )}
+        >
+          <FaYoutube className="text-sm" />
+          <span className="relative -top-0.5">{session.data?.youtube?.username.slice(0, 1)}...</span>
+        </a>
+      ) : null}
       <a
         href={session.data?.twitch ? '/api/auth/logout' : '/api/auth/twitch'}
         className={cls(
