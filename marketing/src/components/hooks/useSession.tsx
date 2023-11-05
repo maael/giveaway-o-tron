@@ -29,16 +29,22 @@ const SessionContext = React.createContext<{ data: Data; loading: boolean; statu
 const SESSION_KEY = 'giveaway-user-session/v1'
 const YOUTUBE_REFRESH_KEY = 'giveaway-youtube-refresh'
 
-function getFromStorage(key): Data {
+function getFromStorage<T>(key, options: { parse: boolean }): T | undefined {
   try {
-    return JSON.parse(localStorage.getItem(key) || 'null') || undefined
+    const found = localStorage.getItem(key)
+    if (options.parse) {
+      return JSON.parse(found || 'null') || undefined
+    } else {
+      return found as T
+    }
   } catch (e) {
+    console.info('[youtube][error]', e, localStorage.getItem(key))
     return
   }
 }
 
-export const getSession = () => getFromStorage(SESSION_KEY)
-export const getYoutubeRefresh = () => getFromStorage(YOUTUBE_REFRESH_KEY)
+export const getSession = () => getFromStorage<Data>(SESSION_KEY, { parse: true })
+export const getYoutubeRefresh = () => getFromStorage<string>(YOUTUBE_REFRESH_KEY, { parse: false })
 
 export function SessionProvider({ children }: React.PropsWithChildren) {
   const session = useLoadSession()
@@ -52,8 +58,10 @@ export function useLoadSession() {
   const user: Data = data?.user
   useEffect(() => {
     if (!loading && user) {
-      localStorage.setItem(SESSION_KEY, JSON.stringify(user))
+      const existing = getSession()
+      localStorage.setItem(SESSION_KEY, JSON.stringify({ ...(existing || {}), ...user }))
       if (user?.youtube?.refreshToken) {
+        console.info('[youtube][refresh][save]', user?.youtube?.refreshToken)
         localStorage.setItem(YOUTUBE_REFRESH_KEY, user?.youtube?.refreshToken)
       }
     }

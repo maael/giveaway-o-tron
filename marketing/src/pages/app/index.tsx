@@ -107,7 +107,11 @@ function InnerApp() {
   )
   const [chatPaused, setChatPaused] = React.useState(false)
   const [chatEvents, resetChat, setChat] = useChatEvents(chatPaused, winners, onNewChat)
-  useYoutubeChat(setChat)
+  const {
+    getChat: getYoutubeChat,
+    setChatPoll: setYoutubeChatDelay,
+    chatDelay: youtubeChatDelay,
+  } = useYoutubeChat(setChat)
   React.useEffect(() => {
     document.title = [channelInfo.login, 'Giveaway-o-tron'].join(' - ')
   }, [channelInfo.login, client])
@@ -136,6 +140,9 @@ function InnerApp() {
             forfeits={forfeits}
             stats={stats}
             cacheHistory={cacheHistory}
+            getYoutubeChat={getYoutubeChat}
+            setYoutubeChatDelay={setYoutubeChatDelay}
+            youtubeChatDelay={youtubeChatDelay}
           />
         </Route>
         <Route path="/setup" exact>

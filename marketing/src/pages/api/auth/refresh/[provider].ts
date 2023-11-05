@@ -50,7 +50,7 @@ const handler: NextApiHandler = async (req, res) => {
         res.status(403).json({ error: 'Failed to refresh token' })
       }
       console.info('[refresh][youtube][success]')
-      res.status(200).json({ accessToken, refreshToken })
+      res.status(200).json({ accessToken, refreshToken: refreshToken || token })
     })
   }
 }

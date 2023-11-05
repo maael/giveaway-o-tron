@@ -3,7 +3,8 @@ import { wait } from './misc'
 
 export const safeYoutubeFetch: typeof fetch = async (input, init) => {
   const request = await fetch(input, init)
-  if (request.status === 409) {
+  if (request.status === 409 || request.status === 401) {
+    console.info('[youtube][refresh]', getYoutubeRefresh())
     const newTokens = await fetch('/api/auth/refresh/youtube', {
       headers: {
         'Content-Type': 'application/json',

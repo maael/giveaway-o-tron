@@ -103,7 +103,9 @@ export default function Header({
           )}
         >
           <FaYoutube className="text-sm" />
-          <span className="relative -top-0.5">{session.data?.youtube?.username.slice(0, 1)}...</span>
+          <span className="relative -top-0.5">
+            {session.data?.youtube?.username ? `${session.data?.youtube?.username.slice(0, 1)}...` : 'Connect YouTube'}
+          </span>
         </a>
       ) : null}
       <a

@@ -107,6 +107,7 @@ export default function init(channelInfo: ChannelInfo) {
       formattedTmiTs: format(new Date(tmiTs), 'HH:mm:ss'),
       source: 'twitch',
     }
+    console.info('[youtube] Twitch', data)
 
     chatEmitter.emit(data)
   }
@@ -129,6 +130,9 @@ export default function init(channelInfo: ChannelInfo) {
   client.on('connected', onConnectedHandler)
   client.on('timeout', () => {
     console.info('[timeout]')
+  })
+  client.on('disconnect', () => {
+    console.info('[disconnect]')
   })
 
   // Connect to Twitch:
