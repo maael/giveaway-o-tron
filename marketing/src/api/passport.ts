@@ -22,7 +22,7 @@ const twitchStragegy = new TwitchStrategy(
     passReqToCallback: true,
     clientID: process.env.TWITCH_ID,
     clientSecret: process.env.TWITCH_SECRET,
-    callbackURL: `${process.env.ROOT}/api/auth/twitch/callback`,
+    callbackURL: `${process.env.ROOT_URL}/api/auth/twitch/callback`,
     scope:
       'openid user:read:email user:read:follows user:read:subscriptions chat:read chat:edit channel:read:subscriptions channel_subscriptions moderator:read:followers',
   },
@@ -59,7 +59,7 @@ const googleStrategy = new GoogleStrategy(
     passReqToCallback: true,
     clientID: process.env.GOOGLE_ID,
     clientSecret: process.env.GOOGLE_SECRET,
-    callbackURL: `${process.env.ROOT}/api/auth/google/callback`,
+    callbackURL: `${process.env.ROOT_URL}/api/auth/google/callback`,
     scope: [
       'https://www.googleapis.com/auth/youtube.readonly',
       'https://www.googleapis.com/auth/userinfo.email',
