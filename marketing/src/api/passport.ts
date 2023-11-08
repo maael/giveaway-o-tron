@@ -1,5 +1,4 @@
 import passport from 'passport'
-import refresh from 'passport-oauth2-refresh'
 import { Strategy as TwitchStrategy } from 'passport-twitch-new'
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20'
 import { FullNextApiRequest } from '~/api/types'
@@ -99,7 +98,5 @@ const googleStrategy = new GoogleStrategy(
 
 passport.use(twitchStragegy)
 passport.use(googleStrategy)
-refresh.use(twitchStragegy)
-refresh.use(googleStrategy)
 
 export default passport

@@ -1,5 +1,4 @@
 import { NextApiHandler } from 'next'
-import refresh from 'passport-oauth2-refresh'
 
 const handler: NextApiHandler = async (req, res) => {
   if (req.method !== 'POST') {
@@ -44,14 +43,36 @@ const handler: NextApiHandler = async (req, res) => {
 
     res.status(data?.status || 200).json(data)
   } else {
-    refresh.requestNewAccessToken('google', token, (err, accessToken, refreshToken) => {
-      if (err) {
-        console.info('[refresh][youtube][error]')
-        res.status(403).json({ error: 'Failed to refresh token' })
-      }
-      console.info('[refresh][youtube][success]')
-      res.status(200).json({ accessToken, refreshToken: refreshToken || token })
+    const details = {
+      client_id: process.env.GOOGLE_ID,
+      client_secret: process.env.GOOGLE_SECRET,
+      grant_type: 'refresh_token',
+      refresh_token: token,
+    }
+
+    const formBody: string[] = []
+    for (let property in details) {
+      const encodedKey = encodeURIComponent(property)
+      const encodedValue = encodeURIComponent(details[property])
+      formBody.push(`${encodedKey}=${encodedValue}`)
+    }
+    const body = formBody.join('&')
+    const result = await fetch('https://oauth2.googleapis.com/token', {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      method: 'POST',
+      body,
     })
+
+    if (result.status === 403) {
+      console.error('[refresh][error]')
+      res.status(403).json({ error: 'Failed to refresh token' })
+    }
+
+    const data = await result.json()
+
+    res.status(data?.status || 200).json(data)
   }
 }
 

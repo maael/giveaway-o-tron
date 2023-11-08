@@ -15,6 +15,10 @@ export const safeYoutubeFetch: typeof fetch = async (input, init) => {
       }),
     }).then((r) => r.json())
     console.info('[youtube] Refresh tokens', newTokens)
+    return safeYoutubeFetch(input, {
+      ...init,
+      headers: { ...init?.headers, Authorization: `Bearer ${newTokens.access_token}` },
+    })
   } else if (request.status === 403) {
     console.info('[youtube] Rate limited, waiting')
     await wait(60_000)

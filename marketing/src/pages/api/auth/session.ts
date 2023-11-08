@@ -3,10 +3,12 @@ import { FullNextApiRequest } from '~/api/types'
 
 const handler = auth.clone()
 
-handler.get((req: FullNextApiRequest, res) => {
-  console.info('session', req.user)
+handler.post((req: FullNextApiRequest, res) => {
   res.json({
-    user: req.user,
+    user: {
+      ...req.user,
+      ...req.body,
+    },
   })
 })
 

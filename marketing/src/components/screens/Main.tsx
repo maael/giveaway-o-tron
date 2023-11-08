@@ -17,6 +17,7 @@ import formatDuration from 'date-fns/formatDuration'
 import Stats from '../primitives/Stats'
 import MukSettings from '../primitives/MukSettings'
 import useCheckTwitchScopes from '../hooks/useCheckTwitchScopes'
+import YoutubeWelcomeModal from '../primitives/YoutubeWelcomeModal'
 
 export default function MainScreen({
   chatEvents,
@@ -68,6 +69,7 @@ export default function MainScreen({
   useCheckTwitchScopes(channelInfo)
   return (
     <div className="flex flex-col flex-1">
+      <YoutubeWelcomeModal />
       <Winner
         winners={winners}
         onClear={(idx) => setWinners((w) => removeIdx(w, idx))}

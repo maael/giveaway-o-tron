@@ -1,7 +1,14 @@
 import React, { useEffect } from 'react'
 import useSWR from 'swr'
 
-export const fetcher = (url) => fetch(url).then((r) => r.json())
+export const fetcher = (url) =>
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: localStorage.getItem(SESSION_KEY),
+  }).then((r) => r.json())
 
 type Data =
   | undefined
