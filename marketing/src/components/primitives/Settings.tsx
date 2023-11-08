@@ -45,6 +45,8 @@ interface Props {
   resetChat: () => void
   channelId?: string
   discordSettings: DiscordSettings
+  setYoutubeChatDelay: Dispatch<SetStateAction<number | null>>
+  getYoutubeChat: () => void
 }
 
 const StableCountdown = React.memo(function StableCountdown({
@@ -70,6 +72,8 @@ const Time = React.memo(function Time({
   discordSettings,
   duration,
   alertHidden,
+  setYoutubeChatDelay,
+  getYoutubeChat,
 }: {
   followersOnly: Props['settings']['followersOnly']
   alertTheme: Props['settings']['alertTheme']
@@ -79,11 +83,16 @@ const Time = React.memo(function Time({
   duration: Props['settings']['timerDuration']
   alertHidden: Props['settings']['timerAlertHidden']
   setSettings: Props['setSettings']
-} & Pick<Props, 'channelId' | 'setChatPaused' | 'resetChat' | 'discordSettings'>) {
+} & Pick<
+  Props,
+  'channelId' | 'setChatPaused' | 'resetChat' | 'discordSettings' | 'setYoutubeChatDelay' | 'getYoutubeChat'
+>) {
   const [active, setActive] = React.useState(false)
   const value = duration || ONE_MIN
   const onComplete = React.useCallback(() => {
+    void getYoutubeChat()
     toast.success('Timer finished! Chat paused, do a giveaway...', { position: 'bottom-center' })
+    setYoutubeChatDelay(null)
     const disabledDueToTimer = duration && discordSettings.giveawayMinTime && duration < discordSettings.giveawayMinTime
     relay.emit('event', {
       type: 'timer-end',
@@ -132,6 +141,8 @@ const Time = React.memo(function Time({
         className="absolute right-3 top-2 text-red-500 select-none cursor-pointer"
         onClick={() => {
           setActive(false)
+          setYoutubeChatDelay(null)
+          setChatPaused(false)
           relay.emit('event', { type: 'timer-cancel', channelId })
         }}
         title="Cancel the timer"
@@ -171,6 +182,9 @@ const Time = React.memo(function Time({
           setChatPaused(false)
           setSettings((s) => ({ ...s, timerAlertHidden: false }))
           setActive(true)
+          const youtubeDelay = Math.max(duration ? duration / 50 : 10_000, 10_000)
+          console.info('[youtube] Delay', youtubeDelay)
+          setYoutubeChatDelay(youtubeDelay)
           const disabledDueToTimer =
             duration && discordSettings.giveawayMinTime && duration < discordSettings.giveawayMinTime
           relay.emit('event', {
@@ -267,6 +281,8 @@ export default function SettingsComponent({
   setChatPaused,
   resetChat,
   discordSettings,
+  setYoutubeChatDelay,
+  getYoutubeChat,
 }: Props) {
   return (
     <>
@@ -346,6 +362,8 @@ export default function SettingsComponent({
           alertCustomImageUrl={settings.alertCustomImageUrl}
           followersOnly={settings.followersOnly}
           alertHidden={settings.timerAlertHidden}
+          setYoutubeChatDelay={setYoutubeChatDelay}
+          getYoutubeChat={getYoutubeChat}
         />
       </div>
       <div className="flex flex-row gap-2 mt-2 text-sm">

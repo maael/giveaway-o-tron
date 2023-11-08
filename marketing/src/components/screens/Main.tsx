@@ -17,6 +17,7 @@ import formatDuration from 'date-fns/formatDuration'
 import Stats from '../primitives/Stats'
 import MukSettings from '../primitives/MukSettings'
 import useCheckTwitchScopes from '../hooks/useCheckTwitchScopes'
+import YoutubeWelcomeModal from '../primitives/YoutubeWelcomeModal'
 
 export default function MainScreen({
   chatEvents,
@@ -34,6 +35,9 @@ export default function MainScreen({
   forfeits,
   stats,
   cacheHistory,
+  setYoutubeChatDelay,
+  getYoutubeChat,
+  youtubeChatDelay,
 }: {
   client: ReturnType<typeof chat> | null
   chatEvents: ChatItem[]
@@ -51,6 +55,9 @@ export default function MainScreen({
   forfeits: string[]
   stats: CacheStats
   cacheHistory: CacheHistory
+  setYoutubeChatDelay: Dispatch<SetStateAction<number | null>>
+  getYoutubeChat: () => void
+  youtubeChatDelay: number | null
 }) {
   const messageDelay = React.useMemo(() => {
     const mostRecent = chatEvents[chatEvents.length - 1]
@@ -62,6 +69,7 @@ export default function MainScreen({
   useCheckTwitchScopes(channelInfo)
   return (
     <div className="flex flex-col flex-1">
+      <YoutubeWelcomeModal />
       <Winner
         winners={winners}
         onClear={(idx) => setWinners((w) => removeIdx(w, idx))}
@@ -104,6 +112,8 @@ export default function MainScreen({
         setChatPaused={setChatPaused}
         resetChat={resetChat}
         discordSettings={discordSettings}
+        setYoutubeChatDelay={setYoutubeChatDelay}
+        getYoutubeChat={getYoutubeChat}
       />
       {settings.performanceMode && !winners.length ? (
         <div className="h-full flex-1 gap-2 flex flex-col justify-center items-center">
@@ -123,6 +133,9 @@ export default function MainScreen({
           clear={resetChat}
           settings={settings}
           setSettings={setSettings}
+          getYoutubeChat={getYoutubeChat}
+          setYoutubeChatDelay={setYoutubeChatDelay}
+          youtubeChatDelay={youtubeChatDelay}
         />
       )}
       <Stats stats={stats} cacheHistory={cacheHistory} />

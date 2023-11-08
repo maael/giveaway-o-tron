@@ -6,7 +6,7 @@ import { ChannelInfo } from '../../utils'
 export default function Setup({ channel }: { channel: ChannelInfo }) {
   const history = useHistory()
   React.useEffect(() => {
-    if (channel.login && !window.location.search.includes('--restarted')) {
+    if (channel.login) {
       history.push('/')
     }
   }, [channel.login])

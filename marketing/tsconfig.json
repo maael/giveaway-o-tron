@@ -23,6 +23,7 @@
     "paths": {
       "~/components/*": ["components/*"],
       "~/utils/*": ["utils/*"],
+      "~/api/*": ["api/*"],
       "~/*": ["*"]
     }
   },

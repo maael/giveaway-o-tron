@@ -1,7 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom'
-import { SessionProvider } from 'next-auth/react'
-import { useSession, signIn } from 'next-auth/react'
 import chat, { ChatItem, useChatEvents } from '~/chat'
 import useStorage from '~/components/hooks/useStorage'
 import MainScreen from '~/components/screens/Main'
@@ -9,6 +7,7 @@ import SetupScreen from '~/components/screens/Setup'
 import PastGiveawaysScreen from '~/components/screens/PastGiveaways'
 import SettingsScreen from '~/components/screens/Settings'
 import Header from '~/components/primitives/Header'
+import useSession, { SessionProvider } from '~/components/hooks/useSession'
 import {
   ChannelInfo,
   defaultDiscordSettings,
@@ -24,6 +23,7 @@ import {
 import { WinnerUser } from '~/components/primitives/giveaways'
 import DiscordScreen from '~/components/screens/Discord'
 import ObsScreen from '~/components/screens/Obs'
+import { useYoutubeChat } from '~/components/hooks/useYoutubeChat'
 import twitchCache from '~/utils/twitchCaches'
 import * as Sentry from '@sentry/nextjs'
 
@@ -31,9 +31,9 @@ if (typeof window !== undefined) {
   void twitchCache()
 }
 
-export default function App({ session }: { session: any }) {
+export default function App() {
   return (
-    <SessionProvider session={session}>
+    <SessionProvider>
       <Router initialEntries={['/setup']}>
         <InnerApp />
       </Router>
@@ -44,15 +44,15 @@ export default function App({ session }: { session: any }) {
 function useHandleLogin(channelInfo: ChannelInfo, setChannelInfo: any) {
   const session = useSession()
   React.useEffect(() => {
-    if (!channelInfo.token && session.status === 'unauthenticated') {
-      signIn('twitch')
+    if (session.status === 'unauthenticated') {
+      window.location.href = '/api/auth/twitch'
     }
   }, [session.status, channelInfo.token])
   React.useEffect(() => {
     const data = session.data as any
     if (session.status === 'authenticated' && data) {
       ;(async () => {
-        const sessionData = session.data as any
+        const sessionData = session.data?.twitch as any
         console.info('[handlelogin][validateToken]', sessionData)
         const data = await validateToken(sessionData.accessToken, sessionData.refreshToken)
         setChannelInfo(data)
@@ -106,7 +106,12 @@ function InnerApp() {
     [settings.forfeitCommand]
   )
   const [chatPaused, setChatPaused] = React.useState(false)
-  const [chatEvents, resetChat] = useChatEvents(chatPaused, winners, onNewChat)
+  const [chatEvents, resetChat, setChat] = useChatEvents(chatPaused, winners, onNewChat)
+  const {
+    getChat: getYoutubeChat,
+    setChatPoll: setYoutubeChatDelay,
+    chatDelay: youtubeChatDelay,
+  } = useYoutubeChat(setChat)
   React.useEffect(() => {
     document.title = [channelInfo.login, 'Giveaway-o-tron'].join(' - ')
   }, [channelInfo.login, client])
@@ -135,6 +140,9 @@ function InnerApp() {
             forfeits={forfeits}
             stats={stats}
             cacheHistory={cacheHistory}
+            getYoutubeChat={getYoutubeChat}
+            setYoutubeChatDelay={setYoutubeChatDelay}
+            youtubeChatDelay={youtubeChatDelay}
           />
         </Route>
         <Route path="/setup" exact>

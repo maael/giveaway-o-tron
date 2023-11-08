@@ -21,7 +21,7 @@ export default function useCheckTwitchScopes(channelInfo: ChannelInfo) {
       console.info('[checkTwitchScopes]', channelInfo)
       const result = await validateToken(channelInfo.token, channelInfo.refreshToken, false)
       if (REQUIRED_SCOPES.some((s) => !(result?.scopes || []).includes(s))) {
-        console.warn('Missing scopes, wiping tokens and prompting reauth')
+        console.warn('Missing scopes, wiping tokens and prompting reauth', REQUIRED_SCOPES, result?.scopes)
         try {
           await store.setItem('main-channelInfo', '')
           window.location.search = '--restarted&--error=scopes'

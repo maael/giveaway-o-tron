@@ -13,6 +13,8 @@ import {
   FaSearch,
   FaTimes,
   FaTimesCircle,
+  FaTwitch,
+  FaYoutube,
 } from 'react-icons/fa'
 import { Settings } from '~/utils'
 import { Modal, useModal } from '../hooks/useModal'
@@ -118,6 +120,9 @@ interface Props {
   settings: Settings
   setSettings: Dispatch<SetStateAction<Settings>>
   messageDelay: string
+  setYoutubeChatDelay: Dispatch<SetStateAction<number | null>>
+  getYoutubeChat: () => void
+  youtubeChatDelay: number | null
 }
 
 export default function ChatBox({
@@ -129,6 +134,8 @@ export default function ChatBox({
   settings,
   setSettings,
   messageDelay,
+  getYoutubeChat,
+  youtubeChatDelay,
 }: Props) {
   const shouldAutoScroll = settings.autoScroll ?? true
   const limitedMessages = chatEvents.filter((c) =>
@@ -164,7 +171,31 @@ export default function ChatBox({
   return (
     <>
       <div className="mt-2 rounded-md bg-gray-700 flex-1 flex flex-col relative overflow-hidden">
-        <div className="bg-gray-600 h-8 gap-2 flex justify-between px-5 items-center text-white z-50">
+        <div className="bg-gray-600 h-8 gap-3 flex justify-between px-5 items-center text-white z-50">
+          <div className="ml-1 text-md flex gap-4">
+            <div className="text-md flex flex-row justify-center items-center gap-1" title="Twitch is always enabled">
+              <div className="rounded-full w-2 h-2 bg-green-400" />
+              <FaTwitch className="text-purple-600" />
+            </div>
+            <div
+              className="text-md flex flex-row justify-center items-center gap-1 cursor-pointer hover:opacity-90"
+              onClick={() => {
+                console.info('[youtube] Testing')
+                toast.success('Fetching last YouTube chat...', { position: 'bottom-center' })
+                void getYoutubeChat()
+              }}
+            >
+              <div
+                title="Shows if YoutTube is active, or can temporarily enable it"
+                className={cls('rounded-full w-2 h-2', {
+                  'bg-green-400': youtubeChatDelay !== null,
+                  'bg-gray-400': youtubeChatDelay === null,
+                })}
+              />
+              <FaYoutube className="text-red-600" />
+            </div>
+          </div>
+
           <div className="flex flex-row justify-center items-center flex-1 text-xs">
             <div
               className="flex-0 bg-purple-600 px-2 py-1.5 border border-purple-600 rounded-l-md"
@@ -190,7 +221,7 @@ export default function ChatBox({
             </span>
           </div>
 
-          <div className="flex-1 text-yellow-600 text-xs">
+          <div className="text-yellow-600 text-xs">
             {winners.length ? (
               <>
                 {limitedMessages.length} winner message
@@ -198,6 +229,9 @@ export default function ChatBox({
               </>
             ) : null}
           </div>
+
+          <div className="flex-1" />
+
           <div className="flex flex-row justify-center items-center gap-2 text-xl flex-2">
             <div className="text-xs text-center">{messageDelay}</div>
             <button
@@ -235,6 +269,14 @@ export default function ChatBox({
                     })}
                   >
                     <span className="text-xs mr-0.5">[{c.formattedTmiTs}]</span>
+                    <span
+                      className={cls('text-xs mr-0.5 relative top-0.5 inline-block', {
+                        'text-red-600': c.source === 'youtube',
+                        'text-purple-600': c.source === 'twitch',
+                      })}
+                    >
+                      {c.source === 'youtube' ? <FaYoutube /> : <FaTwitch />}
+                    </span>
                     <span
                       className={cls('rounded-full bg-gray-300 h-4 w-4 inline-block relative', {
                         'bg-yellow-500': c.isSubscriber,

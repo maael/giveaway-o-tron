@@ -49,7 +49,7 @@ export async function validateToken(token: string, refreshToken: string, isRefre
 
 export async function refreshTokenFlow(refreshToken: string) {
   console.info('[refreshTokenFlow]', { refreshToken })
-  const res = await fetch(`/api/auth/refresh`, {
+  const res = await fetch(`/api/auth/refresh/twitch`, {
     headers: {
       'Content-Type': 'application/json',
     },

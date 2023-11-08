@@ -15,15 +15,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hapi/iron": "^7.0.1",
     "@sentry/nextjs": "^7.72.0",
     "classnames": "^2.3.2",
+    "cookie": "^0.5.0",
     "date-fns": "^2.30.0",
     "fathom-client": "^3.5.0",
     "howler": "^2.2.4",
     "localforage": "^1.10.0",
     "next": "^13.5.3",
     "next-auth": "~4.18.8",
+    "next-connect": "^1.0.0",
     "next-seo": "^6.1.0",
+    "passport": "0.5.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-twitch-new": "^0.0.2",
     "react": "^18.2.0",
     "react-countdown": "^2.3.5",
     "react-dom": "^18.2.0",
@@ -35,6 +41,8 @@
     "react-twitter-embed": "^4.0.4",
     "recharts": "^2.8.0",
     "socket.io-client": "^4.7.2",
+    "string-to-color": "^2.2.2",
+    "swr": "^2.2.4",
     "tmi.js": "^1.8.5"
   },
   "devDependencies": {

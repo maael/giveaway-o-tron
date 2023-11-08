@@ -1,4 +1,3 @@
-import { signOut } from 'next-auth/react'
 import * as React from 'react'
 import { FaCheck, FaExclamationTriangle, FaPlus, FaTimes } from 'react-icons/fa'
 import { removeIdx, Settings, store } from '~/utils'
@@ -183,7 +182,7 @@ export default function SettingsScreen({
           onClick={async () => {
             try {
               await store.setItem('main-channelInfo', '')
-              await signOut()
+              window.location.href = '/api/auth/logout'
             } catch (e) {
               console.error('[reset][error]', e)
             }
