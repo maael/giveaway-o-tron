@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom'
 import chat, { ChatItem, useChatEvents } from '~/chat'
 import useStorage from '~/components/hooks/useStorage'
@@ -25,10 +25,12 @@ import DiscordScreen from '~/components/screens/Discord'
 import ObsScreen from '~/components/screens/Obs'
 import { useYoutubeChat } from '~/components/hooks/useYoutubeChat'
 import twitchCache from '~/utils/twitchCaches'
+import youtubeCache from '~/utils/google'
 import * as Sentry from '@sentry/nextjs'
 
 if (typeof window !== undefined) {
   void twitchCache()
+  void youtubeCache()
 }
 
 export default function App() {

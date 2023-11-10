@@ -107,7 +107,6 @@ export default function init(channelInfo: ChannelInfo) {
       formattedTmiTs: format(new Date(tmiTs), 'HH:mm:ss'),
       source: 'twitch',
     }
-    console.info('[youtube] Twitch', data)
 
     chatEmitter.emit(data)
   }
