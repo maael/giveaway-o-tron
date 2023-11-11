@@ -148,6 +148,7 @@ export async function getChatGiveaway(
         (u) => u !== winner.username
       ),
       source: 'chat',
+      platform: winner.source,
     }
   }).filter(Boolean) as GiveawayResult['winners']
   return {
@@ -177,6 +178,7 @@ export async function getInstantGiveaway(
     follows: followersList!.has(v),
     isSubscriber: subsList!.has(v),
     source: 'instant',
+    platform: 'twitch',
   }))
   let filteredFollowers = mappedViewers.filter((v) => v.follows)
   let filteredSubs = mappedViewers.filter((v) => v.isSubscriber)
@@ -212,7 +214,12 @@ export async function getInstantGiveaway(
       discordSettings,
     })
     return winner.login
-      ? { login: winner.login, wasSubscriber: winner.isSubscriber, wasFollower: winner.follows }
+      ? {
+          login: winner.login,
+          wasSubscriber: winner.isSubscriber,
+          wasFollower: winner.follows,
+          platform: winner.platform,
+        }
       : undefined
   }).filter(Boolean) as { login: string; wasSubscriber: boolean; wasFollower: boolean }[]
   return {

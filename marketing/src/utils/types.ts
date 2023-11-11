@@ -78,6 +78,7 @@ export interface GiveawayResult {
     wasFollower: boolean | null
     notes?: string
     otherUsersWithEntry?: string[]
+    platform?: 'youtube' | 'twitch'
   }[]
   createdAt: string
   type: GiveawayType

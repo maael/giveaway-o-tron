@@ -115,6 +115,13 @@ function InnerApp() {
     chatDelay: youtubeChatDelay,
   } = useYoutubeChat(setChat)
   React.useEffect(() => {
+    if (winners && winners.some((w) => w.platform === 'youtube')) {
+      setYoutubeChatDelay(15_000)
+    } else {
+      setYoutubeChatDelay(null)
+    }
+  }, [winners, setYoutubeChatDelay, youtubeChatDelay])
+  React.useEffect(() => {
     document.title = [channelInfo.login, 'Giveaway-o-tron'].join(' - ')
   }, [channelInfo.login, client])
   const [pastGiveaways, setPastGiveaways] = useStorage<GiveawayResult[]>('past-giveaways', [])
