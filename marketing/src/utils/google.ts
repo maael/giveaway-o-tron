@@ -8,6 +8,7 @@ import { toast } from 'react-hot-toast'
 export enum YOUTUBE_STORAGE_KEYS {
   ForceSubs = 'giveaway-youtube-force-subscriptions/v1',
   LastSubKey = 'giveaway-youtube-last-subscriptions/v1',
+  TimerStart = 'giveaway-youtube-timer-start/v1',
 }
 
 let notifiedOnMembersIssue = false

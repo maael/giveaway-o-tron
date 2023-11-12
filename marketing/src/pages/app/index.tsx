@@ -25,7 +25,7 @@ import DiscordScreen from '~/components/screens/Discord'
 import ObsScreen from '~/components/screens/Obs'
 import { useYoutubeChat } from '~/components/hooks/useYoutubeChat'
 import twitchCache from '~/utils/twitchCaches'
-import youtubeCache from '~/utils/google'
+import youtubeCache, { YOUTUBE_STORAGE_KEYS } from '~/utils/google'
 import * as Sentry from '@sentry/nextjs'
 
 if (typeof window !== undefined) {
@@ -116,8 +116,10 @@ function InnerApp() {
   } = useYoutubeChat(setChat)
   React.useEffect(() => {
     if (winners && winners.some((w) => w.platform === 'youtube')) {
+      console.info('[youtube] Setting youtube delay from winners')
       setYoutubeChatDelay(15_000)
-    } else {
+    } else if (!localStorage.getItem(YOUTUBE_STORAGE_KEYS.TimerStart)) {
+      console.info('[youtube] Clearing youtube delay from winners')
       setYoutubeChatDelay(null)
     }
   }, [winners, setYoutubeChatDelay, youtubeChatDelay])
