@@ -112,19 +112,21 @@ export default function Stats({ stats, cacheHistory }: { stats: CacheStats; cach
             </div>
           </>
         ) : null}
-        <button
-          className="bg-red-600 py-1 px-2 rounded-md flex flex-row gap-1 justify-center items-center"
-          onClick={() => {
-            console.info('[youtube] Forcing full sub sync')
-            toast.success('Forcing full subscription sync', {
-              position: 'bottom-right',
-              style: { fontSize: '0.8rem', padding: '0.2rem' },
-            })
-            localStorage.setItem(YOUTUBE_STORAGE_KEYS.ForceSubs, 'true')
-          }}
-        >
-          <FaYoutube /> Force Sync
-        </button>
+        {isBeta ? (
+          <button
+            className="bg-red-600 py-1 px-2 rounded-md flex flex-row gap-1 justify-center items-center"
+            onClick={() => {
+              console.info('[youtube] Forcing full sub sync')
+              toast.success('Forcing full subscription sync', {
+                position: 'bottom-right',
+                style: { fontSize: '0.8rem', padding: '0.2rem' },
+              })
+              localStorage.setItem(YOUTUBE_STORAGE_KEYS.ForceSubs, 'true')
+            }}
+          >
+            <FaYoutube /> Force Sync
+          </button>
+        ) : null}
         <button className="bg-purple-600 p-1 rounded-md" onClick={() => setFullView((v) => !v)}>
           {fullView ? <FaAngleDown /> : <FaAngleUp />}
         </button>
