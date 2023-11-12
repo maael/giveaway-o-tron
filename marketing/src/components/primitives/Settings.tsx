@@ -17,6 +17,7 @@ import { Howl } from 'howler'
 import Slider, { SliderInner } from './Slider'
 import relay from '../../utils/relay'
 import { DiscordSettings, getDiscordColour, Settings } from '../../utils'
+import { YOUTUBE_STORAGE_KEYS } from '~/utils/google'
 
 const bell = new Howl({
   src: ['sounds/pleasing-bell.ogg'],
@@ -46,7 +47,7 @@ interface Props {
   channelId?: string
   discordSettings: DiscordSettings
   setYoutubeChatDelay: Dispatch<SetStateAction<number | null>>
-  getYoutubeChat: () => void
+  getYoutubeChat: () => Promise<void>
 }
 
 const StableCountdown = React.memo(function StableCountdown({
@@ -90,7 +91,10 @@ const Time = React.memo(function Time({
   const [active, setActive] = React.useState(false)
   const value = duration || ONE_MIN
   const onComplete = React.useCallback(() => {
-    void getYoutubeChat()
+    void getYoutubeChat().then(() => {
+      console.info('[youtube] Clearing timer')
+      localStorage.removeItem(YOUTUBE_STORAGE_KEYS.TimerStart)
+    })
     toast.success('Timer finished! Chat paused, do a giveaway...', { position: 'bottom-center' })
     setYoutubeChatDelay(null)
     const disabledDueToTimer = duration && discordSettings.giveawayMinTime && duration < discordSettings.giveawayMinTime
@@ -142,6 +146,8 @@ const Time = React.memo(function Time({
         onClick={() => {
           setActive(false)
           setYoutubeChatDelay(null)
+          console.info('[youtube] Clearing timer')
+          localStorage.removeItem(YOUTUBE_STORAGE_KEYS.TimerStart)
           setChatPaused(false)
           relay.emit('event', { type: 'timer-cancel', channelId })
         }}
@@ -184,13 +190,16 @@ const Time = React.memo(function Time({
           setActive(true)
           const youtubeDelay = Math.max(duration ? duration / 50 : 10_000, 10_000)
           console.info('[youtube] Delay', youtubeDelay)
+          const timerStart = new Date().toISOString()
+          console.info('[youtube] Setting timer', timerStart)
+          localStorage.setItem(YOUTUBE_STORAGE_KEYS.TimerStart, timerStart)
           setYoutubeChatDelay(youtubeDelay)
           const disabledDueToTimer =
             duration && discordSettings.giveawayMinTime && duration < discordSettings.giveawayMinTime
           relay.emit('event', {
             type: 'timer-start',
             channelId,
-            ts: new Date().toISOString(),
+            ts: timerStart,
             duration,
             chatCommand: chatCommand?.trim(),
             discordGuildId: discordSettings.guildId,
@@ -209,6 +218,8 @@ const Time = React.memo(function Time({
           })
           window.onbeforeunload = () => {
             relay.emit('event', { type: 'timer-cancel', channelId })
+            console.info('[youtube] Clearing timer')
+            localStorage.removeItem(YOUTUBE_STORAGE_KEYS.TimerStart)
           }
         }}
         title="Warning: will clear chat"

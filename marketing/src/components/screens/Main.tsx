@@ -56,7 +56,7 @@ export default function MainScreen({
   stats: CacheStats
   cacheHistory: CacheHistory
   setYoutubeChatDelay: Dispatch<SetStateAction<number | null>>
-  getYoutubeChat: () => void
+  getYoutubeChat: () => Promise<void>
   youtubeChatDelay: number | null
 }) {
   const messageDelay = React.useMemo(() => {

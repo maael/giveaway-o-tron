@@ -18,6 +18,7 @@ import {
 } from 'react-icons/fa'
 import { Settings } from '~/utils'
 import { Modal, useModal } from '../hooks/useModal'
+import { TimeProgressBar } from './TimeProgressBar'
 
 function isVisibleIn(ele: HTMLElement, container: HTMLElement, buffer: number = 50) {
   const eleTop = ele.offsetTop
@@ -181,7 +182,10 @@ export default function ChatBox({
               className="text-md flex flex-row justify-center items-center gap-1 cursor-pointer hover:opacity-90"
               onClick={() => {
                 console.info('[youtube] Testing')
-                toast.success('Fetching last YouTube chat...', { position: 'bottom-center' })
+                toast.success('Fetching last YouTube chat...', {
+                  position: 'bottom-center',
+                  style: { fontSize: '1rem', padding: '0.2rem' },
+                })
                 void getYoutubeChat()
               }}
             >
@@ -248,6 +252,7 @@ export default function ChatBox({
             <ChatControls chatEvents={chatEvents} paused={paused} setPaused={setPaused} clear={clear} />
           </div>
         </div>
+        <TimeProgressBar timeMs={youtubeChatDelay} />
         <div className="relative flex-1">
           {chatEvents.length === 0 ? (
             <span className={cls('absolute inset-0 text-center flex justify-center items-center')}>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom'
 import chat, { ChatItem, useChatEvents } from '~/chat'
 import useStorage from '~/components/hooks/useStorage'
@@ -25,10 +25,12 @@ import DiscordScreen from '~/components/screens/Discord'
 import ObsScreen from '~/components/screens/Obs'
 import { useYoutubeChat } from '~/components/hooks/useYoutubeChat'
 import twitchCache from '~/utils/twitchCaches'
+import youtubeCache, { YOUTUBE_STORAGE_KEYS } from '~/utils/google'
 import * as Sentry from '@sentry/nextjs'
 
 if (typeof window !== undefined) {
   void twitchCache()
+  void youtubeCache()
 }
 
 export default function App() {
@@ -112,6 +114,15 @@ function InnerApp() {
     setChatPoll: setYoutubeChatDelay,
     chatDelay: youtubeChatDelay,
   } = useYoutubeChat(setChat)
+  React.useEffect(() => {
+    if (winners && winners.some((w) => w.platform === 'youtube')) {
+      console.info('[youtube] Setting youtube delay from winners')
+      setYoutubeChatDelay(15_000)
+    } else if (!localStorage.getItem(YOUTUBE_STORAGE_KEYS.TimerStart)) {
+      console.info('[youtube] Clearing youtube delay from winners')
+      setYoutubeChatDelay(null)
+    }
+  }, [winners, setYoutubeChatDelay, youtubeChatDelay])
   React.useEffect(() => {
     document.title = [channelInfo.login, 'Giveaway-o-tron'].join(' - ')
   }, [channelInfo.login, client])

@@ -2,6 +2,7 @@ import { Chat, ChatItem } from '../chat'
 import { ChannelInfo, DiscordSettings, GiveawayResult, Settings } from './types'
 import { getDiscordColour, getRandomArrayItem, handleChatCommand } from './misc'
 import { getFollowers, getSubs, getViewers } from './twitch'
+import { getYoutubeSubscribers, getYoutubeMembers } from './google'
 import relay from './relay'
 import toast from 'react-hot-toast'
 
@@ -44,6 +45,13 @@ type GiveawayInformation = Promise<{
   winners: GiveawayResult['winners']
   giveawayStats: GiveawayResult['giveawayStats']
 }>
+
+function isSubscriber(item: ChatItem, youtubeSubs: Map<any, any>) {
+  if (item.source === 'twitch') {
+    return item.isSubscriber
+  }
+  return youtubeSubs?.has(item.username)
+}
 
 export async function getChatGiveaway(
   chatClient: Chat,
@@ -92,15 +100,24 @@ export async function getChatGiveaway(
     const didSpam = count > settings.spamLimit
     return !didSpam
   })
-  const followers = await getFollowers(channelInfo)
-  const filteredFollowers = users.filter((u) => followers!.has(u.username))
+  const [twitchFollowers, youtubeFollowers, youtubeSubs] = await Promise.all([
+    getFollowers(channelInfo),
+    getYoutubeSubscribers(undefined, 60_000),
+    getYoutubeMembers(undefined, 60_000),
+  ])
+  const filteredFollowers = users.filter((u) => {
+    return (
+      (u.source === 'twitch' && twitchFollowers?.has(u.username)) ||
+      (u.source === 'youtube' && youtubeFollowers?.has(u.username))
+    )
+  })
   giveawayUserStats.followers = filteredFollowers.length
   if (settings.followersOnly) {
     users = filteredFollowers
   }
-  giveawayUserStats.subs = users.filter((u) => u.isSubscriber).length
+  giveawayUserStats.subs = users.filter((u) => isSubscriber(u, youtubeSubs)).length
   users = users.flatMap((c) => {
-    if (c.isSubscriber) {
+    if (isSubscriber(c, youtubeSubs)) {
       subCount += 1
       subEntries += settings.subLuck
       return Array.from({ length: settings.subLuck }, () => c)
@@ -126,11 +143,12 @@ export async function getChatGiveaway(
       displayName: winner.displayName,
       login: winner.username,
       wasSubscriber: winner.isSubscriber,
-      wasFollower: followers?.has(winner.username),
+      wasFollower: twitchFollowers?.has(winner.username) || youtubeFollowers?.has(winner.username),
       otherUsersWithEntry: [...(matchMap.get(userMatchMap.get(winner.username) || '') || new Set())].filter(
         (u) => u !== winner.username
       ),
       source: 'chat',
+      platform: winner.source,
     }
   }).filter(Boolean) as GiveawayResult['winners']
   return {
@@ -160,6 +178,7 @@ export async function getInstantGiveaway(
     follows: followersList!.has(v),
     isSubscriber: subsList!.has(v),
     source: 'instant',
+    platform: 'twitch',
   }))
   let filteredFollowers = mappedViewers.filter((v) => v.follows)
   let filteredSubs = mappedViewers.filter((v) => v.isSubscriber)
@@ -195,7 +214,12 @@ export async function getInstantGiveaway(
       discordSettings,
     })
     return winner.login
-      ? { login: winner.login, wasSubscriber: winner.isSubscriber, wasFollower: winner.follows }
+      ? {
+          login: winner.login,
+          wasSubscriber: winner.isSubscriber,
+          wasFollower: winner.follows,
+          platform: winner.platform,
+        }
       : undefined
   }).filter(Boolean) as { login: string; wasSubscriber: boolean; wasFollower: boolean }[]
   return {

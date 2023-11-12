@@ -3,10 +3,11 @@ import format from 'date-fns/format'
 import stringToColour from 'string-to-color'
 import useSession from './useSession'
 import { ChatItem } from '~/chat'
-import { safeYoutubeFetch } from '~/utils/google'
+import { YOUTUBE_STORAGE_KEYS, safeYoutubeFetch } from '~/utils/google'
 import { useRecursiveTimeout } from './useRecursiveTimeout'
 import toast from 'react-hot-toast'
 import { useBeta } from './useBeta'
+import isAfter from 'date-fns/isAfter'
 
 interface YoutubeStream {
   id?: string
@@ -89,7 +90,10 @@ function updateChat(chatItems: ChatItem[]) {
   return (c: ChatItem[]) => {
     const chatIds = new Set(c.map((c) => c.id))
     const newItems = chatItems.filter((i) => !chatIds.has(i.id))
-    return c.concat(newItems).sort((a, b) => a.tmiTs - b.tmiTs)
+    const startTs = localStorage.getItem(YOUTUBE_STORAGE_KEYS.TimerStart)
+    const startTsDate = startTs ? new Date(startTs) : null
+    const itemsAfterStart = newItems.filter((i) => (startTsDate ? isAfter(i.tmiTs, startTsDate) : true))
+    return c.concat(itemsAfterStart).sort((a, b) => a.tmiTs - b.tmiTs)
   }
 }
 

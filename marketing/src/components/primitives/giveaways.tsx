@@ -69,7 +69,7 @@ export function InstantGiveaway({
             })
             return
           }
-          setWinners((w) => w.concat(giveawayWinner.map((u) => ({ username: u.login }))))
+          setWinners((w) => w.concat(giveawayWinner.map((u) => ({ username: u.login, platform: u.platform }))))
           setPastGiveaways((p) =>
             (
               [
@@ -147,6 +147,7 @@ export function ChatGiveaway({
                 isFollower: !!w.wasFollower,
                 isSubscriber: !!w.wasSubscriber,
                 otherUsersWithEntry: w.otherUsersWithEntry,
+                platform: w.platform,
               }))
             )
           )
@@ -184,6 +185,7 @@ export type WinnerUser = Partial<{
   isFollower: boolean
   source: 'instant' | 'chat'
   otherUsersWithEntry?: string[]
+  platform: 'youtube' | 'twitch'
 }>
 export function Winner({
   winners,
