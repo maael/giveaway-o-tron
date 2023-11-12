@@ -17,7 +17,7 @@ export default function MyApp({ Component, pageProps: { session, ...pageProps } 
         <meta name="theme-color" content="#1e293b" />
       </Head>
       <DefaultSeo {...SEO} />
-      <Component {...pageProps} fathom={fathom} session={session} />
+      <Component {...pageProps} fathom={fathom} session={session} suppressHydrationWarning />
       <Toaster />
     </>
   )

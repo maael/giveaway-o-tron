@@ -5,11 +5,15 @@ import { CACHE_KEY } from './cache'
 import { ChannelInfo } from './types'
 import { toast } from 'react-hot-toast'
 
+export enum YOUTUBE_STORAGE_KEYS {
+  ForceSubs = 'giveaway-youtube-force-subscriptions/v1',
+  LastSubKey = 'giveaway-youtube-last-subscriptions/v1',
+}
+
 let notifiedOnMembersIssue = false
 export const safeYoutubeFetch: typeof fetch = async (input, init) => {
   const request = await fetch(input, init)
   if (request.status === 409 || request.status === 401) {
-    console.info('[youtube][refresh]', getYoutubeRefresh())
     const newTokens = await fetch('/api/auth/refresh/youtube', {
       headers: {
         'Content-Type': 'application/json',
@@ -19,7 +23,7 @@ export const safeYoutubeFetch: typeof fetch = async (input, init) => {
         refreshToken: getYoutubeRefresh(),
       }),
     }).then((r) => r.json())
-    console.info('[youtube] Refresh tokens', newTokens)
+    console.info('[youtube][refresh][new]', newTokens)
     return safeYoutubeFetch(input, {
       ...init,
       headers: { ...init?.headers, Authorization: `Bearer ${newTokens.access_token}` },
@@ -33,21 +37,23 @@ export const safeYoutubeFetch: typeof fetch = async (input, init) => {
         return null
       })
     if (data?.error?.message?.includes('scopes')) {
-      console.info('[youtube] Insufficient scopes', data)
+      console.info('[youtube][error][scopes] Insufficient scopes', data?.error)
       if (!notifiedOnMembersIssue) {
         toast.error("Sorry, you don't seem to be able to have members", {
           position: 'bottom-right',
+          style: { fontSize: '0.8rem', padding: '0.2rem' },
         })
       }
       notifiedOnMembersIssue = true
       // window.location.href = '/api/auth/google'
     } else {
-      console.info('[youtube] Rate limited, waiting')
+      console.info('[youtube][rate-limit] Waiting')
       toast.error('Sorry, rate limited by Youtube, trying again later', {
         position: 'bottom-right',
+        style: { fontSize: '0.8rem', padding: '0.2rem' },
       })
       await wait(60_000)
-      console.info('[youtube] Rate limited, waited')
+      console.info('[youtube][rate-limit] Waited')
       return safeYoutubeFetch(input, init)
     }
   }
@@ -61,13 +67,22 @@ const YOUTUBE_URLS = {
 }
 
 async function getYoutubeItems(channelInfo: ChannelInfo, type: string, cursor: string) {
-  const result = await safeYoutubeFetch(`${YOUTUBE_URLS[type]}${cursor ? `&pageToken=${cursor}` : ''}`, {
+  let pageToken = cursor
+  if (type === 'subscribers' && !pageToken && localStorage.getItem(YOUTUBE_STORAGE_KEYS.ForceSubs)) {
+    pageToken = localStorage.getItem(YOUTUBE_STORAGE_KEYS.LastSubKey) || cursor
+  }
+
+  const result = await safeYoutubeFetch(`${YOUTUBE_URLS[type]}${pageToken ? `&pageToken=${pageToken}` : ''}`, {
     headers: {
       Authorization: `Bearer ${channelInfo.token}`,
     },
   }).then((r) => r.json())
 
-  console.info('[youtube]', type, result)
+  console.info('[youtube][get-items]', type, result, pageToken)
+
+  if (type === 'subscribers' && result?.nextPageToken) {
+    localStorage.setItem(YOUTUBE_STORAGE_KEYS.LastSubKey, result?.nextPageToken)
+  }
 
   return {
     data: result?.items || [],
@@ -138,11 +153,7 @@ export async function getYoutubeSubscribers(
     login: youtubeSession?.username,
     userId: youtubeSession?.id,
   }
-  let delay = 60_000
-  if (window.location.search.includes('forceYoutube')) {
-    console.warn('[youtube] Forcing Youtube subscribers cache')
-    delay = 10_000
-  }
+
   const cacherPromise = genericCacher(
     'youtube',
     'followers',
@@ -152,10 +163,14 @@ export async function getYoutubeSubscribers(
     youtubeSubscribersCache,
     (i) => ({ id: i?.subscriberSnippet?.channelId, login: i?.subscriberSnippet?.title }),
     getYoutubeItems,
-    delay
+    60_000,
+    !!localStorage.getItem(YOUTUBE_STORAGE_KEYS.ForceSubs)
   )
   if (maxTime) {
     return Promise.race([cacherPromise, racedCache(maxTime, youtubeSubscribersCache)])
+  } else {
+    localStorage.removeItem(YOUTUBE_STORAGE_KEYS.ForceSubs)
+    localStorage.removeItem(YOUTUBE_STORAGE_KEYS.LastSubKey)
   }
   return cacherPromise
 }

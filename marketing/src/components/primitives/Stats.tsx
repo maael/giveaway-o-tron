@@ -14,6 +14,8 @@ import { CacheHistory, CacheStats } from '~/utils'
 import cls from 'classnames'
 import { useBeta } from '../hooks/useBeta'
 import useSession from '../hooks/useSession'
+import toast from 'react-hot-toast'
+import { YOUTUBE_STORAGE_KEYS } from '~/utils/google'
 
 const PLATFORM_THEME = {
   twitch: {
@@ -110,6 +112,19 @@ export default function Stats({ stats, cacheHistory }: { stats: CacheStats; cach
             </div>
           </>
         ) : null}
+        <button
+          className="bg-red-600 py-1 px-2 rounded-md flex flex-row gap-1 justify-center items-center"
+          onClick={() => {
+            console.info('[youtube] Forcing full sub sync')
+            toast.success('Forcing full subscription sync', {
+              position: 'bottom-right',
+              style: { fontSize: '0.8rem', padding: '0.2rem' },
+            })
+            localStorage.setItem(YOUTUBE_STORAGE_KEYS.ForceSubs, 'true')
+          }}
+        >
+          <FaYoutube /> Force Sync
+        </button>
         <button className="bg-purple-600 p-1 rounded-md" onClick={() => setFullView((v) => !v)}>
           {fullView ? <FaAngleDown /> : <FaAngleUp />}
         </button>

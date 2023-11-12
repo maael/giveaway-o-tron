@@ -3,6 +3,7 @@ import { wait } from './misc'
 import { ChannelInfo } from './types'
 import { Cache, CACHE_KEY } from './cache'
 import { cacheEmitter } from './cacheStats'
+import { YOUTUBE_STORAGE_KEYS } from './google'
 
 const initialized = {
   twitchfollowers: false,
@@ -96,10 +97,15 @@ export async function genericCacher(
         status: 'inprogress',
         lastUpdated: new Date(),
       })
+      let selectedDelay = delay
+      if (platform === 'youtube' && type === 'followers' && force) {
+        console.warn(`[${platform}][${type}]`, 'Forcing Youtube subscribers cache')
+        selectedDelay = 10_000
+      }
       if (cursor) {
-        await wait(delay)
+        await wait(selectedDelay)
       } else {
-        console.info(`[${platform}][${type}]`, 'No cursor remaining', { delay })
+        console.info(`[${platform}][${type}]`, 'No cursor remaining', { selectedDelay })
       }
     } while (cursor)
     if (shouldToast)
