@@ -76,7 +76,7 @@ async function getYoutubeItems(channelInfo: ChannelInfo, type: string, cursor: s
     url = url.replace('myRecentSubscribers', 'mySubscribers')
   }
 
-  const result = await safeYoutubeFetch(`${YOUTUBE_URLS[type]}${pageToken ? `&pageToken=${pageToken}` : ''}`, {
+  const result = await safeYoutubeFetch(`${url}${pageToken ? `&pageToken=${pageToken}` : ''}`, {
     headers: {
       Authorization: `Bearer ${channelInfo.token}`,
     },
@@ -171,12 +171,19 @@ export async function getYoutubeSubscribers(
     !!localStorage.getItem(YOUTUBE_STORAGE_KEYS.ForceSubs)
   )
   if (maxTime) {
-    return Promise.race([cacherPromise, racedCache(maxTime, youtubeSubscribersCache)])
-  } else {
-    localStorage.removeItem(YOUTUBE_STORAGE_KEYS.ForceSubs)
-    localStorage.removeItem(YOUTUBE_STORAGE_KEYS.LastSubKey)
+    return Promise.race([cacherPromise, racedCache(maxTime, youtubeSubscribersCache)]).then(() => {
+      if (!maxTime) {
+        localStorage.removeItem(YOUTUBE_STORAGE_KEYS.ForceSubs)
+        localStorage.removeItem(YOUTUBE_STORAGE_KEYS.LastSubKey)
+      }
+    })
   }
-  return cacherPromise
+  return cacherPromise.then(() => {
+    if (!maxTime) {
+      localStorage.removeItem(YOUTUBE_STORAGE_KEYS.ForceSubs)
+      localStorage.removeItem(YOUTUBE_STORAGE_KEYS.LastSubKey)
+    }
+  })
 }
 
 export default async function watch() {
