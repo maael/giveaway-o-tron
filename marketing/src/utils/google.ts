@@ -69,8 +69,11 @@ const YOUTUBE_URLS = {
 
 async function getYoutubeItems(channelInfo: ChannelInfo, type: string, cursor: string) {
   let pageToken = cursor
+  let url: string = YOUTUBE_URLS[type]
+
   if (type === 'subscribers' && !pageToken && localStorage.getItem(YOUTUBE_STORAGE_KEYS.ForceSubs)) {
     pageToken = localStorage.getItem(YOUTUBE_STORAGE_KEYS.LastSubKey) || cursor
+    url = url.replace('myRecentSubscribers', 'mySubscribers')
   }
 
   const result = await safeYoutubeFetch(`${YOUTUBE_URLS[type]}${pageToken ? `&pageToken=${pageToken}` : ''}`, {

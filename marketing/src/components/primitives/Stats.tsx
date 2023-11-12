@@ -121,6 +121,7 @@ export default function Stats({ stats, cacheHistory }: { stats: CacheStats; cach
                 position: 'bottom-right',
                 style: { fontSize: '0.8rem', padding: '0.2rem' },
               })
+              localStorage.removeItem(YOUTUBE_STORAGE_KEYS.LastSubKey)
               localStorage.setItem(YOUTUBE_STORAGE_KEYS.ForceSubs, 'true')
             }}
           >
