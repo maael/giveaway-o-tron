@@ -2,6 +2,7 @@ import * as React from 'react'
 import { FaCheck, FaExclamationTriangle, FaPlus, FaTimes } from 'react-icons/fa'
 import { removeIdx, Settings, store } from '~/utils'
 import { APP_VERSION } from '~/utils/updates'
+import { SESSION_KEY } from '../hooks/useSession'
 
 export default function SettingsScreen({
   settings,
@@ -182,6 +183,7 @@ export default function SettingsScreen({
           onClick={async () => {
             try {
               await store.setItem('main-channelInfo', '')
+              await localStorage.removeItem(SESSION_KEY)
               window.location.href = '/api/auth/logout'
             } catch (e) {
               console.error('[reset][error]', e)

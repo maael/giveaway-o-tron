@@ -2,7 +2,6 @@ import { Chat, ChatItem } from '../chat'
 import { ChannelInfo, DiscordSettings, GiveawayResult, Settings } from './types'
 import { getDiscordColour, getRandomArrayItem, handleChatCommand } from './misc'
 import { getFollowers, getSubs, getViewers } from './twitch'
-import { getYoutubeSubscribers, getYoutubeMembers } from './google'
 import relay from './relay'
 import toast from 'react-hot-toast'
 
@@ -53,6 +52,10 @@ function isSubscriber(item: ChatItem, youtubeSubs: Map<any, any>) {
   return youtubeSubs?.has(item.username)
 }
 
+async function fakeCache() {
+  return new Map()
+}
+
 export async function getChatGiveaway(
   chatClient: Chat,
   channelInfo: ChannelInfo,
@@ -100,16 +103,9 @@ export async function getChatGiveaway(
     const didSpam = count > settings.spamLimit
     return !didSpam
   })
-  const [twitchFollowers, youtubeFollowers, youtubeSubs] = await Promise.all([
-    getFollowers(channelInfo),
-    getYoutubeSubscribers(undefined, 60_000),
-    getYoutubeMembers(undefined, 60_000),
-  ])
+  const [twitchFollowers, youtubeSubs] = await Promise.all([getFollowers(channelInfo), fakeCache()])
   const filteredFollowers = users.filter((u) => {
-    return (
-      (u.source === 'twitch' && twitchFollowers?.has(u.username)) ||
-      (u.source === 'youtube' && youtubeFollowers?.has(u.username))
-    )
+    return (u.source === 'twitch' && twitchFollowers?.has(u.username)) || u.source === 'youtube'
   })
   giveawayUserStats.followers = filteredFollowers.length
   if (settings.followersOnly) {
@@ -143,7 +139,7 @@ export async function getChatGiveaway(
       displayName: winner.displayName,
       login: winner.username,
       wasSubscriber: winner.isSubscriber,
-      wasFollower: twitchFollowers?.has(winner.username) || youtubeFollowers?.has(winner.username),
+      wasFollower: twitchFollowers?.has(winner.username),
       otherUsersWithEntry: [...(matchMap.get(userMatchMap.get(winner.username) || '') || new Set())].filter(
         (u) => u !== winner.username
       ),

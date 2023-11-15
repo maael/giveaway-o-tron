@@ -33,7 +33,7 @@ const SessionContext = React.createContext<{ data: Data; loading: boolean; statu
   status: 'loading',
 })
 
-const SESSION_KEY = 'giveaway-user-session/v1'
+export const SESSION_KEY = 'giveaway-user-session/v1'
 const YOUTUBE_REFRESH_KEY = 'giveaway-youtube-refresh'
 
 function getFromStorage<T>(key, options: { parse: boolean }): T | undefined {
