@@ -1,16 +1,58 @@
-export default function Privacy() {
+import Header from '~/components/marketing/Header'
+
+export default function Privacy({ fathom }: any) {
   return (
-    <div className="py-10 max-w-6xl mx-auto">
-      <style
-        dangerouslySetInnerHTML={{
-          __html:
-            "\n  [data-custom-class='body'], [data-custom-class='body'] * {\n          background: transparent !important;\n        }\n[data-custom-class='title'], [data-custom-class='title'] * {\n          font-family: Arial !important;\nfont-size: 26px !important;\ncolor: #000000 !important;\n        }\n[data-custom-class='subtitle'], [data-custom-class='subtitle'] * {\n          font-family: Arial !important;\ncolor: #595959 !important;\nfont-size: 14px !important;\n        }\n[data-custom-class='heading_1'], [data-custom-class='heading_1'] * {\n          font-family: Arial !important;\nfont-size: 19px !important;\ncolor: #000000 !important;\n        }\n[data-custom-class='heading_2'], [data-custom-class='heading_2'] * {\n          font-family: Arial !important;\nfont-size: 17px !important;\ncolor: #000000 !important;\n        }\n[data-custom-class='body_text'], [data-custom-class='body_text'] * {\n          color: #595959 !important;\nfont-size: 14px !important;\nfont-family: Arial !important;\n        }\n[data-custom-class='link'], [data-custom-class='link'] * {\n          color: #3030F1 !important;\nfont-size: 14px !important;\nfont-family: Arial !important;\nword-break: break-word !important;\n        }\n",
-        }}
-      />
+    <div className="pt-4 pb-10 max-w-6xl mx-auto">
+      <Header fathom={fathom} />
+      <style jsx>{`
+        h2 {
+          font-size: 2rem;
+          padding-top: 0.3rem;
+        }
+
+        h3 {
+          font-size: 1.5rem;
+          padding-top: 0.3rem;
+        }
+
+        bold {
+          font-weight: bold;
+        }
+
+        p {
+          padding: 0.2rem 0;
+        }
+
+        a {
+          color: #9333ea;
+        }
+
+        a:hover {
+          color: #a855f7;
+        }
+
+        ul {
+          list-style-type: disc;
+        }
+
+        th,
+        td {
+          width: 33%;
+        }
+
+        tr {
+          border-top: 1px solid white;
+        }
+
+        tr > *:last-child {
+          width: 10%;
+          text-align: right;
+        }
+      `}</style>
       <div data-custom-class="body">
         <div>
           <strong>
-            <span style={{ fontSize: 26 }}>
+            <span>
               <span data-custom-class="title">
                 <span className="block-component" />
                 <span className="question">PRIVACY POLICY</span>
@@ -23,9 +65,9 @@ export default function Privacy() {
           <br />
         </div>
         <div>
-          <span style={{ color: 'rgb(127, 127, 127)' }}>
+          <span>
             <strong>
-              <span style={{ fontSize: 15 }}>
+              <span>
                 <span data-custom-class="subtitle">
                   Last updated <span className="question">October 31, 2023</span>
                 </span>
@@ -37,18 +79,12 @@ export default function Privacy() {
           <br />
         </div>
         <div>
-          <br />
-        </div>
-        <div>
-          <br />
-        </div>
-        <div style={{ lineHeight: '1.5' }}>
-          <span style={{ color: 'rgb(127, 127, 127)' }}>
-            <span style={{ color: 'rgb(89, 89, 89)', fontSize: 15 }}>
+          <span>
+            <span>
               <span data-custom-class="body_text">
                 This privacy notice for{' '}
                 <span className="question">
-                  __________
+                  Giveaway-o-tron
                   <span className="block-component" />
                 </span>{' '}
                 (<span className="block-component" />'<strong>we</strong>', '<strong>us</strong>', or '
@@ -64,22 +100,11 @@ export default function Privacy() {
               </span>
             </span>
           </span>
-          <span style={{ fontSize: 15 }}>
-            <span style={{ color: 'rgb(127, 127, 127)' }}>
-              <span data-custom-class="body_text">
-                <span style={{ color: 'rgb(89, 89, 89)' }}>
-                  <span data-custom-class="body_text">
-                    <span className="block-component" />
-                  </span>
-                </span>
-              </span>
-            </span>
-          </span>
         </div>
         <ul className="list-inside">
-          <li style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-              <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+          <li>
+            <span>
+              <span>
                 <span data-custom-class="body_text">
                   Visit our website
                   <span className="block-component" /> at{' '}
@@ -88,11 +113,11 @@ export default function Privacy() {
                       https://giveaway-o-tron.mael.tech
                     </a>
                   </span>
-                  <span style={{ fontSize: 15 }}>
-                    <span style={{ color: 'rgb(89, 89, 89)' }}>
+                  <span>
+                    <span>
                       <span data-custom-class="body_text">
-                        <span style={{ fontSize: 15 }}>
-                          <span style={{ color: 'rgb(89, 89, 89)' }}>
+                        <span>
+                          <span>
                             <span className="statement-end-if-in-editor">
                               , or any website of ours that links to this privacy notice
                             </span>
@@ -108,11 +133,11 @@ export default function Privacy() {
         </ul>
         <div>
           <span className="block-component">
-            <span style={{ fontSize: 15 }}>
-              <span style={{ fontSize: 15 }}>
-                <span style={{ color: 'rgb(127, 127, 127)' }}>
+            <span>
+              <span>
+                <span>
                   <span data-custom-class="body_text">
-                    <span style={{ color: 'rgb(89, 89, 89)' }}>
+                    <span>
                       <span data-custom-class="body_text">
                         <span className="block-component" />
                       </span>
@@ -122,11 +147,11 @@ export default function Privacy() {
               </span>
             </span>
           </span>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
-              <span style={{ color: 'rgb(127, 127, 127)' }}>
+          <div>
+            <span>
+              <span>
                 <span data-custom-class="body_text">
-                  <span style={{ color: 'rgb(89, 89, 89)' }}>
+                  <span>
                     <span data-custom-class="body_text">
                       <span className="block-component" />
                     </span>
@@ -136,16 +161,16 @@ export default function Privacy() {
             </span>
           </div>
           <ul className="list-inside">
-            <li style={{ lineHeight: '1.5' }}>
-              <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-                <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+            <li>
+              <span>
+                <span>
                   <span data-custom-class="body_text">
                     Engage with us in other related ways, including any sales, marketing, or events
-                    <span style={{ fontSize: 15 }}>
-                      <span style={{ color: 'rgb(89, 89, 89)' }}>
+                    <span>
+                      <span>
                         <span data-custom-class="body_text">
-                          <span style={{ fontSize: 15 }}>
-                            <span style={{ color: 'rgb(89, 89, 89)' }}>
+                          <span>
+                            <span>
                               <span className="statement-end-if-in-editor" />
                             </span>
                           </span>
@@ -157,9 +182,9 @@ export default function Privacy() {
               </span>
             </li>
           </ul>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
-              <span style={{ color: 'rgb(127, 127, 127)' }}>
+          <div>
+            <span>
+              <span>
                 <span data-custom-class="body_text">
                   <strong>Questions or concerns?&nbsp;</strong>Reading this privacy notice will help you understand your
                   privacy rights and choices. If you do not agree with our policies and practices, please do not use our
@@ -170,24 +195,24 @@ export default function Privacy() {
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <strong>
-              <span style={{ fontSize: 15 }}>
+              <span>
                 <span data-custom-class="heading_1">SUMMARY OF KEY POINTS</span>
               </span>
             </strong>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
+          <div>
+            <span>
               <span data-custom-class="body_text">
                 <strong>
                   <em>
@@ -198,7 +223,7 @@ export default function Privacy() {
               </span>
             </span>
             <a data-custom-class="link" href="#toc">
-              <span style={{ fontSize: 15 }}>
+              <span>
                 <span data-custom-class="body_text">
                   <strong>
                     <em>table of contents</em>
@@ -206,7 +231,7 @@ export default function Privacy() {
                 </span>
               </span>
             </a>
-            <span style={{ fontSize: 15 }}>
+            <span>
               <span data-custom-class="body_text">
                 <strong>
                   <em>&nbsp;below to find the section you are looking for.</em>
@@ -214,11 +239,11 @@ export default function Privacy() {
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
+          <div>
+            <span>
               <span data-custom-class="body_text">
                 <strong>What personal information do we process?</strong> When you visit, use, or navigate our Services,
                 we may process personal information depending on how you interact with us and the Services, the choices
@@ -226,17 +251,17 @@ export default function Privacy() {
               </span>
             </span>
             <a data-custom-class="link" href="#personalinfo">
-              <span style={{ fontSize: 15 }}>
+              <span>
                 <span data-custom-class="body_text">personal information you disclose to us</span>
               </span>
             </a>
             <span data-custom-class="body_text">.</span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
+          <div>
+            <span>
               <span data-custom-class="body_text">
                 <strong>Do we process any sensitive personal information?</strong> <span className="block-component" />
                 We do not process sensitive personal information.
@@ -244,11 +269,11 @@ export default function Privacy() {
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
+          <div>
+            <span>
               <span data-custom-class="body_text">
                 <strong>Do we receive any information from third parties?</strong> <span className="block-component" />
                 We do not receive any information from third parties.
@@ -256,11 +281,11 @@ export default function Privacy() {
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
+          <div>
+            <span>
               <span data-custom-class="body_text">
                 <strong>How do we process your information?</strong> We process your information to provide, improve,
                 and administer our Services, communicate with you, for security and fraud prevention, and to comply with
@@ -269,17 +294,17 @@ export default function Privacy() {
               </span>
             </span>
             <a data-custom-class="link" href="#infouse">
-              <span style={{ fontSize: 15 }}>
+              <span>
                 <span data-custom-class="body_text">how we process your information</span>
               </span>
             </a>
             <span data-custom-class="body_text">.</span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
+          <div>
+            <span>
               <span data-custom-class="body_text">
                 <strong>
                   In what situations and with which <span className="block-component" />
@@ -290,38 +315,38 @@ export default function Privacy() {
               </span>
             </span>
             <a data-custom-class="link" href="#whoshare">
-              <span style={{ fontSize: 15 }}>
+              <span>
                 <span data-custom-class="body_text">when and with whom we share your personal information</span>
               </span>
             </a>
-            <span style={{ fontSize: 15 }}>
+            <span>
               <span data-custom-class="body_text">
                 .<span className="block-component" />
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
+          <div>
+            <span>
               <span data-custom-class="body_text">
                 <strong>What are your rights?</strong> Depending on where you are located geographically, the applicable
                 privacy law may mean you have certain rights regarding your personal information. Learn more about&nbsp;
               </span>
             </span>
             <a data-custom-class="link" href="#privacyrights">
-              <span style={{ fontSize: 15 }}>
+              <span>
                 <span data-custom-class="body_text">your privacy rights</span>
               </span>
             </a>
             <span data-custom-class="body_text">.</span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
+          <div>
+            <span>
               <span data-custom-class="body_text">
                 <strong>How do you exercise your rights?</strong> The easiest way to exercise your rights is by{' '}
                 <span className="block-component">submitting a&nbsp;</span>
@@ -333,45 +358,45 @@ export default function Privacy() {
               rel="noopener noreferrer"
               target="_blank"
             >
-              <span style={{ fontSize: 15 }}>
+              <span>
                 <span data-custom-class="body_text">data subject access request</span>
               </span>
             </a>
-            <span style={{ fontSize: 15 }}>
+            <span>
               <span data-custom-class="body_text">
                 <span className="block-component" />, or by contacting us. We will consider and act upon any request in
                 accordance with applicable data protection laws.
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
+          <div>
+            <span>
               <span data-custom-class="body_text">
                 Want to learn more about what we do with any information we collect?&nbsp;
               </span>
             </span>
             <a data-custom-class="link" href="#toc">
-              <span style={{ fontSize: 15 }}>
+              <span>
                 <span data-custom-class="body_text">Review the privacy notice in full</span>
               </span>
             </a>
-            <span style={{ fontSize: 15 }}>
+            <span>
               <span data-custom-class="body_text">.</span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div id="toc" style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
-              <span style={{ color: 'rgb(127, 127, 127)' }}>
-                <span style={{ color: 'rgb(0, 0, 0)' }}>
+          <div id="toc">
+            <span>
+              <span>
+                <span>
                   <strong>
                     <span data-custom-class="heading_1">TABLE OF CONTENTS</span>
                   </strong>
@@ -379,44 +404,42 @@ export default function Privacy() {
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
+          <div>
+            <span>
               <a data-custom-class="link" href="#infocollect">
-                <span style={{ color: 'rgb(89, 89, 89)' }}>1. WHAT INFORMATION DO WE COLLECT?</span>
+                <span>1. WHAT INFORMATION DO WE COLLECT?</span>
               </a>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
+          <div>
+            <span>
               <a data-custom-class="link" href="#infouse">
-                <span style={{ color: 'rgb(89, 89, 89)' }}>
+                <span>
                   2. HOW DO WE PROCESS YOUR INFORMATION?
                   <span className="block-component" />
                 </span>
               </a>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
+          <div>
+            <span>
               <a data-custom-class="link" href="#legalbases">
-                <span style={{ color: 'rgb(89, 89, 89)' }}>
+                <span>
                   3.{' '}
-                  <span style={{ fontSize: 15 }}>
-                    <span style={{ color: 'rgb(89, 89, 89)' }}>
-                      WHAT LEGAL BASES DO WE RELY ON TO PROCESS YOUR PERSONAL INFORMATION?
-                    </span>
+                  <span>
+                    <span>WHAT LEGAL BASES DO WE RELY ON TO PROCESS YOUR PERSONAL INFORMATION?</span>
                   </span>
                   <span className="statement-end-if-in-editor" />
                 </span>
               </a>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
-              <span style={{ color: 'rgb(89, 89, 89)' }}>
+          <div>
+            <span>
+              <span>
                 <a data-custom-class="link" href="#whoshare">
                   4. WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION?
                 </a>
@@ -424,10 +447,10 @@ export default function Privacy() {
               <span data-custom-class="body_text">
                 <span className="block-component" />
               </span>
-              <span style={{ color: 'rgb(127, 127, 127)' }}>
-                <span style={{ color: 'rgb(89, 89, 89)' }}>
+              <span>
+                <span>
                   <span data-custom-class="body_text">
-                    <span style={{ color: 'rgb(89, 89, 89)' }}>
+                    <span>
                       <span className="block-component" />
                     </span>
                   </span>
@@ -435,22 +458,22 @@ export default function Privacy() {
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
+          <div>
+            <span>
               <a data-custom-class="link" href="#cookies">
-                <span style={{ color: 'rgb(89, 89, 89)' }}>5. DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?</span>
+                <span>5. DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?</span>
               </a>
-              <span style={{ color: 'rgb(127, 127, 127)' }}>
-                <span style={{ color: 'rgb(89, 89, 89)' }}>
+              <span>
+                <span>
                   <span data-custom-class="body_text">
-                    <span style={{ color: 'rgb(89, 89, 89)' }}>
+                    <span>
                       <span className="statement-end-if-in-editor" />
                     </span>
                   </span>
                   <span data-custom-class="body_text">
-                    <span style={{ color: 'rgb(89, 89, 89)' }}>
-                      <span style={{ color: 'rgb(89, 89, 89)' }}>
-                        <span style={{ color: 'rgb(89, 89, 89)' }}>
+                    <span>
+                      <span>
+                        <span>
                           <span className="block-component" />
                         </span>
                       </span>
@@ -460,21 +483,21 @@ export default function Privacy() {
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
+          <div>
+            <span>
               <a data-custom-class="link" href="#sociallogins">
-                <span style={{ color: 'rgb(89, 89, 89)' }}>
-                  <span style={{ color: 'rgb(89, 89, 89)' }}>
-                    <span style={{ color: 'rgb(89, 89, 89)' }}>6. HOW DO WE HANDLE YOUR SOCIAL LOGINS?</span>
+                <span>
+                  <span>
+                    <span>6. HOW DO WE HANDLE YOUR SOCIAL LOGINS?</span>
                   </span>
                 </span>
               </a>
-              <span style={{ color: 'rgb(127, 127, 127)' }}>
-                <span style={{ color: 'rgb(89, 89, 89)' }}>
+              <span>
+                <span>
                   <span data-custom-class="body_text">
-                    <span style={{ color: 'rgb(89, 89, 89)' }}>
-                      <span style={{ color: 'rgb(89, 89, 89)' }}>
-                        <span style={{ color: 'rgb(89, 89, 89)' }}>
+                    <span>
+                      <span>
+                        <span>
                           <span className="statement-end-if-in-editor" />
                         </span>
                       </span>
@@ -485,16 +508,16 @@ export default function Privacy() {
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
+          <div>
+            <span>
               <a data-custom-class="link" href="#inforetain">
-                <span style={{ color: 'rgb(89, 89, 89)' }}>7. HOW LONG DO WE KEEP YOUR INFORMATION?</span>
+                <span>7. HOW LONG DO WE KEEP YOUR INFORMATION?</span>
               </a>
-              <span style={{ color: 'rgb(127, 127, 127)' }}>
-                <span style={{ color: 'rgb(89, 89, 89)' }}>
+              <span>
+                <span>
                   <span data-custom-class="body_text">
-                    <span style={{ color: 'rgb(89, 89, 89)' }}>
-                      <span style={{ color: 'rgb(89, 89, 89)' }}>
+                    <span>
+                      <span>
                         <span className="block-component" />
                         <span className="block-component" />
                       </span>
@@ -504,15 +527,15 @@ export default function Privacy() {
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
+          <div>
+            <span>
               <a data-custom-class="link" href="#infominors">
-                <span style={{ color: 'rgb(89, 89, 89)' }}>8. DO WE COLLECT INFORMATION FROM MINORS?</span>
+                <span>8. DO WE COLLECT INFORMATION FROM MINORS?</span>
               </a>
-              <span style={{ color: 'rgb(127, 127, 127)' }}>
-                <span style={{ color: 'rgb(89, 89, 89)' }}>
+              <span>
+                <span>
                   <span data-custom-class="body_text">
-                    <span style={{ color: 'rgb(89, 89, 89)' }}>
+                    <span>
                       <span className="statement-end-if-in-editor" />
                     </span>
                   </span>
@@ -520,42 +543,40 @@ export default function Privacy() {
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
-              <span style={{ color: 'rgb(89, 89, 89)' }}>
+          <div>
+            <span>
+              <span>
                 <a data-custom-class="link" href="#privacyrights">
                   9. WHAT ARE YOUR PRIVACY RIGHTS?
                 </a>
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
+          <div>
+            <span>
               <a data-custom-class="link" href="#DNT">
-                <span style={{ color: 'rgb(89, 89, 89)' }}>
+                <span>
                   10. CONTROLS FOR DO-NOT-TRACK FEATURES
                   <span className="block-component" />
                 </span>
               </a>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
+          <div>
+            <span>
               <a data-custom-class="link" href="#uslaws">
-                <span style={{ color: 'rgb(89, 89, 89)' }}>
-                  11. DO UNITED STATES RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?
-                </span>
+                <span>11. DO UNITED STATES RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?</span>
               </a>
             </span>
             <span className="block-component">
-              <span style={{ fontSize: 15 }}>
+              <span>
                 <span data-custom-class="body_text" />
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <span className="block-component">
-              <span style={{ fontSize: 15 }} />
+              <span />
             </span>
             <span className="block-component" />
             <span className="block-component" />
@@ -567,39 +588,35 @@ export default function Privacy() {
             <span className="block-component" />
             <span className="block-component" />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
+          <div>
+            <span>
               <a data-custom-class="link" href="#policyupdates">
-                <span style={{ color: 'rgb(89, 89, 89)' }}>12. DO WE MAKE UPDATES TO THIS NOTICE?</span>
+                <span>12. DO WE MAKE UPDATES TO THIS NOTICE?</span>
               </a>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <a data-custom-class="link" href="#contact">
-              <span style={{ color: 'rgb(89, 89, 89)', fontSize: 15 }}>
-                13. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?
-              </span>
+              <span>13. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?</span>
             </a>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <a data-custom-class="link" href="#request">
-              <span style={{ color: 'rgb(89, 89, 89)' }}>
-                14. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?
-              </span>
+              <span>14. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?</span>
             </a>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div id="infocollect" style={{ lineHeight: '1.5' }}>
-            <span style={{ color: 'rgb(127, 127, 127)' }}>
-              <span style={{ color: 'rgb(89, 89, 89)', fontSize: 15 }}>
-                <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-                  <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-                    <span id="control" style={{ color: 'rgb(0, 0, 0)' }}>
+          <div id="infocollect">
+            <span>
+              <span>
+                <span>
+                  <span>
+                    <span id="control">
                       <strong>
                         <span data-custom-class="heading_1">1. WHAT INFORMATION DO WE COLLECT?</span>
                       </strong>
@@ -609,12 +626,12 @@ export default function Privacy() {
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div id="personalinfo" style={{ lineHeight: '1.5' }}>
-            <span data-custom-class="heading_2" style={{ color: 'rgb(0, 0, 0)' }}>
-              <span style={{ fontSize: 15 }}>
+          <div id="personalinfo">
+            <span data-custom-class="heading_2">
+              <span>
                 <strong>Personal information you disclose to us</strong>
               </span>
             </span>
@@ -623,12 +640,12 @@ export default function Privacy() {
             <div>
               <br />
             </div>
-            <div style={{ lineHeight: '1.5' }}>
-              <span style={{ color: 'rgb(127, 127, 127)' }}>
-                <span style={{ color: 'rgb(89, 89, 89)', fontSize: 15 }}>
+            <div>
+              <span>
+                <span>
                   <span data-custom-class="body_text">
-                    <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-                      <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+                    <span>
+                      <span>
                         <span data-custom-class="body_text">
                           <strong>
                             <em>In Short:</em>
@@ -638,8 +655,8 @@ export default function Privacy() {
                     </span>
                   </span>
                   <span data-custom-class="body_text">
-                    <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-                      <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+                    <span>
+                      <span>
                         <span data-custom-class="body_text">
                           <strong>
                             <em>&nbsp;</em>
@@ -653,15 +670,15 @@ export default function Privacy() {
               </span>
             </div>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-              <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+          <div>
+            <span>
+              <span>
                 <span data-custom-class="body_text">
                   We collect personal information that you voluntarily provide to us when you{' '}
-                  <span style={{ fontSize: 15 }}>
+                  <span>
                     <span className="block-component" />
                   </span>
                 </span>
@@ -672,41 +689,41 @@ export default function Privacy() {
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-              <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+          <div>
+            <span>
+              <span>
                 <span data-custom-class="body_text">
-                  <span style={{ fontSize: 15 }}>
+                  <span>
                     <span className="block-component" />
                   </span>
                 </span>
               </span>
             </span>
           </div>
-          <div id="sensitiveinfo" style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
+          <div id="sensitiveinfo">
+            <span>
               <span data-custom-class="body_text">
                 <strong>Sensitive Information.</strong> <span className="block-component" />
                 We do not process sensitive information.
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15 }}>
+          <div>
+            <span>
               <span data-custom-class="body_text">
                 <span className="else-block" />
               </span>
             </span>
-            <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-              <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+            <span>
+              <span>
                 <span data-custom-class="body_text">
-                  <span style={{ fontSize: 15 }}>
+                  <span>
                     <span data-custom-class="body_text">
                       <span className="block-component">
                         <span className="block-component" />
@@ -717,18 +734,18 @@ export default function Privacy() {
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-              <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+          <div>
+            <span>
+              <span>
                 <span data-custom-class="body_text">
                   <strong>Social Media Login Data.&nbsp;</strong>We may provide you with the option to register with us
                   using your existing social media account details, like your Facebook, Twitter, or other social media
                   account. If you choose to register in this way, we will collect the information described in the
                   section called <span className="block-component" />'<span className="else-block" />
-                  <span style={{ fontSize: 15 }}>
+                  <span>
                     <span data-custom-class="body_text">
-                      <span style={{ fontSize: 15 }}>
-                        <span style={{ color: 'rgb(89, 89, 89)' }}>
+                      <span>
+                        <span>
                           <a data-custom-class="link" href="#sociallogins">
                             HOW DO WE HANDLE YOUR SOCIAL LOGINS?
                           </a>
@@ -741,14 +758,14 @@ export default function Privacy() {
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-              <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+          <div>
+            <span>
+              <span>
                 <span data-custom-class="body_text">
-                  <span style={{ fontSize: 15 }}>
+                  <span>
                     <span className="statement-end-if-in-editor">
                       <span className="statement-end-if-in-editor" />
                     </span>
@@ -758,9 +775,9 @@ export default function Privacy() {
             </span>
             <span className="block-component" />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-              <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+          <div>
+            <span>
+              <span>
                 <span data-custom-class="body_text">
                   All personal information that you provide to us must be true, complete, and accurate, and you must
                   notify us of any changes to such personal information.
@@ -768,21 +785,21 @@ export default function Privacy() {
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-              <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+          <div>
+            <span>
+              <span>
                 <span data-custom-class="body_text">
                   <span className="block-component" />
                 </span>
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span data-custom-class="heading_2" style={{ color: 'rgb(0, 0, 0)' }}>
-              <span style={{ fontSize: 15 }}>
+          <div>
+            <span data-custom-class="heading_2">
+              <span>
                 <strong>Information automatically collected</strong>
               </span>
             </span>
@@ -791,12 +808,12 @@ export default function Privacy() {
             <div>
               <br />
             </div>
-            <div style={{ lineHeight: '1.5' }}>
-              <span style={{ color: 'rgb(127, 127, 127)' }}>
-                <span style={{ color: 'rgb(89, 89, 89)', fontSize: 15 }}>
+            <div>
+              <span>
+                <span>
                   <span data-custom-class="body_text">
-                    <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-                      <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+                    <span>
+                      <span>
                         <span data-custom-class="body_text">
                           <strong>
                             <em>In Short:</em>
@@ -806,8 +823,8 @@ export default function Privacy() {
                     </span>
                   </span>
                   <span data-custom-class="body_text">
-                    <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-                      <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+                    <span>
+                      <span>
                         <span data-custom-class="body_text">
                           <strong>
                             <em>&nbsp;</em>
@@ -824,12 +841,12 @@ export default function Privacy() {
               </span>
             </div>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-              <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+          <div>
+            <span>
+              <span>
                 <span data-custom-class="body_text">
                   We automatically collect certain information when you visit, use, or navigate the Services. This
                   information does not reveal your specific identity (like your name or contact information) but may
@@ -842,21 +859,21 @@ export default function Privacy() {
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-              <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+          <div>
+            <span>
+              <span>
                 <span data-custom-class="body_text">
                   <span className="block-component" />
                 </span>
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-              <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+          <div>
+            <span>
+              <span>
                 <span data-custom-class="body_text">
                   Like many businesses, we also collect information through cookies and similar technologies.{' '}
                   <span className="block-component" />
@@ -865,12 +882,12 @@ export default function Privacy() {
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <br />
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-              <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+          <div>
+            <span>
+              <span>
                 <span data-custom-class="body_text">
                   <span className="statement-end-if-in-editor">
                     <span data-custom-class="body_text" />
@@ -882,9 +899,9 @@ export default function Privacy() {
               </span>
             </span>
           </div>
-          <div style={{ lineHeight: '1.5' }}>
-            <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-              <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+          <div>
+            <span>
+              <span>
                 <span data-custom-class="body_text">
                   The information we collect includes:
                   <span className="block-component" />
@@ -893,27 +910,26 @@ export default function Privacy() {
             </span>
           </div>
           <ul className="list-inside">
-            <li style={{ lineHeight: '1.5' }}>
-              <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-                <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+            <li>
+              <span>
+                <span>
                   <span data-custom-class="body_text">
                     <em>Log and Usage Data.</em> Log and usage data is service-related, diagnostic, usage, and
                     performance information our servers automatically collect when you access or use our Services and
                     which we record in log files. Depending on how you interact with us, this log data may include your
                     IP address, device information, browser type, and settings and information about your activity in
                     the Services
-                    <span style={{ fontSize: 15 }}>&nbsp;</span>(such as the date/time stamps associated with your
-                    usage, pages and files viewed, searches, and other actions you take such as which features you use),
-                    device event information (such as system activity, error reports (sometimes called{' '}
-                    <span className="block-component" />
+                    <span>&nbsp;</span>(such as the date/time stamps associated with your usage, pages and files viewed,
+                    searches, and other actions you take such as which features you use), device event information (such
+                    as system activity, error reports (sometimes called <span className="block-component" />
                     'crash dumps'
                     <span className="else-block" />
                     ), and hardware settings).
-                    <span style={{ fontSize: 15 }}>
-                      <span style={{ color: 'rgb(89, 89, 89)' }}>
+                    <span>
+                      <span>
                         <span data-custom-class="body_text">
-                          <span style={{ fontSize: 15 }}>
-                            <span style={{ color: 'rgb(89, 89, 89)' }}>
+                          <span>
+                            <span>
                               <span className="statement-end-if-in-editor" />
                             </span>
                           </span>
@@ -925,27 +941,27 @@ export default function Privacy() {
               </span>
             </li>
           </ul>
-          <div style={{ lineHeight: '1.5' }}>
+          <div>
             <span className="block-component">
-              <span style={{ fontSize: 15 }}>
+              <span>
                 <span data-custom-class="body_text" />
               </span>
             </span>
-            <div style={{ lineHeight: '1.5' }}>
+            <div>
               <span className="block-component">
-                <span style={{ fontSize: 15 }}>
+                <span>
                   <span data-custom-class="body_text" />
                 </span>
               </span>
               <div>
                 <span className="block-component">
-                  <span style={{ fontSize: 15 }} />
+                  <span />
                 </span>
                 <span className="statement-end-if-in-editor" />
                 <span data-custom-class="body_text">
-                  <span style={{ color: 'rgb(89, 89, 89)', fontSize: 15 }}>
+                  <span>
                     <span data-custom-class="body_text">
-                      <span style={{ color: 'rgb(89, 89, 89)', fontSize: 15 }}>
+                      <span>
                         <span data-custom-class="body_text">
                           <span className="statement-end-if-in-editor">
                             <span className="block-component" />
@@ -955,18 +971,18 @@ export default function Privacy() {
                     </span>
                   </span>
                 </span>
-                <span style={{ fontSize: 15 }}>
+                <span>
                   <span data-custom-class="body_text">
                     <span className="block-component" />
                   </span>
                 </span>
               </div>
-              <div id="infouse" style={{ lineHeight: '1.5' }}>
-                <span style={{ color: 'rgb(127, 127, 127)' }}>
-                  <span style={{ color: 'rgb(89, 89, 89)', fontSize: 15 }}>
-                    <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-                      <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-                        <span id="control" style={{ color: 'rgb(0, 0, 0)' }}>
+              <div id="infouse">
+                <span>
+                  <span>
+                    <span>
+                      <span>
+                        <span id="control">
                           <strong>
                             <span data-custom-class="heading_1">2. HOW DO WE PROCESS YOUR INFORMATION?</span>
                           </strong>
@@ -977,15 +993,15 @@ export default function Privacy() {
                 </span>
               </div>
               <div>
-                <div style={{ lineHeight: '1.5' }}>
+                <div>
                   <br />
                 </div>
-                <div style={{ lineHeight: '1.5' }}>
-                  <span style={{ color: 'rgb(127, 127, 127)' }}>
-                    <span style={{ color: 'rgb(89, 89, 89)', fontSize: 15 }}>
+                <div>
+                  <span>
+                    <span>
                       <span data-custom-class="body_text">
-                        <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-                          <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+                        <span>
+                          <span>
                             <span data-custom-class="body_text">
                               <strong>
                                 <em>In Short:&nbsp;</em>
@@ -1003,12 +1019,12 @@ export default function Privacy() {
                   </span>
                 </div>
               </div>
-              <div style={{ lineHeight: '1.5' }}>
+              <div>
                 <br />
               </div>
-              <div style={{ lineHeight: '1.5' }}>
-                <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-                  <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+              <div>
+                <span>
+                  <span>
                     <span data-custom-class="body_text">
                       <strong>
                         We process your personal information for a variety of reasons, depending on how you interact
@@ -1018,199 +1034,163 @@ export default function Privacy() {
                     </span>
                   </span>
                 </span>
-                <div style={{ lineHeight: '1.5' }}>
-                  <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-                    <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+                <div>
+                  <span>
+                    <span>
                       <span data-custom-class="body_text">
                         <span className="block-component" />
                       </span>
                     </span>
                   </span>
-                  <div style={{ lineHeight: '1.5' }}>
-                    <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-                      <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+                  <div>
+                    <span>
+                      <span>
                         <span data-custom-class="body_text">
                           <span className="block-component" />
                         </span>
                       </span>
                     </span>
-                    <div style={{ lineHeight: '1.5' }}>
-                      <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-                        <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+                    <div>
+                      <span>
+                        <span>
                           <span data-custom-class="body_text">
                             <span className="block-component" />
                           </span>
                         </span>
                       </span>
-                      <div style={{ lineHeight: '1.5' }}>
-                        <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
-                          <span style={{ fontSize: 15, color: 'rgb(89, 89, 89)' }}>
+                      <div>
+                        <span>
+                          <span>
                             <span data-custom-class="body_text">
                               <span className="block-component" />
                             </span>
                           </span>
                         </span>
-                        <div style={{ lineHeight: '1.5' }}>
+                        <div>
                           <span className="block-component">
-                            <span style={{ fontSize: 15 }} />
+                            <span />
                           </span>
-                          <div style={{ lineHeight: '1.5' }}>
+                          <div>
                             <span className="block-component">
-                              <span style={{ fontSize: 15 }} />
+                              <span />
                             </span>
-                            <div style={{ lineHeight: '1.5' }}>
+                            <div>
                               <span className="block-component">
-                                <span style={{ fontSize: 15 }} />
+                                <span />
                               </span>
-                              <div style={{ lineHeight: '1.5' }}>
+                              <div>
                                 <span className="block-component">
-                                  <span style={{ fontSize: 15 }}>
+                                  <span>
                                     <span data-custom-class="body_text" />
                                   </span>
                                 </span>
-                                <p style={{ fontSize: 15, lineHeight: '1.5' }}>
+                                <p>
                                   <span className="block-component">
-                                    <span style={{ fontSize: 15 }} />
+                                    <span />
                                   </span>
                                 </p>
-                                <p style={{ fontSize: 15, lineHeight: '1.5' }}>
+                                <p>
                                   <span className="block-component">
-                                    <span style={{ fontSize: 15 }} />
+                                    <span />
                                   </span>
                                 </p>
-                                <p style={{ fontSize: 15, lineHeight: '1.5' }}>
+                                <p>
                                   <span className="block-component" />
                                 </p>
-                                <p style={{ fontSize: 15, lineHeight: '1.5' }}>
+                                <p>
                                   <span className="block-component" />
                                 </p>
-                                <div style={{ lineHeight: '1.5' }}>
+                                <div>
                                   <span className="block-component">
-                                    <span style={{ fontSize: 15 }}>
+                                    <span>
                                       <span data-custom-class="body_text" />
                                     </span>
                                   </span>
-                                  <div style={{ lineHeight: '1.5' }}>
+                                  <div>
                                     <span className="block-component">
-                                      <span style={{ fontSize: 15 }} />
+                                      <span />
                                     </span>
-                                    <div style={{ lineHeight: '1.5' }}>
+                                    <div>
                                       <span className="block-component">
-                                        <span style={{ fontSize: 15 }} />
+                                        <span />
                                       </span>
-                                      <div style={{ lineHeight: '1.5' }}>
-                                        <span style={{ fontSize: 15 }}>
+                                      <div>
+                                        <span>
                                           <span className="block-component">
                                             <span data-custom-class="body_text" />
                                           </span>
                                         </span>
-                                        <div style={{ lineHeight: '1.5' }}>
+                                        <div>
                                           <span className="block-component">
-                                            <span style={{ fontSize: 15 }}>
+                                            <span>
                                               <span data-custom-class="body_text" />
                                             </span>
                                           </span>
-                                          <div style={{ lineHeight: '1.5' }}>
+                                          <div>
                                             <span className="block-component">
-                                              <span style={{ fontSize: 15 }}>
+                                              <span>
                                                 <span data-custom-class="body_text" />
                                               </span>
                                             </span>
-                                            <div style={{ lineHeight: '1.5' }}>
+                                            <div>
                                               <span className="block-component">
-                                                <span style={{ fontSize: 15 }}>
+                                                <span>
                                                   <span data-custom-class="body_text" />
                                                 </span>
                                               </span>
-                                              <div style={{ lineHeight: '1.5' }}>
+                                              <div>
                                                 <span className="block-component">
-                                                  <span style={{ fontSize: 15 }}>
+                                                  <span>
                                                     <span data-custom-class="body_text" />
                                                   </span>
                                                 </span>
-                                                <div style={{ lineHeight: '1.5' }}>
+                                                <div>
                                                   <span className="block-component">
-                                                    <span style={{ fontSize: 15 }}>
+                                                    <span>
                                                       <span data-custom-class="body_text" />
                                                     </span>
                                                   </span>
-                                                  <div style={{ lineHeight: '1.5' }}>
+                                                  <div>
                                                     <span className="block-component">
-                                                      <span style={{ fontSize: 15 }}>
+                                                      <span>
                                                         <span data-custom-class="body_text" />
                                                       </span>
                                                     </span>
-                                                    <div style={{ lineHeight: '1.5' }}>
+                                                    <div>
                                                       <span className="block-component">
-                                                        <span style={{ fontSize: 15 }}>
+                                                        <span>
                                                           <span data-custom-class="body_text" />
                                                         </span>
                                                       </span>
-                                                      <div
-                                                        style={{
-                                                          lineHeight: '1.5',
-                                                        }}
-                                                      >
+                                                      <div>
                                                         <span className="block-component">
-                                                          <span style={{ fontSize: 15 }}>
+                                                          <span>
                                                             <span data-custom-class="body_text" />
                                                           </span>
                                                         </span>
-                                                        <div
-                                                          style={{
-                                                            lineHeight: '1.5',
-                                                          }}
-                                                        >
+                                                        <div>
                                                           <span className="block-component">
-                                                            <span
-                                                              style={{
-                                                                fontSize: 15,
-                                                              }}
-                                                            >
+                                                            <span>
                                                               <span data-custom-class="body_text" />
                                                             </span>
                                                           </span>
-                                                          <div
-                                                            style={{
-                                                              lineHeight: '1.5',
-                                                            }}
-                                                          >
+                                                          <div>
                                                             <span className="block-component">
-                                                              <span
-                                                                style={{
-                                                                  fontSize: 15,
-                                                                }}
-                                                              >
+                                                              <span>
                                                                 <span data-custom-class="body_text" />
                                                               </span>
                                                             </span>
-                                                            <div
-                                                              style={{
-                                                                lineHeight: '1.5',
-                                                              }}
-                                                            >
+                                                            <div>
                                                               <span className="block-component">
-                                                                <span
-                                                                  style={{
-                                                                    fontSize: 15,
-                                                                  }}
-                                                                >
+                                                                <span>
                                                                   <span data-custom-class="body_text" />
                                                                 </span>
                                                               </span>
                                                             </div>
                                                             <ul className="list-inside">
-                                                              <li
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <li>
                                                                 <span data-custom-class="body_text">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     <strong>
                                                                       To save or protect an individual's vital interest.
                                                                     </strong>{' '}
@@ -1220,77 +1200,40 @@ export default function Privacy() {
                                                                   </span>
                                                                 </span>
                                                                 <span className="statement-end-if-in-editor">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     <span data-custom-class="body_text" />
                                                                   </span>
                                                                 </span>
                                                               </li>
                                                             </ul>
-                                                            <div
-                                                              style={{
-                                                                lineHeight: '1.5',
-                                                              }}
-                                                            >
+                                                            <div>
                                                               <span className="block-component">
-                                                                <span
-                                                                  style={{
-                                                                    fontSize: 15,
-                                                                  }}
-                                                                >
+                                                                <span>
                                                                   <span data-custom-class="body_text" />
                                                                 </span>
                                                               </span>
                                                               <span className="block-component">
-                                                                <span
-                                                                  style={{
-                                                                    fontSize: 15,
-                                                                  }}
-                                                                >
+                                                                <span>
                                                                   <span data-custom-class="body_text" />
                                                                 </span>
                                                               </span>
                                                               <span className="block-component">
-                                                                <span
-                                                                  style={{
-                                                                    fontSize: 15,
-                                                                  }}
-                                                                >
+                                                                <span>
                                                                   <span data-custom-class="body_text" />
                                                                 </span>
                                                               </span>
                                                               <span className="block-component">
-                                                                <span
-                                                                  style={{
-                                                                    fontSize: 15,
-                                                                  }}
-                                                                >
+                                                                <span>
                                                                   <span data-custom-class="body_text" />
                                                                 </span>
                                                               </span>
                                                             </div>
-                                                            <div
-                                                              style={{
-                                                                lineHeight: '1.5',
-                                                              }}
-                                                            >
+                                                            <div>
                                                               <br />
                                                             </div>
-                                                            <div
-                                                              id="legalbases"
-                                                              style={{
-                                                                lineHeight: '1.5',
-                                                              }}
-                                                            >
+                                                            <div id="legalbases">
                                                               <strong>
-                                                                <span
-                                                                  style={{
-                                                                    fontSize: 15,
-                                                                  }}
-                                                                >
+                                                                <span>
                                                                   <span data-custom-class="heading_1">
                                                                     3. WHAT LEGAL BASES DO WE RELY ON TO PROCESS YOUR
                                                                     INFORMATION?
@@ -1298,24 +1241,12 @@ export default function Privacy() {
                                                                 </span>
                                                               </strong>
                                                             </div>
-                                                            <div
-                                                              style={{
-                                                                lineHeight: '1.5',
-                                                              }}
-                                                            >
+                                                            <div>
                                                               <br />
                                                             </div>
-                                                            <div
-                                                              style={{
-                                                                lineHeight: '1.5',
-                                                              }}
-                                                            >
+                                                            <div>
                                                               <em>
-                                                                <span
-                                                                  style={{
-                                                                    fontSize: 15,
-                                                                  }}
-                                                                >
+                                                                <span>
                                                                   <span data-custom-class="body_text">
                                                                     <strong>In Short:&nbsp;</strong>
                                                                     We only process your personal information when we
@@ -1335,11 +1266,7 @@ export default function Privacy() {
                                                                   </span>
                                                                 </span>
                                                               </em>
-                                                              <span
-                                                                style={{
-                                                                  fontSize: 15,
-                                                                }}
-                                                              >
+                                                              <span>
                                                                 <span data-custom-class="body_text">
                                                                   <span className="block-component" />
                                                                 </span>
@@ -1348,24 +1275,12 @@ export default function Privacy() {
                                                                 </span>
                                                               </span>
                                                             </div>
-                                                            <div
-                                                              style={{
-                                                                lineHeight: '1.5',
-                                                              }}
-                                                            >
+                                                            <div>
                                                               <br />
                                                             </div>
-                                                            <div
-                                                              style={{
-                                                                lineHeight: '1.5',
-                                                              }}
-                                                            >
+                                                            <div>
                                                               <em>
-                                                                <span
-                                                                  style={{
-                                                                    fontSize: 15,
-                                                                  }}
-                                                                >
+                                                                <span>
                                                                   <span data-custom-class="body_text">
                                                                     <strong>
                                                                       <u>
@@ -1376,33 +1291,17 @@ export default function Privacy() {
                                                                   </span>
                                                                 </span>
                                                               </em>
-                                                              <span
-                                                                style={{
-                                                                  fontSize: 15,
-                                                                }}
-                                                              >
+                                                              <span>
                                                                 <span data-custom-class="body_text">
                                                                   <span className="statement-end-if-in-editor" />
                                                                 </span>
                                                               </span>
                                                             </div>
-                                                            <div
-                                                              style={{
-                                                                lineHeight: '1.5',
-                                                              }}
-                                                            >
+                                                            <div>
                                                               <br />
                                                             </div>
-                                                            <div
-                                                              style={{
-                                                                lineHeight: '1.5',
-                                                              }}
-                                                            >
-                                                              <span
-                                                                style={{
-                                                                  fontSize: 15,
-                                                                }}
-                                                              >
+                                                            <div>
+                                                              <span>
                                                                 <span data-custom-class="body_text">
                                                                   The General Data Protection Regulation (GDPR) and UK
                                                                   GDPR require us to explain the valid legal bases we
@@ -1413,16 +1312,8 @@ export default function Privacy() {
                                                               </span>
                                                             </div>
                                                             <ul className="list-inside">
-                                                              <li
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
-                                                                <span
-                                                                  style={{
-                                                                    fontSize: 15,
-                                                                  }}
-                                                                >
+                                                              <li>
+                                                                <span>
                                                                   <span data-custom-class="body_text">
                                                                     <strong>Consent.&nbsp;</strong>
                                                                     We may process your information if you have given us
@@ -1434,11 +1325,7 @@ export default function Privacy() {
                                                                   </span>
                                                                 </span>
                                                                 <a data-custom-class="link" href="#withdrawconsent">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     <span data-custom-class="body_text">
                                                                       withdrawing your consent
                                                                     </span>
@@ -1447,56 +1334,28 @@ export default function Privacy() {
                                                                 <span data-custom-class="body_text">.</span>
                                                               </li>
                                                             </ul>
-                                                            <div
-                                                              style={{
-                                                                lineHeight: '1.5',
-                                                              }}
-                                                            >
+                                                            <div>
                                                               <span className="block-component">
-                                                                <span
-                                                                  style={{
-                                                                    fontSize: 15,
-                                                                  }}
-                                                                >
+                                                                <span>
                                                                   <span data-custom-class="body_text" />
                                                                 </span>
                                                               </span>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <div>
                                                                 <span className="block-component">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     <span data-custom-class="body_text" />
                                                                   </span>
                                                                 </span>
                                                                 <span className="block-component">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     <span data-custom-class="body_text" />
                                                                   </span>
                                                                 </span>
                                                               </div>
                                                               <ul className="list-inside">
-                                                                <li
-                                                                  style={{
-                                                                    lineHeight: '1.5',
-                                                                  }}
-                                                                >
+                                                                <li>
                                                                   <span data-custom-class="body_text">
-                                                                    <span
-                                                                      style={{
-                                                                        fontSize: 15,
-                                                                      }}
-                                                                    >
+                                                                    <span>
                                                                       <strong>Legal Obligations.</strong> We may process
                                                                       your information where we believe it is necessary
                                                                       for compliance with our legal obligations, such as
@@ -1510,33 +1369,17 @@ export default function Privacy() {
                                                                   </span>
                                                                 </li>
                                                               </ul>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <div>
                                                                 <span className="block-component">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     <span data-custom-class="body_text" />
                                                                   </span>
                                                                 </span>
                                                               </div>
                                                               <ul className="list-inside">
-                                                                <li
-                                                                  style={{
-                                                                    lineHeight: '1.5',
-                                                                  }}
-                                                                >
+                                                                <li>
                                                                   <span data-custom-class="body_text">
-                                                                    <span
-                                                                      style={{
-                                                                        fontSize: 15,
-                                                                      }}
-                                                                    >
+                                                                    <span>
                                                                       <strong>Vital Interests.</strong> We may process
                                                                       your information where we believe it is necessary
                                                                       to protect your vital interests or the vital
@@ -1546,42 +1389,22 @@ export default function Privacy() {
                                                                     </span>
                                                                   </span>
                                                                   <span className="statement-end-if-in-editor">
-                                                                    <span
-                                                                      style={{
-                                                                        fontSize: 15,
-                                                                      }}
-                                                                    >
+                                                                    <span>
                                                                       <span data-custom-class="body_text" />
                                                                     </span>
                                                                   </span>
                                                                 </li>
                                                               </ul>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <div>
                                                                 <span className="block-component">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     <span data-custom-class="body_text" />
                                                                   </span>
                                                                 </span>
                                                               </div>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <div>
                                                                 <span data-custom-class="body_text">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     In legal terms, we are generally the{' '}
                                                                     <span className="block-component" />
                                                                     'data controller'
@@ -1609,44 +1432,24 @@ export default function Privacy() {
                                                                   </span>
                                                                 </span>
                                                                 <span className="statement-end-if-in-editor">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     <span data-custom-class="body_text" />
                                                                   </span>
                                                                 </span>
                                                                 <span data-custom-class="body_text">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     <span className="block-component">
                                                                       <span className="block-component" />
                                                                     </span>
                                                                   </span>
                                                                 </span>
                                                               </div>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <div>
                                                                 <br />
                                                               </div>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <div>
                                                                 <span data-custom-class="body_text">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     <strong>
                                                                       <u>
                                                                         <em>
@@ -1659,24 +1462,12 @@ export default function Privacy() {
                                                                   </span>
                                                                 </span>
                                                               </div>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <div>
                                                                 <br />
                                                               </div>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <div>
                                                                 <span data-custom-class="body_text">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     We may process your information if you have given us
                                                                     specific permission (i.e.
                                                                     <span className="block-component" /> express
@@ -1689,43 +1480,19 @@ export default function Privacy() {
                                                                 </span>
                                                                 <a data-custom-class="link" href="#withdrawconsent">
                                                                   <span data-custom-class="body_text">
-                                                                    <span
-                                                                      style={{
-                                                                        fontSize: 15,
-                                                                      }}
-                                                                    >
-                                                                      withdraw your consent
-                                                                    </span>
+                                                                    <span>withdraw your consent</span>
                                                                   </span>
                                                                 </a>
                                                                 <span data-custom-class="body_text">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
-                                                                    &nbsp;at any time.
-                                                                  </span>
+                                                                  <span>&nbsp;at any time.</span>
                                                                 </span>
                                                               </div>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <div>
                                                                 <br />
                                                               </div>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <div>
                                                                 <span data-custom-class="body_text">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     In some exceptional cases, we may be legally
                                                                     permitted under applicable law to process your
                                                                     information without your consent, including, for
@@ -1734,17 +1501,9 @@ export default function Privacy() {
                                                                 </span>
                                                               </div>
                                                               <ul className="list-inside">
-                                                                <li
-                                                                  style={{
-                                                                    lineHeight: '1.5',
-                                                                  }}
-                                                                >
+                                                                <li>
                                                                   <span data-custom-class="body_text">
-                                                                    <span
-                                                                      style={{
-                                                                        fontSize: 15,
-                                                                      }}
-                                                                    >
+                                                                    <span>
                                                                       If collection is clearly in the interests of an
                                                                       individual and consent cannot be obtained in a
                                                                       timely way
@@ -1752,33 +1511,17 @@ export default function Privacy() {
                                                                   </span>
                                                                 </li>
                                                               </ul>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <div>
                                                                 <span data-custom-class="body_text">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     <span className="block-component" />
                                                                   </span>
                                                                 </span>
                                                               </div>
                                                               <ul className="list-inside">
-                                                                <li
-                                                                  style={{
-                                                                    lineHeight: '1.5',
-                                                                  }}
-                                                                >
+                                                                <li>
                                                                   <span data-custom-class="body_text">
-                                                                    <span
-                                                                      style={{
-                                                                        fontSize: 15,
-                                                                      }}
-                                                                    >
+                                                                    <span>
                                                                       For investigations and fraud detection and
                                                                       prevention
                                                                       <span className="statement-end-if-in-editor" />
@@ -1786,160 +1529,84 @@ export default function Privacy() {
                                                                   </span>
                                                                 </li>
                                                               </ul>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <div>
                                                                 <span className="block-component">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     <span data-custom-class="body_text" />
                                                                   </span>
                                                                 </span>
                                                               </div>
                                                               <ul className="list-inside">
-                                                                <li
-                                                                  style={{
-                                                                    lineHeight: '1.5',
-                                                                  }}
-                                                                >
+                                                                <li>
                                                                   <span data-custom-class="body_text">
-                                                                    <span
-                                                                      style={{
-                                                                        fontSize: 15,
-                                                                      }}
-                                                                    >
+                                                                    <span>
                                                                       For business transactions provided certain
                                                                       conditions are met
                                                                     </span>
                                                                   </span>
                                                                   <span className="statement-end-if-in-editor">
-                                                                    <span
-                                                                      style={{
-                                                                        fontSize: 15,
-                                                                      }}
-                                                                    >
+                                                                    <span>
                                                                       <span data-custom-class="body_text" />
                                                                     </span>
                                                                   </span>
                                                                 </li>
                                                               </ul>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <div>
                                                                 <span className="block-component">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     <span data-custom-class="body_text" />
                                                                   </span>
                                                                 </span>
                                                               </div>
                                                               <ul className="list-inside">
-                                                                <li
-                                                                  style={{
-                                                                    lineHeight: '1.5',
-                                                                  }}
-                                                                >
+                                                                <li>
                                                                   <span data-custom-class="body_text">
-                                                                    <span
-                                                                      style={{
-                                                                        fontSize: 15,
-                                                                      }}
-                                                                    >
+                                                                    <span>
                                                                       If it is contained in a witness statement and the
                                                                       collection is necessary to assess, process, or
                                                                       settle an insurance claim
                                                                     </span>
                                                                   </span>
                                                                   <span className="statement-end-if-in-editor">
-                                                                    <span
-                                                                      style={{
-                                                                        fontSize: 15,
-                                                                      }}
-                                                                    >
+                                                                    <span>
                                                                       <span data-custom-class="body_text" />
                                                                     </span>
                                                                   </span>
                                                                 </li>
                                                               </ul>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <div>
                                                                 <span className="block-component">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     <span data-custom-class="body_text" />
                                                                   </span>
                                                                 </span>
                                                               </div>
                                                               <ul className="list-inside">
-                                                                <li
-                                                                  style={{
-                                                                    lineHeight: '1.5',
-                                                                  }}
-                                                                >
+                                                                <li>
                                                                   <span data-custom-class="body_text">
-                                                                    <span
-                                                                      style={{
-                                                                        fontSize: 15,
-                                                                      }}
-                                                                    >
+                                                                    <span>
                                                                       For identifying injured, ill, or deceased persons
                                                                       and communicating with next of kin
                                                                     </span>
                                                                   </span>
                                                                   <span className="statement-end-if-in-editor">
-                                                                    <span
-                                                                      style={{
-                                                                        fontSize: 15,
-                                                                      }}
-                                                                    >
+                                                                    <span>
                                                                       <span data-custom-class="body_text" />
                                                                     </span>
                                                                   </span>
                                                                 </li>
                                                               </ul>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <div>
                                                                 <span data-custom-class="body_text">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     <span className="block-component" />
                                                                   </span>
                                                                 </span>
                                                               </div>
                                                               <ul className="list-inside">
-                                                                <li
-                                                                  style={{
-                                                                    lineHeight: '1.5',
-                                                                  }}
-                                                                >
+                                                                <li>
                                                                   <span data-custom-class="body_text">
-                                                                    <span
-                                                                      style={{
-                                                                        fontSize: 15,
-                                                                      }}
-                                                                    >
+                                                                    <span>
                                                                       If we have reasonable grounds to believe an
                                                                       individual has been, is, or may be victim of
                                                                       financial abuse
@@ -1948,33 +1615,17 @@ export default function Privacy() {
                                                                   </span>
                                                                 </li>
                                                               </ul>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <div>
                                                                 <span data-custom-class="body_text">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     <span className="block-component" />
                                                                   </span>
                                                                 </span>
                                                               </div>
                                                               <ul className="list-inside">
-                                                                <li
-                                                                  style={{
-                                                                    lineHeight: '1.5',
-                                                                  }}
-                                                                >
+                                                                <li>
                                                                   <span data-custom-class="body_text">
-                                                                    <span
-                                                                      style={{
-                                                                        fontSize: 15,
-                                                                      }}
-                                                                    >
+                                                                    <span>
                                                                       If it is reasonable to expect collection and use
                                                                       with consent would compromise the availability or
                                                                       the accuracy of the information and the collection
@@ -1986,33 +1637,17 @@ export default function Privacy() {
                                                                   </span>
                                                                 </li>
                                                               </ul>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <div>
                                                                 <span data-custom-class="body_text">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     <span className="block-component" />
                                                                   </span>
                                                                 </span>
                                                               </div>
                                                               <ul className="list-inside">
-                                                                <li
-                                                                  style={{
-                                                                    lineHeight: '1.5',
-                                                                  }}
-                                                                >
+                                                                <li>
                                                                   <span data-custom-class="body_text">
-                                                                    <span
-                                                                      style={{
-                                                                        fontSize: 15,
-                                                                      }}
-                                                                    >
+                                                                    <span>
                                                                       If disclosure is required to comply with a
                                                                       subpoena, warrant, court order, or rules of the
                                                                       court relating to the production of records
@@ -2021,32 +1656,16 @@ export default function Privacy() {
                                                                   </span>
                                                                 </li>
                                                               </ul>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <div>
                                                                 <span className="block-component">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     <span data-custom-class="body_text" />
                                                                   </span>
                                                                 </span>
                                                               </div>
                                                               <ul className="list-inside">
-                                                                <li
-                                                                  style={{
-                                                                    lineHeight: '1.5',
-                                                                  }}
-                                                                >
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                <li>
+                                                                  <span>
                                                                     <span data-custom-class="body_text">
                                                                       If it was produced by an individual in the course
                                                                       of their employment, business, or profession and
@@ -2057,32 +1676,16 @@ export default function Privacy() {
                                                                   </span>
                                                                 </li>
                                                               </ul>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
-                                                                <span
-                                                                  style={{
-                                                                    fontSize: 15,
-                                                                  }}
-                                                                >
+                                                              <div>
+                                                                <span>
                                                                   <span data-custom-class="body_text">
                                                                     <span className="block-component" />
                                                                   </span>
                                                                 </span>
                                                               </div>
                                                               <ul className="list-inside">
-                                                                <li
-                                                                  style={{
-                                                                    lineHeight: '1.5',
-                                                                  }}
-                                                                >
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                <li>
+                                                                  <span>
                                                                     <span data-custom-class="body_text">
                                                                       If the collection is solely for journalistic,
                                                                       artistic, or literary purposes
@@ -2091,32 +1694,16 @@ export default function Privacy() {
                                                                   </span>
                                                                 </li>
                                                               </ul>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
-                                                                <span
-                                                                  style={{
-                                                                    fontSize: 15,
-                                                                  }}
-                                                                >
+                                                              <div>
+                                                                <span>
                                                                   <span data-custom-class="body_text">
                                                                     <span className="block-component" />
                                                                   </span>
                                                                 </span>
                                                               </div>
                                                               <ul className="list-inside">
-                                                                <li
-                                                                  style={{
-                                                                    lineHeight: '1.5',
-                                                                  }}
-                                                                >
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                <li>
+                                                                  <span>
                                                                     <span data-custom-class="body_text">
                                                                       If the information is publicly available and is
                                                                       specified by the regulations
@@ -2127,72 +1714,27 @@ export default function Privacy() {
                                                                   </span>
                                                                 </li>
                                                               </ul>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <div>
                                                                 <span className="statement-end-if-in-editor">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     <span data-custom-class="body_text" />
                                                                   </span>
                                                                 </span>
                                                                 <span className="statement-end-if-in-editor">
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                  <span>
                                                                     <span data-custom-class="body_text" />
                                                                   </span>
                                                                 </span>
                                                               </div>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <div>
                                                                 <br />
                                                               </div>
-                                                              <div
-                                                                id="whoshare"
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
-                                                                <span
-                                                                  style={{
-                                                                    color: 'rgb(127, 127, 127)',
-                                                                  }}
-                                                                >
-                                                                  <span
-                                                                    style={{
-                                                                      color: 'rgb(89, 89, 89)',
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
-                                                                    <span
-                                                                      style={{
-                                                                        fontSize: 15,
-                                                                        color: 'rgb(89, 89, 89)',
-                                                                      }}
-                                                                    >
-                                                                      <span
-                                                                        style={{
-                                                                          fontSize: 15,
-                                                                          color: 'rgb(89, 89, 89)',
-                                                                        }}
-                                                                      >
-                                                                        <span
-                                                                          id="control"
-                                                                          style={{
-                                                                            color: 'rgb(0, 0, 0)',
-                                                                          }}
-                                                                        >
+                                                              <div id="whoshare">
+                                                                <span>
+                                                                  <span>
+                                                                    <span>
+                                                                      <span>
+                                                                        <span id="control">
                                                                           <strong>
                                                                             <span data-custom-class="heading_1">
                                                                               4. WHEN AND WITH WHOM DO WE SHARE YOUR
@@ -2205,30 +1747,12 @@ export default function Privacy() {
                                                                   </span>
                                                                 </span>
                                                               </div>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <div>
                                                                 <br />
                                                               </div>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
-                                                                <span
-                                                                  style={{
-                                                                    fontSize: 15,
-                                                                    color: 'rgb(89, 89, 89)',
-                                                                  }}
-                                                                >
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                      color: 'rgb(89, 89, 89)',
-                                                                    }}
-                                                                  >
+                                                              <div>
+                                                                <span>
+                                                                  <span>
                                                                     <span data-custom-class="body_text">
                                                                       <strong>
                                                                         <em>In Short:</em>
@@ -2245,46 +1769,20 @@ export default function Privacy() {
                                                                   &nbsp;
                                                                 </span>
                                                               </div>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
-                                                                <span
-                                                                  style={{
-                                                                    fontSize: 15,
-                                                                    color: 'rgb(89, 89, 89)',
-                                                                  }}
-                                                                >
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                      color: 'rgb(89, 89, 89)',
-                                                                    }}
-                                                                  >
+                                                              <div>
+                                                                <span>
+                                                                  <span>
                                                                     <span data-custom-class="body_text">
                                                                       <span className="block-component" />
                                                                     </span>
                                                                   </span>
                                                                 </span>
                                                               </div>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
+                                                              <div>
                                                                 <br />
                                                               </div>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
-                                                                <span
-                                                                  style={{
-                                                                    fontSize: 15,
-                                                                  }}
-                                                                >
+                                                              <div>
+                                                                <span>
                                                                   <span data-custom-class="body_text">
                                                                     We <span className="block-component" />
                                                                     may need to share your personal information in the
@@ -2293,16 +1791,8 @@ export default function Privacy() {
                                                                 </span>
                                                               </div>
                                                               <ul className="list-inside">
-                                                                <li
-                                                                  style={{
-                                                                    lineHeight: '1.5',
-                                                                  }}
-                                                                >
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                <li>
+                                                                  <span>
                                                                     <span data-custom-class="body_text">
                                                                       <strong>Business Transfers.</strong> We may share
                                                                       or transfer your information in connection with,
@@ -2313,116 +1803,47 @@ export default function Privacy() {
                                                                   </span>
                                                                 </li>
                                                               </ul>
-                                                              <div
-                                                                style={{
-                                                                  lineHeight: '1.5',
-                                                                }}
-                                                              >
-                                                                <span
-                                                                  style={{
-                                                                    fontSize: 15,
-                                                                  }}
-                                                                >
+                                                              <div>
+                                                                <span>
                                                                   <span data-custom-class="body_text">
                                                                     <span className="block-component" />
                                                                   </span>
                                                                 </span>
-                                                                <div
-                                                                  style={{
-                                                                    lineHeight: '1.5',
-                                                                  }}
-                                                                >
-                                                                  <span
-                                                                    style={{
-                                                                      fontSize: 15,
-                                                                    }}
-                                                                  >
+                                                                <div>
+                                                                  <span>
                                                                     <span className="block-component">
                                                                       <span data-custom-class="body_text" />
                                                                     </span>
                                                                   </span>
-                                                                  <div
-                                                                    style={{
-                                                                      lineHeight: '1.5',
-                                                                    }}
-                                                                  >
+                                                                  <div>
                                                                     <span className="block-component">
-                                                                      <span
-                                                                        style={{
-                                                                          fontSize: 15,
-                                                                        }}
-                                                                      >
+                                                                      <span>
                                                                         <span data-custom-class="body_text" />
                                                                       </span>
                                                                     </span>
-                                                                    <div
-                                                                      style={{
-                                                                        lineHeight: '1.5',
-                                                                      }}
-                                                                    >
+                                                                    <div>
                                                                       <span className="block-component">
-                                                                        <span
-                                                                          style={{
-                                                                            fontSize: 15,
-                                                                          }}
-                                                                        >
+                                                                        <span>
                                                                           <span data-custom-class="body_text" />
                                                                         </span>
                                                                       </span>
-                                                                      <div
-                                                                        style={{
-                                                                          lineHeight: '1.5',
-                                                                        }}
-                                                                      >
+                                                                      <div>
                                                                         <span className="block-component">
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                            }}
-                                                                          >
+                                                                          <span>
                                                                             <span data-custom-class="body_text" />
                                                                           </span>
                                                                         </span>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <span className="block-component">
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                              }}
-                                                                            >
+                                                                            <span>
                                                                               <span data-custom-class="body_text" />
                                                                             </span>
                                                                           </span>
-                                                                          <span
-                                                                            style={{
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                              fontSize: 15,
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
+                                                                          <span>
+                                                                            <span>
+                                                                              <span>
+                                                                                <span>
+                                                                                  <span>
                                                                                     <span className="block-component">
                                                                                       <span data-custom-class="heading_1" />
                                                                                     </span>
@@ -2432,48 +1853,15 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          id="cookies"
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              color: 'rgb(127, 127, 127)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                                fontSize: 15,
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    id="control"
-                                                                                    style={{
-                                                                                      color: 'rgb(0, 0, 0)',
-                                                                                    }}
-                                                                                  >
+                                                                        <div id="cookies">
+                                                                          <span>
+                                                                            <span>
+                                                                              <span>
+                                                                                <span>
+                                                                                  <span id="control">
                                                                                     <strong>
                                                                                       <span data-custom-class="heading_1">
                                                                                         5. DO WE USE COOKIES AND OTHER
@@ -2486,30 +1874,12 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                        <div>
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 <strong>
                                                                                   <em>In Short:</em>
@@ -2523,30 +1893,12 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                        <div>
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 We may use cookies and similar tracking
                                                                                 technologies (like web beacons and
@@ -2555,42 +1907,16 @@ export default function Privacy() {
                                                                                 such technologies and how you can refuse
                                                                                 certain cookies is set out in our Cookie
                                                                                 Notice
-                                                                                <span
-                                                                                  style={{
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                    fontSize: 15,
-                                                                                  }}
-                                                                                >
+                                                                                <span>
                                                                                   <span data-custom-class="body_text">
                                                                                     <span className="block-component" />
                                                                                     .
                                                                                   </span>
-                                                                                  <span
-                                                                                    style={{
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                      fontSize: 15,
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                      }}
-                                                                                    >
-                                                                                      <span
-                                                                                        style={{
-                                                                                          color: 'rgb(89, 89, 89)',
-                                                                                        }}
-                                                                                      >
-                                                                                        <span
-                                                                                          style={{
-                                                                                            fontSize: 15,
-                                                                                          }}
-                                                                                        >
-                                                                                          <span
-                                                                                            style={{
-                                                                                              color: 'rgb(89, 89, 89)',
-                                                                                            }}
-                                                                                          >
+                                                                                  <span>
+                                                                                    <span>
+                                                                                      <span>
+                                                                                        <span>
+                                                                                          <span>
                                                                                             <span data-custom-class="body_text">
                                                                                               <span className="statement-end-if-in-editor" />
                                                                                             </span>
@@ -2602,45 +1928,13 @@ export default function Privacy() {
                                                                                 </span>
                                                                               </span>
                                                                               <span data-custom-class="body_text">
-                                                                                <span
-                                                                                  style={{
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                    fontSize: 15,
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                      fontSize: 15,
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                        fontSize: 15,
-                                                                                      }}
-                                                                                    >
-                                                                                      <span
-                                                                                        style={{
-                                                                                          fontSize: 15,
-                                                                                        }}
-                                                                                      >
-                                                                                        <span
-                                                                                          style={{
-                                                                                            color: 'rgb(89, 89, 89)',
-                                                                                          }}
-                                                                                        >
-                                                                                          <span
-                                                                                            style={{
-                                                                                              fontSize: 15,
-                                                                                            }}
-                                                                                          >
-                                                                                            <span
-                                                                                              style={{
-                                                                                                color:
-                                                                                                  'rgb(89, 89, 89)',
-                                                                                              }}
-                                                                                            >
+                                                                                <span>
+                                                                                  <span>
+                                                                                    <span>
+                                                                                      <span>
+                                                                                        <span>
+                                                                                          <span>
+                                                                                            <span>
                                                                                               <span data-custom-class="body_text">
                                                                                                 <span className="block-component" />
                                                                                               </span>
@@ -2655,48 +1949,15 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          id="sociallogins"
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              color: 'rgb(127, 127, 127)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                                fontSize: 15,
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    id="control"
-                                                                                    style={{
-                                                                                      color: 'rgb(0, 0, 0)',
-                                                                                    }}
-                                                                                  >
+                                                                        <div id="sociallogins">
+                                                                          <span>
+                                                                            <span>
+                                                                              <span>
+                                                                                <span>
+                                                                                  <span id="control">
                                                                                     <strong>
                                                                                       <span data-custom-class="heading_1">
                                                                                         6. HOW DO WE HANDLE YOUR SOCIAL
@@ -2709,30 +1970,12 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                        <div>
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 <strong>
                                                                                   <em>In Short:&nbsp;</em>
@@ -2747,30 +1990,12 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                        <div>
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 Our Services offer you the ability to
                                                                                 register and log in using your
@@ -2787,16 +2012,8 @@ export default function Privacy() {
                                                                                 well as other information you choose to
                                                                                 make public on such a social media
                                                                                 platform.{' '}
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
+                                                                                <span>
+                                                                                  <span>
                                                                                     <span data-custom-class="body_text">
                                                                                       <span className="block-component" />
                                                                                     </span>
@@ -2806,30 +2023,12 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                        <div>
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 We will use the information we receive
                                                                                 only for the purposes that are described
@@ -2845,51 +2044,14 @@ export default function Privacy() {
                                                                                 share your personal information, and how
                                                                                 you can set your privacy preferences on
                                                                                 their sites and apps.
-                                                                                <span
-                                                                                  style={{
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                    fontSize: 15,
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                      fontSize: 15,
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                        fontSize: 15,
-                                                                                      }}
-                                                                                    >
-                                                                                      <span
-                                                                                        style={{
-                                                                                          color: 'rgb(89, 89, 89)',
-                                                                                          fontSize: 15,
-                                                                                        }}
-                                                                                      >
-                                                                                        <span
-                                                                                          style={{
-                                                                                            fontSize: 15,
-                                                                                          }}
-                                                                                        >
-                                                                                          <span
-                                                                                            style={{
-                                                                                              color: 'rgb(89, 89, 89)',
-                                                                                            }}
-                                                                                          >
-                                                                                            <span
-                                                                                              style={{
-                                                                                                fontSize: 15,
-                                                                                              }}
-                                                                                            >
-                                                                                              <span
-                                                                                                style={{
-                                                                                                  color:
-                                                                                                    'rgb(89, 89, 89)',
-                                                                                                }}
-                                                                                              >
+                                                                                <span>
+                                                                                  <span>
+                                                                                    <span>
+                                                                                      <span>
+                                                                                        <span>
+                                                                                          <span>
+                                                                                            <span>
+                                                                                              <span>
                                                                                                 <span data-custom-class="body_text">
                                                                                                   <span className="statement-end-if-in-editor" />
                                                                                                 </span>
@@ -2910,48 +2072,15 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          id="inforetain"
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              color: 'rgb(127, 127, 127)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                                fontSize: 15,
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    id="control"
-                                                                                    style={{
-                                                                                      color: 'rgb(0, 0, 0)',
-                                                                                    }}
-                                                                                  >
+                                                                        <div id="inforetain">
+                                                                          <span>
+                                                                            <span>
+                                                                              <span>
+                                                                                <span>
+                                                                                  <span id="control">
                                                                                     <strong>
                                                                                       <span data-custom-class="heading_1">
                                                                                         7. HOW LONG DO WE KEEP YOUR
@@ -2964,30 +2093,12 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                        <div>
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 <strong>
                                                                                   <em>In Short:&nbsp;</em>
@@ -3006,30 +2117,12 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                        <div>
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 We will only keep your personal
                                                                                 information for as long as it is
@@ -3044,30 +2137,12 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                        <div>
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 When we have no ongoing legitimate
                                                                                 business need to process your personal
@@ -3082,19 +2157,10 @@ export default function Privacy() {
                                                                                 your personal information and isolate it
                                                                                 from any further processing until
                                                                                 deletion is possible.
-                                                                                <span
-                                                                                  style={{
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
+                                                                                <span>
                                                                                   <span className="block-component" />
                                                                                 </span>
-                                                                                <span
-                                                                                  style={{
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                    fontSize: 15,
-                                                                                  }}
-                                                                                >
+                                                                                <span>
                                                                                   <span data-custom-class="body_text">
                                                                                     <span className="block-component" />
                                                                                   </span>
@@ -3103,48 +2169,15 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          id="infominors"
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              color: 'rgb(127, 127, 127)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                                fontSize: 15,
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    id="control"
-                                                                                    style={{
-                                                                                      color: 'rgb(0, 0, 0)',
-                                                                                    }}
-                                                                                  >
+                                                                        <div id="infominors">
+                                                                          <span>
+                                                                            <span>
+                                                                              <span>
+                                                                                <span>
+                                                                                  <span id="control">
                                                                                     <strong>
                                                                                       <span data-custom-class="heading_1">
                                                                                         8. DO WE COLLECT INFORMATION
@@ -3157,30 +2190,12 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                        <div>
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 <strong>
                                                                                   <em>In Short:</em>
@@ -3197,30 +2212,12 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                        <div>
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 We do not knowingly solicit data from or
                                                                                 market to children under 18 years of
@@ -3237,12 +2234,7 @@ export default function Privacy() {
                                                                                 records. If you become aware of any data
                                                                                 we may have collected from children
                                                                                 under age 18, please contact us at{' '}
-                                                                                <span
-                                                                                  style={{
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                    fontSize: 15,
-                                                                                  }}
-                                                                                >
+                                                                                <span>
                                                                                   <span data-custom-class="body_text">
                                                                                     <span className="block-component" />
                                                                                     <span className="question">
@@ -3261,48 +2253,15 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          id="privacyrights"
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              color: 'rgb(127, 127, 127)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                                fontSize: 15,
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    id="control"
-                                                                                    style={{
-                                                                                      color: 'rgb(0, 0, 0)',
-                                                                                    }}
-                                                                                  >
+                                                                        <div id="privacyrights">
+                                                                          <span>
+                                                                            <span>
+                                                                              <span>
+                                                                                <span>
+                                                                                  <span id="control">
                                                                                     <strong>
                                                                                       <span data-custom-class="heading_1">
                                                                                         9. WHAT ARE YOUR PRIVACY RIGHTS?
@@ -3314,46 +2273,20 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                        <div>
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 <strong>
                                                                                   <em>In Short:</em>
                                                                                 </strong>
                                                                                 <em>
                                                                                   &nbsp;
-                                                                                  <span
-                                                                                    style={{
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                      }}
-                                                                                    >
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         <em>
                                                                                           <span className="block-component" />
@@ -3370,16 +2303,8 @@ export default function Privacy() {
                                                                                   you have rights that allow you greater
                                                                                   access to and control over your
                                                                                   personal information.
-                                                                                  <span
-                                                                                    style={{
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                      }}
-                                                                                    >
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         <em>
                                                                                           <span className="statement-end-if-in-editor" />
@@ -3391,16 +2316,8 @@ export default function Privacy() {
                                                                                   You may review, change, or terminate
                                                                                   your account at any time.
                                                                                 </em>
-                                                                                <span
-                                                                                  style={{
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                    }}
-                                                                                  >
+                                                                                <span>
+                                                                                  <span>
                                                                                     <span className="block-component" />
                                                                                   </span>
                                                                                 </span>
@@ -3408,30 +2325,12 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                        <div>
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 In some regions (like{' '}
                                                                                 <span className="block-component" />
@@ -3460,18 +2359,8 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                           <a data-custom-class="link" href="#contact">
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
+                                                                            <span>
+                                                                              <span>
                                                                                 <span data-custom-class="body_text">
                                                                                   HOW CAN YOU CONTACT US ABOUT THIS
                                                                                   NOTICE?
@@ -3479,18 +2368,8 @@ export default function Privacy() {
                                                                               </span>
                                                                             </span>
                                                                           </a>
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 <span className="block-component" />
                                                                                 '
@@ -3499,30 +2378,12 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                        <div>
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 We will consider and act upon any
                                                                                 request in accordance with applicable
@@ -3532,58 +2393,21 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            &nbsp;
-                                                                          </span>
+                                                                        <div>
+                                                                          <span>&nbsp;</span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                        <div>
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 If you are located in the EEA or UK and
                                                                                 you believe we are unlawfully processing
                                                                                 your personal information, you also have
                                                                                 the right to complain to your{' '}
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
+                                                                                <span>
+                                                                                  <span>
                                                                                     <span data-custom-class="body_text">
-                                                                                      <span
-                                                                                        style={{
-                                                                                          color: 'rgb(48, 48, 241)',
-                                                                                        }}
-                                                                                      >
+                                                                                      <span>
                                                                                         <span data-custom-class="body_text">
                                                                                           <a
                                                                                             data-custom-class="link"
@@ -3591,11 +2415,7 @@ export default function Privacy() {
                                                                                             rel="noopener noreferrer"
                                                                                             target="_blank"
                                                                                           >
-                                                                                            <span
-                                                                                              style={{
-                                                                                                fontSize: 15,
-                                                                                              }}
-                                                                                            >
+                                                                                            <span>
                                                                                               Member State data
                                                                                               protection authority
                                                                                             </span>
@@ -3615,18 +2435,8 @@ export default function Privacy() {
                                                                             target="_blank"
                                                                           >
                                                                             <span data-custom-class="link">
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
+                                                                              <span>
+                                                                                <span>
                                                                                   <span data-custom-class="body_text">
                                                                                     UK data protection authority
                                                                                   </span>
@@ -3634,73 +2444,29 @@ export default function Privacy() {
                                                                               </span>
                                                                             </span>
                                                                           </a>
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 .
                                                                               </span>
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                        <div>
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 If you are located in Switzerland, you
                                                                                 may contact the{' '}
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
+                                                                                <span>
+                                                                                  <span>
                                                                                     <span data-custom-class="body_text">
-                                                                                      <span
-                                                                                        style={{
-                                                                                          color: 'rgb(48, 48, 241)',
-                                                                                        }}
-                                                                                      >
+                                                                                      <span>
                                                                                         <span data-custom-class="body_text">
-                                                                                          <span
-                                                                                            style={{
-                                                                                              fontSize: 15,
-                                                                                            }}
-                                                                                          >
+                                                                                          <span>
                                                                                             <a
                                                                                               data-custom-class="link"
                                                                                               href="https://www.edoeb.admin.ch/edoeb/en/home.html"
@@ -3722,31 +2488,12 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          id="withdrawconsent"
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                        <div id="withdrawconsent">
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 <strong>
                                                                                   <u>Withdrawing your consent:</u>
@@ -3769,18 +2516,8 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                           <a data-custom-class="link" href="#contact">
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
+                                                                            <span>
+                                                                              <span>
                                                                                 <span data-custom-class="body_text">
                                                                                   HOW CAN YOU CONTACT US ABOUT THIS
                                                                                   NOTICE?
@@ -3788,18 +2525,8 @@ export default function Privacy() {
                                                                               </span>
                                                                             </span>
                                                                           </a>
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 <span className="block-component" />
                                                                                 '
@@ -3809,23 +2536,11 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                            }}
-                                                                          >
+                                                                        <div>
+                                                                          <span>
                                                                             <span data-custom-class="body_text">
                                                                               However, please note that this will not
                                                                               affect the lawfulness of the processing
@@ -3841,60 +2556,21 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                           <span className="block-component">
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                              }}
-                                                                            >
+                                                                            <span>
                                                                               <span data-custom-class="body_text" />
                                                                             </span>
                                                                             &nbsp;
                                                                           </span>
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                      }}
-                                                                                    >
-                                                                                      <span
-                                                                                        style={{
-                                                                                          color: 'rgb(89, 89, 89)',
-                                                                                        }}
-                                                                                      >
+                                                                                <span>
+                                                                                  <span>
+                                                                                    <span>
+                                                                                      <span>
                                                                                         <span data-custom-class="body_text">
-                                                                                          <span
-                                                                                            style={{
-                                                                                              fontSize: 15,
-                                                                                            }}
-                                                                                          >
-                                                                                            <span
-                                                                                              style={{
-                                                                                                color:
-                                                                                                  'rgb(89, 89, 89)',
-                                                                                              }}
-                                                                                            >
+                                                                                          <span>
+                                                                                            <span>
                                                                                               <span className="block-component" />
                                                                                             </span>
                                                                                           </span>
@@ -3907,30 +2583,12 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                        <div>
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 <strong>
                                                                                   <u>
@@ -3946,50 +2604,16 @@ export default function Privacy() {
                                                                                 certain features or services of our
                                                                                 Services.{' '}
                                                                                 <span className="block-component">
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         <span className="block-component" />
-                                                                                        <span
-                                                                                          style={{
-                                                                                            fontSize: 15,
-                                                                                          }}
-                                                                                        >
-                                                                                          <span
-                                                                                            style={{
-                                                                                              color: 'rgb(89, 89, 89)',
-                                                                                            }}
-                                                                                          >
-                                                                                            <span
-                                                                                              style={{
-                                                                                                fontSize: 15,
-                                                                                              }}
-                                                                                            >
-                                                                                              <span
-                                                                                                style={{
-                                                                                                  color:
-                                                                                                    'rgb(89, 89, 89)',
-                                                                                                }}
-                                                                                              >
-                                                                                                <span
-                                                                                                  style={{
-                                                                                                    fontSize: 15,
-                                                                                                  }}
-                                                                                                >
-                                                                                                  <span
-                                                                                                    style={{
-                                                                                                      color:
-                                                                                                        'rgb(89, 89, 89)',
-                                                                                                    }}
-                                                                                                  >
+                                                                                        <span>
+                                                                                          <span>
+                                                                                            <span>
+                                                                                              <span>
+                                                                                                <span>
+                                                                                                  <span>
                                                                                                     <span className="statement-end-if-in-editor" />
                                                                                                   </span>
                                                                                                 </span>
@@ -4005,33 +2629,17 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                           <span className="block-component">
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                              }}
-                                                                            >
+                                                                            <span>
                                                                               <span data-custom-class="body_text" />
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <span data-custom-class="body_text">
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                              }}
-                                                                            >
+                                                                            <span>
                                                                               If you have questions or comments about
                                                                               your privacy rights, you may email us at{' '}
                                                                               <span className="question">
@@ -4041,57 +2649,20 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                           <span className="statement-end-if-in-editor">
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                              }}
-                                                                            >
+                                                                            <span>
                                                                               <span data-custom-class="body_text" />
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          id="DNT"
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              color: 'rgb(127, 127, 127)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                                fontSize: 15,
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    id="control"
-                                                                                    style={{
-                                                                                      color: 'rgb(0, 0, 0)',
-                                                                                    }}
-                                                                                  >
+                                                                        <div id="DNT">
+                                                                          <span>
+                                                                            <span>
+                                                                              <span>
+                                                                                <span>
+                                                                                  <span id="control">
                                                                                     <strong>
                                                                                       <span data-custom-class="heading_1">
                                                                                         10. CONTROLS FOR DO-NOT-TRACK
@@ -4104,30 +2675,12 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                        <div>
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 Most web browsers and some mobile
                                                                                 operating systems and mobile
@@ -4161,48 +2714,15 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          id="uslaws"
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              color: 'rgb(127, 127, 127)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                                fontSize: 15,
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    id="control"
-                                                                                    style={{
-                                                                                      color: 'rgb(0, 0, 0)',
-                                                                                    }}
-                                                                                  >
+                                                                        <div id="uslaws">
+                                                                          <span>
+                                                                            <span>
+                                                                              <span>
+                                                                                <span>
+                                                                                  <span id="control">
                                                                                     <strong>
                                                                                       <span data-custom-class="heading_1">
                                                                                         11. DO UNITED STATES RESIDENTS
@@ -4215,30 +2735,12 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                        <div>
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 <strong>
                                                                                   <em>In Short:&nbsp;</em>
@@ -4254,30 +2756,12 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                        <div>
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 <strong>
                                                                                   What categories of personal
@@ -4287,30 +2771,12 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
-                                                                          <span
-                                                                            style={{
-                                                                              fontSize: 15,
-                                                                              color: 'rgb(89, 89, 89)',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
+                                                                        <div>
+                                                                          <span>
+                                                                            <span>
                                                                               <span data-custom-class="body_text">
                                                                                 We have collected the following
                                                                                 categories of personal information in
@@ -4319,91 +2785,33 @@ export default function Privacy() {
                                                                             </span>
                                                                           </span>
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <table
-                                                                          style={{
-                                                                            width: '100%',
-                                                                          }}
-                                                                        >
+                                                                        <table>
                                                                           <tbody>
                                                                             <tr>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '33.8274%',
-                                                                                  borderLeft: '1px solid black',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
+                                                                              <td>
+                                                                                <span>
+                                                                                  <span>
                                                                                     <span data-custom-class="body_text">
                                                                                       <strong>Category</strong>
                                                                                     </span>
                                                                                   </span>
                                                                                 </span>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '51.4385%',
-                                                                                  borderTop: '1px solid black',
-                                                                                  borderRight: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
+                                                                              <td>
+                                                                                <span>
+                                                                                  <span>
                                                                                     <span data-custom-class="body_text">
                                                                                       <strong>Examples</strong>
                                                                                     </span>
                                                                                   </span>
                                                                                 </span>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '14.9084%',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                  textAlign: 'center',
-                                                                                }}
-                                                                              >
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
+                                                                              <td>
+                                                                                <span>
+                                                                                  <span>
                                                                                     <span data-custom-class="body_text">
                                                                                       <strong>Collected</strong>
                                                                                     </span>
@@ -4412,31 +2820,10 @@ export default function Privacy() {
                                                                               </td>
                                                                             </tr>
                                                                             <tr>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '33.8274%',
-                                                                                  borderLeft: '1px solid black',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                              <td>
+                                                                                <div>
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         A. Identifiers
                                                                                       </span>
@@ -4444,30 +2831,10 @@ export default function Privacy() {
                                                                                   </span>
                                                                                 </div>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '51.4385%',
-                                                                                  borderTop: '1px solid black',
-                                                                                  borderRight: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                              <td>
+                                                                                <div>
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         Contact details, such as real
                                                                                         name, alias, postal address,
@@ -4481,39 +2848,13 @@ export default function Privacy() {
                                                                                   </span>
                                                                                 </div>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '14.9084%',
-                                                                                  textAlign: 'center',
-                                                                                  verticalAlign: 'middle',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                              <td>
+                                                                                <div>
                                                                                   <br />
                                                                                 </div>
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                                <div>
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         <span className="block-component">
                                                                                           <span className="block-component" />
@@ -4526,56 +2867,23 @@ export default function Privacy() {
                                                                                     </span>
                                                                                   </span>
                                                                                 </div>
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                                <div>
                                                                                   <br />
                                                                                 </div>
                                                                               </td>
                                                                             </tr>
                                                                           </tbody>
                                                                         </table>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <span className="block-component" />
                                                                         </div>
-                                                                        <table
-                                                                          style={{
-                                                                            width: '100%',
-                                                                          }}
-                                                                        >
+                                                                        <table>
                                                                           <tbody>
                                                                             <tr>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '33.8274%',
-                                                                                  borderLeft: '1px solid black',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                              <td>
+                                                                                <div>
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         <span className="block-component" />
                                                                                         B
@@ -4588,30 +2896,10 @@ export default function Privacy() {
                                                                                   </span>
                                                                                 </div>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '51.4385%',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                              <td>
+                                                                                <div>
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         Gender and date of birth
                                                                                       </span>
@@ -4619,27 +2907,11 @@ export default function Privacy() {
                                                                                   </span>
                                                                                 </div>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '14.9084%',
-                                                                                  textAlign: 'center',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                              <td>
+                                                                                <div>
                                                                                   <br />
                                                                                 </div>
-                                                                                <div
-                                                                                  data-custom-class="body_text"
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                                <div data-custom-class="body_text">
                                                                                   <span className="forloop-component">
                                                                                     <span data-custom-class="body_text">
                                                                                       <span className="block-component" />
@@ -4650,41 +2922,16 @@ export default function Privacy() {
                                                                                     </span>
                                                                                   </span>
                                                                                 </div>
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                                <div>
                                                                                   <br />
                                                                                 </div>
                                                                               </td>
                                                                             </tr>
                                                                             <tr>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '33.8274%',
-                                                                                  borderLeft: '1px solid black',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                              <td>
+                                                                                <div>
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         <span className="block-component" />
                                                                                         C
@@ -4695,30 +2942,10 @@ export default function Privacy() {
                                                                                   </span>
                                                                                 </div>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '51.4385%',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                              <td>
+                                                                                <div>
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         Transaction information,
                                                                                         purchase history, financial
@@ -4728,27 +2955,11 @@ export default function Privacy() {
                                                                                   </span>
                                                                                 </div>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '14.9084%',
-                                                                                  textAlign: 'center',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                              <td>
+                                                                                <div>
                                                                                   <br />
                                                                                 </div>
-                                                                                <div
-                                                                                  data-custom-class="body_text"
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                                <div data-custom-class="body_text">
                                                                                   <span className="forloop-component">
                                                                                     <span data-custom-class="body_text">
                                                                                       <span className="block-component" />
@@ -4760,41 +2971,16 @@ export default function Privacy() {
                                                                                     </span>
                                                                                   </span>
                                                                                 </div>
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                                <div>
                                                                                   <br />
                                                                                 </div>
                                                                               </td>
                                                                             </tr>
                                                                             <tr>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '33.8274%',
-                                                                                  borderLeft: '1px solid black',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                              <td>
+                                                                                <div>
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         <span className="block-component" />
                                                                                         D
@@ -4805,30 +2991,10 @@ export default function Privacy() {
                                                                                   </span>
                                                                                 </div>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '51.4385%',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                              <td>
+                                                                                <div>
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         Fingerprints and voiceprints
                                                                                       </span>
@@ -4836,27 +3002,11 @@ export default function Privacy() {
                                                                                   </span>
                                                                                 </div>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '14.9084%',
-                                                                                  textAlign: 'center',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                              <td>
+                                                                                <div>
                                                                                   <br />
                                                                                 </div>
-                                                                                <div
-                                                                                  data-custom-class="body_text"
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                                <div data-custom-class="body_text">
                                                                                   <span className="forloop-component">
                                                                                     <span data-custom-class="body_text">
                                                                                       <span className="block-component">
@@ -4869,41 +3019,16 @@ export default function Privacy() {
                                                                                     </span>
                                                                                   </span>
                                                                                 </div>
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                                <div>
                                                                                   <br />
                                                                                 </div>
                                                                               </td>
                                                                             </tr>
                                                                             <tr>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '33.8274%',
-                                                                                  borderLeft: '1px solid black',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                              <td>
+                                                                                <div>
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         <span className="block-component" />
                                                                                         E
@@ -4915,30 +3040,10 @@ export default function Privacy() {
                                                                                   </span>
                                                                                 </div>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '51.4385%',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                              <td>
+                                                                                <div>
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         Browsing history, search
                                                                                         history, online{' '}
@@ -4954,27 +3059,11 @@ export default function Privacy() {
                                                                                   </span>
                                                                                 </div>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '14.9084%',
-                                                                                  textAlign: 'center',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                              <td>
+                                                                                <div>
                                                                                   <br />
                                                                                 </div>
-                                                                                <div
-                                                                                  data-custom-class="body_text"
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                                <div data-custom-class="body_text">
                                                                                   <span className="forloop-component">
                                                                                     <span data-custom-class="body_text">
                                                                                       <span className="block-component" />
@@ -4985,41 +3074,16 @@ export default function Privacy() {
                                                                                     </span>
                                                                                   </span>
                                                                                 </div>
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                                <div>
                                                                                   <br />
                                                                                 </div>
                                                                               </td>
                                                                             </tr>
                                                                             <tr>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '33.8274%',
-                                                                                  borderLeft: '1px solid black',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                              <td>
+                                                                                <div>
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         <span className="block-component" />
                                                                                         F
@@ -5030,30 +3094,10 @@ export default function Privacy() {
                                                                                   </span>
                                                                                 </div>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '51.4385%',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                              <td>
+                                                                                <div>
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         Device location
                                                                                       </span>
@@ -5061,27 +3105,11 @@ export default function Privacy() {
                                                                                   </span>
                                                                                 </div>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '14.9084%',
-                                                                                  textAlign: 'center',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                              <td>
+                                                                                <div>
                                                                                   <br />
                                                                                 </div>
-                                                                                <div
-                                                                                  data-custom-class="body_text"
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                                <div data-custom-class="body_text">
                                                                                   <span className="forloop-component">
                                                                                     <span data-custom-class="body_text">
                                                                                       <span className="block-component" />
@@ -5092,41 +3120,16 @@ export default function Privacy() {
                                                                                     </span>
                                                                                   </span>
                                                                                 </div>
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                                <div>
                                                                                   <br />
                                                                                 </div>
                                                                               </td>
                                                                             </tr>
                                                                             <tr>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '33.8274%',
-                                                                                  borderLeft: '1px solid black',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                              <td>
+                                                                                <div>
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         <span className="block-component" />
                                                                                         G
@@ -5139,30 +3142,10 @@ export default function Privacy() {
                                                                                   </span>
                                                                                 </div>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '51.4385%',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                              <td>
+                                                                                <div>
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         Images and audio, video or call
                                                                                         recordings created in connection
@@ -5172,27 +3155,11 @@ export default function Privacy() {
                                                                                   </span>
                                                                                 </div>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '14.9084%',
-                                                                                  textAlign: 'center',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                              <td>
+                                                                                <div>
                                                                                   <br />
                                                                                 </div>
-                                                                                <div
-                                                                                  data-custom-class="body_text"
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                                <div data-custom-class="body_text">
                                                                                   <span className="forloop-component">
                                                                                     <span data-custom-class="body_text">
                                                                                       <span className="block-component" />
@@ -5203,41 +3170,16 @@ export default function Privacy() {
                                                                                     </span>
                                                                                   </span>
                                                                                 </div>
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                                <div>
                                                                                   <br />
                                                                                 </div>
                                                                               </td>
                                                                             </tr>
                                                                             <tr>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '33.8274%',
-                                                                                  borderLeft: '1px solid black',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                              <td>
+                                                                                <div>
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         <span className="block-component" />
                                                                                         H
@@ -5249,30 +3191,10 @@ export default function Privacy() {
                                                                                   </span>
                                                                                 </div>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '51.4385%',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                              <td>
+                                                                                <div>
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         Business contact details in
                                                                                         order to provide you our
@@ -5285,27 +3207,11 @@ export default function Privacy() {
                                                                                   </span>
                                                                                 </div>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  width: '14.9084%',
-                                                                                  textAlign: 'center',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                              <td>
+                                                                                <div>
                                                                                   <br />
                                                                                 </div>
-                                                                                <div
-                                                                                  data-custom-class="body_text"
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                                <div data-custom-class="body_text">
                                                                                   <span className="forloop-component">
                                                                                     <span data-custom-class="body_text">
                                                                                       <span className="block-component" />
@@ -5316,41 +3222,16 @@ export default function Privacy() {
                                                                                     </span>
                                                                                   </span>
                                                                                 </div>
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                                <div>
                                                                                   <br />
                                                                                 </div>
                                                                               </td>
                                                                             </tr>
                                                                             <tr>
-                                                                              <td
-                                                                                style={{
-                                                                                  borderLeft: '1px solid black',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                  width: '33.8274%',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                              <td>
+                                                                                <div>
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         <span className="block-component" />
                                                                                         I
@@ -5361,30 +3242,10 @@ export default function Privacy() {
                                                                                   </span>
                                                                                 </div>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                  width: '51.4385%',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                              <td>
+                                                                                <div>
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         Student records and directory
                                                                                         information
@@ -5393,27 +3254,11 @@ export default function Privacy() {
                                                                                   </span>
                                                                                 </div>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  textAlign: 'center',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                  width: '14.9084%',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                              <td>
+                                                                                <div>
                                                                                   <br />
                                                                                 </div>
-                                                                                <div
-                                                                                  data-custom-class="body_text"
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                                <div data-custom-class="body_text">
                                                                                   <span className="forloop-component">
                                                                                     <span data-custom-class="body_text">
                                                                                       <span className="block-component" />
@@ -5424,41 +3269,16 @@ export default function Privacy() {
                                                                                     </span>
                                                                                   </span>
                                                                                 </div>
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                                <div>
                                                                                   <br />
                                                                                 </div>
                                                                               </td>
                                                                             </tr>
                                                                             <tr>
-                                                                              <td
-                                                                                style={{
-                                                                                  borderWidth: 1,
-                                                                                  borderColor: 'black',
-                                                                                  borderStyle: 'solid',
-                                                                                  width: '33.8274%',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                              <td>
+                                                                                <div>
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         <span className="block-component" />
                                                                                         J
@@ -5470,31 +3290,10 @@ export default function Privacy() {
                                                                                   </span>
                                                                                 </div>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  borderBottom: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                  borderRight: '1px solid black',
-                                                                                  width: '51.4385%',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                              <td>
+                                                                                <div>
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
                                                                                         Inferences drawn from any of the
                                                                                         collected personal information
@@ -5507,49 +3306,18 @@ export default function Privacy() {
                                                                                   </span>
                                                                                 </div>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  textAlign: 'center',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderBottom: '1px solid black',
-                                                                                  borderTop: '1px solid black',
-                                                                                  width: '14.9084%',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                              <td>
+                                                                                <div>
                                                                                   <br />
                                                                                 </div>
-                                                                                <div
-                                                                                  data-custom-class="body_text"
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                                <div data-custom-class="body_text">
                                                                                   <span data-custom-class="body_text">
                                                                                     <span className="block-component" />
                                                                                     NO
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
-                                                                                      <span
-                                                                                        style={{
-                                                                                          fontSize: 15,
-                                                                                          color: 'rgb(89, 89, 89)',
-                                                                                        }}
-                                                                                      >
+                                                                                    <span>
+                                                                                      <span>
                                                                                         <span data-custom-class="body_text">
-                                                                                          <span
-                                                                                            style={{
-                                                                                              color: 'rgb(89, 89, 89)',
-                                                                                            }}
-                                                                                          >
+                                                                                          <span>
                                                                                             <span data-custom-class="body_text">
                                                                                               <span className="statement-end-if-in-editor" />
                                                                                             </span>
@@ -5559,24 +3327,13 @@ export default function Privacy() {
                                                                                     </span>
                                                                                   </span>
                                                                                 </div>
-                                                                                <div
-                                                                                  style={{
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
-                                                                                >
+                                                                                <div>
                                                                                   <br />
                                                                                 </div>
                                                                               </td>
                                                                             </tr>
                                                                             <tr>
-                                                                              <td
-                                                                                style={{
-                                                                                  borderLeft: '1px solid black',
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderBottom: '1px solid black',
-                                                                                  lineHeight: '1.5',
-                                                                                }}
-                                                                              >
+                                                                              <td>
                                                                                 <span data-custom-class="body_text">
                                                                                   <span className="block-component" />
                                                                                   K
@@ -5584,38 +3341,18 @@ export default function Privacy() {
                                                                                   . Sensitive personal Information
                                                                                 </span>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderBottom: '1px solid black',
-                                                                                  lineHeight: '1.5',
-                                                                                }}
-                                                                              >
+                                                                              <td>
                                                                                 <span className="block-component">
                                                                                   <span data-custom-class="body_text" />
                                                                                 </span>
                                                                               </td>
-                                                                              <td
-                                                                                style={{
-                                                                                  borderRight: '1px solid black',
-                                                                                  borderBottom: '1px solid black',
-                                                                                }}
-                                                                              >
-                                                                                <div
-                                                                                  data-empty="true"
-                                                                                  style={{
-                                                                                    textAlign: 'center',
-                                                                                  }}
-                                                                                >
+                                                                              <td>
+                                                                                <div data-empty="true">
                                                                                   <br />
                                                                                 </div>
                                                                                 <div
                                                                                   data-custom-class="body_text"
                                                                                   data-empty="true"
-                                                                                  style={{
-                                                                                    textAlign: 'center',
-                                                                                    lineHeight: '1.5',
-                                                                                  }}
                                                                                 >
                                                                                   <span className="block-component">
                                                                                     <span data-custom-class="body_text" />
@@ -5625,98 +3362,42 @@ export default function Privacy() {
                                                                                     <span data-custom-class="body_text" />
                                                                                   </span>
                                                                                 </div>
-                                                                                <div
-                                                                                  data-empty="true"
-                                                                                  style={{
-                                                                                    textAlign: 'center',
-                                                                                  }}
-                                                                                >
+                                                                                <div data-empty="true">
                                                                                   <br />
                                                                                 </div>
                                                                               </td>
                                                                             </tr>
                                                                           </tbody>
                                                                         </table>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <br />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            lineHeight: '1.5',
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           <span className="block-component">
                                                                             <span data-custom-class="body_text" />
                                                                           </span>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
+                                                                          <div>
+                                                                            <span>
+                                                                              <span>
                                                                                 <span data-custom-class="body_text">
                                                                                   <span className="block-component" />
                                                                                 </span>
                                                                               </span>
                                                                             </span>
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
+                                                                          <div>
+                                                                            <span>
+                                                                              <span>
                                                                                 <span data-custom-class="body_text">
                                                                                   We may also collect other personal
                                                                                   information outside of these
                                                                                   categories through instances where you
                                                                                   interact with us in person, online, or
                                                                                   by phone or mail in the context of:
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
-                                                                                        <span
-                                                                                          style={{
-                                                                                            color: 'rgb(89, 89, 89)',
-                                                                                            fontSize: 15,
-                                                                                          }}
-                                                                                        >
+                                                                                        <span>
                                                                                           <span data-custom-class="body_text">
                                                                                             <span className="block-component" />
                                                                                           </span>
@@ -5729,67 +3410,23 @@ export default function Privacy() {
                                                                             </span>
                                                                           </div>
                                                                           <ul className="list-inside">
-                                                                            <li
-                                                                              style={{
-                                                                                lineHeight: '1.5',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
+                                                                            <li>
+                                                                              <span>
+                                                                                <span>
                                                                                   <span data-custom-class="body_text">
                                                                                     Receiving help through our customer
                                                                                     support channels;
                                                                                   </span>
                                                                                   <span data-custom-class="body_text">
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
-                                                                                      <span
-                                                                                        style={{
-                                                                                          fontSize: 15,
-                                                                                          color: 'rgb(89, 89, 89)',
-                                                                                        }}
-                                                                                      >
+                                                                                    <span>
+                                                                                      <span>
                                                                                         <span data-custom-class="body_text">
-                                                                                          <span
-                                                                                            style={{
-                                                                                              color: 'rgb(89, 89, 89)',
-                                                                                              fontSize: 15,
-                                                                                            }}
-                                                                                          >
+                                                                                          <span>
                                                                                             <span data-custom-class="body_text">
-                                                                                              <span
-                                                                                                style={{
-                                                                                                  color:
-                                                                                                    'rgb(89, 89, 89)',
-                                                                                                  fontSize: 15,
-                                                                                                }}
-                                                                                              >
+                                                                                              <span>
                                                                                                 <span data-custom-class="body_text">
-                                                                                                  <span
-                                                                                                    style={{
-                                                                                                      fontSize: 15,
-                                                                                                    }}
-                                                                                                  >
-                                                                                                    <span
-                                                                                                      style={{
-                                                                                                        color:
-                                                                                                          'rgb(89, 89, 89)',
-                                                                                                      }}
-                                                                                                    >
+                                                                                                  <span>
+                                                                                                    <span>
                                                                                                       <span data-custom-class="body_text">
                                                                                                         <span className="statement-end-if-in-editor" />
                                                                                                       </span>
@@ -5808,38 +3445,13 @@ export default function Privacy() {
                                                                             </li>
                                                                           </ul>
                                                                           <div>
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
+                                                                            <span>
+                                                                              <span>
                                                                                 <span data-custom-class="body_text">
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
-                                                                                        <span
-                                                                                          style={{
-                                                                                            color: 'rgb(89, 89, 89)',
-                                                                                            fontSize: 15,
-                                                                                          }}
-                                                                                        >
+                                                                                        <span>
                                                                                           <span data-custom-class="body_text">
                                                                                             <span className="block-component" />
                                                                                           </span>
@@ -5852,67 +3464,23 @@ export default function Privacy() {
                                                                             </span>
                                                                           </div>
                                                                           <ul className="list-inside">
-                                                                            <li
-                                                                              style={{
-                                                                                lineHeight: '1.5',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
+                                                                            <li>
+                                                                              <span>
+                                                                                <span>
                                                                                   <span data-custom-class="body_text">
                                                                                     Participation in customer surveys or
                                                                                     contests; and
                                                                                   </span>
                                                                                   <span data-custom-class="body_text">
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
-                                                                                      <span
-                                                                                        style={{
-                                                                                          fontSize: 15,
-                                                                                          color: 'rgb(89, 89, 89)',
-                                                                                        }}
-                                                                                      >
+                                                                                    <span>
+                                                                                      <span>
                                                                                         <span data-custom-class="body_text">
-                                                                                          <span
-                                                                                            style={{
-                                                                                              color: 'rgb(89, 89, 89)',
-                                                                                              fontSize: 15,
-                                                                                            }}
-                                                                                          >
+                                                                                          <span>
                                                                                             <span data-custom-class="body_text">
-                                                                                              <span
-                                                                                                style={{
-                                                                                                  color:
-                                                                                                    'rgb(89, 89, 89)',
-                                                                                                  fontSize: 15,
-                                                                                                }}
-                                                                                              >
+                                                                                              <span>
                                                                                                 <span data-custom-class="body_text">
-                                                                                                  <span
-                                                                                                    style={{
-                                                                                                      fontSize: 15,
-                                                                                                    }}
-                                                                                                  >
-                                                                                                    <span
-                                                                                                      style={{
-                                                                                                        color:
-                                                                                                          'rgb(89, 89, 89)',
-                                                                                                      }}
-                                                                                                    >
+                                                                                                  <span>
+                                                                                                    <span>
                                                                                                       <span data-custom-class="body_text">
                                                                                                         <span className="statement-end-if-in-editor" />
                                                                                                       </span>
@@ -5931,38 +3499,13 @@ export default function Privacy() {
                                                                             </li>
                                                                           </ul>
                                                                           <div>
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
+                                                                            <span>
+                                                                              <span>
                                                                                 <span data-custom-class="body_text">
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
+                                                                                  <span>
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
-                                                                                        <span
-                                                                                          style={{
-                                                                                            color: 'rgb(89, 89, 89)',
-                                                                                            fontSize: 15,
-                                                                                          }}
-                                                                                        >
+                                                                                        <span>
                                                                                           <span data-custom-class="body_text">
                                                                                             <span className="block-component" />
                                                                                           </span>
@@ -5975,68 +3518,24 @@ export default function Privacy() {
                                                                             </span>
                                                                           </div>
                                                                           <ul className="list-inside">
-                                                                            <li
-                                                                              style={{
-                                                                                lineHeight: '1.5',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
+                                                                            <li>
+                                                                              <span>
+                                                                                <span>
                                                                                   <span data-custom-class="body_text">
                                                                                     Facilitation in the delivery of our
                                                                                     Services and to respond to your
                                                                                     inquiries.
                                                                                   </span>
                                                                                   <span data-custom-class="body_text">
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
-                                                                                      <span
-                                                                                        style={{
-                                                                                          fontSize: 15,
-                                                                                          color: 'rgb(89, 89, 89)',
-                                                                                        }}
-                                                                                      >
+                                                                                    <span>
+                                                                                      <span>
                                                                                         <span data-custom-class="body_text">
-                                                                                          <span
-                                                                                            style={{
-                                                                                              color: 'rgb(89, 89, 89)',
-                                                                                              fontSize: 15,
-                                                                                            }}
-                                                                                          >
+                                                                                          <span>
                                                                                             <span data-custom-class="body_text">
-                                                                                              <span
-                                                                                                style={{
-                                                                                                  color:
-                                                                                                    'rgb(89, 89, 89)',
-                                                                                                  fontSize: 15,
-                                                                                                }}
-                                                                                              >
+                                                                                              <span>
                                                                                                 <span data-custom-class="body_text">
-                                                                                                  <span
-                                                                                                    style={{
-                                                                                                      fontSize: 15,
-                                                                                                    }}
-                                                                                                  >
-                                                                                                    <span
-                                                                                                      style={{
-                                                                                                        color:
-                                                                                                          'rgb(89, 89, 89)',
-                                                                                                      }}
-                                                                                                    >
+                                                                                                  <span>
+                                                                                                    <span>
                                                                                                       <span data-custom-class="body_text">
                                                                                                         <span className="statement-end-if-in-editor" />
                                                                                                       </span>
@@ -6054,23 +3553,9 @@ export default function Privacy() {
                                                                               </span>
                                                                             </li>
                                                                           </ul>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
+                                                                          <div>
+                                                                            <span>
+                                                                              <span>
                                                                                 <span data-custom-class="body_text">
                                                                                   <strong>
                                                                                     How do we use and share your
@@ -6080,24 +3565,11 @@ export default function Privacy() {
                                                                               </span>
                                                                             </span>
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
+                                                                          <div>
                                                                             <br />
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              data-custom-class="body_text"
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                              }}
-                                                                            >
+                                                                          <div>
+                                                                            <span data-custom-class="body_text">
                                                                               Learn about how we use your personal
                                                                               information in the section,{' '}
                                                                               <span className="block-component" />
@@ -6105,57 +3577,24 @@ export default function Privacy() {
                                                                               <span className="else-block" />
                                                                             </span>
                                                                             <a href="#infouse">
-                                                                              <span
-                                                                                data-custom-class="link"
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                }}
-                                                                              >
+                                                                              <span data-custom-class="link">
                                                                                 HOW DO WE PROCESS YOUR INFORMATION?
                                                                               </span>
                                                                             </a>
-                                                                            <span
-                                                                              data-custom-class="body_text"
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                              }}
-                                                                            >
+                                                                            <span data-custom-class="body_text">
                                                                               <span className="block-component" />
                                                                               '
                                                                               <span className="else-block" />
                                                                             </span>
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
+                                                                          <div>
                                                                             <br />
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
+                                                                          <div>
+                                                                            <span>
+                                                                              <span>
                                                                                 <span data-custom-class="body_text">
-                                                                                  <span
-                                                                                    style={{
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                      fontSize: 15,
-                                                                                    }}
-                                                                                  >
+                                                                                  <span>
                                                                                     <span data-custom-class="body_text">
                                                                                       <span className="block-component" />
                                                                                     </span>
@@ -6164,23 +3603,9 @@ export default function Privacy() {
                                                                               </span>
                                                                             </span>
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
+                                                                          <div>
+                                                                            <span>
+                                                                              <span>
                                                                                 <span data-custom-class="body_text">
                                                                                   <strong>
                                                                                     Will your information be shared with
@@ -6190,30 +3615,12 @@ export default function Privacy() {
                                                                               </span>
                                                                             </span>
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
+                                                                          <div>
                                                                             <br />
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
+                                                                          <div>
+                                                                            <span>
+                                                                              <span>
                                                                                 <span data-custom-class="body_text">
                                                                                   We may disclose your personal
                                                                                   information with our service providers
@@ -6228,18 +3635,8 @@ export default function Privacy() {
                                                                               </span>
                                                                             </span>
                                                                             <a href="#whoshare">
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
+                                                                              <span>
+                                                                                <span>
                                                                                   <span data-custom-class="link">
                                                                                     WHEN AND WITH WHOM DO WE SHARE YOUR
                                                                                     PERSONAL INFORMATION?
@@ -6247,18 +3644,8 @@ export default function Privacy() {
                                                                                 </span>
                                                                               </span>
                                                                             </a>
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
+                                                                            <span>
+                                                                              <span>
                                                                                 <span data-custom-class="body_text">
                                                                                   <span className="block-component" />
                                                                                   '
@@ -6267,30 +3654,12 @@ export default function Privacy() {
                                                                               </span>
                                                                             </span>
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
+                                                                          <div>
                                                                             <br />
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
+                                                                          <div>
+                                                                            <span>
+                                                                              <span>
                                                                                 <span data-custom-class="body_text">
                                                                                   We may use your personal information
                                                                                   for our own business purposes, such as
@@ -6302,12 +3671,7 @@ export default function Privacy() {
                                                                                   'selling'
                                                                                   <span className="else-block" /> of
                                                                                   your personal information.
-                                                                                  <span
-                                                                                    style={{
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                      fontSize: 15,
-                                                                                    }}
-                                                                                  >
+                                                                                  <span>
                                                                                     <span data-custom-class="body_text">
                                                                                       <span className="block-component" />
                                                                                     </span>
@@ -6316,64 +3680,28 @@ export default function Privacy() {
                                                                               </span>
                                                                             </span>
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
+                                                                          <div>
                                                                             <br />
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
+                                                                          <div>
+                                                                            <span>
+                                                                              <span>
                                                                                 <span data-custom-class="body_text">
                                                                                   We have not disclosed, sold, or shared
                                                                                   any personal information to third
                                                                                   parties for a business or commercial
                                                                                   purpose in the preceding twelve (12)
                                                                                   months. We
-                                                                                  <span
-                                                                                    style={{
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    &nbsp;
-                                                                                  </span>
+                                                                                  <span>&nbsp;</span>
                                                                                   will not sell or share personal
                                                                                   information in the future belonging to
                                                                                   website visitors, users, and other
                                                                                   consumers.
-                                                                                  <span
-                                                                                    style={{
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
+                                                                                  <span>
                                                                                     <span data-custom-class="body_text">
-                                                                                      <span
-                                                                                        style={{
-                                                                                          color: 'rgb(89, 89, 89)',
-                                                                                        }}
-                                                                                      >
+                                                                                      <span>
                                                                                         <span data-custom-class="body_text">
-                                                                                          <span
-                                                                                            style={{
-                                                                                              color: 'rgb(89, 89, 89)',
-                                                                                            }}
-                                                                                          >
+                                                                                          <span>
                                                                                             <span data-custom-class="body_text">
                                                                                               <span className="statement-end-if-in-editor" />
                                                                                             </span>
@@ -6387,11 +3715,7 @@ export default function Privacy() {
                                                                               </span>
                                                                             </span>
                                                                             <span data-custom-class="body_text">
-                                                                              <span
-                                                                                style={{
-                                                                                  color: 'rgb(0, 0, 0)',
-                                                                                }}
-                                                                              >
+                                                                              <span>
                                                                                 <span data-custom-class="body_text">
                                                                                   <span className="block-component" />
                                                                                 </span>
@@ -6399,127 +3723,40 @@ export default function Privacy() {
                                                                             </span>
                                                                             <span className="block-component" />
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
+                                                                          <div>
                                                                             <span className="block-component">
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                }}
-                                                                              />
+                                                                              <span />
                                                                             </span>
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
+                                                                          <div>
                                                                             <span className="block-component" />
                                                                             <span className="block-component">
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                }}
-                                                                              />
+                                                                              <span />
                                                                             </span>
                                                                             <span className="block-component">
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                }}
-                                                                              />
+                                                                              <span />
                                                                             </span>
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
-                                                                                <span
-                                                                                  style={{
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                    fontSize: 15,
-                                                                                  }}
-                                                                                >
+                                                                            <span>
+                                                                              <span>
+                                                                                <span>
                                                                                   <span data-custom-class="body_text">
-                                                                                    <span
-                                                                                      style={{
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                        fontSize: 15,
-                                                                                      }}
-                                                                                    >
+                                                                                    <span>
                                                                                       <span data-custom-class="body_text">
-                                                                                        <span
-                                                                                          style={{
-                                                                                            color: 'rgb(89, 89, 89)',
-                                                                                            fontSize: 15,
-                                                                                          }}
-                                                                                        >
+                                                                                        <span>
                                                                                           <span data-custom-class="body_text">
-                                                                                            <span
-                                                                                              style={{
-                                                                                                color:
-                                                                                                  'rgb(89, 89, 89)',
-                                                                                                fontSize: 15,
-                                                                                              }}
-                                                                                            >
+                                                                                            <span>
                                                                                               <span data-custom-class="body_text">
                                                                                                 <span className="statement-end-if-in-editor">
                                                                                                   <span data-custom-class="body_text">
-                                                                                                    <span
-                                                                                                      style={{
-                                                                                                        fontSize: 15,
-                                                                                                        color:
-                                                                                                          'rgb(89, 89, 89)',
-                                                                                                      }}
-                                                                                                    >
-                                                                                                      <span
-                                                                                                        style={{
-                                                                                                          fontSize: 15,
-                                                                                                          color:
-                                                                                                            'rgb(89, 89, 89)',
-                                                                                                        }}
-                                                                                                      >
-                                                                                                        <span
-                                                                                                          style={{
-                                                                                                            color:
-                                                                                                              'rgb(89, 89, 89)',
-                                                                                                            fontSize: 15,
-                                                                                                          }}
-                                                                                                        >
+                                                                                                    <span>
+                                                                                                      <span>
+                                                                                                        <span>
                                                                                                           <span data-custom-class="body_text">
-                                                                                                            <span
-                                                                                                              style={{
-                                                                                                                color:
-                                                                                                                  'rgb(89, 89, 89)',
-                                                                                                                fontSize: 15,
-                                                                                                              }}
-                                                                                                            >
+                                                                                                            <span>
                                                                                                               <span data-custom-class="body_text">
-                                                                                                                <span
-                                                                                                                  style={{
-                                                                                                                    color:
-                                                                                                                      'rgb(89, 89, 89)',
-                                                                                                                    fontSize: 15,
-                                                                                                                  }}
-                                                                                                                >
+                                                                                                                <span>
                                                                                                                   <span data-custom-class="body_text">
-                                                                                                                    <span
-                                                                                                                      style={{
-                                                                                                                        color:
-                                                                                                                          'rgb(89, 89, 89)',
-                                                                                                                        fontSize: 15,
-                                                                                                                      }}
-                                                                                                                    >
+                                                                                                                    <span>
                                                                                                                       <span data-custom-class="body_text">
                                                                                                                         <span className="statement-end-if-in-editor">
                                                                                                                           <span className="statement-end-if-in-editor" />
@@ -6547,62 +3784,21 @@ export default function Privacy() {
                                                                               </span>
                                                                             </span>
                                                                             <span className="block-component">
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                }}
-                                                                              />
+                                                                              <span />
                                                                             </span>{' '}
                                                                             <span className="block-component">
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                }}
-                                                                              />
+                                                                              <span />
                                                                             </span>
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
+                                                                          <div>
                                                                             <br />
                                                                           </div>
-                                                                          <div
-                                                                            id="policyupdates"
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                color: 'rgb(127, 127, 127)',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                  fontSize: 15,
-                                                                                }}
-                                                                              >
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      id="control"
-                                                                                      style={{
-                                                                                        color: 'rgb(0, 0, 0)',
-                                                                                      }}
-                                                                                    >
+                                                                          <div id="policyupdates">
+                                                                            <span>
+                                                                              <span>
+                                                                                <span>
+                                                                                  <span>
+                                                                                    <span id="control">
                                                                                       <strong>
                                                                                         <span data-custom-class="heading_1">
                                                                                           12. DO WE MAKE UPDATES TO THIS
@@ -6615,30 +3811,12 @@ export default function Privacy() {
                                                                               </span>
                                                                             </span>
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
+                                                                          <div>
                                                                             <br />
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
+                                                                          <div>
+                                                                            <span>
+                                                                              <span>
                                                                                 <span data-custom-class="body_text">
                                                                                   <em>
                                                                                     <strong>In Short:&nbsp;</strong>
@@ -6650,30 +3828,12 @@ export default function Privacy() {
                                                                               </span>
                                                                             </span>
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
+                                                                          <div>
                                                                             <br />
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
+                                                                          <div>
+                                                                            <span>
+                                                                              <span>
                                                                                 <span data-custom-class="body_text">
                                                                                   We may update this privacy notice from
                                                                                   time to time. The updated version will
@@ -6695,48 +3855,15 @@ export default function Privacy() {
                                                                               </span>
                                                                             </span>
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
+                                                                          <div>
                                                                             <br />
                                                                           </div>
-                                                                          <div
-                                                                            id="contact"
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                color: 'rgb(127, 127, 127)',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                  fontSize: 15,
-                                                                                }}
-                                                                              >
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      id="control"
-                                                                                      style={{
-                                                                                        color: 'rgb(0, 0, 0)',
-                                                                                      }}
-                                                                                    >
+                                                                          <div id="contact">
+                                                                            <span>
+                                                                              <span>
+                                                                                <span>
+                                                                                  <span>
+                                                                                    <span id="control">
                                                                                       <strong>
                                                                                         <span data-custom-class="heading_1">
                                                                                           13. HOW CAN YOU CONTACT US
@@ -6749,278 +3876,43 @@ export default function Privacy() {
                                                                               </span>
                                                                             </span>
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
+                                                                          <div>
                                                                             <br />
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
+                                                                          <div>
+                                                                            <span>
+                                                                              <span>
                                                                                 <span data-custom-class="body_text">
                                                                                   If you have questions or comments
                                                                                   about this notice, you may{' '}
-                                                                                  <span
-                                                                                    style={{
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                      fontSize: 15,
-                                                                                    }}
-                                                                                  >
+                                                                                  <span>
                                                                                     <span data-custom-class="body_text">
                                                                                       <span className="block-component">
                                                                                         <span className="block-component" />
                                                                                       </span>
                                                                                       email us at{' '}
                                                                                       <span className="question">
-                                                                                        odialo.help@gmail.com or&nbsp;
+                                                                                        odialo.help@gmail.com
                                                                                       </span>
                                                                                       <span className="statement-end-if-in-editor">
                                                                                         <span className="block-component" />
                                                                                       </span>
                                                                                     </span>
                                                                                   </span>
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
-                                                                                      <span data-custom-class="body_text">
-                                                                                        contact us by post at:
-                                                                                      </span>
-                                                                                    </span>
-                                                                                  </span>
                                                                                 </span>
                                                                               </span>
                                                                             </span>
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <br />
-                                                                          </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
-                                                                                <span data-custom-class="body_text">
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        color: 'rgb(89, 89, 89)',
-                                                                                      }}
-                                                                                    >
-                                                                                      <span
-                                                                                        style={{
-                                                                                          color: 'rgb(89, 89, 89)',
-                                                                                        }}
-                                                                                      >
-                                                                                        <span data-custom-class="body_text">
-                                                                                          <span className="question">
-                                                                                            __________
-                                                                                          </span>
-                                                                                        </span>
-                                                                                      </span>
-                                                                                    </span>
-                                                                                  </span>
-                                                                                </span>
-                                                                                <span data-custom-class="body_text">
-                                                                                  <span
-                                                                                    style={{
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span data-custom-class="body_text">
-                                                                                      <span className="block-component" />
-                                                                                    </span>
-                                                                                  </span>
-                                                                                </span>
-                                                                              </span>
-                                                                            </span>
-                                                                          </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                              }}
-                                                                            >
-                                                                              <span data-custom-class="body_text">
-                                                                                <span className="question">
-                                                                                  __________
-                                                                                </span>
-                                                                                <span
-                                                                                  style={{
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                    }}
-                                                                                  >
-                                                                                    <span className="block-component" />
-                                                                                  </span>
-                                                                                </span>
-                                                                              </span>
-                                                                            </span>
-                                                                          </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                              }}
-                                                                            >
-                                                                              <span data-custom-class="body_text">
-                                                                                <span className="question">
-                                                                                  __________
-                                                                                </span>
-                                                                                <span
-                                                                                  style={{
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                    }}
-                                                                                  >
-                                                                                    <span className="block-component" />
-                                                                                    <span className="block-component" />
-                                                                                    <span className="block-component" />
-                                                                                  </span>
-                                                                                </span>
-                                                                              </span>
-                                                                              <span data-custom-class="body_text">
-                                                                                <span
-                                                                                  style={{
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                    }}
-                                                                                  >
-                                                                                    <span className="statement-end-if-in-editor" />
-                                                                                  </span>
-                                                                                </span>
-                                                                              </span>
-                                                                            </span>
+                                                                          <br />
+                                                                          <div>
                                                                             <span data-custom-class="body_text">
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                }}
-                                                                              >
-                                                                                <span data-custom-class="body_text">
-                                                                                  <span
-                                                                                    style={{
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span className="statement-end-if-in-editor">
-                                                                                      <span
-                                                                                        style={{
-                                                                                          color: 'rgb(89, 89, 89)',
-                                                                                        }}
-                                                                                      >
-                                                                                        <span
-                                                                                          style={{
-                                                                                            fontSize: 15,
-                                                                                          }}
-                                                                                        >
-                                                                                          <span data-custom-class="body_text">
-                                                                                            <span className="block-component">
-                                                                                              <span className="block-component" />
-                                                                                            </span>
-                                                                                          </span>
-                                                                                        </span>
-                                                                                      </span>
-                                                                                    </span>
-                                                                                  </span>
-                                                                                </span>
-                                                                              </span>
-                                                                            </span>
-                                                                          </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <br />
-                                                                          </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              data-custom-class="body_text"
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                              }}
-                                                                            >
                                                                               If you are a resident in the United
                                                                               Kingdom, we are the{' '}
                                                                               <span className="block-component" />
                                                                               'data controller'
                                                                               <span className="else-block" /> of your
                                                                               personal information. We have appointed{' '}
-                                                                              <span
-                                                                                style={{
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                  fontSize: 15,
-                                                                                }}
-                                                                              >
+                                                                              <span>
                                                                                 <span data-custom-class="body_text">
                                                                                   <span className="question">
                                                                                     Matthew Elphick
@@ -7030,12 +3922,7 @@ export default function Privacy() {
                                                                               to be our representative in the UK. You
                                                                               can contact them directly regarding our
                                                                               processing of your information
-                                                                              <span
-                                                                                style={{
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                  fontSize: 15,
-                                                                                }}
-                                                                              >
+                                                                              <span>
                                                                                 <span data-custom-class="body_text">
                                                                                   ,
                                                                                   <span className="block-component" />{' '}
@@ -7056,210 +3943,22 @@ export default function Privacy() {
                                                                                       https://mael.tech
                                                                                     </a>
                                                                                   </span>
-                                                                                  ,
-                                                                                  <span className="statement-end-if-in-editor" />
-                                                                                  <span className="block-component" />
                                                                                 </span>
-                                                                              </span>{' '}
-                                                                              or by post to:
+                                                                              </span>
                                                                             </span>
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
+                                                                          <div>
                                                                             <br />
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                              }}
-                                                                            >
-                                                                              <span data-custom-class="body_text">
-                                                                                <span className="question">
-                                                                                  __________
-                                                                                  <span
-                                                                                    style={{
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                      fontSize: 15,
-                                                                                    }}
-                                                                                  >
-                                                                                    <span data-custom-class="body_text">
-                                                                                      <span className="block-component" />
-                                                                                    </span>
-                                                                                  </span>
-                                                                                </span>
-                                                                              </span>
-                                                                            </span>
-                                                                          </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                              }}
-                                                                            >
-                                                                              <span data-custom-class="body_text">
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                  }}
-                                                                                >
-                                                                                  <span data-custom-class="body_text">
-                                                                                    <span className="question">
-                                                                                      __________
-                                                                                    </span>
-                                                                                  </span>
-                                                                                </span>
-                                                                                <span
-                                                                                  style={{
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                    fontSize: 15,
-                                                                                  }}
-                                                                                >
-                                                                                  <span data-custom-class="body_text">
-                                                                                    <span className="block-component" />
-                                                                                  </span>
-                                                                                </span>
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                  }}
-                                                                                >
-                                                                                  <span data-custom-class="body_text">
-                                                                                    &nbsp;
-                                                                                    <span className="question">
-                                                                                      __________
-                                                                                    </span>
-                                                                                  </span>
-                                                                                </span>
-                                                                              </span>
-                                                                            </span>
-                                                                          </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              data-custom-class="body_text"
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                              }}
-                                                                            >
-                                                                              <span className="block-component" />
-                                                                              United Kingdom
-                                                                              <span className="statement-end-if-in-editor" />
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                }}
-                                                                              >
-                                                                                <span data-custom-class="body_text">
-                                                                                  <span
-                                                                                    style={{
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                      fontSize: 15,
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                      }}
-                                                                                    >
-                                                                                      <span data-custom-class="body_text">
-                                                                                        <span className="statement-end-if-in-editor" />
-                                                                                      </span>
-                                                                                    </span>
-                                                                                  </span>
-                                                                                </span>
-                                                                              </span>
-                                                                            </span>
-                                                                            <span className="block-component">
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                }}
-                                                                              />
-                                                                            </span>
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                              }}
-                                                                            >
-                                                                              <span data-custom-class="body_text">
-                                                                                <span
-                                                                                  style={{
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                    fontSize: 15,
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                    }}
-                                                                                  >
-                                                                                    <span data-custom-class="body_text">
-                                                                                      <span className="statement-end-if-in-editor">
-                                                                                        <span className="block-component" />
-                                                                                      </span>
-                                                                                    </span>
-                                                                                  </span>
-                                                                                </span>
-                                                                              </span>
-                                                                            </span>
-                                                                          </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
+                                                                          <div>
                                                                             <br />
                                                                           </div>
-                                                                          <div
-                                                                            id="request"
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                color: 'rgb(127, 127, 127)',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                  fontSize: 15,
-                                                                                }}
-                                                                              >
-                                                                                <span
-                                                                                  style={{
-                                                                                    fontSize: 15,
-                                                                                    color: 'rgb(89, 89, 89)',
-                                                                                  }}
-                                                                                >
-                                                                                  <span
-                                                                                    style={{
-                                                                                      fontSize: 15,
-                                                                                      color: 'rgb(89, 89, 89)',
-                                                                                    }}
-                                                                                  >
-                                                                                    <span
-                                                                                      id="control"
-                                                                                      style={{
-                                                                                        color: 'rgb(0, 0, 0)',
-                                                                                      }}
-                                                                                    >
+                                                                          <div id="request">
+                                                                            <span>
+                                                                              <span>
+                                                                                <span>
+                                                                                  <span>
+                                                                                    <span id="control">
                                                                                       <strong>
                                                                                         <span data-custom-class="heading_1">
                                                                                           14. HOW CAN YOU REVIEW,
@@ -7273,30 +3972,12 @@ export default function Privacy() {
                                                                               </span>
                                                                             </span>
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
+                                                                          <div>
                                                                             <br />
                                                                           </div>
-                                                                          <div
-                                                                            style={{
-                                                                              lineHeight: '1.5',
-                                                                            }}
-                                                                          >
-                                                                            <span
-                                                                              style={{
-                                                                                fontSize: 15,
-                                                                                color: 'rgb(89, 89, 89)',
-                                                                              }}
-                                                                            >
-                                                                              <span
-                                                                                style={{
-                                                                                  fontSize: 15,
-                                                                                  color: 'rgb(89, 89, 89)',
-                                                                                }}
-                                                                              >
+                                                                          <div>
+                                                                            <span>
+                                                                              <span>
                                                                                 <span data-custom-class="body_text">
                                                                                   <span className="block-component" />
                                                                                   Based on the applicable laws of your
@@ -7313,17 +3994,9 @@ export default function Privacy() {
                                                                                     fill out and submit a&nbsp;
                                                                                   </span>
                                                                                 </span>
-                                                                                <span
-                                                                                  style={{
-                                                                                    color: 'rgb(48, 48, 241)',
-                                                                                  }}
-                                                                                >
+                                                                                <span>
                                                                                   <span data-custom-class="body_text">
-                                                                                    <span
-                                                                                      style={{
-                                                                                        fontSize: 15,
-                                                                                      }}
-                                                                                    >
+                                                                                    <span>
                                                                                       <a
                                                                                         data-custom-class="link"
                                                                                         href="https://app.termly.io/notify/7221e774-122b-4dd8-8856-1665122b1bb6"
@@ -7349,21 +4022,9 @@ export default function Privacy() {
                                                                             }}
                                                                           />
                                                                         </div>
-                                                                        <div
-                                                                          style={{
-                                                                            color: '#595959',
-                                                                            fontSize: 14,
-                                                                            fontFamily: 'Arial',
-                                                                            paddingTop: 16,
-                                                                          }}
-                                                                        >
+                                                                        <div>
                                                                           This privacy policy was created using Termly's{' '}
-                                                                          <a
-                                                                            style={{
-                                                                              color: 'rgb(48, 48, 241) !important',
-                                                                            }}
-                                                                            href="https://termly.io/products/privacy-policy-generator/"
-                                                                          >
+                                                                          <a href="https://termly.io/products/privacy-policy-generator/">
                                                                             Privacy Policy Generator
                                                                           </a>
                                                                           .

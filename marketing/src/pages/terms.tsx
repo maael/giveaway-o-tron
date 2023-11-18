@@ -1,6 +1,40 @@
-export default function Terms() {
+import Header from '~/components/marketing/Header'
+
+export default function Terms({ fathom }: any) {
   return (
-    <div className="py-10 max-w-6xl mx-auto">
+    <div className="pt-4 pb-10 max-w-6xl mx-auto">
+      <Header fathom={fathom} />
+      <style jsx>{`
+        h2 {
+          font-size: 2rem;
+          padding-top: 0.3rem;
+        }
+
+        h3 {
+          font-size: 1.5rem;
+          padding-top: 0.3rem;
+        }
+
+        bold {
+          font-weight: bold;
+        }
+
+        p {
+          padding: 0.2rem 0;
+        }
+
+        a {
+          color: #9333ea;
+        }
+
+        a:hover {
+          color: #a855f7;
+        }
+
+        ul {
+          list-style-type: disc;
+        }
+      `}</style>
       <h2>
         <strong>Terms and Conditions</strong>
       </h2>
