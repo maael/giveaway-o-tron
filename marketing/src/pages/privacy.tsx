@@ -24,7 +24,8 @@ export default function Privacy({ fathom }: any) {
         }
 
         a {
-          color: #9333ea;
+          color: #c48ff4;
+          text-decoration: underline;
         }
 
         a:hover {
@@ -69,7 +70,7 @@ export default function Privacy({ fathom }: any) {
             <strong>
               <span>
                 <span data-custom-class="subtitle">
-                  Last updated <span className="question">October 31, 2023</span>
+                  Last updated <span className="question">February 10, 2024</span>
                 </span>
               </span>
             </strong>
@@ -925,58 +926,30 @@ export default function Privacy({ fathom }: any) {
                     'crash dumps'
                     <span className="else-block" />
                     ), and hardware settings).
-                    <span>
-                      <span>
-                        <span data-custom-class="body_text">
-                          <span>
-                            <span>
-                              <span className="statement-end-if-in-editor" />
-                            </span>
-                          </span>
-                        </span>
-                      </span>
-                    </span>
                   </span>
                 </span>
               </span>
             </li>
           </ul>
-          <div>
-            <span className="block-component">
-              <span>
-                <span data-custom-class="body_text" />
-              </span>
-            </span>
+          <div style={{ paddingTop: 20, paddingBottom: 20 }}>
             <div>
-              <span className="block-component">
+              <span data-custom-class="heading_2">
                 <span>
-                  <span data-custom-class="body_text" />
+                  <strong>Limited Use Disclosure Related to Google</strong>
                 </span>
               </span>
-              <div>
-                <span className="block-component">
-                  <span />
-                </span>
-                <span className="statement-end-if-in-editor" />
-                <span data-custom-class="body_text">
-                  <span>
-                    <span data-custom-class="body_text">
-                      <span>
-                        <span data-custom-class="body_text">
-                          <span className="statement-end-if-in-editor">
-                            <span className="block-component" />
-                          </span>
-                        </span>
-                      </span>
-                    </span>
-                  </span>
-                </span>
-                <span>
-                  <span data-custom-class="body_text">
-                    <span className="block-component" />
-                  </span>
-                </span>
-              </div>
+            </div>
+            <span data-custom-class="body_text">
+              Giveaway-o-tron's use and transfer to any other app of information received from Google APIs will adhere
+              to{' '}
+              <a href="https://developers.google.com/terms/api-services-user-data-policy#additional_requirements_for_specific_api_scopes">
+                Google API Services User Data Policy
+              </a>
+              , including the Limited Use requirements.
+            </span>
+          </div>
+          <div>
+            <div>
               <div id="infouse">
                 <span>
                   <span>

@@ -24,7 +24,8 @@ export default function Terms({ fathom }: any) {
         }
 
         a {
-          color: #9333ea;
+          color: #c48ff4;
+          text-decoration: underline;
         }
 
         a:hover {
