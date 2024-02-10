@@ -102,9 +102,9 @@ export default function Header({
             }
           )}
         >
-          <FaYoutube className="text-sm" />
+          <FaYoutube className="text-2xl" />
           <span className="relative -top-0.5">
-            {session.data?.youtube?.username ? `${session.data?.youtube?.username.slice(0, 1)}...` : 'Connect YouTube'}
+            {session.data?.youtube?.username ? `${session.data?.youtube?.username.slice(0, 1)}...` : 'YouTube'}
           </span>
         </a>
       ) : null}
