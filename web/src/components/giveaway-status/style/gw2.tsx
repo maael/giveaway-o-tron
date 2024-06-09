@@ -21,6 +21,10 @@ const StableCountdown = React.memo(function StableCountdown({ value }: { value: 
   return <Countdown renderer={countDownRenderer} date={value} />
 })
 
+/**
+ * This is the timer and ended notification
+ */
+
 export default function Gw2Status({
   status,
   title,
@@ -47,7 +51,7 @@ export default function Gw2Status({
               ? alertType === 'gw2'
                 ? 225
                 : 230
-              : alertType === 'gw2' || alertType === 'gw2-soto'
+              : alertType === 'gw2' || alertType === 'gw2-soto' || alertType === 'gw2-janthir'
               ? 238
               : 245,
           }}
@@ -60,7 +64,9 @@ export default function Gw2Status({
           className={`text-white uppercasetext-bold left-2 right-2 text-center absolute uppercase cagfont drop-shadow-lg ${
             alertType === 'gw2-soto' ? 'text-3xl' : followersOnly ? 'text-xl' : 'text-xl'
           }`}
-          style={{ top: alertType === 'gw2-soto' ? 240 : alertType === 'gw2' ? 252 : 257 }}
+          style={{
+            top: alertType === 'gw2-soto' ? 240 : alertType === 'gw2' || alertType === 'gw2-janthir' ? 252 : 257,
+          }}
         >
           <StableCountdown value={Number(goalTs)} />
         </div>
@@ -73,7 +79,7 @@ export default function Gw2Status({
             ? 'text-4xl'
             : 'text-2xl'
         }`}
-        style={{ top: 285, width: 360 }}
+        style={{ top: alertType === 'gw2-janthir' ? 313 : 285, width: 360 }}
       >
         {body}
       </div>

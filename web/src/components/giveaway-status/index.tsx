@@ -124,6 +124,7 @@ export default function GW2Alerts() {
     new Image().src = '/images/gw2/notification.png'
     new Image().src = '/images/gw2-aurene/notification.png'
     new Image().src = '/images/gw2-soto/notification.png'
+    new Image().src = '/images/gw2-janthir/notification.png'
     new Image().src = '/images/mukluk/notification.png'
     new Image().src = '/images/guildmm/notification.png'
   }, [])

@@ -2,6 +2,10 @@
 import * as React from 'react'
 import { AutoTextSize } from 'auto-text-size'
 
+/**
+ * This is the winner notification
+ */
+
 export default function Gw2StyleAlert({
   winner,
   visible,
@@ -30,7 +34,7 @@ export default function Gw2StyleAlert({
       <div>
         <div
           className="text-white uppercase px-4 py-2 text-bold text-center absolute mx-auto items-center-important cagfont"
-          style={{ top: 292, left: 50, right: 50, width: 450, height: 50 }}
+          style={{ top: alertType === 'gw2-janthir' ? 320 : 292, left: 50, right: 50, width: 450, height: 50 }}
         >
           <AutoTextSize maxFontSizePx={50}>
             <p className="mx-auto my-auto">{winnerName}</p>
@@ -38,7 +42,7 @@ export default function Gw2StyleAlert({
         </div>
         <div
           className="text-white text-4xl uppercase px-4 py-2 text-bold text-center absolute mx-auto cagfont"
-          style={{ top: 340, left: 50, right: 50, width: 450, height: 50 }}
+          style={{ top: alertType === 'gw2-janthir' ? 375 : 340, left: 50, right: 50, width: 450, height: 50 }}
         >
           {type === 'blocked' ? 'blocked!' : type === 'rigged' ? 'won! Totally not rigged.' : 'won!'}
         </div>
