@@ -4,6 +4,7 @@ import cls from 'classnames'
 import isBefore from 'date-fns/isBefore'
 import { useMemo, useState } from 'react'
 import { Modal, useModal } from '../hooks/useModal'
+import useFathom from '../hooks/useFathom'
 
 export default function Changelog() {
   const [loaded, setLoaded] = useState(false)
@@ -15,12 +16,14 @@ export default function Changelog() {
     [lastChangelog, loaded]
   )
   const { close, open, isOpen } = useModal()
+  const fathom = useFathom()
   return (
     <>
       <button
         onClick={() => {
           setLastChangelog(new Date().toISOString())
           open()
+          fathom.trackEvent('Open Changelog')
         }}
         title="Changelog"
         className={cls('px-3 flex justify-center items-center rounded-md text-xs gap-1 hover:opacity-100', {
