@@ -16,6 +16,7 @@ import { ChannelInfo } from '~/utils'
 import chat from '../../chat'
 import useSession from '../hooks/useSession'
 import { useBeta } from '../hooks/useBeta'
+import Changelog from './Changelog'
 
 export default function Header({
   client,
@@ -92,6 +93,7 @@ export default function Header({
           </button>
         )}
       </div>
+      <Changelog />
       {inBeta ? (
         <a
           href={session.data?.youtube ? '/api/auth/logout' : '/api/auth/google'}
