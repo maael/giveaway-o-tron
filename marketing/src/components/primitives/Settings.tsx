@@ -18,6 +18,7 @@ import Slider, { SliderInner } from './Slider'
 import relay from '../../utils/relay'
 import { DiscordSettings, getDiscordColour, Settings } from '../../utils'
 import { YOUTUBE_STORAGE_KEYS } from '~/utils/google'
+import useFathom from '../hooks/useFathom'
 
 const bell = new Howl({
   src: ['sounds/pleasing-bell.ogg'],
@@ -119,6 +120,7 @@ const Time = React.memo(function Time({
     setChatPaused(true)
     if (timerBell) bell.play()
   }, [channelId, timerBell, discordSettings, duration])
+  const fathom = useFathom()
   return active ? (
     <div className="flex-1 border border-purple-600 rounded-md flex justify-center items-center text-center relative">
       <StableCountdown value={value} onComplete={onComplete} />
@@ -196,6 +198,7 @@ const Time = React.memo(function Time({
           setYoutubeChatDelay(youtubeDelay)
           const disabledDueToTimer =
             duration && discordSettings.giveawayMinTime && duration < discordSettings.giveawayMinTime
+          fathom.trackEvent(`Start giveaway: ${channelId}`)
           relay.emit('event', {
             type: 'timer-start',
             channelId,
