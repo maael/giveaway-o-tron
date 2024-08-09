@@ -7,6 +7,7 @@ import { WinnerUser } from '../primitives/giveaways'
 import {
   FaCheck,
   FaExclamationTriangle,
+  FaPatreon,
   FaPauseCircle,
   FaPlayCircle,
   FaSave,
@@ -124,6 +125,7 @@ interface Props {
   setYoutubeChatDelay: Dispatch<SetStateAction<number | null>>
   getYoutubeChat: () => void
   youtubeChatDelay: number | null
+  patreons: Set<string>
 }
 
 export default function ChatBox({
@@ -137,6 +139,7 @@ export default function ChatBox({
   messageDelay,
   getYoutubeChat,
   youtubeChatDelay,
+  patreons,
 }: Props) {
   const shouldAutoScroll = settings.autoScroll ?? true
   const limitedMessages = chatEvents.filter((c) =>
@@ -266,6 +269,7 @@ export default function ChatBox({
               {searchedMessages.map((c) => {
                 const hasWarning =
                   winners.length > 0 && winners.some((w) => (w.otherUsersWithEntry || []).includes(c.username))
+                const isPatreon = patreons.has(c.userId)
                 return (
                   <div
                     key={c.id}
@@ -277,10 +281,11 @@ export default function ChatBox({
                     <span
                       className={cls('text-xs mr-0.5 relative top-0.5 inline-block', {
                         'text-red-600': c.source === 'youtube',
-                        'text-purple-600': c.source === 'twitch',
+                        'text-purple-600': c.source === 'twitch' && !isPatreon,
+                        'text-orange-600': c.source === 'twitch' && isPatreon,
                       })}
                     >
-                      {c.source === 'youtube' ? <FaYoutube /> : <FaTwitch />}
+                      {isPatreon ? <FaPatreon /> : c.source === 'youtube' ? <FaYoutube /> : <FaTwitch />}
                     </span>
                     <span
                       className={cls('rounded-full bg-gray-300 h-4 w-4 inline-block relative', {

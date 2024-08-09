@@ -45,9 +45,9 @@ type GiveawayInformation = Promise<{
   giveawayStats: GiveawayResult['giveawayStats']
 }>
 
-function isSubscriber(item: ChatItem, youtubeSubs: Map<any, any>) {
+function isSubscriber(item: ChatItem, youtubeSubs: Map<any, any>, patreons: Set<string>) {
   if (item.source === 'twitch') {
-    return item.isSubscriber
+    return item.isSubscriber || patreons.has(`${item.id}`)
   }
   return youtubeSubs?.has(item.username)
 }
@@ -63,7 +63,8 @@ export async function getChatGiveaway(
   chatCommand: string,
   settings: Settings,
   discordSettings: DiscordSettings,
-  forfeits: string[]
+  forfeits: string[],
+  patreons: Set<string>
 ): Promise<GiveawayInformation> {
   const forfeitSet = new Set([...forfeits])
   const matchMap = new Map<string, Set<string>>()
@@ -111,9 +112,9 @@ export async function getChatGiveaway(
   if (settings.followersOnly) {
     users = filteredFollowers
   }
-  giveawayUserStats.subs = users.filter((u) => isSubscriber(u, youtubeSubs)).length
+  giveawayUserStats.subs = users.filter((u) => isSubscriber(u, youtubeSubs, patreons)).length
   users = users.flatMap((c) => {
-    if (isSubscriber(c, youtubeSubs)) {
+    if (isSubscriber(c, youtubeSubs, patreons)) {
       subCount += 1
       subEntries += settings.subLuck
       return Array.from({ length: settings.subLuck }, () => c)
@@ -158,7 +159,8 @@ export async function getInstantGiveaway(
   channelInfo: ChannelInfo,
   settings: Settings,
   discordSettings: DiscordSettings,
-  forfeits: string[]
+  forfeits: string[],
+  patreons: Set<string>
 ): Promise<GiveawayInformation> {
   const forfeitSet = new Set([...forfeits])
   const giveawayUserStats = prepareStats()

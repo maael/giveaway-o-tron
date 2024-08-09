@@ -37,6 +37,7 @@ export function InstantGiveaway({
   client,
   setPastGiveaways,
   forfeits,
+  getPatreons,
 }: {
   setWinners: Dispatch<SetStateAction<WinnerUser[]>>
   channelInfo: ChannelInfo
@@ -45,6 +46,7 @@ export function InstantGiveaway({
   client: ReturnType<typeof chat> | null
   setPastGiveaways: Dispatch<SetStateAction<GiveawayResult[]>>
   forfeits: string[]
+  getPatreons: () => Promise<Set<string>>
 }) {
   const [thinking, setThinking] = React.useState(false)
   return (
@@ -55,12 +57,14 @@ export function InstantGiveaway({
         if (!channelInfo.login) return
         try {
           setThinking(true)
+          const patreons = await getPatreons().catch(() => new Set<string>())
           const { winners: giveawayWinner, giveawayStats } = await getInstantGiveaway(
             client,
             channelInfo,
             settings,
             discordSettings,
-            forfeits
+            forfeits,
+            patreons
           )
           if (!giveawayWinner.length) {
             toast.error('No winners found that match conditions!', {
@@ -105,6 +109,7 @@ export function ChatGiveaway({
   client,
   setPastGiveaways,
   forfeits,
+  getPatreons,
 }: {
   chatEvents: ChatItem[]
   setWinners: Dispatch<SetStateAction<WinnerUser[]>>
@@ -114,6 +119,7 @@ export function ChatGiveaway({
   client: ReturnType<typeof chat> | null
   setPastGiveaways: Dispatch<SetStateAction<GiveawayResult[]>>
   forfeits: string[]
+  getPatreons: () => Promise<Set<string>>
 }) {
   const [thinking, setThinking] = React.useState(false)
   return (
@@ -123,6 +129,7 @@ export function ChatGiveaway({
       onClick={async () => {
         try {
           setThinking(true)
+          const patreons = await getPatreons().catch(() => new Set<string>())
           const { winners: giveawayWinner, giveawayStats } = await getChatGiveaway(
             client,
             channelInfo,
@@ -130,7 +137,8 @@ export function ChatGiveaway({
             settings.chatCommand,
             settings,
             discordSettings,
-            forfeits
+            forfeits,
+            patreons
           )
           if (!giveawayWinner.length) {
             toast.error('No winners found that match conditions!', {
