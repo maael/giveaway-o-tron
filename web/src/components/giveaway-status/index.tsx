@@ -95,6 +95,8 @@ export default function GW2Alerts() {
     }
   }, [handleEvent, relayVersion, channel])
   console.info('[status]', status)
+  const isSpecialCommand = status.command?.split(' ').some((c) => !!SPECIAL_COMMAND_TEXT[c])
+  const msgQuote = isSpecialCommand ? `` : `"`
   const props = {
     title:
       status.status === 'start'
@@ -105,10 +107,10 @@ export default function GW2Alerts() {
     body:
       status.status === 'start'
         ? status.command
-          ? `Message with "${status.command
+          ? `Message with ${msgQuote}${status.command
               .split(' ')
               .map((c) => SPECIAL_COMMAND_TEXT[c] || c)
-              .join(' ')}" for a chance to win!`
+              .join(' ')}${msgQuote} for a chance to win!`
           : "Make sure to send a message in chat, there's no command!"
         : status.status === 'ended'
         ? 'The giveaway is closed'
